@@ -1241,6 +1241,16 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     full_coverage_html = ""
     full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content_en") or item.get("article_content") or item.get("original_content"))) or "").strip()
+    if not full_text:
+        # Fall back to structured paragraphs if full text string was stripped
+        if is_zh:
+            if item.get("paragraphs_zh") and isinstance(item["paragraphs_zh"], list) and len(item["paragraphs_zh"]) > 0:
+                full_text = "\n\n".join(str(p).strip() for p in item["paragraphs_zh"] if str(p).strip())
+            elif item.get("paragraphs") and isinstance(item["paragraphs"], list) and len(item["paragraphs"]) > 0:
+                full_text = "\n\n".join(str(p).strip() for p in item["paragraphs"] if str(p).strip())
+        else:
+            if item.get("paragraphs") and isinstance(item["paragraphs"], list) and len(item["paragraphs"]) > 0:
+                full_text = "\n\n".join(str(p).strip() for p in item["paragraphs"] if str(p).strip())
     is_reuters = "reuters" in (item.get("source") or "").lower() or "reuters.com" in (item.get("url") or "").lower()
     is_bloomberg = "bloomberg" in (item.get("source") or "").lower() or "bloomberg.com" in (item.get("url") or "").lower()
     is_fortune = "fortune" in (item.get("source") or "").lower() or "fortune.com" in (item.get("url") or "").lower()
@@ -1816,9 +1826,10 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 """
 
 def generate_all_landing_pages():
-    data_path = os.path.join(WORKSPACE_DIR, "public", "data", "latest_news.json")
+    # Prioritize rich backend data (which holds complete article bodies, full translations, and multi-paragraph records)
+    data_path = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")
     if not os.path.exists(data_path):
-        data_path = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")
+        data_path = os.path.join(WORKSPACE_DIR, "public", "data", "latest_news.json")
 
     with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -1836,6 +1847,31 @@ def generate_all_landing_pages():
     for d in (en_tools_dir, zh_tools_dir, en_news_dir, zh_news_dir):
         os.makedirs(d, exist_ok=True)
 
+    # Also build a fallback lookup map from master_archive and archive_news for rich paragraphs
+    rich_lookup = {}
+    for arch_file in ["data/master_archive.json", "data/archive_news.json", "public/data/archive_news.json"]:
+        ap = os.path.join(WORKSPACE_DIR, arch_file)
+        if os.path.exists(ap):
+            try:
+                with open(ap, "r", encoding="utf-8") as af:
+                    a_data = json.load(af)
+                    a_list = a_data.get("items", []) if isinstance(a_data, dict) else (a_data if isinstance(a_data, list) else [])
+                    for a_it in a_list:
+                        a_id = a_it.get("id")
+                        if a_id and (a_it.get("paragraphs") or a_it.get("article_content") or a_it.get("article_content_zh")):
+                            if a_id not in rich_lookup:
+                                rich_lookup[a_id] = a_it
+            except Exception:
+                pass
+
+    for it in news:
+        nid = it.get("id")
+        if nid and nid in rich_lookup:
+            rit = rich_lookup[nid]
+            for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
+                if rit.get(fld) and not it.get(fld):
+                    it[fld] = rit[fld]
+
     # Also load historical news items from archive that already have landing pages
     archive_path = os.path.join(WORKSPACE_DIR, 'public', 'data', 'archive_news.json')
     if os.path.exists(archive_path):
@@ -1849,6 +1885,11 @@ def generate_all_landing_pages():
                 if i_id and i_id not in existing_ids:
                     target_file = os.path.join(en_news_dir, f'{i_id}.html')
                     if os.path.exists(target_file):
+                        if i_id in rich_lookup:
+                            rit = rich_lookup[i_id]
+                            for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
+                                if rit.get(fld) and not it.get(fld):
+                                    it[fld] = rit[fld]
                         news.append(it)
                         existing_ids.add(i_id)
         except Exception as e:

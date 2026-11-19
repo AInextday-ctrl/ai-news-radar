@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside the Codex sandbox | AI News Radar</title>
+  <meta name="description" content="How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/62edf22a5359f316">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/62edf22a5359f316">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Inside the Codex sandbox | AI News Radar">
+  <meta property="og:description" content="How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua">
+  <meta property="og:image" content="https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill">
+  <meta property="og:image:secure_url" content="https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Inside the Codex sandbox">
+  <meta property="og:url" content="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <meta name="twitter:title" content="Inside the Codex sandbox | AI News Radar">
+  <meta name="twitter:description" content="How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua">
+  <meta name="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill">
+  <meta property="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill">
+  <meta name="twitter:image:alt" content="Inside the Codex sandbox">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Inside the Codex sandbox">
+  <meta name="citation_publication_date" content="2026-11-18">
+  <meta name="citation_author" content="OpenAI">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/news/62edf22a5359f316">
+  <meta name="citation_abstract" content="How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar (Chinese Edition RSS)" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "AI News Radar",
+"item": "https://ainewsradar.xyz/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "Breaking AI News",
+"item": "https://ainewsradar.xyz#news"
+},
+{
+"@type": "ListItem",
+"position": 3,
+"name": "Inside the Codex sandbox",
+"item": "https://ainewsradar.xyz/news/62edf22a5359f316"
+}
+]
+},
+{
+"@type": "NewsArticle",
+"headline": "Inside the Codex sandbox",
+"description": "How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua",
+"image": [
+"https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill"
+],
+"url": "https://ainewsradar.xyz/news/62edf22a5359f316",
+"datePublished": "2026-11-18T08:00:00+00:00",
+"dateModified": "2026-11-18T08:00:00+00:00",
+"inLanguage": "en",
+"mainEntityOfPage": "https://ainewsradar.xyz/news/62edf22a5359f316",
+"articleSection": "Artificial Intelligence",
+"articleBody": "How Codex runs commands on your machine with limits you control.\n\nAt OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sandbox so Codex can work in your existing environment within filesystem and network limits you control.\n\nA ⁠(opens in a new window)sandbox⁠(opens in a new window) limits what a program can access while it runs. For a photo-organizing task, you might configure the Codex sandbox to let commands read and modify files in ~/Pictures while blocking network access to prevent uploads. For code review, you might allow access to online documentation while keeping source files read-only. Users configure the Codex sandbox through ⁠(opens in a new window)permission profiles⁠(opens in a new window), which define the filesystem and network restrictions for a Codex session.\n\nIn this article, we’ll start with the tradeoffs behind Codex’s sandbox defaults, then explain the sandbox’s design and how the harness uses it to run commands. We’ll show how end users and enterprises can tailor its permissions to their needs and how developers can reuse the sandbox in their own tools. Finally, we’ll examine how these restrictions are enforced on macOS, Linux, and Windows.\n\nIn Codex, our philosophy is to specify conservative defaults for the sandbox that still enable meaningful work. For example, with a Git repository as the workspace root, the built-in :workspace permission profile:\n\nAllows writes within the workspace, while keeping directories such as .git and .codex read-only. This lets Codex edit source code without seeking permission for every change, while preventing direct changes to .codex/config.toml or Git hooks under .git/hooks.\n\nAllows broad filesystem reads, subject to the user’s existing OS permissions. Compilers, runtimes, and build tools depend on SDKs, libraries, and configuration outside the repository. Restricting reads to the workspace would break many ordinary workflows. The tradeoff is that sensitive files elsewhere on the machine may also remain readable (such as config files containing API keys).\n\nDisables network access. This blocks direct uploads to external services, including attempts to exfiltrate data the command can read. It also prevents legitimate operations such as downloading dependencies, which require additional access.\n\nThese restrictions prevent a large class of bad behavior, but harmful actions are still possible. For example, the agent could inject malicious code into a locally installed package such as node_modules/prettier. Such a change might not appear in git status because node_modules is often ignored by Git. If the user’s editor runs that copy of Prettier on save, simply saving a file could execute the malicious code outside the Codex sandbox. This is why we take a defense in depth approach: the sandbox limits what commands can access, while training and alignment help the model use that access in accordance with the user’s intent.\n\nFor guidance on tailoring sandbox permissions and combining them with other protections in an enterprise environment, see the Codex security cookbook⁠(opens in a new window).\n\nVirtual machines and containers⁠(opens in a new window) are two popular mechanisms used for sandboxing, but we take a different approach with the Codex sandbox. Instead of moving computation to a separate environment to provide isolation, Codex uses each platform’s sandboxing facilities to constrain commands running in the user’s existing environment.For many developers, their laptop serves as a bespoke dev environment that they can change on a whim. Reproducing that environment in a Docker container can take work, and some workflows still depend on tools that run on the host.\n\nFor example, consider using Codex to develop an iOS app on a Mac. If you decided to sandbox Codex by running it inside Docker, Codex would not be able to run the iOS build toolchain composed of native Mac executables, nor could it launch the iPhone simulator to run the code. A Docker-based workflow could delegate builds and simulator operations to the Mac host, but those operations would execute outside the container’s sandbox and would need their own restrictions. For Codex, we prefer to keep things simple by investing heavily in OS-specific sandboxing so Codex can run in the environment that is most appropriate to the task at hand.\n\nThe harness exposes these OS-specific sandboxing mechanisms through a common API across macOS, Windows, and Linux. This API takes a command and a permission profile. If the permission profile allows limited network access, the caller must supply a network proxy to enforce those limits:\n\n1# This is a simplified version of the actual API.2def spawn_command_under_sandbox(3 program_and_args: list[str],4 cwd: Path,5 env: dict[str, str],6 permission_profile: PermissionProfile,7 network_proxy: NetworkProxy | None,8) -> Child:This function starts the process in a sandbox and returns a Child handle the harness can use to wait for it to finish. Each child process inherits its parent’s sandbox constraints, so those restrictions apply throughout the process tree initiated by the command, even to descendants that outlive the original process.\n\nThe following diagram shows how these pieces fit together, from configuration to running a sandboxed command. The sections that follow explain each stage.\n\nHow the harness leverages the sandboxAs explained in Unrolling the Codex Agent Loop, the Codex harness is responsible for executing tool calls generated by the model. For coding tasks, the most commonly used tool is a shell tool, which runs commands much as a user would in an interactive shell such as Bash. Here we’ll examine the one-shot ⁠(opens in a new window)exec_command⁠(opens in a new window) shell tool⁠(opens in a new window) to illustrate how the harness employs the sandbox to achieve the desired protections.This is a simplified version of how the exec_command tool call would be honored by the Codex harness without sandboxing:\n\n1# Illustrative implementation of the exec_command tool call.23class ExecCommandToolCall:4 cmd: str5 workdir: str | None = None6 shell: str | None = None7 login: bool = True8 timeout_ms: int = 10_00091011def perform_exec_command(tool_call: ExecCommandToolCall):12 program_and_args = [13 tool_call.shell or os.environ.get(\"SHELL\") or \"/bin/sh\",14 \"-lc\" if tool_call.login else \"-c\",15 tool_call.cmd,16 ]17 child = subprocess.Popen(18 program_and_args,19 # workdir defaults to the turn's cwd, assumed here to be the process cwd.20 cwd=Path(tool_call.workdir or \".\").absolute(),21 stdout=subprocess.PIPE,22 stderr=subprocess.STDOUT,23 )24 output, exit_code = collect_output(child, timeout_ms=tool_call.timeout_ms)25 return {\"output\": output, \"exit_code\": exit_code}To sandbox the command, the harness replaces the call to subprocess.Popen() with spawn_command_under_sandbox(). The harness supplies the permission profile and, when needed, the network proxy:\n\n1# Honoring the exec_command tool call while enforcing sandbox constraints.23def perform_exec_command_with_sandboxing(4 tool_call: ExecCommandToolCall,5 permission_profile: PermissionProfile,6 network_proxy: NetworkProxy | None,7):8 # ...build program_and_args as in the previous example...9 child = spawn_command_under_sandbox(10 program_and_args=program_and_args,11 cwd=Path(tool_call.workdir or \".\").absolute(),12 env=os.environ.copy(),13 permission_profile=permission_profile,14 network_proxy=network_proxy,15 )16 output, exit_code = collect_output(child, timeout_ms=tool_call.timeout_ms)17 return {\"output\": output, \"exit_code\": exit_code}The exec_command tool also lets the model request different permissions for an individual command, but the harness decides whether to grant the request:\n\n1class ExecCommandToolCall:2 # ...command-related fields...34 # Per-command sandbox override. Defaults to \"use_default\".5 sandbox_permissions: Literal[6 \"use_default\",7 \"with_additional_permissions\",8 \"require_escalated\",9 ] = \"use_default\"1011 # User-facing approval question; only for \"require_escalated\".12 justification: str | None = None1314 # Expand network or filesystem access; only for \"with_additional_permissions\".15 # AdditionalPermissions supports fine-grained options.16 additional_permissions: AdditionalPermissions | None = NoneWhen use_default is specified, the harness uses the default sandbox config for the turn. with_additional_permissions requests expanded access within the sandbox, while require_escalated requests execution outside it. The harness evaluates the request based on the user’s preferences before executing the command. (For example, Codex may prompt the user directly, or it might route the request to auto-review⁠(opens in a new window).) If execution is authorized, Codex will pass the appropriate permission_profile and network_proxy to perform_exec_command_with_sandboxing() with the command arguments from the original ExecCommandToolCall.\n\nThe shell tool is the primary consumer of spawn_command_under_sandbox(), and the harness also reuses its sandboxing infrastructure for operations such as reading and modifying local files. This reuse extends beyond the harness: the codex sandbox command lets you incorporate sandboxed command execution into your own tools, as we’ll see later. Next, we’ll look at how permission profiles are defined.\n\nA named permission profile lets you reuse the same filesystem and network restrictions across projects. You can define your own profiles under [permissions] in config.toml. For example, the following defines a profile named dev that extends⁠(opens in a new window) the built-in :workspace profile:\n\n1# Use the dev profile by default.2default_permissions = \"dev\"34[permissions.dev]5# This is displayed when /permissions is run in the Codex CLI.6description = \"Development with extra read-only protections.\"78# A profile can be derived from an existing profile.9# Profiles starting with \":\" are provided by Codex.10extends = \":workspace\"1112[permissions.dev.filesystem]13\"~/build-cache\" = \"write\"1415[permissions.dev.filesystem.\":workspace_roots\"]16\".devcontainer\" = \"read\"17\".vscode\" = \"read\"18\"**/*.env\" = \"deny\"19\"secrets\" = \"deny\"The dev profile adds write access to ~/build-cache and places additional restrictions on files in the workspace. Filesystem entries can grant read-only access (read), grant read and write access (write), or block access entirely (deny).\n\nThe :workspace_roots table lets you define rules for paths relative to a project’s workspace roots. By default, the Codex CLI uses its working directory as its sole workspace root, while the ChatGPT desktop app uses the project’s source folders. Codex applies each rule to every root, so the .vscode entry in dev makes the .vscode directory read-only under each root.\n\n1[permissions.\":workspace\".filesystem.\":workspace_roots\"]2\".agents\" = \"read\"3\".aws\" = \"read\"4\".codex\" = \"read\"5\".git\" = \"read\"Network permissionsWhen it comes to configuring the network for the sandbox in Codex, there are roughly three options:\n\nTo give dev direct network access, set permissions.dev.network.enabled = true at the top level of config.toml. This grants full network access when the network proxy is disabled.\n\n1[permissions.dev.network]2enabled = true34[permissions.dev.network.domains]5\"*.openai.com\" = \"allow\"6# Allow requests to local services by hostname or by IPv4/IPv6 loopback address.7\"localhost\" = \"allow\"8\"127.0.0.1\" = \"allow\"9\"::1\" = \"allow\"10\"evil.example\" = \"deny\"1112[features]13# If neither local config nor managed requirements enable the proxy,14# this profile allows direct network access; domain rules are not enforced.15network_proxy = trueDomain rules support exact names and wildcard patterns, with explicit deny rules taking precedence over allow rules. Requests to other domains require approval or are blocked, as described in Network proxy below.\n\nIndividual users can configure defaults that apply across projects and override them for a particular trusted project. Enterprise administrators may also want to configure defaults for their users and constrain which settings those users can change. Codex supports both through layered configuration and managed requirements.\n\nAs described in Configuration precedence,⁠(opens in a new window) Codex merges settings from multiple config.toml files. Tables are merged recursively, with the higher-precedence source winning when values conflict. Arrays are replaced as a whole.\n\nThis is why permission profiles use tables for filesystem paths and network domains. A team can add or override individual entries in its own configuration and automatically inherit changes to all other entries in the organization’s base configuration:\n\n1[permissions.dev.filesystem.\":workspace_roots\"]2\".idea\" = \"read\"34[permissions.dev.network.domains]5\"example.com\" = \"allow\"Administrators can also supply managed requirements⁠(opens in a new window) through requirements.toml to constrain users’ configuration choices. These requirements can come from multiple sources, including system files and cloud-provided policy. A common use case is to specify allowed_permission_profiles to constrain the set of permission profiles an enterprise user can select. For example, an administrator could specify these cloud requirements:\n\n1default_permissions = \":read-only\"23[allowed_permission_profiles]4\":read-only\" = true5\":danger-full-access\" = falseThe cloud requirements would take precedence over the system requirements file at /etc/codex/requirements.toml, so an entry in that file cannot override the explicit \":danger-full-access\" = false above. Leaving :workspace unspecified allows another requirements layer to supply that entry. Profiles whose entries are false or absent from the final merged table are unavailable.This separation lets organizations enforce limits while users tailor their configuration within those limits. The resulting permission profiles can be used by the harness or applied directly to a command, as we’ll see next.\n\nThe Codex CLI provides a sandbox command to facilitate running an arbitrary command under a permission profile defined in the Codex config. This is commonly used to test out the profile, ensuring that the sandbox prevents the behavior it was designed to block.\n\nFor example, the following command attempts to configure VS Code to run a malicious auto-formatter on save. Assuming .vscode already exists, the dev profile defined above should block this write because that directory is read-only (codex sandbox treats cwd as a workspace root by default):\n\n1codex sandbox --permission-profile dev -- \\2 bash -c 'cat > .vscode/settings.json' <<'JSON'3{4 \"prettier.prettierPath\": \"./node_modules/evil-prettier\",5 \"[typescript]\": {6 \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",7 \"editor.formatOnSave\": true8 }9}10JSONIndeed, on macOS this fails with:\n\n1bash: .vscode/settings.json: Operation not permittedThe codex sandbox command makes Codex’s sandboxing mechanism available independently of an agent session. You can use the same configuration language and platform-specific enforcement to constrain commands launched by your own tools.\n\nFor a stdio MCP server configured in config.toml, the Codex harness does not attempt to sandbox the command used to start the server. Codex cannot reliably infer which files or network services that server needs, so applying a default sandbox profile could break an otherwise valid configuration.\n\n1[mcp_servers.memory]2command = \"npx\"3args = [4 \"-y\",5 \"@modelcontextprotocol/server-memory@1.0.0\"6]78[mcp_servers.memory.env]9MEMORY_FILE_PATH = \"~/mcp-data/memory.jsonl\"Because this npx command runs unsandboxed, it can write files and make network requests with the same permissions as the user running Codex, which is overly permissive. To lock it down, we can define a permission profile named memory-mcp and then wrap the original npx command with codex sandbox --permission-profile memory-mcp to limit where the server can write and to prevent it from accessing the network:\n\n1[permissions.memory-mcp.filesystem]2# Allow broad reads for Node.js/npm dependencies and configuration.3\":root\" = \"read\"4\"~/.npm\" = \"write\"5\"~/mcp-data\" = \"write\"67[permissions.memory-mcp.network]8enabled = false910[mcp_servers.memory]11command = \"codex\"12args = [13 \"sandbox\",14 \"--permission-profile\",15 \"memory-mcp\",16 \"--\",17 \"npx\",18 \"--offline\",19 \"@modelcontextprotocol/server-memory@1.0.0\"20]2122[mcp_servers.memory.env]23MEMORY_FILE_PATH = \"~/mcp-data/memory.jsonl\"Before starting the server, create its data directory and populate the npm cache with the pinned package. That lets npx --offline launch the server under a profile that disables network access:\n\n1# The sandbox can write to this folder, but it cannot create it.2mkdir -p ~/mcp-data34# Installing the MCP server requires network access.5npx -y --package=@modelcontextprotocol/server-memory@1.0.0 -c trueOnce the package is cached, Codex can start the memory server without network access, with writes limited to the npm cache and the server’s data directory.\n\nThe sandbox implementation turns a permission profile into restrictions enforced by the operating system. The network proxy’s core request-handling and policy logic is shared across all three major operating systems, while proxy setup and integration with the sandbox are OS-specific. We’ll examine the shared proxy first, followed by the implementations for macOS, Linux, and Windows.\n\nTo enforce a permission profile’s network restrictions, the harness starts a network proxy and configures the sandbox to allow connections to it while blocking direct connections to external hosts. The proxy checks each request against the profile’s domain rules to determine whether to forward it.\n\nIn the Codex repo, the network proxy is implemented in the codex-network-proxy⁠(opens in a new window) crate, which the harness uses as a library, though it can also be built as a standalone CLI⁠(opens in a new window). When enabled, codex-network-proxy starts both an HTTP proxy and a SOCKS5 proxy by default. These proxy addresses are communicated to the process spawned by the sandbox via environment variables. In addition to injecting standard environment variables such as HTTP_PROXY, HTTPS_PROXY, and ALL_PROXY, a number of well-known application-specific environment variables⁠(opens in a new window) (such as PIP_PROXY) are injected, as well. Admittedly, not all programs honor these environment variables. If a program attempts a direct connection to an external host, the operating system’s sandbox restrictions block it, as described in the platform-specific sections below.\n\nThe network proxy is responsible for implementing the network restrictions defined in a permission profile. For example, the dev profile shown earlier allows requests to *.openai.com and explicitly denies requests to evil.example. When a request targets a domain that does not match an allow or deny rule, the proxy can suspend the request while it delegates to the harness for approval. Like the shell command example, Codex may prompt the user directly, or it might route the request to auto-review⁠(opens in a new window). Upon receiving a decision, the proxy either allows the request to proceed or rejects it with an error response.\n\nThe order matters here because even a DNS lookup can leak information encoded in a hostname. The proxy therefore resolves the requested hostname only after determining that it is allowed or approved. Note that broad wildcard rules or access to DNS services can still permit DNS-based exfiltration.\n\nOn macOS, Codex uses Seatbelt⁠(opens in a new window), Apple’s kernel-enforced sandboxing mechanism. Seatbelt policies are written in Sandbox Profile Language (SBPL), a Scheme-based language for expressing sandbox restrictions. Codex invokes Seatbelt through macOS’s /usr/bin/sandbox-exec command. Like codex sandbox, it takes options describing the sandbox followed by the command to run:\n\n1sandbox-exec -p PROFILE [-Dkey=value]* -- PROG ARGS...The PROFILE is a string of SBPL that contains entries that configure the sandbox. For example, the following SBPL snippet makes /dev/null and /dev/zero readable and writable under the sandbox policy:\n\n1; local HTTP proxy launched by Codex2(allow network-outbound (remote ip \"localhost:3128\"))34; local SOCKS proxy launched by Codex5(allow network-outbound (remote ip \"localhost:8081\"))Codex’s base profile starts with (deny default), so outbound connections remain blocked unless explicitly allowed.\n\n1; Pass -DWRITABLE_ROOT_0=/path/to/dir to specify a folder that cannot be removed.2(deny file-write-unlink3 (require-all4 (literal (param \"WRITABLE_ROOT_0\"))5 (vnode-type DIRECTORY)))which are populated by the -Dkey=value options passed to sandbox-exec.\n\nTo implement its own sandbox API, Codex builds up the list of arguments⁠(opens in a new window) to sandbox-exec starting from a base policy⁠(opens in a new window), and then uses permission_profile and other context to amend it to produce the complete Seatbelt profile. The resulting profile and accompanying -D arguments configure the restrictions enforced by Seatbelt, while the network proxy enforces additional network rules. With the full arg list assembled, the invocation of sandbox-exec is straightforward.\n\nGenerating the correct SBPL is challenging because Apple does not document the language for third-party use. Indeed, man sandbox-exec states The sandbox-exec command is DEPRECATED (as is the sandbox_init() library function documented via man 3 sandbox_init). Despite the deprecation warning, macOS still ships Seatbelt profiles in /usr/share/sandbox, and third-party software, including Google Chrome and Chromium⁠(opens in a new window), continues to rely on Seatbelt. As such, we plan to continue to use Seatbelt for the foreseeable future.\n\nTo create the sandbox on Linux, Codex uses a combination of bubblewrap⁠(opens in a new window) (bwrap), a command-line tool for constructing isolated environments, and seccomp-bpf⁠(opens in a new window), a Linux kernel mechanism for filtering system calls. An internal helper named codex-linux-sandbox coordinates the setup. Like sandbox-exec on macOS, it takes a sandbox configuration followed by a command to run:\n\n1codex-linux-sandbox SANDBOX_ARGS... -- PROG ARGS...When filesystem isolation or proxy routing is required, codex-linux-sandbox invokes bwrap to create the initial sandbox environment. bwrap then launches codex-linux-sandbox --apply-seccomp-then-exec inside it. This second invocation uses seccomp-bpf to apply additional restrictions before running the user’s command.\n\nTo construct that initial sandbox environment, Codex uses bubblewrap to create a filesystem view in a separate mount namespace that reflects the permission profile’s filesystem rules. Because this is fundamental to the sandbox implementation, Codex vendors its own copy of bwrap in case the user has not installed their own, but it prefers a compatible installation of ⁠(opens in a new window)bwrap⁠(opens in a new window) found on PATH, when available. Empirically, some Linux distributions disable access to user namespaces by default⁠(opens in a new window), but grant an exception for the system bwrap.\n\nAlso like sandbox-exec, bwrap takes a sandbox configuration followed by a command to run within the sandbox. Instead of using a custom config language like SBPL, bwrap uses individual flags for configuration. Codex uses the following options to create the filesystem view:\n\nTo apply deny globs using these options, Codex expands them to concrete paths before launching each command. New matching paths are not automatically added to that command’s sandbox restrictions.\n\nCodex also specifies options such as --unshare-ipc and --unshare-pid to prevent the sandbox from accessing other types of resources on the host, so bubblewrap affects more than just file visibility.\n\nWhen using bubblewrap, Codex passes --unshare-net whenever networking is disabled or connections must go through the network proxy, which will create a new network namespace for the sandbox. We then use seccomp-bpf to apply additional restrictions on the networking system calls and socket families available to the command.\n\nSpecifically, we use the seccompiler crate⁠(opens in a new window) to dynamically compile a BPF program based on the desired filters⁠(opens in a new window) and apply it to a launcher process in the sandbox so the constraints are inherited by the entire process tree. As such, bwrap does not run the user’s command, but runs the codex-linux-sandbox launcher with its own config args followed by the user’s command:\n\n1bwrap BWRAP_ARGS... -- \\2 codex-linux-sandbox --apply-seccomp-then-exec CODEX_LINUX_SANDBOX_ARGS... -- \\3 PROG ARGS...To apply seccomp filters without elevated privileges, the launcher sets Linux’s no_new_privs flag⁠(opens in a new window). This flag is inherited by child processes and prevents them from gaining additional privileges when executing another program, such as a setuid executable.\n\nThe seccomp filters depend on the network configuration. When network access is disabled, we block a number of network-related syscalls, such as connect(2) and bind(2). Though when the network proxy is enabled in the sandbox, we allow IP sockets so the TCP listener created by codex-linux-sandbox can be reached, but block the creation of standalone Unix domain sockets by default, as those could enable inadvertent access to resources from the host.\n\nWhen the sandbox configuration merits the use of the network proxy, the Codex harness creates one instance of the proxy that can be reused across multiple invocations of codex-linux-sandbox within the same Codex thread. Each sandbox needs a way to reach that shared proxy from its isolated network namespace. Codex provides a loopback TCP listener inside that namespace and arranges for a process outside the sandbox to accept its connections and relay them to the proxy.\n\nThe following diagrams illustrate this setup for one proxy endpoint, with one connection through it shown in the final diagram. Before launching bubblewrap, codex-linux-sandbox creates a Unix socket pair to serve as a control channel and forks itself. The child runs run_host_bridge() and waits to receive the listener’s file descriptor over that channel:\n\nIn this example, the parent process uses exec to replace its program image with bwrap. This sets up the sandbox and launches codex-linux-sandbox --apply-seccomp-then-exec within it, passing along the FD for the control channel:\n\nInside the sandbox’s network namespace, the second invocation of codex-linux-sandbox creates a loopback TCP listener and passes its file descriptor via the socket. The listener remains associated with the sandbox’s network namespace, allowing the child process that remained outside the sandbox to accept connections from sandboxed programs while opening its upstream connections in the host’s network namespace. After the handoff, both processes close their control-channel descriptors, and the process inside the sandbox closes its copy of the listener.\n\nOnce the TCP listener is ready, the process inside the sandbox sets the appropriate value for HTTP_PROXY⁠(opens in a new window) and related environment variables to point to that listener. It then applies seccomp before forking and executing the user’s command:\n\nThe process outside the sandbox keeps the listener open. For each accepted connection, it opens a connection to the configured proxy and relays data in both directions.This additional machinery gives the command its own network namespace, including a separate loopback interface. On macOS, Seatbelt allows the command to connect directly to specified ports on the host’s loopback interface. On Linux, the command instead connects to a listener inside its isolated namespace, and a process outside the sandbox relays those connections to the configured proxy. The descriptor handoff makes this connection possible without exposing the host’s network namespace to the command.\n\nEarlier this year, we implemented and wrote about our sandboxing efforts on Windows. Since then, Microsoft has released a library called MXC alongside new features for process isolation inside the Windows operating system. We are currently replacing our existing sandbox with one that makes use of the MXC library.\n\nMXC (Microsoft eXecution Container) is a sandboxed code execution system⁠(opens in a new window) from Microsoft that supports several containment backends across Windows, Linux, and macOS. Codex supports an MXC-based sandbox on compatible Windows devices, using native process isolation to restrict commands within the user’s existing environment.\n\nMXC exposes a JSON configuration schema⁠(opens in a new window). Codex uses the MXC SDK⁠(opens in a new window) to construct an execution request following that schema and containing the command, working directory, environment, and permissions. Those permissions cover filesystem and network access, along with Windows resources such as the desktop and clipboard.\n\nCodex uses fixed settings for several controls to balance compatibility and security. It permits registry reads and retains the Win32k and desktop access PowerShell needs during startup. Clipboard access, input injection, and desktop and system-settings controls are disabled. Finally, MXC is prevented from falling back to modifying host filesystem permissions.\n\nCodex translates the permission profile’s filesystem and network rules into MXC’s configuration. Using the earlier dev profile, and assuming:\n\nC:\\, D:\\ and Z:\\ are the machine’s only local drives.\n\nThe workspace root and working directory are C:\\work\\demo.\n\nThe user’s home directory is D:\\Users\\dev, so ~/build-cache resolves to D:\\Users\\dev\\build-cache.\n\nThe deny glob matches only C:\\work\\demo\\config\\dev.env and C:\\work\\demo\\config\\prod.env.\n\n1{2 ...3 \"filesystem\": {4 \"readwritePaths\": [5 \"C:\\\\work\\\\demo\",6 \"D:\\\\Users\\\\dev\\\\build-cache\",7 ...8 ],9 \"readonlyPaths\": [10 \"C:\\\\\",11 \"D:\\\\\",12 \"Z:\\\\\",13 \"C:\\\\work\\\\demo\\\\.agents\",14 \"C:\\\\work\\\\demo\\\\.aws\",15 \"C:\\\\work\\\\demo\\\\.codex\",16 \"C:\\\\work\\\\demo\\\\.devcontainer\",17 \"C:\\\\work\\\\demo\\\\.git\",18 \"C:\\\\work\\\\demo\\\\.vscode\",19 ...20 ],21 \"deniedPaths\": [22 \"C:\\\\work\\\\demo\\\\config\\\\dev.env\",23 \"C:\\\\work\\\\demo\\\\config\\\\prod.env\",24 \"C:\\\\work\\\\demo\\\\secrets\"25 ]26 },27 \"network\": {28 \"egress\": {29 \"default\": \"deny\",30 \"allow\": [{31 \"to\": [32 {\"cidr\": \"127.0.0.0/8\"},33 {\"cidr\": \"::1/128\"}34 ]35 }]36 },37 \"ingress\": {38 \"default\": \"deny\",39 \"hostLoopback\": \"allow\"40 }41 },42 ...43}Drive-root accessMXC’s filesystem policy denies access by default. Codex therefore adds read-only grants for the local drive roots to provide the broad reads allowed by this profile. These grants apply recursively, subject to the user’s existing OS permissions.\n\nOne wrinkle: writable drive-root grants do not apply recursively, so Codex expands them to include the drive’s existing immediate children.\n\nMore-specific paths override ancestor grants, so C:\\work\\demo can be writable beneath a read-only C:\\, while C:\\work\\demo\\.git remains read-only.\n\nWhen different path spellings or symlink/junction aliases refer to the same path, MXC applies the stricter permission: deny takes precedence over read-only, which takes precedence over read-write.\n\nMXC takes concrete deny paths only, so Codex expands deny globs to matching files and directories before launch. New paths that match the glob are not automatically added while the command is running.\n\nDomain rules such as *.openai.com are enforced by the shared Codex network proxy described earlier. Codex runs that proxy outside the sandbox and passes its addresses to the command through the same standard *_PROXY environment variables as mentioned previously. MXC blocks direct external connections while allowing host-loopback connections, including access to the proxy. Other local services remain reachable.\n\nAcross macOS, Linux, and Windows, the harness uses the same sandbox API to launch commands under a permission profile. The platform-specific implementations handle the setup needed to apply those restrictions.\n\nWriting and executing code gives agents a flexible way to solve problems beyond software development. The Codex sandbox lets them use that capability in the user’s existing environment with explicit limits on filesystem and network access. It is a reusable primitive within the harness, and the codex sandbox command makes it available to tools you build yourself.\n\nAs agents take on more tasks, we want to make sandboxing practical for more tools and environments. That means making permissions easier to configure and taking advantage of better operating system protections as they become available. Our goal is to expand what agents can do while keeping people in control of what they can access.\n\nSpecial thanks to David Wiesen, Charlie Weems, Viyat Bhalodia, and Fotis Chantzis for contributing to this post.",
+"wordCount": 4595,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, OpenAI, Autonomous Agent",
+"isBasedOn": "https://openai.com/index/inside-the-codex-sandbox?ref=ainewsradar",
+"about": [
+{
+"@type": "Organization",
+"name": "OpenAI",
+"sameAs": "https://en.wikipedia.org/wiki/OpenAI"
+}
+],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
+"speakable": {
+"@type": "SpeakableSpecification",
+"cssSelector": [
+".executive-summary",
+"h1",
+".article-body",
+".fact-card"
+]
+},
+"author": {
+"@type": "Organization",
+"name": "AI News Radar Editorial Team",
+"url": "https://ainewsradar.xyz/about"
+},
+"publisher": {
+"@type": "NewsMediaOrganization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz",
+"logo": {
+"@type": "ImageObject",
+"url": "https://ainewsradar.xyz/favicon.ico"
+}
+},
+"mentions": [
+{
+"@type": "Thing",
+"name": "Autonomous Agent",
+"sameAs": "https://en.wikipedia.org/wiki/Intelligent_agent"
+}
+]
+},
+{
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "What are the key facts regarding Inside the Codex sandbox?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "OpenAI: Inside the Codex sandbox Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sa. It permits registry reads and retains the Win32k and desktop access PowerShell needs during startup. Inside the Codex sandbox."
+}
+},
+{
+"@type": "Question",
+"name": "What is the strategic AI industry analysis of this event?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sa"
+}
+}
+]
+}
+]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← Back to AI News Radar
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/zh/news/62edf22a5359f316" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🇨🇳 Chinese Edition
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&h=900&fit=fill" alt="Inside the Codex sandbox" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            Primary Source: OpenAI
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Inside the Codex sandbox
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>By OpenAI</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sa
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="Executive Summary & Key Facts" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>Executive Summary & Key Facts</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> OpenAI: Inside the Codex sandbox</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sa.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Metrics]</strong> It permits registry reads and retains the Win32k and desktop access PowerShell needs during startup.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Position &amp; Outlook]</strong> Inside the Codex sandbox.</li>
+          </ul>
+        </section>
+        
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">OpenAI Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">How Codex runs commands on your machine with limits you control.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sandbox so Codex can work in your existing environment within filesystem and network limits you control.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A ⁠(opens in a new window)sandbox⁠(opens in a new window) limits what a program can access while it runs. For a photo-organizing task, you might configure the Codex sandbox to let commands read and modify files in ~/Pictures while blocking network access to prevent uploads. For code review, you might allow access to online documentation while keeping source files read-only. Users configure the Codex sandbox through ⁠(opens in a new window)permission profiles⁠(opens in a new window), which define the filesystem and network restrictions for a Codex session.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In this article, we’ll start with the tradeoffs behind Codex’s sandbox defaults, then explain the sandbox’s design and how the harness uses it to run commands. We’ll show how end users and enterprises can tailor its permissions to their needs and how developers can reuse the sandbox in their own tools. Finally, we’ll examine how these restrictions are enforced on macOS, Linux, and Windows.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In Codex, our philosophy is to specify conservative defaults for the sandbox that still enable meaningful work. For example, with a Git repository as the workspace root, the built-in :workspace permission profile:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Allows writes within the workspace, while keeping directories such as .git and .codex read-only. This lets Codex edit source code without seeking permission for every change, while preventing direct changes to .codex/config.toml or Git hooks under .git/hooks.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Allows broad filesystem reads, subject to the user’s existing OS permissions. Compilers, runtimes, and build tools depend on SDKs, libraries, and configuration outside the repository. Restricting reads to the workspace would break many ordinary workflows. The tradeoff is that sensitive files elsewhere on the machine may also remain readable (such as config files containing API keys).</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Disables network access. This blocks direct uploads to external services, including attempts to exfiltrate data the command can read. It also prevents legitimate operations such as downloading dependencies, which require additional access.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">These restrictions prevent a large class of bad behavior, but harmful actions are still possible. For example, the agent could inject malicious code into a locally installed package such as node_modules/prettier. Such a change might not appear in git status because node_modules is often ignored by Git. If the user’s editor runs that copy of Prettier on save, simply saving a file could execute the malicious code outside the Codex sandbox. This is why we take a defense in depth approach: the sandbox limits what commands can access, while training and alignment help the model use that access in accordance with the user’s intent.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For guidance on tailoring sandbox permissions and combining them with other protections in an enterprise environment, see the Codex security cookbook⁠(opens in a new window).</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Virtual machines and containers⁠(opens in a new window) are two popular mechanisms used for sandboxing, but we take a different approach with the Codex sandbox. Instead of moving computation to a separate environment to provide isolation, Codex uses each platform’s sandboxing facilities to constrain commands running in the user’s existing environment.For many developers, their laptop serves as a bespoke dev environment that they can change on a whim. Reproducing that environment in a Docker container can take work, and some workflows still depend on tools that run on the host.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For example, consider using Codex to develop an iOS app on a Mac. If you decided to sandbox Codex by running it inside Docker, Codex would not be able to run the iOS build toolchain composed of native Mac executables, nor could it launch the iPhone simulator to run the code. A Docker-based workflow could delegate builds and simulator operations to the Mac host, but those operations would execute outside the container’s sandbox and would need their own restrictions. For Codex, we prefer to keep things simple by investing heavily in OS-specific sandboxing so Codex can run in the environment that is most appropriate to the task at hand.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The harness exposes these OS-specific sandboxing mechanisms through a common API across macOS, Windows, and Linux. This API takes a command and a permission profile. If the permission profile allows limited network access, the caller must supply a network proxy to enforce those limits:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# This is a simplified version of the actual API.2def spawn_command_under_sandbox(3 program_and_args: list[str],4 cwd: Path,5 env: dict[str, str],6 permission_profile: PermissionProfile,7 network_proxy: NetworkProxy | None,8) -&gt; Child:This function starts the process in a sandbox and returns a Child handle the harness can use to wait for it to finish. Each child process inherits its parent’s sandbox constraints, so those restrictions apply throughout the process tree initiated by the command, even to descendants that outlive the original process.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The following diagram shows how these pieces fit together, from configuration to running a sandboxed command. The sections that follow explain each stage.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">How the harness leverages the sandboxAs explained in Unrolling the Codex Agent Loop, the Codex harness is responsible for executing tool calls generated by the model. For coding tasks, the most commonly used tool is a shell tool, which runs commands much as a user would in an interactive shell such as Bash. Here we’ll examine the one-shot ⁠(opens in a new window)exec_command⁠(opens in a new window) shell tool⁠(opens in a new window) to illustrate how the harness employs the sandbox to achieve the desired protections.This is a simplified version of how the exec_command tool call would be honored by the Codex harness without sandboxing:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# Illustrative implementation of the exec_command tool call.23class ExecCommandToolCall:4 cmd: str5 workdir: str | None = None6 shell: str | None = None7 login: bool = True8 timeout_ms: int = 10_00091011def perform_exec_command(tool_call: ExecCommandToolCall):12 program_and_args = [13 tool_call.shell or os.environ.get(&quot;SHELL&quot;) or &quot;/bin/sh&quot;,14 &quot;-lc&quot; if tool_call.login else &quot;-c&quot;,15 tool_call.cmd,16 ]17 child = subprocess.Popen(18 program_and_args,19 # workdir defaults to the turn&#x27;s cwd, assumed here to be the process cwd.20 cwd=Path(tool_call.workdir or &quot;.&quot;).absolute(),21 stdout=subprocess.PIPE,22 stderr=subprocess.STDOUT,23 )24 output, exit_code = collect_output(child, timeout_ms=tool_call.timeout_ms)25 return {&quot;output&quot;: output, &quot;exit_code&quot;: exit_code}To sandbox the command, the harness replaces the call to subprocess.Popen() with spawn_command_under_sandbox(). The harness supplies the permission profile and, when needed, the network proxy:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# Honoring the exec_command tool call while enforcing sandbox constraints.23def perform_exec_command_with_sandboxing(4 tool_call: ExecCommandToolCall,5 permission_profile: PermissionProfile,6 network_proxy: NetworkProxy | None,7):8 # ...build program_and_args as in the previous example...9 child = spawn_command_under_sandbox(10 program_and_args=program_and_args,11 cwd=Path(tool_call.workdir or &quot;.&quot;).absolute(),12 env=os.environ.copy(),13 permission_profile=permission_profile,14 network_proxy=network_proxy,15 )16 output, exit_code = collect_output(child, timeout_ms=tool_call.timeout_ms)17 return {&quot;output&quot;: output, &quot;exit_code&quot;: exit_code}The exec_command tool also lets the model request different permissions for an individual command, but the harness decides whether to grant the request:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1class ExecCommandToolCall:2 # ...command-related fields...34 # Per-command sandbox override. Defaults to &quot;use_default&quot;.5 sandbox_permissions: Literal[6 &quot;use_default&quot;,7 &quot;with_additional_permissions&quot;,8 &quot;require_escalated&quot;,9 ] = &quot;use_default&quot;1011 # User-facing approval question; only for &quot;require_escalated&quot;.12 justification: str | None = None1314 # Expand network or filesystem access; only for &quot;with_additional_permissions&quot;.15 # AdditionalPermissions supports fine-grained options.16 additional_permissions: AdditionalPermissions | None = NoneWhen use_default is specified, the harness uses the default sandbox config for the turn. with_additional_permissions requests expanded access within the sandbox, while require_escalated requests execution outside it. The harness evaluates the request based on the user’s preferences before executing the command. (For example, Codex may prompt the user directly, or it might route the request to auto-review⁠(opens in a new window).) If execution is authorized, Codex will pass the appropriate permission_profile and network_proxy to perform_exec_command_with_sandboxing() with the command arguments from the original ExecCommandToolCall.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The shell tool is the primary consumer of spawn_command_under_sandbox(), and the harness also reuses its sandboxing infrastructure for operations such as reading and modifying local files. This reuse extends beyond the harness: the codex sandbox command lets you incorporate sandboxed command execution into your own tools, as we’ll see later. Next, we’ll look at how permission profiles are defined.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A named permission profile lets you reuse the same filesystem and network restrictions across projects. You can define your own profiles under [permissions] in config.toml. For example, the following defines a profile named dev that extends⁠(opens in a new window) the built-in :workspace profile:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# Use the dev profile by default.2default_permissions = &quot;dev&quot;34[permissions.dev]5# This is displayed when /permissions is run in the Codex CLI.6description = &quot;Development with extra read-only protections.&quot;78# A profile can be derived from an existing profile.9# Profiles starting with &quot;:&quot; are provided by Codex.10extends = &quot;:workspace&quot;1112[permissions.dev.filesystem]13&quot;~/build-cache&quot; = &quot;write&quot;1415[permissions.dev.filesystem.&quot;:workspace_roots&quot;]16&quot;.devcontainer&quot; = &quot;read&quot;17&quot;.vscode&quot; = &quot;read&quot;18&quot;**/*.env&quot; = &quot;deny&quot;19&quot;secrets&quot; = &quot;deny&quot;The dev profile adds write access to ~/build-cache and places additional restrictions on files in the workspace. Filesystem entries can grant read-only access (read), grant read and write access (write), or block access entirely (deny).</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The :workspace_roots table lets you define rules for paths relative to a project’s workspace roots. By default, the Codex CLI uses its working directory as its sole workspace root, while the ChatGPT desktop app uses the project’s source folders. Codex applies each rule to every root, so the .vscode entry in dev makes the .vscode directory read-only under each root.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1[permissions.&quot;:workspace&quot;.filesystem.&quot;:workspace_roots&quot;]2&quot;.agents&quot; = &quot;read&quot;3&quot;.aws&quot; = &quot;read&quot;4&quot;.codex&quot; = &quot;read&quot;5&quot;.git&quot; = &quot;read&quot;Network permissionsWhen it comes to configuring the network for the sandbox in Codex, there are roughly three options:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To give dev direct network access, set permissions.dev.network.enabled = true at the top level of config.toml. This grants full network access when the network proxy is disabled.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1[permissions.dev.network]2enabled = true34[permissions.dev.network.domains]5&quot;*.openai.com&quot; = &quot;allow&quot;6# Allow requests to local services by hostname or by IPv4/IPv6 loopback address.7&quot;localhost&quot; = &quot;allow&quot;8&quot;127.0.0.1&quot; = &quot;allow&quot;9&quot;::1&quot; = &quot;allow&quot;10&quot;evil.example&quot; = &quot;deny&quot;1112[features]13# If neither local config nor managed requirements enable the proxy,14# this profile allows direct network access; domain rules are not enforced.15network_proxy = trueDomain rules support exact names and wildcard patterns, with explicit deny rules taking precedence over allow rules. Requests to other domains require approval or are blocked, as described in Network proxy below.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Individual users can configure defaults that apply across projects and override them for a particular trusted project. Enterprise administrators may also want to configure defaults for their users and constrain which settings those users can change. Codex supports both through layered configuration and managed requirements.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">As described in Configuration precedence,⁠(opens in a new window) Codex merges settings from multiple config.toml files. Tables are merged recursively, with the higher-precedence source winning when values conflict. Arrays are replaced as a whole.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">This is why permission profiles use tables for filesystem paths and network domains. A team can add or override individual entries in its own configuration and automatically inherit changes to all other entries in the organization’s base configuration:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1[permissions.dev.filesystem.&quot;:workspace_roots&quot;]2&quot;.idea&quot; = &quot;read&quot;34[permissions.dev.network.domains]5&quot;example.com&quot; = &quot;allow&quot;Administrators can also supply managed requirements⁠(opens in a new window) through requirements.toml to constrain users’ configuration choices. These requirements can come from multiple sources, including system files and cloud-provided policy. A common use case is to specify allowed_permission_profiles to constrain the set of permission profiles an enterprise user can select. For example, an administrator could specify these cloud requirements:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1default_permissions = &quot;:read-only&quot;23[allowed_permission_profiles]4&quot;:read-only&quot; = true5&quot;:danger-full-access&quot; = falseThe cloud requirements would take precedence over the system requirements file at /etc/codex/requirements.toml, so an entry in that file cannot override the explicit &quot;:danger-full-access&quot; = false above. Leaving :workspace unspecified allows another requirements layer to supply that entry. Profiles whose entries are false or absent from the final merged table are unavailable.This separation lets organizations enforce limits while users tailor their configuration within those limits. The resulting permission profiles can be used by the harness or applied directly to a command, as we’ll see next.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The Codex CLI provides a sandbox command to facilitate running an arbitrary command under a permission profile defined in the Codex config. This is commonly used to test out the profile, ensuring that the sandbox prevents the behavior it was designed to block.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For example, the following command attempts to configure VS Code to run a malicious auto-formatter on save. Assuming .vscode already exists, the dev profile defined above should block this write because that directory is read-only (codex sandbox treats cwd as a workspace root by default):</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1codex sandbox --permission-profile dev -- \2 bash -c &#x27;cat &gt; .vscode/settings.json&#x27; &lt;&lt;&#x27;JSON&#x27;3{4 &quot;prettier.prettierPath&quot;: &quot;./node_modules/evil-prettier&quot;,5 &quot;[typescript]&quot;: {6 &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,7 &quot;editor.formatOnSave&quot;: true8 }9}10JSONIndeed, on macOS this fails with:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1bash: .vscode/settings.json: Operation not permittedThe codex sandbox command makes Codex’s sandboxing mechanism available independently of an agent session. You can use the same configuration language and platform-specific enforcement to constrain commands launched by your own tools.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For a stdio MCP server configured in config.toml, the Codex harness does not attempt to sandbox the command used to start the server. Codex cannot reliably infer which files or network services that server needs, so applying a default sandbox profile could break an otherwise valid configuration.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1[mcp_servers.memory]2command = &quot;npx&quot;3args = [4 &quot;-y&quot;,5 &quot;@modelcontextprotocol/server-memory@1.0.0&quot;6]78[mcp_servers.memory.env]9MEMORY_FILE_PATH = &quot;~/mcp-data/memory.jsonl&quot;Because this npx command runs unsandboxed, it can write files and make network requests with the same permissions as the user running Codex, which is overly permissive. To lock it down, we can define a permission profile named memory-mcp and then wrap the original npx command with codex sandbox --permission-profile memory-mcp to limit where the server can write and to prevent it from accessing the network:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1[permissions.memory-mcp.filesystem]2# Allow broad reads for Node.js/npm dependencies and configuration.3&quot;:root&quot; = &quot;read&quot;4&quot;~/.npm&quot; = &quot;write&quot;5&quot;~/mcp-data&quot; = &quot;write&quot;67[permissions.memory-mcp.network]8enabled = false910[mcp_servers.memory]11command = &quot;codex&quot;12args = [13 &quot;sandbox&quot;,14 &quot;--permission-profile&quot;,15 &quot;memory-mcp&quot;,16 &quot;--&quot;,17 &quot;npx&quot;,18 &quot;--offline&quot;,19 &quot;@modelcontextprotocol/server-memory@1.0.0&quot;20]2122[mcp_servers.memory.env]23MEMORY_FILE_PATH = &quot;~/mcp-data/memory.jsonl&quot;Before starting the server, create its data directory and populate the npm cache with the pinned package. That lets npx --offline launch the server under a profile that disables network access:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# The sandbox can write to this folder, but it cannot create it.2mkdir -p ~/mcp-data34# Installing the MCP server requires network access.5npx -y --package=@modelcontextprotocol/server-memory@1.0.0 -c trueOnce the package is cached, Codex can start the memory server without network access, with writes limited to the npm cache and the server’s data directory.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The sandbox implementation turns a permission profile into restrictions enforced by the operating system. The network proxy’s core request-handling and policy logic is shared across all three major operating systems, while proxy setup and integration with the sandbox are OS-specific. We’ll examine the shared proxy first, followed by the implementations for macOS, Linux, and Windows.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To enforce a permission profile’s network restrictions, the harness starts a network proxy and configures the sandbox to allow connections to it while blocking direct connections to external hosts. The proxy checks each request against the profile’s domain rules to determine whether to forward it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In the Codex repo, the network proxy is implemented in the codex-network-proxy⁠(opens in a new window) crate, which the harness uses as a library, though it can also be built as a standalone CLI⁠(opens in a new window). When enabled, codex-network-proxy starts both an HTTP proxy and a SOCKS5 proxy by default. These proxy addresses are communicated to the process spawned by the sandbox via environment variables. In addition to injecting standard environment variables such as HTTP_PROXY, HTTPS_PROXY, and ALL_PROXY, a number of well-known application-specific environment variables⁠(opens in a new window) (such as PIP_PROXY) are injected, as well. Admittedly, not all programs honor these environment variables. If a program attempts a direct connection to an external host, the operating system’s sandbox restrictions block it, as described in the platform-specific sections below.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://images.ctfassets.net/kftzwdyauwt9/7phvBtHTMSTY6vHJx9YL9L/0a4cf5a80f25882a663681872f648617/codex-sandbox-command-desktop-light.png?w=3840&amp;q=90&amp;fm=webp" alt="Flow diagram: configuration and managed requirements define a session permission profile; the Codex" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 Flow diagram: configuration and managed requirements define a session permission profile; the Codex
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The network proxy is responsible for implementing the network restrictions defined in a permission profile. For example, the dev profile shown earlier allows requests to *.openai.com and explicitly denies requests to evil.example. When a request targets a domain that does not match an allow or deny rule, the proxy can suspend the request while it delegates to the harness for approval. Like the shell command example, Codex may prompt the user directly, or it might route the request to auto-review⁠(opens in a new window). Upon receiving a decision, the proxy either allows the request to proceed or rejects it with an error response.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The order matters here because even a DNS lookup can leak information encoded in a hostname. The proxy therefore resolves the requested hostname only after determining that it is allowed or approved. Note that broad wildcard rules or access to DNS services can still permit DNS-based exfiltration.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">On macOS, Codex uses Seatbelt⁠(opens in a new window), Apple’s kernel-enforced sandboxing mechanism. Seatbelt policies are written in Sandbox Profile Language (SBPL), a Scheme-based language for expressing sandbox restrictions. Codex invokes Seatbelt through macOS’s /usr/bin/sandbox-exec command. Like codex sandbox, it takes options describing the sandbox followed by the command to run:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1sandbox-exec -p PROFILE [-Dkey=value]* -- PROG ARGS...The PROFILE is a string of SBPL that contains entries that configure the sandbox. For example, the following SBPL snippet makes /dev/null and /dev/zero readable and writable under the sandbox policy:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1; local HTTP proxy launched by Codex2(allow network-outbound (remote ip &quot;localhost:3128&quot;))34; local SOCKS proxy launched by Codex5(allow network-outbound (remote ip &quot;localhost:8081&quot;))Codex’s base profile starts with (deny default), so outbound connections remain blocked unless explicitly allowed.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1; Pass -DWRITABLE_ROOT_0=/path/to/dir to specify a folder that cannot be removed.2(deny file-write-unlink3 (require-all4 (literal (param &quot;WRITABLE_ROOT_0&quot;))5 (vnode-type DIRECTORY)))which are populated by the -Dkey=value options passed to sandbox-exec.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To implement its own sandbox API, Codex builds up the list of arguments⁠(opens in a new window) to sandbox-exec starting from a base policy⁠(opens in a new window), and then uses permission_profile and other context to amend it to produce the complete Seatbelt profile. The resulting profile and accompanying -D arguments configure the restrictions enforced by Seatbelt, while the network proxy enforces additional network rules. With the full arg list assembled, the invocation of sandbox-exec is straightforward.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Generating the correct SBPL is challenging because Apple does not document the language for third-party use. Indeed, man sandbox-exec states The sandbox-exec command is DEPRECATED (as is the sandbox_init() library function documented via man 3 sandbox_init). Despite the deprecation warning, macOS still ships Seatbelt profiles in /usr/share/sandbox, and third-party software, including Google Chrome and Chromium⁠(opens in a new window), continues to rely on Seatbelt. As such, we plan to continue to use Seatbelt for the foreseeable future.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To create the sandbox on Linux, Codex uses a combination of bubblewrap⁠(opens in a new window) (bwrap), a command-line tool for constructing isolated environments, and seccomp-bpf⁠(opens in a new window), a Linux kernel mechanism for filtering system calls. An internal helper named codex-linux-sandbox coordinates the setup. Like sandbox-exec on macOS, it takes a sandbox configuration followed by a command to run:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1codex-linux-sandbox SANDBOX_ARGS... -- PROG ARGS...When filesystem isolation or proxy routing is required, codex-linux-sandbox invokes bwrap to create the initial sandbox environment. bwrap then launches codex-linux-sandbox --apply-seccomp-then-exec inside it. This second invocation uses seccomp-bpf to apply additional restrictions before running the user’s command.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To construct that initial sandbox environment, Codex uses bubblewrap to create a filesystem view in a separate mount namespace that reflects the permission profile’s filesystem rules. Because this is fundamental to the sandbox implementation, Codex vendors its own copy of bwrap in case the user has not installed their own, but it prefers a compatible installation of ⁠(opens in a new window)bwrap⁠(opens in a new window) found on PATH, when available. Empirically, some Linux distributions disable access to user namespaces by default⁠(opens in a new window), but grant an exception for the system bwrap.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Also like sandbox-exec, bwrap takes a sandbox configuration followed by a command to run within the sandbox. Instead of using a custom config language like SBPL, bwrap uses individual flags for configuration. Codex uses the following options to create the filesystem view:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To apply deny globs using these options, Codex expands them to concrete paths before launching each command. New matching paths are not automatically added to that command’s sandbox restrictions.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Codex also specifies options such as --unshare-ipc and --unshare-pid to prevent the sandbox from accessing other types of resources on the host, so bubblewrap affects more than just file visibility.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When using bubblewrap, Codex passes --unshare-net whenever networking is disabled or connections must go through the network proxy, which will create a new network namespace for the sandbox. We then use seccomp-bpf to apply additional restrictions on the networking system calls and socket families available to the command.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Specifically, we use the seccompiler crate⁠(opens in a new window) to dynamically compile a BPF program based on the desired filters⁠(opens in a new window) and apply it to a launcher process in the sandbox so the constraints are inherited by the entire process tree. As such, bwrap does not run the user’s command, but runs the codex-linux-sandbox launcher with its own config args followed by the user’s command:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1bwrap BWRAP_ARGS... -- \2 codex-linux-sandbox --apply-seccomp-then-exec CODEX_LINUX_SANDBOX_ARGS... -- \3 PROG ARGS...To apply seccomp filters without elevated privileges, the launcher sets Linux’s no_new_privs flag⁠(opens in a new window). This flag is inherited by child processes and prevents them from gaining additional privileges when executing another program, such as a setuid executable.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The seccomp filters depend on the network configuration. When network access is disabled, we block a number of network-related syscalls, such as connect(2) and bind(2). Though when the network proxy is enabled in the sandbox, we allow IP sockets so the TCP listener created by codex-linux-sandbox can be reached, but block the creation of standalone Unix domain sockets by default, as those could enable inadvertent access to resources from the host.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When the sandbox configuration merits the use of the network proxy, the Codex harness creates one instance of the proxy that can be reused across multiple invocations of codex-linux-sandbox within the same Codex thread. Each sandbox needs a way to reach that shared proxy from its isolated network namespace. Codex provides a loopback TCP listener inside that namespace and arranges for a process outside the sandbox to accept its connections and relay them to the proxy.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The following diagrams illustrate this setup for one proxy endpoint, with one connection through it shown in the final diagram. Before launching bubblewrap, codex-linux-sandbox creates a Unix socket pair to serve as a control channel and forks itself. The child runs run_host_bridge() and waits to receive the listener’s file descriptor over that channel:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In this example, the parent process uses exec to replace its program image with bwrap. This sets up the sandbox and launches codex-linux-sandbox --apply-seccomp-then-exec within it, passing along the FD for the control channel:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inside the sandbox’s network namespace, the second invocation of codex-linux-sandbox creates a loopback TCP listener and passes its file descriptor via the socket. The listener remains associated with the sandbox’s network namespace, allowing the child process that remained outside the sandbox to accept connections from sandboxed programs while opening its upstream connections in the host’s network namespace. After the handoff, both processes close their control-channel descriptors, and the process inside the sandbox closes its copy of the listener.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Once the TCP listener is ready, the process inside the sandbox sets the appropriate value for HTTP_PROXY⁠(opens in a new window) and related environment variables to point to that listener. It then applies seccomp before forking and executing the user’s command:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The process outside the sandbox keeps the listener open. For each accepted connection, it opens a connection to the configured proxy and relays data in both directions.This additional machinery gives the command its own network namespace, including a separate loopback interface. On macOS, Seatbelt allows the command to connect directly to specified ports on the host’s loopback interface. On Linux, the command instead connects to a listener inside its isolated namespace, and a process outside the sandbox relays those connections to the configured proxy. The descriptor handoff makes this connection possible without exposing the host’s network namespace to the command.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Earlier this year, we implemented and wrote about our sandboxing efforts on Windows. Since then, Microsoft has released a library called MXC alongside new features for process isolation inside the Windows operating system. We are currently replacing our existing sandbox with one that makes use of the MXC library.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MXC (Microsoft eXecution Container) is a sandboxed code execution system⁠(opens in a new window) from Microsoft that supports several containment backends across Windows, Linux, and macOS. Codex supports an MXC-based sandbox on compatible Windows devices, using native process isolation to restrict commands within the user’s existing environment.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MXC exposes a JSON configuration schema⁠(opens in a new window). Codex uses the MXC SDK⁠(opens in a new window) to construct an execution request following that schema and containing the command, working directory, environment, and permissions. Those permissions cover filesystem and network access, along with Windows resources such as the desktop and clipboard.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Codex uses fixed settings for several controls to balance compatibility and security. It permits registry reads and retains the Win32k and desktop access PowerShell needs during startup. Clipboard access, input injection, and desktop and system-settings controls are disabled. Finally, MXC is prevented from falling back to modifying host filesystem permissions.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Codex translates the permission profile’s filesystem and network rules into MXC’s configuration. Using the earlier dev profile, and assuming:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">C:\, D:\ and Z:\ are the machine’s only local drives.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The workspace root and working directory are C:\work\demo.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The user’s home directory is D:\Users\dev, so ~/build-cache resolves to D:\Users\dev\build-cache.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The deny glob matches only C:\work\demo\config\dev.env and C:\work\demo\config\prod.env.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1{2 ...3 &quot;filesystem&quot;: {4 &quot;readwritePaths&quot;: [5 &quot;C:\\work\\demo&quot;,6 &quot;D:\\Users\\dev\\build-cache&quot;,7 ...8 ],9 &quot;readonlyPaths&quot;: [10 &quot;C:\\&quot;,11 &quot;D:\\&quot;,12 &quot;Z:\\&quot;,13 &quot;C:\\work\\demo\\.agents&quot;,14 &quot;C:\\work\\demo\\.aws&quot;,15 &quot;C:\\work\\demo\\.codex&quot;,16 &quot;C:\\work\\demo\\.devcontainer&quot;,17 &quot;C:\\work\\demo\\.git&quot;,18 &quot;C:\\work\\demo\\.vscode&quot;,19 ...20 ],21 &quot;deniedPaths&quot;: [22 &quot;C:\\work\\demo\\config\\dev.env&quot;,23 &quot;C:\\work\\demo\\config\\prod.env&quot;,24 &quot;C:\\work\\demo\\secrets&quot;25 ]26 },27 &quot;network&quot;: {28 &quot;egress&quot;: {29 &quot;default&quot;: &quot;deny&quot;,30 &quot;allow&quot;: [{31 &quot;to&quot;: [32 {&quot;cidr&quot;: &quot;127.0.0.0/8&quot;},33 {&quot;cidr&quot;: &quot;::1/128&quot;}34 ]35 }]36 },37 &quot;ingress&quot;: {38 &quot;default&quot;: &quot;deny&quot;,39 &quot;hostLoopback&quot;: &quot;allow&quot;40 }41 },42 ...43}Drive-root accessMXC’s filesystem policy denies access by default. Codex therefore adds read-only grants for the local drive roots to provide the broad reads allowed by this profile. These grants apply recursively, subject to the user’s existing OS permissions.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">One wrinkle: writable drive-root grants do not apply recursively, so Codex expands them to include the drive’s existing immediate children.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">More-specific paths override ancestor grants, so C:\work\demo can be writable beneath a read-only C:\, while C:\work\demo\.git remains read-only.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When different path spellings or symlink/junction aliases refer to the same path, MXC applies the stricter permission: deny takes precedence over read-only, which takes precedence over read-write.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MXC takes concrete deny paths only, so Codex expands deny globs to matching files and directories before launch. New paths that match the glob are not automatically added while the command is running.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Domain rules such as *.openai.com are enforced by the shared Codex network proxy described earlier. Codex runs that proxy outside the sandbox and passes its addresses to the command through the same standard *_PROXY environment variables as mentioned previously. MXC blocks direct external connections while allowing host-loopback connections, including access to the proxy. Other local services remain reachable.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Across macOS, Linux, and Windows, the harness uses the same sandbox API to launch commands under a permission profile. The platform-specific implementations handle the setup needed to apply those restrictions.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Writing and executing code gives agents a flexible way to solve problems beyond software development. The Codex sandbox lets them use that capability in the user’s existing environment with explicit limits on filesystem and network access. It is a reusable primitive within the harness, and the codex sandbox command makes it available to tools you build yourself.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">As agents take on more tasks, we want to make sandboxing practical for more tools and environments. That means making permissions easier to configure and taking advantage of better operating system protections as they become available. Our goal is to expand what agents can do while keeping people in control of what they can access.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Special thanks to David Wiesen, Charlie Weems, Viyat Bhalodia, and Fotis Chantzis for contributing to this post.</p>
+          </div>
+          
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>AI Radar Technical Deep-Dive</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sa</p>
+        </div>
+        
+
+      </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>Share</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>Copy Link</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://openai.com/index/inside-the-codex-sandbox?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 Read Original Source Report ↗</span>
+        </a>
+
+      </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="Source Attribution and Copyright Notice" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">Source Attribution &amp; Disclaimer:</strong> Curated by AI News Radar for independent industry monitoring, commentary, and research reference only (not legal, financial, or investment advice). All third-party headlines, reporting, trademarks, images, and embedded media remain the sole intellectual property of <strong class="text-slate-600 dark:text-slate-300">OpenAI</strong> and the credited author(s). Readers are encouraged to subscribe to and support original journalism via the official link above. Rights holders or publishers requesting immediate takedown, summary-only display, or domain opt-out may contact <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a> per our <a href="/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DMCA &amp; Copyright Policy</a> (24–48h SLA).</p>
+      </aside>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/news/ea468916f78cea78" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/nyt_993f489b68bc7fd3.jpg" alt="The Anti-A.I. Campus Movement Is Growing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">The Anti-A.I. Campus Movement Is Growing</h4>
+            </a>
+            
+            <a href="/news/aa6c9e852776802c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_88abcf961da6640a.jpg" alt="US companies turn to robots to ease labour shortage crisis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">US companies turn to robots to ease labour shortage crisis</h4>
+            </a>
+            
+            <a href="/news/3121c9f137f53276" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://media.datacenterdynamics.com/media/images/Nvidia_CEO_Jensen_Huang_exit.2e16d0ba.fill-280x185.jpg" alt="Google Ruth Porat Pledges Data Center Local Support Amid Backlash" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Google Ruth Porat Pledges Data Center Local Support Amid Backlash</h4>
+            </a>
+            
+            <a href="/news/099ba421a90a74cd" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fffe47a4c-f930-4bfc-b1e4-8ebe180487e0.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="Sources expect Anthropic&#x27;s IPO allocation for retail investors to fall below 20%; retail buyers have historically received 5% to 10% of shares in large IPOs (Financial Times)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sources expect Anthropic&#x27;s IPO allocation for retail investors to fall below 20%; retail buyers have historically received 5% to 10% of shares in large IPOs (Financial Times)</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a><a href="/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Editorial Policy</a><a href="/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">DMCA &amp; Copyright</a><a href="/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms</a><a href="/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a><a href="/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; All third-party reporting copyrights belong to their respective publishers and authors</p>
+    </div>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "62edf22a5359f316",
+      type: "news",
+      title: "Inside the Codex sandbox",
+      snippet: "How Codex runs commands on your machine with limits you control. At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safegua",
+      url: window.location.href,
+      image_url: "https://images.ctfassets.net/kftzwdyauwt9/1PnylD7lJwgUw7jYNP8wLh/7fa5553001136f3982e8d4db44146de3/inside-the-codex-sandbox-social.png?w=1600&amp;h=900&amp;fit=fill"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Inside the Codex sandbox";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Share link copied to clipboard! 🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
