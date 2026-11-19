@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 22:48:57 UTC",
+  "generated_at": "2026-11-19 23:03:34 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 22:48:57 UTC",
+      "updated_at": "2026-11-19 23:03:34 UTC",
       "headline_item": {
-        "id": "e4a4779e65cbd2c3",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "美国国家网络总监肖恩·凯恩克罗斯离任",
-        "title_en": "Sources: National Cyber Director Sean Cairncross is leaving now to let the White House get a successor confirmed before Democrats take the Senate in January (Axios)",
-        "source": "Axios",
-        "published_at": "2026-11-19T22:45:01+00:00",
-        "url": "https://www.axios.com/2026/11/19/trump-national-cyber-director-sean-cairncross-leaving",
-        "event_summary_zh": "美国国家网络总监肖恩·凯恩克罗斯宣布离职，旨在确保继任者在明年1月国会权力格局变动前完成参议院确认程序",
-        "event_summary_en": "US National Cyber Director Sean Cairncross is stepping down to provide a transition window for his successor to be confirmed by the Senate before Democrats gain control in January. As the head of the Office of the National Cyber Director, Cairncross led federal cybersecurity strategy and notably directed technical reviews of AI firms like Anthropic following commerce-led export control implementations.",
+        "id": "4913ee9b53b10e89",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "英伟达正洽谈以逾5亿美元收购Inception",
+        "title_en": "Sources: Nvidia is in advanced talks to acquire diffusion LLM developer Inception for $500M+ plus earnouts; talks began before Jensen Huang's resignation (The Information)",
+        "source": "The Information",
+        "published_at": "2026-11-19T23:00:01+00:00",
+        "url": "https://www.theinformation.com/articles/nvidia-nears-acquisition-diffusion-ai-developer-500-million",
+        "event_summary_zh": "英伟达拟逾5亿美元收购Diffusion架构大模型开发商Inception，旨在加强其非自回归模型技术布局",
+        "event_summary_en": "Nvidia is in advanced talks to acquire diffusion-based LLM developer Inception for over $500 million, including earnouts. Inception recently launched Mercury 3, a model utilizing diffusion scaling laws to outperform autoregressive models like GPT-6.1-Sol in specific benchmarks, achieving speeds exceeding 1,000 tokens per second.",
         "core_facts_zh": [
-          "【核心事件】肖恩·凯恩克罗斯（Sean Cairncross），美国国家网络总监在美国白宫/国家网络总监办公室：辞去现职，旨在为继任者提供参议院确认的过渡期",
-          "【起因与机理】避免在明年1月民主党控制参议院后出现任命受阻，同时应对当前人工智能引发的网络威胁挑战",
-          "【核心事实细节】肖恩·凯恩克罗斯辞去国家网络总监职务。",
-          "【行业影响与走向】该办公室核心任务包括协调联邦网络安全政策及应对AI带来的新型网络安全风险。"
+          "【核心事件】英伟达（Nvidia）、Inception（Diffusion大模型开发商）在企业兼并与收购（M&A）市场：拟以5亿美元以上价格收购Inception，并整合其Mercury 3扩散架构技术",
+          "【起因与机理】验证了扩散模型在处理复杂任务时具备与自回归模型竞争的扩展定律，且推理效率具有显著差异化优势",
+          "【关键数据与实测】英伟达推进收购协议，交易对价逾5亿美元。",
+          "【各方立场与态度】扩散架构已证实具备与自回归模型竞争的扩展定律，引发算力架构布局竞争。"
         ],
         "core_facts_en": [
-          "[Core Event] Sean Cairncross, National Cyber Director of the United States: Resignation to facilitate the confirmation of a successor before the Senate transition",
-          "[Root Cause & Mechanism] To preempt potential legislative gridlock and navigate the intensifying cybersecurity challenges posed by advanced AI systems",
-          "[Regulatory & Investigation Focus] Resignation of National Cyber Director Sean Cairncross.",
-          "[Scope & Next Steps] Core mandates include coordinating federal cybersecurity policy and managing AI-driven cyber threats."
+          "[Core Event] Nvidia, Inception (M&A market): Acquisition deal over $500M involving Mercury 3 technology integration",
+          "[Root Cause & Mechanism] Validation of diffusion scaling laws competing with autoregressive models and superior inference efficiency",
+          "[Key Metrics] Nvidia advancing acquisition with valuation exceeding $500M.",
+          "[Key Position & Outlook] Diffusion scaling laws verified as a viable alternative to autoregressive models for latency-sensitive applications."
         ],
-        "industry_impact_zh": "此次辞职揭示了美国政府在政权换届之际对网络安全战略连续性的高度忧虑，尤其是AI技术对网络攻击能力与防御机制的重塑速度已超越行政决策周期。继任者需在AI模型出口管制与关键基础设施弹性保障之间寻找更精细的平衡点，预计后续政策重心将转向更具强制性的AI安全合规标准与跨部门网络防御协同。",
-        "industry_impact_en": "This departure underscores the urgency of maintaining strategic continuity in US cybersecurity during the political transition, particularly as AI capabilities outpace traditional regulatory frameworks. The successor must navigate the tension between stringent AI export controls and the urgent requirement for hardening critical infrastructure, likely accelerating the shift toward mandatory AI security compliance protocols."
+        "industry_impact_zh": "此次收购标志着英伟达正加速通过构建技术防火墙来对抗Transformer架构在推理侧的效率瓶颈。Inception验证的扩散模型扩展定律若能整合入英伟达的软硬一体架构中，将直接威胁现有自回归模型的市场定价基准，并为特定实时代理场景提供远超传统方案的低延迟算力支持。",
+        "industry_impact_en": "This acquisition signals Nvidia's strategic push to mitigate the inference bottlenecks of Transformer architectures by diversifying into diffusion-based LLMs. Integrating Inception's validated scaling laws into Nvidia's vertical stack could disrupt current autoregressive pricing models and provide a decisive low-latency advantage for real-time agentic workflows."
       },
       "headlines": [
+        {
+          "id": "4913ee9b53b10e89",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "英伟达正洽谈以逾5亿美元收购Inception",
+          "title_en": "Sources: Nvidia is in advanced talks to acquire diffusion LLM developer Inception for $500M+ plus earnouts; talks began before Jensen Huang's resignation (The Information)",
+          "source": "The Information",
+          "published_at": "2026-11-19T23:00:01+00:00",
+          "url": "https://www.theinformation.com/articles/nvidia-nears-acquisition-diffusion-ai-developer-500-million",
+          "event_summary_zh": "英伟达拟逾5亿美元收购Diffusion架构大模型开发商Inception，旨在加强其非自回归模型技术布局",
+          "event_summary_en": "Nvidia is in advanced talks to acquire diffusion-based LLM developer Inception for over $500 million, including earnouts. Inception recently launched Mercury 3, a model utilizing diffusion scaling laws to outperform autoregressive models like GPT-6.1-Sol in specific benchmarks, achieving speeds exceeding 1,000 tokens per second.",
+          "core_facts_zh": [
+            "【核心事件】英伟达（Nvidia）、Inception（Diffusion大模型开发商）在企业兼并与收购（M&A）市场：拟以5亿美元以上价格收购Inception，并整合其Mercury 3扩散架构技术",
+            "【起因与机理】验证了扩散模型在处理复杂任务时具备与自回归模型竞争的扩展定律，且推理效率具有显著差异化优势",
+            "【关键数据与实测】英伟达推进收购协议，交易对价逾5亿美元。",
+            "【各方立场与态度】扩散架构已证实具备与自回归模型竞争的扩展定律，引发算力架构布局竞争。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nvidia, Inception (M&A market): Acquisition deal over $500M involving Mercury 3 technology integration",
+            "[Root Cause & Mechanism] Validation of diffusion scaling laws competing with autoregressive models and superior inference efficiency",
+            "[Key Metrics] Nvidia advancing acquisition with valuation exceeding $500M.",
+            "[Key Position & Outlook] Diffusion scaling laws verified as a viable alternative to autoregressive models for latency-sensitive applications."
+          ],
+          "industry_impact_zh": "此次收购标志着英伟达正加速通过构建技术防火墙来对抗Transformer架构在推理侧的效率瓶颈。Inception验证的扩散模型扩展定律若能整合入英伟达的软硬一体架构中，将直接威胁现有自回归模型的市场定价基准，并为特定实时代理场景提供远超传统方案的低延迟算力支持。",
+          "industry_impact_en": "This acquisition signals Nvidia's strategic push to mitigate the inference bottlenecks of Transformer architectures by diversifying into diffusion-based LLMs. Integrating Inception's validated scaling laws into Nvidia's vertical stack could disrupt current autoregressive pricing models and provide a decisive low-latency advantage for real-time agentic workflows."
+        },
         {
           "id": "e4a4779e65cbd2c3",
           "tag_zh": "📰 业界动态",
@@ -83,37 +109,12 @@
           ],
           "industry_impact_zh": "苹果的逻辑是利用macOS和iOS的底层权限优势，将AI代理锚定在“隐私合规”的护城河内，以对抗Meta等竞品激进的UI劫持式代理技术。此举本质上是在重塑操作系统的人机交互范式，即由用户主动指令转向AI模型作为“系统操作者”，这将对应用生态的入口价值产生深远挤压。",
           "industry_impact_en": "Apple is leveraging its OS-level permission control to build a 'privacy-first' moat for AI agents, countering the UI-overtaking approaches used by competitors. This marks a paradigm shift in human-computer interaction, transforming AI models from mere assistants into autonomous system operators, which effectively challenges the traditional interface value of third-party applications."
-        },
-        {
-          "id": "a5321bbf77dc5c52",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "苹果正在开发用于设备控制、应用程序、浏览和编码的人工智能代理",
-          "title_en": "Apple Is Working on AI Agent for Device Control, Apps, Browsing and Coding",
-          "source": "Bloomberg",
-          "published_at": "2026-11-19T22:30:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-19/apple-is-working-on-ai-agent-for-device-control-apps-browsing-and-coding?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NTEyNDc2NSwiZXhwIjoxNzk1NzI5NTY1LCJhcnRpY2xlSWQiOiJUT1I5MEtLSkg2VjUwMCIsImJjb25uZWN0SWQiOiJDNEVEQ0FFMUZBMDU0MEJFQTI0QTlGMjExQzFFOTA4MCJ9.76_dY8UuzU3uFF5ExyvuszXnM3mdj2w3dulsez1QvhY",
-          "event_summary_zh": "报道称，苹果正在聘请工程师开发一款自主人工智能代理，能够代表用户浏览网页、编写代码和控制应用程序。以下是详细信息。 ### 苹果正在开发可以编码、浏览网页等功能的人工智能代理\n\n彭博社在今天发布的一份报告中指出，新的职位列表",
-          "event_summary_en": "Bloomberg reports that Apple is hiring engineers to develop an autonomous AI agent capable of browsing the web, writing code, and controlling apps on behalf of users. Here are the details.\n\n### Apple working on AI agent that can code, browse the web, more\n\nIn a report published today, Bloomberg notes that new job listings on Apple’s website indicate the company’s efforts to develop an autonomous AI agent capable of performing complex tasks on the user’s behalf.\n\nSince the breakout success of Ope",
-          "core_facts_zh": [
-            "【核心事件】苹果公司 (Apple Inc.)：苹果正在开发用于设备控制、应用程序、浏览和编码的人工智能代理",
-            "【核心事实细节】苹果正在开发用于设备控制、应用程序、浏览和编码的人工智能代理。",
-            "【行业研判】### 苹果正在开发可以编码、浏览网页等功能的人工智能代理\n\n彭博社在今天发布的一份报告中指出，苹果网站上的新职位列表表明。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Apple Is Working on AI Agent for Device Control, Apps, Browsing and Coding",
-            "[Context & Motivation] Bloomberg reports that Apple is hiring engineers to develop an autonomous AI agent capable of browsing the web, writing code, and controlling apps on behalf of users.",
-            "[Key Technical Spec] ### Apple working on AI agent that can code, browse the web, more\n\nIn a report published today, Bloomberg notes that new job listings on Apple’s website indicate the company’s efforts to develop an autonomous AI agent capable of performing complex tasks on the user’s behalf.",
-            "[Industry Analysis] Since the breakout success of Ope."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 22:48:57 UTC",
+      "updated_at": "2026-11-19 23:03:35 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -280,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 22:48:57 UTC",
+      "updated_at": "2026-11-19 23:03:35 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
