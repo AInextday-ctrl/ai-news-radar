@@ -20,6 +20,10 @@
    - 严禁将源站配图注释（Caption，如 `字节跳动联合创始人张一鸣，公司2021年发布的肖像照。`、`View image in fullscreen ... Photograph: ...`）、摄影机构署名（Credit，如 `Photo by ...`、`新华社发`、`视觉中国供图`）当作文章正文段落提取或排版。
    - 严禁将邮件订阅引导语（如 `Get the most important tech news in your inbox each week.`、`每周在您的收件箱中获取最重要的科技新闻。`）泄漏至正文末尾或任何段落中。
    - 所有正文段落必须通过 `clean_article_paragraphs` 自动过滤图片注释与推广尾巴，确保深度报道原文实录纯正无杂质。
+5. **信源 URL/Slug 规范化与穿透检索安全守则 (URL Normalization & Safe Search Invariants)**：
+   - 外部信源（如 Bloomberg、Reuters 等）URL 路径中若含有前导/尾随特殊连字符（如 `/-grand-theft-auto...`）、特殊符号或多余斜杠，在提取 slug 时必须强制使用 `re.sub(r'^-+|-+$', '', slug)` 彻底过滤。
+   - 严禁将带有前导 `-` 的原始 slug 直接拼入外部搜索引擎（如 Google News RSS 的 `site:bloomberg.com "..."`）作为关键词，避免触发搜索引擎的排除运算符（Negative Operator）导致穿透抓取自锁。
+   - 所有搜索引擎 Query 构造函数必须具备符号转义与净化层，保证搜索穿透具备高容错性。
 
 ---
 
@@ -33,6 +37,9 @@
    - 确保用户翻到第 20 页、第 50 页的历史资讯时，点击卡片依然能 0ms 秒开深度研判与 5W1H 事实，杜绝“找不到数据直接跳 404”。
 3. **404 智能救赎兜底**：
    - [public/404.html](file:///e:/AI/Antigravity/AI%20News/public/404.html) 必须常驻路径捕获脚本。当外部直链访问了未预生成的静态落地页时，自动将用户平滑重定向至看板对应的 `/#news?open={id}`，确保访客永不碰壁。
+4. **严谨语义解耦与防假正文冒充 (Strict Microdata Semantics & Anti-Spoofing)**：
+   - **后端 Microdata 语义归位**：静态页面发布器（`tool_news_publisher.py`、`content_publisher.py`）中，Schema.org 属性 `itemprop="articleBody"` 必须且仅能声明在真正的正文容器（`<div class="article-body">`）上，绝对严禁标记在要点摘要、引言或列表（`<ul>`/`<ol>`）元素上。
+   - **前端提取类型卫语句**：前端弹窗 DOM 降级提取器（`app.js`）在拉取正文时，必须具备严格的容器类型拦截卫语句：若目标元素为纯列表容器（`UL`、`OL`）或内部缺少段落标签（`<p>`），严禁将其作为正文渲染至“深度报道原文实录”，杜绝要点列表倒挂冒充长文正文。
 
 ---
 
@@ -80,3 +87,13 @@
    - 所有在 GitHub Actions CI 中被调用的核心 Python 脚本（`main.py`、`content_publisher.py`、`tool_news_publisher.py`、`curator_engine.py` 等），其 `if __name__ == '__main__':` 必须具备顶层 `try...except BaseException` 护盾，打印详细堆栈并实施自愈降级，严禁因偶发非关键报错以 exit code 1 导致整条 24x7 部署流水线中断。
 4. **数据存储序列化防污染与体积守恒 (Serialization Invariants)**：
    - 数据文件（`latest_news.json` 等）必须保持既定的序列化紧凑规范（`separators=(',', ':')`），严禁在修改时随意切换格式导致产生数十万行无意义 diff，污染代码审查与历史记录。
+
+---
+
+## 7. 系统自主性与防御性归因准则 (Defensive Accountability Invariants)
+
+1. **客观归因，拒绝甩锅外部信源**：
+   - 外部媒体网站的付费墙、配图图注（Caption）、摄影署名、动态脚本或非标 URL 格式，均属于公网不可控信源的**客观常态**。
+   - 任何“图注混入正文”、“付费墙穿透失败”或“列表冒充长文”，根源均在于系统自身解析规则不严、防御性卫语句缺失或规范化不足，严禁将内部工程缺陷归因于“信源有问题”。
+2. **所有偶发缺陷必须通过门禁代码化固锁**：
+   - 每解决一个解析或排版异常，必须将对应的防御逻辑同时写入爬虫模块、前端提取器和 `tests/test_data_quality_gate.py` 硬性断言，杜绝口头修补与历史回退。
