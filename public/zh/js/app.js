@@ -59,6 +59,9 @@
       if (!url || typeof url !== 'string') return '';
       const u = url.trim();
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return '';
+      if (u.includes('ainewsradar.xyz/images/') || u.startsWith('/images/')) {
+        return u.replace(/^https?:\/\/[^\/]+/, '');
+      }
       if (u.startsWith('/') || u.startsWith('./')) {
         if (u.includes('/assets/tool-previews/') && !u.includes('?v=')) {
           return u + '?v=4';
@@ -3679,7 +3682,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const twImg = item.image_url || item.media || '';
       let thumbHtml = '';
       if (isValidTweetImageUrl(twImg)) {
-        const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
+        const optImg = optimizeImageUrl(twImg, 240);
         thumbHtml = `
           <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
             <img src="${optImg}" width="72" height="52" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.closest('.tweet-thumb-box')?.remove();">
@@ -3819,7 +3822,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const twImg = item.image_url || item.media || '';
       let thumbHtml = '';
       if (isValidTweetImageUrl(twImg)) {
-        const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
+        const optImg = optimizeImageUrl(twImg, 240);
         thumbHtml = `
           <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
             <img src="${optImg}" width="72" height="52" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.closest('.tweet-thumb-box')?.remove();">
@@ -4753,19 +4756,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function handleNewsCardClick(newsId, event) {
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
-      // 当处于独立【资讯】栏目 (currentTab === 'news' 或 hash === '#news') 时，采用新页面标签模式打开
+      const targetUrl = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
       const isNewsTab = (typeof currentTab !== 'undefined' && currentTab === 'news') || (window.location.hash === '#news');
       if (isNewsTab) {
-        const url = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
+        window.location.href = targetUrl;
         return;
       }
-      // 首页 (currentTab === 'all') 及其它区域优先弹窗，数据尚未到达时直接平滑进入独立落地页
-      if (typeof openAiNewsModal === 'function') {
-        openAiNewsModal(newsId);
-      } else {
-        window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
+      if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
+        try {
+          openAiNewsModal(newsId);
+          return;
+        } catch (e) {
+          console.error('[handleNewsCardClick] openAiNewsModal error:', e);
+        }
       }
+      window.location.href = targetUrl;
     }
 
     function handleNewsTitleClick(newsId, event) {
@@ -4776,26 +4781,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isNewsTab) {
         return; // 在独立快讯流中，允许原生链接跳转
       }
-      // 在首页：若数据已就绪且弹窗可用，打开弹窗速读
-      if (typeof openAiNewsModal === 'function' && cachedData) {
-        if (event) event.preventDefault();
-        openAiNewsModal(newsId);
+      if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
+        try {
+          if (event) event.preventDefault();
+          openAiNewsModal(newsId);
+          return;
+        } catch (e) {
+          console.error('[handleNewsTitleClick] openAiNewsModal error:', e);
+        }
       }
-      // 否则直接顺畅执行 a 标签原生跳转进入 /zh/news/${newsId}
     }
 
     function handleToolCardClick(toolId, event) {
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
-      // 当处于独立【工具】栏目 (currentTab === 'tools' 或 hash === '#tools') 时，采用新页面标签模式打开
+      const targetUrl = isZh ? `/zh/tools/${toolId}` : `/tools/${toolId}`;
       const isToolsTab = (typeof currentTab !== 'undefined' && currentTab === 'tools') || (window.location.hash === '#tools');
       if (isToolsTab) {
-        const url = isZh ? `/zh/tools/${toolId}` : `/tools/${toolId}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
+        window.location.href = targetUrl;
         return;
       }
-      // 首页及其它区域保持弹窗模式
-      openToolDetailModal(toolId);
+      if (typeof openToolDetailModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
+        try {
+          openToolDetailModal(toolId);
+          return;
+        } catch (e) {
+          console.error('[handleToolCardClick] openToolDetailModal error:', e);
+        }
+      }
+      window.location.href = targetUrl;
     }
 
     // ==========================================
@@ -4872,7 +4886,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="flex flex-col sm:flex-row gap-3.5 sm:gap-5 justify-between flex-1 min-w-0">
             ${hasRealImage ? `
               <div class="w-full sm:w-48 md:w-56 h-36 sm:h-32 rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0">
-                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.style.display='none';">
+                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null; var p=this.parentElement; if(p) p.style.display='none';">
                 ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[9px] font-bold flex items-center gap-0.5 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
               </div>` : ''}
             <div class="flex-1 flex flex-col justify-between space-y-2 min-w-0">
@@ -4909,7 +4923,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `
         <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 group border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full" onclick="handleNewsCardClick('${item.id}', event)">
           <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0 self-start shadow-xs">
-            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; this.style.display='none';">
+            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; var p=this.parentElement; if(p) p.style.display='none';">
             ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[8px] font-bold flex items-center gap-0.5 shadow-sm">▶</span>` : ''}
           </div>
           <div class="flex-1 flex flex-col justify-between min-w-0">

@@ -373,7 +373,7 @@ def is_valid_news_lead_image(url: Any) -> bool:
     if not url or not isinstance(url, str):
         return False
     u = url.lower().strip()
-    if not u.startswith("http") or u in ("null", "undefined", "none"):
+    if not (u.startswith("http") or u.startswith("/images/")) or u in ("null", "undefined", "none"):
         return False
     bad_patterns = [
         "googleusercontent.com/j6_cofbog", "techmeme.com/img", "techmeme.com/pml",
@@ -383,6 +383,27 @@ def is_valid_news_lead_image(url: Any) -> bool:
         "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg"
     ]
     return not any(b in u for b in bad_patterns)
+
+
+def resolve_news_lead_image_url(img: str, width: int = 480) -> str:
+    """Resolve news lead image URL cleanly without wsrv.nl proxy for ainewsradar.xyz / local images."""
+    if not img or not isinstance(img, str):
+        return ""
+    u = img.strip()
+    if not u or u.lower() in ("null", "undefined", "none"):
+        return ""
+    if "ainewsradar.xyz/images/" in u or u.startswith("/images/"):
+        filename = u.split("/images/")[-1].split("?")[0]
+        return f"/images/{filename}"
+    if u.startswith("/") or u.startswith("./"):
+        return u
+    if "images.unsplash.com" in u:
+        res = re.sub(r'w=\d+', f'w={width}', u) if 'w=' in u else (u + ('&' if '?' in u else '?') + f'w={width}')
+        if "auto=format" not in res:
+            res += "&auto=format"
+        return res
+    import urllib.parse
+    return f"https://wsrv.nl/?url={urllib.parse.quote(u)}&w={width}&output=webp&q=80"
 
 
 def safe_text(text: Any, max_len: int = 400) -> str:
@@ -3079,11 +3100,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             img = it.get("image_url", "")
             it_id = it.get("id") or ""
             if is_valid_news_lead_image(img):
-                opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
+                opt_img = resolve_news_lead_image_url(img, 480)
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_en_html else 'loading="lazy"'
-                img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></a>'
+                img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3689,11 +3710,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             img = it.get("image_url", "")
             it_id = it.get("id") or ""
             if is_valid_news_lead_image(img):
-                opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
+                opt_img = resolve_news_lead_image_url(img, 480)
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_zh_html else 'loading="lazy"'
-                img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></a>'
+                img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
