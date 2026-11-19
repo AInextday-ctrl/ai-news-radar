@@ -36,6 +36,23 @@ ZH_PUBLIC_DIR = os.path.join(PUBLIC_DIR, "zh")
 
 BASE_URL = "https://ainewsradar.xyz"
 
+def atomic_write_text(filepath: str, content: str, encoding: str = "utf-8") -> None:
+    """Writes text atomically using temporary file swap to prevent crawler read corruption."""
+    os.makedirs(os.path.dirname(os.path.abspath(filepath)), exist_ok=True)
+    tmp_path = f"{filepath}.tmp"
+    with open(tmp_path, "w", encoding=encoding) as f:
+        f.write(content)
+    os.replace(tmp_path, filepath)
+
+def atomic_write_bytes(filepath: str, content_bytes: bytes) -> None:
+    """Writes bytes atomically using temporary file swap to prevent crawler read corruption."""
+    os.makedirs(os.path.dirname(os.path.abspath(filepath)), exist_ok=True)
+    tmp_path = f"{filepath}.tmp"
+    with open(tmp_path, "wb") as f:
+        f.write(content_bytes)
+    os.replace(tmp_path, filepath)
+
+
 def sanitize_for_en(text: str, preserve_newlines: bool = False) -> str:
     """Removes any CJK characters and normalizes whitespace for pure English compliance."""
     if not text:
@@ -164,8 +181,7 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
     en_llms_content = "\n".join(en_llms_lines)
     # Guarantee zero Chinese characters in English file while preserving clean markdown structure
     en_llms_content = sanitize_for_en(en_llms_content, preserve_newlines=True)
-    with open(os.path.join(PUBLIC_DIR, "llms.txt"), "w", encoding="utf-8") as f:
-        f.write(en_llms_content.strip() + "\n")
+    atomic_write_text(os.path.join(PUBLIC_DIR, "llms.txt"), en_llms_content.strip() + "\n")
 
     # ----------------------------------------------------
     # B. English llms-full.txt (Comprehensive Knowledge Context)
@@ -191,10 +207,13 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         url = item.get("url") or f"{BASE_URL}/news/{nid}"
         bullets = [sanitize_for_en(b) for b in (item.get("fact_bullets_en") or [])]
         bullets = [b for b in bullets if b]
+        pub_date = item.get("published_at") or item.get("date") or ""
 
         en_full_lines.append(f"### {title}")
-        en_full_lines.append(f"- URL: {BASE_URL}/news/{nid}")
-        en_full_lines.append(f"- Source: {source} ({url})")
+        en_full_lines.append(f"- Canonical URL: {BASE_URL}/news/{nid}")
+        en_full_lines.append(f"- Primary Source: {source} ({url})")
+        if pub_date:
+            en_full_lines.append(f"- Published: {pub_date}")
         en_full_lines.append(f"- Executive Summary: {summary}")
         if bullets:
             en_full_lines.append("- Key Verified Facts:")
@@ -203,6 +222,14 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         analysis = sanitize_for_en(item.get("ai_analysis_en") or item.get("ai_analysis") or "")
         if analysis:
             en_full_lines.append(f"- Strategic AI Analysis: {analysis}")
+
+        full_text = sanitize_for_en(item.get("article_content_en") or item.get("article_content") or "", preserve_newlines=True)
+        if full_text and len(full_text) > 120:
+            en_full_lines.append("- Substantive Intelligence Report:")
+            for p in full_text.splitlines():
+                p = p.strip()
+                if p and len(p) >= 3:
+                    en_full_lines.append(f"  > {p}")
         en_full_lines.append("")
 
     en_full_lines.extend([
@@ -252,8 +279,7 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         en_full_lines.append("")
 
     en_full_content = sanitize_for_en("\n".join(en_full_lines), preserve_newlines=True)
-    with open(os.path.join(PUBLIC_DIR, "llms-full.txt"), "w", encoding="utf-8") as f:
-        f.write(en_full_content.strip() + "\n")
+    atomic_write_text(os.path.join(PUBLIC_DIR, "llms-full.txt"), en_full_content.strip() + "\n")
 
     # ----------------------------------------------------
     # C. Chinese llms.txt (中文专版精炼地图)
@@ -324,8 +350,7 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
     ])
 
     zh_llms_content = "\n".join(zh_llms_lines)
-    with open(os.path.join(ZH_PUBLIC_DIR, "llms.txt"), "w", encoding="utf-8") as f:
-        f.write(zh_llms_content + "\n")
+    atomic_write_text(os.path.join(ZH_PUBLIC_DIR, "llms.txt"), zh_llms_content + "\n")
 
     # ----------------------------------------------------
     # D. Chinese llms-full.txt (中文全量深度知识库)
@@ -350,10 +375,13 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         source = item.get("source") or "权威信源"
         url = item.get("url") or f"{BASE_URL}/zh/news/{nid}"
         bullets = item.get("fact_bullets_zh") or []
+        pub_date = item.get("published_at") or item.get("date") or ""
 
         zh_full_lines.append(f"### {title}")
         zh_full_lines.append(f"- 落地页链接: {BASE_URL}/zh/news/{nid}")
         zh_full_lines.append(f"- 原始信源: {source} ({url})")
+        if pub_date:
+            zh_full_lines.append(f"- 发布时间: {pub_date}")
         zh_full_lines.append(f"- 核心摘要: {summary}")
         if bullets:
             zh_full_lines.append("- 核验事实清单:")
@@ -362,6 +390,14 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         analysis = item.get("ai_analysis_zh") or item.get("ai_analysis") or ""
         if analysis:
             zh_full_lines.append(f"- 独家研判与技术透视: {analysis}")
+
+        full_text_zh = str(item.get("article_content_zh") or item.get("article_content") or "").strip()
+        if full_text_zh and len(full_text_zh) > 120:
+            zh_full_lines.append("- 深度报道全文精录:")
+            for p in full_text_zh.splitlines():
+                p = p.strip()
+                if p and len(p) >= 3:
+                    zh_full_lines.append(f"  > {p}")
         zh_full_lines.append("")
 
     zh_full_lines.extend([
@@ -411,8 +447,7 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
         zh_full_lines.append("")
 
     zh_full_content = "\n".join(zh_full_lines)
-    with open(os.path.join(ZH_PUBLIC_DIR, "llms-full.txt"), "w", encoding="utf-8") as f:
-        f.write(zh_full_content + "\n")
+    atomic_write_text(os.path.join(ZH_PUBLIC_DIR, "llms-full.txt"), zh_full_content + "\n")
 
     print(f"🤖 [GEO Engine] llms.txt & llms-full.txt 已成功生成 (EN: {os.path.getsize(os.path.join(PUBLIC_DIR, 'llms.txt'))} B, ZH: {os.path.getsize(os.path.join(ZH_PUBLIC_DIR, 'llms.txt'))} B)")
 
@@ -492,8 +527,7 @@ def generate_rss_and_json_feeds(news_items: List[Dict[str, Any]],
     # Guarantee zero Chinese characters in English RSS while preserving XML line breaks
     en_rss_full = sanitize_for_en(en_rss_full, preserve_newlines=True)
     for p in [os.path.join(PUBLIC_DIR, "feed.xml"), os.path.join(PUBLIC_DIR, "rss.xml")]:
-        with open(p, "wb") as f:
-            f.write(en_rss_full.strip().encode("utf-8") + b"\n")
+        atomic_write_bytes(p, en_rss_full.strip().encode("utf-8") + b"\n")
 
     # ----------------------------------------------------
     # B. Chinese RSS 2.0 (zh/feed.xml & zh/rss.xml)
@@ -553,8 +587,7 @@ def generate_rss_and_json_feeds(news_items: List[Dict[str, Any]],
 </rss>
 """
     for p in [os.path.join(ZH_PUBLIC_DIR, "feed.xml"), os.path.join(ZH_PUBLIC_DIR, "rss.xml")]:
-        with open(p, "wb") as f:
-            f.write(zh_rss_full.strip().encode("utf-8") + b"\n")
+        atomic_write_bytes(p, zh_rss_full.strip().encode("utf-8") + b"\n")
 
     # ----------------------------------------------------
     # C. JSON Feed v1.1 (public/feed.json)
@@ -583,8 +616,7 @@ def generate_rss_and_json_feeds(news_items: List[Dict[str, Any]],
         "items": json_feed_items
     }
 
-    with open(os.path.join(PUBLIC_DIR, "feed.json"), "w", encoding="utf-8") as f:
-        json.dump(json_feed, f, ensure_ascii=False, indent=2)
+    atomic_write_text(os.path.join(PUBLIC_DIR, "feed.json"), json.dumps(json_feed, ensure_ascii=False, indent=2))
 
     print(f"📡 [Feed Engine] RSS 2.0 & JSON Feed 已全量构建 (EN: {len(en_items_xml)} 条, ZH: {len(zh_items_xml)} 条)")
 
@@ -598,9 +630,24 @@ def generate_google_news_sitemap(news_items: List[Dict[str, Any]]) -> None:
     Contains high-freshness breaking news published within the past 48 hours.
     """
     now = datetime.now(timezone.utc)
+    now_ts = now.timestamp()
+    cutoff_ts = now_ts - (48 * 3600)
     entries = []
 
-    for item in news_items:
+    def get_item_ts(item):
+        raw_pub = item.get("published_at") or item.get("raw_published_at") or item.get("date")
+        iso_pub = parse_iso_or_rfc(raw_pub)
+        try:
+            return datetime.fromisoformat(iso_pub.replace("Z", "+00:00")).timestamp()
+        except Exception:
+            return 0
+
+    sorted_items = sorted(news_items, key=get_item_ts, reverse=True)
+    recent_items = [it for it in sorted_items if get_item_ts(it) >= cutoff_ts]
+    if len(recent_items) < 8:
+        recent_items = sorted_items[:20]
+
+    for item in recent_items:
         nid = item.get("id")
         if not nid:
             continue
@@ -608,7 +655,7 @@ def generate_google_news_sitemap(news_items: List[Dict[str, Any]]) -> None:
         raw_pub = item.get("published_at") or item.get("raw_published_at") or item.get("date")
         iso_pub = parse_iso_or_rfc(raw_pub)
         
-        # English News Entry
+        # English News Entry (Strictly sanitized: zero Chinese characters)
         en_title = sanitize_for_en(item.get("title_en") or item.get("title") or "AI Breaking Update")
         entries.append(f"""  <url>
     <loc>{BASE_URL}/news/{nid}</loc>
@@ -643,10 +690,9 @@ def generate_google_news_sitemap(news_items: List[Dict[str, Any]]) -> None:
 {xml_body}
 </urlset>
 """
-    with open(os.path.join(PUBLIC_DIR, "news-sitemap.xml"), "wb") as f:
-        f.write(full_xml.strip().encode("utf-8") + b"\n")
+    atomic_write_bytes(os.path.join(PUBLIC_DIR, "news-sitemap.xml"), full_xml.strip().encode("utf-8") + b"\n")
 
-    print(f"📰 [Google News Sitemap] 突发快讯地图已构建: 共收录 {len(entries)} 个实时新闻条目！")
+    print(f"📰 [Google News Sitemap] 突发快讯地图已构建: 共收录 {len(entries)} 个实时新闻条目 (严格遵循48小时时效标准)！")
 
 
 # ==============================================================================
@@ -742,8 +788,7 @@ def update_complete_sitemap(daily_dates: List[str],
 </urlset>
 """
     sitemap_path = os.path.join(PUBLIC_DIR, "sitemap.xml")
-    with open(sitemap_path, "wb") as f:
-        f.write(full_xml.strip().encode("utf-8") + b"\n")
+    atomic_write_bytes(sitemap_path, full_xml.strip().encode("utf-8") + b"\n")
 
     print(f"🗺️ [Sitemap Engine] 全量高权重站点地图已更新: 共计收录 {len(entries)} 个双语对齐页面 URL！")
 
@@ -758,7 +803,7 @@ def generate_robots_txt() -> None:
     while protecting private redirect pathways.
     """
     content = """# AI News Radar (https://ainewsradar.xyz) - Robots.txt
-# Optimized for Web Indexing & Generative Engine Optimization (GEO)
+# Optimized for Web Indexing, Generative Engine Optimization (GEO) & AI Agents
 
 User-agent: *
 Allow: /
@@ -786,7 +831,15 @@ User-agent: PerplexityBot
 Allow: /
 Disallow: /cdn-cgi/
 
+User-agent: Perplexity-User
+Allow: /
+Disallow: /cdn-cgi/
+
 User-agent: ClaudeBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Claude-Web
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -795,6 +848,34 @@ Allow: /
 Disallow: /cdn-cgi/
 
 User-agent: Google-Extended
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther-Image
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther-Video
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Googlebot-News
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: YouBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: TavilyBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: ExaBot
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -827,6 +908,10 @@ Allow: /
 Disallow: /cdn-cgi/
 
 User-agent: FacebookBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: MistralAI-User
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -880,9 +965,8 @@ User-agent: Google-Display-AdsBot
 Allow: /
 Disallow: /cdn-cgi/
 
-# --- Sitemaps & AI Context Endpoints ---
-# LLMs.txt AI Manifests (llmstxt.org)
-# Discoverable AI knowledge context manifests:
+# --- Sitemaps, Feeds & LLMs Discovery Manifests ---
+# Canonical LLMs.txt AI Manifests (llmstxt.org standard):
 # https://ainewsradar.xyz/llms.txt
 # https://ainewsradar.xyz/llms-full.txt
 # https://ainewsradar.xyz/zh/llms.txt
@@ -893,7 +977,34 @@ Sitemap: https://ainewsradar.xyz/feed.xml
 Sitemap: https://ainewsradar.xyz/zh/feed.xml
 """
     robots_path = os.path.join(PUBLIC_DIR, "robots.txt")
-    with open(robots_path, "w", encoding="utf-8") as f:
-        f.write(content.strip() + "\n")
+    atomic_write_text(robots_path, content.strip() + "\n")
 
     print("🤖 [Robots Engine] public/robots.txt 已全面升级，显式支持所有主流 GEO 智能体爬虫与双站点地图！")
+
+
+if __name__ == "__main__":
+    from build_flagship_articles import ARTICLES_DATA
+    pub_json = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+    tools_list = []
+    news_list = []
+    daily_dates = []
+    if os.path.exists(pub_json):
+        try:
+            with open(pub_json, "r", encoding="utf-8") as pf:
+                pdata = json.load(pf)
+                tools_list = pdata.get("grouped", {}).get("tools", [])
+                news_list = pdata.get("grouped", {}).get("news", [])
+                daily_dates = pdata.get("archive_meta", {}).get("available_dates", [])
+        except Exception:
+            pass
+    if not daily_dates:
+        daily_dir = os.path.join(PUBLIC_DIR, "daily")
+        if os.path.exists(daily_dir):
+            daily_dates = sorted([f[:-5] for f in os.listdir(daily_dir) if f.endswith(".html") and re.match(r"^\d{4}-\d{2}-\d{2}$", f[:-5])])
+
+    generate_google_news_sitemap(news_list)
+    generate_rss_and_json_feeds(news_list, tools_list, ARTICLES_DATA)
+    generate_llms_manifests(news_list, tools_list, ARTICLES_DATA)
+    update_complete_sitemap(daily_dates, ARTICLES_DATA, tools=tools_list, news_items=news_list)
+    generate_robots_txt()
+    print("🚀 [SEO/GEO Engine] 全量 SEO/GEO 资产与智能体地图生成完毕！")

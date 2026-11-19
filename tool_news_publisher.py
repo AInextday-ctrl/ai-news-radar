@@ -380,12 +380,14 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{escape(meta_title)}</title>
   <meta name="description" content="{clean_meta_desc}">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="{canonical_url}">
   <link rel="alternate" hreflang="en" href="{alt_en_url}">
   <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -1417,6 +1419,35 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     searchable_text = f"{title} {summary} {' '.join(str(b) for b in fact_bullets)} {ai_analysis}"
     about_entities, mentions_entities = extract_entities_for_jsonld(searchable_text)
 
+    # Build rich articleBody for LLMs and AI Search engine ingestion
+    if paras:
+        article_body_text = "\n\n".join(paras)
+    else:
+        bullets_text = " ".join([re.sub(r'^[【\[].*?[】\]]\s*', '', str(b)).strip() for b in fact_bullets])
+        article_body_text = f"{summary}\n\n{bullets_text}\n\n{ai_analysis}".strip()
+
+    if not is_zh:
+        article_body_text = sanitize_for_en(article_body_text, preserve_newlines=True)
+
+    word_count = len(article_body_text.split()) if not is_zh else len(article_body_text)
+
+    kw_candidates = ["Artificial Intelligence", "AI News", "Frontier LLM", "Machine Learning"]
+    if source_name:
+        kw_candidates.append(source_name)
+    for ent in about_entities:
+        if isinstance(ent, dict) and ent.get("name"):
+            kw_candidates.append(ent["name"])
+    for ent in mentions_entities:
+        if isinstance(ent, dict) and ent.get("name"):
+            kw_candidates.append(ent["name"])
+    seen_kw = set()
+    unique_kw = []
+    for k in kw_candidates:
+        k_clean = sanitize_for_en(k) if not is_zh else k.strip()
+        if k_clean and k_clean.lower() not in seen_kw:
+            seen_kw.add(k_clean.lower())
+            unique_kw.append(k_clean)
+
     news_article_schema = {
         "@type": "NewsArticle",
         "headline": escape(title),
@@ -1428,11 +1459,20 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         "inLanguage": "zh-CN" if is_zh else "en",
         "mainEntityOfPage": canonical_url,
         "articleSection": "Artificial Intelligence",
+        "articleBody": article_body_text,
+        "wordCount": word_count,
+        "keywords": ", ".join(unique_kw[:10]),
         "isBasedOn": source_target_url,
         "about": about_entities,
+        "copyrightHolder": {
+            "@type": "Organization",
+            "name": "AI News Radar",
+            "url": "https://ainewsradar.xyz"
+        },
+        "license": "https://ainewsradar.xyz/editorial-policy",
         "speakable": {
             "@type": "SpeakableSpecification",
-            "cssSelector": [".executive-summary", "h1"]
+            "cssSelector": [".executive-summary", "h1", ".article-body", ".fact-card"]
         },
         "author": {
             "@type": "Organization",
@@ -1548,12 +1588,15 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{escape(meta_title)}</title>
   <meta name="description" content="{clean_meta_desc}">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="{canonical_url}">
   <link rel="alternate" hreflang="en" href="{alt_en_url}">
   <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -1773,9 +1816,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 """
 
 def generate_all_landing_pages():
-    data_path = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")
+    data_path = os.path.join(WORKSPACE_DIR, "public", "data", "latest_news.json")
     if not os.path.exists(data_path):
-        data_path = os.path.join(WORKSPACE_DIR, "public", "data", "latest_news.json")
+        data_path = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")
 
     with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)

@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anthropic揭示AI代理记忆优化核心：减法胜于加法 | AI 资讯雷达</title>
   <meta name="description" content="Anthropic通过Pokémon游戏测试发现，AI代理的长程记忆效能取决于精简信息存储，而非冗余存档，引入“睡眠复盘”机制可修正记忆偏差">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/d5bc5f032f5215fa">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/d5bc5f032f5215fa">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/d5bc5f032f5215fa">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/d5bc5f032f5215fa">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/d5bc5f032f5215fa">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/d5bc5f032f5215fa",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "Anthropic 研究了克劳德如何在不同的课程中保留知识。它的测试表明，选择性笔记胜过详尽的档案，并且让克劳德在事后回顾自己的记忆可以纠正错误。\n\n任何在一个项目上与人工智能代理一起工作几天的人都会很快碰壁，因为每个新的会话都是从头开始的。在一篇研究文章中，Anthropic 描述了 Claude 如何在模型保持不变的情况下跨会话保留知识。克劳德将注释写入一个文件夹，以便稍后读取。\n\n根据 Anthropic 的说法，核心问题是选择。在知道接下来会发生什么之前，智能体必须立即决定稍后可能发生的事情，因此每一个音符都是对未来的赌注。\n\n### 拯救一切的特工失去了踪迹\n\n在 Pokémon Red 的 Anthropic 测试中，较旧的 Claude Sonnet 3.7 将所有内容视为潜在重要的内容，并在大约 10,000 个游戏步骤中，在 225 个文件夹中创建了 413 个文件，通常为它发现的每一场战斗和项目创建一个单独的文件。由于游戏状态不断变化，存档很快就会过时。有时，模型只是重新组织音符而不是演奏，什么也不做，最后只留下一个徽章。\n\n较新的《克劳德寓言 5》将其内存限制为几个文件，并获得了四个徽章。 《神鬼寓言 5》并没有记录屏幕上已经可见的信息，而是写下了已经测试过的计划、策略和规则。然而，Anthropic 的比较仅涵盖每个模型的一次游戏。\n\nAnthropic 建议向 Claude 解释记忆的用途，并让模型决定如何使用它。根据 Anthropic 的说法，在一项基准测试中，诸如“仅记录错误”之类的严格指令消除了更强大模型的大部分优势。相比之下，较旧的模型受益于明确的指示，例如被告知在每次回答之前实际阅读他们的笔记。\n\n### 做梦的目的是修复错误的记忆\n\n更大的风险来自于代理人后来盲目信任的错误票据。梦想是一个建立在莱塔和加州大学伯克利分校研究基础上的想法，旨在解决这个问题。就像人类大脑在睡眠期间处理经历一样，克劳德在休息期间查看早期会议的记录，并对照记录进行检查。\n\n在神奇宝贝测试中，克劳德错误地指出了地标位于山的哪一侧。靠着那张错误的音符，克劳德三度落入同样的陷阱，最终想要放弃，却未能达到目的。在完成“梦想”关卡后，克劳德通过对照记录检查笔记发现了错误，并找到了正确的路径。\n\n据Anthropic介绍，Dreaming还可以组织更大的知识库。克劳德利用 Anthropic 收购的软件公司不锈钢的约 350,000 份内部文档构建了一个链接维基。梦想应该生成新页面，同时修复间隙、重复和损坏的链接。当克劳德能够将 wiki 与搜索结合起来时，回报是最大的，因此 wiki 作为补充而不是替代。\n\n在 Anthropic 进行的一项单独的法律测试中，维基百科对答案分散在多个文档中的问题提供了最大的帮助。克劳德在 wiki 上的得分为 87%，而仅在搜索方面得分为 73%。对于简单的查找任务，wiki 的性能与搜索大致相当，在一种情况下，它甚至比源文档还要大。\n\n### 记忆仍在进行中\n\nAnthropic 承认关键问题仍然悬而未决。在任务中做笔记会分散代理的工作注意力，做梦会消耗额外的计算资源，而且结果只有在延迟后才会到达。维基和注释也需要定期维护，否则错误和幻觉就会堆积起来。 Anthropic 还警告不要在每个会话中自动加载太多记忆，因为它们会耗尽上下文并将任何不良记录传递给未来的每个会话。\n\n所有这些测试都来自 Anthropic。总的结论是，有用的代理记忆更多地取决于保留正确的信息并在以后纠正错误，而不是尽可能多地存储。\n\nAnthropic 在 5 月份推出了 Dreaming，作为该公司的 AI 代理云平台 Claude Managed Agents 的研究预览。该服务读取现有内存存储和最多 100 个过去的会话，删除重复和过时的条目，并创建重新组织的存储，使原始存储保持不变。发布时，Dreaming 仅支持 Claude Opus 4.7 和 Sonnet 4.6。\n\nOpenAI 还将 ChatGPT 的内存称为“Dreaming”，该系统在 6 月份对其进行了彻底检修。该系统在后台维护用户配置文件，并自动更正过时的信息。据 OpenAI 称，这将时间准确度从 52.2% 提高到了 75.1%。\n\n谷歌和谷歌 DeepMind 的研究人员也让人工智能代理做梦，但他们利用做梦来改进代理的搜索策略。他们的代理使用已经存储的结果来解决替代解决方案，而无需再次调用模型。谷歌还建立了 WikiSkill，一个针对代理的 wiki。与 Anthropic 的系统一样，WikiSkill 将原始记录、提炼的知识和具体指令保存在不同的层中。",
+      "wordCount": 1963,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, THE DECODER, Anthropic",
       "isBasedOn": "https://the-decoder.com/anthropic-says-the-key-to-agent-memory-is-knowing-what-to-forget-not-how-much-to-store/?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -380,36 +394,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/zh/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Payhawk获高盛领投2.8亿美元融资，估值达20亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="Rockstar北区揭秘侠盗猎车手6开发逻辑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Rockstar北区揭秘侠盗猎车手6开发逻辑</h4>
+            </a>
+            
+            <a href="/zh/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/zh/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求</h4>
+            </a>
+            
+            <a href="/zh/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="GTA6口碑炸裂：叙事深度与沉浸感" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Payhawk获高盛领投2.8亿美元融资，估值达20亿美元</h4>
-            </a>
-            
-            <a href="/zh/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic启动IPO，VC市场权力格局重塑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic启动IPO，VC市场权力格局重塑</h4>
-            </a>
-            
-            <a href="/zh/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana基金会收购CoinGecko多数股权" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana基金会收购CoinGecko多数股权</h4>
-            </a>
-            
-            <a href="/zh/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot 是“新的工作操作系统”，现在 Office 在其中运行" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot 是“新的工作操作系统”，现在 Office 在其中运行</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA6口碑炸裂：叙事深度与沉浸感</h4>
             </a>
             
               </div>

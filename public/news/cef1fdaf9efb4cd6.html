@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inside Microsoft’s giant Outlook outage | AI News Radar</title>
   <meta name="description" content="Microsoft&#x27;s Exchange Online service suffered a sev0-rated outage initiated by server failures in Switzerland, which triggered failover mechanisms that propagate">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/cef1fdaf9efb4cd6">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/cef1fdaf9efb4cd6",
 "articleSection": "Artificial Intelligence",
+"articleBody": "At 9AM last Thursday, everything seemed normal. Microsoft employees were arriving on campus, ready for a regular day of emails and meetings. But barely an hour later, one of Microsoft’s worst outages in history started to unfold, leaving employees, businesses, and many governments without access to Outlook emails for nearly 24 hours.\n\nIt all started in Switzerland, according to a source familiar with the outage. Exchange Online servers that power Outlook started to fall offline. The problem quickly spread to Mexico, and then to other countries around the world, as Microsoft’s failover systems tried to shift email traffic elsewhere. Within a couple of hours, more than 80 percent of Exchange servers were unresponsive.\n\nSources tell me that Microsoft marked the outage as “sev0” in its internal incident tracking system, the highest level, which indicates a catastrophic level of service disruption. Hundreds of engineers began trying to figure out what had gone wrong, and how to restore service. It’s not unusual for servers to fail under certain circumstances, but Microsoft has a variety of systems that are supposed to route traffic toward healthy servers to keep the broader system online. In this case, the failover systems did their job, but they also spread the problem.\n\nIn the early hours of the outage, engineers were analyzing crash reports, trace logs, and kernel dumps to try and find clues to the giant outage. Some servers had entered into maintenance mode and became unresponsive due to unusually high CPU loads. Engineers tried to bring servers back online, but they were almost immediately overwhelmed by traffic waiting to access the servers.\n\nExchange servers boot up and run an OS over a network (Preboot Execution Environment), a process that allows Microsoft’s support staff and engineers to manage OS updates remotely. I understand that the sudden burst of traffic from servers being rebooted was overwhelming the systems monitoring them, causing a form of reboot loop where they kept trying and failing to come back online.\n\nAs engineers continued to hunt for the root cause, Microsoft was even struggling to roll back servers to a healthy state using its usual processes of reverting recent changes. As the outside world began to wonder if this outage was related to a cyberattack or sloppy AI coding, Microsoft’s engineers were already investigating potential attack vectors and liaising with DDoS specialists to understand whether this could have been an attack.\n\nI’m told crash reports and logs quickly ruled out the possibility of an attack, and after recent rollbacks failed, Microsoft’s engineers began to take a closer look at the networking stack of the servers and discovered an unusual bug. It was unusual because the bug had been sitting on Microsoft 365 networking gateway servers since July without any impact to servers.\n\n“A latent defect caused servers to become overwhelmed and unresponsive under certain load conditions,” wrote Charles Lamanna, the leader of Microsoft’s Copilot, Agents, and Platform (CAP) team, in a post on X. The teams behind Office, Outlook, and Microsoft Teams all started reporting to Lamanna last month after the head of Office and Teams, Ryan Roslansky, left the company.\n\nMicrosoft’s preliminary post-incident report describes the bug as one affecting select Windows servers “due to lock contention inside an internal Windows process.” The bug doesn’t affect regular versions of Windows since it was the result of a fix that was prepared specifically for Microsoft 365 networking gateway servers.\n\nMicrosoft didn’t find the bug until this major outage, and it admits that was because of the traffic mix and hardware used in its testing labs. “The contention issue is worsened on machines with more cores and newer hardware; whereas our load testing tended to focus on weaker hardware with fewer cores,” Lamanna wrote.\n\nThe bug became obvious because of two other incidents that increased load and reduced server capacity. Fifteen hours before this Outlook outage began, Microsoft Teams failed over from an alternative networking gateway to the main gateway that supports Exchange Online. “This increased the load on the networking gateway and changed its traffic patterns,” Lamanna wrote. Ordinarily this wouldn’t have been a problem, but at the same time around 14 percent of server capacity for this gateway was “out of service due to an unrelated issue from the previous day.”\n\nThe trifecta of a bug, Microsoft Teams failing over, and reduced server capacity all caused the network gateway to trigger the problem that had been lying dormant since July. It took Microsoft nearly 24 hours to get its Exchange servers stable again, and I’m told overlapping interventions from teams trying to fix issues complicated coordination at times.\n\nMicrosoft engineers had a running bridge call the entire time, and at one point it hit the maximum of 1,000 participants. That shows you how many teams were involved with trying to find the root cause of this huge outage, which started at the peak window of traffic in the US.\n\n“Recovery took longer than usual because as servers returned to service, they were immediately overwhelmed by waiting traffic and became unresponsive again,” Lamanna wrote. “Our normally automated recovery processes were not designed to restore service from this broad unresponsive state. Additionally, since the main code defect was a latent bug from several months previous, our normal rollback, flighting, and feature flags were unable to quickly revert the change.”\n\nMicrosoft is now working on a final post-incident review that will be published later this week. Even without that full review, it’s clear that the company will need to invest more into its testing processes to ensure that when something like this happens again, it can catch the problem a lot sooner. Outages happen daily, but this kind of cascading failure is a rare moment for Microsoft to learn from its mistakes and make sure the same sequence of events doesn’t bring down Outlook for millions of people again.\n\nNotepad will return in December after next week’s Thanksgiving break.\n\nI’m always keen to hear from readers, so please drop a comment here, or you can reach me at notepad@theverge.com if you want to discuss anything else. If you’ve heard about any of Microsoft’s secret projects, you can reach me via email at notepad@theverge.com or speak to me confidentially on the Signal messaging app, where I’m tomwarren.01. I’m also tomwarren on Telegram, if you’d prefer to chat there.\n\nThanks for subscribing to Notepad.",
+"wordCount": 1057,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, The Verge, Microsoft",
 "isBasedOn": "https://www.theverge.com/tech/1035364/microsoft-outlook-outage-notepad?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlJMSEZCU1NVZHYiLCJwIjoiL3RlY2gvMTAzNTM2NC9taWNyb3NvZnQtb3V0bG9vay1vdXRhZ2Utbm90ZXBhZCIsImV4cCI6MTc5NTM2Njg5NywiaWF0IjoxNzk0OTM0ODk3fQ.qvNcpytW9E3bjpGqPWJDeMM-dLOfUvq1QT9fb4fxHec&utm_medium=gift-link&ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Microsoft"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -335,36 +349,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>

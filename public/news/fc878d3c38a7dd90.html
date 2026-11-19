@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alibaba&#x27;s Qwen4-Max takes on Opus 5.5… | AI News Radar</title>
+  <title>Alibaba&#x27;s Qwen4-Max takes on Opus 5.5, GPT-6… | AI News Radar</title>
   <meta name="description" content="Alibaba has unveiled the Qwen4-Max flagship model, utilizing a 2.4-trillion-parameter MoE architecture with only 71 billion active parameters per token. By impl">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/fc878d3c38a7dd90">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/fc878d3c38a7dd90">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/fc878d3c38a7dd90">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/fc878d3c38a7dd90">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/fc878d3c38a7dd90">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/fc878d3c38a7dd90",
 "articleSection": "Artificial Intelligence",
+"articleBody": "Qwen4-Max is Alibaba's answer to Opus 5.5, GPT-6, and Kimi K3.1 Pro. The new flagship pairs a more efficient architecture with much lower prices and targets professional work in industry, science, and finance.\n\nThe mixture-of-experts model has 2.4 trillion parameters but activates only 71 billion per token, according to the Qwen team. It processes images natively and offers a one-million-token context window.\n\n### A hybrid architecture makes long contexts cheaper to process\n\nQwen4-Max debuts the revamped architecture of the Qwen4 series. Instead of relying only on standard attention layers, Alibaba combines two methods. Three layers compress the prior context into a condensed state, and a fourth layer then picks out only the parts that matter. That sharply cuts compute costs on long inputs, since the model no longer has to give every part of the context equal attention.\n\nThe architecture also adds four parallel connections between model layers, with dynamic gates meant to stabilize the flow of information. An N-gram embedding layer with 328 billion parameters supplies common token sequences as ready-made building blocks. According to Alibaba, training the 2.4-trillion-parameter configuration ran stably. Training loss fell steadily throughout the run with no sudden spikes.\n\nAlibaba's internal evaluations measure model quality in bits per byte across knowledge, code, question answering, and STEM. Qwen4-Max-Base scored best among the five checkpoints tested. It improved 5 to 13 percent over Qwen3.8-Max-Base while activating 25 percent fewer parameters per token.\n\n### Lower token use cuts the cost of each task by more than half\n\nThe efficiency gains show up in operating costs. Work360 is Alibaba's own benchmark for industrial work tasks across 721 specialized fields. On it, Qwen4-Max uses roughly a quarter to a third fewer tokens than its predecessor to solve the same tasks. On the agent benchmark Terminal-Bench 4.0, token use drops by nearly half.\n\nAccording to Alibaba, the average cost per Work360 task falls 62 percent, from $4.43 to $1.67. The benchmark score climbs from 47.74 to 52.69 at the same time.\n\nResults on external benchmarks are mixed. On long-horizon agent tasks like Agents' Last Exam v1.1, Qwen4-Max scores 46.7 points, the best result in the comparison group. It trails Opus 5.5 and the GPT models on Humanity's Last Exam. On HealthBench Professional, it falls behind the GPT models but edges past Opus 5.5.\n\n### Qwen4-Max ranks second among Chinese models at a third of its predecessor's cost\n\nAt its highest reasoning setting, Qwen4-Max scores 43 points on the current Artificial Analysis Intelligence Index. That's nine more than Qwen3.8-Max and three behind Kimi K3.1 Pro, the top Chinese model at 46 points. The biggest gains over the predecessor come on HLE-Diamond (up 21 points to 45 percent), AA-Omniscience (up 18), and AutomationBench-AA (up 17).\n\nArtificial Analysis puts the cost of Qwen4-Max at $3.27 per Intelligence Index task. That's about a third of Qwen3.8-Max's $10.02 and roughly 11 percent less than Kimi K3.1 Pro's $3.68. The savings come from three places. Token prices are 25 percent lower than the predecessor's, cache hits cost 70 percent less, and the model burns through fewer tokens. Qwen4-Max needs about 105,000 output tokens per benchmark task, compared with 171,000 for Qwen3.8-Max.\n\nTencent's Hy4 is much cheaper at $1.03 per task but scores eight points lower on the index. On Terminal-Bench 4.0, Qwen4-Max scores 48 percent, behind Kimi K3.1 Pro at 67 percent. On Cognition's coding benchmark FrontierCode 2.0, it ties Kimi at 26 percent and trails Tencent Hy4 at 31 percent.\n\nThrough its own API, Alibaba charges $1.50 per million input tokens and $4.50 per million output tokens. Cache hits cost $0.075.\n\n### Live Delivery hands control of long-running agents back to users\n\nLike much of the AI industry, Alibaba builds this release around agents that handle long tasks on their own. If users only see results at the end, they have almost no way to fix mistakes. Alibaba's answer is \"Live Delivery.\"The model delivers a usable first version early and builds it out in later passes. Users can step in and change course at any point. Alibaba has open-sourced the accompanying Qwen-Live-Delivery-Plugin.\n\nAlibaba cites several partner deployments. Automotive partners SANF and Pacific Union reportedly used Qwen4-Max to cut manual programming time for a single workpiece from about 475 minutes to 24. In finance, the model taps 90 MCP tools to pull market data from multiple sources. It delivers the results as verifiable Excel and PowerPoint files, and every number traces back to its original source.\n\nAlibaba also uses the model internally to run its own cloud infrastructure more efficiently. According to the company, Qwen4-Max worked with the in-house solver MindOpt to cut the cost of allocating compute jobs for data annotation by an average of 10.42 percent. When distributing CPU tasks in data centers, it found optimal solutions more than 14 times faster than the comparison method.\n\n### Alibaba's models now run lab experiments on their own\n\nAlibaba also shows the Qwen4 generation at work in physical labs. Paired with Mira, a system from startup Deep Principle, the model ran autonomously for 48 hours, according to Alibaba. In that time, it designed, synthesized, and tested a new coolant for high-performance data center chips. It searched 2.7 million molecular candidates, controlled an automated lab, and completed four full cycles of design, synthesis, and measurement.\n\nQwen4-Max also worked with PharmMaster, a platform from Beijing-based AI drug discovery startup DP Technology. The target was a compound aimed at an inflammatory response linked to Alzheimer's disease. Over several rounds of literature review, design, and computation, the model optimized 24 candidate molecules. According to Alibaba, the final candidate binds to the target protein about 3.6 times better than the known starting compound from a patent. DP Technology's experts consider the result promising enough to pursue further lab tests.\n\n### Qwen4-Max aims to build playable games from a single prompt\n\nAlibaba also shows Qwen4-Max working with established game engines like Unity, Unreal Engine, and Godot. From a single natural-language description, the model is supposed to handle the entire development process. That covers scene setup, game logic, and matching external assets, along with materials, UI, and visual effects, until the game is playable.\n\nDuring development, the model runs the game itself and uses visual and interactive feedback to tweak camera work, character animations, hit reactions, and lighting. Alibaba's sample project is \"Meow of Magic,\"an Unreal Engine adventure about a cat wizard in which players cast spells and fight waves of enemies. According to Alibaba, Qwen4-Max also builds 3D models in Blender that can be reused for games and 3D printing.\n\nAnthropic recently moved its coding assistant Claude Code in the opposite direction. After a wave of unofficial Halo and GTA: Vice City clones, it barred the tool from recreating existing games.\n\n### Alibaba says the model writes safer code and offers no real CBRN uplift\n\nOn the safety benchmark Last Secure Code Bench, the share of code that is both functional and secure rose from 22 to 31.8 percent, according to Alibaba. The share rated secure at all three testing levels nearly doubled, from 8 to 14.7 percent. Alibaba also tested for CBRN risks (chemical, biological, radiological, and nuclear). Internal reviewers went through the model's full chains of thought, the company says. They found no real capacity for innovation that would give a user a significant boost in capability.\n\nQwen4-Max is available through QwenCloud and in QwenWork, Qoder, and QwenStudio. Alibaba plans to release smaller Qwen4 models as open source later.\n\nIn August, Alibaba released Qwen3.8-Max, its first Max model built for autonomous tasks that run for days. It also has 2.4 trillion parameters, but 95 billion are active per token. At the time, Artificial Analysis found that the model needed 64 steps per task instead of 14 and cost more than twice as much per task as Qwen3.7-Max.\n\nIn late August, Alibaba previewed the Qwen4 architecture with Qwen3.8-Flash-Next, which already used an N-gram embedding layer with 51 billion parameters. The company had released the Qwen3.8-Max weights in mid-August. For Qwen4, only the smaller models will get open weights for now.\n\nMoonshot AI followed in October with Kimi K3.1 Pro. At 2.8 trillion parameters, it's even larger, and Moonshot says it sits just behind Claude Opus 5.5 on Terminal-Bench 4.0. Like Alibaba, DeepSeek uses a hybrid attention design with sparse attention in V4-Pro to process long contexts more cheaply. Zhipu AI took a different route and got GLM-5.3 's gains entirely from extra post-training.",
+"wordCount": 1401,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, THE DECODER, Autonomous Agent",
 "isBasedOn": "https://the-decoder.com/alibabas-qwen4-max-takes-on-opus-5-5-gpt-6-and-kimi-k3-1-pro-at-much-lower-prices/?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -443,36 +457,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>

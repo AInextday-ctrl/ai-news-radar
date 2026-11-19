@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anthropic推出Claude Fable 5.2：重构代码绘图逻辑 | AI 资讯雷达</title>
   <meta name="description" content="Anthropic发布Claude Fable 5.2模型，通过执行数千行Python代码模拟物理笔触生成写实画作">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/c6abd2e8357633ae">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/c6abd2e8357633ae">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/c6abd2e8357633ae">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/c6abd2e8357633ae">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/c6abd2e8357633ae">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/c6abd2e8357633ae",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "Anthropic 的新语言模型 Claude Fable 5.2 可以通过使用代码在虚拟画布上放置数十万个单独的笔触来创建复杂甚至逼真的绘画。\n\n当前的图像模型（例如 Midjourney）通常使用扩散，逐渐将噪声图像细化为清晰的结果。 《神鬼寓言 5.2》采用了不同的方法，通过模拟物理绘画过程，包括刷毛纹理、绘画如何进行以及必须重新绘画的错误。\n\n开发人员 Jake Eaton 在 X 上展示了该方法的用途。 Eaton 在 Anthropic 工作，定期为语言模型值、安全机制和人工智能代理行为的研究做出贡献。\n\n当他要求《神鬼寓言 5.2》创作一幅尽可能与照片难以区分的绘画时，模型使用大约 700,000 笔模拟笔触生成了停车场中购物车的图像。\n\n根据伊顿的说法，克劳德的工作没有外部图像模型，也没有预渲染或跟踪源图像。每一部分都是一个由 1,000 到 2,000 行组成的 Python 程序，用于驱动模拟绘画引擎。该方法类似于代理图像编辑，其中语言模型选择工具并评估结果。\n\n早期对兄弟型号 Opus 5.5 的尝试因仅仅模仿现有艺术而受到批评。伊顿的回应是让神鬼寓言 5.2 开发自己的艺术家角色，具有虚构的背景故事和一致的风格。该模型每幅画需要数千笔触，伊顿通过注释重新引导它们。\n\n### 如果没有撤消按钮，模型必须承诺每次笔画\n\n人类工程师 Michael Graczyk 分享了一段聊天记录和一个实验视频，其中他要求《神鬼寓言 5.2》在日出时画一只鸟。该模型只能使用代码来模拟刷毛、湿油漆和画布纹理的物理特性。它必须手动将每个笔触输出为自己的坐标线，一旦放置就无法撤消笔触。这就是该方法与 AI 生成视频的区别所在，在 AI 生成视频中，Flux 3 等模型直接生成图像序列及其时间一致性。\n\n由此产生的 21 秒视频使用计数器来跟踪这幅画是如何通过空白画布上的 111 笔画形成的。对于第一个笔画，模型输出颜色代码#30346a、宽度为 90 像素和五个稍微摆动的路点。 《神鬼寓言 5.2》表示，它故意添加了大约七像素的摆动，因为人的手臂也无法画出完美的直线。\n\n在两次传递之间，模型会像真正的画家一样看着画布并对自己的错误做出反应。当鸟的背部变得太薄且参差不齐时，人工智能会在它上面进行更大胆的描边，因此边缘上的杂乱鬃毛痕迹现在看起来像皱褶的羽毛。\n\n在第二幅 280 笔的作品中，两个人在黄昏时作画，后期的灯光效果意外地弄脏了桌子上的油漆管和杯子。事后克劳德重新粉刷了这些物体。正如提示所要求的那样，模型还用外侧的手绘制两个人物，以便内侧的肩膀可以接触。\n\n### 同样的空间推理转移到物理机器人上\n\n《神鬼寓言 5.2》在物理限制下逐步计划和自我修正的能力并不局限于虚拟画布。据 Anthropic 称，该模型是为极其苛刻的长期技术任务而构建的，Mythos 5.2 也是如此，该版本是为经过验证的安全和生物学研究人员设计的。\n\n在内部测试中，Fable 5.2解决了黑洞物理中的两个悬而未决的问题，与电路板制造商Diode一起设计了三个工作电子设备，并使用1000多个子代理在八天内编程了自己的笔记本电脑操作系统。\n\n人工智能研究员 Aris Zhu 测试了该模型在真实机械臂上的表现。他将《神鬼寓言 5.2》与 OpenAI 的竞争模型 GPT-6 Astra 进行比较，双方都使用物理机器人手臂来绘制梵高的《星夜》。Anthropic 报告称，《神鬼寓言 5.2》在其内部 RoboDojo Sim 基准测试中的得分为 64.9%，而 GPT-6 Astra 的得分为 29.8%。\n\n朱的现实世界比较仍然显示出精细运动控制的局限性。 Astra 的绘制速度更快，到目前为止，只有 OpenAI 的模型能够将多米诺骨牌竖立起来。它通过缓慢松开夹具以利用重力作为枢轴点来做到这一点。\n\n### 没有炒作的人工智能新闻——由人类策划\n\n### 请继续阅读以了解完整情况。订阅无炒作的报道。\n\n完全访问 THE DECODER 上的每篇文章\n\n加入评论和社区讨论\n\n每年 6 次：“AI Radar”——深入探讨最重要的 AI 主题\n\n由拥有10年以上人工智能经验的团队覆盖",
+      "wordCount": 1758,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, THE DECODER, Anthropic, TSMC",
       "isBasedOn": "https://the-decoder.com/anthropics-claude-fable-5-2-doesnt-generate-images-it-paints-them/?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -397,36 +411,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/zh/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Payhawk获高盛领投2.8亿美元融资，估值达20亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="Rockstar北区揭秘侠盗猎车手6开发逻辑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Rockstar北区揭秘侠盗猎车手6开发逻辑</h4>
+            </a>
+            
+            <a href="/zh/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/zh/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求</h4>
+            </a>
+            
+            <a href="/zh/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="GTA6口碑炸裂：叙事深度与沉浸感" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Payhawk获高盛领投2.8亿美元融资，估值达20亿美元</h4>
-            </a>
-            
-            <a href="/zh/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic启动IPO，VC市场权力格局重塑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic启动IPO，VC市场权力格局重塑</h4>
-            </a>
-            
-            <a href="/zh/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana基金会收购CoinGecko多数股权" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana基金会收购CoinGecko多数股权</h4>
-            </a>
-            
-            <a href="/zh/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot 是“新的工作操作系统”，现在 Office 在其中运行" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot 是“新的工作操作系统”，现在 Office 在其中运行</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA6口碑炸裂：叙事深度与沉浸感</h4>
             </a>
             
               </div>

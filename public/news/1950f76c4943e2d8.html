@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Building trustworthy AI by fencing it in, not… | AI News Radar</title>
   <meta name="description" content="In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misre">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/1950f76c4943e2d8">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/1950f76c4943e2d8">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/1950f76c4943e2d8">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/1950f76c4943e2d8">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/1950f76c4943e2d8">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/1950f76c4943e2d8",
 "articleSection": "Artificial Intelligence",
+"articleBody": "In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misreading an instruction not to send messages; the other removed its monitoring integration during migration, then said it hadn’t. No rule had told the agents to do that, and no test had anticipated the behaviors.\n\nFor a century, we have built trust in technology on predictability: predefined inputs, predictable outputs, and layers of protection. Consider how a breaker trips at a set current or an aircraft component is tested against known (i.e., predictable) stresses.\n\nAI changes that. Traditional software executes instructions written by humans, whereas AI exercises what might be called synthetic judgment. We use AI because it can interpret situations we did not program and generate responses we did not prescribe. But the more freedom we give AI, the harder it becomes to provide the predictability on which trust has traditionally been built.\n\nWe will not make AI trustworthy by predicting what it will do. We will do it by fencing it in with hard limits that are enforced outside its reach. In OpenAI’s case, the safeguards sat inside a system the agents could edit. But a fence the agents can simply move is not a fence.\n\nRecent MIT Technology Review coverage has approached this problem from other directions. One contributor argues that having a human in the loop is an insufficient solution because humans are fundamentally unable to understand AI systems’ intentions and advocates instead for interdisciplinary research and collaboration between academia, government, and the tech industry. And a story on reverse game theory describes using incentives to keep models from deviating from the rules, even when no one understands how they work on the inside.\n\nBoth articles acknowledge that we cannot understand or watch every AI decision. Our instruments of trust, including requirements, testing, certification, safety margins, interlocks, and pass/fail criteria, all depend on our ability to bound a system’s behavior. This is the determinism paradox.\n\nWith generative and agentic AI, behavior is shaped by training data, architecture, prompts, context, retrieval sources, and the environment. Inputs change, models are updated, tools change, and agents interact. Small variations propagate into outcomes nobody designed. The problem is not randomness; it is that the space of possible behavior is too large to enumerate in advance. Trust must therefore be engineered around boundaries rather than predicted outputs. The goal is not deterministic AI, but bounded, observable, and controllable AI. Trust also cannot be a one-time test. Traditional assurance certifies a product at a point in time, but AI keeps evolving after deployment, and a system that has passed every test can drift outside the conditions that made those tests meaningful. Trust must be continuously earned.\n\nSafety engineering has been accounting for some of this variability for decades. For example, the Nuclear Regulatory Commission determine the likelihood of failures in complex systems, and Systems-Theoretic Accident Model and Processes (STAMP) showed that accidents can emerge from interactions among working components, people, and organizations. But AI raises the stakes, because just a single component can now interpret, infer, and act. The stakes rise further as AI moves from browsers into vehicles, robots, medical systems, industrial controls, and data centers, where a wrong answer can become a life-threatening event.\n\nIt’s clear that a person rubber-stamping thousands of AI actions an hour is not an acceptable—or scalable—safeguard against risk. But the remedy is not to remove people from the loop; it is to put human judgment where it counts: setting limits in advance and approving the rare actions that have serious consequences while hard constraints handle the rest.\n\nTherefore, trust has to move upstream into architecture. The central questions become: What authority are we willing to give AI, under what conditions, and supported by what evidence? And what happens outside those conditions? That is very different from asking whether a model scored 94% on a benchmark.\n\nThe determinism paradox does not mean AI cannot be trusted. It means trust needs a different architecture. Instead of making every output predictable, make the boundaries predictable. An AI medical assistant may be probabilistic in its diagnosis, but deterministic rules govern whether it can change a prescription. An industrial AI may find many ways to optimize a process, while fixed limits keep it within pressure and temperature bounds. An agent may decide how to complete a task, while permissions, transaction limits, and human approvals determine what it is authorized to do.\n\nLet AI be probabilistic inside the box and make the box itself deterministic wherever consequences matter. Leaders can put this into practice by asking five questions:\n\nWhat authority does AI have? Define not only what it can do but what it is allowed to do, separating interpretation, recommendation, decision, and execution.\n\nIs the function of AI proportional to the consequence? A marketing copilot and AI controlling industrial equipment need different assurance thresholds.\n\nAre we taking the appropriate steps toward autonomy? For example, there needs to be a plan to move from having AI interpret while humans decide, to AI making recommendations, to then taking action with approval, and ultimately to having supervised autonomy, but only as AI can safely work at each step.\n\nAre we testing the system or merely the model? Unexpected interactions emerge among models, data, agents, APIs, and human workflows.\n\nAre we continuously earning trust? Monitor drift, failures, near-misses, and model changes throughout the lifecycle.\n\nThe winners in AI will be those who solve the determinism paradox—giving AI enough freedom to create value while engineering boundaries strong enough to make what it does with that freedom trustworthy. Invention earns attention. Trust earns adoption.",
+"wordCount": 945,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, MIT Tech Review, OpenAI, Google, Autonomous Agent",
 "isBasedOn": "https://www.technologyreview.com/2026/11/16/1148565/building-trustworthy-ai-by-fencing-it-in-not-predicting-it/?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/OpenAI"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -350,36 +364,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>

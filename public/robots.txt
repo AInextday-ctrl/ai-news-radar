@@ -1,5 +1,5 @@
 # AI News Radar (https://ainewsradar.xyz) - Robots.txt
-# Optimized for Web Indexing & Generative Engine Optimization (GEO)
+# Optimized for Web Indexing, Generative Engine Optimization (GEO) & AI Agents
 
 User-agent: *
 Allow: /
@@ -27,7 +27,15 @@ User-agent: PerplexityBot
 Allow: /
 Disallow: /cdn-cgi/
 
+User-agent: Perplexity-User
+Allow: /
+Disallow: /cdn-cgi/
+
 User-agent: ClaudeBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Claude-Web
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -36,6 +44,34 @@ Allow: /
 Disallow: /cdn-cgi/
 
 User-agent: Google-Extended
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther-Image
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: GoogleOther-Video
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Googlebot-News
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: YouBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: TavilyBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: ExaBot
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -68,6 +104,10 @@ Allow: /
 Disallow: /cdn-cgi/
 
 User-agent: FacebookBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: MistralAI-User
 Allow: /
 Disallow: /cdn-cgi/
 
@@ -121,9 +161,8 @@ User-agent: Google-Display-AdsBot
 Allow: /
 Disallow: /cdn-cgi/
 
-# --- Sitemaps & AI Context Endpoints ---
-# LLMs.txt AI Manifests (llmstxt.org)
-# Discoverable AI knowledge context manifests:
+# --- Sitemaps, Feeds & LLMs Discovery Manifests ---
+# Canonical LLMs.txt AI Manifests (llmstxt.org standard):
 # https://ainewsradar.xyz/llms.txt
 # https://ainewsradar.xyz/llms-full.txt
 # https://ainewsradar.xyz/zh/llms.txt

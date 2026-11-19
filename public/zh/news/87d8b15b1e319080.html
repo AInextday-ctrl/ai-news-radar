@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Optimizely供应链被攻陷，百余家大型机构面临安全威胁 | AI 资讯雷达</title>
   <meta name="description" content="2026年11月16日，Optimizely平台被植入恶意JavaScript代码，导致包括Zoom、BBC及汇丰银行在内的178家机构网站受感染">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/87d8b15b1e319080">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/87d8b15b1e319080">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/87d8b15b1e319080">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/87d8b15b1e319080">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/87d8b15b1e319080">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/87d8b15b1e319080",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "2026 年 11 月 16 日，恶意 JavaScript 通过 Optimizely Web 实验平台向 178 个组织的访问者提供。该列表包括一些世界上访问量最大的网站：Zoom、BBC、CNN、Salesforce、GitLab、IKEA、HSBC、Equifax、Air France-KLM、Ledger 和 Peacock。\n\n该恶意软件是一个多用途工具包。它将加密货币钱包地址交换为攻击者的地址，浏览支付卡，窃取 cookie 和屏幕截图，并在 iPhone 和 iPad 上提供 Coruna 和 DarkSword iOS 漏洞利用套件。加密货币已经被盗，攻击者已验证交易。\n\n这正是 Report URI 旨在检测的攻击类型。我们的平台可以识别受信任 JavaScript 的意外更改、检测正在加载的新脚本并揭示与外部目的地的可疑连接。在这种情况下，即使原始脚本是由受信任的 Optimizely 域提供的，这些信号也会暴露恶意活动。通过适当的 CSP 执行模式，组织可以更进一步，在攻击成功之前阻止其关键部分。\n\n这里重要的教训是，受信任的 JavaScript 并不总是值得信赖的。网站可能会因第三方依赖而受到损害，而其自身的代码或基础设施却不会被破坏。\n\n大多数恶意代码现已被删除。截至世界标准时间 21:52，我们仅在 188 个受感染片段中的 1 个中发现了该病毒，低于世界标准时间 20:56 的 169 个。如果您的网站使用 Optimizely Web，或者您今天访问了以下任何网站，请继续阅读。\n\nOptimizely Web 的工作原理是让每个客户从 Optimizely 的 CDN 加载 JavaScript“片段”，例如 https://cdn.optimizely.com/js/6395285578973184.js。该代码片段包含 Optimizely 的代码、客户的实验和一个名为 Project JavaScript (projectJS) 的可选字段：客户在其 Optimizely 仪表板中编写的自定义代码，该仪表板在每个页面上运行。\n\n攻击者将自己的代码写入客户项目的项目 JavaScript 中，每个片段的其余部分未受影响。该文件仍然由 cdn.optimizely.com 提供，带有 Optimizely 的证书，来自每个受影响站点都已信任的主机。以下是 Zoom 代码片段中添加的内容：\n\n有些客户从自己的域提供代码片段，例如 opt.scheels.com/js/<id>.js 或 www.vodafone.com.au/js/<id>.js。这些也受到影响，因为内容来自同一个 Optimizely 项目。\n\n我们不知道攻击者如何获得对如此多不相关的客户项目的写入权限：受损的 Optimizely 系统、受损的跨客户访问凭据或其他内容。这是由Optimizely 来解释的。需要明确的是，Optimizely 的 CDN 完全满足了它的要求；这不是 CDN 缓存中毒攻击。 Optimizely 自己的网站也受到了影响：www.optimizely.com 和 login.optimizely.com 的片段都携带了该代码。\n\n一天之内，有效载荷被重建了 26 次。攻击者添加了功能，并添加了钱包，但从未删除过任何内容。\n\n每个访问者都会收到相同的脚本 track.js，并且它的每个部分都立即处于活动状态。访问者的体验取决于他们的设备以及他们在页面上执行的操作。\n\n该脚本会找到任何有效的钱包地址（BTC、ETH 和 EVM 链、TRON、Solana、TON、Litecoin、Bitcoin Cash、Dogecoin），并将其替换为攻击者的地址之一。它验证校验和，因此只交换真实地址。它将它们交换为：\n\n每当页面发生变化时，它都会重新扫描页面。从任何受影响的页面或该选项卡打开时的其他任何地方复制地址，然后您就可以粘贴攻击者的地址。",
+      "wordCount": 1662,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Report URI Blog",
       "isBasedOn": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -345,36 +359,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/zh/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Payhawk获高盛领投2.8亿美元融资，估值达20亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="Rockstar北区揭秘侠盗猎车手6开发逻辑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Rockstar北区揭秘侠盗猎车手6开发逻辑</h4>
+            </a>
+            
+            <a href="/zh/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/zh/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求</h4>
+            </a>
+            
+            <a href="/zh/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="GTA6口碑炸裂：叙事深度与沉浸感" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Payhawk获高盛领投2.8亿美元融资，估值达20亿美元</h4>
-            </a>
-            
-            <a href="/zh/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic启动IPO，VC市场权力格局重塑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic启动IPO，VC市场权力格局重塑</h4>
-            </a>
-            
-            <a href="/zh/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana基金会收购CoinGecko多数股权" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana基金会收购CoinGecko多数股权</h4>
-            </a>
-            
-            <a href="/zh/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot 是“新的工作操作系统”，现在 Office 在其中运行" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot 是“新的工作操作系统”，现在 Office 在其中运行</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA6口碑炸裂：叙事深度与沉浸感</h4>
             </a>
             
               </div>

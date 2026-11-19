@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Preliminary report: Microsoft attributes a… | AI News Radar</title>
   <meta name="description" content="Microsoft has blamed last week&#x27;s epic outage on a change it made in July that lurked in the network gateway servers until a surge in load and a drop in capacity">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/12b1e5bae13adf42">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/12b1e5bae13adf42">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/12b1e5bae13adf42">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/12b1e5bae13adf42">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/12b1e5bae13adf42">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/12b1e5bae13adf42",
 "articleSection": "Artificial Intelligence",
+"articleBody": "Microsoft has blamed last week's epic outage on a change it made in July that lurked in the network gateway servers until a surge in load and a drop in capacity triggered the defect, giving the Microsoft 365 world a day off from email.\n\nAccording to a preliminary post incident report published by Microsoft on November 15, the defect was introduced in July 2026. The update looked fine at the time, Microsoft says, having passed load testing and been deployed without any impact.\n\nHowever, the testing wasn't good enough. Microsoft's report states: \"Our load testing tended to focus on weaker hardware with fewer cores.\" The defect caused \"lock contention inside an internal Windows process which caused the machine's resources (CPU & memory) to be exhausted.\"\n\n\"The contention issue is worsened on machines with more cores and newer hardware.\"\n\nThe fix containing the defect was prepared specifically for Microsoft 365 network gateway servers. Then two things happened at once. Teams failed over to the \"primary\" gateway that supports Exchange Online, creating a surge in load that was not, in itself, particularly unusual. At the same time, almost 14 percent of server capacity for the networking gateway was out of service, which wasn't a problem by itself either: it was on its way to being restored and, according to Microsoft, \"the service had sufficient capacity headroom.\" Together, they pushed the gateway into the defect and chaos ensued.\n\nIt was a classic cascading failure scenario. When a server loses connectivity, traffic gets routed to the next healthy endpoint. Which encountered the same problem. So traffic was rerouted again and… you can see where this was going. Within two hours, the defect was encountered across Microsoft's fleet. \"At its lowest,\" the report states, \"more than 80 percent of servers were unresponsive.\"\n\nSo, what to do? Bringing servers back to service didn't help – they were immediately overwhelmed and fell over again.\n\n\"Our normally automated recovery processes were not designed to restore service from this broad unresponsive state.\" A straightforward rollback was also not possible because the defect was months old.\n\nInstead, engineers developed patch for the patch or, in Microsoft's words, \"an update that returned the code path to the previously known good state in Windows.\" The patch was applied to groups of servers and service was gradually restored.\n\nThe timings show the pain customers experienced and the floundering in Redmond as Microsoft tried to work out why Exchange Online and other cloud services were so poorly. The Teams failover, which turned out to be a factor in the outage, happened at 0107 UTC on November 12. During the day, the load began to ramp up until, at 1603 UTC, Microsoft's connectivity anomaly detection monitor identified an increase in connectivity issues.\n\nAt 1633 UTC, the first support case came in.\n\nIt is not difficult to imagine the stress engineers felt as, over the next 15 hours, nothing they tried resolved the issue. All ongoing and planned deployments and configuration changes were paused while the team attempted to resurrect the service. Extra capacity was added. Traffic was rerouted. Yet servers kept falling over.\n\n\"Those services that were able – like Teams, OneDrive, SharePoint, and Office apps – failed out of the faulty network gateway infrastructure,\" the report says. \"But not all services, like Exchange Online, can fail out of this network gateway for scale reasons.\"\n\nHence the length of time for which Exchange Online (or, from the perspective of many users, Outlook) was out of action.\n\nBy 0030 UTC on November 13, Microsoft had identified connection negotiation as the main culprit for the access failures and concluded that competing processes were preventing connections from being handled.\n\nHowever, it took until 0720 UTC before \"We identified a mitigation and applied the mitigation – an update that reverted the defective change.\"\n\nAt 1610 UTC, Microsoft confirmed that things were once again looking healthy and, at 0415 on November 14, issued its final customer update.\n\nA final post incident report is due on November 20. However, the preliminary report will do little to calm jangling nerves. An update applied three months ago managed to cause Exchange Online (and other services) disruption on a global scale? With load testing that didn't reflect scenarios under Microsoft's control?\n\nThe engineers who worked feverishly to restore services deserve commendation and will hopefully never have to buy their own beverages in Redmond again (or at least escape the next round of firings). However, the processes that led to an update with a latent defect reaching production deserve a long, hard look. ®\n\nOPINION We don't need no education platform evolution. Hey, Redmond, leave those kids alone Microsoft pulls the plug on free student email, but people are learning fast\n\nPLUS: US takes down Iranian propaganda sites; Marketing company asks 'Why Do We Have Your Information?' And more!\n\nPLUS: China upgrades smartphone surveillance tools; Ring eases anti-snooping stance; and more\n\nWent at equivalent of $3.5B+ valuation for entire firm, though portion sold not specified\n\nVersion 4.0 of Redmond’s cloudy OS is free to use in its cloud. Repeat. Free to use\n\nOnly a minority want to ban it. Plus plenty of updates on 16 projects\n\nMint 27 to land before Christmas, with stable Wayland display upgrades, as punters try out Cinnamon 6.8",
+"wordCount": 878,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, The Register, Microsoft",
 "isBasedOn": "https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Microsoft"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -358,36 +372,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>

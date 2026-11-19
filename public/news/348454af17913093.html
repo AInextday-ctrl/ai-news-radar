@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anthropic says Claude Mythos slashed software… | AI News Radar</title>
   <meta name="description" content="Anthropic Chief Compute Officer Tom Brown announced that using Claude Mythos Preview, the company reduced the time required to port models to AMD GPUs from 6-12">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/348454af17913093">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/348454af17913093">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/348454af17913093">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/348454af17913093">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/348454af17913093">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/348454af17913093",
 "articleSection": "Artificial Intelligence",
+"articleBody": "Anthropic told IPO investors that its Claude Mythos Preview model did the software work required to get its AI running on AMD’s GPUs in about three days, with “basically no human intervention,” a job it says used to take six to 12 months. The three days cover prompt processing for one Anthropic model on AMD MI355X GPUs “at a useful level of performance,” with Mythos porting or writing “almost 100% of the kernels.” That kind of low-level code, which ties an AI model to one company’s chips, has long been part of Nvidia’s CUDA moat, and an AI that can write it in days would suggest that moat is eroding.\n\nTom Brown, Anthropic’s co-founder and chief compute officer, made the time comparison, noting to investors that the original meant using a team of “dozens of engineers.” The company already runs its models on multiple kinds of chips — on GPUs from Nvidia and AMD, Google’s TPUs, and AWS Trainium — and its fleet is managed as “one fungible pool of compute.” Brown called the early multi-chip decision “an unconventional bet.” It may have been a wise one, given that Google’s TPUs can now natively run AI models built in PyTorch, and Meta uses them in production.\n\nAnthropic's claim that the job used to take six to 12 months comes from past work, from its “historical experience bringing up new accelerators using traditional engineering approaches,” where tailoring the code to each hardware platform was a challenge. Removing that onboarding barrier could reduce things to a purchase decision, and Anthropic started working with AMD GPUs for the first time this year, with an agreement for up to 2 gigawatts now in place.\n\nCUDA, Nvidia’s programming platform, is very mature at nearly two decades old. AMD has an equivalent, ROCm, with HIP as its programming layer. Code written for CUDA has to be transformed to work there, and AMD even built a tool called HIPify for the process. There is still a conversion cost to switching, and AMD’s vice president of AI software, Anush Elangovan, told EE Times in April that “Claude is better than HIPify because it has web search built in.”\n\nAMD has been making the argument that AI can write this type of code since August of last year, presenting a research agent that fell short of human experts at the time. In September of that year, AMD CEO Lisa Su said on the Possible podcast that much of AI software is written in CUDA, which needs to be “translated to AMD,” and “a ton of that can now be done in software.”\n\nMoving forward to July earlier this year, AMD’s senior vice president of AI, Vamsi Boppana, said its engineers were using AI models to generate GPU kernels, and Su said that when she asked whether her team was helping the Anthropic engineer working on the MI355X, she was told they didn’t need any help. Boppana said that in some cases, the resulting kernels were even “better than the most manually tuned versions.” Under its July agreement with Anthropic, AMD is also using Claude to optimize workloads for its Instinct GPUs and to speed up ROCm development.\n\nAt AMD’s Advancing AI event in July, OpenAI’s Philippe Tillet said that once OpenAI got its Helios racks, a single engineer confirmed everything worked within a few days, and that “agents are taking over our jobs, in a sense, as kernel engineers.” Before the event, AMD’s Andrew Dieckman, corporate vice president and general manager of the company’s data center GPU business, told reporters that he has had practically zero conversations with AMD’s customers about CUDA.\n\n• Date: Aug. 1, 2025 | Who: AMD researchers | What they said or showed: Published GEAK, an AI agent that writes GPU kernels; against 30 expert-written kernels it got 19 right, at 0.92 times the experts’ speed on average | Where: AMD’s ROCm blog\n\n• Date: Sept. 24, 2025 | Who: Lisa Su, AMD chair and CEO | What they said or showed: Asked about AI coding tools, said much of the code written for CUDA can now be translated to AMD in software: “We’re using software to significantly optimize our customers’ code so that they can run on AMD” | Where: Possible podcast\n\n• Date: April 1, 2026 | Who: Anush Elangovan, AMD vice president of AI software | What they said or showed: Compared Claude with HIPify, AMD’s tool for converting CUDA code: “Claude is better than HIPify because it has web search built in” | Where: EE Times interview\n\n• Date: April 15, 2026 | Who: Jensen Huang, Nvidia CEO | What they said or showed: “We use a ton of AI to create the kernels that we have”; “nobody knows our architecture better than we do” | Where: Dwarkesh Patel interview\n\n• Date: July 23, 2026 | Who: Andrew Dieckman, AMD corporate vice president and general manager, data center GPU business | What they said or showed: “I have almost zero conversations with our customers about CUDA at this point in time” | Where: PC Gamer, from a pre-event AMD briefing\n\n• Date: July 23, 2026 | Who: Vamsi Boppana, AMD senior vice president of AI | What they said or showed: AI-assisted GPU programming will “remove any remaining barriers to broad adoption” | Where: AMD Advancing AI keynote\n\n• Date: July 23, 2026 | Who: Philippe Tillet, OpenAI | What they said or showed: “agents are taking over our jobs, in a sense, as kernel engineers” | Where: AMD Advancing AI keynote\n\n• Date: July 23, 2026 | Who: Tom Brown, Anthropic co-founder and chief compute officer | What they said or showed: One engineer asked Claude to bring up an MI355X rack and left it running “over the weekend” | Where: AMD Advancing AI keynote\n\n• Date: Nov. 10, 2026 | Who: Tom Brown, Anthropic co-founder and chief compute officer | What they said or showed: Mythos “got Claude running on AMD in just three days with basically no human intervention”; the slide footnote limits the three days to prompt processing for one model | Where: Anthropic’s IPO roadshow video\n\nUntil this week, though, all of this came from AMD or its stage, not from Anthropic to its own investors. Anthropic buys the chips rather than selling them, and it’s heading into its IPO next week, so its multi-chip approach — now with at least some numbers to back it up — carries more weight than a chipmaker’s claims. Its prospectus says it in writing, too, though without a number: “We can onboard new chip platforms in a fraction of the time it once took.”\n\n• Where Anthropic said it: AMD’s Advancing AI keynote, July 23 | Who did the work: One engineer and Claude | How long: Not stated; left running “over the weekend” | What it covered: Its “leading model” on an MI355X rack, with performance climbing | What it replaced: What it called “a big effort”\n\n• Where Anthropic said it: IPO roadshow video, narration, Nov. 10 | Who did the work: Mythos, with “basically no human intervention” | How long: Three days (“in just three days”) | What it covered: Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels” | What it replaced: Work that “took dozens of engineers months”\n\n• Where Anthropic said it: IPO roadshow video, slide footnote, Nov. 10 | Who did the work: Claude Mythos Preview | How long: About three days (“~3 day timeline”) | What it covered: Bringing up “prompt processing for one Anthropic model on AMD MI355X GPUs at a useful level of performance” | What it replaced: Six to 12 months (“~6-12-month estimate”), from “historical experience bringing up new accelerators”\n\n• Where Anthropic said it: Prospectus (S-1/A No. 2), Nov. 10 | Who did the work: Its engineering teams, “leveraging Claude” | How long: No figure; “more quickly” | What it covered: Bringing “new chip platforms into production”; no chip named | What it replaced: What it calls “intense engineering effort over many months”\n\nThe prompt processing (prefill) part of the workload is the step where a model reads and processes what it’s been given before it starts replying, and Anthropic hasn’t said whether the replying step (decode) was included as well. Anthropic’s chart, with its axis labeled “Time to onboard new silicon,” shows both lines reaching the same “~100%” mark without saying 100% of what. The company also hasn’t said how fast the model ran on AMD’s GPUs versus Nvidia’s, and that’s the comparison we want to see to show whether AMD’s chips, running AI-written code, can match Nvidia silicon.\n\nOn the other hand, Nvidia CEO Jensen Huang said in an April interview with Dwarkesh Patel that Nvidia already uses AI on its own kernels and knows its chips best — “nobody knows our architecture better than we do” — and can get the most out of them. Asked why labs like Anthropic use other accelerators, he called Anthropic “a unique instance, not a trend.” Nvidia and AMD, among seven companies, are buying $26.0 billion of Anthropic’s stock at the IPO price, so Nvidia is investing in the very company Huang called the exception.\n\nIn late July, SemiAnalysis published an article, “Can AMD break the CUDA Moat?,” which essentially said that software creation is not the same moat it was even a year ago. That said, the catch for AMD is that with agentic coding, “each agent requires GPUs to test their code against,” which means that the AI writing the code still needs the hardware. It has found a constant lack of GPUs inside AMD for this type of development, which has held AMD back and may be a new bottleneck.\n\nThat leaves CUDA’s moat somewhere in between. Getting a model running on a new chip, once the expensive part, appears to be getting cheaper, and better AI may wear down Nvidia’s claim that it knows its hardware best. As for Anthropic’s fungible pool, the chips in it aren’t fully interchangeable — Google’s TPUs are increasingly specialized, for example — and getting the most out of any of them still takes the hardware to test on. The moat is narrowing, but is not gone.\n\nAnthropic’s first AMD MI450 chips, in Helios racks, are expected in the first half of 2027. That’s a new generation and an opportunity to see if the three-day bring-up can be repeated. Anthropic’s IPO comes sooner, after which it will report as a public company.",
+"wordCount": 1748,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Tom's Hardware, Google, Anthropic, NVIDIA, Amazon, AMD",
 "isBasedOn": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Google"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -373,36 +387,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>

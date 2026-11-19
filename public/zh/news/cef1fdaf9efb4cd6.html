@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>微软Exchange服务大规模宕机始末及技术失效机制 | AI 资讯雷达</title>
   <meta name="description" content="微软Exchange Online因瑞士节点故障及自动故障转移机制触发网络拥塞，导致全球80%以上服务器陷入重启循环">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/cef1fdaf9efb4cd6">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/cef1fdaf9efb4cd6",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "上周四上午 9 点，一切看起来都很正常。微软员工抵达校园，准备开始一天的电子邮件和会议。但不到一个小时后，微软历史上最严重的故障之一开始发生，导致员工、企业和许多政府近 24 小时无法访问 Outlook 电子邮件。\n\n据知情人士透露，这一切都始于瑞士。为 Outlook 提供支持的 Exchange Online 服务器开始脱机。由于微软的故障转移系统试图将电子邮件流量转移到其他地方，该问题迅速蔓延到墨西哥，然后蔓延到世界其他国家。几个小时内，超过 80% 的 Exchange 服务器没有响应。\n\n消息人士告诉我，微软在其内部事件跟踪系统中将此次中断标记为“sev0”，这是最高级别，这表明服务中断已达到灾难性级别。数百名工程师开始试图找出问题所在以及如何恢复服务。服务器在某些情况下发生故障并不罕见，但微软有多种系统可以将流量路由到健康的服务器，以保持更广泛的系统在线。在这种情况下，故障转移系统发挥了作用，但也传播了问题。\n\n在停电的最初几个小时，工程师们正在分析崩溃报告、跟踪日志和内核转储，试图找到这次大停电的线索。一些服务器已进入维护模式，并且由于 CPU 负载异常高而变得无响应。工程师试图让服务器重新上线，但他们几乎立即就被等待访问服务器的流量淹没了。\n\nExchange 服务器通过网络（预启动执行环境）启动并运行操作系统，该过程允许 Microsoft 的支持人员和工程师远程管理操作系统更新。据我所知，重新启动的服务器突然爆发的流量压垮了监控它们的系统，导致了一种重新启动循环，它们不断尝试但无法重新上线。\n\n当工程师继续寻找根本原因时，微软甚至正在努力使用恢复最近更改的常规流程将服务器恢复到健康状态。当外界开始怀疑这次中断是否与网络攻击或草率的人工智能编码有关时，微软的工程师已经在调查潜在的攻击向量，并与 DDoS 专家联络，以了解这是否可能是一次攻击。\n\n我被告知崩溃报告和日志很快就排除了攻击的可能性，在最近的回滚失败后，微软的工程师开始仔细研究服务器的网络堆栈，并发现了一个不寻常的错误。这是不寻常的，因为该错误自 7 月份以来一直存在于 Microsoft 365 网络网关服务器上，没有对服务器产生任何影响。\n\n微软 Copilot、代理和平台 (CAP) 团队负责人 Charles Lamanna 在 X 上的一篇帖子中写道：“潜在缺陷导致服务器在某些负载条件下变得不堪重负且无响应。”上个月，在 Office 和 Teams 负责人 Ryan Roslansky 离开公司后，Office、Outlook 和 Microsoft Teams 背后的团队都开始向 Lamanna 汇报。\n\n微软的初步事件后报告将该错误描述为“由于内部 Windows 进程内的锁争用”而影响特定 Windows 服务器的错误。该错误不会影响常规版本的 Windows，因为它是专门为 Microsoft 365 网络网关服务器准备的修复的结果。\n\n微软直到这次重大中断才发现这个错误，它承认这是由于其测试实验室中使用的流量混合和硬件造成的。 “在具有更多内核和较新硬件的机器上，争用问题会更加严重；而我们的负载测试往往侧重于内核较少的较弱硬件，”拉曼纳写道。\n\n由于另外两起增加负载并减少服务器容量的事件，该错误变得明显。在此 Outlook 中断开始前 15 小时，Microsoft Teams 从备用网络网关故障转移到支持 Exchange Online 的主网关。 “这增加了网关的负载并改变了其流量模式，”拉曼纳写道。通常这不会是一个问题，但与此同时，该网关大约 14% 的服务器容量“由于前一天的不相关问题而停止服务”。\n\nbug、Microsoft Teams 故障转移和服务器容量减少这三重因素都导致网络网关触发了自 7 月份以来一直处于休眠状态的问题。微软花了近 24 小时才使其 Exchange 服务器再次稳定下来，而且我获悉，试图解决问题的团队有时会进行重叠干预，从而使协调变得复杂。\n\n微软工程师一直在进行桥牌通话，参与人数一度达到了 1000 人的上限。这向您展示了有多少团队参与试图找到这次大规模中断的根本原因，该中断始于美国的流量高峰期。\n\n拉曼纳写道：“恢复时间比平时要长，因为当服务器恢复服务时，它们立即被等待的流量淹没，再次变得无响应。” “我们通常的自动恢复流程并不是为了从这种广泛的无响应状态恢复服务。此外，由于主要代码缺陷是几个月前的潜在错误，因此我们的正常回滚、飞行和功能标志无法快速恢复更改。”\n\n微软目前正在开展最终的事件后审查，该审查将于本周晚些时候发布。即使没有进行全面审查，很明显该公司也需要在测试流程上投入更多资金，以确保当类似的事情再次发生时，它可以更快地发现问题。中断每天都会发生，但这种级联故障是微软从错误中吸取教训的难得时刻，并确保同样的事件序列不会再次导致数百万人的 Outlook 瘫痪。\n\n记事本将于 12 月下周感恩节假期后回归。\n\n我总是渴望收到读者的来信，所以请在这里发表评论，或者如果您想讨论其他问题，可以通过 notepad@theverge.com 与我联系。如果您听说过 Microsoft 的任何秘密项目，可以通过电子邮件联系我：notepad@theverge.com，或者在 Signal 消息应用程序上与我私下交谈，我是 tomwarren.01。如果您想在那里聊天，我也是 Telegram 上的 tomwarren。\n\n感谢您订阅记事本。",
+      "wordCount": 2284,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, The Verge, Microsoft",
       "isBasedOn": "https://www.theverge.com/tech/1035364/microsoft-outlook-outage-notepad?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlJMSEZCU1NVZHYiLCJwIjoiL3RlY2gvMTAzNTM2NC9taWNyb3NvZnQtb3V0bG9vay1vdXRhZ2Utbm90ZXBhZCIsImV4cCI6MTc5NTM2Njg5NywiaWF0IjoxNzk0OTM0ODk3fQ.qvNcpytW9E3bjpGqPWJDeMM-dLOfUvq1QT9fb4fxHec&utm_medium=gift-link&ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Microsoft"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -336,36 +350,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/zh/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Payhawk获高盛领投2.8亿美元融资，估值达20亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="Rockstar北区揭秘侠盗猎车手6开发逻辑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Rockstar北区揭秘侠盗猎车手6开发逻辑</h4>
+            </a>
+            
+            <a href="/zh/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/zh/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">索尼发布官方 PS5 固件更新警告，确认 GTA 6 要求</h4>
+            </a>
+            
+            <a href="/zh/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="GTA6口碑炸裂：叙事深度与沉浸感" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Payhawk获高盛领投2.8亿美元融资，估值达20亿美元</h4>
-            </a>
-            
-            <a href="/zh/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic启动IPO，VC市场权力格局重塑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic启动IPO，VC市场权力格局重塑</h4>
-            </a>
-            
-            <a href="/zh/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana基金会收购CoinGecko多数股权" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana基金会收购CoinGecko多数股权</h4>
-            </a>
-            
-            <a href="/zh/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot 是“新的工作操作系统”，现在 Office 在其中运行" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot 是“新的工作操作系统”，现在 Office 在其中运行</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA6口碑炸裂：叙事深度与沉浸感</h4>
             </a>
             
               </div>

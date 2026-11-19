@@ -3,7 +3,7 @@
 > 面向全球开发者与技术决策者的独立前沿 AI 工程观察站与技术研报平台，全天候实时追踪全球大模型突破、行业领袖社交动态、深度实操教程与高频生产力工具库。
 
 AI 资讯雷达 (https://ainewsradar.xyz/zh) 坚持一手源头事实核验、零伪造时钟、零机器水词摘要。全站支持中英双轨同构与深度语义结构化数据。
-最新构建时间: 2026-11-19 01:46:02Z
+最新构建时间: 2026-11-19 01:53:14Z
 
 ## 核心板块导航
 
@@ -50,16 +50,16 @@ AI 资讯雷达 (https://ainewsradar.xyz/zh) 坚持一手源头事实核验、�
 
 ## 深度技术专栏研报
 
-- [Claude Code 终端自主 AI Agent 实战指南：架构解析、命令工作流与企业级降本实践](https://ainewsradar.xyz/zh/articles/2026-10-14-claude-code-agent-guide): 
-- [DeepSeek 本地与私有化部署深度实操：Ollama、vLLM 与 SGLang 吞吐与显存多维实测](https://ainewsradar.xyz/zh/articles/2026-10-13-deepseek-v3-r1-local-deployment): 
-- [2026 AI 编程助手终极横评：Cursor、Windsurf、GitHub Copilot 与 Cline 真实场景代码生成实测](https://ainewsradar.xyz/zh/articles/2026-10-12-cursor-vs-windsurf-vs-copilot-benchmarks): 
-- [生产级 Agent 提示词工程架构手册：思维链（CoT）、结构化 JSON 约束与容错防漂移最佳实践](https://ainewsradar.xyz/zh/articles/2026-10-11-prompt-engineering-production-playbook): 
-- [企业级 RAG 架构选型与召回率调优实战：Hybrid Search、Rerank 与多模态知识库解析](https://ainewsradar.xyz/zh/articles/2026-10-10-rag-production-architecture-evaluation): 
-- [Model Context Protocol (MCP) 深度拆解：从通信协议规范到自建企业私有 MCP Server 实战](https://ainewsradar.xyz/zh/articles/2026-10-09-mcp-model-context-protocol-deep-dive): 
-- [开源多智能体框架全景选型：LangGraph、CrewAI、AutoGen 与 AutoGPT 生产就绪度评测](https://ainewsradar.xyz/zh/articles/2026-10-08-open-source-ai-agents-frameworks-comparison): 
-- [端侧小语言模型 (SLM) 实战落地指南：Llama 3.2、Phi-4 与 Gemma 2 端侧量化与微调手记](https://ainewsradar.xyz/zh/articles/2026-10-07-small-language-models-edge-ai): 
-- [大模型高吞吐推理优化全景：PagedAttention、KV Cache 量化与推测解码（Speculative Decoding）实战](https://ainewsradar.xyz/zh/articles/2026-10-06-llm-inference-kv-cache-optimization): 
-- [高质量合成数据构建与 DPO/ORPO 对齐微调：基于 Unsloth 与 Axolotl 的生产级实操指南](https://ainewsradar.xyz/zh/articles/2026-10-05-synthetic-data-generation-dpo-finetuning): 
+- [Claude Code 终端自主 AI Agent 实战指南：架构解析、命令工作流与企业级降本实践](https://ainewsradar.xyz/zh/articles/2026-10-14-claude-code-agent-guide): 深入拆解 Anthropic 官方推出的终端 AI 编程智能体 Claude Code。解析其在命令行环境中的自主决策架构、权限隔离模型、Prompt Caching 缓存机制以及结合自建 MCP Server 的企业级自动化改造方案。
+- [DeepSeek 本地与私有化部署深度实操：Ollama、vLLM 与 SGLang 吞吐与显存多维实测](https://ainewsradar.xyz/zh/articles/2026-10-13-deepseek-v3-r1-local-deployment): 全面横评 DeepSeek 架构大模型在本地单机与私有化集群中的部署方案。基于 RTX 4090 与专业显卡实测 Ollama、vLLM 与 SGLang 的首字延迟、Decode 吞吐率及显存驻留，附完整 Docker 生产级配置。
+- [2026 AI 编程助手终极横评：Cursor、Windsurf、GitHub Copilot 与 Cline 真实场景代码生成实测](https://ainewsradar.xyz/zh/articles/2026-10-12-cursor-vs-windsurf-vs-copilot-benchmarks): 基于 50 万行真实工业级 Python/TypeScript 代码库，横向对比 2026 年四大主流 AI 编程助手：Cursor、Windsurf、GitHub Copilot 与 Cline 的上下文索引深度、多文件联动编辑与架构重构准确率。
+- [生产级 Agent 提示词工程架构手册：思维链（CoT）、结构化 JSON 约束与容错防漂移最佳实践](https://ainewsradar.xyz/zh/articles/2026-10-11-prompt-engineering-production-playbook): 系统总结生产环境下大模型提示词工程的最佳设计模式。深入讲解如何通过 Pydantic 校验、动态思维链（Dynamic CoT）与 Few-Shot 校准机制，彻底根治大模型格式漂移、幻觉与非法指令穿透难题。
+- [企业级 RAG 架构选型与召回率调优实战：Hybrid Search、Rerank 与多模态知识库解析](https://ainewsradar.xyz/zh/articles/2026-10-10-rag-production-architecture-evaluation): 解析为什么传统的朴素向量检索在企业复杂知识库中准确率严重不足。详解向量（Dense）+ 倒排（BM25）混合检索、Cohere/BGE 重排器（Rerank）调优及 Parent-Child 语义分块方案。
+- [Model Context Protocol (MCP) 深度拆解：从通信协议规范到自建企业私有 MCP Server 实战](https://ainewsradar.xyz/zh/articles/2026-10-09-mcp-model-context-protocol-deep-dive): 全面剖析 Anthropic 推动的开源标准 Model Context Protocol (MCP)。解析其 JSON-RPC 2.0 报文协议规范、三大抽象实体（Resources/Prompts/Tools），并提供 Python FastMCP 构建私有数据源插件的完整生
+- [开源多智能体框架全景选型：LangGraph、CrewAI、AutoGen 与 AutoGPT 生产就绪度评测](https://ainewsradar.xyz/zh/articles/2026-10-08-open-source-ai-agents-frameworks-comparison): 针对复杂多智能体协同场景，深入评测四大开源框架：LangGraph、CrewAI、Microsoft AutoGen 与 AutoGPT。从状态机管理、人机回路（Human-in-the-loop）、断点恢复与死循环自愈能力进行全方位选型对比。
+- [端侧小语言模型 (SLM) 实战落地指南：Llama 3.2、Phi-4 与 Gemma 2 端侧量化与微调手记](https://ainewsradar.xyz/zh/articles/2026-10-07-small-language-models-edge-ai): 深入探讨 1B~4B 参数端侧小语言模型（SLM）的技术突破。结合 Apple M 系列芯片与移动端 NPU，详解基于 MLX、ONNX Runtime 的端侧极限部署与 QLoRA 垂直场景轻量微调实录。
+- [大模型高吞吐推理优化全景：PagedAttention、KV Cache 量化与推测解码（Speculative Decoding）实战](https://ainewsradar.xyz/zh/articles/2026-10-06-llm-inference-kv-cache-optimization): 深度剖析大模型在线推理的核心瓶颈——显存带宽受限（Memory-Bound）。实操讲解 PagedAttention 虚拟内存映射、FP8/INT4 KV Cache 动态量化压缩，以及利用 Draft Model 实现推测解码（Speculative Decoding）2.5 
+- [高质量合成数据构建与 DPO/ORPO 对齐微调：基于 Unsloth 与 Axolotl 的生产级实操指南](https://ainewsradar.xyz/zh/articles/2026-10-05-synthetic-data-generation-dpo-finetuning): 系统拆解企业级合成数据（Synthetic Data）构建管线：从拒绝采样（Rejection Sampling）、多维度 LLM-as-a-Judge 自动化质检，到借助 Unsloth 与 Axolotl 在单张消费级显卡上高效完成 DPO 与 ORPO 对齐微调的全流程实操
 
 ## 机器可读与订阅接口
 

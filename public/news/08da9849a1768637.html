@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A.I. Helps Find Major Security Bug in Java, a… | AI News Radar</title>
   <meta name="description" content="OpenAI released GPT-6 Cyber, a specialized model for cybersecurity research that significantly enhances security audit and patching performance through optimize">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/08da9849a1768637">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/08da9849a1768637">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/08da9849a1768637">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/08da9849a1768637">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/08da9849a1768637">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/08da9849a1768637",
 "articleSection": "Artificial Intelligence",
+"articleBody": "A cybersecurity start-up revealed on Tuesday it had used a new A.I. model to uncover a critical software bug in Java, a popular programming language that is used by government agencies and about 90 percent of Fortune 500 companies.\n\nIt was the latest evidence of a reality facing companies and the government, as A.I. is revolutionizing the field of discovery in computer vulnerabilities, identifying flaws in code so rapidly that cybersecurity professionals are struggling to keep up.\n\nUsing leading A.I. models, the start-up Calif has now unearthed a string of serious vulnerabilities in recent months. The start-up’s latest effort exposed a flaw, using OpenAI’s recently released GPT-6 Cyber model, in Java, which is widely used by banks, hospitals, the aviation industry and technology giants, as well as government agencies, including those with national security missions.\n\n“Java is the beating heart of the modern economy,” said Bruce Dang, a senior researcher at Calif. “Practically speaking, all major companies” will be affected by the bug, he added.\n\nMr. Dang and his colleagues have worked in recent days to coordinate with all government agencies in the intelligence-sharing alliance known as Five Eyes — which consists of the United States, Canada, Australia, New Zealand and Britain — and major vendors in the private sector, including Google and Microsoft.\n\nThe National Security Agency, whose classified network went down on Tuesday for what it described as “routine software maintenance,” did not respond to a request for comment. It was not clear whether that disruption was related to addressing the Java bug.\n\nOracle, the owner of the Java trademark and provider of commercial Java licenses, did not respond to a request for comment. The company released a software patch Tuesday.\n\nThe Cybersecurity and Infrastructure Security Agency, in an alert, pressed organizations to “immediately patch” the vulnerability.\n\nAnnouncements about exploits from Calif and other groups using A.I. tools have startled the cybersecurity world and upended what was considered achievable by a small band of coders just a few months ago. Those efforts, which involve working with A.I. models before they are publicly released, help alert network defenders to undetected problems in order to fix them before malicious hackers find them and wreak havoc.\n\nBut the Java discovery may be Calif’s most serious yet, one that could enable a hacker to gain remote access to sensitive internal systems. It comes on the heels of a cascade of seemingly independent disruptions in recent days — outages of Microsoft products, a nationwide grounding of flights and banking interruptions — that have shaken public confidence in the reliability of everyday technology and fanned fears that A.I. may be to blame. (So far, the explanations for each appear to be relatively benign.)\n\nA.I.-assisted bug hunting and cyberattack building has made it much easier to identify weaknesses in systems, said Ollie Whitehouse, the chief technology officer of the National Cyber Security Center in Britain. “We have seen this taking shape for some time, with A.I. being used to discover a growing number of latent vulnerabilities across software and the digital services we all rely on.”\n\nThe Java vulnerability is the second major bug Calif has unearthed with the aid of OpenAI models in the past few weeks. It discovered last month security flaws in PHP, a programming language estimated to be used by 70 percent of websites and apps on the internet.\n\nThe PHP disclosure set off fears around the world about significant disruptions for consumers and businesses and a mad scramble by companies to patch PHP before hackers could pounce. Government agencies, including the N.S.A., warned businesses to take websites offline if they could not immediately deploy a patch. Disruptions ultimately proved less serious than some predicted, however, as it became clear hackers could not easily reverse-engineer the attack method.\n\nBut the PHP flaws chiefly concerned software that helps websites function. In contrast, Java helps power the nuts and bolts of the modern digital world, including cloud computing architecture, identity management tools, email services and more.\n\n“Java is everywhere,” said Thai Duong, the chief executive of Calif. He noted that the Java bug was not easy to weaponize into an attack, giving defenders more time to patch the issues.\n\n“But vulnerabilities have a very long tail,” he added, predicting the bug could be a threat to systems that do not update in the next five to 10 years.\n\nAmong the most significant findings, Calif demonstrated that it could use this bug to break into Keycloak, a widely used authentication and log-in system. Keycloak protects thousands of organizations, including CERN, Hewlett Packard, UnitedHealthcare and NASA.\n\nQuang Luong, a security researcher from Calif, discovered the bug in Java’s base64 decoder, a common algorithm that is used to translate binary computer data into a legible palette of text that includes lowercase and uppercase letters, numbers and punctuation. On certain computers, researchers found that Java encounters a bug when it tries to decode 64 “A” characters followed by one equal sign:\n\n“AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=”\n\nThis bug, called Java4Shell, causes Java to erroneously execute code by tampering with a section of computer memory, which typically makes the program immediately crash. With the help of A.I., Calif researchers demonstrated that they could corrupt data by carefully arranging the memory — a technique called “heap grooming” — granting them full unauthorized access to the underlying system.\n\nThe New York Times independently verified Calif’s discovery after the start-up shared proof-of-concept details about the attack. The successful test took less than an hour.\n\nThe rapid advances with artificial intelligence in cybersecurity efforts mirror what the chess world champion Garry Kasparov observed after he lost a match to IBM’s Deep Blue computer nearly 30 years ago.\n\nThe best games of chess would not be played by humans or computers, he predicted, but by a hybrid of the two. The concept, which he called a “centaur” in a nod to the mythological half-human, half-horse creature, took off. For years, centaurs were seen as the best chess players, reaching new heights in the game.\n\nNow companies and the government are contending with the threat of the “centaur hacker” — half A.I., half human, and fully capable of creating chaos on the internet.\n\nThe most alarming discoveries — for now, at least — still require human expertise. In recent months, small teams of veteran security researchers have used top-shelf A.I. models to build in days or hours the kinds of advanced cyberattacks that once took platoons of elite hackers at spy agencies like the National Security Agency months to construct.\n\nFouad Matin, who leads cyber preparedness and safety at OpenAI, said Calif’s Java research “shows how A.I. can assist expert security researchers with finding serious flaws in software we all depend on” and helps lead to collaborative fixes. “We want more security teams to have these capabilities and tools to help make critical software more secure for everyone,” Mr. Matin said.\n\nEduardo Vela Nava, an information security engineer at Google, said that “once notified, we swiftly rolled out mitigations and patches across Google services, developed detection to ensure there was no exploitation of the vulnerability, and provided guidance to our customers.”\n\nSecurity experts expect those risks are likely to grow, at least in the short term. For about 20 years, centaur chess players were widely seen as capable of playing the best game of chess. But eventually, the centaurs were eclipsed by more advanced supercomputers.\n\nMr. Duong believes it may be only a matter of time until A.I. can independently build the most advanced cyberattacks, which could usher in a new age of unpredictable problems. The F.B.I. this week issued an alert warning that hackers were using new autonomous A.I. hacking tools to target government agencies and businesses around the world.\n\n“I don’t know how much time we have — maybe three months, maybe three years,” Mr. Duong said. “But right now, the best hacker is the centaur hacker.”",
+"wordCount": 1311,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, New York Times, OpenAI, Amazon",
 "isBasedOn": "https://www.nytimes.com/2026/11/17/us/politics/ai-security-bug-java.html?unlocked_article_code=1.RFE.J4uR.JL0Qv-280ALN&ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/OpenAI"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -374,36 +388,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/46fa8222f4022cbc" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Goldman Backs Fintech Startup Payhawk at $2 Billion Value" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">‘It’s a risk’: How Rockstar built the most detailed (and romantic) GTA yet</h4>
+            </a>
+            
+            <a href="/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_d373eae74209b2ee.jpg" alt="How Long Is GTA 6?" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">How Long Is GTA 6?</h4>
+            </a>
+            
+            <a href="/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ign_8c4dd629914185d7.jpg" alt="Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sony Issues Official PS5 Firmware Update Warning, Confirms GTA 6 Requirement</h4>
+            </a>
+            
+            <a href="/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="Grand Theft Auto VI Is a Masterpiece" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Goldman Backs Fintech Startup Payhawk at $2 Billion Value</h4>
-            </a>
-            
-            <a href="/news/8021e3973f7a24b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ft_4fff794b10d0911b.jpg" alt="Anthropic IPO set to deliver windfall to handful of smaller VC firms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO set to deliver windfall to handful of smaller VC firms</h4>
-            </a>
-            
-            <a href="/news/0b55d8f05b2cf8df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/coindesk_80dafd9dc7878111.jpg" alt="Solana Foundation takes majority stake in crypto data provider CoinGecko" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CoinDesk</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Solana Foundation takes majority stake in crypto data provider CoinGecko</h4>
-            </a>
-            
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/ars_e2635b66bfc8206e.jpg" alt="Copilot is “the new OS for work,” and now Office runs inside of it" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Copilot is “the new OS for work,” and now Office runs inside of it</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Grand Theft Auto VI Is a Masterpiece</h4>
             </a>
             
               </div>
