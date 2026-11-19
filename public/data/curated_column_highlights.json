@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 19:04:08 UTC",
+  "generated_at": "2026-11-19 19:18:39 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 19:04:08 UTC",
+      "updated_at": "2026-11-19 19:18:39 UTC",
       "headline_item": {
-        "id": "3e5557b0c0cc7405",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "谷歌Gemini桌面端引入Mac系统自动化控制",
-        "title_en": "Google gives Gemini the ability to use your Mac for you",
-        "source": "TechCrunch",
-        "published_at": "2026-11-19T18:50:09+00:00",
-        "url": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you/",
-        "event_summary_zh": "谷歌在macOS版Gemini应用中上线计算机使用功能，AI可代用户操控本地应用、浏览网页并执行多步骤任务",
-        "event_summary_en": "Google has introduced 'Computer Use' capabilities to its Gemini desktop application on macOS, enabling the AI agent to navigate native apps, manage local files, and browse the web on the user's behalf. This feature is gated behind Gemini Plus, Pro, or Ultra subscriptions and is currently limited to English users in the U.S., requiring explicit user approval for agentic actions via a live preview interface.",
+        "id": "edd9224f8cdf80b8",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "美国众议院组建AI安全与创新核心小组",
+        "title_en": "A bipartisan group of 24+ House lawmakers forms the AI Safety and Innovation Caucus, seeking to balance mitigating AI risks with maintaining US leadership in AI (Owen Dahlkamp/Politico)",
+        "source": "Politico",
+        "published_at": "2026-11-19T19:01:15+00:00",
+        "url": "https://www.politico.com/live-updates/2026/11/19/congress/new-bipartisan-ai-caucus-forms-with-two-dozen-house-members-01174829",
+        "event_summary_zh": "逾24名众议员跨党派组建AI安全与创新核心小组，旨在平衡风险监管与技术竞争优势",
+        "event_summary_en": "Over 24 bipartisan House lawmakers, led by Representatives George Whitesides, Don Beyer, and Nathaniel Moran, have formed the AI Safety and Innovation Caucus. The group aims to serve as an active legislative conduit, bridging the gap between long-term policy formulation and rapid-response requirements by leveraging cross-sector intelligence to address AI-related incidents and security breaches.",
         "core_facts_zh": [
-          "【核心事件】Google（谷歌公司）在macOS桌面应用环境：上线计算机使用功能，支持自动化控制本地应用与网页",
-          "【起因与机理】应对OpenAI与Anthropic在代理化（Agentic）AI领域的先发竞争压力",
-          "【核心事实细节】谷歌将AI代理能力拓展至macOS本地应用层级。",
-          "【各方立场与态度】需订阅Gemini高级服务，目前仅限美区英语用户。"
+          "【核心事件】众议员George Whitesides、Don Beyer、Nathaniel Moran及24名跨党派众议员在美国众议院内部立法协调机制：成立AI安全与创新核心小组（AI Safety and Innovation Caucus），聚焦立法反馈、跨行业信息整合与AI事件快速响应",
+          "【起因与机理】应对AI技术爆发式增长带来的监管滞后，并弥补现有国会AI小组在执行力与跨党派协作上的空白",
+          "【核心事实细节】核心诉求：建立跨党派立法闭环，平衡美国AI产业竞争力与国家安全风险管控。",
+          "【行业影响与走向】行业影响：国会AI立法流程趋于敏捷化，未来头部AI企业需应对更频繁的政治性实时监管介入。"
         ],
         "core_facts_en": [
-          "[Core Event] Google: Launched 'Computer Use' feature for controlling native apps and browsers",
-          "[Root Cause & Mechanism] Competitive pressure from OpenAI and Anthropic in the agentic AI market",
-          "[Key Technical Spec] Google extends AI agent capabilities to native macOS application control.",
-          "[Key Position & Outlook] Requires premium Gemini subscription, currently limited to U.S. English users."
+          "[Core Event] Reps. George Whitesides, Don Beyer, Nathaniel Moran, and a bipartisan group of 24+ lawmakers (U.S. House of Representatives): Established the AI Safety and Innovation Caucus to focus on legislative feedback, industry liaison, and rapid incident response",
+          "[Root Cause & Mechanism] To address the need for agile, bipartisan AI governance that balances technological leadership with robust security safeguards",
+          "[Key Fact Detail] Core demand: Establish a bipartisan legislative loop to balance AI competitiveness with risk mitigation.",
+          "[Key Position & Outlook] Industry outlook: Legislative processes are shifting toward agility, forcing AI firms to prepare for more frequent, real-time regulatory interventions."
         ],
-        "industry_impact_zh": "AI从单纯的生成式模型转向行动代理，核心竞争点已从上下文长度博弈转移至对OS层级接口的底层渗透深度。谷歌此举旨在利用macOS作为高净值生产力入口，通过封装桌面自动化提升订阅价值，但受限于跨应用语义理解的鲁棒性，该功能目前仍处于辅助性生产力工具阶段，尚未实现真正的全流程自动化重构。",
-        "industry_impact_en": "The transition from generative models to action-oriented agents signals a shift in competition toward low-level OS API integration. By leveraging macOS as a premium productivity touchpoint, Google aims to enhance subscription retention; however, until cross-application semantic understanding reaches a higher threshold of reliability, this remains a sophisticated assistive tool rather than a fully autonomous workflow engine."
+        "industry_impact_zh": "该小组的成立标志着美国立法机构从“教育普及型”转向“防御干预型”AI治理，其引入的快速响应机制本质上是对AI突发故障进行政治定性的尝试。这预示着未来美国AI监管将跳过漫长的委员会听证周期，转而通过跨部门情报共享在短期内强制介入产业技术演进路径。",
+        "industry_impact_en": "The caucus marks a pivot from purely educational AI policy engagement toward an active, interventionist oversight model. By establishing a rapid-response mechanism for AI-induced incidents, the group seeks to bypass bureaucratic delays, signaling that future U.S. AI governance will increasingly prioritize real-time geopolitical and security-driven intervention over passive industry standard-setting."
       },
       "headlines": [
+        {
+          "id": "edd9224f8cdf80b8",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国众议院组建AI安全与创新核心小组",
+          "title_en": "A bipartisan group of 24+ House lawmakers forms the AI Safety and Innovation Caucus, seeking to balance mitigating AI risks with maintaining US leadership in AI (Owen Dahlkamp/Politico)",
+          "source": "Politico",
+          "published_at": "2026-11-19T19:01:15+00:00",
+          "url": "https://www.politico.com/live-updates/2026/11/19/congress/new-bipartisan-ai-caucus-forms-with-two-dozen-house-members-01174829",
+          "event_summary_zh": "逾24名众议员跨党派组建AI安全与创新核心小组，旨在平衡风险监管与技术竞争优势",
+          "event_summary_en": "Over 24 bipartisan House lawmakers, led by Representatives George Whitesides, Don Beyer, and Nathaniel Moran, have formed the AI Safety and Innovation Caucus. The group aims to serve as an active legislative conduit, bridging the gap between long-term policy formulation and rapid-response requirements by leveraging cross-sector intelligence to address AI-related incidents and security breaches.",
+          "core_facts_zh": [
+            "【核心事件】众议员George Whitesides、Don Beyer、Nathaniel Moran及24名跨党派众议员在美国众议院内部立法协调机制：成立AI安全与创新核心小组（AI Safety and Innovation Caucus），聚焦立法反馈、跨行业信息整合与AI事件快速响应",
+            "【起因与机理】应对AI技术爆发式增长带来的监管滞后，并弥补现有国会AI小组在执行力与跨党派协作上的空白",
+            "【核心事实细节】核心诉求：建立跨党派立法闭环，平衡美国AI产业竞争力与国家安全风险管控。",
+            "【行业影响与走向】行业影响：国会AI立法流程趋于敏捷化，未来头部AI企业需应对更频繁的政治性实时监管介入。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Reps. George Whitesides, Don Beyer, Nathaniel Moran, and a bipartisan group of 24+ lawmakers (U.S. House of Representatives): Established the AI Safety and Innovation Caucus to focus on legislative feedback, industry liaison, and rapid incident response",
+            "[Root Cause & Mechanism] To address the need for agile, bipartisan AI governance that balances technological leadership with robust security safeguards",
+            "[Key Fact Detail] Core demand: Establish a bipartisan legislative loop to balance AI competitiveness with risk mitigation.",
+            "[Key Position & Outlook] Industry outlook: Legislative processes are shifting toward agility, forcing AI firms to prepare for more frequent, real-time regulatory interventions."
+          ],
+          "industry_impact_zh": "该小组的成立标志着美国立法机构从“教育普及型”转向“防御干预型”AI治理，其引入的快速响应机制本质上是对AI突发故障进行政治定性的尝试。这预示着未来美国AI监管将跳过漫长的委员会听证周期，转而通过跨部门情报共享在短期内强制介入产业技术演进路径。",
+          "industry_impact_en": "The caucus marks a pivot from purely educational AI policy engagement toward an active, interventionist oversight model. By establishing a rapid-response mechanism for AI-induced incidents, the group seeks to bypass bureaucratic delays, signaling that future U.S. AI governance will increasingly prioritize real-time geopolitical and security-driven intervention over passive industry standard-setting."
+        },
         {
           "id": "3e5557b0c0cc7405",
           "tag_zh": "⚡ 职场提效",
@@ -59,86 +85,60 @@
           "industry_impact_en": "The transition from generative models to action-oriented agents signals a shift in competition toward low-level OS API integration. By leveraging macOS as a premium productivity touchpoint, Google aims to enhance subscription retention; however, until cross-application semantic understanding reaches a higher threshold of reliability, this remains a sophisticated assistive tool rather than a fully autonomous workflow engine."
         },
         {
-          "id": "9ab20d78281035e1",
+          "id": "7ebe9b722bac4b74",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "谷歌Gemini Mac版获电脑操作权限",
-          "title_en": "Gemini on Mac can now use your computer",
-          "source": "The Verge AI",
-          "published_at": "2026-11-19T18:21:13+00:00",
-          "url": "https://www.theverge.com/tech/1037902/google-gemini-macos-ai-computer-use",
-          "event_summary_zh": "谷歌推出macOS版Gemini端侧操作功能，支持跨应用执行复杂自动化工作流",
-          "event_summary_en": "Google has introduced the \"Computer Use\" feature to its Gemini app for macOS, enabling the AI to execute multi-step tasks across local files, desktop applications, and the web. Currently rolling out in the US, the feature allows users to designate app access while monitoring AI actions through a real-time background preview window.",
+          "title_zh": "跨境供应链平台Everful获4850万美元融资",
+          "title_en": "Former Alibaba exec’s Everful raises $48.5M to connect retailers with Chinese factories",
+          "source": "TechCrunch",
+          "published_at": "2026-11-19T18:25:02+00:00",
+          "url": "https://techcrunch.com/2026/11/19/former-alibaba-execs-everful-raises-48-5m-to-connect-retailers-with-chinese-factories/",
+          "event_summary_zh": "由阿里巴巴前高管创立的跨境电商平台Everful完成4850万美元A轮融资，旨在通过AI驱动直连中国工厂与全球零售商",
+          "event_summary_en": "Everful, a cross-border supply chain platform co-founded by former Alibaba executive Sisi Song and serial entrepreneur Kevin Han, raised $48.5 million in Series A funding led by Vertex Ventures Southeast Asia & India. The company leverages an AI-enabled platform to connect over 30,000 factories with small retailers, providing end-to-end services including sourcing, quality control, and logistics, achieving an annualized revenue of $100 million.",
           "core_facts_zh": [
-            "【核心事件】谷歌（Google）在macOS桌面端操作系统环境：部署AI自动化Agent，具备跨本地应用与网页的操作权限",
-            "【起因与机理】旨在通过自动化复杂办公流程提升生产力，抢占系统级AI交互入口",
-            "【核心事实细节】Gemini新增跨应用操作权限，支持文档处理、网页表单填写及演示文稿制作。",
-            "【各方立场与态度】处于苹果加强macOS全盘访问权限监管的背景下，合规博弈压力增加。"
+            "【核心事件】联合创始人 Sisi Song（前阿里巴巴高管）与 Kevin Han在跨国B2B供应链采购领域：完成4850万美元A轮融资，提供端到端工厂直连服务",
+            "【起因与机理】针对传统采购模式周期长、门槛高、中间商环节冗余的行业痛点",
+            "【关键数据与实测】Everful完成4850万美元A轮融资，致力于重构跨境B2B采购模式。",
+            "【各方立场与态度】年化营收达到1亿美元，目前已服务全球60多个国家和地区的零售商。"
           ],
           "core_facts_en": [
-            "[Core Event] Google (macOS environment): Deployed AI Agent with capabilities to operate local apps and web interfaces",
-            "[Root Cause & Mechanism] To increase productivity via workflow automation and secure system-level AI integration",
-            "[Key Technical Spec] Gemini gains cross-app capabilities including document processing, form filling, and presentation creation.",
-            "[Key Position & Outlook] Launch coincides with Apple’s tightened macOS security constraints regarding full disk access."
+            "[Core Event] Co-founders Sisi Song (former Alibaba exec) and Kevin Han: Secured $48.5M Series A; provides end-to-end factory-direct services",
+            "[Root Cause & Mechanism] To address inefficiencies in traditional procurement, such as long cycles and high minimum orders",
+            "[Key Metrics] Everful secured $48.5M Series A to reshape cross-border B2B procurement.",
+            "[Key Position & Outlook] Reached $100M ARR, serving retailers across 60+ countries."
           ],
-          "industry_impact_zh": "从对话式AI向代理式AI（Agentic AI）进阶，系统级权限获取是关键技术博弈点。苹果近期针对“全盘访问权限”收紧监管，旨在防御恶意AI入侵，这预示着未来AI Agent生态的竞争将演变为‘算力算法能力’与‘操作系统底层访问策略’的深度制衡。",
-          "industry_impact_en": "Transitioning from conversational to agentic AI requires system-level permissions, which is the current critical technical battleground. Apple’s tightening of \"Full Disk Access\" security against malicious agents indicates that future AI ecosystem dominance will hinge on the trade-off between AI capability and OS-level security access policies."
-        },
-        {
-          "id": "79bd226e27043e8e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "育碧黑旗重制版销售强劲，暂无后续重制计划",
-          "title_en": "Ubisoft Logs Strong Bookings as Players Welcome Assassin’s Creed Remake",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-19T17:30:00+00:00",
-          "url": "https://www.wsj.com/business/earnings/ubisoft-logs-strong-bookings-as-players-welcome-assassins-creed-remake-372081c1?st=LvUnbR&reflink=desktopwebshare_permalink",
-          "event_summary_zh": "育碧重制版《刺客信条：黑旗》两周内销量突破350万份，官方明确目前无其他重制项目",
-          "event_summary_en": "Ubisoft Singapore's 'Assassin's Creed Black Flag Resynced' achieved 3.5 million sales within two weeks, accompanied by recent New Game+ and difficulty updates. Jean Guesdon, Head of AC Content, confirmed in the Fall 2026 Update that no further remakes are in development, with resources redirected to 'Codename Invictus' and the mainline 'Codename Hexe'.",
-          "core_facts_zh": [
-            "【核心事件】育碧刺客信条系列内容主管 Jean Guesdon、育碧新加坡工作室在2026年秋季更新报告：确认《Black Flag Resynced》销量表现及取消后续重制计划，披露《Codename Invictus》与《Codename Hexe》开发进度",
-            "【起因与机理】优化系列研发资源配置，集中精力推进多平台联机与主线新作开发",
-            "【关键数据与实测】《Black Flag Resynced》两周销量超350万份，确立了单机重制版本的市场验证价值。",
-            "【各方立场与态度】研发重心明确向《Codename Invictus》多人模式及《Codename Hexe》主线新作倾斜。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Jean Guesdon, Head of AC Content at Ubisoft; Ubisoft Singapore (Fall 2026 Update report): Confirmed sales success of 'Black Flag Resynced', halted further remake projects, and provided updates on 'Codename Invictus' and 'Codename Hexe",
-            "[Root Cause & Mechanism] Reallocating R&D resources to prioritize multiplayer expansion and future mainline sequels",
-            "[Key Fact Detail] Achieved 3.5 million units sold in two weeks, validating the commercial appeal of single-player remakes.",
-            "[Key Position & Outlook] Strategic prioritization shifted toward the multiplayer 'Codename Invictus' and mainline title 'Codename Hexe'."
-          ],
-          "industry_impact_zh": "育碧放弃《刺客信条》早期作品重制路线，反映出公司试图规避过度开发旧IP带来的边际效用递减，转而通过《Codename Invictus》的多人竞技化尝试拓展商业闭环。此举表明其策略重心已由存量IP的情怀变现转向长期在线服务模式（GaaS）的深度运营，以应对日益高企的AAA游戏研发与维护成本。",
-          "industry_impact_en": "Ubisoft's decision to pivot away from further remakes suggests a strategic move to avoid the diminishing returns of legacy IP extraction, shifting focus toward recurring revenue models via multiplayer iterations like 'Codename Invictus'. This signals a transition toward a GaaS-heavy portfolio to mitigate the escalating R&D overhead of modern AAA titles."
+          "industry_impact_zh": "该模式本质是将外贸代理的复杂人力流程通过AI实现数字化标品化，通过对订单履行全链路的控制权而非单纯的信息撮合，构筑了区别于传统B2B平台的护城河。随着全球零售商对库存周转速度要求提升，此类深度的供应链集成服务正成为跨境B2B降本增效的核心变量。",
+          "industry_impact_en": "This model focuses on digitizing and standardizing complex trade brokerage through AI, establishing a moat via end-to-end fulfillment control rather than mere information matching. As global retailers demand faster inventory turnover, this deep supply chain integration is becoming a critical variable for cost optimization in cross-border B2B."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 19:04:08 UTC",
+      "updated_at": "2026-11-19 19:18:39 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
-      "url": "https://x.com/AravSrinivas/status/2123480966459174920",
-      "published_at": "2026-11-19T18:18:09+00:00",
-      "quote_zh": "祝贺@AnthropicAI 今天实现历史性 IPO！ Anthropic 向世界展示了一个专注、高度信念、品味驱动的团队可以在短时间内执行的任务。 Opus 5.5 仍然是业界最好的型号，遥遥领先，我们为他们作为他们的客户感到高兴。",
-      "quote_en": "Congratulations to @AnthropicAI on their historic IPO today! Anthropic has shown the world what a focused, high-conviction, taste-driven team can execute in a short time. Opus 5.5 remains the best model in the industry by a good margin, and we're delighted for them as their customer.",
+      "url": "https://x.com/AravSrinivas/status/2123490843428622413",
+      "published_at": "2026-11-19T18:57:24+00:00",
+      "quote_zh": "您现在可以通过电话与您的 Perplexity 队友进行语音交谈。比加入日历上的 Teams 链接更好的未来。",
+      "quote_en": "You can now talk to your Perplexity Teammates on phone via voice. Much better future than joining a Teams link on your calendar.   https://t.co/0tOGxoDavD",
       "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
       "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "5.6k",
-        "likes": "161",
+        "views": "3.8k",
+        "likes": "46",
         "comments": "12",
-        "retweets": "3",
+        "retweets": "2",
         "platform": "x",
         "verified": true
       },
       "titans": [
         {
-          "id": "8702adc590791da6",
+          "id": "e90e983d61dcfb4f",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
@@ -146,24 +146,24 @@
           "avatar": "https://unavatar.io/x/AravSrinivas",
           "topic_zh": "Aravind Srinivas",
           "topic_en": "Aravind Srinivas on ",
-          "event_context_zh": "祝贺@AnthropicAI 今天实现历史性 IPO！ Anthropic 向世界展示了一个专注、高度信念、品味驱动的团队可以在短时间内执行的任务。 Opus 5.5 仍然是业界最好的型号，遥遥领先，我们为他们作为他们的客户感到高兴。",
-          "event_context_en": "Congratulations to @AnthropicAI on their historic IPO today! Anthropic has shown the world what a focused, high-convicti",
-          "quote_zh": "祝贺@AnthropicAI 今天实现历史性 IPO！ Anthropic 向世界展示了一个专注、高度信念、品味驱动的团队可以在短时间内执行的任务。 Opus 5.5 仍然是业界最好的型号，遥遥领先，我们为他们作为他们的客户感到高兴。",
-          "quote_en": "Congratulations to @AnthropicAI on their historic IPO today! Anthropic has shown the world what a focused, high-conviction, taste-driven team can execute in a short time. Opus 5.5 remains the best model in the industry by a good margin, and we're delighted for them as their customer.",
+          "event_context_zh": "您现在可以通过电话与您的 Perplexity 队友进行语音交谈。比加入日历上的 Teams 链接更好的未来。",
+          "event_context_en": "You can now talk to your Perplexity Teammates on phone via voice. Much better future than joining a Teams link on your c",
+          "quote_zh": "您现在可以通过电话与您的 Perplexity 队友进行语音交谈。比加入日历上的 Teams 链接更好的未来。",
+          "quote_en": "You can now talk to your Perplexity Teammates on phone via voice. Much better future than joining a Teams link on your calendar.   https://t.co/0tOGxoDavD",
           "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "5.6k",
-            "likes": "161",
+            "views": "3.8k",
+            "likes": "46",
             "comments": "12",
-            "retweets": "3",
+            "retweets": "2",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-19T18:18:09+00:00",
-          "url": "https://x.com/AravSrinivas/status/2123480966459174920"
+          "published_at": "2026-11-19T18:57:24+00:00",
+          "url": "https://x.com/AravSrinivas/status/2123490843428622413"
         },
         {
           "id": "ab74ca30f1d3c066",
@@ -250,38 +250,38 @@
           "url": "https://x.com/OpenAI/status/2123191365983248653"
         },
         {
-          "id": "e8b708efd28f4d32",
-          "name": "Hugging Face",
-          "handle": "@huggingface",
-          "role_zh": "全球开源 AI 模型与数据集社区枢纽",
+          "id": "7a7f6d6598329f4d",
+          "name": "NVIDIA AI",
+          "handle": "@NVIDIAAI",
+          "role_zh": "NVIDIA AI 研究与开发者生态",
           "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/huggingface",
-          "topic_zh": "Hugging Face 行业前",
-          "topic_en": "Hugging Face on AI",
-          "event_context_zh": "RT @victormusstar：现在拥抱脸的趋势🔥",
-          "event_context_en": "RT @victormustar: Trending on Hugging Face right now 🔥 https://t.co/JuZuYm7D7E",
-          "quote_zh": "RT @victormusstar：现在拥抱脸的趋势🔥",
-          "quote_en": "RT @victormustar: Trending on Hugging Face right now 🔥 https://t.co/JuZuYm7D7E",
-          "thesis_zh": "深入探讨Hugging Face 行业前的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Hugging Face on AI, highlighting system trade-offs and engineering shifts.",
+          "avatar": "https://unavatar.io/nvidia",
+          "topic_zh": "NVIDIA AI 行业前沿观察",
+          "topic_en": "NVIDIA AI on AI",
+          "event_context_zh": "以 Encord 和 Voxel51 为特色的两个提示构建训练就绪数据集 |宇宙实验室",
+          "event_context_en": "Build Training-Ready Datasets in Two Prompts Featuring Encord and Voxel51 | Cosmos Labs https://t.co/KHhVGFIdPj",
+          "quote_zh": "以 Encord 和 Voxel51 为特色的两个提示构建训练就绪数据集 |宇宙实验室",
+          "quote_en": "Build Training-Ready Datasets in Two Prompts Featuring Encord and Voxel51 | Cosmos Labs https://t.co/KHhVGFIdPj",
+          "thesis_zh": "深入探讨NVIDIA AI 行业前沿观察的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in NVIDIA AI on AI, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "5.4k",
-            "likes": "140",
-            "comments": "3",
-            "retweets": "13",
+            "views": "1.8k",
+            "likes": "13",
+            "comments": "6",
+            "retweets": "1",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-19T18:45:06+00:00",
-          "url": "https://x.com/huggingface/status/2123487747058909347"
+          "published_at": "2026-11-19T19:01:26+00:00",
+          "url": "https://x.com/NVIDIAAI/status/2123491860685480432"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 19:04:08 UTC",
+      "updated_at": "2026-11-19 19:18:39 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
