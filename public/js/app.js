@@ -10049,13 +10049,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               .then(html => {
                 if (!html) return;
                 const doc = new DOMParser().parseFromString(html, 'text/html');
-                const articleDiv = doc.querySelector('.article-body, .space-y-4, [itemprop="articleBody"]');
+                const articleDiv = doc.querySelector('.article-body, [itemprop="articleBody"]');
                 if (articleDiv && articleDiv.innerHTML.length > 200 && currentActiveNewsItem && String(currentActiveNewsItem.id) === String(curId)) {
-                  originalTextEl.innerHTML = articleDiv.innerHTML;
-                  if (originalTitleEl) {
-                    originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+                  // 严格防御：严禁将要点列表或纯列表容器当作正文注入实录
+                  const isPureBullets = articleDiv.tagName === 'UL' || articleDiv.tagName === 'OL' || (articleDiv.querySelector('ul, ol') && !articleDiv.querySelector('p'));
+                  if (!isPureBullets) {
+                    originalTextEl.innerHTML = articleDiv.innerHTML;
+                    if (originalTitleEl) {
+                      originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+                    }
+                    if (expandWrapEl) expandWrapEl.classList.add('hidden');
                   }
-                  if (expandWrapEl) expandWrapEl.classList.add('hidden');
                 }
               })
               .catch(() => {});

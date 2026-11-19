@@ -235,7 +235,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>核心要点提炼与关键事实</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Optimizely（数字优化平台）：植入并分发恶意track.js脚本以窃取数据及推送iOS漏洞工具</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>攻击者获取了Optimizely跨客户项目的写入权限</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键数据与实测】</strong>网站优化平台Optimizely的基础设施被植入恶意JavaScript脚本，该脚本经由合法CDN分发至包括CNN、Zoom、BBC及Salesforce在内的178个客户站点。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【行业影响与走向】</strong>受影响范围涉及全球百余家高权重站点，供应链防御机制存在严重合规缺口。</li>
           </ul>
         </section>
@@ -252,7 +252,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Ars Technica 权威实录</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">研究人员周二表示，数百个使用Optimizely网站个性化平台的网站向毫无防备的访问者提供了强大的恶意软件鸡尾酒，这些恶意软件以加密货币钱包为目标，窃取支付卡数据、cookie和截图，并提供了感染iphone和ipad的漏洞利用工具包。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">reportturi表示，它确定了178个网站受到影响，包括CNN、Zoom、BBC和salesforce。经过Optimizely数字签名，然后加载到客户页面的JavaScript被修改为包含恶意组件，试图感染具有多个有效载荷的访问者设备。当软件安装成功后，他们将用户加密货币钱包地址交换给攻击者。其他组件则会刷掉支付卡，窃取cookie和截图，并在iphone和ipad上发布名为Coruna和DarkSword的iOS漏洞利用工具包。</p>

@@ -242,7 +242,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>核心要点提炼与关键事实</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Hugging Face研究人员：大规模文档识别（OCR）运行成本从51美分/千页降至10美分/千页</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>模型优化策略与硬件租用效率的提升</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键数据与实测】</strong>通过对比八款主流OCR模型，Hugging Face研究人员发现，得益于模型架构轻量化、推理软件优化及高效GPU算力租赁（如RTX PRO 6000），大规模文档识别成本在过去18个月内降低了约五倍。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>未来的竞争焦点将从单一模型的识别准确率，转移至模型在低功耗边缘端设备的部署灵活性与幻觉纠错能力。</li>
           </ul>
         </section>
@@ -259,7 +259,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER 权威实录</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">通过免费提供的人工智能模型，从扫描的书籍和记录中提取文本变得更加便宜。 Hugging Face 的 Daniel van Strien 比较了八种识别图像中文本的模型。他在 850 页的古老自然历史书籍、1771 年的《大英百科全书》以及打字和打印的档案文件中进行了测试。所有模型都运行在相同的 GPU 上，即 van Strien 通过 Hugging Face 以每小时 2.75 美元的价格租用的 Nvidia RTX PRO 6000。在相同的图像尺寸下，2025 年 4 月推出的最旧型号 (RolmOCR) 每 1,000 页的成本约为 51 美分。 2026 年 10 月推出的最新版本 (LightOnOCR-3-0.8B) 价格略低于 10 美分。现在一百万个页面的 GPU 租金在 65 到 130 美元之间，具体取决于源材料。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">van Strien 表示，优化模型的运行方式所节省的资金与切换到新模型所节省的资金差不多，甚至更多。这意味着更均匀地送入页面、使用更小的扫描、更新软件以及运行更快的 GPU。最新的模型阅读书页的准确率至少与最旧的模型一样准确。然而，有些模型会在空白页面上产生幻觉文本，或者一遍又一遍地重复相同的内容。</p>

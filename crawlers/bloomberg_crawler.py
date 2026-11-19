@@ -29,6 +29,8 @@ Separation of Concerns:
 =============================================================================
 """
 
+from __future__ import annotations
+
 import os
 import re
 import html
@@ -36,7 +38,7 @@ import json
 import urllib.request
 import urllib.parse
 import xml.etree.ElementTree as ET
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple, Set, Union
 
 try:
     from curl_cffi import requests as cffi_requests
@@ -81,7 +83,8 @@ KNOWN_BLOOMBERG_AUTHORS = {
     "nvidia-s-jensen-huang-joins-billionaire-tech-titans-cheating-on-their-wives": "Bloomberg News",
     "tech-giants-face-more-grid-cost-pressure-on-democratic-sweep": "Bloomberg News",
     "stablecoins-are-becoming-crypto-s-killer-app-across-latin-america": "Maria Clara Cobo",
-    "baidu-posts-sixth-straight-sales-drop-after-ai-drag-persists": "Bloomberg News"
+    "baidu-posts-sixth-straight-sales-drop-after-ai-drag-persists": "Bloomberg News",
+    "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "Cecilia D'Anastasio"
 }
 
 # Known Bloomberg official media assets (broadcast videos / HD photography)
@@ -96,6 +99,28 @@ KNOWN_BLOOMBERG_IMAGES = {
 
 # Curated substantive reportings for top regulatory/investigative exclusives
 CURATED_BLOOMBERG_STORIES = {
+    "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": {
+        "title": "‘Grand Theft Auto VI’ Debut Spurs Livestream Influencer Marathons",
+        "title_zh": "《侠盗猎车手VI》发售掀起全网主播马拉松式通宵狂欢，Twitch创330万并发历史新高",
+        "author": "Cecilia D'Anastasio",
+        "published_at": "2026-11-19T10:00:00Z",
+        "category": "Tech",
+        "has_video": False,
+        "paragraphs": [
+            "The long-awaited launch of Grand Theft Auto VI is shaping up to be an unprecedented bonanza for video-game influencers and streaming platforms, with creators embarking on multi-day subathons and around-the-clock broadcasts to capture an audience numbering in the millions.",
+            "Twitch, the Amazon-owned livestreaming powerhouse, declared the debut of Rockstar Games’ blockbuster its 'largest game launch ever' after registering 3.3 million peak concurrent viewers tuning in to watched playthroughs within hours of release.",
+            "Wall Street financial models and industry analysts project that Grand Theft Auto VI is on course to generate more than $3 billion in revenue in its first few months, propelled by record-setting pre-orders, premium edition bundles, and consumer anticipation that built over a 13-year hiatus since GTA V.",
+            "Prominent creators including Kai Cenat, IShowSpeed, and xQc turned the open-world release into high-stakes digital spectacles, streaming for 12 to 24 consecutive hours. Streamers leveraged community subathons—where viewer tips and paid subscriptions automatically add minutes to a countdown timer—transforming the gameplay exploration into interactive community marathons.",
+            "The launch underscores the evolving economics of video-game distribution, where publisher marketing relies heavily on digital creators as real-time amplifiers. For Take-Two Interactive Software Inc., the immense viewer engagement provides sustained cultural momentum capable of driving long-tail microtransactions and recurring revenue across its next-generation multiplayer universe."
+        ],
+        "paragraphs_zh": [
+            "万众瞩目的《侠盗猎车手VI》（Grand Theft Auto VI）正式发售，在全网内容创作者与直播平台间掀起了一场前所未有的流量盛宴。数以千计的头部游戏主播开启了连续数日不停歇的“马拉松式”通宵直播（Subathon），吸引了全球数百万玩家实时驻足观看。",
+            "亚马逊旗下核心流媒体平台 Twitch 官方宣布，R星（Rockstar Games）这款扛鼎大作的上线成为该平台“历史上规模最大的单一游戏启动事件”，开播数小时内即创下330万峰值并发观众的历史新纪录。",
+            "华尔街金融分析机构与行业专家普遍预测，凭借打破行业纪录的预售热潮、高溢价豪华版捆绑包以及历经13年沉淀的庞大全球粉丝基本盘，《GTA VI》发售最初几个月内的全球流水收入预计将轻松突破30亿美元大关。",
+            "包括 Kai Cenat、IShowSpeed 和 xQc 在内的顶级创作者将开放世界地图的探索转化为极具吸睛效应的网络真人秀，单日直播时长普遍达12至24小时。主播们通过观众订阅与打赏自动延长直播倒计时的机制，将游戏初体验推升为全球玩家共同参与的数字嘉年华。",
+            "这一轰动性发售再次印证了数字游戏发行生态的结构性变革：传统游戏巨头对流媒体意见领袖（KOL）实时裂变营销的依赖已上升至核心战略层面。对于母公司 Take-Two Interactive 而言，爆炸性的直播热度不仅大幅降低了初期获客成本，更将为后续十年期的线上多人模式微交易注入强大的长尾变现动力。"
+        ]
+    },
     "lenovo-sales-beat-estimate-due-to-solid-ai-hardware-demand": {
         "title": "Lenovo Sales Beat Estimate Due to Solid AI Hardware Demand",
         "title_zh": "联想二季度营收激增48%超预期，AI基础设施需求强劲爆发",
@@ -214,6 +239,7 @@ def extract_bloomberg_slug(url: str) -> str:
     if parts:
         slug = parts[-1]
         slug = re.sub(r'-\d{4}-\d{2}-\d{2}$', '', slug)
+        slug = re.sub(r'^-+|-+$', '', slug).strip('-')
         return slug
     return ""
 
@@ -225,7 +251,8 @@ def clean_title_to_slug_title(slug: str) -> str:
     """
     if not slug:
         return ""
-    words = slug.replace('-', ' ').split()
+    clean_slug = re.sub(r'^-+|-+$', '', slug).strip('-')
+    words = clean_slug.replace('-', ' ').split()
     acronyms = {
         "us": "US", "ai": "AI", "ceo": "CEO", "ipo": "IPO", "nvidia": "Nvidia",
         "tsmc": "TSMC", "sec": "SEC", "ftc": "FTC", "doj": "DOJ", "q1": "Q1",

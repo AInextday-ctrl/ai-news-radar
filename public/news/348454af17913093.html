@@ -256,7 +256,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>Executive Summary & Key Facts</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Tom Brown, Co-founder and Chief Compute Officer at Anthropic (Investor briefing): Shortened hardware onboarding time via AI-generated GPU kernels</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> To reduce CUDA dependency and establish a flexible, fungible compute architecture</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Metrics]</strong> Anthropic’s chart, with its axis labeled “Time to onboard new silicon,” shows both lines reaching the same “~100%” mark without saying 100% of what.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Position &amp; Outlook]</strong> Established a platform-agnostic compute pool to mitigate single-vendor dependency.</li>
           </ul>
         </section>
@@ -273,7 +273,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Tom&#x27;s Hardware Full Report</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Anthropic told IPO investors that its Claude Mythos Preview model did the software work required to get its AI running on AMD’s GPUs in about three days, with “basically no human intervention,” a job it says used to take six to 12 months. The three days cover prompt processing for one Anthropic model on AMD MI355X GPUs “at a useful level of performance,” with Mythos porting or writing “almost 100% of the kernels.” That kind of low-level code, which ties an AI model to one company’s chips, has long been part of Nvidia’s CUDA moat, and an AI that can write it in days would suggest that moat is eroding.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Tom Brown, Anthropic’s co-founder and chief compute officer, made the time comparison, noting to investors that the original meant using a team of “dozens of engineers.” The company already runs its models on multiple kinds of chips — on GPUs from Nvidia and AMD, Google’s TPUs, and AWS Trainium — and its fleet is managed as “one fungible pool of compute.” Brown called the early multi-chip decision “an unconventional bet.” It may have been a wise one, given that Google’s TPUs can now natively run AI models built in PyTorch, and Meta uses them in production.</p>

@@ -246,7 +246,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>Executive Summary & Key Facts</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Hugging Face researchers (Document digitization analysis): OCR costs per 1,000 pages reduced from $0.51 to $0.10</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> Optimization of AI models and increased hardware compute efficiency</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Metrics]</strong> Processing one million pages now costs between $65 and $130 in GPU compute, with newer models achieving parity in accuracy compared to older, more expensive counterparts.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Position &amp; Outlook]</strong> Future competitive advantages will hinge not just on accuracy, but on the ability to deploy these models efficiently at the edge while minimizing inherent hallucinations.</li>
           </ul>
         </section>
@@ -263,7 +263,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER Full Report</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Pulling text out of scanned books and records has gotten a lot cheaper with freely available AI models. Daniel van Strien of Hugging Face compared eight such models that recognize text in images. He tested them on 850 pages from old natural history books, the 1771 Encyclopaedia Britannica, and typed and printed archival documents. All models ran on the same GPU, an Nvidia RTX PRO 6000 that van Strien rented through Hugging Face for $2.75 per hour. At the same image size, the oldest model from April 2025 (RolmOCR) cost about 51 cents per 1,000 pages. The newest from October 2026 (LightOnOCR-3-0.8B) came in at just under 10 cents. A million pages now runs between $65 and $130 in GPU rental, depending on the source material.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to van Strien, optimizing how the models ran saved about as much money as switching to newer models did, if not more. That meant feeding pages more evenly, using smaller scans, updating software, and running a faster GPU. The newest model read book pages at least as accurately as the oldest one. Some models, though, hallucinated text on blank pages or repeated the same content over and over.</p>

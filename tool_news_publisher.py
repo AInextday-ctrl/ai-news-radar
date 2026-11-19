@@ -1091,7 +1091,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>{briefing_title}</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             {bullet_items}
           </ul>
         </section>
@@ -1407,7 +1407,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">{escape(src_note)}</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             {p_html}
           </div>
           {excerpt_notice_html}
