@@ -1084,6 +1084,23 @@ def resolve_techmeme_url_and_source(curr_url: str, title: str) -> tuple:
     return None, real_source
 
 
+def _extract_item_ts(it: dict) -> float:
+    """Safely extract unix timestamp from various date/timestamp fields of an item."""
+    if not isinstance(it, dict):
+        return 0.0
+    for k in ("raw_published_at", "published_at", "date", "created_at", "timestamp"):
+        val = it.get(k)
+        if isinstance(val, (int, float)) and val > 0:
+            return float(val)
+        if isinstance(val, str) and val.strip():
+            try:
+                s = val.strip().replace("Z", "+00:00")
+                return datetime.fromisoformat(s).timestamp()
+            except Exception:
+                pass
+    return 0.0
+
+
 def load_existing_items() -> list:
     """Load previously saved news items from JSON to support incremental updates and complete history retention."""
     # 优先载入具备完整长文解构与 AI 深度研判的最新看板库与公开归档库，绝不让陈旧 data/archive_news.json 冲刷掉已重构的深度内容
@@ -1096,11 +1113,16 @@ def load_existing_items() -> list:
         try:
             with open(target_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                file_items = data.get("items", [])
-                if not file_items and "grouped" in data and isinstance(data["grouped"], dict):
-                    for cat_items in data["grouped"].values():
-                        if isinstance(cat_items, list):
-                            file_items.extend(cat_items)
+                if isinstance(data, list):
+                    file_items = data
+                elif isinstance(data, dict):
+                    file_items = data.get("items", [])
+                    if not file_items and "grouped" in data and isinstance(data["grouped"], dict):
+                        for cat_items in data["grouped"].values():
+                            if isinstance(cat_items, list):
+                                file_items.extend(cat_items)
+                else:
+                    file_items = []
                 for it in file_items:
                     if not isinstance(it, dict):
                         continue
