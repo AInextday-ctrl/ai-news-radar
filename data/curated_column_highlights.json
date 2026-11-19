@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 19:48:37 UTC",
+  "generated_at": "2026-11-19 20:03:49 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 19:48:37 UTC",
+      "updated_at": "2026-11-19 20:03:49 UTC",
       "headline_item": {
-        "id": "a4b4c647fe434703",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "AI模型单位算力成本急剧下探，用量与支出背离",
-        "title_en": "AI industry growth remains strong, but the pace is slowing",
-        "source": "THE DECODER",
-        "published_at": "2026-11-19T19:28:19+00:00",
-        "url": "https://the-decoder.com/ai-industry-growth-remains-strong-but-the-pace-is-slowing/",
-        "event_summary_zh": "Ramp与OpenRouter数据显示，AI模型Token单价六周内骤降21.2%，企业调用量持续创新高但总支出增速显著放缓",
-        "event_summary_en": "Ramp AI Index and OpenRouter data indicate that US corporate AI usage is hitting record highs while the average cost per million tokens has dropped below $0.45 due to aggressive pricing competition. Anthropic has surpassed OpenAI in both spending and volume market share, signaling a paradigm shift in the AI infrastructure market from a high-premium phase to a defensive pricing cycle.",
+        "id": "c4875da6c8ca5255",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "Meta发布Muse Charm硬件及AI代理",
+        "title_en": "Source: Meta plans to charge $300 for its forthcoming Muse Charm device and include a free 5G data plan from Verizon for up to 12 months (Jyoti Mann/The Information)",
+        "source": "The Information",
+        "published_at": "2026-11-19T19:50:28+00:00",
+        "url": "https://www.theinformation.com/articles/meta-bets-300-muse-charm-boost-ai-hardware-business",
+        "event_summary_zh": "Meta首席执行官马克·扎克伯格发布AI代理硬件Muse Charm，定价300美元并捆绑Verizon 12个月5G流量，旨在通过拟人化外观降低用户抵触情绪",
+        "event_summary_en": "Meta CEO Mark Zuckerberg unveiled the Muse Charm, a $300 handheld AI device bundled with a 12-month free 5G plan from Verizon, at Meta Connect. The device replaces traditional UI with a customizable, 'fuzzy' mascot avatar to handle tasks like email management, scheduling, and purchases, aiming to shift consumer perception through anthropomorphic interaction.",
         "core_facts_zh": [
-          "【核心事件】Ramp（金融科技与数据分析机构）、Anthropic（AI模型开发商）、OpenAI（AI模型开发商）在美国企业AI API调用市场：Token单价六周内下降21.2%，总支出较峰值回落，用量与营收出现结构性剪刀差。",
-          "【起因与机理】模型厂商通过降价争夺市场份额，导致API收入增速无法匹配推理负载的爆发式增长。",
-          "【关键数据与实测】Token单价六周降幅达21.2%，平均价格下探至0.45美元/百万Token。",
-          "【各方立场与态度】推理负载爆发与API营收增长出现显著剪刀差，行业进入价格防御性周期。"
+          "【核心事件】马克·扎克伯格 (Mark Zuckerberg)，Meta首席执行官在Meta Connect大会：发布Muse Charm硬件，定价300美元并赠送1年5G服务",
+          "【起因与机理】通过可爱化设计降低公众对AI技术的恐惧与排斥，推动AI代理的大众化普",
+          "【关键数据与实测】硬件定价300美元并捆绑12个月Verizon 5G数据服务。",
+          "【各方立场与态度】支持跨平台任务流处理，但面临生态权限隐私合规的信任考验。"
         ],
         "core_facts_en": [
-          "[Core Event] Ramp, Anthropic, OpenAI (US enterprise AI API market): Token unit prices fell 21.2% in six weeks; total expenditure declined from peak despite rising volumes.",
-          "[Root Cause & Mechanism] Aggressive market share competition among model providers is decoupling inference demand from revenue growth.",
-          "[Key Metrics] Token unit price dropped 21.2% in six weeks to an average of $0.45 per million tokens.",
-          "[Key Position & Outlook] The widening gap between inference volume and revenue indicates an entry into a defensive pricing cycle."
+          "[Core Event] Mark Zuckerberg, CEO of Meta (Meta Connect): Launched Muse Charm at $300 with a 1-year 5G bundle",
+          "[Root Cause & Mechanism] To mitigate public AI anxiety via 'cute' design and drive mass-market adoption",
+          "[Key Metrics] Priced at $300 with 12-month Verizon 5G bundle.",
+          "[Key Position & Outlook] Enables cross-platform agentic workflows, contingent on resolving privacy-driven trust gaps."
         ],
-        "industry_impact_zh": "AI推理市场正从溢价驱动转向效率驱动，价格战导致的营收增速背离将逼迫模型厂商加速向Agent与垂直场景转型以重塑定价权。当前Token价格的快速通缩，短期利好下游应用层开发，但长期将使通用大模型厂商面临资本支出与收入规模难以匹配的资产负债表压力。",
-        "industry_impact_en": "The AI inference market is shifting from value-driven to efficiency-driven; the revenue-usage decoupling forces model providers to pivot toward Agents and vertical solutions to regain pricing power. While rapid token deflation benefits downstream application developers in the short term, it creates long-term balance sheet pressures for model vendors struggling to reconcile massive CAPEX with diminishing margins."
+        "industry_impact_zh": "Meta此举标志着消费级AI硬件正从功能导向转向情感交互导向，通过“Tamagotchi式”拟人化界面绕开深度科技产品的心理阈值。然而，AI代理涉及深度跨应用权限访问，其商业化成功的核心卡点不在硬件交互形式，而在于Meta如何通过合规的隐私边界确立用户对其生态系统的底层信任。",
+        "industry_impact_en": "Meta’s strategy marks a pivot from utility-driven to emotionally-responsive AI hardware, using anthropomorphic UI to bypass psychological barriers. The ultimate scalability of the Muse Charm depends less on its 'cute' form factor and more on Meta’s ability to secure user trust regarding cross-platform data access permissions."
       },
       "headlines": [
+        {
+          "id": "c4875da6c8ca5255",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Meta发布Muse Charm硬件及AI代理",
+          "title_en": "Source: Meta plans to charge $300 for its forthcoming Muse Charm device and include a free 5G data plan from Verizon for up to 12 months (Jyoti Mann/The Information)",
+          "source": "The Information",
+          "published_at": "2026-11-19T19:50:28+00:00",
+          "url": "https://www.theinformation.com/articles/meta-bets-300-muse-charm-boost-ai-hardware-business",
+          "event_summary_zh": "Meta首席执行官马克·扎克伯格发布AI代理硬件Muse Charm，定价300美元并捆绑Verizon 12个月5G流量，旨在通过拟人化外观降低用户抵触情绪",
+          "event_summary_en": "Meta CEO Mark Zuckerberg unveiled the Muse Charm, a $300 handheld AI device bundled with a 12-month free 5G plan from Verizon, at Meta Connect. The device replaces traditional UI with a customizable, 'fuzzy' mascot avatar to handle tasks like email management, scheduling, and purchases, aiming to shift consumer perception through anthropomorphic interaction.",
+          "core_facts_zh": [
+            "【核心事件】马克·扎克伯格 (Mark Zuckerberg)，Meta首席执行官在Meta Connect大会：发布Muse Charm硬件，定价300美元并赠送1年5G服务",
+            "【起因与机理】通过可爱化设计降低公众对AI技术的恐惧与排斥，推动AI代理的大众化普",
+            "【关键数据与实测】硬件定价300美元并捆绑12个月Verizon 5G数据服务。",
+            "【各方立场与态度】支持跨平台任务流处理，但面临生态权限隐私合规的信任考验。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Mark Zuckerberg, CEO of Meta (Meta Connect): Launched Muse Charm at $300 with a 1-year 5G bundle",
+            "[Root Cause & Mechanism] To mitigate public AI anxiety via 'cute' design and drive mass-market adoption",
+            "[Key Metrics] Priced at $300 with 12-month Verizon 5G bundle.",
+            "[Key Position & Outlook] Enables cross-platform agentic workflows, contingent on resolving privacy-driven trust gaps."
+          ],
+          "industry_impact_zh": "Meta此举标志着消费级AI硬件正从功能导向转向情感交互导向，通过“Tamagotchi式”拟人化界面绕开深度科技产品的心理阈值。然而，AI代理涉及深度跨应用权限访问，其商业化成功的核心卡点不在硬件交互形式，而在于Meta如何通过合规的隐私边界确立用户对其生态系统的底层信任。",
+          "industry_impact_en": "Meta’s strategy marks a pivot from utility-driven to emotionally-responsive AI hardware, using anthropomorphic UI to bypass psychological barriers. The ultimate scalability of the Muse Charm depends less on its 'cute' form factor and more on Meta’s ability to secure user trust regarding cross-platform data access permissions."
+        },
         {
           "id": "a4b4c647fe434703",
           "tag_zh": "🎁 算力福利",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "该小组的成立标志着美国立法机构从“教育普及型”转向“防御干预型”AI治理，其引入的快速响应机制本质上是对AI突发故障进行政治定性的尝试。这预示着未来美国AI监管将跳过漫长的委员会听证周期，转而通过跨部门情报共享在短期内强制介入产业技术演进路径。",
           "industry_impact_en": "The caucus marks a pivot from purely educational AI policy engagement toward an active, interventionist oversight model. By establishing a rapid-response mechanism for AI-induced incidents, the group seeks to bypass bureaucratic delays, signaling that future U.S. AI governance will increasingly prioritize real-time geopolitical and security-driven intervention over passive industry standard-setting."
-        },
-        {
-          "id": "3e5557b0c0cc7405",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "谷歌Gemini桌面端引入Mac系统自动化控制",
-          "title_en": "Google gives Gemini the ability to use your Mac for you",
-          "source": "TechCrunch",
-          "published_at": "2026-11-19T18:50:09+00:00",
-          "url": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you/",
-          "event_summary_zh": "谷歌在macOS版Gemini应用中上线计算机使用功能，AI可代用户操控本地应用、浏览网页并执行多步骤任务",
-          "event_summary_en": "Google has introduced 'Computer Use' capabilities to its Gemini desktop application on macOS, enabling the AI agent to navigate native apps, manage local files, and browse the web on the user's behalf. This feature is gated behind Gemini Plus, Pro, or Ultra subscriptions and is currently limited to English users in the U.S., requiring explicit user approval for agentic actions via a live preview interface.",
-          "core_facts_zh": [
-            "【核心事件】Google（谷歌公司）在macOS桌面应用环境：上线计算机使用功能，支持自动化控制本地应用与网页",
-            "【起因与机理】应对OpenAI与Anthropic在代理化（Agentic）AI领域的先发竞争压力",
-            "【核心事实细节】谷歌将AI代理能力拓展至macOS本地应用层级。",
-            "【各方立场与态度】需订阅Gemini高级服务，目前仅限美区英语用户。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google: Launched 'Computer Use' feature for controlling native apps and browsers",
-            "[Root Cause & Mechanism] Competitive pressure from OpenAI and Anthropic in the agentic AI market",
-            "[Key Technical Spec] Google extends AI agent capabilities to native macOS application control.",
-            "[Key Position & Outlook] Requires premium Gemini subscription, currently limited to U.S. English users."
-          ],
-          "industry_impact_zh": "AI从单纯的生成式模型转向行动代理，核心竞争点已从上下文长度博弈转移至对OS层级接口的底层渗透深度。谷歌此举旨在利用macOS作为高净值生产力入口，通过封装桌面自动化提升订阅价值，但受限于跨应用语义理解的鲁棒性，该功能目前仍处于辅助性生产力工具阶段，尚未实现真正的全流程自动化重构。",
-          "industry_impact_en": "The transition from generative models to action-oriented agents signals a shift in competition toward low-level OS API integration. By leveraging macOS as a premium productivity touchpoint, Google aims to enhance subscription retention; however, until cross-application semantic understanding reaches a higher threshold of reliability, this remains a sophisticated assistive tool rather than a fully autonomous workflow engine."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 19:48:38 UTC",
+      "updated_at": "2026-11-19 20:03:49 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 19:48:38 UTC",
+      "updated_at": "2026-11-19 20:03:49 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
