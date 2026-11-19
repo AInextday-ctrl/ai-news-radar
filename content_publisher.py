@@ -4300,7 +4300,9 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
         from tool_news_publisher import generate_all_landing_pages
         generate_all_landing_pages()
     except Exception as e:
+        import traceback
         print(f"⚠️ [Landing Pages Generator] {e}")
+        traceback.print_exc()
 
     # 5. 全量 Sitemap 生成与 SEO / GEO 深度引擎协同
     update_sitemap_with_all_pages(daily_dates, articles_meta)

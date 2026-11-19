@@ -3812,10 +3812,10 @@ def save_news(items: list):
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
             # 严格控制单篇长文上限，保证公共 payload 体积在 850KB 限额内稳定受控
-            if c_it.get('article_content') and len(c_it['article_content']) > 3500:
-                c_it['article_content'] = c_it['article_content'][:3500] + '...'
-            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 2200:
-                c_it['article_content_zh'] = c_it['article_content_zh'][:2200] + '...'
+            if c_it.get('article_content') and len(c_it['article_content']) > 2800:
+                c_it['article_content'] = c_it['article_content'][:2800] + '...'
+            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 1800:
+                c_it['article_content_zh'] = c_it['article_content_zh'][:1800] + '...'
         return c_it
 
     all_archive_items = list(all_master_items)
