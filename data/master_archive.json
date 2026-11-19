@@ -6963,7 +6963,7 @@
       "metrics": {
         "stars": 39448,
         "weekly_stars": 1836,
-        "forks": 4529,
+        "forks": 4530,
         "pricing": "🟢 完全开源免费",
         "runtime": "⚡ 命令行/一键执行",
         "icon_type": "code",
@@ -7076,6 +7076,43 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_math_pseudocode_derivation",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 复杂数学公式向 PyTorch 向量化代码翻译",
+      "purpose_en": "🔬 Research & Papers · Math Formula to PyTorch Vectorized Code",
+      "title_zh": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
+      "title_en": "💡 [Math to Code] Mathematical Notation to High-Performance Vectorized PyTorch Translation",
+      "url": "https://pytorch.org/",
+      "image_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "算法工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-19T02:20:12Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
+      "metrics": {
+        "type": "🔬 公式转代码",
+        "model": "Claude 5.5",
+        "temp": "0.1"
+      },
+      "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
+      "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
+      "prompt_content": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "tags": [
+        "数学公式",
+        "PyTorch",
+        "张量运算"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-19T02:20:12Z",
+      "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板"
     },
     {
       "id": "a193b784deda0410",
@@ -8659,6 +8696,45 @@
       }
     },
     {
+      "id": "wf_claude_code_cli_best_practices",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "⚡ CLI 自动化",
+      "title_zh": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "title_en": "Claude Code CLI Autonomous Coding & Context Pruning Playbook",
+      "target_platform": "Claude Code (CLI) / Terminal / Bash",
+      "scenario": "💻 编程研发 / Agent工作流",
+      "scenario_key": "code",
+      "tested_models": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "model_family": "Claude",
+      "takeaway_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "takeaway_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "config_filename": "claude-code-playbook.sh",
+      "config_lang": "bash",
+      "code_snippet": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "usage_guide_zh": "在终端中全局安装 `@anthropic-ai/claude-code` 后，直接按需调用上述预置命令，可大幅缩减 Token 消耗并杜绝意外越权操作。",
+      "usage_guide_en": "After installing @anthropic-ai/claude-code globally, execute these commands in your repository root to maximize token efficiency and safe autonomous coding.",
+      "created_at": "2026-11-19T00:20:12Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-19T00:20:12Z",
+      "summary_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "summary_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "prompt_content_zh": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content_en": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "recommended_model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "metrics": {
+        "type": "⚡ CLI 自动化",
+        "model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+        "filename": "claude-code-playbook.sh"
+      },
+      "title": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "image_url": null
+    },
+    {
       "id": "8a4e959e032e2f44",
       "title": "Gemini 4 Neon costs $3/1M input tokens and $15/1M output tokens; the model sits between Hydrogen and Carbon and replaces Argon in the Gemini app (Abner Li/9to5Google)",
       "title_en": "Gemini 4 Neon costs $3/1M input tokens and $15/1M output tokens; the model sits between Hydrogen and Carbon and replaces Argon in the Gemini app (Abner Li/9to5Google)",
@@ -9177,6 +9253,43 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T23:20:12Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T23:20:12Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
     },
     {
       "id": "828be52df88ca542",
@@ -9955,6 +10068,87 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-18T22:20:12Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T22:20:12Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T22:20:12Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T22:20:12Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
     },
     {
       "id": "7933b059f97748ea",
@@ -11126,6 +11320,45 @@
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
+    },
+    {
+      "id": "wf_deepseek_r1_ollama_local_sota",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🧠 本地私有化",
+      "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
+      "target_platform": "Ollama / OpenWebUI / vLLM",
+      "scenario": "🔌 模型部署 / 隐私推理",
+      "scenario_key": "infra",
+      "tested_models": "DeepSeek-R1 (14B / 32B / 70B)",
+      "model_family": "DeepSeek",
+      "takeaway_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "takeaway_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "config_filename": "Modelfile.deepseek-r1-opt",
+      "config_lang": "dockerfile",
+      "code_snippet": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "usage_guide_zh": "保存为 `Modelfile`，执行 `ollama create deepseek-r1-opt -f Modelfile`，即可生成抗复读、低显存占用的专属本地超强推理大模型。",
+      "usage_guide_en": "Save as Modelfile, then run 'ollama create deepseek-r1-opt -f Modelfile'. Delivers stable reasoning with low VRAM footprint and no loop loops.",
+      "created_at": "2026-11-18T21:20:12Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-18T21:20:12Z",
+      "summary_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "summary_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "prompt_content_zh": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content_en": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "recommended_model": "DeepSeek-R1 (14B / 32B / 70B)",
+      "metrics": {
+        "type": "🧠 本地私有化",
+        "model": "DeepSeek-R1 (14B / 32B / 70B)",
+        "filename": "Modelfile.deepseek-r1-opt"
+      },
+      "title": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "image_url": null
     },
     {
       "id": "c643f2a383748d33",
@@ -12674,6 +12907,89 @@
       }
     },
     {
+      "id": "prompt-report-mckinsey-01",
+      "title_zh": "麦肯锡金字塔原理：季度述职与高管商业报告",
+      "title_en": "McKinsey Pyramid Executive Report & Review",
+      "category": "prompts",
+      "scenario_label": "📑 商业报告",
+      "target_model": "Claude 5.5 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 95,
+      "generation_tier": "sota",
+      "purpose_zh": "结论先行的高层述职与项目复盘报告",
+      "temp_advice": "温度 0.3",
+      "variables": [
+        "{{业务部门}}",
+        "{{关键战果}}",
+        "{{核心短板}}",
+        "{{下阶段目标}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
+      "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+      "sample_output": {
+        "type": "text",
+        "title": "述职报告提纲样本：AI 自动化中台建设报告",
+        "content": "【BLUF 核心结论】\nQ3 通过在客户服务与情报聚合管线中全面引入 AI Agent，我们在运营成本降低 41% 的同时，将响应中位数缩短至 1.8 秒，实现单季 ROI 达 380%。\n\n【第一支柱：经营效能跃迁（MECE 1）】\n- 全自主中转网关与自动化管线承载 94.2% 的日常例行分发，无人工介入事故率降至 0.01%；\n\n【第二支柱：资产沉淀与质量壁垒（MECE 2）】\n- 搭建前沿 SOTA 模型代际评级系统与微快照图库，成为垂类雷达第一标杆；\n\n【第三支柱：短板复盘与 Q4 攻坚（MECE 3）】\n- 痛点：老旧模型模版对新用户构成噪音干扰；\n- 策略：推出历史库智能分流系统，预计下季度用户留存提升 25%。",
+        "title_en": "Verified Sample Output (Claude 5.5 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将自己一周/一月的粗糙工作备忘录贴在后面，几秒钟即可输出具备咨询公司水准的商业报告。",
+      "created_at": "2026-11-18T19:20:12Z",
+      "variables_en": [
+        "{{Business Unit}}",
+        "{{Key Achievements}}",
+        "{{Core Bottlenecks}}",
+        "{{Next-Phase Goals}}"
+      ],
+      "scenario_label_en": "📑 Business Report",
+      "purpose_en": "BLUF Executive Summary & Post-Mortem Report",
+      "temp_advice_en": "Temp 0.3 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T19:20:12Z",
+      "recommended_model": "Claude 5.5 / GPT-6.0",
+      "title": "麦肯锡金字塔原理：季度述职与高管商业报告",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_video_cinematic_lens",
+      "sub_type": "video_gen",
+      "purpose_zh": "🎥 视频生成 · 影视级镜头语言与多角度运镜",
+      "purpose_en": "🎥 Video Gen · Cinematic Camera Movement & Lens Control",
+      "title_zh": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词",
+      "title_en": "💡 [Cinematic Camera Movement] Sora & Kling Vertigo Dolly Zoom & FPV Drone Master Prompt",
+      "url": "https://runwayml.com/",
+      "image_url": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "影视极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T19:20:12Z",
+      "recommended_model": "Runway Gen-3 / Sora / Kling",
+      "temp_advice": "Motion Scale: 5 | 严格运镜控制",
+      "metrics": {
+        "type": "🎥 视频运镜",
+        "model": "Gen-3 / Kling",
+        "temp": "Motion 5"
+      },
+      "content_snippet": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
+      "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变。",
+      "summary_en": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
+      "prompt_content_zh": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.\n\n【中文使用解析】：专为 Runway Gen-3 Alpha 或 Kling 1.5 的 Text-to-Video / Image-to-Video 设计。重点定义镜头物理轨迹（dolly zoom / push forward / zoom out）以约束物理引擎不会乱造多余肢体。",
+      "prompt_content_en": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
+      "prompt_content": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
+      "tags": [
+        "视频运镜",
+        "Runway",
+        "影视质感"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T19:20:12Z",
+      "title": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词"
+    },
+    {
       "id": "eb986466eaa22008",
       "status_id": "2123133742063706343",
       "category": "celebrity",
@@ -13961,6 +14277,82 @@
       }
     },
     {
+      "id": "wf_multi_agent_planner_critic_dsl",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🤖 Agent 编排",
+      "title_zh": "Multi-Agent 多智能体协同自省编排架构（Planner-Executor-Reviewer）",
+      "title_en": "Autonomous Multi-Agent Orchestration DSL (Planner-Executor-Critic)",
+      "target_platform": "LangGraph / Dify / Autogen / CrewAI",
+      "scenario": "🤖 智能体工作流 / 研报生成",
+      "scenario_key": "agent",
+      "tested_models": "Claude 3.7 Sonnet / GPT-4o / DeepSeek-V3",
+      "model_family": "Claude / OpenAI",
+      "takeaway_zh": "终结单 Agent 容易中途跑偏和幻觉无法自纠的痛点，通过规划器（Planner）、执行器（Executor）与独立评审器（Reviewer）构建自闭环三权分立链路。",
+      "takeaway_en": "Production architecture for robust autonomous tasks: Decouples task planning, tool execution, and adversarial quality review to prevent agent derailment.",
+      "config_filename": "agent_orchestration_flow.yaml",
+      "config_lang": "yaml",
+      "code_snippet": "# Multi-Agent Orchestration Topology\nworkflow:\n  name: Autonomous_Research_And_Delivery_Pipeline\n  max_iterations: 3\n  nodes:\n    - id: planner\n      role: Strategic Planner\n      prompt: \"Decompose user request into discrete verifiable sub-tasks. Output pure JSON DAG.\"\n      next: executor\n      \n    - id: executor\n      role: Tool Specialist\n      tools: [\"web_search\", \"read_url\", \"code_interpreter\"]\n      prompt: \"Execute current sub-task using provided tools. Capture raw evidence.\"\n      next: reviewer\n      \n    - id: reviewer\n      role: Adversarial Critic\n      prompt: \"Verify executor results against factuality and accuracy requirements. Output PASS or REJECT with specific critique.\"\n      conditional_edges:\n        PASS: finish\n        REJECT: planner",
+      "usage_guide_zh": "适用于在 Dify、LangGraph 或自定义 Python Agent 框架中导入此拓扑设计，显著将复杂多步任务的完成成功率从 55% 提升至 92% 以上。",
+      "usage_guide_en": "Import this DAG architecture into Dify, LangGraph, or custom agent runtimes to boost complex multi-step delivery reliability from 55% to 92%+.",
+      "created_at": "2026-11-18T18:20:12Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-18T18:20:12Z",
+      "summary_zh": "终结单 Agent 容易中途跑偏和幻觉无法自纠的痛点，通过规划器（Planner）、执行器（Executor）与独立评审器（Reviewer）构建自闭环三权分立链路。",
+      "summary_en": "Production architecture for robust autonomous tasks: Decouples task planning, tool execution, and adversarial quality review to prevent agent derailment.",
+      "prompt_content_zh": "# Multi-Agent Orchestration Topology\nworkflow:\n  name: Autonomous_Research_And_Delivery_Pipeline\n  max_iterations: 3\n  nodes:\n    - id: planner\n      role: Strategic Planner\n      prompt: \"Decompose user request into discrete verifiable sub-tasks. Output pure JSON DAG.\"\n      next: executor\n      \n    - id: executor\n      role: Tool Specialist\n      tools: [\"web_search\", \"read_url\", \"code_interpreter\"]\n      prompt: \"Execute current sub-task using provided tools. Capture raw evidence.\"\n      next: reviewer\n      \n    - id: reviewer\n      role: Adversarial Critic\n      prompt: \"Verify executor results against factuality and accuracy requirements. Output PASS or REJECT with specific critique.\"\n      conditional_edges:\n        PASS: finish\n        REJECT: planner",
+      "prompt_content_en": "# Multi-Agent Orchestration Topology\nworkflow:\n  name: Autonomous_Research_And_Delivery_Pipeline\n  max_iterations: 3\n  nodes:\n    - id: planner\n      role: Strategic Planner\n      prompt: \"Decompose user request into discrete verifiable sub-tasks. Output pure JSON DAG.\"\n      next: executor\n      \n    - id: executor\n      role: Tool Specialist\n      tools: [\"web_search\", \"read_url\", \"code_interpreter\"]\n      prompt: \"Execute current sub-task using provided tools. Capture raw evidence.\"\n      next: reviewer\n      \n    - id: reviewer\n      role: Adversarial Critic\n      prompt: \"Verify executor results against factuality and accuracy requirements. Output PASS or REJECT with specific critique.\"\n      conditional_edges:\n        PASS: finish\n        REJECT: planner",
+      "prompt_content": "# Multi-Agent Orchestration Topology\nworkflow:\n  name: Autonomous_Research_And_Delivery_Pipeline\n  max_iterations: 3\n  nodes:\n    - id: planner\n      role: Strategic Planner\n      prompt: \"Decompose user request into discrete verifiable sub-tasks. Output pure JSON DAG.\"\n      next: executor\n      \n    - id: executor\n      role: Tool Specialist\n      tools: [\"web_search\", \"read_url\", \"code_interpreter\"]\n      prompt: \"Execute current sub-task using provided tools. Capture raw evidence.\"\n      next: reviewer\n      \n    - id: reviewer\n      role: Adversarial Critic\n      prompt: \"Verify executor results against factuality and accuracy requirements. Output PASS or REJECT with specific critique.\"\n      conditional_edges:\n        PASS: finish\n        REJECT: planner",
+      "recommended_model": "Claude 3.7 Sonnet / GPT-4o / DeepSeek-V3",
+      "metrics": {
+        "type": "🤖 Agent 编排",
+        "model": "Claude 3.7 Sonnet / GPT-4o / DeepSeek-V3",
+        "filename": "agent_orchestration_flow.yaml"
+      },
+      "title": "Multi-Agent 多智能体协同自省编排架构（Planner-Executor-Reviewer）",
+      "image_url": null
+    },
+    {
+      "id": "prompt_sql_performance_tuning",
+      "sub_type": "coding",
+      "purpose_zh": "💻 编码与架构 · 高并发 SQL 慢查询诊断调优",
+      "purpose_en": "💻 Coding & Architecture · High-Concurrency SQL Query Tuning",
+      "title_zh": "💡【数据库性能优化】高并发 SQL 慢查询诊断与执行计划重写优化模板",
+      "title_en": "💡 [Database Performance] High-Concurrency SQL Slow Query Diagnosis & Plan Optimization",
+      "url": "https://github.com/",
+      "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "DBA极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T18:20:12Z",
+      "recommended_model": "DeepSeek-Coder-V2 / Claude 4.6",
+      "temp_advice": "建议温度 0.1 | 数据库内核调优",
+      "metrics": {
+        "type": "💻 SQL调优",
+        "model": "DeepSeek-Coder",
+        "temp": "0.1"
+      },
+      "content_snippet": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+      "summary_zh": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引建议。",
+      "summary_en": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+      "prompt_content_zh": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+      "prompt_content_en": "You are a Staff Database Administrator specializing in high-concurrency SQL optimization. Analyze the following slow SQL query along with its EXPLAIN ANALYZE execution plan:\n1. Pinpoint performance bottlenecks (e.g., table scans, temporary filesort, nested loop skew);\n2. Rewrite the query utilizing deferred joins, covering index optimization, or CTE materialization;\n3. Provide the exact composite index recommendation ordered by cardinality and leftmost prefix rules, estimating index maintenance overhead.",
+      "prompt_content": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+      "tags": [
+        "SQL调优",
+        "数据库实战",
+        "Prompt模板"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T18:20:12Z",
+      "title": "💡【数据库性能优化】高并发 SQL 慢查询诊断与执行计划重写优化模板"
+    },
+    {
       "id": "ae8c30e8de4ed833",
       "status_id": "2123118806390493574",
       "category": "celebrity",
@@ -14644,14 +15036,14 @@
       "author_avatar": "https://unavatar.io/youtube/Joseph Martin",
       "source": "YouTube · Joseph Martin",
       "views": "2.0万 播放",
-      "views_count": 19599,
-      "velocity": 1399.9,
-      "momentum_score": 3799.8,
+      "views_count": 19730,
+      "velocity": 1409.3,
+      "momentum_score": 3825.2,
       "metrics": {
         "views": "2.0万 播放",
-        "views_count": 19599,
-        "velocity": "+1,399/h",
-        "momentum_score": 3799.8,
+        "views_count": 19730,
+        "velocity": "+1,409/h",
+        "momentum_score": 3825.2,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -14669,7 +15061,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,399/h)",
+        "🔥 24h飙升 (+1,409/h)",
         "Joseph Martin",
         "🔥 极客实操"
       ],
@@ -15841,22 +16233,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】AI News & Strategy Daily | Nate B Jones：机器人大脑可能已经存在。这是一个编码代理。",
-      "title_zh": "【48h 极客实测】AI News & Strategy Daily | Nate B Jones：机器人大脑可能已经存在。这是一个编码代理。",
-      "title_en": "The Robot Brain Might Already Exist. It's A Coding Agent.",
+      "title": "【48h 极客实测】AI News & Strategy Daily | Nate B Jones：机器人技术的下一个突破可能是编码代理的更新。 25 人去 24 人。",
+      "title_zh": "【48h 极客实测】AI News & Strategy Daily | Nate B Jones：机器人技术的下一个突破可能是编码代理的更新。 25 人去 24 人。",
+      "title_en": "The Next Robotics Breakthrough Could Be An Update To Your Coding Agent. One Went 24 For 25.",
       "author": "AI News & Strategy Daily | Nate B Jones",
       "author_handle": "@AINews&StrategyDaily|NateBJones",
       "author_avatar": "https://unavatar.io/youtube/AI News & Strategy Daily | Nate B Jones",
       "source": "YouTube · AI News & Strategy Daily | Nate B Jones",
       "views": "1.8万 播放",
-      "views_count": 17926,
-      "velocity": 1120.4,
-      "momentum_score": 2800.9,
+      "views_count": 18003,
+      "velocity": 1125.2,
+      "momentum_score": 2813.0,
       "metrics": {
         "views": "1.8万 播放",
-        "views_count": 17926,
-        "velocity": "+1,120/h",
-        "momentum_score": 2800.9,
+        "views_count": 18003,
+        "velocity": "+1,125/h",
+        "momentum_score": 2813.0,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -15874,7 +16266,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,120/h)",
+        "🔥 24h飙升 (+1,125/h)",
         "AI News & Strategy Daily | Nate B Jones",
         "🔥 极客实操"
       ],
@@ -15892,8 +16284,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 85,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
+        "score": 90,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (90分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -16216,14 +16608,14 @@
       "author_avatar": "https://unavatar.io/youtube/PixelArtistry and Stefan 3D AI",
       "source": "YouTube · PixelArtistry and Stefan 3D AI",
       "views": "3.6万 播放",
-      "views_count": 35967,
-      "velocity": 2115.7,
-      "momentum_score": 5102.6,
+      "views_count": 36142,
+      "velocity": 2126.0,
+      "momentum_score": 5127.4,
       "metrics": {
         "views": "3.6万 播放",
-        "views_count": 35967,
-        "velocity": "+2,115/h",
-        "momentum_score": 5102.6,
+        "views_count": 36142,
+        "velocity": "+2,126/h",
+        "momentum_score": 5127.4,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16241,7 +16633,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+2,115/h)",
+        "🔥 24h飙升 (+2,126/h)",
         "PixelArtistry and Stefan 3D AI",
         "🔥 极客实操"
       ],
@@ -18129,6 +18521,82 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_mckinsey_pyramid_pitch",
+      "sub_type": "writing",
+      "purpose_zh": "✍️ 生产力写作 · 麦肯锡金字塔原理商业方案",
+      "purpose_en": "✍️ Writing & Productivity · McKinsey Pyramid Principle Pitch",
+      "title_zh": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板",
+      "title_en": "💡 [Executive Presentation] McKinsey Pyramid Principle Structured Business Proposal Template",
+      "url": "https://hbr.org/",
+      "image_url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "咨询总监",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T11:20:12Z",
+      "recommended_model": "Claude 4.6 / GPT-4o",
+      "temp_advice": "建议温度 0.3 | 高管严谨表达",
+      "metrics": {
+        "type": "✍️ 商业汇报",
+        "model": "Claude 4.6",
+        "temp": "0.3"
+      },
+      "content_snippet": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则。",
+      "summary_en": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "prompt_content_zh": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "prompt_content_en": "Adopt the persona of a Senior McKinsey Strategy Director. Restructure the provided raw operational notes into an executive proposal for the C-Suite following the Pyramid Principle:\n1. Frame the introduction using the SCQA methodology (Situation, Complication, Question, Answer);\n2. Enforce Bottom Line Up Front (BLUF): the opening sentence of each pillar must be a crisp, quantified value claim;\n3. Group supporting pillars using the MECE framework (Mutually Exclusive, Collectively Exhaustive), concluding with an ROI model and concrete risk hedges.",
+      "prompt_content": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "tags": [
+        "金字塔原理",
+        "高管汇报",
+        "商业方案"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T11:20:12Z",
+      "title": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板"
+    },
+    {
+      "id": "prompt_claude46_extended_thinking",
+      "sub_type": "coding",
+      "model_family": "claude_46",
+      "purpose_zh": "💻 混合推理 · Claude 4.6 思考时间预算控制与全栈代码交付",
+      "purpose_en": "💻 Hybrid Reasoning · Claude 4.6 Thinking Budget Control & Full-Stack Delivery",
+      "title_zh": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块",
+      "title_en": "💡 [Claude 4.6 Frontier] Extended Thinking & Budget Control: One-Shot Production Full-Stack Module",
+      "url": "https://docs.anthropic.com/",
+      "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+      "source": "Anthropic 官方前沿",
+      "author": "Anthropic 工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-18T11:20:12Z",
+      "recommended_model": "Claude 4.6 Sonnet (Extended Thinking Mode)",
+      "temp_advice": "建议温度 1.0 (Extended Thinking 官方推荐温度) | 预算 16k tokens",
+      "metrics": {
+        "type": "💻 Claude 4.6",
+        "model": "Sonnet 3.7",
+        "temp": "1.0"
+      },
+      "content_snippet": "Maximizes Claude 4.6's hybrid reasoning budget: plans architectural trade-offs in thinking phase, then delivers production-grade, bug-free implementations.",
+      "summary_zh": "充分释放 Claude 4.6 混合推理优势：在思考阶段预判所有边界情况与架构取舍，一键输出直接可运行的高内聚工程代码。",
+      "summary_en": "Leverages Claude 4.6 extended thinking to resolve architecture trade-offs before generating complete, bug-free production code.",
+      "prompt_content_zh": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "prompt_content_en": "You are acting as a Principal Full-Stack Architect utilizing Claude 4.6 Extended Thinking mode. Before emitting code, use your reasoning budget to analyze:\n1. Architecture Trade-offs: Benchmark alternative designs across complexity, maintenance, and latency;\n2. Concurrency & Race Condition Simulation: Map asynchronous lifecycles and eliminate memory leaks;\n3. Complete Zero-Placeholder Implementation: Never emit comments like '// TODO: implement later'; ensure every function is production-ready;\n4. Include defensive unit tests and resilient error boundaries.\n\n[REQUIREMENTS]:\n[Describe your complex business system or full-stack feature here]",
+      "prompt_content": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "tags": [
+        "Claude 4.6",
+        "思考预算",
+        "全栈架构",
+        "无占位符"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-18T11:20:12Z",
+      "title": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块"
     },
     {
       "id": "abdc4a83d9410e0c",
@@ -44688,6 +45156,12 @@
       "content_snippet": "Sam Witteveen 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Sam Witteveen 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Sam Witteveen: RAON-1 Nano: The Tiny LLM for AI Game Characters",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-19T07:16:45.684580+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -59083,7 +59557,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+261/h)",
+        "⚡ 48h实测 (+262/h)",
         "AI by Alex",
         "🛠️ 实战教学"
       ],
@@ -66144,14 +66618,14 @@
       "author_avatar": "https://unavatar.io/youtube/Vaibhav Sisinty",
       "source": "YouTube · Vaibhav Sisinty",
       "views": "4.2万 播放",
-      "views_count": 41928,
-      "velocity": 873.5,
-      "momentum_score": 1310.2,
+      "views_count": 41992,
+      "velocity": 874.8,
+      "momentum_score": 1312.2,
       "metrics": {
         "views": "4.2万 播放",
-        "views_count": 41928,
-        "velocity": "+873/h",
-        "momentum_score": 1310.2,
+        "views_count": 41992,
+        "velocity": "+874/h",
+        "momentum_score": 1312.2,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -66169,19 +66643,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+873/h)",
+        "⚡ 48h实测 (+874/h)",
         "Vaibhav Sisinty",
         "🔥 极客实操"
       ],
       "content_snippet": "Vaibhav Sisinty 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Vaibhav Sisinty 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Vaibhav Sisinty: Google’s Gemini Lead Showed Me How Google Really Uses AI",
-      "is_pinned": false,
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-19T07:16:45.177852+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -72150,14 +72618,14 @@
       "author_avatar": "https://unavatar.io/youtube/Grow With Kaz",
       "source": "YouTube · Grow With Kaz",
       "views": "5.8万 播放",
-      "views_count": 58304,
-      "velocity": 1214.7,
-      "momentum_score": 1822.0,
+      "views_count": 58398,
+      "velocity": 1216.6,
+      "momentum_score": 1824.9,
       "metrics": {
         "views": "5.8万 播放",
-        "views_count": 58304,
-        "velocity": "+1,214/h",
-        "momentum_score": 1822.0,
+        "views_count": 58398,
+        "velocity": "+1,216/h",
+        "momentum_score": 1824.9,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -72175,7 +72643,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+1,214/h)",
+        "⚡ 48h实测 (+1,216/h)",
         "Grow With Kaz",
         "🔥 极客实操"
       ],
@@ -239334,7 +239802,7 @@
         "今日要闻"
       ],
       "title_zh": "Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
-      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲弱。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
+      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲软。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
       "hot_score": 3,
       "fact_bullets_zh": [
         "【核心事件】Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
@@ -476309,7 +476777,7 @@
         "今日要闻"
       ],
       "title_zh": "苹果表示， HomeView将不会在欧盟推出，因为Siri AI目前无法在iOS上使用，而且它正在“与欧盟进行建设性的合作” （",
-      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前无法使用……",
+      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前不可用……",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -556624,7 +557092,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license (Financial Times)",
         "[Context & Motivation] Financial Times:\nSources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license&nbsp; &mdash;&nbsp; Securities regulators looking at use of legal exemption by world's biggest crypto.",
-        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearing and federal regulatory review site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -565186,7 +565654,7 @@
         "今日要闻"
       ],
       "title_zh": "Mariano-Florentino cusamllar简介，Anthropic的首任全球事务主管，他在2025年帮助制定了加州第一部人工智能安全法",
-      "summary_zh": "Brandon Pho / Mission Local：\nAnthropic 首任全球事务负责人马里亚诺-弗洛伦蒂诺·奎利亚尔 (Mariano-Florentino Cuéllar) 简介，他曾帮助制定了 2025 年加州首部人工智能安全法 — 在加州帝王谷 (Imperial Valley) 脚下的一个炎热干燥的边境小镇，",
+      "summary_zh": "Brandon Pho / Mission Local：\nAnthropic 首位全球事务负责人马里亚诺-弗洛伦蒂诺·奎利亚尔 (Mariano-Florentino Cuéllar) 的简介，他曾帮助制定了 2025 年加州首部人工智能安全法 — 在加州帝王谷 (Imperial Valley) 脚下的一个炎热干燥的边境小镇，",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -589513,7 +589981,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: How AI's acceleration created a global policy vacuum, as EU AI Act enforcement lags and regulators remain torn between harnessing AI and fearing its risks",
         "[Root Cause & Mechanism] New York Times:\nHow AI's acceleration created a global policy vacuum, as EU AI Act enforcement lags and regulators remain torn between harnessing AI and fearing its risks&nbsp; &mdash;&nbsp; Ursula von der Leyen, the president of the European Commission, gathered senior officials.",
-        "[Regulatory & Investigation Focus] European Commission at U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] European Commission at US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -596847,7 +597315,7 @@
         "今日要闻"
       ],
       "title_zh": "谷歌表示，ShinyHunters再次“大规模利用”了甲骨文PeopleSoft的一个漏洞；ShinyHunters表示，它利用PeopleSoft的一个漏洞访问了FBI的数据。",
-      "summary_zh": "谷歌表示，ShinyHunters 再次“大规模利用”甲骨文 PeopleSoft 中的一个缺陷； ShinyHunters 表示，它利用 PeopleSoft 的缺陷访问了 FBI 数据——谷歌网络安全部门周五表示，黑客组织 ShinyHunters 已经",
+      "summary_zh": "谷歌表示，ShinyHunters 再次“大规模利用”甲骨文 PeopleSoft 中的一个缺陷； ShinyHunters 表示，它利用 PeopleSoft 中的一个缺陷访问了 FBI 数据——谷歌网络安全部门周五表示，黑客组织 ShinyHunters 已经",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -598953,7 +599421,7 @@
         "今日要闻"
       ],
       "title_zh": "Nscale在美国首次公开募股前获得了由Third Point领投的33.6亿美元可转换融资，其中23.6亿美元将立即获得，而英伟达将在11月获得10亿美元。",
-      "summary_zh": "玛丽娜·特姆金 / TechCrunch：\nNscale 在美国 IPO 之前获得了由 Third Point 领投的 3.36B 美元可转换融资，其中 2.36B 美元立即可用，11 月来自 Nvidia 的 10 亿美元 — 英国 Neocloud 的 Nscale 在其上市之前已获得 33.6 亿美元的融资",
+      "summary_zh": "玛丽娜·特姆金 / TechCrunch：\nNscale 在美国 IPO 之前获得了由 Third Point 领投的 3.36B 美元可转换融资，其中 2.36B 美元立即可用，11 月份来自 Nvidia 的 10 亿美元 — 英国 Neocloud 的 Nscale 在其上市之前已获得 33.6 亿美元的融资",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -608846,7 +609314,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs",
         "[Context & Motivation] The Information:\nSources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs&nbsp; &mdash;&nbsp; Google, OpenAI and Anthropic are pushing forward with a plan to create a new AI safet.",
-        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free from government oversight in late 2026 or 2027."
+        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free of government oversight in late 2026 or 2027."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -619765,7 +620233,7 @@
       "fact_bullets_en": [
         "[Core Event] ShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site (Joseph Cox/404 Media)",
         "[Context & Motivation] Joseph Cox / 404 Media:\nShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site&nbsp; &mdash;&nbsp; A sample of 5,000 alleged agents seen by 404 Media includes names, addresses.",
-        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day attacks on FBI-related services and stole employee and applicant data;."
+        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day to attack FBI-related services and steal employee and applicant data;."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -640551,7 +641019,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -651967,7 +652435,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: From drafting bills to writing birthday songs: How Congress is using AI",
         "[Root Cause & Mechanism] As doomsday warnings spark calls for Congress to step in and regulate artificial intelligence, NBC News asked a dozen lawmakers in the House and Senate how they personally use AI in their day-to-day lives..",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -654284,7 +654752,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat",
         "[Context & Motivation] The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat&nbsp;&nbsp;WSJ.",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -689046,7 +689514,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: the European Commission plans to propose an EU KIDS Act on Thursday to set a minimum age for accessing social media, video platforms, games, and more (Politico)",
         "[Context & Motivation] Politico:\nDocuments: the European Commission plans to propose an EU KIDS Act on Thursday to set a minimum age for accessing social media, video platforms, games, and more&nbsp; &mdash;&nbsp; The proposal will propose a new enforcement structure similar to existing laws'.&nbsp; &m.",
-        "[Regulatory & Investigation Focus] European Commission at U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] European Commission at US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
