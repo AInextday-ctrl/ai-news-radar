@@ -1048,7 +1048,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         author_prefix = "记者 / 供稿: " if is_zh else "By "
         author_byline_html = f'<div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>{author_prefix}{escape(author_name)}</span></div>'
 
-    # 全局付费墙/订阅促销/返佣广告话术防线（杜绝 "Pay a year upfront" / "earn a small commission" 等污染要点与正文）
+    # 全局付费墙/订阅促销/返佣广告话术与图片注释防线（杜绝 "Pay a year upfront" / "in your inbox each week" 等污染要点与正文）
     PROMO_NOISE_RE = re.compile(
         r"(?:pay a year upfront|then \$\d+\s*per month|complete digital access to quality|"
         r"essential digital access to quality|cancel or change your plan anytime|"
@@ -1057,10 +1057,12 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         r"already a subscriber\??\s*log in|myft digest|unlock the editor['’]s digest|"
         r"most read from the washington post|democracy dies in darkness|you were gifted this article|"
         r"posts from this topic will be added to your daily email digest|delivered directly to your inbox|"
+        r"in your inbox each week|to receive this newsletter in your inbox|view image in fullscreen|"
         r"when you purchase through links in our articles|we may earn a (?:small )?commission|"
         r"doesn['’]t affect our editorial independence|income earning auto affiliate links|"
         r"subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|where was nvidia['’]s security team\?|"
         r"预付一年.*省\s*\d+%|每月\s*\d+\s*美元.*数字访问|完整数字访问|基本数字访问|订阅以解锁|"
+        r"每周在您的收件箱中获取|订阅我们的通讯|公司\d{4}年发布的肖像照|资料照片|新华社发|视觉中国供图|"
         r"通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)",
         re.I,
     )
@@ -1343,12 +1345,29 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 "dom_order": img_entry.get("dom_order") if isinstance(img_entry, dict) and isinstance(img_entry.get("dom_order"), int) else None,
             })
 
+        from crawlers.content_filters import clean_article_paragraphs
+        paras = clean_article_paragraphs(
+            paras,
+            inline_images=usable_images,
+            cover_caption=item.get("image_caption"),
+            is_zh=is_zh
+        )
+
         usable_inline_videos = [
             v for v in (item.get("inline_videos") or [])
             if isinstance(v, dict) and str(v.get("url") or "").startswith("http")
         ]
         en_raw_for_ref = str(item.get("article_content_en") or item.get("article_content") or "").strip()
-        en_ref_paras = [p.strip() for p in en_raw_for_ref.split("\n\n") if len(p.strip()) >= 3 and not PROMO_NOISE_RE.search(p)] if en_raw_for_ref else []
+        if en_raw_for_ref:
+            raw_en_split = [p.strip() for p in en_raw_for_ref.split("\n\n") if len(p.strip()) >= 3 and not PROMO_NOISE_RE.search(p)]
+            en_ref_paras = clean_article_paragraphs(
+                raw_en_split,
+                inline_images=usable_images,
+                cover_caption=item.get("image_caption"),
+                is_zh=False
+            )
+        else:
+            en_ref_paras = []
         p_html = format_editorial_paragraphs(
             paras,
             usable_images,

@@ -284,10 +284,22 @@ def _clean_paragraph(text: str) -> str:
     """Cleans a single paragraph of text and strips boilerplate noise."""
     if not text:
         return ""
+    from crawlers.content_filters import (
+        clean_guardian_fullscreen_prefix,
+        is_newsletter_or_promo_noise,
+        is_photo_caption_or_credit,
+    )
     t = html.unescape(text)
     t = re.sub(r'<[^>]+>', ' ', t)
     t = re.sub(r'[\u200b\u200c\u200d\u2060\ufeff\xa0]', ' ', t)
     t = re.sub(r'\s+', ' ', t).strip()
+    t = clean_guardian_fullscreen_prefix(t)
+    if not t or len(t) < 15:
+        return ""
+    if is_newsletter_or_promo_noise(t):
+        return ""
+    if is_photo_caption_or_credit(t):
+        return ""
     
     # Filter Bloomberg specific boilerplate
     low = t.lower()
@@ -457,6 +469,8 @@ def resolve_bloomberg_syndicated_fulltext(
                                 cleaned_p = _clean_paragraph(p)
                                 if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
                                     cand_paras.append(cleaned_p)
+                            from crawlers.content_filters import clean_article_paragraphs
+                            cand_paras = clean_article_paragraphs(cand_paras, inline_images=ext.get('inline_images'))
                             if len(cand_paras) >= 3:
                                 cand_img = ext.get('image_url')
                                 if not cand_img and ext.get('inline_images'):
@@ -667,6 +681,12 @@ def crawl_bloomberg(
             syndicated_paras = synd_res
 
         if syndicated_paras and len(syndicated_paras) >= 3:
+            from crawlers.content_filters import clean_article_paragraphs
+            syndicated_paras = clean_article_paragraphs(
+                syndicated_paras,
+                inline_images=result.get("inline_images"),
+                cover_caption=result.get("image_caption")
+            )
             result["paragraphs"] = syndicated_paras
             result["paras_count"] = len(syndicated_paras)
             result["full_text"] = "\n\n".join(syndicated_paras)

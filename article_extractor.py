@@ -218,13 +218,23 @@ class ArticleExtractor:
 
     @classmethod
     def _clean_paragraph(cls, text: str) -> Optional[str]:
-        """清理单个段落文本，去除 HTML 标签与多余空白"""
+        """清理单个段落文本，去除 HTML 标签与多余空白，并过滤图片注释与邮件推广"""
         if not text:
             return None
+        from crawlers.content_filters import (
+            clean_guardian_fullscreen_prefix,
+            is_newsletter_or_promo_noise,
+            is_photo_caption_or_credit,
+        )
         clean_p = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', text)).split()).strip()
+        clean_p = clean_guardian_fullscreen_prefix(clean_p)
         if len(clean_p) < 35 or len(clean_p) > 4000:
             return None
         if cls.is_nav_or_noise_text(clean_p):
+            return None
+        if is_newsletter_or_promo_noise(clean_p):
+            return None
+        if is_photo_caption_or_credit(clean_p):
             return None
         if not re.search(r'[.!?。！？;；]', clean_p):
             return None
@@ -536,8 +546,8 @@ class ArticleExtractor:
         if len(paras) >= 3:
             return paras
 
-        # 2. 剥离无意义标签
-        clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)
+        # 2. 剥离无意义标签（包含 figure 与 figcaption 避免图片注释混入标准段落）
+        clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu|figure|figcaption)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu|figure|figcaption)>', ' ', html_text, flags=re.DOTALL | re.I)
 
         rule = None
         for d_key, r_cfg in cls.SOURCE_RULES.items():
@@ -1180,12 +1190,19 @@ class ArticleExtractor:
                 key_metrics.append(mm_clean)
         result["key_metrics"] = key_metrics[:8]
 
+        from crawlers.content_filters import clean_article_paragraphs
+        clean_paras = clean_article_paragraphs(
+            clean_paras,
+            inline_images=result.get("inline_images"),
+            cover_caption=result.get("cover_image")
+        )
+
         result["paragraphs"] = clean_paras
         result["paras_count"] = len(clean_paras)
         result["full_text"] = "\n\n".join(clean_paras)
         result["is_substantive"] = (len(clean_paras) >= 3) or (len(result["full_text"]) >= 300)
 
-        if result["paragraphs"] and not result["lead_paragraph"]:
+        if result["paragraphs"]:
             result["lead_paragraph"] = result["paragraphs"][0]
 
         if result["is_substantive"] or len(clean_paras) >= 1:

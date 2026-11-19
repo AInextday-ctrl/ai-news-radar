@@ -15,7 +15,7 @@ from processor import has_chinglish_seams
 
 
 def run_quality_gate_assertions(payload: dict) -> bool:
-    """Run 20 hard assertions against the latest news payload."""
+    """Run 21 hard assertions against the latest news payload."""
     grouped = payload.get("grouped", {})
 
     print("\n" + "=" * 60)
@@ -506,6 +506,37 @@ def run_quality_gate_assertions(payload: dict) -> bool:
 
     assert len(landing_page_violations) == 0, f"断言 20 失败：检测到 {len(landing_page_violations)} 个新闻落地页实质正文脱落: {landing_page_violations[:3]}"
     print(f"✅ 断言 20 通过: 静态落地页多段正文保全度达标 (共抽检 {len(sample_substantive)} 篇深度报道，中英文落地页 100% 具备全景正文)")
+
+    # 21. 正文纯净度与零图片注释/摄影署名/邮件推广残留门禁 (Zero Leaked Caption & Newsletter Noise)
+    caption_noise_violations = []
+    from crawlers.content_filters import is_photo_caption_or_credit, is_newsletter_or_promo_noise
+
+    for it in news:
+        nid = it.get("id")
+        imgs = it.get("inline_images", [])
+        cap = it.get("image_caption")
+        paras = it.get("paragraphs") or []
+        for idx, p in enumerate(paras):
+            p_str = str(p or "").strip()
+            if not p_str:
+                continue
+            if is_newsletter_or_promo_noise(p_str):
+                caption_noise_violations.append((nid, f"paragraphs[{idx}]", "邮件订阅引导杂质", p_str[:80]))
+            elif is_photo_caption_or_credit(p_str, inline_images=imgs, cover_caption=cap, is_zh=False):
+                caption_noise_violations.append((nid, f"paragraphs[{idx}]", "图片注释/摄影署名杂质", p_str[:80]))
+
+        paras_zh = it.get("paragraphs_zh") or []
+        for idx, p in enumerate(paras_zh):
+            p_str = str(p or "").strip()
+            if not p_str:
+                continue
+            if is_newsletter_or_promo_noise(p_str):
+                caption_noise_violations.append((nid, f"paragraphs_zh[{idx}]", "中文邮件订阅杂质", p_str[:80]))
+            elif is_photo_caption_or_credit(p_str, inline_images=imgs, cover_caption=cap, is_zh=True):
+                caption_noise_violations.append((nid, f"paragraphs_zh[{idx}]", "中文图片注释杂质", p_str[:80]))
+
+    assert len(caption_noise_violations) == 0, f"断言 21 失败：检测到 {len(caption_noise_violations)} 处图片注释或邮件推广杂质泄漏进正文: {caption_noise_violations[:3]}"
+    print(f"✅ 断言 21 通过: 正文纯净度与零图片注释/摄影署名/邮件推广残留达标 (全站 {len(news)} 篇资讯零注释杂质污染)")
 
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")

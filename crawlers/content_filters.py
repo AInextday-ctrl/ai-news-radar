@@ -121,3 +121,157 @@ def is_low_value_roundup_or_promo(
         title=title, url=url, body=body, summary=summary, classes=classes
     )
     return flagged
+
+
+# =========================================================================
+# Photo Caption, Credit & Newsletter Boilerplate Pure Filters
+# =========================================================================
+
+PHOTO_CAPTION_INDICATORS = [
+    re.compile(r"^(?:view image in fullscreen|photograph:|photo:|credit:|image:|illustration:|source:|caption:)\s*", re.I),
+    re.compile(r"\b(?:photograph|photo|credit|image|illustration):\s*[A-Za-z0-9\s,\./\-]{3,60}$", re.I),
+    re.compile(r"\b(?:in a|in this)\s+(?:company\s+)?(?:handout\s+)?(?:portrait|photo(?:graph)?)\s+released by\b", re.I),
+    re.compile(r"^(?:file photo|archive photo|handout photo|editorial image|stock photo):?\s*", re.I),
+    re.compile(r"^(?:photo\s+by|image\s+courtesy\s+of|courtesy\s+of)\s+[A-Za-z0-9\s,\./\-]{3,60}$", re.I),
+    re.compile(r",?\s*in a (?:company\s+)?(?:handout\s+)?portrait released by the company(?:\s+in\s+\d{4})?(?:\.|$)", re.I),
+    re.compile(r",?\s*in a (?:company\s+)?(?:handout\s+)?photo(?:graph)?(?:\s+released by\s+.*?)?(?:\.|$)", re.I),
+    re.compile(r"^\s*shown (?:here\s+)?(?:in|at|during)\s+.*?(?:\.|$)", re.I),
+    # Chinese photo credit / caption indicators
+    re.compile(r"(?:公司\d{4}年发布的肖像照|资料照片|资料图片|新华社发|法新社图|视觉中国供图|路透社图|封面配图|正文配图)"),
+    re.compile(r"[（\(](?:资料图片|资料照片|供图|视觉中国|新华社发|法新社|路透社|Getty Images)[）\)]\s*$", re.I),
+    re.compile(r"^(?:摄影|供图|来源|制图|图源)[：:]\s*"),
+    re.compile(r"^(?:图为|图说|配图|照片显示|肖像照|插图)[：:\s]"),
+    re.compile(r"^(?:全屏查看图片|全屏查看图像|查看全屏图片)"),
+]
+
+NEWSLETTER_PROMO_INDICATORS = [
+    re.compile(r"^(?:get the most important|sign up for|subscribe to|read more about|listen to|follow us on).*?(?:inbox|newsletter|podcast|updates)", re.I),
+    re.compile(r"\bin your inbox each week\.?$", re.I),
+    re.compile(r"^(?:to receive this newsletter in your inbox|delivered directly to your inbox)", re.I),
+    re.compile(r"^(?:sign up for the \w+ newsletter|get our newsletter)", re.I),
+    re.compile(r"^(?:this article was originally published on|read the original article on)", re.I),
+    re.compile(r"^(?:每周在您的收件箱中获取|订阅我们的通讯|点击订阅|更多报道请关注|本文最初发表于|阅读原文请访问)"),
+]
+
+
+def clean_guardian_fullscreen_prefix(text: str) -> str:
+    """
+    Cleans Guardian-style glued image captions like:
+    'View image in fullscreen <Caption text>. Photograph: <Credit><Real sentence...>'
+    Returns stripped substantive text or empty string if it was purely a caption.
+    """
+    if not text:
+        return ""
+    t = text.strip()
+    if re.search(r"^view image in fullscreen", t, re.I):
+        cleaned = re.sub(
+            r"^view image in fullscreen\s*.*?(?:photograph|photo|credit):\s*[A-Za-z0-9\s,\./\-]+(?:\.|\s*—|\s*-\s*|(?=[A-Z\u4e00-\u9fa5]))",
+            "",
+            t,
+            flags=re.I
+        ).strip()
+        if len(cleaned) < 30:
+            return ""
+        return cleaned
+    return t
+
+
+def is_newsletter_or_promo_noise(text: str) -> bool:
+    """Detects whether text is an email newsletter signup footer or promo link."""
+    if not text:
+        return False
+    t = text.strip()
+    return any(rx.search(t) for rx in NEWSLETTER_PROMO_INDICATORS)
+
+
+def is_photo_caption_or_credit(
+    text: str,
+    inline_images: Optional[Iterable[Any]] = None,
+    cover_caption: Optional[str] = None,
+    is_zh: bool = False
+) -> bool:
+    """
+    Returns True if the text represents an image caption, photo credit,
+    or matches an inline/cover image caption or alt text.
+    """
+    if not text:
+        return True
+    t = text.strip()
+    if len(t) < 5:
+        return True
+
+    # 1. Indicator regexes
+    for rx in PHOTO_CAPTION_INDICATORS:
+        if rx.search(t):
+            return True
+
+    # 2. Match against candidate image captions and alt texts
+    candidate_captions = []
+    if cover_caption:
+        candidate_captions.append(str(cover_caption).strip().lower())
+
+    if inline_images:
+        for im in inline_images:
+            if isinstance(im, dict):
+                for k in ("caption", "alt", "caption_zh", "alt_zh"):
+                    v = str(im.get(k) or "").strip().lower()
+                    if v:
+                        candidate_captions.append(v)
+            elif isinstance(im, str):
+                pass
+
+    t_low = t.lower()
+    for cap in candidate_captions:
+        if len(cap) < 15:
+            continue
+        # Exact or substring match
+        if t_low == cap or (len(t_low) >= 20 and t_low in cap):
+            return True
+        if len(cap) >= 20 and cap in t_low and len(t_low) <= len(cap) + 40:
+            return True
+        # Overlap match
+        tw = set(t_low.split())
+        cw = set(cap.split())
+        if len(tw) >= 5 and len(cw) >= 5:
+            overlap = len(tw & cw) / float(min(len(tw), len(cw)))
+            if overlap >= 0.85:
+                return True
+
+    return False
+
+
+def clean_article_paragraphs(
+    paragraphs: Iterable[Any],
+    inline_images: Optional[Iterable[Any]] = None,
+    cover_caption: Optional[str] = None,
+    is_zh: bool = False
+) -> List[str]:
+    """
+    Cleans paragraph lists by:
+    1. Un-gluing and stripping 'View image in fullscreen' prefixes.
+    2. Dropping pure image captions and photo credits.
+    3. Dropping newsletter signup footers and promotional noise.
+    4. Removing empty or trivial fragments.
+    """
+    if not paragraphs:
+        return []
+
+    cleaned = []
+    for p in paragraphs:
+        p_str = str(p or "").strip()
+        if not p_str:
+            continue
+        # Un-glue Guardian fullscreen prefix
+        p_str = clean_guardian_fullscreen_prefix(p_str)
+        if not p_str or len(p_str) < 10:
+            continue
+        # Check newsletter promo
+        if is_newsletter_or_promo_noise(p_str):
+            continue
+        # Check photo caption/credit
+        if is_photo_caption_or_credit(p_str, inline_images=inline_images, cover_caption=cover_caption, is_zh=is_zh):
+            continue
+        cleaned.append(p_str)
+
+    return cleaned
+

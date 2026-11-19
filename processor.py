@@ -591,10 +591,15 @@ def is_tail_boilerplate_para(para: str, is_zh: bool = False) -> bool:
     return False
 
 
-def sanitize_article_content(text: str, is_zh: bool = False) -> str:
-    """深度过滤文章长正文中的广告嵌入、推广引流、记者爆料提示与媒体废话，返回高纯度长文段落。"""
+def sanitize_article_content(text: str, is_zh: bool = False, inline_images: Optional[List[Dict[str, Any]]] = None, cover_caption: Optional[str] = None) -> str:
+    """深度过滤文章长正文中的广告嵌入、推广引流、图片注释、记者爆料提示与媒体废话，返回高纯度长文段落。"""
     if not text:
         return ""
+    from crawlers.content_filters import (
+        clean_guardian_fullscreen_prefix,
+        is_newsletter_or_promo_noise,
+        is_photo_caption_or_credit,
+    )
     paras = [p.strip() for p in text.replace("\r\n", "\n").split("\n\n") if p.strip()]
     cleaned_paras = []
     ad_phrases = [
@@ -606,12 +611,18 @@ def sanitize_article_content(text: str, is_zh: bool = False) -> str:
         "仅供订阅者", "download the app", "read in app"
     ]
     for p in paras:
-        pl = p.lower()
+        p_clean = clean_guardian_fullscreen_prefix(p)
+        if not p_clean:
+            continue
+        if is_newsletter_or_promo_noise(p_clean):
+            continue
+        if is_photo_caption_or_credit(p_clean, inline_images=inline_images, cover_caption=cover_caption, is_zh=is_zh):
+            continue
+        pl = p_clean.lower()
         if any(phrase in pl for phrase in ad_phrases):
             continue
-        if is_tail_boilerplate_para(p, is_zh=is_zh):
+        if is_tail_boilerplate_para(p_clean, is_zh=is_zh):
             continue
-        p_clean = p
         for rule in AGGREGATOR_NOISE_RULES:
             p_clean = re.sub(rule, '', p_clean, flags=re.IGNORECASE).strip()
         min_len = 5 if is_zh else 10
@@ -1637,7 +1648,12 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     if is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant:
                         item["is_paywalled"] = False
                     if ext.get("paragraphs"):
-                        item["paragraphs"] = ext["paragraphs"]
+                        from crawlers.content_filters import clean_article_paragraphs
+                        item["paragraphs"] = clean_article_paragraphs(
+                            ext["paragraphs"],
+                            inline_images=ext.get("inline_images"),
+                            cover_caption=ext.get("image_caption")
+                        )
                     if is_nyt or is_verge or is_wapo or is_washsun or is_ft or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant:
                         item["inline_images"] = ext.get("inline_images", [])
                     elif ext.get("inline_images"):
@@ -1683,16 +1699,37 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
             (len(raw_art_en) >= 2000 and len(art_zh) < 800)
         )
         if raw_art_en and is_zh_stub:
+            from crawlers.content_filters import clean_article_paragraphs
             paras = [p.strip() for p in raw_art_en.split("\n\n") if len(p.strip()) > 25]
             if not paras:
                 paras = [p.strip() for p in raw_art_en.split("\n") if len(p.strip()) > 25]
+            paras = clean_article_paragraphs(
+                paras,
+                inline_images=item.get("inline_images"),
+                cover_caption=item.get("image_caption")
+            )
             capped_en = "\n\n".join(paras[:14])
             raw_trans_zh = free_translate_zh(capped_en)
-            item["article_content_zh"] = sanitize_article_content(clean_multiline_text(raw_trans_zh), is_zh=True)
+            item["article_content_zh"] = sanitize_article_content(
+                clean_multiline_text(raw_trans_zh),
+                is_zh=True,
+                inline_images=item.get("inline_images"),
+                cover_caption=item.get("image_caption")
+            )
         elif art_zh:
-            item["article_content_zh"] = sanitize_article_content(clean_multiline_text(art_zh), is_zh=True)
+            item["article_content_zh"] = sanitize_article_content(
+                clean_multiline_text(art_zh),
+                is_zh=True,
+                inline_images=item.get("inline_images"),
+                cover_caption=item.get("image_caption")
+            )
         if raw_art_en:
-            item["article_content"] = sanitize_article_content(raw_art_en, is_zh=False)
+            item["article_content"] = sanitize_article_content(
+                raw_art_en,
+                is_zh=False,
+                inline_images=item.get("inline_images"),
+                cover_caption=item.get("image_caption")
+            )
 
     # 5. spec_tags_en 0 中文
     if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):

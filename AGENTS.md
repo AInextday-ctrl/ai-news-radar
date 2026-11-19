@@ -16,6 +16,10 @@
 3. **真实原厂配图，拒绝无关联库存图**：
    - 权威财经/技术报道（如联想 AI 服务器财报）严禁被关键词误判打上无关的库存无人机（drone）图片。
    - 优先提取并本地化托管源站真实的官方大图（如 `assets.bwbx.io`、ThinkSystem 算力集群大图）；若无合适图片，优雅降级为文字排版卡片（`feed-card-editorial`），绝不滥用假图。
+4. **零图片注释与邮件推广杂质泄漏 (Zero Leaked Caption & Newsletter Noise)**：
+   - 严禁将源站配图注释（Caption，如 `字节跳动联合创始人张一鸣，公司2021年发布的肖像照。`、`View image in fullscreen ... Photograph: ...`）、摄影机构署名（Credit，如 `Photo by ...`、`新华社发`、`视觉中国供图`）当作文章正文段落提取或排版。
+   - 严禁将邮件订阅引导语（如 `Get the most important tech news in your inbox each week.`、`每周在您的收件箱中获取最重要的科技新闻。`）泄漏至正文末尾或任何段落中。
+   - 所有正文段落必须通过 `clean_article_paragraphs` 自动过滤图片注释与推广尾巴，确保深度报道原文实录纯正无杂质。
 
 ---
 
@@ -57,4 +61,4 @@
 
 ## 5. 质量门禁一票否决制 (CI Quality Gate Hard Enforcement)
 
-- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 20 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
+- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 21 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
