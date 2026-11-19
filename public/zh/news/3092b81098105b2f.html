@@ -264,10 +264,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">代理开发的惊人速度使得传统的性能工程方法变得不可持续。为了跟上步伐，我们构建了 Performance Factory，这是一个自治系统，它利用 Codex 和我们的模型的全部功能以前所未有的速度查找和修复回归。 Performance Factory 在云中运行并自动调查和解决性能问题，使我们能够跟上路线图的雄心壮志。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Performance Factory 中，我们的工程师为重复性作业定义工作流程，并为执行这些作业的 Codex 代理编写指令。特别是，当性能警报触发时，回归工作流程会打开一个任务。代理调查减速情况，将其发现记录在任务中，并提出修复方案供工程师审查。部署后，另一个代理将执行相同的任务来检查性能是否已恢复到基线。从调查到编写修复程序再到验证缓解措施，性能工厂中的第一个工作流程已经自动化了修复回归的整个过程。在短短三个多月的时间里，回归工作流程跟踪了 1,700 多项调查，找出了 600 多个案例的根源。每天有 17 项自动调查。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在这里，我们将分享我们对 Codex 的使用如何演变为现在的 Performance Factory，逐步完成我们的第一个运行工作流程，并分享在生产中构建和运行代理工作流程的早期经验教训。</p>
-
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://images.ctfassets.net/kftzwdyauwt9/581rKVIvguLraKii21zIgr/83deca5cdcec639b656a9a5ec1954f4b/performance-factory-evolution-light.png?w=3840&amp;q=90&amp;fm=webp" alt="Software work evolves from manual labor to partnering with machines to agent factories." class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -275,11 +271,11 @@
                 </figcaption>
             </figure>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Performance Factory 中，我们的工程师为重复性作业定义工作流程，并为执行这些作业的 Codex 代理编写指令。特别是，当性能警报触发时，回归工作流程会打开一个任务。代理调查减速情况，将其发现记录在任务中，并提出修复方案供工程师审查。部署后，另一个代理将执行相同的任务来检查性能是否已恢复到基线。从调查到编写修复程序再到验证缓解措施，性能工厂中的第一个工作流程已经自动化了修复回归的整个过程。在短短三个多月的时间里，回归工作流程跟踪了 1,700 多项调查，找出了 600 多个案例的根源。每天有 17 项自动调查。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在这里，我们将分享我们对 Codex 的使用如何演变为现在的 Performance Factory，逐步完成我们的第一个运行工作流程，并分享在生产中构建和运行代理工作流程的早期经验教训。</p>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当我们使用 Codex 进行更多性能工作时，我们注意到我们团队的工作方式取得了进步。我们希望其他服务团队在其他领域采用代理工作流程时可以从我们的流程中学习。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1. 食品法典委员会之前。在 Codex 之前，工程师手动检查指标和日志、比较跟踪、调试实时机器并读取代码以调查速度下降情况。这项工作非常耗时，并且知道在哪里查找通常需要对服务有深入的了解。相关信号很容易被忽视。当我们反复遇到相同类型的问题时（例如 ChatGPT 的第一个令牌延迟中的回归），我们构建了高级工具，例如 CPU 和分配分析器，以使这些调查变得更容易。随着时间的推移，我们积累了 30 多个性能工具。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">2. 法典作为合作伙伴。一旦我们与 Codex 成为合作伙伴，工程师就会问：“为什么速度变慢了？”并与 Codex 合作进行调查，即使是在不熟悉的系统中。 Codex 可以搜索大型代码库，查找相关指标和跟踪，跟踪跨服务的交互，并进行适当的分析以拼凑发生的情况。但工程师仍然必须掌控整个过程，了解要使用哪些性能工具以及如何指导调查。对于更多的人来说，困难的调查更容易调试，所需的专业知识和时间更少。</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://images.ctfassets.net/kftzwdyauwt9/4GVsirng1kgJ1GzSsQ9Iof/f21a0b8682d456132be1ef8e1b9ce0ed/performance-factory-orchestrator-architecture-light.png?w=3840&amp;q=90&amp;fm=webp" alt="Performance Factory consists of a task service, dispatch loop, cloud execution, and subscriptions." class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -287,6 +283,10 @@
                   📷 Performance Factory consists of a task service, dispatch loop, cloud execution, and subscriptions.
                 </figcaption>
             </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1. 食品法典委员会之前。在 Codex 之前，工程师手动检查指标和日志、比较跟踪、调试实时机器并读取代码以调查速度下降情况。这项工作非常耗时，并且知道在哪里查找通常需要对服务有深入的了解。相关信号很容易被忽视。当我们反复遇到相同类型的问题时（例如 ChatGPT 的第一个令牌延迟中的回归），我们构建了高级工具，例如 CPU 和分配分析器，以使这些调查变得更容易。随着时间的推移，我们积累了 30 多个性能工具。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">2. 法典作为合作伙伴。一旦我们与 Codex 成为合作伙伴，工程师就会问：“为什么速度变慢了？”并与 Codex 合作进行调查，即使是在不熟悉的系统中。 Codex 可以搜索大型代码库，查找相关指标和跟踪，跟踪跨服务的交互，并进行适当的分析以拼凑发生的情况。但工程师仍然必须掌控整个过程，了解要使用哪些性能工具以及如何指导调查。对于更多的人来说，困难的调查更容易调试，所需的专业知识和时间更少。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">3.可重复使用的技能。为了进一步自动化，我们通过称为性能取证的共享技能捕获了性能团队的调查过程。它告诉 Codex 哪些工具可用、何时使用它们以及如何解决速度下降的问题，以便 Codex 可以尝试从几个角度解决问题：</p>
 
@@ -306,6 +306,16 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">6、工厂。我们构建了 Performance Factory 来运行端到端代理性能工程工作流程。它跟踪每个活动任务接下来需要什么，并在该步骤准备好时分配一个代理。每个任务都会保留其状态和结果，因此工作可以在代理和工程师之间传递，并在代码审查或部署后恢复。对于回归，工作从调查警报开始，到验证生产中的恢复结束。我们可以将常见的优化转化为在我们的服务中定期运行的工作流程。发现潜在优化的工作流程可以在另一个工作流程中打开任务来测试和实施它。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">任务服务是工程师通过添加用 Markdown 编写的配置文件和提示以供代理遵循的提示来定义工作流程的地方。配置列出了任务可以经历的状态、允许的转换以及哪些步骤需要工程师。单独的提示告诉代理在每一步要做什么。</p>
+
+<figure class="my-8 mx-auto w-full w-full">
+          <div class="w-full aspect-video rounded-2xl overflow-hidden shadow-lg bg-black">
+            <iframe src="https://player.vimeo.com/video/1246485623?h=0445ddf6d0" class="w-full h-full border-0 block" loading="lazy" scrolling="no" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="Performance Factory agents process alert triage, regression investigation, and service monitoring tasks, creating tasks for other workflows as work progresses."></iframe>
+          </div>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 Performance Factory agents process alert triage, regression investigation, and service monitoring tasks, creating tasks for other workflows as work progresses.</span>
+            <a href="https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">原站观看 ↗</a>
+          </figcaption>
+        </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1code-change/2├── config.toml3└── work/4 ├── Implementing.md5 └── reviewing.md 代码更改任务包含一个配置文件，以及实现和审核的 Markdown 提示。</p>
           </div>
@@ -365,6 +375,14 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
+            <a href="/zh/news/a4b4c647fe434703" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/decoder_6646d473a819af32.jpg" alt="AI模型单位算力成本急剧下探，用量与支出背离" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">THE DECODER</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">AI模型单位算力成本急剧下探，用量与支出背离</h4>
+            </a>
+            
             <a href="/zh/news/edd9224f8cdf80b8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://www.politico.com/dims4/default/6f7c2fa/2147483647/resize/1200x/quality/90/?url=https%3A%2F%2Fstatic.politico.com%2F8b%2F2e%2F6bee9b35422f9a04c406d689eb40%2Felection-2024-california-house-15316.jpg" alt="美国众议院组建AI安全与创新核心小组" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -387,14 +405,6 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">TechCrunch</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">跨境供应链平台Everful获4850万美元融资</h4>
-            </a>
-            
-            <a href="/zh/news/9ab20d78281035e1" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/verge_f5c860210425baad.jpg" alt="谷歌Gemini Mac版获电脑操作权限" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">谷歌Gemini Mac版获电脑操作权限</h4>
             </a>
             
               </div>
