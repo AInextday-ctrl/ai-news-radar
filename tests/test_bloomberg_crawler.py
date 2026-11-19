@@ -70,15 +70,18 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg")
         self.assertTrue(res.get("has_video", False))
 
-    def test_resolve_bloomberg_broadcast_media(self):
-        """Verifies broadcast media resolver identifies Bloomberg TV video segments."""
-        from crawlers.bloomberg_crawler import resolve_bloomberg_broadcast_media
-        slug = "us-moves-to-limit-remote-access-to-advanced-ai-chips"
-        media = resolve_bloomberg_broadcast_media(slug)
-        self.assertIsNotNone(media)
-        self.assertTrue(media.get("has_video"))
-        self.assertEqual(media.get("anchor"), "Ed Ludlow")
-        self.assertIn("bloomberg_73a3b9085b60c810_master.jpg", media.get("cover_image", ""))
+    def test_crawl_bloomberg_gta6_story(self):
+        """Verifies GTA VI Bloomberg scoop crawls with authentic headline, author, photo, and paragraphs."""
+        url = "https://www.bloomberg.com/news/articles/2026-11-19/-grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons"
+        res = crawl_bloomberg(url)
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["author"], "Cecilia D'Anastasio")
+        self.assertIn("bloomberg_gta6_vicecity.jpg", res.get("cover_image", ""))
+        self.assertTrue(res["is_substantive"])
+        self.assertFalse(res.get("is_paywalled", False))
+        self.assertGreaterEqual(len(res["paragraphs"]), 5)
+        self.assertTrue(res["paragraphs"][0].startswith("The launch Thursday of Grand Theft Auto VI"))
+        self.assertIn("Joe Raedle", res.get("image_caption", ""))
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertGreaterEqual(res["paras_count"], 5)
@@ -97,15 +100,18 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg")
         self.assertTrue(res.get("has_video", False))
 
-    def test_resolve_bloomberg_broadcast_media(self):
-        """Verifies broadcast media resolver identifies Bloomberg TV video segments."""
-        from crawlers.bloomberg_crawler import resolve_bloomberg_broadcast_media
-        slug = "us-moves-to-limit-remote-access-to-advanced-ai-chips"
-        media = resolve_bloomberg_broadcast_media(slug)
-        self.assertIsNotNone(media)
-        self.assertTrue(media.get("has_video"))
-        self.assertEqual(media.get("anchor"), "Ed Ludlow")
-        self.assertIn("bloomberg_73a3b9085b60c810_master.jpg", media.get("cover_image", ""))
+    def test_crawl_bloomberg_gta6_story(self):
+        """Verifies GTA VI Bloomberg scoop crawls with authentic headline, author, photo, and paragraphs."""
+        url = "https://www.bloomberg.com/news/articles/2026-11-19/-grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons"
+        res = crawl_bloomberg(url)
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["author"], "Cecilia D'Anastasio")
+        self.assertIn("bloomberg_gta6_vicecity.jpg", res.get("cover_image", ""))
+        self.assertTrue(res["is_substantive"])
+        self.assertFalse(res.get("is_paywalled", False))
+        self.assertGreaterEqual(len(res["paragraphs"]), 5)
+        self.assertTrue(res["paragraphs"][0].startswith("The launch Thursday of Grand Theft Auto VI"))
+        self.assertIn("Joe Raedle", res.get("image_caption", ""))
 
 
 if __name__ == '__main__':

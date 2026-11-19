@@ -89,6 +89,7 @@ KNOWN_BLOOMBERG_AUTHORS = {
 
 # Known Bloomberg official media assets (broadcast videos / HD photography)
 KNOWN_BLOOMBERG_IMAGES = {
+    "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "https://ainewsradar.xyz/images/bloomberg_gta6_vicecity.jpg",
     "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
     "meta-ceo-zuckerberg-leans-on-powell-mccormick-to-clear-path-for-ai-push": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifoW7jFkDAGo/v1/1200x800.jpg",
     "meta-touts-the-cost-saving-benefits-of-latest-in-house-ai-chips": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iE2H29fMfu8E/v0/1200x820.jpg",
@@ -105,16 +106,18 @@ CURATED_BLOOMBERG_STORIES = {
         "author": "Cecilia D'Anastasio",
         "published_at": "2026-11-19T10:00:00Z",
         "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_gta6_vicecity.jpg",
+        "image_caption": "Visitors in front of a Vice City sign in the Wynwood neighborhood of Miami. (Joe Raedle / Getty Images / Bloomberg)",
         "has_video": False,
         "paragraphs": [
-            "The long-awaited launch of Grand Theft Auto VI is shaping up to be an unprecedented bonanza for video-game influencers and streaming platforms, with creators embarking on multi-day subathons and around-the-clock broadcasts to capture an audience numbering in the millions.",
+            "The launch Thursday of Grand Theft Auto VI is shaping up to be a bonanza for online influencers, some of whom are planning all-night livestreaming marathons for what is expected to be the biggest video-game release of all time.",
             "Twitch, the Amazon-owned livestreaming powerhouse, declared the debut of Rockstar Games’ blockbuster its 'largest game launch ever' after registering 3.3 million peak concurrent viewers tuning in to watched playthroughs within hours of release.",
             "Wall Street financial models and industry analysts project that Grand Theft Auto VI is on course to generate more than $3 billion in revenue in its first few months, propelled by record-setting pre-orders, premium edition bundles, and consumer anticipation that built over a 13-year hiatus since GTA V.",
             "Prominent creators including Kai Cenat, IShowSpeed, and xQc turned the open-world release into high-stakes digital spectacles, streaming for 12 to 24 consecutive hours. Streamers leveraged community subathons—where viewer tips and paid subscriptions automatically add minutes to a countdown timer—transforming the gameplay exploration into interactive community marathons.",
             "The launch underscores the evolving economics of video-game distribution, where publisher marketing relies heavily on digital creators as real-time amplifiers. For Take-Two Interactive Software Inc., the immense viewer engagement provides sustained cultural momentum capable of driving long-tail microtransactions and recurring revenue across its next-generation multiplayer universe."
         ],
         "paragraphs_zh": [
-            "万众瞩目的《侠盗猎车手VI》（Grand Theft Auto VI）正式发售，在全网内容创作者与直播平台间掀起了一场前所未有的流量盛宴。数以千计的头部游戏主播开启了连续数日不停歇的“马拉松式”通宵直播（Subathon），吸引了全球数百万玩家实时驻足观看。",
+            "《侠盗猎车手VI》（Grand Theft Auto VI）于周四正式发售，在这款有望成为历史上规模最大视频游戏大作的狂潮下，全球网络主播迎来了一场流量盛宴，部分创作者甚至计划进行通宵不间断的马拉松式直播狂欢。",
             "亚马逊旗下核心流媒体平台 Twitch 官方宣布，R星（Rockstar Games）这款扛鼎大作的上线成为该平台“历史上规模最大的单一游戏启动事件”，开播数小时内即创下330万峰值并发观众的历史新纪录。",
             "华尔街金融分析机构与行业专家普遍预测，凭借打破行业纪录的预售热潮、高溢价豪华版捆绑包以及历经13年沉淀的庞大全球粉丝基本盘，《GTA VI》发售最初几个月内的全球流水收入预计将轻松突破30亿美元大关。",
             "包括 Kai Cenat、IShowSpeed 和 xQc 在内的顶级创作者将开放世界地图的探索转化为极具吸睛效应的网络真人秀，单日直播时长普遍达12至24小时。主播们通过观众订阅与打赏自动延长直播倒计时的机制，将游戏初体验推升为全球玩家共同参与的数字嘉年华。",
@@ -389,6 +392,93 @@ def resolve_bloomberg_broadcast_media(
     return None
 
 
+def localize_bloomberg_image(img_url: str, slug: str) -> str:
+    """
+    Downloads authentic Bloomberg assets.bwbx.io images and caches them in public/images/
+    to deliver via self-hosted CDN (https://ainewsradar.xyz/images/...), adhering to Rule 4.1.
+    """
+    if not img_url:
+        return ""
+    if "ainewsradar.xyz" in img_url:
+        return img_url
+
+    clean_slug = re.sub(r'[^a-zA-Z0-9_-]', '_', slug)[:40].strip('_')
+    local_name = f"bloomberg_{clean_slug}.jpg"
+    public_img_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "public",
+        "images"
+    )
+    os.makedirs(public_img_dir, exist_ok=True)
+    local_path = os.path.join(public_img_dir, local_name)
+
+    if os.path.exists(local_path) and os.path.getsize(local_path) > 5000:
+        return f"https://ainewsradar.xyz/images/{local_name}"
+
+    try:
+        import urllib.request
+        req = urllib.request.Request(img_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            if resp.status == 200:
+                data = resp.read()
+                if len(data) > 5000:
+                    with open(local_path, "wb") as f:
+                        f.write(data)
+                    return f"https://ainewsradar.xyz/images/{local_name}"
+    except Exception:
+        pass
+    return img_url
+
+
+def resolve_bloomberg_image_from_syndication(
+    slug: str,
+    proxies: Optional[Dict[str, str]] = None
+) -> Optional[str]:
+    """
+    Queries open syndication networks (Techmeme, Bing News RSS) for the Bloomberg slug
+    to discover the authentic 1200x800 assets.bwbx.io HD image when PerimeterX blocks direct bloomberg.com access.
+    """
+    if not slug:
+        return None
+
+    if not HAS_REQUESTS or requests is None:
+        return None
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    }
+
+    # 1. Query Techmeme for syndicated Bloomberg post & authentic bwbx og:image
+    for page in ["https://www.techmeme.com", "https://www.techmeme.com/river"]:
+        try:
+            resp = requests.get(page, headers=headers, proxies=proxies, timeout=6)
+            if resp.status_code == 200 and slug in resp.text:
+                html = resp.text
+                for m in re.finditer(re.escape(slug), html, re.I):
+                    start = max(0, m.start() - 200)
+                    end = min(len(html), m.end() + 300)
+                    chunk = html[start:end]
+                    f_match = re.search(r'HREF="#a(\d{6}p\d+)"', chunk)
+                    if f_match:
+                        item_id = f_match.group(1)
+                        p_match = re.match(r'(\d{6})p(\d+)', item_id)
+                        if p_match:
+                            date_part, num_part = p_match.groups()
+                            permalink = f"https://www.techmeme.com/{date_part}/p{num_part}"
+                            p_resp = requests.get(permalink, headers=headers, proxies=proxies, timeout=5)
+                            if p_resp.status_code == 200:
+                                og_img = re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']', p_resp.text, re.I)
+                                if og_img:
+                                    cand = og_img.group(1).strip()
+                                    if "bwbx.io" in cand or "bloomberg" in cand:
+                                        localized = localize_bloomberg_image(cand, slug)
+                                        return localized or cand
+        except Exception:
+            pass
+
+    return None
+
+
 def resolve_authentic_bloomberg_headline(
     url: str,
     slug: str,
@@ -611,6 +701,11 @@ def crawl_bloomberg(
             cand = html.unescape(m_img.group(1)).strip()
             if "bwbx.io" in cand or "bloomberg" in cand:
                 result["cover_image"] = cand
+
+    if not result.get("cover_image"):
+        synd_img = resolve_bloomberg_image_from_syndication(slug, proxies=proxies)
+        if synd_img:
+            result["cover_image"] = synd_img
 
     # 6. Resolve substantive paragraphs
     # First: Check curated high-priority exclusive stories

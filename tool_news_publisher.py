@@ -75,7 +75,8 @@ THEMATIC_FALLBACK_IMAGES = {
     'biotech': 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&h=630&fit=crop&fm=jpg&q=85',
     'policy': 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&h=630&fit=crop&fm=jpg&q=85',
     'engineering': 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&fm=jpg&q=85',
-    'default': 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&fm=jpg&q=85'
+    'gaming': 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1200&h=630&fit=crop&fm=jpg&q=85',
+    'default': 'https://ainewsradar.xyz/images/og-default.jpg'
 }
 
 def get_thematic_fallback_image(title: str = '', category: str = '') -> str:
@@ -94,6 +95,8 @@ def get_thematic_fallback_image(title: str = '', category: str = '') -> str:
         return THEMATIC_FALLBACK_IMAGES['policy']
     if any(k in text for k in ['code', 'software', 'developer', 'github', 'api', 'cloud', 'engineer', 'fund', 'valuation', 'invest', 'raise', 'instacart', 'shein']):
         return THEMATIC_FALLBACK_IMAGES['engineering']
+    if any(k in text for k in ['game', 'gaming', 'gta', 'grand theft auto', 'twitch', 'streamer', 'nintendo', 'playstation', 'xbox']):
+        return THEMATIC_FALLBACK_IMAGES['gaming']
     return THEMATIC_FALLBACK_IMAGES['default']
 
 def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') -> str:
