@@ -109,8 +109,8 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/e6c9b244cf512da2",
       "articleSection": "Artificial Intelligence",
-      "articleBody": "OpenAI通过GPT-o3 mini优化芯片逻辑设计，实现AMD GPU与自研芯片性能提升\n\nOpenAI在高性能芯片研发实验室：利用GPT-o3 mini优化芯片PPA指标，协同AMD进行设计改进 通过模型赋能降低高性能芯片的设计门槛与开发周期 OpenAI利用GPT-o3 mini模型优化芯片设计逻辑，显著提升其首款定制推理芯片Jalapeño的向量与矩阵计算单元性能，并与AMD合作在旗舰GPU IP设计中实现高达14%的PPA性能优化。 Synopsys EDA工具集成与研发周期的缩短。",
-      "wordCount": 250,
+      "articleBody": "OpenAI 的模型正在快速改进为人工智能提供动力的芯片。 8 月份，我们分享了 OpenAI 工程师如何使用我们的前沿模型来加速我们首款定制推理芯片 Jalapeo 的开发。在这里，我们更仔细地研究 Jalapeo 收益背后的专家级设计改进，以及我们如何应用相同的方法为 AMD 的第三方硬件带来显着收益。\n\n为了衡量我们的模型在端到端芯片设计任务中的能力，我们评估了两个开源处理器设计的连续几代，并得出了有趣的发现。为了让值得信赖的评估者进行能力开发，我们正在与 Synopsys 合作，将前沿情报与工程师已经用来设计和验证芯片的电子设计自动化 (EDA) 工具集成起来。\n\n### 改进 Jalapeo 的计算块\n\n我们于 2025 年初开始使用 GPT‑o3 mini 来帮助设计 Jalapeo。即使是早期模型也找到了进行重要 PPA 改进的方法，例如：\n\n在管理和执行并行计算任务的矢量单元中，节省的资源来自浮点加法器和乘法器、转换函数、归约逻辑和特殊功能单元。这些模型探索了替代逻辑实现以及如何跨管道阶段划分计算，寻找共享硬件和减少中间存储的机会。\n\n在矩阵单元（算术组件）中，浮点加法器、乘法器和低精度点积电路积累了改进。一项乘法器重新设计在综合过程中使用的单元面积减少了约 15%，同时将延迟从两个时钟周期减少到一个时钟周期。单独的加法器重新设计将单元面积减少了约 15%，同时保留了两个周期的延迟。点积逻辑和管道组织的进一步改进为整个区块带来了额外的节省。\n\n在更广泛的 Jalapeo 设计工作中，团队估计模型提出的更改将矢量单元中的标准单元面积减少了约 13%，矩阵单元中的标准单元面积减少了 10%。这些优化在 Jalapeo 的芯片启动过程中得到了芯片验证。\n\n### 我们与 AMD 的合作\n\n我们与 AMD 合作进行 PPA 改进，并发现相对于旗舰 GPU IP 上经过深度优化的基准，性能提升高达 14%。我们的模型通过重写描述芯片电路的代码（SystemVerilog RTL）来确定进一步的改进。这代表了在不到 5 个月的时间里取得的大约一年的进展——在芯片设计前沿取得了前所未有的成果。 AMD 已经在最近发送给制造的设计中包含了其中一些更改，并将其他更改添加到其生产设计文件中以供未来版本使用。\n\n我们在专家微架构师的水平上观察了 RTL 的模型原因。该模型可以重写执行计算、控制操作或移动数据的电路。它使用 Synopsys 工具来验证每次重写是否保留了块的行为，并评估功耗、性能和面积的权衡。\n\nAMD 还使用我们的模型编写的设计验证了其即将推出的下一代旗舰 CPU 的关键模块的 PPA 实现了个位数百分比增长。展望未来，我们预计相对于最优化的基准，除了 GPU 和 CPU 之外，PPA 还会进一步改进。\n\n我们对 Jalapeo 和 AMD 芯片的结果表明，模型可以改进生产设计。为了衡量芯片设计能力从一代模型到下一代模型的进展，我们在两个开源 32 位 RISC-V 内核上测试了每个模型。 PicoRV32 是一款紧凑型内核，专为称为 FPGA 的可重新编程芯片而设计。 OpenTitan 使用 Ibex 作为其安全芯片中的嵌入式处理器。每个都是用于嵌入式微控制器类工作负载的完整处理器内核。\n\n我们为每个模型提供了每个内核的原始硬件描述，并要求其提高吞吐量（内核每秒可以执行的指令数）。例如，更改可能会让内核在更少的时钟周期内完成一条指令，但会使每个周期花费更长的时间。测量吞吐量可以捕捉到这两种影响。",
+      "wordCount": 1481,
       "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, OpenAI, AMD, Semiconductor",
       "isBasedOn": "https://openai.com/index/advancing-chip-design-with-our-models/?ref=ainewsradar",
       "about": [
@@ -171,6 +171,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "OpenAI在高性能芯片研发实验室：利用GPT-o3 mini优化芯片PPA指标，协同AMD进行设计改进 通过模型赋能降低高性能芯片的设计门槛与开发周期 OpenAI利用GPT-o3 mini模型优化芯片设计逻辑，显著提升其首款定制推理芯片Jalapeño的向量与矩阵计算单元性能，并与AMD合作在旗舰GPU IP设计中实现高达14%的PPA性能优化。 Synopsys EDA工具集成与研发周期的缩短。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI驱动半导体EDA（电子设计自动化）正进入实质性工业交付期，OpenAI通过算法优化掩盖了硅片物理实现的复杂性。此举不仅是自身算力保障的纵向整合，更是对英伟达等传统芯片商技术垄断的一种降维打击，旨在通过算法赋能重构芯片开发范式。"
           }
         }
       ]
@@ -246,6 +254,59 @@
         
         
         
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">OpenAI 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">OpenAI 的模型正在快速改进为人工智能提供动力的芯片。 8 月份，我们分享了 OpenAI 工程师如何使用我们的前沿模型来加速我们首款定制推理芯片 Jalapeo 的开发。在这里，我们更仔细地研究 Jalapeo 收益背后的专家级设计改进，以及我们如何应用相同的方法为 AMD 的第三方硬件带来显着收益。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">为了衡量我们的模型在端到端芯片设计任务中的能力，我们评估了两个开源处理器设计的连续几代，并得出了有趣的发现。为了让值得信赖的评估者进行能力开发，我们正在与 Synopsys 合作，将前沿情报与工程师已经用来设计和验证芯片的电子设计自动化 (EDA) 工具集成起来。</p>
+
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
+              <span>改进 Jalapeo 的计算块</span>
+            </h3>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们于 2025 年初开始使用 GPT‑o3 mini 来帮助设计 Jalapeo。即使是早期模型也找到了进行重要 PPA 改进的方法，例如：</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在管理和执行并行计算任务的矢量单元中，节省的资源来自浮点加法器和乘法器、转换函数、归约逻辑和特殊功能单元。这些模型探索了替代逻辑实现以及如何跨管道阶段划分计算，寻找共享硬件和减少中间存储的机会。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在矩阵单元（算术组件）中，浮点加法器、乘法器和低精度点积电路积累了改进。一项乘法器重新设计在综合过程中使用的单元面积减少了约 15%，同时将延迟从两个时钟周期减少到一个时钟周期。单独的加法器重新设计将单元面积减少了约 15%，同时保留了两个周期的延迟。点积逻辑和管道组织的进一步改进为整个区块带来了额外的节省。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在更广泛的 Jalapeo 设计工作中，团队估计模型提出的更改将矢量单元中的标准单元面积减少了约 13%，矩阵单元中的标准单元面积减少了 10%。这些优化在 Jalapeo 的芯片启动过程中得到了芯片验证。</p>
+
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
+              <span>我们与 AMD 的合作</span>
+            </h3>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们与 AMD 合作进行 PPA 改进，并发现相对于旗舰 GPU IP 上经过深度优化的基准，性能提升高达 14%。我们的模型通过重写描述芯片电路的代码（SystemVerilog RTL）来确定进一步的改进。这代表了在不到 5 个月的时间里取得的大约一年的进展——在芯片设计前沿取得了前所未有的成果。 AMD 已经在最近发送给制造的设计中包含了其中一些更改，并将其他更改添加到其生产设计文件中以供未来版本使用。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们在专家微架构师的水平上观察了 RTL 的模型原因。该模型可以重写执行计算、控制操作或移动数据的电路。它使用 Synopsys 工具来验证每次重写是否保留了块的行为，并评估功耗、性能和面积的权衡。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">AMD 还使用我们的模型编写的设计验证了其即将推出的下一代旗舰 CPU 的关键模块的 PPA 实现了个位数百分比增长。展望未来，我们预计相对于最优化的基准，除了 GPU 和 CPU 之外，PPA 还会进一步改进。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们对 Jalapeo 和 AMD 芯片的结果表明，模型可以改进生产设计。为了衡量芯片设计能力从一代模型到下一代模型的进展，我们在两个开源 32 位 RISC-V 内核上测试了每个模型。 PicoRV32 是一款紧凑型内核，专为称为 FPGA 的可重新编程芯片而设计。 OpenTitan 使用 Ibex 作为其安全芯片中的嵌入式处理器。每个都是用于嵌入式微控制器类工作负载的完整处理器内核。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们为每个模型提供了每个内核的原始硬件描述，并要求其提高吞吐量（内核每秒可以执行的指令数）。例如，更改可能会让内核在更少的时钟周期内完成一条指令，但会使每个周期花费更长的时间。测量吞吐量可以捕捉到这两种影响。</p>
+          </div>
+          
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">AI驱动半导体EDA（电子设计自动化）正进入实质性工业交付期，OpenAI通过算法优化掩盖了硅片物理实现的复杂性。此举不仅是自身算力保障的纵向整合，更是对英伟达等传统芯片商技术垄断的一种降维打击，旨在通过算法赋能重构芯片开发范式。</p>
+        </div>
         
 
       </div>
@@ -290,36 +351,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
+            <a href="/zh/news/ea468916f78cea78" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/nyt_993f489b68bc7fd3.jpg" alt="全球高校反AI运动：学术自主权的博弈" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">全球高校反AI运动：学术自主权的博弈</h4>
+            </a>
+            
+            <a href="/zh/news/aa6c9e852776802c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_88abcf961da6640a.jpg" alt="北美工业机器人订单激增，制造自动化加速" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">北美工业机器人订单激增，制造自动化加速</h4>
+            </a>
+            
+            <a href="/zh/news/3121c9f137f53276" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://media.datacenterdynamics.com/media/images/Nvidia_CEO_Jensen_Huang_exit.2e16d0ba.fill-280x185.jpg" alt="谷歌投资150亿美元扩建密苏里数据中心" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">谷歌投资150亿美元扩建密苏里数据中心</h4>
+            </a>
+            
             <a href="/zh/news/099ba421a90a74cd" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fffe47a4c-f930-4bfc-b1e4-8ebe180487e0.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="Anthropic IPO零售配售份额或不足20%" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic IPO零售配售份额或不足20%</h4>
-            </a>
-            
-            <a href="/zh/news/a1a1d8e8da125337" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://media.thenextweb.com/2026/09/zhang-yiming-portrait.avif" alt="字节跳动张一鸣登顶亚洲首富" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">字节跳动张一鸣登顶亚洲首富</h4>
-            </a>
-            
-            <a href="/zh/news/2ee466cc5c82dd6d" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/nyt_0b8a11adab062592.jpg" alt="Anthropic冲刺IPO与内部安全焦虑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic冲刺IPO与内部安全焦虑</h4>
-            </a>
-            
-            <a href="/zh/news/38013f91b14b2ef0" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="联想集团二季度营收增长48%超预期" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">联想集团二季度营收增长48%超预期</h4>
             </a>
             
               </div>
