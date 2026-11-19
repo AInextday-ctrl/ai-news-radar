@@ -3888,6 +3888,13 @@ def save_news(items: list):
     with open(os.path.join(DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
         json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
+    # 导出静态按页/分卷历史切片 (供前端按需秒级翻页，彻底释放全量 9,000+ 条历史)
+    try:
+        from scripts.export_archive_volumes import export_all_archive_volumes
+        export_all_archive_volumes()
+    except Exception as e:
+        print(f"⚠️ [export_archive_volumes] 分卷切片导出异常: {e}")
+
     # 清理 public/data 中可能遗留的巨型日志文件
     for stray_file in [os.path.join(PUBLIC_DATA_DIR, "processed_news_ledger.json")]:
         if os.path.exists(stray_file):
