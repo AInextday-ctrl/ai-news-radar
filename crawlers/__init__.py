@@ -34,6 +34,7 @@ from .bbc_crawler import crawl_bbc, is_bbc_url
 from .nypost_crawler import crawl_nypost, is_nypost_url
 from .techfundingnews_crawler import crawl_techfundingnews, is_techfundingnews_url
 from .ign_crawler import crawl_ign, is_ign_url
+from .anthropic_crawler import crawl_anthropic, is_anthropic_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -92,6 +93,8 @@ __all__ = [
     "is_techfundingnews_url",
     "crawl_ign",
     "is_ign_url",
+    "crawl_anthropic",
+    "is_anthropic_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]

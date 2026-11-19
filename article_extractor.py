@@ -1018,6 +1018,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "anthropic.com" in domain or "claude.com" in domain:
+            try:
+                from crawlers.anthropic_crawler import crawl_anthropic
+                ant_data = crawl_anthropic(url, html_text=html_text)
+                if ant_data.get("is_filtered_out"):
+                    result.update(ant_data)
+                    return result
+                if ant_data.get("is_substantive") or ant_data.get("paras_count", 0) >= 1 or ant_data.get("title"):
+                    result.update(ant_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
