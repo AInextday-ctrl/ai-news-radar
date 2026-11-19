@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 05:48:03 UTC",
+  "generated_at": "2026-11-19 06:03:17 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 05:48:03 UTC",
+      "updated_at": "2026-11-19 06:03:17 UTC",
       "headline_item": {
-        "id": "0d01833e95653d07",
+        "id": "ed655f00bfd74e85",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Meta AI代理Muse现重大隐私泄露与数据混淆风险",
-        "title_en": "As Meta bets big on Muse AI agent, early safety mishaps surface",
+        "title_zh": "美收紧高端芯片出口管控，中国军方采购承压",
+        "title_en": "China’s military seeks Nvidia chips as US tightens export curbs",
         "source": "Reuters",
-        "published_at": "2026-11-19T04:55:28+00:00",
-        "url": "https://www.reuters.com/investigations/meta-bets-big-muse-ai-agent-early-safety-mishaps-surface-2026-11-18",
-        "event_summary_zh": "Meta旗下AI代理Muse在运行中出现跨账户信息混淆及非法访问加密隐私数据，引发内部对其隐私安全架构的严重质疑",
-        "event_summary_en": "Meta's AI agent Muse has exhibited critical functional errors, including unauthorized access to third-party push notifications, disclosure of private bank balances, and cross-account data leakage. Internal reports indicate that Muse defaults to reading Android push notifications, enabling it to ingest data from encrypted services like Signal without explicit user authorization.",
+        "published_at": "2026-11-19T05:55:31+00:00",
+        "url": "https://www.reuters.com/world/china/china-seeks-advanced-nvidia-chips-ai-weapons-despite-us-curbs-report-says-2026-11-18/",
+        "event_summary_zh": "美国进一步收紧高性能计算芯片出口限制，旨在限制中国获取 AI 算力以防御所谓“智能化战争”风险",
+        "event_summary_en": "The U.S. Department of Commerce has intensified export controls on high-performance AI processors, restricting companies like Nvidia from supplying advanced computing power to China. This strategy aims to curb the deployment of AI in intelligent warfare while forcing Nvidia to navigate a narrow path between stringent regulatory compliance and maintaining its market share.",
         "core_facts_zh": [
-          "【核心事件】Meta公司AI研发团队在Meta内部产品反馈渠道及安卓端运行环境：Muse AI代理出现数据越权抓取、个人财务信息泄露及跨平台对话混淆",
-          "【起因与机理】AI代理权限设置逻辑缺陷及对端到端加密隐私边界处理不当",
-          "【核心事实细节】Muse AI代理在安卓系统运行中存在越权读取推送通知的权限漏洞。",
-          "【各方立场与态度】Meta亟需重构AI交互的权限隔离架构以应对日益严峻的隐私合规压力。"
+          "【核心事件】美国商务部、英伟达（Nvidia）在美国及全球半导体贸易合规体系：进一步收紧针对高端处理器的出口许可发放，限制高性能GPU在AI应用领域的对华供应",
+          "【起因与机理】基于国家安全考量，试图遏制中国在先进AI硬件与军事智能化领域的研发进度",
+          "【调查与监管诉求】美方持续扩大对高性能处理器芯片的出口禁令范围。",
+          "【各方立场与态度】英伟达面临合规性压力及潜在的中国市场营收份额收缩。"
         ],
         "core_facts_en": [
-          "[Core Event] Meta AI development team: Unauthorized access to notifications, leakage of financial data, and cross-account data mixing",
-          "[Root Cause & Mechanism] Flawed permission architecture and lack of robust boundary controls for end-to-end encrypted data",
-          "[Key Metrics] 58, your Charles Schwab balance is $5899.",
-          "[Official Stance & Demand] Urgent need for Meta to reconstruct AI permission isolation architecture amid rising privacy compliance pressures."
+          "[Core Event] U.S. Department of Commerce, Nvidia: Further tightening of export licenses for high-performance GPUs and AI-capable processors",
+          "[Root Cause & Mechanism] National security concerns regarding the integration of advanced AI into military infrastructure",
+          "[Regulatory & Investigation Focus] Expansion of export restrictions on high-performance processors.",
+          "[Industry Impact & Outlook] Pressure on Nvidia’s compliance and potential revenue impact."
         ],
-        "industry_impact_zh": "此事件揭示了生成式AI Agent在追求高交互深度时，面临的核心合规悖论：即如何平衡主动式服务与用户隐私安全防线。Muse的权限泄露表明大模型系统在集成操作系统底层权限时，缺乏对用户数据上下文边界的有效防火墙，这将成为未来监管机构针对端侧AI部署开展隐私合规审查的关键痛点。",
-        "industry_impact_en": "This incident highlights the inherent compliance paradox in generative AI Agents: balancing proactive service delivery with rigorous privacy containment. The unauthorized access to Android notifications reveals a failure to implement robust data boundary firewalls, setting a precedent for upcoming regulatory scrutiny on the privacy architectures of edge-deployed AI systems."
+        "industry_impact_zh": "美国对华科技封锁已从消费级算力下沉至深度学习基础设施底层，实质是试图通过切断高性能GPU供给，将中国AI工业锁死在上一代硬件体系内。英伟达在此环境下已丧失通过定制版芯片绕开管制的可能性，未来产业链焦点将转为国产化替代进程及对存量高算力资源的极端化存量博弈。",
+        "industry_impact_en": "U.S. containment has shifted from consumer-grade computing to the bedrock of deep learning infrastructure, aiming to trap Chinese AI development on legacy hardware. With tailored chips no longer viable as a bypass, the industry must pivot toward internal substitution and high-stakes management of existing high-performance hardware inventories."
       },
       "headlines": [
+        {
+          "id": "ed655f00bfd74e85",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美收紧高端芯片出口管控，中国军方采购承压",
+          "title_en": "China’s military seeks Nvidia chips as US tightens export curbs",
+          "source": "Reuters",
+          "published_at": "2026-11-19T05:55:31+00:00",
+          "url": "https://www.reuters.com/world/china/china-seeks-advanced-nvidia-chips-ai-weapons-despite-us-curbs-report-says-2026-11-18/",
+          "event_summary_zh": "美国进一步收紧高性能计算芯片出口限制，旨在限制中国获取 AI 算力以防御所谓“智能化战争”风险",
+          "event_summary_en": "The U.S. Department of Commerce has intensified export controls on high-performance AI processors, restricting companies like Nvidia from supplying advanced computing power to China. This strategy aims to curb the deployment of AI in intelligent warfare while forcing Nvidia to navigate a narrow path between stringent regulatory compliance and maintaining its market share.",
+          "core_facts_zh": [
+            "【核心事件】美国商务部、英伟达（Nvidia）在美国及全球半导体贸易合规体系：进一步收紧针对高端处理器的出口许可发放，限制高性能GPU在AI应用领域的对华供应",
+            "【起因与机理】基于国家安全考量，试图遏制中国在先进AI硬件与军事智能化领域的研发进度",
+            "【调查与监管诉求】美方持续扩大对高性能处理器芯片的出口禁令范围。",
+            "【各方立场与态度】英伟达面临合规性压力及潜在的中国市场营收份额收缩。"
+          ],
+          "core_facts_en": [
+            "[Core Event] U.S. Department of Commerce, Nvidia: Further tightening of export licenses for high-performance GPUs and AI-capable processors",
+            "[Root Cause & Mechanism] National security concerns regarding the integration of advanced AI into military infrastructure",
+            "[Regulatory & Investigation Focus] Expansion of export restrictions on high-performance processors.",
+            "[Industry Impact & Outlook] Pressure on Nvidia’s compliance and potential revenue impact."
+          ],
+          "industry_impact_zh": "美国对华科技封锁已从消费级算力下沉至深度学习基础设施底层，实质是试图通过切断高性能GPU供给，将中国AI工业锁死在上一代硬件体系内。英伟达在此环境下已丧失通过定制版芯片绕开管制的可能性，未来产业链焦点将转为国产化替代进程及对存量高算力资源的极端化存量博弈。",
+          "industry_impact_en": "U.S. containment has shifted from consumer-grade computing to the bedrock of deep learning infrastructure, aiming to trap Chinese AI development on legacy hardware. With tailored chips no longer viable as a bypass, the industry must pivot toward internal substitution and high-stakes management of existing high-performance hardware inventories."
+        },
+        {
+          "id": "04563b90d0811dff",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美拒签中国机器人技术人员，CES参展受阻",
+          "title_en": "Sources: technical staff at several Chinese humanoid robot makers have been denied US visas ahead of CES, hampering their efforts to showcase their hardware (Nikkei Asia)",
+          "source": "Nikkei Asia",
+          "published_at": "2026-11-19T05:50:02+00:00",
+          "url": "https://asia.nikkei.com/business/technology/us-visa-denials-hit-xpeng-other-chinese-robot-makers-ahead-of-ces",
+          "event_summary_zh": "多家中国人形机器人企业核心技术人员遭美国拒签，导致CES参展计划被迫调整，展现出美对华科技人员流动的严格审查趋势",
+          "event_summary_en": "Technical staff from Chinese humanoid robot companies, including Xpeng and Engine AI, have faced U.S. visa denials for the upcoming CES. This systemic rejection of engineering personnel, contrasted with easier access for marketing staff, indicates an intensified U.S. regulatory push to limit technology transfer and engagement in critical hardware sectors.",
+          "core_facts_zh": [
+            "【核心事件】小鹏汽车、Engine AI等中国人形机器人初创企业：核心工程技术人员赴美签证申请遭拒绝，导致机器人演示项目无法正常开展",
+            "【起因与机理】美方以国家安全为由，针对高科技产业人员实施更严格的边境审查与技术限制",
+            "【核心事实细节】中国机器人企业技术骨干赴美签证审批受阻。",
+            "【各方立场与态度】美方审查政策显著向具身智能与高端制造领域倾斜。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Xpeng, Engine AI, and other Chinese humanoid robotics startups: Systematic denial of engineering visas, leading to disruptions in exhibition and hardware demonstrations",
+            "[Root Cause & Mechanism] Tightening U.S. border security policies focused on critical technology sectors under national security pretexts",
+            "[Key Metrics] to 65% in 2028 and 75% in 2029, the country's humanoid robot developers still rely on Chinese suppliers for key hardware.",
+            "[Key Position & Outlook] Policy targeting embodied AI and advanced manufacturing sectors."
+          ],
+          "industry_impact_zh": "通过签证限制精准打击技术交流，是美方“小院高墙”策略在人员流动维度的具体化表现。此举直接打击中国机器人企业在国际顶级展示平台的品牌溢价与技术影响力，将迫使中国企业将参展重心向非美地区转移，加速全球科技生态在机器人硬件与具身智能领域出现明显的断裂与阵营化。",
+          "industry_impact_en": "Weaponizing visa denials is a tactical evolution of the 'small yard, high fence' strategy applied to human capital. By undermining the international visibility of Chinese robotics, the U.S. is forcing a decoupling of global tech ecosystems, likely accelerating the bifurcation of the embodied AI market into distinct, non-integrated spheres."
+        },
         {
           "id": "0d01833e95653d07",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "此事件揭示了生成式AI Agent在追求高交互深度时，面临的核心合规悖论：即如何平衡主动式服务与用户隐私安全防线。Muse的权限泄露表明大模型系统在集成操作系统底层权限时，缺乏对用户数据上下文边界的有效防火墙，这将成为未来监管机构针对端侧AI部署开展隐私合规审查的关键痛点。",
           "industry_impact_en": "This incident highlights the inherent compliance paradox in generative AI Agents: balancing proactive service delivery with rigorous privacy containment. The unauthorized access to Android notifications reveals a failure to implement robust data boundary firewalls, setting a precedent for upcoming regulatory scrutiny on the privacy architectures of edge-deployed AI systems."
-        },
-        {
-          "id": "d090111431e1ce01",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "梅塔博睿完成近2亿美元融资，布局AI科学基础设施",
-          "title_en": "China AI Biotech Firm Raises $200 Million in Oman-Backed Round",
-          "source": "Bloomberg",
-          "published_at": "2026-11-19T04:45:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-19/china-ai-biotech-firm-raises-200-million-in-oman-backed-round",
-          "event_summary_zh": "苏州梅塔博睿获阿曼投资局领投的近2亿美元融资，旨在推动“AI+科学”物理世界基础设施的全球化扩张",
-          "event_summary_en": "Suzhou-based MegaRobo Technologies has raised nearly $200 million in a new financing round led by the Oman Investment Authority (OIA), with participation from Asia Investment Capital, Granite Asia, Sinovation Ventures, and CMB International. The capital will support the R&D of its proprietary 'One Intelligence Stack' and the global expansion of its AI-for-Science infrastructure, enabling autonomous execution and learning in complex physical scientific environments.",
-          "core_facts_zh": [
-            "【核心事件】梅塔博睿（MegaRobo Technologies）；阿曼投资局（OIA）在中国苏州：完成近2亿美元融资，用于建设AI科学基础设施及全球化扩张",
-            "【起因与机理】AI模型从数字信息处理向物理世界实验闭环（设计-执行-观察-学习）的范式转移需求",
-            "【关键数据与实测】阿曼投资局领投，总额近2亿美元。",
-            "【行业影响与走向】计划利用融资加速全球业务扩张及服务药企与科研机构的R&D效率提升。"
-          ],
-          "core_facts_en": [
-            "[Core Event] MegaRobo Technologies; Oman Investment Authority (OIA) (Suzhou, China): Raised nearly $200M for AI-for-Science infrastructure expansion",
-            "[Root Cause & Mechanism] Requirement for transitioning AI from digital processing to physical experimental loops",
-            "[Key Metrics] Lead investor Oman Investment Authority (OIA); $200M total capital.",
-            "[Key Position & Outlook] Targeting global expansion and R&D efficiency gains for global pharmaceutical clients."
-          ],
-          "industry_impact_zh": "该融资标志着实验室自动化已从单纯的仪器搬运进化为‘AI+科学’底层操作系统，梅塔博睿通过将模型决策与物理执行深度耦合，试图构建科学发现的通用算力基座。阿曼主权基金的入局不仅是财务投资，更折射出中东资本对AI赋能生物医药与硬科技自主可控基础设施的长期战略配置需求。",
-          "industry_impact_en": "This funding signifies the evolution of laboratory automation into a foundational 'AI+Science' operating system, where MegaRobo bridges model-driven decisions with physical execution. The involvement of the Oman Investment Authority highlights a strategic shift by Middle Eastern sovereign capital toward securing AI-enabled infrastructure for autonomous biotech R&D and scientific discovery."
-        },
-        {
-          "id": "4613577ccd9541fd",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Kraken母公司收购Tribe Capital以拓展金融业务",
-          "title_en": "Kraken parent company Payward agrees to buy Tribe Capital, the VC firm formerly led by Kraken co-CEO Arjun Sethi; Tribe Capital has $2.7B in assets (CoinDesk)",
-          "source": "CoinDesk",
-          "published_at": "2026-11-19T04:30:00+00:00",
-          "url": "https://www.coindesk.com/business/2026/11/18/payward-the-owner-of-crypto-exchange-kraken-is-buying-its-ceo-s-venture-capital-business-tribe",
-          "event_summary_zh": "加密货币交易所Kraken母公司Payward宣布收购管理规模达27亿美元的风险投资公司Tribe Capital",
-          "event_summary_en": "Payward, the parent company of Kraken, has reached an agreement to acquire Tribe Capital, a venture capital firm previously led by Kraken co-CEO Arjun Sethi. The move aims to integrate Tribe Capital's $2.7 billion in assets under management to bolster Kraken's capital deployment and financial services capabilities.",
-          "core_facts_zh": [
-            "【核心事件】Payward (Kraken母公司), Tribe Capital (标的公司)在加密金融资产并购市场：收购Tribe Capital，接收其27亿美元管理资产",
-            "【起因与机理】整合风险投资能力以加速金融业务版图扩张",
-            "【关键数据与实测】整合27亿美元资产管理规模以强化资本实力。",
-            "【各方立场与态度】深化Kraken联席首席执行官Arjun Sethi与标的机构的既有管理纽带。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Payward (parent of Kraken), Tribe Capital (target firm) (Crypto-financial M&A market): Acquisition of Tribe Capital with $2.7B AUM",
-            "[Root Cause & Mechanism] Expansion of financial service capabilities through venture capital integration",
-            "[Key Metrics] Integration of $2.7B AUM to strengthen capital capacity.",
-            "[Key Position & Outlook] Leveraging existing management ties with co-CEO Arjun Sethi."
-          ],
-          "industry_impact_zh": "此举标志着大型加密交易所正从单纯的交易撮合向综合性资产管理与投研实体转型。通过并购VC机构，Payward能够直接将高风险资产配置与流动性管理结合，实现从散户流量变现到深度机构资本运作的跃迁。",
-          "industry_impact_en": "This acquisition signals a strategic shift for large crypto exchanges from trade matching to integrated asset management and investment banking. By internalizing a VC arm, Payward can bridge retail liquidity with institutional-grade capital allocation, scaling beyond pure brokerage revenue streams."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 05:48:03 UTC",
+      "updated_at": "2026-11-19 06:03:18 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 05:48:03 UTC",
+      "updated_at": "2026-11-19 06:03:18 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
