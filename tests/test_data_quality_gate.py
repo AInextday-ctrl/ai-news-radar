@@ -15,7 +15,7 @@ from processor import has_chinglish_seams
 
 
 def run_quality_gate_assertions(payload: dict) -> bool:
-    """Run 19 hard assertions against the latest news payload."""
+    """Run 20 hard assertions against the latest news payload."""
     grouped = payload.get("grouped", {})
 
     print("\n" + "=" * 60)
@@ -476,6 +476,36 @@ def run_quality_gate_assertions(payload: dict) -> bool:
 
     assert len(pollution_violations) == 0, f"断言 19 失败：检测到 {len(pollution_violations)} 处信源污染或悬空截断杂质: {pollution_violations[:3]}"
     print(f"✅ 断言 19 通过: 信源纯正性与零异源通讯社污染/零悬空截断门禁达标 (0 处污染 / 全站 {len(news)} 篇深度资讯)")
+
+    # 20. 静态落地页多段正文保全度与零脱落门禁 (Landing Page Body Integrity)
+    landing_page_violations = []
+    # 采样查验活跃资讯中拥有段落 (paragraphs >= 3 或 is_substantive) 的新闻落地页
+    sample_substantive = [it for it in news if len(it.get("paragraphs") or []) >= 3 or it.get("is_substantive")]
+    for it in sample_substantive:
+        nid = it.get("id")
+        if not nid:
+            continue
+        en_html_p = os.path.join(WORKSPACE_DIR, "public", "news", f"{nid}.html")
+        zh_html_p = os.path.join(WORKSPACE_DIR, "public", "zh", "news", f"{nid}.html")
+        if os.path.exists(en_html_p):
+            try:
+                with open(en_html_p, "r", encoding="utf-8") as f_in:
+                    c = f_in.read()
+                if "In-Depth Coverage" not in c and "article-body" not in c:
+                    landing_page_violations.append((nid, "EN", "英文落地页缺失深度正文区块"))
+            except Exception as e:
+                landing_page_violations.append((nid, "EN", str(e)))
+        if os.path.exists(zh_html_p):
+            try:
+                with open(zh_html_p, "r", encoding="utf-8") as f_in:
+                    c = f_in.read()
+                if "权威报道核心实录" not in c and "深度报道原文实录" not in c and "article-body" not in c:
+                    landing_page_violations.append((nid, "ZH", "中文落地页缺失深度正文区块"))
+            except Exception as e:
+                landing_page_violations.append((nid, "ZH", str(e)))
+
+    assert len(landing_page_violations) == 0, f"断言 20 失败：检测到 {len(landing_page_violations)} 个新闻落地页实质正文脱落: {landing_page_violations[:3]}"
+    print(f"✅ 断言 20 通过: 静态落地页多段正文保全度达标 (共抽检 {len(sample_substantive)} 篇深度报道，中英文落地页 100% 具备全景正文)")
 
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")

@@ -40,6 +40,9 @@
 2. **公共数据体积红线守门**：
    - `public/data/latest_news.json` 体积必须**严格控制在 850 KB 以内**（CI 断言 14 硬性阻断）。
    - 公共 JSON 中剔除 `article_content_en` 等与 `paragraphs` 重复的冗余大文本，保持轻量高效传输。
+3. **服务端静态编译与前端轻量化彻底解耦原则 (Backend Source-of-Truth)**：
+   - **严禁数据源倒挂**：服务端静态单篇页面生成脚本（如 `tool_news_publisher.py`、`content_publisher.py`）必须以完整的后端主库（`data/latest_news.json` 与 `master_archive.json`）为第一数据源；严禁将面向浏览器精简后的 `public/data/latest_news.json` 作为静态构建的主输入源。
+   - **双轨健壮兜底渲染**：正文排版逻辑必须实施多层回退机制——优先读取完整长文字符串，若字段为空则**必须无缝降级读取 `paragraphs` / `paragraphs_zh` 数组**自动拼接还原全景正文，严禁因单一字段缺失导致有数据却渲染出正文空白的落地页。
 
 ---
 
@@ -54,4 +57,4 @@
 
 ## 5. 质量门禁一票否决制 (CI Quality Gate Hard Enforcement)
 
-- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 19 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
+- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 20 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
