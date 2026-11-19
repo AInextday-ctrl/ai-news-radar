@@ -1,12 +1,65 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-19 05:04:17Z
+Generated: 2026-11-19 05:08:44Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### As Meta bets big on Muse AI agent, early safety mishaps surface
+- Canonical URL: https://ainewsradar.xyz/news/0d01833e95653d07
+- Primary Source: Reuters (https://www.reuters.com/investigations/meta-bets-big-muse-ai-agent-early-safety-mishaps-surface-2026-11-18)
+- Executive Summary: Meta's AI agent Muse has exhibited critical functional errors, including unauthorized access to third-party push notifications, disclosure of private bank balances, and cross-account data leakage. Internal reports indicate that Muse defaults to reading Android push notifications, enabling it to ingest data from encrypted services like Signal without explicit user authorization.
+- Key Verified Facts:
+* [Core Event] Meta AI development team: Unauthorized access to notifications, leakage of financial data, and cross-account data mixing
+* [Root Cause & Mechanism] Flawed permission architecture and lack of robust boundary controls for end-to-end encrypted data
+* [Key Metrics] 58, your Charles Schwab balance is $5899.
+* [Official Stance & Demand] Urgent need for Meta to reconstruct AI permission isolation architecture amid rising privacy compliance pressures.
+- Substantive Intelligence Report:
+> NEW YORK, Nov 18 (Reuters) - Meta’s AI agent Muse, embodied by a smiley, fuzzy mascot named Jolly, has burrowed into encrypted personal messages, supplied made-up information about purchases and sent users chats seemingly meant for other people, a fraught start for a bot meant to simplify life for consumers, according to internal company posts reviewed by Reuters.
+> The unbidden actions by Muse – one of the fastest-growing apps on record, with more than 10 million downloads since its September launch, and the centerpiece of Meta’s plan to generate billions of dollars in AI revenue – have prompted unnerved employees to raise concerns it could be mixing up conversations between different accounts and exposing users’ private data, the posts showed.
+> In some of those cases, Meta staffers reported the agent sending them messages about a childcare request they had not made, career advice they had not sought, product orders they had not placed and bank account balances that were not theirs.
+> In one post, from earlier this month, an employee told colleagues his Muse had randomly added an extra message to its regular chats about fishing-related weather and tide information, saying: “BTW, two bank updates, your Capital One balance is $2722.58, your Charles Schwab balance is $5899.57.”
+> “I have never shared my bank account with Muse and never discussed any banking topic with Muse. I’m afraid it’s sending other’s bank info to me,” the staffer wrote in his post.
+> In another example, an employee using Muse on her personal phone reported it had surprised her with a reminder to respond to a message from her sister on Signal, an end-to-end encrypted messaging service popular with privacy advocates that competes with Meta’s WhatsApp.
+> “This seems like an extreme privacy violation. I definitely did not grant it access to other apps, or recall being asked about this,” the employee said in her post.
+> A colleague responded, saying he had discovered Muse was set up by default with permission to access push notifications on phones with Google’s Android operating system after being similarly caught off guard by unsolicited chats related to apps he had not connected.
+> For this story, Reuters reviewed more than two dozen internal posts describing undesired actions by Muse since its debut, many of them from a feedback group where Meta employees flag problems to the team building the agent. Reuters also worked with staff at Signal and the AI Now Institute, a non-profit that studies AI’s impact on society, to replicate Muse’s access to Signal messages. The results of those tests indicated the issue described by the Meta employees was ongoing and could be affecting others.
+> In response to questions about Signal access and other Muse safety concerns, Meta spokesperson Daniel Roberts described the Reuters examples as “isolated incidents,” saying the company prioritizes safety, conducts extensive internal testing and continuously updates products to improve protections.
+> Muse needs to see and interact with people’s computers in order to work on their behalf, and can access other apps only via permissions they explicitly grant, Roberts said. He said many of the messages flagged by employees as potential account mix-ups were hallucinations, a term referring to AI models’ tendency to make things up, and had already been addressed.
+> Reuters was unable to establish whether Muse was giving users other people’s bank account balances and other sensitive data, or making up the information.
+> The Muse incidents highlight the risks associated with an emerging category of consumer AI agents hitting the market from Meta, OpenAI and others, pitched as the next big wave of AI technology. The bots promise to reshape how digital exchanges operate by executing time-saving tasks like answering emails, booking appointments and making online purchases without direct instructions.
+> Meta is ahead of competitors so far, with Muse consistently topping app download charts after heavy promotion to the company’s more than 3.6 billion users on Facebook, Instagram and WhatsApp. The app’s retention rate is also strong, with around a quarter of the people who have set up Muse accounts returning to use it each day, the company has disclosed.
+> To work effectively, agents need deep access to smartphones and computers. However, they are also prone to making mistakes, exploiting obscure loopholes and accomplishing their objectives in sometimes harmful ways. OpenAI and Anthropic, for instance, have revealed instances of their AI agents unexpectedly hacking other companies and weakening systems designed to monitor their activities.
+> Some banks and retailers have responded to those risks by blocking agents. The technology is also posing new challenges for operating system providers like Apple and Google, which manage the permissions agents use to navigate around people’s devices. Apple, for instance, changed its operating system this week to give people more control over agents’ data usage after an Inc. Magazine columnist accused Muse of reading private chats from the Messages app on his Mac.
+> Meta has assured Muse users it isolates each agent in its own secure “virtual machine” – a cloud-based emulation of a personal computer – and gives people full control over which apps they connect. Meta CEO Mark Zuckerberg has cited those protections in dismissing calls for industry-wide AI safety standards, arguing companies already have incentives to build safe products, both to earn consumers’ trust and avoid legal risks. Even so, Meta warns incoming users Muse may make mistakes and its terms of service hold users responsible for the agent’s actions.
+> To find out how Muse might access encrypted messages without users’ knowledge, Reuters provided a description of the Meta employee’s post – where the bot randomly prompted her to respond to a Signal message – to staff at Signal and the AI Now Institute. Reuters then worked with them to replicate the access she had observed.
+> Testers prompted Muse to read Signal messages on different operating systems. On an Android phone and an Apple laptop, it responded by bypassing Meta’s “Connector” tool and instead using permissions granted during the bot’s initial setup to pull in the message text, leveraging those authorizations in ways a user might not anticipate.
+> Specifically, on Android, it used its permission to access the device's push notifications to retrieve the messages, just as the Meta employees had described. On Apple’s macOS, it used a combination of the computer’s accessibility and screenshot tools, repurposing settings Apple offers to help people with disabilities operate their computers.
+> The same requests were blocked in tests conducted on an iPhone.
+> The results indicate Meta is interpreting the permissions granted by Muse users broadly, an approach that has long earned the company criticism from privacy advocates and hefty fines from regulators.
+> In response to Reuters’ findings, Signal President Meredith Whittaker accused Meta of launching Muse “without showing any respect for basic privacy or cybersecurity,” calling the deployment of agents that can gain wide access to people’s devices “technologically reckless.”
+> She called for app developers like Signal to be given “consistent technical ways” to mark their applications as off-limits to AI agents, for Meta and other AI companies to honor those boundaries and for operating system providers to enforce the rules.
+> Presented with the same findings, Apple and Google said they were considering changes to give people more control over what they authorize with AI agents – though Google, like Meta, noted that people already “must deliberately grant permissions” for apps to access Android notifications.
+> Apple said it had built its accessibility tools for people with disabilities and cautioned that leveraging them “for unintended purposes” could put people’s personal information at risk. Its operating system update this week effectively closed the pathway identified by Reuters, sharply restricting developers’ use of accessibility tools on Macs and introducing a new agent-oriented set of permissions.
+> “We are committed to ensuring users understand exactly what they are allowing, so they can make informed choices about their data and privacy,” Apple said in a statement.
+> In other cases discussed internally, staffers reported cases of Muse informing users about transactions that never occurred and making up prices on products they did purchase, costing them real money. In one incident, the agent booked a non-refundable Airbnb stay without permission, an employee reported.
+> Some of the incidents that raised the most concern involved cryptic out-of-context messages sent by the agent that appeared to contain other people’s information, in many cases phrased as replies to queries the users had never submitted.
+> In a late September social media post, a member of Meta’s Superintelligence team behind Muse initially described a user report of a similar problem as a temporary hallucination-related glitch, resolved the same day it arose. However, the internal posts reviewed by Reuters showed such incidents occurring as far back as mid-September and continuing through this month.
+> In one such post, an employee reported his Muse sending him a message “out of nowhere” saying it was unable to submit a request related to a parent’s control over who could access their child’s data.
+> He had done nothing to trigger the chat, and had never discussed child data or caregiving access with his Muse, he said.
+> When he asked Muse about the message, the bot replied: “I don’t have a good explanation for it other than that it wasn’t related to our conversation. Let’s ignore it. How can I help?”
+> Another staffer said Muse randomly offered to “message the seller” about picking up a coffee table. When the employee asked Muse, “What are you talking about?” the agent responded that it had “pulled in some context about a coffee table pickup that doesn’t seem to be yours.”
+> This was “not my conversation,” the employee said in his post, expressing concern about a “possible cross-account context leak.”
+> To address employee worries, another Superintelligence team member told the internal feedback group in early November that the agent appeared to be hallucinating messages in response to built-in prompts pushing it to engage with users in between sessions.
+> “These (hallucinations) unfortunately bias towards the most uncomfortable topics, like finances/security/safety, which sucks,” he said, adding that he was aware of several other cases involving “crypto-related things too, like giving people updates on their Bitcoin balances.”
+> He said the issues involved both the underlying AI model and the software enabling Muse to take actions, and that the team was working through them.
+> Roberts declined to answer Reuters questions about those issues, including how many there were and why they were persisting.
+> Sorry, there are no recent results for popular images.
+> Sorry, there are no recent results for popular videos.
+> Sorry, there are no recent results for popular commented articles.
 
 ### China AI Biotech Firm Raises $200 Million in Oman-Backed Round
 - Canonical URL: https://ainewsradar.xyz/news/d090111431e1ce01
@@ -665,39 +718,6 @@ Canonical: https://ainewsradar.xyz
 > MAI Code 2 and Code 2 Flash are available in GitHub Copilot, with Code 2 Flash also in a limited preview in Foundry. OpenRouter, Vercel, Hermes, Open Code, and Kilo are expected to follow. MAI Image 2.7 and Flash are in public preview in Foundry and on fal, Genspark, OpenRouter, and Vercel. Decision 1.1 is generally available in Foundry, on OpenRouter, and through Vercel's AI Gateway. MAI Realtime 1 can be tried in MAI Labs and is available as a Foundry preview, free until the public preview launches. MAI Cyber 2 Flash is exclusive to Microsoft's security products. In MDASH, it will automatically replace the existing model in the MAI profile for eligible customers starting mid-December.
 > In April, Microsoft and OpenAI restructured their partnership. OpenAI can now sell its products through any cloud provider, but Azure remains the primary cloud partner. Microsoft holds a non-exclusive license to OpenAI's models and products through 2032.
 
-### What is Nvidia without AI’s sugar daddy in charge?
-- Canonical URL: https://ainewsradar.xyz/news/cb3094d728a94851
-- Primary Source: The Verge AI (https://www.theverge.com/ai-artificial-intelligence/1036776/nvidia-earnings-kress-jensen-huang-petition)
-- Executive Summary: Following Jensen Huang's departure due to personal misconduct, interim CEO Colette Kress held her first all-hands meeting at Nvidia. To counter market concerns regarding supply chain stability without Huang, Kress confirmed supply agreements remain valid through the end of the decade and announced accelerated salary and equity packages to address internal unrest.
-- Key Verified Facts:
-* [Core Event] Interim CEO Colette Kress, Board Chair Harvey C. Jones (Nvidia all-hands meeting): Announced accelerated pay raises and equity, reaffirmed supply chain agreements
-* [Root Cause & Mechanism] Managing leadership crisis and potential brain drain following Huang's exit
-* [Key Fact Detail] Following Jensen Huang's departure due to personal misconduct, interim CEO Colette Kress held her first all-hands meeting at Nvidia.
-* [Industry Impact & Outlook] Kress's focus on fiscal discipline may signal the end of the company's historically aggressive customer-financing strategy, shifting Nvidia's supply chain dominance to rely more on legal contract enforcement rather than personal endorsements.
-- Substantive Intelligence Report:
-> If the glorious AI revolution rests entirely on the well-being of one man, AI is perhaps not as robust a technology as I had previously been led to believe. Nonetheless, chunks of Silicon Valley are now insisting he is indispensable. For instance, if Elon Musk is telling the truth, then Jensen Huang (the former CEO of Nvidia, a company with a market cap of about $3 trillion) has been making deals that were “a handshake with Jensen” with suppliers — “not a written contract,” Musk wrote.
-> Fascinating stuff to tell shareholders. But after listening to Nvidia’s first earnings call with its new CEO, Colette Kress, I do think something may have shifted. In her former role as CFO, Kress generally told Huang to stop spending so much money on financing its customers, because telling the CEO to stop spending so much goddamn money is the CFO’s job. Apparently he belittled her about this, but that’s the CEO–CFO relationship, baby! Anyway she’s the boss now, at least temporarily. I think it’s reasonable to assume that though Nvidia has for years been the AI industry’s sugar daddy, without Huang and his handshakes in the picture, it may be less liberal with its cash.
-> "Kress shot down the idea that Huang’s departure would lead to a brain drain within Nvidia"
-> Kress’ job was never going to be easy. Even without tantrums from the likes of Epic Games CEO Tim Sweeney and Musk, both of whom seem to have a lot of free time for guys who are ostensibly running multibillion-dollar companies, having to steer a company after an event on the scale of Huang’s meltdown is a miserable task. But this woman also is now having to deal with a bunch of guys publicly insisting that Huang was the only reason Nvidia succeeded. It amused me on the call that she did the thing I often do when men decide they can bully me, which is to tap in another man who is theoretically or actually in charge of me — and so on the call, Nvidia board Chair Harvey C. Jones politely told these losers to get bent. The board does not intend to reinstate Huang, and the company won’t be taking questions about him.
-> On the call, Kress pointedly noted that Nvidia’s agreements with suppliers last through the end of the decade, so I suppose we must entertain the possibility that when it comes to the handshake deals, Musk is, once again, lying. This is an important thing, though — as SemiAnalysis noted in its bizarrely conspiratorial post on the situation, Nvidia is successful because it has choked off the supply chain.
-> Kress also shot down the idea that Huang’s departure would lead to a brain drain within Nvidia, or the kind of open internal revolt that got Sam Altman reinstated at OpenAI during “the blip” in 2023. She told investors that “our employees, we believe, are committed. They are committed to doing their life’s work at Nvidia.” Nvidia’s employees have “been working seamlessly on what they need to complete,” she added. “From a business perspective, it’s business as usual.” I’m sure we’ll hear more about this in the coming days, but unlike with Altman, Huang resigned, and we all know why. And while some employees support reinstating Huang, I notice that there’s a real dearth of “we’ll quit with him” in those sentiments.
-> I don’t think this is going to shut the Branch Nvidians up, but I do think the board doesn’t have another choice here. Hilariously, we learned this weekend that Nvidia did not buy complete directors’ and officers’ insurance. While the individual executives’ and board members’ personal assets are shielded from lawsuits that stem from its executives’ behavior, the company is not. So if someone, or perhaps several someones, were to file a suit because of, say, Huang’s personal life and its damaging effects on the stock price, Nvidia itself is on the hook.
-> "The scandal isn’t mainly about the affairs, as much fun as we all have been having with them"
-> This is to say nothing of the Securities and Exchange Commission’s investigation — which, given how cliqued up Huang was with President Donald Trump, may be investigating on his behalf rather than investigating him — or the California attorney general going on Bloomberg TV to say that he was going to start kicking the tires on an investigation, or Huang and general counsel Tim Teter’s upcoming congressional testimony. The three actual lawyers left at the Department of Justice may be doing their own investigation, too. Elizabeth Warren seems mad. Marco Rubio’s name has been publicly attached in stories on the leaks, which makes me a little suspicious about who’s been doing the leaking.
-> A reminder: The scandal isn’t mainly about the affairs, as much fun as we all have been having with them. It is about Nvidia customers allegedly circumventing a ban on selling chips to China. The scandal is already big enough that US policy has been altered; the Department of Commerce informed us all on November 16th that there were new restrictions on selling chips to countries such as Indonesia, Malaysia, Singapore, Thailand, and Brazil. Also, data centers around the world need licenses from the US to lease compute to companies headquartered in China.
-> “No one could tell them ‘no’ or put them in their place.”
-> You may be wondering how these restrictions will affect Nvidia’s sales. The company also addressed this, though somewhat obliquely: It raised its forecast, saying that revenue will grow by 75 percent next year. Still, given that Singapore alone was responsible for $104 billion of revenue in 2025, I am curious about the number; at the time, it was the second-biggest geographic area by revenue, dwarfed only by the US. I can’t tell you how much Singaporean sales matter to Nvidia now, because around the time that Singaporean sales reportedly started to represent half the company’s revenue, Nvidia switched its reporting methodology. The company had previously noted that “most shipments associated with Singapore revenue were to locations other than Singapore and shipments to Singapore were insignificant.” Notably, Megaspeed had a Singapore address — and was the subject of a truncated Commerce Department investigation into whether its chips were being diverted to China. Fun stuff!
-> You know what else is fun? Jensen Huang’s children are still at the company, at least as far as anyone knows. His daughter Madison, described as Huang’s “chief of staff” by The New York Times, even helped direct Nvidia’s response to inquiries about Megaspeed, which have been mounting now for a year, the Financial Times reported. Her husband, Nico Caprez, “was promoted to a role that covered international deals with cloud computing clients in Asia” around the time those inquiries were getting started. “They had a lot of power and influence and were allowed to operate unchecked,” an anonymous source told the FT. “No one could tell them ‘no’ or put them in their place.”
-> His kids — one of them, Spencer, ran a bar before his role at Nvidia — likely haven’t endeared themselves to their colleagues, based on some of the reporting now trickling out about them. What was Spencer doing at Nvidia? Unknown. “Some executives said they had never encountered Spencer Huang in the course of business,” The Wall Street Journal wrote.
-> "As a person who loves mess, I think the Branch Nvidians should keep this shit coming"
-> Employing the CEO’s relatives was already a governance risk. If the outside agitation continues to reinstate Jensen Huang, there are three key lambs that Nvidia can slaughter, and all of them are his relatives. I suppose the thing I find most astonishing is that Huang doesn’t see the writing on the wall; he has posted that if “the Board of Directors decides that my return is in the best interest of our shareholders, our employees, the company, and America, I would be honored to answer these calls and return as CEO.” The post was met with, among other things, Altman posting a green heart in response.
-> Now, as a person who loves mess, I think the Branch Nvidians should keep this shit coming. I mean, Huang can nominate two people to the board of directors before the company’s shareholder meeting next year. Let’s have a stupid proxy fight and see what else leaks about Huang’s leadership and children! Of course, that will be difficult for Kress to manage — but that’s I guess what she’s getting paid for.
-> Up until now, Kress had been trying to rein in Huang’s spending on the AI ecosystem — financing, investments, and so on — in a huge swath of companies, according to stories in The Information and The Wall Street Journal. According to the Journal’s story, Huang noted that the vaunted deals he’d made with suppliers “were coming at him like an ‘avalanche,’” while “major cloud providers were running away from Nvidia.” This does explain Nvidia’s role as the sugar daddy for the neocloud industry. Kress reportedly pushed back on some of its agreements, apparently significantly downsizing a financial commitment to OpenAI among other things. Now, while she’ll be spending plenty of her time managing the fallout from Huang’s departure, she won’t be directly fighting with him over Nvidia’s finances.
-> "It publicly tells us there are limitations on what Nvidia is willing to support"
-> On the earnings call, analyst Stacy Rasgon of Bernstein Research asked about a new paragraph he’d noticed in the earnings release about neoclouds. Nvidia had been supplying guarantees to some neoclouds by saying it would purchase compute if no one else would. The new paragraph reads, in part, “Our commitments take effect only if the neoclouds secure financing to purchase the data center infrastructure products and the related compute capacity is deployed, made operational, and accepted by us.” Kress clarified that this meant that if neoclouds’ buildout was delayed — or they otherwise had a challenge in building the warehouse to stick the chips in — Nvidia’s guarantee “doesn’t exist anymore,” she said. “Is it new? No. Did we change anything? No,” she said.
-> I have no way of knowing if this language had been ready to go in the press release before Huang resigned, but it does seem notable all the same. It publicly tells us there are limitations on what Nvidia is willing to support. And knowing Kress wanted Huang to spend less on this stuff, I think it tees us up for an interesting period. Passing under the radar last week were some indications that the Federal Reserve may be about to do an interest rate hike, which is trouble for a number of companies, such as CoreWeave, that rely on debt for their data center buildouts. If we are entering a period where financing is more expensive or more difficult to get, we may see some neoclouds falter. The new paragraph in the earnings release suggests that Nvidia wants us all to know that it’s not going to bail them out forever. Bring Huang back if you want, I guess, but even he can’t control the Fed — or the increasingly odd outlook for data center financing. In the coming months, Nvidia may be better off with a woman who wants to keep the costs down.
-> You know who is getting money under Kress, though? Nvidia staff. They can expect raises and equity in December.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -715,8 +735,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a586541f8b0974e7
 - Official Source: https://github.com/blader/humanizer?ref=ainewsradar
 - Headline: Agent skill that removes signs of AI-generated writing from text
-- Overview: humanizer is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,924 stars this week, 70,884 total). Agent skill that removes signs of AI-generated writing from text.
-- Features: ['📈 Exponential community momentum: +2,924 stars this week (70,884 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: humanizer is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,924 stars this week, 70,889 total). Agent skill that removes signs of AI-generated writing from text.
+- Features: ['📈 Exponential community momentum: +2,924 stars this week (70,889 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/blader/humanizer.git`
 
@@ -724,8 +744,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
 - Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,894 stars this week, 8,062 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +2,894 stars this week (8,062 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,894 stars this week, 8,066 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +2,894 stars this week (8,066 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
 - Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -733,8 +753,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,840 stars this week, 29,927 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +6,840 stars this week (29,927 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,840 stars this week, 29,930 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +6,840 stars this week (29,930 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -742,8 +762,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a9682d2a9aa41848
 - Official Source: https://github.com/openai/codex-security?ref=ainewsradar
 - Headline: OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixi
-- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,630 stars this week, 14,134 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
-- Features: ['📈 Exponential community momentum: +2,630 stars this week (14,134 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,630 stars this week, 14,135 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
+- Features: ['📈 Exponential community momentum: +2,630 stars this week (14,135 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/openai/codex-security.git`
 
@@ -751,8 +771,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,987 stars this week, 52,685 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +2,987 stars this week (52,685 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,987 stars this week, 52,689 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +2,987 stars this week (52,689 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -760,8 +780,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,221 stars this week, 20,480 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +3,221 stars this week (20,480 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,221 stars this week, 20,482 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +3,221 stars this week (20,482 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -769,8 +789,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
 - Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,423 stars this week, 70,179 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +2,423 stars this week (70,179 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,423 stars this week, 70,192 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +2,423 stars this week (70,192 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -778,8 +798,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/1c5edee7c934959a
 - Official Source: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - Headline: Chrome DevTools for coding agents
-- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,143 stars this week, 58,245 total). Chrome DevTools for coding agents.
-- Features: ['📈 Exponential community momentum: +3,143 stars this week (58,245 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,143 stars this week, 58,246 total). Chrome DevTools for coding agents.
+- Features: ['📈 Exponential community momentum: +3,143 stars this week (58,246 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -787,8 +807,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,383 stars this week, 54,215 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +4,383 stars this week (54,215 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,383 stars this week, 54,216 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +4,383 stars this week (54,216 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -796,8 +816,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,250 stars this week, 30,645 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +6,250 stars this week (30,645 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,250 stars this week, 30,647 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +6,250 stars this week (30,647 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -805,8 +825,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,290 stars this week, 13,498 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +3,290 stars this week (13,498 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,290 stars this week, 13,500 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +3,290 stars this week (13,500 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -814,10 +834,19 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+7,257 stars this week, 8,895 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +7,257 stars this week (8,895 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+7,257 stars this week, 8,896 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +7,257 stars this week (8,896 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
+
+### hermes-agent
+- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
+- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
+- Headline: The agent that grows with you
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,928 stars this week, 264,543 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +4,928 stars this week (264,543 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### Vibe-Trading
 - URL: https://ainewsradar.xyz/tools/7a3170ba6d51d19e
@@ -836,15 +865,6 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +2,594 stars this week (2,995 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/SoduWork.git`
-
-### hermes-agent
-- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
-- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
-- Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,926 stars this week, 264,540 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +4,926 stars this week (264,540 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### Codewhale
 - URL: https://ainewsradar.xyz/tools/85e1523cc649c26f
