@@ -214,8 +214,8 @@
       "domain_tag": "llm_reasoning",
       "half_life_days": 180,
       "first_learned_at": "2023-03-14T00:00:00Z",
-      "last_updated_at": "2026-11-16T14:06:38.933515+00:00",
-      "active_version": "24",
+      "last_updated_at": "2026-11-19T04:05:56.293459+00:00",
+      "active_version": "101",
       "versions": [
         {
           "version": "3.5",
@@ -286,9 +286,17 @@
         {
           "version": "24",
           "release_date": "2026-11-16",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "101",
+          "benchmark_highlights": "新晋跃迁版本 24，性能与时效处于当前黄金期",
+          "deprecation_warning": "存在上位替代: 101 已上线，旧版 24 严禁作为当前主流横评标杆"
+        },
+        {
+          "version": "101",
+          "release_date": "2026-11-19",
           "lifecycle_status": "ACTIVE_SOTA",
           "superseded_by": null,
-          "benchmark_highlights": "新晋跃迁版本 24，性能与时效处于当前黄金期"
+          "benchmark_highlights": "新晋跃迁版本 101，性能与时效处于当前黄金期"
         }
       ]
     },
