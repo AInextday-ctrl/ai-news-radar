@@ -109,7 +109,7 @@ def format_static_video_card(it: dict, is_zh: bool) -> str:
         author = "AI Researcher"
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
 
-    poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=480&output=webp&q=80" if video_id else "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=480&q=80"
+    poster = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg" if video_id else "/images/og-default.jpg"
     embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
 
     return f"""
@@ -155,7 +155,17 @@ def format_static_prompt_card(it: dict, is_zh: bool) -> str:
 
     is_wf = it.get("is_workflow") or it.get("sub_type") == "workflow"
     badge = ("⚡ 深度工作流" if is_zh else "⚡ Deep Workflow") if is_wf else ("💡 实战提示词" if is_zh else "💡 Production Prompt")
-    tier = safe_text(it.get("tested_models") or it.get("target_model") or it.get("model_tier") or ("主流大模型通用" if is_zh else "Universal SOTA LLMs"), 36)
+    raw_tier = it.get("tested_models") or it.get("target_model") or it.get("model_tier") or ("主流大模型通用" if is_zh else "Universal SOTA LLMs")
+    if not is_zh and re.search(r'[\u4e00-\u9fff]', str(raw_tier)):
+        if "Claude" in str(raw_tier) or "GPT" in str(raw_tier) or "DeepSeek" in str(raw_tier):
+            raw_tier = "Universal LLMs (Claude / GPT / DeepSeek)"
+        elif "MCP" in str(raw_tier):
+            raw_tier = "Agents with MCP Protocol Support"
+        elif "推理" in str(raw_tier) or "推导" in str(raw_tier):
+            raw_tier = "Frontier Reasoning LLMs"
+        else:
+            raw_tier = "Universal SOTA LLMs"
+    tier = safe_text(raw_tier, 45)
 
     return f"""
     <article class="p-3.5 rounded-xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between group space-y-2">
@@ -2530,14 +2540,14 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
     embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
 
     if video_id:
-        poster_url = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/maxresdefault.jpg&w=400&output=webp&q=85"
-        fallback_poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=400&output=webp&q=85"
+        poster_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        fallback_poster = poster_url
     elif lead_media.get("image_url") and is_valid_tweet_image_url(lead_media.get("image_url")):
         import urllib.parse
-        poster_url = f"https://wsrv.nl/?url={urllib.parse.quote(lead_media.get('image_url'))}&w=400&output=webp&q=85"
+        poster_url = resolve_news_lead_image_url(lead_media.get("image_url"), 480)
         fallback_poster = poster_url
     else:
-        poster_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80"
+        poster_url = "/images/og-default.jpg"
         fallback_poster = poster_url
 
     return f"""
@@ -2680,14 +2690,14 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
 
     # 封面图
     if video_id:
-        poster_url = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/maxresdefault.jpg&w=400&output=webp&q=85"
-        fallback_poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=400&output=webp&q=85"
+        poster_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        fallback_poster = poster_url
     elif lead_media.get("image_url"):
         import urllib.parse
-        poster_url = f"https://wsrv.nl/?url={urllib.parse.quote(lead_media.get('image_url'))}&w=400&output=webp&q=85"
+        poster_url = resolve_news_lead_image_url(lead_media.get("image_url"), 480)
         fallback_poster = poster_url
     else:
-        poster_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80"
+        poster_url = "/images/og-default.jpg"
         fallback_poster = poster_url
 
     card_video_html = f"""
@@ -3068,15 +3078,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         # 2. News Stream English (18条快讯填满桌面端双列自适应布局，与天梯榜等高对齐)
         news_items = []
-        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+        backend_latest_path = os.path.join(BASE_DIR, "data", "latest_news.json")
+        public_latest_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+        source_path = backend_latest_path if os.path.exists(backend_latest_path) else public_latest_path
+        if os.path.exists(source_path):
             try:
-                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                with open(source_path, "r", encoding="utf-8") as _f:
                     _nd_news = json.load(_f)
-                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:18]
+                    news_candidates = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])
+                    # 严格按 24h 最新发布时效倒序排列，优先展示1~6小时内最热快讯
+                    news_candidates.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
+                    news_items = news_candidates[:18]
             except Exception:
                 news_items = []
         if not news_items:
-            news_items = [i for i in items if i.get("category") == "news"][:18]
+            news_items = [i for i in items if i.get("category") == "news"]
+            news_items.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
+            news_items = news_items[:18]
 
         news_cards_en_html = ""
         lcp_image_en_url = ""
@@ -3100,6 +3118,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             u = it.get("url", "#")
             img = it.get("image_url", "")
             it_id = it.get("id") or ""
+            pub_iso = safe_text(it.get("raw_published_at") or it.get("published_at") or it.get("created_at") or "", 32)
             if is_valid_news_lead_image(img):
                 opt_img = resolve_news_lead_image_url(img, 480)
                 if not lcp_image_en_url:
@@ -3109,6 +3128,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+                <meta itemprop="headline" content="{t_en}">
+                <meta itemprop="datePublished" content="{pub_iso}">
+                <meta itemprop="dateModified" content="{pub_iso}">
                 {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
@@ -3139,6 +3161,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+                <meta itemprop="headline" content="{t_en}">
+                <meta itemprop="datePublished" content="{pub_iso}">
+                <meta itemprop="dateModified" content="{pub_iso}">
                 <div>
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
@@ -3436,7 +3461,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', en_content)
         hero_lcp_img = ""
         if lead_media_1_en and lead_media_1_en.get("video_id"):
-            hero_lcp_img = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{lead_media_1_en['video_id']}/maxresdefault.jpg&w=400&output=webp&q=85"
+            hero_lcp_img = f"https://i.ytimg.com/vi/{lead_media_1_en['video_id']}/hqdefault.jpg"
         elif lcp_image_en_url:
             hero_lcp_img = lcp_image_en_url
         if hero_lcp_img:
@@ -3702,15 +3727,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         # 2. News Stream Chinese (18条快讯填满桌面端双列自适应布局，与天梯榜等高对齐)
         news_items_zh = []
-        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+        backend_latest_path = os.path.join(BASE_DIR, "data", "latest_news.json")
+        public_latest_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+        source_path = backend_latest_path if os.path.exists(backend_latest_path) else public_latest_path
+        if os.path.exists(source_path):
             try:
-                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                with open(source_path, "r", encoding="utf-8") as _f:
                     _nd_news = json.load(_f)
-                    news_items_zh = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:18]
+                    news_candidates = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])
+                    # 严格按 24h 最新发布时效倒序排列，优先展示1~6小时内最热快讯
+                    news_candidates.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
+                    news_items_zh = news_candidates[:18]
             except Exception:
                 news_items_zh = []
         if not news_items_zh:
-            news_items_zh = [i for i in items if i.get("category") == "news"][:18]
+            news_items_zh = [i for i in items if i.get("category") == "news"]
+            news_items_zh.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
+            news_items_zh = news_items_zh[:18]
         news_items = news_items_zh
 
         news_cards_zh_html = ""
@@ -3722,6 +3755,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             u = it.get("url", "#")
             img = it.get("image_url", "")
             it_id = it.get("id") or ""
+            pub_iso = safe_text(it.get("raw_published_at") or it.get("published_at") or it.get("created_at") or "", 32)
             if is_valid_news_lead_image(img):
                 opt_img = resolve_news_lead_image_url(img, 480)
                 if not lcp_image_zh_url:
@@ -3731,6 +3765,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+                <meta itemprop="headline" content="{t_zh}">
+                <meta itemprop="datePublished" content="{pub_iso}">
+                <meta itemprop="dateModified" content="{pub_iso}">
                 {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
@@ -3761,6 +3798,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+                <meta itemprop="headline" content="{t_zh}">
+                <meta itemprop="datePublished" content="{pub_iso}">
+                <meta itemprop="dateModified" content="{pub_iso}">
                 <div>
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
@@ -4010,7 +4050,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', zh_content)
         hero_lcp_img_zh = ""
         if lead_media_1_zh and lead_media_1_zh.get("video_id"):
-            hero_lcp_img_zh = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{lead_media_1_zh['video_id']}/maxresdefault.jpg&w=400&output=webp&q=85"
+            hero_lcp_img_zh = f"https://i.ytimg.com/vi/{lead_media_1_zh['video_id']}/hqdefault.jpg"
         elif lcp_image_zh_url:
             hero_lcp_img_zh = lcp_image_zh_url
         if hero_lcp_img_zh:
