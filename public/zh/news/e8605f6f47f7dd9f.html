@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anthropic用AI实现汇编级软件形式化验证 | AI 资讯雷达</title>
   <meta name="description" content="Anthropic携手Theorem利用Claude对123个开源库完成汇编级形式化验证，揪出多项潜伏多年的陈年底层漏洞">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/e8605f6f47f7dd9f">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/e8605f6f47f7dd9f">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/e8605f6f47f7dd9f">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/e8605f6f47f7dd9f">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/e8605f6f47f7dd9f">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/e8605f6f47f7dd9f",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "Keane Lucas, Aengus Lynch, Luna Tong, Luke Champine, Zygi Straznickas, Dino Distefano, Harshikaa AgrawalEvyatar Ben Asher, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich, Cheru BerhanuNicholas Carlini, Rajashree Agrawal, Jason Gross\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nEven mature, heavily tested software contains bugs, and LLMs are increasingly adept at finding them. The Linux kernel—one of the most well-tested pieces of software today, deployed on billions of devices worldwide—recently had over 1,000 vulnerabilities disclosed. With frontier models becoming more capable of chaining seemingly benign bugs into critical exploits, we need techniques that can detect and fix these bugs before they can be exploited in the wild.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nHowever, formal verification isn’t easy. Proofs can be many times larger than the original code, and writing them requires significant effort and a niche, highly specialized skill set. For instance, it took two person-years to implement the seL4 operating system kernel, but 20 person-years to formally verify it. Accordingly, formal verification has been practical only in truly mission-critical applications, such as Airbus’s avionics code.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe’re publishing a subset of these proofs so that anyone can verify and reuse them, along with the RISC-V and OS semantics. Theorem, our collaborator on this project, is also offering to run the same pipeline for other open-source projects, and is publishing a Claude skill to help developers get started with verifying their own code.\n\nFormal verification is a broad field with many methodologies. Below, we also describe our initial explorations using other formal verification methods to accelerate other security or software development tasks, such as assessing the security of the zlib compression algorithm, proving behavioral equivalence of a Python interpreter written in Rust, and rooting out long-standing bugs in critical software.\n\nThe road ahead for formal verification is promising. The cost of writing proofs is falling as models become more intelligent. Moreover, as more code is formalized and methods of achieving security guarantees become more standardized, the ability to reuse or modify proofs across codebases will amortize the cost. We encourage all developers to explore formal verification with LLMs—especially those who previously tried it with less capable models and found it didn’t work.\n\nIn the rest of this post, we cover our formal verification experiments in more detail.\n\n### Turning tests into proofs\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nTo find all the bugs that would’ve been surfaced by a fuzz test, we turned the fuzz test into a spec defined over the compiled RISC-V instructions. The spec says that the fuzz test won’t crash for any input less than 64 MB.3 If Claude can prove this spec, the fuzz test on RISC-V becomes superfluous: fuzzing that entry point will never find any bugs.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWhile this is an enormous volume of proof code, virtually none of it needs to be manually reviewed. The Rocq proof checker ensures that the spec is correctly satisfied by the proof. As a result, the only artifacts that a developer needs to trust are:\n\n• The formal models of RISC-V and of Linux processes;\n\n• The exact theorem statements that were proved;\n\n• The Rocq proof checker itself.5\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe welcome independent verification of our proofs and encourage refinement of our approach. To that end, we are publishing the trusted components (above) made for this project that are not already public; Claude’s complete Rocq proofs for fuzz tests that did not require patching; and specifications for other fuzz tests we were not able to prove.\n\n### Finding and fixing bugs\n\nAbove, we showed that you can turn many open-source libraries’ developer-written tests (fuzz tests) into specs that Claude can prove will always pass, sometimes after patching the remaining bugs it found. For this reason, the process of attempting to prove these specs discovered hundreds of bugs.\n\nLots of bugs showed up during Claude’s attempts to prove hundreds of entry points. To ensure that Claude didn’t have to stop for a human every time this happened, we let Claude fix the bugs it found: it patched the code, which caused the spec to be regenerated with that patched code, and then Claude proceeded to prove that new spec.6\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nThe ultimate goal of this project was to achieve a proof that the RISC-V-compiled fuzz tests had no remaining crashes to find. However, bugs like the above show that the process has another benefit, regardless of whether that goal is achieved: even just attempting this process yields real bugs that need to be fixed.\n\n#### Proving more than memory safety\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n#### Other formal verification case studies\n\nFormal verification is an expansive domain. The fuzz-test-to-proof example above is one instance of LLMs making formal verification more widely usable by directly applying proofs to machine code.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nIn another experiment, we asked Claude to develop an interpreter for a large subset of Python in Rust, and to prove (using Verus, a verification tool for Rust) that it adheres to the CPython semantics outlined in an academic paper. We then measured the adherence to CPython’s behavior empirically, running over 1.7 million randomly generated Python programs, finding identical behavior with CPython in 99.95% of tests, with remaining test differences as unsurprising known corner cases.\n\nWe also found issues in several widely used and critical applications via formal verification attempts of simple security properties. In one of them, we discovered a previously unknown logic bug that had been latent for more than a decade. During an effort to verify a widely used PDF reader, we found as many security bugs in one week as are typically reported in a year.\n\nSee the Appendix for more details on some of these efforts.\n\n### This is just the beginning\n\nOne of the key limitations of LLM-assisted formal verification is that the proofs can take hundreds of millions of tokens to produce. Cost-efficiency is critical if our goal is to make these methods available to the entire software ecosystem. Fortunately, there are compelling reasons to expect efficiency to improve.\n\n#### Newer models need fewer tokens\n\nWe built 36 small verification tasks from real OSS-Fuzz code. Opus 5.5 proves half of them with about 40% fewer tokens than Opus 5. We expect this trend to continue as models are trained on long verification tasks.\n\n#### Proofs can be reused\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe observed the same phenomenon occurring at scale during our OSS-Fuzz proof effort. Most of a proof concerns code that every program contains (particularly initialization of the C runtime and AddressSanitizer), so very different programs can end up with significantly overlapping proofs. Agent teams took advantage of this by copying another team’s finished proof and then adapting it to their own program (Figure 6).\n\nThis reusability of proofs is how Mathlib, a shared library of formal mathematics in Lean, grew to nearly 300,000 theorems submitted by over 700 contributors: each new proof builds on the existing body of work. We accumulated a similar body of proofs in the course of our OSS-Fuzz effort, some of which we’re including in our release (we are not releasing proofs that may reveal an unpatched bug in the open-source software).\n\nAs we graduate from these initial experiments, we need a strategy for verifying the enormous body of existing software, starting with the most critical dependencies. As we’ve shown, this can be achieved at scale by using generic specs and working at the binary level, sidestepping the need to rewrite entire codebases in another language.\n\nThis approach also facilitates the reuse of proofs at package-level granularity, which means that each dependency only needs to be verified once. Dependencies follow a power law: proving even a small set of shared libraries makes a huge swath of software feasible to prove. For more details, see Theorem’s roadmap for verifying the entirety of the Nix ecosystem, which includes critical infrastructure like glibc, OpenSSL, and cURL.\n\n### Limitations\n\nIn practice, formal verification can sometimes prove less about the security of the code than we would like.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nThe real machine does something the model doesn’t describe. Our proofs are about single-threaded, static RISC-V binaries linked against musl libc. However, most people run these libraries on x86 or ARM and dynamically link them against glibc. To close this gap, we’d need system models that more closely resemble deployed systems. For example, a step toward this would be generating accurate semantics for x86.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe expect that as we learn more about leveraging LLMs for formal methods, and as models continue to improve, these limitations will become tractable, and we’ll be able to verify a much larger percentage of the code we rely upon.\n\n### Conclusion\n\nThe trajectory is clear: formal verification, which was historically practical only for bespoke expert-crafted guarantees in the most safety-critical code, will soon be as practical as fuzzing is today for almost all production software. Just like static types, testing frameworks, and other correctness tooling, verification will mature from “bolted-on” to “built-in,” driven not only by LLMs but also by innovations in language design and development workflows.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nRead the full appendix.",
+      "wordCount": 10315,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Anthropic",
       "isBasedOn": "https://www.anthropic.com/research/formal-verification?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -221,7 +235,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>核心要点提炼与关键事实</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Anthropic研究团队与Theorem在开源软件底层工程与AI形式化验证研究项目：利用大语言模型在编译后汇编指令层面对123个开源软件库完成数学级安全属性证明，并发现多年深层Bug</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>传统形式化验证耗时耗力难以规模化，通过大模型推理能力打通底层汇编验证以大幅提升基础软件供应链安全性</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键数据与实测】</strong>跨123个主流开源库完成安全证明并找出多项潜伏多年的严重缺陷。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>标志着大语言模型在基础软件安全与数学证明领域的工业化落地。</li>
           </ul>
         </section>
@@ -238,17 +252,12 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Anthropic 权威实录</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Keane Lucas, Aengus Lynch, Luna Tong, Luke Champine, Zygi Straznickas, Dino Distefano, Harshikaa AgrawalEvyatar Ben Asher, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich, Cheru BerhanuNicholas Carlini, Rajashree Agrawal, Jason Gross</p>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS</span>
-            </h3>
-
-<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
-              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
-              <span>简介</span>
             </h3>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Even mature, heavily tested software contains bugs, and LLMs are increasingly adept at finding them. The Linux kernel—one of the most well-tested pieces of software today, deployed on billions of devices worldwide—recently had over 1,000 vulnerabilities disclosed. With frontier models becoming more capable of chaining seemingly benign bugs into critical exploits, we need techniques that can detect and fix these bugs before they can be exploited in the wild.</p>
@@ -293,6 +302,8 @@
               <span>QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS</span>
             </h3>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To find all the bugs that would’ve been surfaced by a fuzz test, we turned the fuzz test into a spec defined over the compiled RISC-V instructions. The spec says that the fuzz test won’t crash for any input less than 64 MB.3 If Claude can prove this spec, the fuzz test on RISC-V becomes superfluous: fuzzing that entry point will never find any bugs.</p>
+
 <figure class="my-8 mx-auto w-full w-full">
           <video controls playsinline preload="metadata" class="w-full aspect-video h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){var f=this.closest('figure');if(f){if(this.videoHeight>this.videoWidth*1.08){f.style.maxWidth='360px';this.classList.remove('aspect-video');}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){f.style.maxWidth='480px';this.classList.remove('aspect-video');}else{f.style.maxWidth='100%';}}}">
             <source src="https://assets.claude.com/6851e539c36759ac1682d6b169d0319b1d97a0f7.mp4#t=0.5" type="video/mp4">
@@ -303,7 +314,10 @@
           </figcaption>
         </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To find all the bugs that would’ve been surfaced by a fuzz test, we turned the fuzz test into a spec defined over the compiled RISC-V instructions. The spec says that the fuzz test won’t crash for any input less than 64 MB.3 If Claude can prove this spec, the fuzz test on RISC-V becomes superfluous: fuzzing that entry point will never find any bugs.</p>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
+              <span>QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS</span>
+            </h3>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
@@ -320,10 +334,7 @@
           </figcaption>
         </figure>
 
-<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
-              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
-              <span>QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS</span>
-            </h3>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">While this is an enormous volume of proof code, virtually none of it needs to be manually reviewed. The Rocq proof checker ensures that the spec is correctly satisfied by the proof. As a result, the only artifacts that a developer needs to trust are:</p>
 
 <figure class="my-8 mx-auto w-full w-full">
           <video controls playsinline preload="metadata" class="w-full aspect-video h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){var f=this.closest('figure');if(f){if(this.videoHeight>this.videoWidth*1.08){f.style.maxWidth='360px';this.classList.remove('aspect-video');}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){f.style.maxWidth='480px';this.classList.remove('aspect-video');}else{f.style.maxWidth='100%';}}}">
@@ -334,8 +345,6 @@
             <a href="https://www.anthropic.com/research/formal-verification?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">原站观看 ↗</a>
           </figcaption>
         </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">While this is an enormous volume of proof code, virtually none of it needs to be manually reviewed. The Rocq proof checker ensures that the spec is correctly satisfied by the proof. As a result, the only artifacts that a developer needs to trust are:</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• The formal models of RISC-V and of Linux processes;</p>
 
@@ -525,6 +534,45 @@
     </article>
 
     
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/1099cb43b4bb3a0c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/sa_cda00a6f956e246f.jpg" alt="工业监控初创公司 BrightAI 完成 9700 万美元投资" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SiliconANGLE</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">工业监控初创公司 BrightAI 完成 9700 万美元投资</h4>
+            </a>
+            
+            <a href="/zh/news/d94adb15e8dc6434" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fd449f0a1-e996-4b08-823b-ac513e3ea2c8.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上</h4>
+            </a>
+            
+            <a href="/zh/news/5544300b55d0f131" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/cbsnews_e71fe42a8a189ff1.jpg" alt="加州总检察长启动对英伟达及黄仁勋调查" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CBS News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">加州总检察长启动对英伟达及黄仁勋调查</h4>
+            </a>
+            
+            <a href="/zh/news/43cf5e526fb27b6f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg" alt="Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%</h4>
+            </a>
+            
+              </div>
+            </div>
+            
 
   </main>
 

@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anthropic和Citrini研究使用内部克劳德模型自主生成蛋白质微型粘合剂，针对五种蝎子神经毒素，测试了 | AI 资讯雷达</title>
+  <title>Anthropic和Citrini研究使用内部克劳德模型自主生成蛋白质微型粘合剂，针对五种蝎子神经毒素，测试了… | AI 资讯雷达</title>
   <meta name="description" content="Anthropic与Citrini Research合作，部署了克劳德模型的内部研究版本，以自主设计针对五种致命蝎子神经毒素的微型结合蛋白。该团队生成了211种候选蛋白质，并在湿实验室对其进行了评估，证明了前沿的多模态">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/51ec0727a5a27408">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/51ec0727a5a27408">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/51ec0727a5a27408">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/51ec0727a5a27408">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/51ec0727a5a27408">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/51ec0727a5a27408",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nScorpions sting 1.2 million people or more every year, resulting in more than 3,250 deaths, mostly among children in parts of the world with limited access to medical care. New treatments are expensive to make, and are also unlikely to earn back the cost of developing them. With so little investment, scorpion envenomation has been described as a neglected tropical disease.\n\nWe started by giving Claude the same prompt we’d used in our earlier protein-binder study, after modifying it with Citrini.1 Over the next 64 hours, an internal research model, operating within Claude Science, worked mainly autonomously, although we directed its work with four follow-ups. Under our supervision, Claude analyzed the research data, generated the figures, and drafted the final report.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe sent Claude’s work to two outside experts, Susana Vázquez Torres and Timothy P. Jenkins, who said they felt this work was a promising first step. If AI can now design credible binders against several hard-to-target toxins in days and they can be confirmed in the lab within weeks, this could, in theory, speed up discovery for envenomation and other neglected diseases. The challenge, as always, is turning those binders into safe, affordable, and widely accessible drugs.\n\nWe share more detail in our technical report, and are making all 211 designs and their data available.\n\n“QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS”\n\nSusana Vázquez Torres, Postdoctoral Researcher, Structural Biology Programme, Spanish National Cancer Research Centre (CNIO), Madrid, Spain.\n\n#### Designing de novo binders against five toxins from four species of scorpions\n\nScorpion venom contains multiple protein neurotoxins. The neurotoxins that are most likely to harm or kill humans attach to sodium channels, large proteins embedded in the membranes of nerve cells that allow them to fire. When sodium channels are disrupted, nerves fire at the wrong time—this releases large amounts of stress chemicals, like adrenaline. In severe cases, this can cause heart failure and excess fluid buildup in the lungs, occasionally resulting in death.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nOur approach was inspired by an earlier effort that designed de novo proteins that neutralized snake neurotoxins and protected mice. To our knowledge, no de novo-designed binders against scorpion neurotoxins have been described.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nTo see how far Claude could go, we asked it to design four kinds of binders: binders against each of the five toxins individually; binders that targeted the β-family toxins Ts1 and Cn2; binders that targeted the α-family toxins AaH II, AaH I, and LqhIII; and binders that targeted all five toxins simultaneously.\n\n“QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS”\n\nTimothy P. Jenkins, Associate Professor, Technical University of Denmark.\n\n#### Claude ran the design campaign with considerable autonomy\n\nOur initial prompt defined the neurotoxin targets, the protein design and folding tools, and the rules for novelty, scoring, and filtering. Beyond choosing the structures and amino acid hotspots, Claude also set the quality thresholds a design had to clear, decided how much to lean on each available design tool, and developed the strategies for designing binders against multiple toxins.\n\nUltimately, Claude used 12 design tools to generate 318,484 designs, filtering out any that resembled a toxin or a known protein. Claude co-folded and screened 553,052 design-toxin pairs, predicting each pair’s structure as one complex. Sixty-four hours after we gave Claude our initial prompt, it produced its final list of 180 designs. The campaign used on the order of 10,000 GPU hours.2\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n#### Testing Claude's designs in the lab\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nBoth labs measured binding by surface plasmon resonance (SPR), in which a toxin flows over the design while the SPR instrument tracks in real time how quickly a toxin binds to and detaches from it. The resulting trace, called a sensorgram, produces a measurement known as the dissociation constant (KD), which is a measurement for binding strength (or affinity). The lower the KD, the tighter the binding.\n\nWhen it came to evaluating the resulting designs, we set out strict criteria for labeling a design a binder against a toxin. The design needed to be a hit at both labs3—that is, it needed to show evidence of binding against that toxin in every replicate, and every KD needed to be 1 µM or tighter. We also required that the design show no signal against CLEC12A, an unrelated human protein used to measure off-target binding or “stickiness.”\n\n#### Claude’s Cn2 binders likely bind the same site as a toxin-neutralizing antibody\n\nAntibodies and nanobodies remain the standard for de novo designs to beat. Three such molecules have reported affinities (KD) below 1 nM (nanomolar) against Cn2 or AaH II, and they have been shown to protect mice from scorpion toxins.\n\nOur two strongest binders, which we call Cn2-B1 and Cn2-B2, target Cn2, a neurotoxin from the Mexican scorpion Centruroides noxius. They each bound Cn2 tightly at both Adaptyv Bio and Twist Bioscience, with affinities (KD) in the single-digit nanomolar range.\n\nOne way to find out whether two molecules (e.g., an antibody and a miniprotein) bind the same site on a target is with a competition experiment, which tests whether both binders can attach to the target at the same time. If the presence of one molecule reduces the other molecule’s binding, then they likely compete for the same binding site.\n\nOur competition experiments suggest our Cn2 binders each attach on or near the same epitope (binding site) as an antibody called LR, which has been reported to neutralize Cn2 in mice. LR’s binding site covers the part of Cn2 that attaches to the sodium channel and causes nerves to misfire. We have not tested our strongest binders, Cn2-B1 and Cn2-B2, in a cellular environment or in live animals, but the fact that they compete with LR suggests that they will likely neutralize Cn2.\n\n#### A binder is only the first step to developing an antivenom\n\nOur results show binding only against recombinant toxins, which are grown in the lab from each toxin’s gene rather than purified from venom. The two biggest limitations of this study are that we didn’t test any design for neutralization in vitro (against cells grown in the lab) or for efficacy in vivo (in living animals, such as mice).\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nWe are releasing all 211 designs and their binding data so that other researchers can build on our work. We hope this demonstration of Claude’s capabilities, along with the data we are releasing, will help accelerate further research into antivenom design.\n\n#### Further reading\n\nThe following resources provide further technical depth and more detailed information about the results described above:\n\n• Technical report;\n\n• Data release: all 211 designs, their predicted structures and scores, and experimental data;\n\n• Our previous posts on protein design and uplifting biomolecular modeling.",
+      "wordCount": 7610,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Anthropic",
       "isBasedOn": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -221,7 +235,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>核心要点提炼与关键事实</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Anthropic与Citrini Research研究团队在生命科学与生成式生物学交叉实验平台：利用内部Claude模型自主生成针对5种致命蝎毒的211个蛋白结合分子并开展测试</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>验证通用大模型在计算生物学与抗毒药物从头设计领域的落地潜力与商业应用价值</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键数据与实测】</strong>针对5种蝎神经毒素测试了211个合成设计分子。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>证明通用前沿架构具备解决复杂生物分子结构设计的能力。</li>
           </ul>
         </section>
@@ -238,7 +252,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Anthropic 权威实录</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS</span>
@@ -443,6 +457,45 @@
     </article>
 
     
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/1099cb43b4bb3a0c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/sa_cda00a6f956e246f.jpg" alt="工业监控初创公司 BrightAI 完成 9700 万美元投资" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SiliconANGLE</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">工业监控初创公司 BrightAI 完成 9700 万美元投资</h4>
+            </a>
+            
+            <a href="/zh/news/d94adb15e8dc6434" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fd449f0a1-e996-4b08-823b-ac513e3ea2c8.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上</h4>
+            </a>
+            
+            <a href="/zh/news/5544300b55d0f131" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/cbsnews_e71fe42a8a189ff1.jpg" alt="加州总检察长启动对英伟达及黄仁勋调查" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CBS News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">加州总检察长启动对英伟达及黄仁勋调查</h4>
+            </a>
+            
+            <a href="/zh/news/43cf5e526fb27b6f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg" alt="Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%</h4>
+            </a>
+            
+              </div>
+            </div>
+            
 
   </main>
 

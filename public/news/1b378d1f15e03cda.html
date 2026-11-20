@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Runway&#x27;s open-source Praxis-1 turns video… | AI News Radar</title>
+  <title>Runway&#x27;s open-source Praxis-1 turns video AI… | AI News Radar</title>
   <meta name="description" content="AI company Runway has released its robot model Praxis-1 with open weights and source code. The model uses what it learned from video to control robots and shows">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/1b378d1f15e03cda">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/1b378d1f15e03cda">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/1b378d1f15e03cda">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/1b378d1f15e03cda">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/1b378d1f15e03cda">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/1b378d1f15e03cda",
 "articleSection": "Artificial Intelligence",
+"articleBody": "AI company Runway has released its robot model Praxis-1 with open weights and source code. The model uses what it learned from video to control robots and shows promising results in the company's own tests.\n\nRunway has released Praxis-1, its AI model for controlling robots. The company first introduced Praxis-1 in late September but initially gave access only to select partners. Alongside the release, Runway published a detailed research report with new performance tests.\n\nRunway's model weights and source code are available under the Apache 2.0 license, which allows commercial use.Ad\n\nPraxis-1 takes in camera images, text instructions, and information about a robot's position. From those inputs, it predicts how the environment will change and calculates the right robot movements. As new camera frames come in, the model continuously adjusts its control.Ad\n\nPraxis-1 builds on a video model that learned how objects move and interact from ordinary footage. Runway then fine-tuned it with videos of human actions and robot data. This approach could reduce the need for expensive robot-specific datasets, which have traditionally been collected just to train these kinds of systems.\n\nRunway is best known for generative video models like Gen-4.5. With Praxis-1, the company is bringing its video research into robotics. Runway calls Praxis-1 a World Action Model that predicts how a scene will change and derives matching robot movements from those predictions. Since September, robotics companies Standard Bots, Noble Machines, and Ultra have been testing Praxis-1 on different systems, including a humanoid robot, an industrial robot arm, and a dual-arm warehouse robot.Ad\n\nPraxis-1 still needs some specialized robot data. To adapt it to a Franka robot arm, Runway used about 277 hours of recordings from the public DROID research dataset, according to its research report. Those recordings show robots grasping and moving objects, for example. For a dual-arm robot, the company used between 1,400 and 2,600 hours of training material. Runway had already used DROID data and data from other robot systems during earlier training stages. Whether the approach actually needs less robot data overall than comparable models without general video pretraining is still an open question.\n\nOn Nvidia's RoboLab-120 leaderboard, Praxis-1 scores a 46.2 percent success rate. The benchmark tests how reliably robot models can sort, grasp, or stack objects across 120 tasks in simulation. FLUX 3 Action, also built as a World Action Model, scores 42.9 percent under the same test conditions. That puts Praxis-1 at the top of the World Action Model category. In the overall leaderboard, it ranks fifth behind two AI agents and two robot models with different architectures. Runway ran all the tests itself, and the results haven't been independently verified yet.Ad\n\nAfter fine-tuning on DROID data, Runway tested the model on a real Franka robot arm. Both models had to complete the same ten tasks, like placing a banana on a plate or closing a drawer. With ten attempts per task, Praxis-1 succeeded 88 times, while FLUX 3 Action managed 80.Ad\n\nRunway also tested how well Praxis-1 transfers to a robot type it had never seen before, using data from a mobile robot platform with a gripper arm that Google had previously used to develop RT-1. Recordings from this robot weren't part of Praxis-1's earlier training. After fine-tuning on about 95 hours of robot data, the model hit an average success rate of 80 percent in simulated tests, according to Runway. The tests covered four types of tasks, including grabbing soda cans, opening and closing drawers, and placing an apple in a drawer. Google's original RT-1 model scored 52.4 percent on the same benchmark.\n\nDevelopers can download Praxis-1 from Hugging Face after signing up and agreeing to the access terms. The code is on GitHub. According to Runway's announcement, pre-adapted versions for different robots are already available alongside the base model. The base model needs additional training before it can work with new robot systems.\n\nThe standard model version needs a GPU with 80 GB of memory. A compressed version should fit on an RTX 5090 with 32 GB of VRAM based on Runway's memory estimates, though the actual peak memory usage hasn't been measured yet according to the GitHub docs.\n\nThe model sometimes confuses similar-looking objects and struggles with vague instructions, according to Runway's research report. For longer tasks, individual steps need to be spelled out because Praxis-1 can't reliably plan complex action sequences on its own yet.\n\nRunway sees Praxis-1 primarily as a system for fast execution of robot movements. In the future, it could work alongside general-purpose AI models that break complex tasks down into individual steps.",
+"wordCount": 760,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, THE DECODER, Robotics",
 "isBasedOn": "https://the-decoder.com/runways-open-source-praxis-1-turns-video-ai-into-a-robot-controller/?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -227,7 +241,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>Executive Summary & Key Facts</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Industry Leaders: Runway&#x27;s open-source Praxis-1 turns video AI into a robot controller</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> AI company Runway has released its robot model Praxis-1 with open weights and source code.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Fact Detail]</strong> Runway&#x27;s open-source Praxis-1 turns video AI into a robot controller.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Industry Analysis]</strong> Runway&#x27;s model weights.</li>
           </ul>
         </section>
@@ -244,7 +258,7 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER Full Report</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">AI company Runway has released its robot model Praxis-1 with open weights and source code. The model uses what it learned from video to control robots and shows promising results in the company&#x27;s own tests.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Runway has released Praxis-1, its AI model for controlling robots. The company first introduced Praxis-1 in late September but initially gave access only to select partners. Alongside the release, Runway published a detailed research report with new performance tests.</p>
@@ -315,6 +329,11 @@
         </a>
 
       </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="Source Attribution and Copyright Notice" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">Source Attribution &amp; Disclaimer:</strong> Curated by AI News Radar for independent industry monitoring, commentary, and research reference only (not legal, financial, or investment advice). All third-party headlines, reporting, trademarks, images, and embedded media remain the sole intellectual property of <strong class="text-slate-600 dark:text-slate-300">THE DECODER</strong> and the credited author(s). Readers are encouraged to subscribe to and support original journalism via the official link above. Rights holders or publishers requesting immediate takedown, summary-only display, or domain opt-out may contact <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a> per our <a href="/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DMCA &amp; Copyright Policy</a> (24–48h SLA).</p>
+      </aside>
     </article>
 
     
@@ -322,36 +341,36 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/31baf07afe5b3960" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/1099cb43b4bb3a0c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://cdn.arstechnica.net/wp-content/uploads/2026/11/MS_Ignite_Perception.png" alt="Microsoft makes Word, Excel, and PowerPoint generally available inside Copilot, which CEO Satya Nadella calls &quot;the new OS for work&quot; (Nick Indge/Ars Technica)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Ars Technica</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Microsoft makes Word, Excel, and PowerPoint generally available inside Copilot, which CEO Satya Nadella calls &quot;the new OS for work&quot; (Nick Indge/Ars Technica)</h4>
-            </a>
-            
-            <a href="/news/81ddfa434a713576" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/wired_e8ad4ac0bf37554f.jpg" alt="Over a Third of Gen Z-ers Rely on AI for Friendship" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wired AI</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Over a Third of Gen Z-ers Rely on AI for Friendship</h4>
-            </a>
-            
-            <a href="/news/0b15b2be14afb083" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/verge_7511e9c02d775413.jpg" alt="YouTube found a new way to inflate view counts" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">YouTube found a new way to inflate view counts</h4>
-            </a>
-            
-            <a href="/news/0465d1c4a5573abf" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="LanceDB, which makes a multimodal lakehouse for AI training, built on the open format Lance, raised a $57.5M Series B led by Bessemer and Innovation Endeavors (Kyt Dotson/SiliconANGLE)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/sa_cda00a6f956e246f.jpg" alt="Industrial monitoring startup BrightAI closes $97M investment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SiliconANGLE</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">LanceDB, which makes a multimodal lakehouse for AI training, built on the open format Lance, raised a $57.5M Series B led by Bessemer and Innovation Endeavors (Kyt Dotson/SiliconANGLE)</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Industrial monitoring startup BrightAI closes $97M investment</h4>
+            </a>
+            
+            <a href="/news/d94adb15e8dc6434" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fd449f0a1-e996-4b08-823b-ac513e3ea2c8.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="Asian tech stocks plunge as Anthropic&#x27;s record IPO fails to stem an AI sell-off; SoftBank falls ~15%, TSMC falls 5%+, and Samsung and SK Hynix fall 6%+ (William Sandlund/Financial Times)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Asian tech stocks plunge as Anthropic&#x27;s record IPO fails to stem an AI sell-off; SoftBank falls ~15%, TSMC falls 5%+, and Samsung and SK Hynix fall 6%+ (William Sandlund/Financial Times)</h4>
+            </a>
+            
+            <a href="/news/5544300b55d0f131" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/cbsnews_e71fe42a8a189ff1.jpg" alt="California AG subpoenas Nvidia over Jensen Huang&#x27;s affair with alleged Chinese spy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CBS News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">California AG subpoenas Nvidia over Jensen Huang&#x27;s affair with alleged Chinese spy</h4>
+            </a>
+            
+            <a href="/news/43cf5e526fb27b6f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg" alt="Anthropic Slumps 5% Post-Market After Record $107.3 Billion IPO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic Slumps 5% Post-Market After Record $107.3 Billion IPO</h4>
             </a>
             
               </div>
@@ -360,8 +379,13 @@
 
   </main>
 
-  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
-    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a><a href="/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Editorial Policy</a><a href="/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">DMCA &amp; Copyright</a><a href="/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms</a><a href="/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a><a href="/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; All third-party reporting copyrights belong to their respective publishers and authors</p>
+    </div>
   </footer>
 
   <script>

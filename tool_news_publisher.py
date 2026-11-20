@@ -1975,55 +1975,60 @@ def generate_all_landing_pages():
 
         if nid and nid in rich_lookup:
             rit = rich_lookup[nid]
-            for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
-                if rit.get(fld) and not it.get(fld):
+            for fld in ("title", "title_en", "title_zh", "author", "author_role", "author_role_en", "author_role_zh", "cover_image", "image_url", "image_caption", "paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images", "is_substantive", "is_paywalled"):
+                if rit.get(fld):
                     it[fld] = rit[fld]
 
-    # Also load historical news items from archive that already have landing pages
-    archive_path = os.path.join(WORKSPACE_DIR, 'public', 'data', 'archive_news.json')
-    if os.path.exists(archive_path):
-        try:
-            with open(archive_path, 'r', encoding='utf-8') as af:
-                arch_data = json.load(af)
-            arch_items = arch_data.get('items', []) if isinstance(arch_data, dict) else (arch_data if isinstance(arch_data, list) else [])
-            existing_ids = {n.get('id') for n in news if n.get('id')}
-            for it in arch_items:
-                i_id = it.get('id')
-                if i_id and i_id not in existing_ids:
-                    target_file = os.path.join(en_news_dir, f'{i_id}.html')
-                    if os.path.exists(target_file):
-                        if i_id in rich_lookup:
-                            rit = rich_lookup[i_id]
-                            for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
-                                if rit.get(fld) and not it.get(fld):
-                                    it[fld] = rit[fld]
-                        u = it.get("url") or ""
-                        if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
-                            clean_u = u.split("#")[0].strip()
-                            bc_entry = bloomberg_cache.get(clean_u)
-                            if bc_entry:
-                                for fld in ("paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
-                                    if bc_entry.get(fld):
-                                        it[fld] = bc_entry[fld]
-                                if bc_entry.get("cover_image"):
-                                    it["image_url"] = bc_entry["cover_image"]
-                                it["is_substantive"] = True
-                                it["is_paywalled"] = False
-                        if "forbes" in u.lower() or "forbes" in (it.get("source") or "").lower():
-                            clean_u = u.split("#")[0].strip()
-                            fc_entry = forbes_cache.get(clean_u)
-                            if fc_entry:
-                                for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
-                                    if fc_entry.get(fld):
-                                        it[fld] = fc_entry[fld]
-                                if fc_entry.get("cover_image"):
-                                    it["image_url"] = fc_entry["cover_image"]
-                                it["is_substantive"] = True
-                                it["is_paywalled"] = False
-                        news.append(it)
-                        existing_ids.add(i_id)
-        except Exception as e:
-            print('Archive load note:', e)
+    # Also load historical news items from master_archive and archive that already have landing pages
+    archive_paths = [
+        os.path.join(WORKSPACE_DIR, 'data', 'master_archive.json'),
+        os.path.join(WORKSPACE_DIR, 'data', 'archive_news.json'),
+        os.path.join(WORKSPACE_DIR, 'public', 'data', 'archive_news.json'),
+    ]
+    for archive_path in archive_paths:
+        if os.path.exists(archive_path):
+            try:
+                with open(archive_path, 'r', encoding='utf-8') as af:
+                    arch_data = json.load(af)
+                arch_items = arch_data.get('items', []) if isinstance(arch_data, dict) else (arch_data if isinstance(arch_data, list) else [])
+                existing_ids = {n.get('id') for n in news if n.get('id')}
+                for it in arch_items:
+                    i_id = it.get('id')
+                    if i_id and i_id not in existing_ids:
+                        target_file = os.path.join(en_news_dir, f'{i_id}.html')
+                        if os.path.exists(target_file):
+                            if i_id in rich_lookup:
+                                rit = rich_lookup[i_id]
+                                for fld in ("title", "title_en", "title_zh", "author", "author_role", "author_role_en", "author_role_zh", "cover_image", "image_url", "image_caption", "paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images", "is_substantive", "is_paywalled"):
+                                    if rit.get(fld):
+                                        it[fld] = rit[fld]
+                            u = it.get("url") or ""
+                            if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
+                                clean_u = u.split("#")[0].strip()
+                                bc_entry = bloomberg_cache.get(clean_u)
+                                if bc_entry:
+                                    for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                                        if bc_entry.get(fld):
+                                            it[fld] = bc_entry[fld]
+                                    if bc_entry.get("cover_image"):
+                                        it["image_url"] = bc_entry["cover_image"]
+                                    it["is_substantive"] = True
+                                    it["is_paywalled"] = False
+                            if "forbes" in u.lower() or "forbes" in (it.get("source") or "").lower():
+                                clean_u = u.split("#")[0].strip()
+                                fc_entry = forbes_cache.get(clean_u)
+                                if fc_entry:
+                                    for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                                        if fc_entry.get(fld):
+                                            it[fld] = fc_entry[fld]
+                                    if fc_entry.get("cover_image"):
+                                        it["image_url"] = fc_entry["cover_image"]
+                                    it["is_substantive"] = True
+                                    it["is_paywalled"] = False
+                            news.append(it)
+                            existing_ids.add(i_id)
+            except Exception as e:
+                print('Archive load note:', e)
 
     print(f"🚀 Generating {len(tools)} tools and {len(news)} news landing pages...")
 

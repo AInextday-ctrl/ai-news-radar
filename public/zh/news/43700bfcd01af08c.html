@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anthropic 发布了 FlashProve，这是一种开源代码，可通过加密方式验证来自给定模型的 AI 响 | AI 资讯雷达</title>
+  <title>Anthropic 发布了 FlashProve，这是一种开源代码，可通过加密方式验证来自给定模型的 AI 响… | AI 资讯雷达</title>
   <meta name="description" content="罗伊·林伯格（人类）、亚历克斯·阿兰（人类）； Alessandro Chiesa（洛桑联邦理工学院、StarkWare）、Miranda Christ（麻省理工学院、RESI）、Rahul Dalal（人类 STEM 研究员计划，简明）、Giacomo Fenzi（洛桑联邦理工学院）、Ben Mayer（人类研究员计">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/zh/news/43700bfcd01af08c">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/43700bfcd01af08c">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/43700bfcd01af08c">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/43700bfcd01af08c">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/43700bfcd01af08c">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -106,6 +109,9 @@
       "inLanguage": "zh-CN",
       "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/43700bfcd01af08c",
       "articleSection": "Artificial Intelligence",
+      "articleBody": "Roy Rinberg（Anthropic）、Alex Allain（Anthropic）、Alessandro Chiesa（EPFL、StarkWare）、Miranda Christ（MIT、RESI）、Rahul Dalal（Anthropic STEM Fellows Program、Succinct）、Giacomo Fenzi（EPFL）、Ben Mayer（Anthropic Fellows Program、MIT）、Guy Weissenberg（EPFL）\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n具体而言，我们在一种名为“zkSNARK”的强大加密证明方面取得了进展，这种证明因其强大的隐藏性和效率特性而特别适合可证明推理。在本文中，我们将主要通过一个名为FlashProve的系统来分享其中的一些进展。技术方面的简要概述如下：\n\n• QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n• 对于大型模型（Llama 4 Maverick，4000 亿参数的专家混合模型），当使用 4 位量化权重并在预填充中使用整数运算时，单个 H100 GPU 生成证明的速度约为 110 个 token/秒，每个 1024 个 token 的请求的证明大小约为 19 MB。这大约是使用常见开源库 vLLM 运行模型本身所需 GPU 时间的 70-95 倍。\n\n• 正如我们在第6节中所讨论的，先前的开源系统要慢几个数量级。Claude 找到了将最先进的工具应用于密码学和安全学文献的新方法，同时依靠密码学证明系统的成熟设计原则。对模型的承诺以及随后的推理证明隐藏了模型的权重；隐藏模型的架构并不是本系统的目标。\n\n• Claude擅长优化，但往往会做出难以评估的决策，在大型复杂系统中尤其如此。为了应对这一问题，我们使用 Lean（一种形式化验证语言）为所宣称的安全保障提供顶级可审计语句。\n\n今天，我们将发布五件文物：\n\n• 当前这篇博客文章，概述了我们的系统及其潜在应用；\n\n• 一份技术报告，详细说明我们的系统；\n\n• 一份（由 Claude 撰写）的协议规范文档；\n\n• 可执行代码，包括：一个证明者和两个验证者，一个C++快速验证者，以及一个Lean可证明正确的验证者；以及\n\n• 顶级数学命题的 Lean 证明，以及 Lean 定理的交互式可视化工具，以协助审核。\n\n我们根据Apache 2.0许可证发布我们的代码、Lean证明和文档。1 本研究文章旨在分享中期进展，而非完整的研究议程。我们明确分享这一内容，目的是让其他人了解我们所做的工作，借鉴并加以改进。\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n然而，实现对模型响应的验证具有挑战性。大多数前沿模型的权重都是保密的，即使用户能够访问这些权重，要核实某个给定响应是否由具有这些权重的模型生成，也需要运行该模型，而这所需要的计算资源远远超出了普通用户（甚至评估者）所能承受的范围。\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n实现PI的一种方法是通过一种名为零知识简洁论证的加密对象：模型提供方在发送所声称的响应的同时，还会发送一个简短的证明（例如，几兆字节），用户可以快速验证该证明（理想情况下，在CPU上只需几秒钟）。如果所声称的响应与指定模型不符，用户的检查将失败。重要的是，加密技术可确保证明不会透露有关模型权重的任何信息。\n\n今天，我们发布了FlashProve：一个用于可证明推理的高性能开源原型。对于一个4000亿参数的混合专家模型（Llama 4 Maverick，4位量化），我们展示了单个H100 GPU以超过100个token/秒的速度生成证明，每个1024个token的请求的证明大小约为19 MB（约为常见开源库vLLM处理同等长度提示所需的GPU时间的约70-95倍）。\n\n该版本附带可执行代码、Lean形式化和协议的技术说明。我们的目标有两方面：(i) 加快和促进可证明推理的发展；(ii) 证明零知识简洁论证对于可证明推理具有实用性。\n\n我们认为，这一进展对于安全、推进人工智能发展、向人工智能客户提供诚信保障、为审计师和监管机构提供工具等方面具有重要意义。\n\n### 人工智能普及过程中的信任挑战\n\n人工智能的发展及其在我们的数字基础设施和经济中日益重要的作用带来了信任方面的挑战，人工智能提供商必须应对这些挑战。依靠可证明推理 (PI) 工具，可以更轻松地应对这些挑战和其他挑战。\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n下文概述了若干挑战以及zkSNARKs如何帮助应对这些挑战。\n\n#### 挑战 1：节奏把控\n\n一些旨在监管和控制人工智能发展速度的提议依赖于对硬件及其使用方式的监控。例如，可能要求提供商将其硬件用于推理，而不是用于训练一个功能强大的新模型。提供商可能会试图通过提供更便宜的模型或以意想不到的方式使用算力来作弊，从而腾出资源用于训练。监管机构如何可靠地确保硬件用于推理？\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n#### 挑战2：篡改检测\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n#### 挑战 3：文本出处\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nzkSNARK如何提供帮助：提供商可以在每次响应时附上一个zkSNARK，证明输出是由所声称的模型对给定输入生成的。简洁性让用户无需专用硬件即可快速检查此证明，而零知识则让提供商确信用户不会获知任何有关专有权重的知识。这补充了用于验证哪个模型生成了响应的现有机制。\n\n例如，在一个漏洞被定期发现的世界中，在发布新代码之前，模型提供方可以向代码开发者提供一份“失败证明”，证明模型提供方在一个特定模型上至少花费了X个代币，但并未取得特定结果（例如，在至少尝试了100万个代币后，该特定模型未在特定补丁中发现任何漏洞）。\n\n#### 挑战4：模型审批\n\n监管可能要求提供商仅提供经批准为安全的模型，而不是被认为存在网络安全或安全风险的模型。提供商可能有绕过这一规定的动机，因为有风险的模型可能优于竞争对手的模型，或者提供此类模型的成本更低。监管机构如何确保只提供经批准的模型？\n\nzkSNARK如何提供帮助：监管机构可以要求提供商在其响应中附上zkSNARK，强制使用经批准的模型。该证明将每个请求与所用模型绑定，因此如果提供商使用的是未经批准的模型，则无法通过验证。由于简洁性，监管机构可以以轻量级的方式进行检查，而无需重新执行每个请求。\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n### 我们的系统：FlashProve\n\nFlashProve 是一个用于大型混合专家 (MoE) 语言模型可证明推理的系统。更多详情请参阅我们的技术报告；本文将简要介绍该系统。\n\nFlashProve涉及两个方：模型提供方（证明方）和用户（验证方）。它分为两个阶段：\n\n• In the offline phase, the prover publishes a commitment to the model weights, which is a short fingerprint to pin down one exact choice of weights while the weights themselves remain hidden. The later inference claims will be checked against that commitment, i.e., the weight model committed to in this phase.\n\n• In the online phase, upon requests from the verifier (i.e., prompts and the corresponding output tokens), the prover produces a proof file proving the following statement:\n\nThe committed model produces these output tokens when evaluated.\n\nAnyone who holds the commitment, the prompt, and the reply can check it, without the weights and with limited compute power, and be convinced that the committed weights, run on this prompt, produce exactly these tokens.\n\n#### Guarantees\n\nA proof file satisfies the following “completeness” and “soundness” properties:\n\n• A proof file is accepted if it is honest (completeness). An honest prover's proof is accepted by the verifier.\n\n• A proof file cannot be forged (soundness). It is effectively impossible (i.e., tantamount to breaking widely believed cryptographic assumptions) to produce a valid proof of a false statement, so the verifier does not have to trust the prover.\n\nCompleteness and soundness alone can be achieved by a computationally powerful verifier that knows the model weights (evaluate the model on the prompt and check whether the result matches the response). The next two properties are what makes the system non-trivial.\n\n• A proof file reveals nothing beyond the statement (zero-knowledge). The verifier learns nothing about the weights, the intermediate values of the computation, or which experts ran at every layer. The model architecture (excluding the weights) is not hidden.\n\n• A proof file is small and cheap to check (succinctness). The attested computation is a run of a 400B-parameter (about 232 GB for a quantized version) model on an H100 GPU, while the verifier receives a proof file of about 19 MB that takes seconds to check on a 24-core CPU. An auditor, or a user with far less hardware than the provider, can check proof files without access to elaborate infrastructure.\n\n#### Evaluation\n\nWe measured an implementation of the protocol on Llama 4 Maverick (a 400B-parameter mixture of experts, with ~17B parameters used per token), using the publicly available 4-bit weights. Each verifier request is a window of 1,024 tokens, and each proof checks one token. The prover runs on a server with a single H100 and 24 CPU cores, and the verifier on a CPU.\n\n• Prover. The prover runs on a server with a single H100 and 24 CPU cores. The offline phase runs once per model and takes about 39 minutes. (For technical reasons we discuss in the technical report, the resulting commitment is good for about 16 million requests, after which the provider has to commit again.) The online phase, on a batch of 24 requests, takes the prover about 223 seconds, which is 110 tokens per second, and each proof is 18.78 MB.\n\n• Verifier. The verifier runs on the client's CPU. It needs no GPU and only has access to a commitment to the weights. The client downloads the commitment, ~6.5 MB in all, and then one proof per request. Checking a proof takes 17 seconds on 24 threads (and 21 seconds on a single thread), including the offline phase's checks.\n\nComparison with plain inference: We ran vLLM, a widely used inference engine, with the FP8 release of the same model on eight H100s, and found that, per GPU, proving a batch of 24 requests takes about 72 times longer than vLLM takes to process the same 24 requests at once (66 to 77 across runs), and about 94 times longer when vLLM runs at the highest load we tried.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n#### Engineering the system\n\nFlashProve benefits from architectural decisions that we took, and which are discussed in detail in the technical report. Here we highlight a few:\n\n• The prover's work is proportional to the experts that actually ran. In a MoE model a token uses ~17B of the 400B parameters, and the prover's work per token is proportional to those ~17B instead of all parameters (the proof still hides which experts were chosen).\n\n• Requests are proved in batches, after the fact. The prover reads finished text in one parallel pass (as in prefill), and it opens the commitment to the weights once per batch instead of once per request.\n\n• The system is designed to fit on a single GPU. The model weights at each layer are split to segments and are proven one segment of layers at a time. The weights are kept in ordinary memory and streamed in, so a single 80 GB GPU, with ~290 GB of host memory beside it, suffices.\n\n#### Post-hoc versus in-line\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n### Trustworthiness from formal verification\n\nCryptographic code is notoriously brittle and error-prone. How can users trust the code we’re releasing today?\n\nThe answer is formal verification: we use the Lean proof assistant to specify the protocol and the desired security properties. We prove these properties in a form that is machine-checkable and guaranteed to be correct (up to compiler errors). We target three top-level properties:\n\n• Completeness: if the statement is correct, the resulting proof is accepted by the verifier.\n\n• Soundness: any fake proof is rejected by the verifier (except with negligible probability).\n\n• Zero knowledge: the proof reveals no information about the weights of the model, beyond what the verifier can infer from the response itself.4\n\nThese properties are stated in the so-called random oracle model, an information-theoretic way to analyze cryptographic protocols that rely on hash functions.\n\nFormal verification leaves two important trust gaps. First, the formal statements must be audited to ensure that they match their intent. This has to be done manually (though it is dramatically less onerous than auditing proofs); we provide an interactive visualizer to assist with this.\n\nSecond, the executable code must be audited to ensure it matches the formally-defined protocol for which the security properties are proven. How to best assist with this depends on the property, because soundness depends solely on the verifier, zero-knowledge depends solely on the prover, and completeness depends on their interaction.\n\n• QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n• For completeness, the threat model does not assume adversarial attacks (the prover and verifier are honest). Therefore, a Lean verifier lets us gain confidence through standard software testing that the honest prover produces accepting proofs: run the prover on a correct statement, and then the Lean verifier on the resulting proof.\n\n• For zero knowledge, we only need the prover to be correct. However, unlike the verifier, the prover is an expensive procedure, and it would be impractical to run a Lean prover. We do not provide facilitations here: we expect that any prover that wants to hide the weights of a model they are serving has access to enough resources for careful agentic and/or human security audits to ensure equivalence to the Lean prover.\n\n### Prior work\n\nAchieving provable inference is the objective of a line of work colloquially termed “zkML”. Early works, such as SafetyNets (2017) verified a two-conv-layer MNIST CNN and a small fully connected speech model, zkCNN (2021) reached VGG-16 (15M parameters) at 88.3 s per proof, and Kang et al. (2022) proved MobileNet v2 on full-resolution ImageNet.\n\nQUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\nRecently commercial efforts have reached impressive numbers, with Attestable proving Gemma 4 31B at 53–77 tok/s on a single H100; at the time of writing, Attestable has not released a corresponding open source library.\n\nThe above numbers speak to the precipitous progress of provable inference in the past years. They should update our priors on what it is possible to prove in zero-knowledge.\n\n• In 2024, zkLLM proved a 13B model at about 2.5 tokens/second on one A100. The only earlier proof of Llama 4 Maverick that we know of, VerInf, reports 14.3 hours for 1,000 tokens on a DGX Spark, with a 93.6 GB proof which took almost a day to verify.\n\n• FlashProve proves the same model at 110 tokens/second on a single H100, with 19 MB proofs that can be verified in seconds. Attestable independently reports 53–77 tokens/second for a dense 31B model.\n\nWe believe that the progress should transfer to more models and architectures, yielding a flexible and powerful tool with overhead over native computation of roughly 2 orders of magnitude (about 70 to 95 times in our measurements), much less than previously expected.\n\n### Limitations\n\nThis release is a research prototype, and has the following technical limitations:\n\n• No formal guarantees on fast executable code. We provide a Lean implementation of the protocol (including an executable “slow” Lean verifier), along with security properties proved in Lean. The paper and the fast executable code are derived from the Lean protocol, but we do not guarantee that all three (Lean, paper, code) match each other.\n\n• QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n• QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS\n\n• Side channel attacks. The current guarantee of the protocol is that the proof itself reveals nothing about the weights of the committed model. However, “side channel attacks”, such as measuring the time it takes to produce a proof, could potentially reveal information about the weights. We consider this out of scope for this release.\n\n• Longer contexts. The system currently proves inference over contexts of up to 1,024 tokens. This is quite short in comparison to the contexts accumulated in chat settings. Ideally, this context length could be increased to full context windows for frontier models (which regularly have context windows of 100s of thousands to millions of tokens).",
+      "wordCount": 13209,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Anthropic",
       "isBasedOn": "https://www.anthropic.com/research/provable-inference?ref=ainewsradar",
       "about": [
         {
@@ -114,11 +120,19 @@
           "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
         }
       ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
           ".executive-summary",
-          "h1"
+          "h1",
+          ".article-body",
+          ".fact-card"
         ]
       },
       "author": {
@@ -230,7 +244,7 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>核心要点提炼与关键事实</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Anthropic：发布FlashProve工具以验证模型响应真实性</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>防止第三方服务商擅自替换廉价模型</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键技术规格】</strong>提升AI推理透明度与安全。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>提升AI推理透明度与安全。</li>
           </ul>
         </section>
@@ -247,13 +261,8 @@
             </div>
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Anthropic 权威实录</span>
           </div>
-          <div class="article-body space-y-6 sm:space-y-7">
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
             <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Roy Rinberg（Anthropic）、Alex Allain（Anthropic）、Alessandro Chiesa（EPFL、StarkWare）、Miranda Christ（MIT、RESI）、Rahul Dalal（Anthropic STEM Fellows Program、Succinct）、Giacomo Fenzi（EPFL）、Ben Mayer（Anthropic Fellows Program、MIT）、Guy Weissenberg（EPFL）</p>
-
-<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
-              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
-              <span>执行摘要</span>
-            </h3>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
@@ -286,11 +295,6 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• 顶级数学命题的 Lean 证明，以及 Lean 定理的交互式可视化工具，以协助审核。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们根据Apache 2.0许可证发布我们的代码、Lean证明和文档。1 本研究文章旨在分享中期进展，而非完整的研究议程。我们明确分享这一内容，目的是让其他人了解我们所做的工作，借鉴并加以改进。</p>
-
-<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
-              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
-              <span>简介</span>
-            </h3>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
@@ -557,6 +561,45 @@
     </article>
 
     
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/1099cb43b4bb3a0c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/sa_cda00a6f956e246f.jpg" alt="工业监控初创公司 BrightAI 完成 9700 万美元投资" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SiliconANGLE</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">工业监控初创公司 BrightAI 完成 9700 万美元投资</h4>
+            </a>
+            
+            <a href="/zh/news/d94adb15e8dc6434" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fd449f0a1-e996-4b08-823b-ac513e3ea2c8.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">由于 Anthropic 创纪录的 IPO 未能阻止人工智能抛售，亚洲科技股暴跌；软银下跌约 15%，台积电下跌 5% 以上，三星和 SK 海力士下跌 6% 以上</h4>
+            </a>
+            
+            <a href="/zh/news/5544300b55d0f131" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/cbsnews_e71fe42a8a189ff1.jpg" alt="加州总检察长启动对英伟达及黄仁勋调查" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CBS News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">加州总检察长启动对英伟达及黄仁勋调查</h4>
+            </a>
+            
+            <a href="/zh/news/43cf5e526fb27b6f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg" alt="Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%</h4>
+            </a>
+            
+              </div>
+            </div>
+            
 
   </main>
 

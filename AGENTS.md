@@ -137,3 +137,17 @@
      - 默认通用：`主流大语言模型通用` / `Universal SOTA LLMs`。
 3. **跨语言镜像纯正性保障**：
    - 英文版静态渲染与客户端必须对模型适用范围做原生英文化（如 `Universal LLMs`），严禁将带中文的字符直接裁剪导致产生半截括号（如 `(Claude / GPT / DeepSeek`）的破损排版。
+
+---
+
+## 9. 福布斯信源固锁与高保真抓取守则 (Forbes Source Invariants & Contract Lock)
+
+1. **信源契约完全固锁 (Contract Frozen)**：
+   - 福布斯信源解析器（`crawlers/forbes_crawler.py`）契约已正式冻结固锁。
+   - 凡涉及 `forbes.com` 的抓取与解析，必须统一经由 `crawl_forbes` 与 `is_forbes_url` 调度。
+2. **零聚合前缀与真实记者署名**：
+   - 严禁聚合平台前缀（如 `Source: ... (Author/Forbes)`）泄漏至标题，必须使用 `clean_forbes_title` 彻底剥离。
+   - 记者署名优先从 `/sites/{author_slug}/` 或电讯网络解析，杜绝将作者笼统标记为 `Forbes`。
+3. **真实配图本地化托管与零版权锁盒**：
+   - 官方配图（`imageio.forbes.com`）由爬虫自动下载并本地化托管至 `/images/forbes_{slug}.jpg`；缺省回退中性品牌卡（`og-default.jpg`），严禁使用无关库存假图。
+   - 落地页必须具备 3 段以上实质报道正文（`paragraphs` / `paragraphs_zh`），严禁出现版权锁盒（`Protected by source publisher copyright or login requirements...`）占位符。

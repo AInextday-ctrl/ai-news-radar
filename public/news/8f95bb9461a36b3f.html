@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meta details Prometheus, its gigawatt-scale… | AI News Radar</title>
   <meta name="description" content="Meta unveiled architectural details for Prometheus, a gigawatt-scale supercluster located in Ohio. Built to eventually host approximately 1 million GPUs, the cl">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/news/8f95bb9461a36b3f">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/8f95bb9461a36b3f">
   <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/8f95bb9461a36b3f">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/8f95bb9461a36b3f">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/8f95bb9461a36b3f">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -105,6 +108,9 @@
 "inLanguage": "en",
 "mainEntityOfPage": "https://ainewsradar.xyz/news/8f95bb9461a36b3f",
 "articleSection": "Artificial Intelligence",
+"articleBody": "Open Source\nMeta Open Source\n\nAndroid\niOS\nWeb\n\nInfrastructure Systems\n\nCore Infra\nData Infrastructure\nDevInfra\nProduction Engineering\nSecurity & Privacy\nResearch Publications\n\nPhysical Infrastructure\n\nConnectivity\nData Center Engineering\nNetworking & Traffic\nResearch Publications\n\nVideo Engineering & AR/VR\n\nVideo Engineering\nVirtual Reality\nResearch Publications\n\nArtificial Intelligence\n\nML Applications\nAI Research\nResearch Publications\n\nWatch Videos\n\nPOSTED ON OCTOBER 19, 2026 TO Core Infra, Data Center Engineering, Data Infrastructure, ML Applications, Networking & Traffic, Production Engineering\nInside Prometheus: Meta’s Journey to a Gigawatt-Scale Supercluster\n\nBy Kevin Lee, Yashar Bayani, Ahmed Sharif, Yee Jiun Song\n\nWith the recent release of the Muse family of foundational models, we want to take you inside the infrastructure that has made it all possible.\nThe first phase of Prometheus, our gigawatt-scale supercluster, is already complete and we’re working toward scaling it to comprise ~1 million GPUs.\nPrometheus also features technologies like closed-loop liquid cooling to help it operate efficiently.\n\nRight now, in New Albany, Ohio, Meta is undertaking its most ambitious AI infrastructure project to date. Prometheus, our gigawatt-scale supercluster, is an advancement in our infrastructure that is training the next generation of foundational models that will bring new AI experiences to billions of people.\n\nTwo years ago, New Albany was a conventional data center site running web traffic. With advancements in hardware, networking and building design, we reworked this site to be home to training programs for frontier models. We’re building the supercluster in phases. The first phase has already been completed and was used to train our Muse foundational models, including the Muse Wonder models, our new frontier models that deliver state-of-the-art performance on personal and professional agentic tasks.\n\nLarge training jobs require everything to work optimally to sustain their performance; an issue on a single host can slow down or stop the entire job, lowering its ‘goodput’. By focusing on improving our systems’ stability and reliability we were able to achieve more than 85% goodput for pre-training runs and more than 90% goodput for reinforcement learning (RL) runs of Muse Wonder. During these training runs, we were able to achieve an overall wall-clock mean time between interruptions (MTBI) of ~47k GPU hours. Since then, we have landed further changes across our fleet including firmware fixes to increase MTBI to more than 54K GPU hours, and we are constantly improving it.\n\nNow, we’re continuing to scale Prometheus with our next frontier models from Meta Superintelligence Labs in mind.\n\nThe Prometheus supercluster is housed in Meta’s New Albany, Ohio, data center.\n\nToday, Prometheus comprises an array of hundreds of thousands of GPUs across multiple interconnected buildings, including traditional and AI-optimized data center buildings and rapid deployment structures, all tightly interconnected by miles of fiber and functioning as a single machine.\n\nThis capacity allows us to pursue larger models and longer context windows than were previously practical. At full scale, Prometheus will comprise roughly 1 million distributed GPUs, all functioning in lockstep.\n\nPrometheus currently deploys two NVIDIA GPU platforms, with a third (based on NVIDIA’s Vera Rubin NVL72) arriving soon. Each represents a generational leap in performance and efficiency, leveraging our NVL72 rack architecture where 72 GPUs act as a single accelerator within the same network fabric.\n\nOur first platform, Catalina, leverages the NVIDIA GB200 NVL72. We deploy the Ariel variant, a two-rack configuration in which 36 GPUs per rack are interconnected via NVLink to form a unified 72-GPU domain. Catalina provides improvements in raw compute and memory capacity compared to Grand Teton H100. It leverages our Open Rack V3 (ORv3) high-power rack (HPR) structure, an open hardware design contributed to the Open Compute Project (OCP).\n\nThe Ariel variant of GB200 NVL72 pairs each NVIDIA Blackwell GPU with an NVIDIA Grace CPU and 2x NVIDIA ConnectX-7 400G NICs at a 1:1 CPU-to-GPU ratio, letting us deploy 800G of I/O per GPU earlier than the rest of the industry. We chose Ariel because the GB200 NVL72 scaled up nearly every other dimension relative to the NVIDIA H100: FLOPS, HBM bandwidth, scale-up bandwidth, and scale-up domain size, while scale-out bandwidth per GPU would have stayed at 400G. We expected that imbalance to cost performance, so we opted for a configuration that delivers 800G of scale-out per GPU. This also gave us more uniformity of spec as the region expanded over time and 800G scale-out became available.\n\nOur second platform, Clemente, moves to the NVIDIA GB300 NVL72 and improves on Catalina at both the GPU and the platform level. GB300 raises HBM capacity per GPU by 1.5x, from 192 GB to 288 GB, and dense FP4 throughput by a similar factor, while roughly doubling attention (softmax) acceleration. At the platform level, scale-out is no longer the constraint it was on the GB200 NVL72: NVIDIA ConnectX-8 SuperNICs deliver 800G per GPU natively, so the capability we deployed early on Ariel becomes the baseline. That, together with a 2:1 GPU-to-CPU ratio, allows Clemente to pack the full 72-GPU domain into a single rack, streamlining our physical deployment. Clemente can be deployed with our modular Air-Assisted Liquid Cooling (AALC) or use Facility Liquid Cooling (FLC) in our newly designed data centers. Serviceability also improves substantially, with reduced cabling.\n\nIn traditional web services, the data center network transports requests and responses between services whose instances typically don’t require high bandwidth, high performance, and tight, lock-step coordination across many servers. Large-scale AI training requires all these, meaning the network that connects them is now an important part of AI workloads. To best address this, in addition to the standard data center network connecting servers, several years ago we added a second dedicated data network based on Ethernet, called the Back-End (BE) network, to enable direct GPU-to-GPU communication both within and across data center buildings.\n\nLarge pre-training jobs partition the training into data-parallel model replicas, creating a hierarchy in network usage: Latency-sensitive and bandwidth-sensitive operations concentrate within a replica, while traffic that is more tolerant of higher latency and less bandwidth is scheduled between replicas. Our network is designed to match this hierarchy, with low-latency, high-bandwidth fabrics within buildings and an aggregation network connecting the building fabrics.\n\nWe work closely with Meta Superintelligence Labs to ensure the parallelism design, traffic patterns, and communication algorithms and software are optimized to minimize exposure of any network communication. This keeps the GPUs as busy as possible and not waiting on the network.\n\nThe Meta team has employed these networking concepts in earlier building-scale, 24K GPU clusters and our region-scale, 100K+ GPU cluster over the last several years, and we took them to a new level of scale and distance in Prometheus.\n\nAt the building level, each Ethernet-based fabric interconnects up to 20,736 GPUs through a high-bandwidth, low-latency multi-layer topology. Our initial design used a Disaggregated Scheduled Fabric (DSF) to mitigate the network congestion caused by training collectives that typically have a small number of large, long-lived network flows that collide under traditional load-balancing techniques; it does this by utilizing sub-packet-level multipath routing and packet re-ordering in the fabric along with virtual output queues and credit-based end-to-end flow control.\n\nAs Ethernet NIC technology advanced, enabling packet re-ordering at the endpoint, we were able to update to a Non-Scheduled Fabric (NSF) utilizing shallow-buffer 51.2T Ethernet switches, such as Minipack3 with Dynamic Load Balancing and the NVIDIA Spectrum-4 switch ASIC-based Minipack3N with NVIDIA’s Adaptive Routing on ConnectX NICs. Both DSF and NSF are based on Meta’s FBOSS networking stack, giving us the control to rapidly iterate on and optimize the fabrics in Prometheus, and the visibility to operate these clusters at scale.\n\nThe Backend Aggregation (BAG) network is a multi-layer hub-and-spoke network that connects building-level fabrics across the Prometheus cluster, spanning 2 km to over 100 km. It is built with Arista 7800-series chassis running deep-buffered Broadcom Jericho3 silicon, delivering multiple Pbps of bandwidth per region pair.\n\nRunning pretraining over this network required a dedicated optimization effort with Meta Superintelligence Labs to ensure training was not slowed down, especially given speed-of-light constraints at these distances.\n\nPulling this all together, the complexity of the Prometheus network involves millions of miles of fiber strand, tens of thousands of switches, and millions of optics — from 2×400G FR4 LITE short-reach, low-cost pluggables inside the buildings to 800G-ZR coherent optics for links beyond ~10 km.\n\nAt Prometheus’ scale, every component needs to be monitored for reliability. A single fault anywhere can halt an entire training job and waste valuable compute resources.\n\nMaintaining reliability at this level requires a co-engineering model with NVIDIA that goes beyond a traditional vendor dynamic. Teams are deeply embedded at our data centers, sharing real-time telemetry and running joint triage sessions to decompose every system halt by its root cause.\n\nThis attribution-driven accountability model ensures both sides are focused on targeted improvements. While Meta optimizes scheduling and infrastructure, NVIDIA addresses firmware, signal diagnostics, and memory handling. This transparency eliminates ambiguity and drives faster fixes across both organizations.\n\nThe transition from the H100 generation’s NVL8 architecture to NVL72 has fundamentally redefined our approach to infrastructure resilience. In the NVL8 era, the scale-up domain — the group of GPUs tightly coupled via NVLink for tensor parallelism — was limited to eight units. With NVL72, that domain expands to 72 GPUs, increasing the fault blast radius by 9X.\n\nThe larger scale-up domain is what gives NVL72 its bandwidth advantage, but it also makes the 72-GPU rack the unit of allocation we plan capacity around. Training parallelism maps most efficiently onto power-of-two group sizes, so each NVL72 domain runs a 64-GPU slice and keeps its remaining eight GPUs as in-rack spares. When a GPU fails, a spare takes its place immediately, so the job restarts from its last checkpoint instead of waiting on hardware repair, and the rack stays in the job. The in-rack redundancy pushes the effective rack fault rate down to the floor set by failures that can remove an entire pod; for rarer whole-rack faults we hold roughly 2% additional racks in reserve. For a 32,768 active-GPU training run, this means provisioning 523 NVL72 racks, or 37,656 GPUs, about 13% above the active footprint. Most of that margin (11%) falls out of the 64-of-72 slice geometry rather than being an absolute reliability tax.\n\nPhysical complexity further intensifies these reliability requirements. A single NVL72 domain incorporates 5,184 tuned differential-pair signaling links operating at 200 Gbps, each traversing multiple potential points of failure, including GPU SerDes, compute tray PCBs, cable cartridges, and switch tray interfaces. Maintaining consistent signal integrity across this dense fabric — at 200 Gbps per lane — represents an unprecedented engineering challenge at this scale.\n\nFault recovery addresses how we react to faults to minimize the impact on training time. Depending on the scope (i.e., blast area) of a fault we address it through two mechanisms:\n\nParallelism-Aware Fault Tolerance (PAFT): When a fault can be isolated to a data-parallel model replica, we reduce the impact of a hardware failure by allowing a single faulty replica to be taken offline, while the remaining cluster repeats that step and continues productive training. The compromised slice simply restarts on available spare hosts and resynchronizes, converting a potential total system halt into a minor, temporary reduction in aggregate throughput.\n\nCheckpointing: When a fault blast area is larger than a data-parallel model replica, the entire job is restarted back to the last checkpoint; frequent checkpointing reduces the amount of work lost in these events. Our distributed checkpointing architecture asynchronously saves the model state — including gradients and optimizer data — to multi-tier storage. We use delta checkpointing and in-memory staging to ensure these saves happen with minimal impact on training throughput.\n\nThese two fault recovery mechanisms combine with a sparing strategy that utilizes pre-allocated spare GPU trays within a rack, as well as spare racks, to minimize the time to bring up replacement hardware and reduce the amount of work lost to hardware failures",
+"wordCount": 1966,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Engineering at Meta, Meta, Large Language Model, Semiconductor",
 "isBasedOn": "https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/?ref=ainewsradar",
 "about": [
 {
@@ -113,11 +119,19 @@
 "sameAs": "https://en.wikipedia.org/wiki/Meta_Platforms"
 }
 ],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
 "speakable": {
 "@type": "SpeakableSpecification",
 "cssSelector": [
 ".executive-summary",
-"h1"
+"h1",
+".article-body",
+".fact-card"
 ]
 },
 "author": {
@@ -208,7 +222,7 @@
       
       <!-- Preview Image -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
-        <img src="https://engineering.fb.com/wp-content/uploads/2026/10/Prometheus-NAO_-5-1.jpg" alt="Meta details Prometheus, its gigawatt-scale supercluster in Ohio, which will have ~1M GPUs at full scale and was used to train its Muse foundational models (Engineering at Meta)" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <img src="https://engineering.fb.com/wp-content/uploads/2026/10/Prometheus-NAO_-5-1.jpg" alt="Meta details Prometheus, its gigawatt-scale supercluster in Ohio, which will have ~1M GPUs at full scale and was used to train its Muse foundational models (Engineering at Meta)" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
           <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
@@ -218,43 +232,18 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Meta details Prometheus, its gigawatt-scale supercluster in Ohio, which will have ~1M GPUs at full scale and was used to train its Muse foundational models (Engineering at Meta)
         </h1>
         <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>By Engineering at Meta</span></div>
 
-        <!-- CTA & Social Share Capsule Bar -->
-        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-          
-          <!-- Primary Source Link Button -->
-          <a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
-            <span>📖 Read Original Source Report ↗</span>
-          </a>
-
-          <!-- Social Sharing & Bookmark Actions -->
-          <div class="flex items-center gap-2">
-            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on 𝕏">
-              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              <span>𝕏</span>
-            </button>
-            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on Threads">
-              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
-              <span>Threads</span>
-            </button>
-            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
-              <span>🔗</span> <span>Copy Link</span>
-            </button>
-          </div>
-
-        </div>
-
         <!-- News Briefing Content -->
-        <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Meta unveiled architectural details for Prometheus, a gigawatt-scale supercluster located in Ohio. Built to eventually host approximately 1 million GPUs, the cluster has already powered the training of Meta&#x27;s next-gen foundation models, solidifying its hardware dominance.
-          </div>
+          </p>
         </div>
 
         
@@ -262,141 +251,187 @@
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>Executive Summary & Key Facts</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Meta Engineering Team (Ohio Data Center Campus): Unveiled architectural details of a gigawatt-scale supercluster scaling up to 1 million GPUs</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> To satisfy massive compute and power demands for training next-gen foundational models</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Metrics]</strong> Scales up to ~1M GPUs and powers next-gen model training.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Position &amp; Outlook]</strong> Big tech infrastructure war escalates to gigawatt grid-level.</li>
           </ul>
         </section>
         
         
-        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
-          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
-            <span>🤖</span> <span>AI Radar Technical Deep-Dive</span>
-          </h3>
-          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">While the rest of the industry still brags about 10,000-GPU clusters, Meta is measuring compute in full gigawatts and millions of chips. The frontier AI race has officially morphed from smart algorithmic breakthroughs into a brutal power-grid slugfest.</p>
-        </div>
+        <figure class="my-8 mx-auto w-full w-full">
+          <video controls playsinline preload="metadata" poster="https://engineering.fb.com/wp-content/uploads/2026/10/Prometheus-NAO_-5-1.jpg" class="w-full aspect-video h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){var f=this.closest('figure');if(f){if(this.videoHeight>this.videoWidth*1.08){f.style.maxWidth='360px';this.classList.remove('aspect-video');}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){f.style.maxWidth='480px';this.classList.remove('aspect-video');}else{f.style.maxWidth='100%';}}}">
+            <source src="https://engineering.fb.com/wp-content/uploads/2026/10/AIM-1210-Superclusters_Video_v1.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 Featured Video Coverage · Engineering at Meta</span>
+            <a href="https://engineering.fb.com/wp-content/uploads/2026/10/AIM-1210-Superclusters_Video_v1.mp4" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">Watch on Source ↗</a>
+          </figcaption>
+        </figure>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 Full In-Depth Coverage</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">Engineering at Meta Full Report</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Open Source
-	Meta Open Source</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Engineering at Meta Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Open Source
+	Meta Open Source</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Android
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Android
 	iOS
 	Web</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Infrastructure Systems</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Infrastructure Systems</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Core Infra
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Core Infra
 	Data Infrastructure
 	DevInfra
 	Production Engineering
 	Security &amp; Privacy
 	Research Publications</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Physical Infrastructure</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Physical Infrastructure</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Connectivity
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Connectivity
 	Data Center Engineering
 	Networking &amp; Traffic
 	Research Publications</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Video Engineering &amp; AR/VR</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Video Engineering &amp; AR/VR</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Video Engineering
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Video Engineering
 	Virtual Reality
 	Research Publications</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Artificial Intelligence</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Artificial Intelligence</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">ML Applications
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">ML Applications
 	AI Research
 	Research Publications</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Watch Videos</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Watch Videos</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">POSTED ON OCTOBER 19, 2026 TO Core Infra, Data Center Engineering, Data Infrastructure, ML Applications, Networking &amp; Traffic, Production Engineering
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">POSTED ON OCTOBER 19, 2026 TO Core Infra, Data Center Engineering, Data Infrastructure, ML Applications, Networking &amp; Traffic, Production Engineering
 			Inside Prometheus: Meta’s Journey to a Gigawatt-Scale Supercluster</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">By Kevin Lee, Yashar Bayani, Ahmed Sharif, Yee Jiun Song</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">By Kevin Lee, Yashar Bayani, Ahmed Sharif, Yee Jiun Song</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">With the recent release of the Muse family of foundational models, we want to take you inside the infrastructure that has made it all possible.
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">With the recent release of the Muse family of foundational models, we want to take you inside the infrastructure that has made it all possible.
 The first phase of Prometheus, our gigawatt-scale supercluster, is already complete and we’re working toward scaling it to comprise  ~1 million GPUs.
 Prometheus also features technologies like closed-loop liquid cooling to help it operate efficiently.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Right now, in New Albany, Ohio, Meta is undertaking its most ambitious AI infrastructure project to date. Prometheus, our gigawatt-scale supercluster, is an advancement in our infrastructure that is training the next generation of foundational models that will bring new AI experiences to billions of people.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Right now, in New Albany, Ohio, Meta is undertaking its most ambitious AI infrastructure project to date. Prometheus, our gigawatt-scale supercluster, is an advancement in our infrastructure that is training the next generation of foundational models that will bring new AI experiences to billions of people.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Two years ago, New Albany was a conventional data center site running web traffic. With advancements in hardware, networking and building design, we reworked this site to be home to training programs for frontier models. We’re building the supercluster in phases. The first phase has already been completed and was used to train our Muse foundational models, including the Muse Wonder models, our new frontier models that deliver state-of-the-art performance on personal and professional agentic tasks.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Two years ago, New Albany was a conventional data center site running web traffic. With advancements in hardware, networking and building design, we reworked this site to be home to training programs for frontier models. We’re building the supercluster in phases. The first phase has already been completed and was used to train our Muse foundational models, including the Muse Wonder models, our new frontier models that deliver state-of-the-art performance on personal and professional agentic tasks.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Large training jobs require everything to work optimally to sustain their performance; an issue on a single host can slow down or stop the entire job, lowering its ‘goodput’. By focusing on improving our systems’ stability and reliability we were able to achieve more than 85% goodput for pre-training runs and more than 90% goodput for reinforcement learning (RL) runs of Muse Wonder. During these training runs, we were able to achieve an overall wall-clock mean time between interruptions (MTBI) of ~47k GPU hours. Since then, we have landed further changes across our fleet including firmware fixes to increase MTBI to more than 54K GPU hours, and we are constantly improving it.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Large training jobs require everything to work optimally to sustain their performance; an issue on a single host can slow down or stop the entire job, lowering its ‘goodput’. By focusing on improving our systems’ stability and reliability we were able to achieve more than 85% goodput for pre-training runs and more than 90% goodput for reinforcement learning (RL) runs of Muse Wonder. During these training runs, we were able to achieve an overall wall-clock mean time between interruptions (MTBI) of ~47k GPU hours. Since then, we have landed further changes across our fleet including firmware fixes to increase MTBI to more than 54K GPU hours, and we are constantly improving it.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Now, we’re continuing to scale Prometheus with our next frontier models from Meta Superintelligence Labs in mind.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Now, we’re continuing to scale Prometheus with our next frontier models from Meta Superintelligence Labs in mind.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The Prometheus supercluster is housed in Meta’s New Albany, Ohio, data center.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The Prometheus supercluster is housed in Meta’s New Albany, Ohio, data center.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Today, Prometheus comprises an array of hundreds of thousands of GPUs across multiple interconnected buildings, including traditional and AI-optimized data center buildings and rapid deployment structures, all tightly interconnected by miles of fiber and functioning as a single machine.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Today, Prometheus comprises an array of hundreds of thousands of GPUs across multiple interconnected buildings, including traditional and AI-optimized data center buildings and rapid deployment structures, all tightly interconnected by miles of fiber and functioning as a single machine.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">This capacity allows us to pursue larger models and longer context windows than were previously practical. At full scale, Prometheus will comprise roughly 1 million distributed GPUs, all functioning in lockstep.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">This capacity allows us to pursue larger models and longer context windows than were previously practical. At full scale, Prometheus will comprise roughly 1 million distributed GPUs, all functioning in lockstep.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Prometheus currently deploys two NVIDIA GPU platforms, with a third (based on NVIDIA’s Vera Rubin NVL72) arriving soon. Each represents a generational leap in performance and efficiency, leveraging our NVL72 rack architecture where 72 GPUs act as a single accelerator within the same network fabric.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Prometheus currently deploys two NVIDIA GPU platforms, with a third (based on NVIDIA’s Vera Rubin NVL72) arriving soon. Each represents a generational leap in performance and efficiency, leveraging our NVL72 rack architecture where 72 GPUs act as a single accelerator within the same network fabric.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Our first platform, Catalina, leverages the NVIDIA GB200 NVL72. We deploy the Ariel variant, a two-rack configuration in which 36 GPUs per rack are interconnected via NVLink to form a unified 72-GPU domain. Catalina provides improvements in raw compute and memory capacity compared to Grand Teton H100. It leverages our Open Rack V3 (ORv3) high-power rack (HPR) structure, an open hardware design contributed to the Open Compute Project (OCP).</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Our first platform, Catalina, leverages the NVIDIA GB200 NVL72. We deploy the Ariel variant, a two-rack configuration in which 36 GPUs per rack are interconnected via NVLink to form a unified 72-GPU domain. Catalina provides improvements in raw compute and memory capacity compared to Grand Teton H100. It leverages our Open Rack V3 (ORv3) high-power rack (HPR) structure, an open hardware design contributed to the Open Compute Project (OCP).</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The Ariel variant of GB200 NVL72 pairs each NVIDIA Blackwell GPU with an NVIDIA Grace CPU and 2x NVIDIA ConnectX-7 400G NICs at a 1:1 CPU-to-GPU ratio, letting us deploy 800G of I/O per GPU earlier than the rest of the industry. We chose Ariel because the GB200 NVL72 scaled up nearly every other dimension relative to the NVIDIA H100: FLOPS, HBM bandwidth, scale-up bandwidth, and scale-up domain size, while scale-out bandwidth per GPU would have stayed at 400G. We expected that imbalance to cost performance, so we opted for a configuration that delivers 800G of scale-out per GPU. This also gave us more uniformity of spec as the region expanded over time and 800G scale-out became available.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The Ariel variant of GB200 NVL72 pairs each NVIDIA Blackwell GPU with an NVIDIA Grace CPU and 2x NVIDIA ConnectX-7 400G NICs at a 1:1 CPU-to-GPU ratio, letting us deploy 800G of I/O per GPU earlier than the rest of the industry. We chose Ariel because the GB200 NVL72 scaled up nearly every other dimension relative to the NVIDIA H100: FLOPS, HBM bandwidth, scale-up bandwidth, and scale-up domain size, while scale-out bandwidth per GPU would have stayed at 400G. We expected that imbalance to cost performance, so we opted for a configuration that delivers 800G of scale-out per GPU. This also gave us more uniformity of spec as the region expanded over time and 800G scale-out became available.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Our second platform, Clemente, moves to the NVIDIA GB300 NVL72 and improves on Catalina at both the GPU and the platform level. GB300 raises HBM capacity per GPU by 1.5x, from 192 GB to 288 GB, and dense FP4 throughput by a similar factor, while roughly doubling attention (softmax) acceleration. At the platform level, scale-out is no longer the constraint it was on the GB200 NVL72: NVIDIA ConnectX-8 SuperNICs deliver 800G per GPU natively, so the capability we deployed early on Ariel becomes the baseline. That, together with a 2:1 GPU-to-CPU ratio, allows Clemente to pack the full 72-GPU domain into a single rack, streamlining our physical deployment. Clemente can be deployed with our modular Air-Assisted Liquid Cooling (AALC) or use Facility Liquid Cooling (FLC) in our newly designed data centers. Serviceability also improves substantially, with reduced cabling.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Our second platform, Clemente, moves to the NVIDIA GB300 NVL72 and improves on Catalina at both the GPU and the platform level. GB300 raises HBM capacity per GPU by 1.5x, from 192 GB to 288 GB, and dense FP4 throughput by a similar factor, while roughly doubling attention (softmax) acceleration. At the platform level, scale-out is no longer the constraint it was on the GB200 NVL72: NVIDIA ConnectX-8 SuperNICs deliver 800G per GPU natively, so the capability we deployed early on Ariel becomes the baseline. That, together with a 2:1 GPU-to-CPU ratio, allows Clemente to pack the full 72-GPU domain into a single rack, streamlining our physical deployment. Clemente can be deployed with our modular Air-Assisted Liquid Cooling (AALC) or use Facility Liquid Cooling (FLC) in our newly designed data centers. Serviceability also improves substantially, with reduced cabling.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In traditional web services, the data center network transports requests and responses between services whose instances typically don’t require high bandwidth, high performance, and tight, lock-step coordination across many servers. Large-scale AI training requires all these, meaning the network that connects them is now an important part of AI workloads. To best address this, in addition to the standard data center network connecting servers, several years ago we added a second dedicated data network based on Ethernet, called the Back-End (BE) network, to enable direct GPU-to-GPU communication both within and across data center buildings.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In traditional web services, the data center network transports requests and responses between services whose instances typically don’t require high bandwidth, high performance, and tight, lock-step coordination across many servers. Large-scale AI training requires all these, meaning the network that connects them is now an important part of AI workloads. To best address this, in addition to the standard data center network connecting servers, several years ago we added a second dedicated data network based on Ethernet, called the Back-End (BE) network, to enable direct GPU-to-GPU communication both within and across data center buildings.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Large pre-training jobs partition the training into data-parallel model replicas, creating a hierarchy in network usage: Latency-sensitive and bandwidth-sensitive operations concentrate within a replica, while traffic that is more tolerant of higher latency and less bandwidth is scheduled between replicas. Our network is designed to match this hierarchy, with low-latency, high-bandwidth fabrics within buildings and an aggregation network connecting the building fabrics.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Large pre-training jobs partition the training into data-parallel model replicas, creating a hierarchy in network usage: Latency-sensitive and bandwidth-sensitive operations concentrate within a replica, while traffic that is more tolerant of higher latency and less bandwidth is scheduled between replicas. Our network is designed to match this hierarchy, with low-latency, high-bandwidth fabrics within buildings and an aggregation network connecting the building fabrics.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">We work closely with Meta Superintelligence Labs to ensure the parallelism design, traffic patterns, and communication algorithms and software are optimized to minimize exposure of any network communication. This keeps the GPUs as busy as possible and not waiting on the network.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We work closely with Meta Superintelligence Labs to ensure the parallelism design, traffic patterns, and communication algorithms and software are optimized to minimize exposure of any network communication. This keeps the GPUs as busy as possible and not waiting on the network.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The Meta team has employed these networking concepts in earlier building-scale, 24K GPU clusters and our region-scale, 100K+ GPU cluster over the last several years, and we took them to a new level of scale and distance in Prometheus.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The Meta team has employed these networking concepts in earlier building-scale, 24K GPU clusters and our region-scale, 100K+ GPU cluster over the last several years, and we took them to a new level of scale and distance in Prometheus.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">At the building level, each Ethernet-based fabric interconnects up to 20,736 GPUs through a high-bandwidth, low-latency multi-layer topology. Our initial design used a Disaggregated Scheduled Fabric (DSF) to mitigate the network congestion caused by training collectives that typically have a small number of large, long-lived network flows that collide under traditional load-balancing techniques; it does this by utilizing sub-packet-level multipath routing and packet re-ordering in the fabric along with virtual output queues and credit-based end-to-end flow control.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At the building level, each Ethernet-based fabric interconnects up to 20,736 GPUs through a high-bandwidth, low-latency multi-layer topology. Our initial design used a Disaggregated Scheduled Fabric (DSF) to mitigate the network congestion caused by training collectives that typically have a small number of large, long-lived network flows that collide under traditional load-balancing techniques; it does this by utilizing sub-packet-level multipath routing and packet re-ordering in the fabric along with virtual output queues and credit-based end-to-end flow control.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">As Ethernet NIC technology advanced, enabling packet re-ordering at the endpoint, we were able to update to a Non-Scheduled Fabric (NSF) utilizing shallow-buffer 51.2T Ethernet switches, such as Minipack3 with Dynamic Load Balancing and the NVIDIA Spectrum-4 switch ASIC-based Minipack3N with NVIDIA’s Adaptive Routing on ConnectX NICs. Both DSF and NSF are based on Meta’s FBOSS networking stack, giving us the control to rapidly iterate on and optimize the fabrics in Prometheus, and the visibility to operate these clusters at scale.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">As Ethernet NIC technology advanced, enabling packet re-ordering at the endpoint, we were able to update to a Non-Scheduled Fabric (NSF) utilizing shallow-buffer 51.2T Ethernet switches, such as Minipack3 with Dynamic Load Balancing and the NVIDIA Spectrum-4 switch ASIC-based Minipack3N with NVIDIA’s Adaptive Routing on ConnectX NICs. Both DSF and NSF are based on Meta’s FBOSS networking stack, giving us the control to rapidly iterate on and optimize the fabrics in Prometheus, and the visibility to operate these clusters at scale.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The Backend Aggregation (BAG) network is a multi-layer hub-and-spoke network that connects building-level fabrics across the Prometheus cluster, spanning 2 km to over 100 km. It is built with Arista 7800-series chassis running deep-buffered Broadcom Jericho3 silicon, delivering multiple Pbps of bandwidth per region pair.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The Backend Aggregation (BAG) network is a multi-layer hub-and-spoke network that connects building-level fabrics across the Prometheus cluster, spanning 2 km to over 100 km. It is built with Arista 7800-series chassis running deep-buffered Broadcom Jericho3 silicon, delivering multiple Pbps of bandwidth per region pair.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Running pretraining over this network required a dedicated optimization effort with Meta Superintelligence Labs to ensure training was not slowed down, especially given speed-of-light constraints at these distances.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Running pretraining over this network required a dedicated optimization effort with Meta Superintelligence Labs to ensure training was not slowed down, especially given speed-of-light constraints at these distances.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Pulling this all together, the complexity of the Prometheus network involves millions of miles of fiber strand, tens of thousands of switches, and millions of optics — from 2×400G FR4 LITE short-reach, low-cost pluggables inside the buildings to 800G-ZR coherent optics for links beyond ~10 km.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Pulling this all together, the complexity of the Prometheus network involves millions of miles of fiber strand, tens of thousands of switches, and millions of optics — from 2×400G FR4 LITE short-reach, low-cost pluggables inside the buildings to 800G-ZR coherent optics for links beyond ~10 km.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">At Prometheus’ scale, every component needs to be monitored for reliability. A single fault anywhere can halt an entire training job and waste valuable compute resources.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At Prometheus’ scale, every component needs to be monitored for reliability. A single fault anywhere can halt an entire training job and waste valuable compute resources.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Maintaining reliability at this level requires a co-engineering model with NVIDIA that goes beyond a traditional vendor dynamic. Teams are deeply embedded at our data centers, sharing real-time telemetry and running joint triage sessions to decompose every system halt by its root cause.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Maintaining reliability at this level requires a co-engineering model with NVIDIA that goes beyond a traditional vendor dynamic. Teams are deeply embedded at our data centers, sharing real-time telemetry and running joint triage sessions to decompose every system halt by its root cause.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">This attribution-driven accountability model ensures both sides are focused on targeted improvements. While Meta optimizes scheduling and infrastructure, NVIDIA addresses firmware, signal diagnostics, and memory handling. This transparency eliminates ambiguity and drives faster fixes across both organizations.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">This attribution-driven accountability model ensures both sides are focused on targeted improvements. While Meta optimizes scheduling and infrastructure, NVIDIA addresses firmware, signal diagnostics, and memory handling. This transparency eliminates ambiguity and drives faster fixes across both organizations.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The transition from the H100 generation’s NVL8 architecture to NVL72 has fundamentally redefined our approach to infrastructure resilience. In the NVL8 era, the scale-up domain — the group of GPUs tightly coupled via NVLink for tensor parallelism — was limited to eight units. With NVL72, that domain expands to 72 GPUs, increasing the fault blast radius by 9X.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The transition from the H100 generation’s NVL8 architecture to NVL72 has fundamentally redefined our approach to infrastructure resilience. In the NVL8 era, the scale-up domain — the group of GPUs tightly coupled via NVLink for tensor parallelism — was limited to eight units. With NVL72, that domain expands to 72 GPUs, increasing the fault blast radius by 9X.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The larger scale-up domain is what gives NVL72 its bandwidth advantage, but it also makes the 72-GPU rack the unit of allocation we plan capacity around. Training parallelism maps most efficiently onto power-of-two group sizes, so each NVL72 domain runs a 64-GPU slice and keeps its remaining eight GPUs as in-rack spares. When a GPU fails, a spare takes its place immediately, so the job restarts from its last checkpoint instead of waiting on hardware repair, and the rack stays in the job. The in-rack redundancy pushes the effective rack fault rate down to the floor set by failures that can remove an entire pod; for rarer whole-rack faults we hold roughly 2% additional racks in reserve. For a 32,768 active-GPU training run, this means provisioning 523 NVL72 racks, or 37,656 GPUs, about 13% above the active footprint. Most of that margin (11%) falls out of the 64-of-72 slice geometry rather than being an absolute reliability tax.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The larger scale-up domain is what gives NVL72 its bandwidth advantage, but it also makes the 72-GPU rack the unit of allocation we plan capacity around. Training parallelism maps most efficiently onto power-of-two group sizes, so each NVL72 domain runs a 64-GPU slice and keeps its remaining eight GPUs as in-rack spares. When a GPU fails, a spare takes its place immediately, so the job restarts from its last checkpoint instead of waiting on hardware repair, and the rack stays in the job. The in-rack redundancy pushes the effective rack fault rate down to the floor set by failures that can remove an entire pod; for rarer whole-rack faults we hold roughly 2% additional racks in reserve. For a 32,768 active-GPU training run, this means provisioning 523 NVL72 racks, or 37,656 GPUs, about 13% above the active footprint. Most of that margin (11%) falls out of the 64-of-72 slice geometry rather than being an absolute reliability tax.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Physical complexity further intensifies these reliability requirements. A single NVL72 domain incorporates 5,184 tuned differential-pair signaling links operating at 200 Gbps, each traversing multiple potential points of failure, including GPU SerDes, compute tray PCBs, cable cartridges, and switch tray interfaces. Maintaining consistent signal integrity across this dense fabric — at 200 Gbps per lane — represents an unprecedented engineering challenge at this scale.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Physical complexity further intensifies these reliability requirements. A single NVL72 domain incorporates 5,184 tuned differential-pair signaling links operating at 200 Gbps, each traversing multiple potential points of failure, including GPU SerDes, compute tray PCBs, cable cartridges, and switch tray interfaces. Maintaining consistent signal integrity across this dense fabric — at 200 Gbps per lane — represents an unprecedented engineering challenge at this scale.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Fault recovery addresses how we react to faults to minimize the impact on training time. Depending on the scope (i.e., blast area) of a fault we address it through two mechanisms:</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Fault recovery addresses how we react to faults to minimize the impact on training time. Depending on the scope (i.e., blast area) of a fault we address it through two mechanisms:</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Parallelism-Aware Fault Tolerance (PAFT): When a fault can be isolated to a data-parallel model replica, we reduce the impact of a hardware failure by allowing a single faulty replica to be taken offline, while the remaining cluster repeats that step and continues productive training. The compromised slice simply restarts on available spare hosts and resynchronizes, converting a potential total system halt into a minor, temporary reduction in aggregate throughput.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Parallelism-Aware Fault Tolerance (PAFT): When a fault can be isolated to a data-parallel model replica, we reduce the impact of a hardware failure by allowing a single faulty replica to be taken offline, while the remaining cluster repeats that step and continues productive training. The compromised slice simply restarts on available spare hosts and resynchronizes, converting a potential total system halt into a minor, temporary reduction in aggregate throughput.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Checkpointing: When a fault blast area is larger than a data-parallel model replica, the entire job is restarted back to the last checkpoint; frequent checkpointing reduces the amount of work lost in these events. Our distributed checkpointing architecture asynchronously saves the model state — including gradients and optimizer data — to multi-tier storage. We use delta checkpointing and in-memory staging to ensure these saves happen with minimal impact on training throughput.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Checkpointing: When a fault blast area is larger than a data-parallel model replica, the entire job is restarted back to the last checkpoint; frequent checkpointing reduces the amount of work lost in these events. Our distributed checkpointing architecture asynchronously saves the model state — including gradients and optimizer data — to multi-tier storage. We use delta checkpointing and in-memory staging to ensure these saves happen with minimal impact on training throughput.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">These two fault recovery mechanisms combine with a sparing strategy that utilizes pre-allocated spare GPU trays within a rack, as well as spare racks, to minimize the time to bring up replacement hardware and reduce the amount of work lost to hardware failures</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">These two fault recovery mechanisms combine with a sparing strategy that utilizes pre-allocated spare GPU trays within a rack, as well as spare racks, to minimize the time to bring up replacement hardware and reduce the amount of work lost to hardware failures</p>
           </div>
           
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>AI Radar Technical Deep-Dive</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">While the rest of the industry still brags about 10,000-GPU clusters, Meta is measuring compute in full gigawatts and millions of chips. The frontier AI race has officially morphed from smart algorithmic breakthroughs into a brutal power-grid slugfest.</p>
         </div>
         
 
       </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>Share</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>Copy Link</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 Read Original Source Report ↗</span>
+        </a>
+
+      </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="Source Attribution and Copyright Notice" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">Source Attribution &amp; Disclaimer:</strong> Curated by AI News Radar for independent industry monitoring, commentary, and research reference only (not legal, financial, or investment advice). All third-party headlines, reporting, trademarks, images, and embedded media remain the sole intellectual property of <strong class="text-slate-600 dark:text-slate-300">Engineering at Meta</strong> and the credited author(s). Readers are encouraged to subscribe to and support original journalism via the official link above. Rights holders or publishers requesting immediate takedown, summary-only display, or domain opt-out may contact <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a> per our <a href="/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DMCA &amp; Copyright Policy</a> (24–48h SLA).</p>
+      </aside>
     </article>
 
     
@@ -404,36 +439,36 @@ Prometheus also features technologies like closed-loop liquid cooling to help it
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/8296c6e4f9661c29" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/1099cb43b4bb3a0c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://images.axios.com/N4mNmo03Un1vKIv6rI4ykN9qMnk=/1366x768/smart/2021/01/29/204346-1611953026695.jpg" alt="Knit Health, which uses its AI world model to predict patient care needs, forecast treatment impacts, and optimize referrals, raised a $35M Series A led by NEA (Will Maddox/Axios)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/sa_cda00a6f956e246f.jpg" alt="Industrial monitoring startup BrightAI closes $97M investment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Axios</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Knit Health, which uses its AI world model to predict patient care needs, forecast treatment impacts, and optimize referrals, raised a $35M Series A led by NEA (Will Maddox/Axios)</h4>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SiliconANGLE</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Industrial monitoring startup BrightAI closes $97M investment</h4>
             </a>
             
-            <a href="/news/fa5eb6fe469cfa4f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/d94adb15e8dc6434" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Tel Aviv- and SF-based Corma, which builds AI agents custom-trained for cyber defense, raised a $125M Series A led by NEA, after raising a $60M seed in August (Angus Loten/Wall Street Journal)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fd449f0a1-e996-4b08-823b-ac513e3ea2c8.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="Asian tech stocks plunge as Anthropic&#x27;s record IPO fails to stem an AI sell-off; SoftBank falls ~15%, TSMC falls 5%+, and Samsung and SK Hynix fall 6%+ (William Sandlund/Financial Times)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wall Street Journal</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Tel Aviv- and SF-based Corma, which builds AI agents custom-trained for cyber defense, raised a $125M Series A led by NEA, after raising a $60M seed in August (Angus Loten/Wall Street Journal)</h4>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Asian tech stocks plunge as Anthropic&#x27;s record IPO fails to stem an AI sell-off; SoftBank falls ~15%, TSMC falls 5%+, and Samsung and SK Hynix fall 6%+ (William Sandlund/Financial Times)</h4>
             </a>
             
-            <a href="/news/7d993d2e5f9e308c" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/5544300b55d0f131" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/Audible-audio-discovery-hero-.jpg?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="Audible is trying to make it easier to find audiobooks you’ll actually like" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/cbsnews_e71fe42a8a189ff1.jpg" alt="California AG subpoenas Nvidia over Jensen Huang&#x27;s affair with alleged Chinese spy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Audible is trying to make it easier to find audiobooks you’ll actually like</h4>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CBS News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">California AG subpoenas Nvidia over Jensen Huang&#x27;s affair with alleged Chinese spy</h4>
             </a>
             
-            <a href="/news/521d7c7ec62479df" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+            <a href="/news/43cf5e526fb27b6f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25472454/STK270_GOOGLE_MAPS_D.png?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="Google Maps can now create trip itineraries for you" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg" alt="Anthropic Slumps 5% Post-Market After Record $107.3 Billion IPO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Google Maps can now create trip itineraries for you</h4>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic Slumps 5% Post-Market After Record $107.3 Billion IPO</h4>
             </a>
             
               </div>
@@ -442,8 +477,13 @@ Prometheus also features technologies like closed-loop liquid cooling to help it
 
   </main>
 
-  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
-    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a><a href="/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Editorial Policy</a><a href="/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">DMCA &amp; Copyright</a><a href="/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms</a><a href="/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a><a href="/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; All third-party reporting copyrights belong to their respective publishers and authors</p>
+    </div>
   </footer>
 
   <script>
