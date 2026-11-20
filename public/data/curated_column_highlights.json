@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 21:18:55 UTC",
+  "generated_at": "2026-11-20 21:34:33 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 21:18:55 UTC",
+      "updated_at": "2026-11-20 21:34:33 UTC",
       "headline_item": {
-        "id": "d95c866cf08800ae",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "TML 发布了 Inkling 2 Mini，这是一个开放权重 26.4B 参数转换器，每个 token 循环中间层 3 次，以便用更少的 token 进行更好的推理（Thinking Machines La）",
-        "title_en": "TML releases Inkling 2 Mini, an open-weights 26.4B-parameter transformer that loops middle layers three times per token for better reasoning with fewer tokens (Thinking Machines Lab)",
-        "source": "Thinking Machines Lab",
-        "published_at": "2026-11-20T21:15:02+00:00",
-        "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
-        "event_summary_zh": "今天，我们发布了 Inkling 2 Mini，这是一款快速、功能强大的型号，其体积足够小，可以在笔记本电脑上运行。 Inkling 2 Mini 是一个循环变压器，为每个令牌运行模型的中间层三次。这使得模型能够应用更多的推理并用更少的标记得出正确的答案，尤其是在",
-        "event_summary_en": "Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.",
+        "id": "5bda8a3d21f41db6",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "Etsy新规引发创作者集体出走",
+        "title_en": "Many Etsy Sellers Close Up Shop Over Site’s New A.I. Policy",
+        "source": "New York Times",
+        "published_at": "2026-11-20T21:30:03+00:00",
+        "url": "https://www.nytimes.com/2026/11/20/arts/etsy-ai-policy.html",
+        "event_summary_zh": "Etsy因调整服务条款，授权第三方调用卖家数据训练AI，导致资深商家关闭店铺抵制",
+        "event_summary_en": "Etsy has introduced new terms of service, effective December 16, allowing the company and its third-party partners to use seller content for training and testing AI models. This prompted widespread backlash and shop closures from creators, despite claims from James Ossman, VP of customer operations, that data use is restricted to fraud detection and advertising, as users remain concerned about the lack of opt-out mechanisms and potential IP exploitation.",
         "core_facts_zh": [
-          "【核心事件】思维机器实验室在AI模型开源社区：发布Inkling 2 Mini模型，具备26.4B总参数、循环层架构及本地化部署能力",
-          "【起因与机理】旨在通过架构创新解决推理深度与算力消耗间的矛盾",
-          "【关键技术规格】引入循环层机制提升逻辑推理效能。",
-          "【各方立场与态度】支持本地设备端离线运行与高并发定制。"
+          "【核心事件】Etsy（电商平台），James Ossman（客户运营副总裁）在Etsy平台服务条款更新：强制授权平台及第三方利用卖家作品训练AI模型，且未提供拒绝选项",
+          "【起因与机理】平台面临股东压力需拥抱AI技术，而创作者面临知识产权变现与流失风险",
+          "【核心事实细节】Etsy新条款强制授权AI数据训练权限，缺乏退出机制。",
+          "【各方立场与态度】平台需平衡AI技术部署与核心卖家的权益保护。"
         ],
         "core_facts_en": [
-          "[Core Event] Thinking Machines Lab (AI Open Source Community): Released Inkling 2 Mini with 26.4B parameters, looped architecture, and local deployment optimization",
-          "[Root Cause & Mechanism] To balance reasoning depth with computational efficiency",
-          "[Key Metrics] 20GB memory footprint for a 26.4B parameter model.",
-          "[Key Position & Outlook] Optimized for local deployment and on-device customization."
+          "[Core Event] Etsy, James Ossman (VP of Customer Operations) (Updated Etsy Terms of Service): Compulsory authorization for AI training using seller data without opt-out options",
+          "[Root Cause & Mechanism] Institutional pressure to integrate AI vs. creator rights protection",
+          "[Key Fact Detail] Etsy mandates AI training rights on user content with no opt-out.",
+          "[Key Position & Outlook] Platform struggle to balance AI integration vs. seller rights."
         ],
-        "industry_impact_zh": "模型架构从单纯的堆叠参数转向利用循环权重优化算术逻辑效率，这是应对边缘侧高强度推理需求的关键转向。此举通过复用推理深度而非单纯堆叠权重，不仅降低了训练与推理的显存成本，更在可控性与思维链透明度上为agentic AI的商业化落地提供了更低部署门槛的范式。",
-        "industry_impact_en": "The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment."
+        "industry_impact_zh": "此事件反映了内容平台在AI转型期的合规性危机，即平台“数据所有权”与创作者“知识产权”的结构性矛盾。若缺乏透明的授权机制与收益对价，平台通过AI榨取长尾内容价值将导致生态失衡，最终造成高质量创作资源的流失与社区价值的毁灭性衰减。",
+        "industry_impact_en": "This incident highlights the structural conflict between platform data-mining mandates and creator IP rights during the AI transition. Without transparent authorization and value-sharing mechanisms, the forced extraction of creator data to train AI risks long-term ecological depletion and the exodus of the platform's core creative capital."
       },
       "headlines": [
+        {
+          "id": "5bda8a3d21f41db6",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Etsy新规引发创作者集体出走",
+          "title_en": "Many Etsy Sellers Close Up Shop Over Site’s New A.I. Policy",
+          "source": "New York Times",
+          "published_at": "2026-11-20T21:30:03+00:00",
+          "url": "https://www.nytimes.com/2026/11/20/arts/etsy-ai-policy.html",
+          "event_summary_zh": "Etsy因调整服务条款，授权第三方调用卖家数据训练AI，导致资深商家关闭店铺抵制",
+          "event_summary_en": "Etsy has introduced new terms of service, effective December 16, allowing the company and its third-party partners to use seller content for training and testing AI models. This prompted widespread backlash and shop closures from creators, despite claims from James Ossman, VP of customer operations, that data use is restricted to fraud detection and advertising, as users remain concerned about the lack of opt-out mechanisms and potential IP exploitation.",
+          "core_facts_zh": [
+            "【核心事件】Etsy（电商平台），James Ossman（客户运营副总裁）在Etsy平台服务条款更新：强制授权平台及第三方利用卖家作品训练AI模型，且未提供拒绝选项",
+            "【起因与机理】平台面临股东压力需拥抱AI技术，而创作者面临知识产权变现与流失风险",
+            "【核心事实细节】Etsy新条款强制授权AI数据训练权限，缺乏退出机制。",
+            "【各方立场与态度】平台需平衡AI技术部署与核心卖家的权益保护。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Etsy, James Ossman (VP of Customer Operations) (Updated Etsy Terms of Service): Compulsory authorization for AI training using seller data without opt-out options",
+            "[Root Cause & Mechanism] Institutional pressure to integrate AI vs. creator rights protection",
+            "[Key Fact Detail] Etsy mandates AI training rights on user content with no opt-out.",
+            "[Key Position & Outlook] Platform struggle to balance AI integration vs. seller rights."
+          ],
+          "industry_impact_zh": "此事件反映了内容平台在AI转型期的合规性危机，即平台“数据所有权”与创作者“知识产权”的结构性矛盾。若缺乏透明的授权机制与收益对价，平台通过AI榨取长尾内容价值将导致生态失衡，最终造成高质量创作资源的流失与社区价值的毁灭性衰减。",
+          "industry_impact_en": "This incident highlights the structural conflict between platform data-mining mandates and creator IP rights during the AI transition. Without transparent authorization and value-sharing mechanisms, the forced extraction of creator data to train AI risks long-term ecological depletion and the exodus of the platform's core creative capital."
+        },
+        {
+          "id": "1a7e6a7d64084361",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "加拿大零售销售遭遇逾三年最大跌幅",
+          "title_en": "Canada Retail Sales Tracking Largest Decline Since Feb. 2025",
+          "source": "Bloomberg",
+          "published_at": "2026-11-20T21:20:00+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-20/crowdstrike-is-in-talks-to-buy-cybersecurity-firm-zscaler",
+          "event_summary_zh": "加拿大10月零售额预估下滑1.5%，创2025年2月以来最大降幅，显示经济动能放缓",
+          "event_summary_en": "Canadian retail sales are projected to decline by 1.5% in October, marking the sharpest drop since February 2025. Despite resilient growth in the third quarter, the combination of escalated trade disputes and a stagnant labor market has dampened fourth-quarter momentum, prompting analysts to expect a pause in rate hikes by the Bank of Canada.",
+          "core_facts_zh": [
+            "【核心事件】加拿大零售商，加拿大央行，CIBC高级经济学家Andrew Grantham在加拿大宏观经济与零售市场：10月零售销售预估下滑1.5%，显示经济动能显著减弱",
+            "【起因与机理】贸易摩擦导致增长放缓，就业市场停滞及购买力受限",
+            "【关键数据与实测】10月零售销售预估下滑1.5%，为近三年多最差表现。",
+            "【各方立场与态度】预期加拿大央行将进入政策观察期，暂停加息节奏。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Canadian retailers, Bank of Canada, Andrew Grantham (CIBC Senior Economist) (Canadian macro-economy): Retail sales forecast to fall 1.5%, signaling a sharp slowdown",
+            "[Root Cause & Mechanism] Escalated trade tensions, stagnant labor market, and reduced consumer demand",
+            "[Key Metrics] Oct retail sales down 1.5%, the largest decline since Feb 2025.",
+            "[Key Position & Outlook] Outlook: Expected pause in rate hikes for Bank of Canada."
+          ],
+          "industry_impact_zh": "此数据揭示了在外部贸易环境冲击下，加拿大内需驱动力的脆弱性。由于就业增长停滞直接压制了家庭消费支出，加拿大央行在货币政策选择上将从对抗通胀转向防范经济硬着陆，后续政策节奏将高度依赖劳动力市场的恢复弹性与贸易摩擦的演变。",
+          "industry_impact_en": "The data underscores the fragility of domestic demand in Canada under external trade pressures. With stagnant employment growth suppressing consumer expenditure, the Bank of Canada is pivoting its monetary policy stance from inflation containment to avoiding a hard landing, with subsequent actions highly sensitive to labor market resilience and trade policy volatility."
+        },
         {
           "id": "d95c866cf08800ae",
           "tag_zh": "🔬 前沿技术",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "模型架构从单纯的堆叠参数转向利用循环权重优化算术逻辑效率，这是应对边缘侧高强度推理需求的关键转向。此举通过复用推理深度而非单纯堆叠权重，不仅降低了训练与推理的显存成本，更在可控性与思维链透明度上为agentic AI的商业化落地提供了更低部署门槛的范式。",
           "industry_impact_en": "The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment."
-        },
-        {
-          "id": "ce34ecfa0fba02bc",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI供应链隐私审计：200万次蜜罐测试揭露数据泄露",
-          "title_en": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
-          "source": "Ars Technica",
-          "published_at": "2026-11-20T20:59:08+00:00",
-          "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-          "event_summary_zh": "安全研究员HD Moore通过200万次蜜罐测试发现，AI路由与中介服务存在严重的数据隐私泄露漏洞",
-          "event_summary_en": "HD Moore, Chief Research Officer at Dragos, uncovered major security flaws in the AI supply chain by injecting 2 million trackable 'canary' secrets into AI prompts sent via routing services. The investigation found evidence of prompt theft, disregard for zero-data-retention (ZDR) settings, and unauthorized logging of user prompts by intermediaries, posing significant compliance risks.",
-          "core_facts_zh": [
-            "【核心事件】HD Moore（Dragos首席研究官）在AI服务路由与中介平台：植入200万个可追踪的伪造敏感凭证进行安全审计，发现严重数据泄露与隐私违规",
-            "【起因与机理】验证当前复杂的AI供应链对敏感信息处理的合规性与安全性",
-            "【关键数据与实测】利用200万个蜜罐凭证实现供应链审计。",
-            "【各方立场与态度】零数据留存政策（ZDR）在执行端全面失效。"
-          ],
-          "core_facts_en": [
-            "[Core Event] HD Moore (CRO of Dragos): Injected 2 million trackable 'canaries' into prompts to audit security, uncovering widespread data leaks and privacy violations",
-            "[Root Cause & Mechanism] To verify the security and compliance of sensitive data handling within the complex AI supply chain",
-            "[Key Fact Detail] Supply chain audit using 2 million canary credentials.",
-            "[Key Position & Outlook] Widespread failure of Zero Data Retention (ZDR) policy enforcement."
-          ],
-          "industry_impact_zh": "AI应用通过路由中介连接多层供应商的碎片化生态，已成为企业数据合规的“黑盒”灾难点。当前的供应链缺乏端到端的信任保障，中介平台的无差别日志记录与零数据留存政策的执行失效，表明现行法律监管与商业承诺在复杂的调用链面前显得极其脆弱。",
-          "industry_impact_en": "The fragmented ecosystem where AI apps connect through intermediaries to multiple suppliers has become a black-box liability for corporate compliance. The current supply chain lacks end-to-end trust, and the failure of ZDR enforcement and unauthorized logging suggest that existing regulatory frameworks and commercial pledges are highly fragile against complex multi-hop call chains."
-        },
-        {
-          "id": "e34d6438927ff1c3",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "OpenAI强化推理层防护，抑制大模型蒸馏攻击",
-          "title_en": "OpenAI makes it much harder for attackers to extract how its latest AI models think",
-          "source": "THE DECODER",
-          "published_at": "2026-11-20T20:31:50+00:00",
-          "url": "https://the-decoder.com/openai-makes-it-much-harder-for-attackers-to-extract-how-its-latest-ai-models-think/",
-          "event_summary_zh": "OpenAI大幅提升GPT-6.2系列模型安全性，通过多层过滤机制将推理数据泄露攻击成功率降至0.2%以下",
-          "event_summary_en": "OpenAI has deployed layered security mechanisms for GPT-6.2 Astra and GPT-6.2 Sol models, reducing the success rate of black-box inference-extraction attacks from 54% to under 0.2% through targeted training, input/output filtering, and API access restrictions. These measures are designed to neutralize distillation attacks that attempt to reconstruct core reasoning paths, supplemented by the weekly suspension of tens of thousands of illicit accounts.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI（模型开发者）在企业内部模型安全生产环境：部署针对推理数据的多层防护架构，包括输入/输出过滤、API访问拦截及针对性强化训练",
-            "【起因与机理】防止攻击者通过模型蒸馏技术窃取核心推理逻辑，保护模型技术壁垒",
-            "【关键数据与实测】技术细节：攻击成功率从54%降至0.2%（先前模型）及0.9%（当前活跃请求）。",
-            "【涉及范围与推进】行业动向：包括Anthropic在内的头部厂商正通过大规模封禁账户与协同政策倡议，建立防御阵线。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI: Implemented layered defenses including I/O filtering, API blocking, and adversarial training",
-            "[Root Cause & Mechanism] To prevent distillation-based theft of internal reasoning logic and protect proprietary model intellectual property",
-            "[Key Metrics] Technical metrics: Attack success rate dropped from 54% to 0.2% for prior models, and 22.9% to 0.9% for active requests.",
-            "[Industry Impact & Outlook] Industry trend: Leading vendors like Anthropic are scaling up account suspensions and advocating for coordinated policy responses."
-          ],
-          "industry_impact_zh": "大模型竞争已进入以‘知识产权保全’为核心的防蒸馏防御战阶段。随着模型推理逻辑的价值攀升，闭源大模型厂商正通过强化API黑盒化与流量合规清洗，从底层逻辑上切断廉价获取高质量蒸馏数据的路径，这将迫使后续开源模型生态面临更严苛的训练数据合规审查压力。",
-          "industry_impact_en": "Competition in the large model sector has shifted toward intellectual property preservation via anti-distillation defense. As reasoning logic becomes a primary value driver, proprietary model vendors are increasingly 'black-boxing' APIs and cleansing traffic to block cost-effective distillation, likely forcing the open-source community to face significantly higher scrutiny regarding training data provenance."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 21:18:55 UTC",
+      "updated_at": "2026-11-20 21:34:33 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 21:18:55 UTC",
+      "updated_at": "2026-11-20 21:34:33 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
