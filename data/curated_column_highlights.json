@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 19:49:11 UTC",
+  "generated_at": "2026-11-20 20:03:59 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 19:49:11 UTC",
+      "updated_at": "2026-11-20 20:03:59 UTC",
       "headline_item": {
-        "id": "a849dc2414d03369",
+        "id": "0795f5d9d8dffd83",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "加拿大10月零售额预计下滑1.5%",
-        "title_en": "Canada Retail Sales Tracking Largest Decline Since Feb. 2025",
-        "source": "Bloomberg",
-        "published_at": "2026-11-20T19:35:00+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-20/trump-says-huang-should-return-as-nvidia-ceo-after-big-apology",
-        "event_summary_zh": "受宏观经济疲软及劳动力市场停滞影响，加拿大10月零售销售额初步估计下降1.5%，创下2025年2月以来的最大跌幅",
-        "event_summary_en": "Statistics Canada reports an estimated 1.5% decline in retail sales for October, marking the sharpest drop since February 2025. CIBC senior economist Andrew Grantham noted that the decline reflects broader volume contraction and stagnant labor market growth, signaling weakening economic momentum heading into the final quarter of 2026.",
+        "title_zh": "Signal封锁截图功能以防AI读取私密聊天",
+        "title_en": "Signal blocks screenshots on iOS 27 and Android to stop AI agents from reading private chats",
+        "source": "THE DECODER",
+        "published_at": "2026-11-20T19:50:27+00:00",
+        "url": "https://the-decoder.com/signal-blocks-screenshots-on-ios-27-and-android-to-stop-ai-agents-from-reading-private-chats/",
+        "event_summary_zh": "Signal在iOS与Android端强制拦截截图，旨在切断Meta Muse等AI智能体对端到端加密内容的读取通道",
+        "event_summary_en": "Signal has implemented screenshot blocking on iOS 27 and specific Android versions to counter OS-level AI agents like Siri, Gemini, and Meta's Muse, which can scrape screen contents. Signal warns that these AI agents, often leveraging system-level permissions or accessibility tools, undermine end-to-end encryption by extracting decrypted messages directly from the display interface.",
         "core_facts_zh": [
-          "【核心事件】加拿大统计局、CIBC高级经济学家安德鲁·格兰瑟姆在加拿大宏观经济与零售市场：10月零售销售额预计下滑1.5%，为2025年2月以来最大单月跌幅",
-          "【起因与机理】消费需求减弱、汽油价格波动及劳动力市场长期缺乏增长动能",
-          "【关键数据与实测】10月零售额预计环比下滑1.5%，远逊于预期。",
-          "【各方立场与态度】分析人士建议加拿大央行暂缓紧缩政策以观察经济韧性。"
+          "【核心事件】Signal (通讯平台)在iOS 27及Android操作系统端：限制屏幕截图功能，阻断AI助手通过辅助功能提取聊天数据",
+          "【起因与机理】AI智能体绕过端到端加密机制，直接抓取用户隐私内容",
+          "【核心事实细节】Signal封锁系统级截图以防AI抓取聊天内容。",
+          "【核心诉求与态度】呼吁操作系统厂商提供应用级屏蔽AI访问的标准化接口。"
         ],
         "core_facts_en": [
-          "[Core Event] Statistics Canada, CIBC Senior Economist Andrew Grantham: Retail sales estimated to decline by 1.5%, the largest drop since Feb 2025",
-          "[Root Cause & Mechanism] Weakening consumer demand, fuel price volatility, and stagnant labor market",
-          "[Key Metrics] 10% retail sales expected to fall 1.5%, significantly below forecasts.",
-          "[Key Position & Outlook] Analysts suggest the Bank of Canada pause tightening to monitor economic resilience."
+          "[Core Event] Signal (Communication Platform) (iOS 27 and Android OS): Blocking screenshots to prevent AI agents from scraping chat data via accessibility tools",
+          "[Root Cause & Mechanism] AI agents are bypassing end-to-end encryption by accessing displayed messages",
+          "[Key Technical Spec] Signal blocks system-level screenshots to prevent AI scraping.",
+          "[Official Stance & Demand] Calls for standardized OS-level controls to restrict AI access to specific applications."
         ],
-        "industry_impact_zh": "劳动力市场的结构性停滞已演变为消费下行的核心驱动力，这意味着加拿大央行在货币政策上将面临更强的暂停加息或转向宽松的压力。在外部贸易保护主义干扰下，内部需求疲软可能导致该国经济进入长期的低速增长通道。",
-        "industry_impact_en": "The structural stagnation of the labor market has become the primary driver of consumption decline, forcing the Bank of Canada to reconsider its rate trajectory toward potential easing. Internal demand weakness, exacerbated by external trade frictions, suggests a shift toward a prolonged period of low-growth economic cycles."
+        "industry_impact_zh": "此次技术博弈揭示了端到端加密在‘多模态AI驱动的OS’时代面临的降维打击，加密保护已从传输层延伸至视觉渲染层。随着操作系统与AI智能体的一体化，如何在保障用户便捷交互与防止敏感数据被模型训练/提取之间实现合规隔离，将成为下一代端侧隐私保护架构的核心竞技场。",
+        "industry_impact_en": "This technical conflict reveals that end-to-end encryption faces a significant challenge in the era of multimodal, AI-integrated operating systems, shifting the focus from transport layer protection to the visual rendering layer. As OS and AI agents merge, the primary strategic challenge will be establishing privacy-preserving architectures that prevent model training or data extraction while maintaining user interface functionality."
       },
       "headlines": [
+        {
+          "id": "0795f5d9d8dffd83",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Signal封锁截图功能以防AI读取私密聊天",
+          "title_en": "Signal blocks screenshots on iOS 27 and Android to stop AI agents from reading private chats",
+          "source": "THE DECODER",
+          "published_at": "2026-11-20T19:50:27+00:00",
+          "url": "https://the-decoder.com/signal-blocks-screenshots-on-ios-27-and-android-to-stop-ai-agents-from-reading-private-chats/",
+          "event_summary_zh": "Signal在iOS与Android端强制拦截截图，旨在切断Meta Muse等AI智能体对端到端加密内容的读取通道",
+          "event_summary_en": "Signal has implemented screenshot blocking on iOS 27 and specific Android versions to counter OS-level AI agents like Siri, Gemini, and Meta's Muse, which can scrape screen contents. Signal warns that these AI agents, often leveraging system-level permissions or accessibility tools, undermine end-to-end encryption by extracting decrypted messages directly from the display interface.",
+          "core_facts_zh": [
+            "【核心事件】Signal (通讯平台)在iOS 27及Android操作系统端：限制屏幕截图功能，阻断AI助手通过辅助功能提取聊天数据",
+            "【起因与机理】AI智能体绕过端到端加密机制，直接抓取用户隐私内容",
+            "【核心事实细节】Signal封锁系统级截图以防AI抓取聊天内容。",
+            "【核心诉求与态度】呼吁操作系统厂商提供应用级屏蔽AI访问的标准化接口。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Signal (Communication Platform) (iOS 27 and Android OS): Blocking screenshots to prevent AI agents from scraping chat data via accessibility tools",
+            "[Root Cause & Mechanism] AI agents are bypassing end-to-end encryption by accessing displayed messages",
+            "[Key Technical Spec] Signal blocks system-level screenshots to prevent AI scraping.",
+            "[Official Stance & Demand] Calls for standardized OS-level controls to restrict AI access to specific applications."
+          ],
+          "industry_impact_zh": "此次技术博弈揭示了端到端加密在‘多模态AI驱动的OS’时代面临的降维打击，加密保护已从传输层延伸至视觉渲染层。随着操作系统与AI智能体的一体化，如何在保障用户便捷交互与防止敏感数据被模型训练/提取之间实现合规隔离，将成为下一代端侧隐私保护架构的核心竞技场。",
+          "industry_impact_en": "This technical conflict reveals that end-to-end encryption faces a significant challenge in the era of multimodal, AI-integrated operating systems, shifting the focus from transport layer protection to the visual rendering layer. As OS and AI agents merge, the primary strategic challenge will be establishing privacy-preserving architectures that prevent model training or data extraction while maintaining user interface functionality."
+        },
         {
           "id": "a849dc2414d03369",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次更新标志着大模型从意图理解范式向基于GUI驱动的Agent范式转型，通过将执行层剥离至受控后台，规避了AI实时交互与用户生产力冲突的痛点。该技术栈的成熟将迫使操作系统厂商重新定义系统级权限框架，以应对AI应用在复杂应用链条中对本地数据的自主获取与操作需求。",
           "industry_impact_en": "This update signals a shift from pure intent-understanding to GUI-driven agentic workflows, decoupling the execution layer to preserve user productivity. The maturation of such technology necessitates a fundamental redesign of OS-level permission frameworks to manage AI-driven autonomous access to heterogeneous local application data."
-        },
-        {
-          "id": "c8293aa2b7f7dc9e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "特朗普拟对海外建设数据中心课重税",
-          "title_en": "Trump threatens ‘tremendous tax’ for moving AI data centers outside the US",
-          "source": "The Verge AI",
-          "published_at": "2026-11-20T18:50:19+00:00",
-          "url": "https://www.theverge.com/policy/1038892/trump-foreign-data-centers-tax",
-          "event_summary_zh": "美国总统特朗普提议对在海外建设AI数据中心的企业征收“巨额税款”，以防止算力基础设施外流",
-          "event_summary_en": "U.S. President Donald Trump has proposed a 'tremendous tax' on American companies that construct AI data centers outside the country. This policy initiative is framed as a matter of national security, aiming to prevent the offshore migration of critical computing infrastructure and ensure the sovereignty of the domestic AI supply chain.",
-          "core_facts_zh": [
-            "【核心事件】美国总统唐纳德·特朗普在美国政经决策会议场合：威胁对海外数据中心建设施加重税，强制算力资产回流美国",
-            "【起因与机理】防范地缘竞争对手获取算力资源及防止美国在AI基础设施领域被边缘化",
-            "【关键技术规格】核心诉求：防止算力基础设施外流，通过关税手段强制企业本土化建设。",
-            "【行业影响与走向】后续影响：面临国会两党法律博弈，或将重塑科技巨头全球基础设施布局策略。"
-          ],
-          "core_facts_en": [
-            "[Core Event] U.S. President Donald Trump: Threatened a 'tremendous tax' on offshore data centers to force domestic infrastructure investment",
-            "[Root Cause & Mechanism] To prevent geopolitical rivals from gaining computing power and to secure American AI infrastructure dominance",
-            "[Key Fact Detail] Core Demand: Preventing computing infrastructure flight via punitive tax measures.",
-            "[Industry Impact & Outlook] Outlook: Subject to legislative hurdles in Congress; likely to reshape global infrastructure strategy for tech giants."
-          ],
-          "industry_impact_zh": "此举本质上是将算力基础设施提升至战略资源高度的强制性产业回流手段，可能大幅抬升跨国科技企业的资本支出成本。在该政策背景下，超大规模算力集群的规划将不再仅遵循电力与低成本土地的经济逻辑，而是必须接受国家地缘政治安全框架的严格规制，加剧全球算力供应链的碎片化进程。",
-          "industry_impact_en": "This move elevates computing infrastructure to a strategic resource, enforcing industrial reshoring at the cost of significantly higher CAPEX for multinational tech firms. Future hyper-scale cluster planning must now balance traditional economic factors like power availability with restrictive geopolitical mandates, accelerating the fragmentation of the global AI supply chain."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 19:49:12 UTC",
+      "updated_at": "2026-11-20 20:03:59 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -194,32 +194,32 @@
           "url": "https://x.com/demishassabis/status/2123567986565173289"
         },
         {
-          "id": "5887efaf5c00248f",
+          "id": "35f33055e73f111d",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/AravSrinivas",
-          "topic_zh": "Aravind Srinivas",
-          "topic_en": "Aravind Srinivas on ",
-          "event_context_zh": "Perplexity Mac 应用程序有了很大的改进。保留率一直在稳步增长。这也是唯一支持尝试前沿模型和本地模型（混合和完全本地）的人工智能应用程序。",
-          "event_context_en": "Perplexity Mac App has improved a ton. Retention has been steadily increasing. Also the only AI app that has support for",
-          "quote_zh": "Perplexity Mac 应用程序有了很大的改进。保留率一直在稳步增长。这也是唯一支持尝试前沿模型和本地模型（混合和完全本地）的人工智能应用程序。",
-          "quote_en": "Perplexity Mac App has improved a ton. Retention has been steadily increasing. Also the only AI app that has support for trying both frontier and local models (hybrid and fully local). https://t.co/VYMh3sX5k2",
-          "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "值得参加。我们将讨论我们在多智能体、持续学习和强化学习后训练方面的研究工作。",
+          "event_context_en": "Worth attending. We will be talking about our research efforts on multi-agent, continual learning, and RL post-training.",
+          "quote_zh": "值得参加。我们将讨论我们在多智能体、持续学习和强化学习后训练方面的研究工作。",
+          "quote_en": "Worth attending. We will be talking about our research efforts on multi-agent, continual learning, and RL post-training.",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "3.1k",
-            "likes": "20",
-            "comments": "11",
+            "views": "3.4k",
+            "likes": "24",
+            "comments": "5",
             "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-20T19:17:54+00:00",
-          "url": "https://x.com/AravSrinivas/status/2123858390472659062"
+          "published_at": "2026-11-20T19:40:17+00:00",
+          "url": "https://x.com/AravSrinivas/status/2123864023422869679"
         },
         {
           "id": "a65aab4076ff8440",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 19:49:12 UTC",
+      "updated_at": "2026-11-20 20:03:59 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
