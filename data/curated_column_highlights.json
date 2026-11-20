@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 03:18:08 UTC",
+  "generated_at": "2026-11-20 04:03:47 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 03:18:08 UTC",
+      "updated_at": "2026-11-20 04:03:47 UTC",
       "headline_item": {
-        "id": "f3e11e3c0eb441ee",
+        "id": "5544300b55d0f131",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "特朗普解雇白宫网络安全主管",
-        "title_en": "Trump ousts cyber director after tech outages spark criticism",
-        "source": "Reuters",
-        "published_at": "2026-11-20T02:20:55+00:00",
-        "url": "https://www.reuters.com/world/us/white-house-national-cyber-director-cairncross-leaving-his-post-axios-reports-2026-11-19/",
-        "event_summary_zh": "因近期大规模技术故障引发民航与金融系统瘫痪，白宫国家网络安全主管肖恩·凯恩克罗斯被解职",
-        "event_summary_en": "President Donald Trump dismissed National Cyber Director Sean Cairncross, with DoD CIO Kirsten Davies serving as interim lead. The move follows widespread technical outages that crippled U.S. air travel and banking sectors, prompting intense legislative scrutiny over the administration's crisis response capabilities.",
+        "title_zh": "加州总检察长启动对英伟达及黄仁勋调查",
+        "title_en": "California AG subpoenas Nvidia over Jensen Huang's affair with alleged Chinese spy",
+        "source": "CBS News",
+        "published_at": "2026-11-20T03:30:00+00:00",
+        "url": "https://www.cbsnews.com/sanfrancisco/news/california-nvidia-subpoena-jensen-huang-affair-alleged-chinese-spy/",
+        "event_summary_zh": "加州总检察长罗伯·邦塔针对黄仁勋离任丑闻及可能涉及的中国间谍风险，对英伟达发起司法调查传票",
+        "event_summary_en": "California Attorney General Rob Bonta has issued an investigative subpoena to Nvidia to assess whether the personal conduct of former CEO Jensen Huang facilitated the unauthorized transfer of advanced chip technologies or confidential intelligence to Chinese entities. The investigation focuses on potential violations of state securities laws and failure to adequately disclose material risks to investors.",
         "core_facts_zh": [
-          "【核心事件】美国总统唐纳德·特朗普；国家网络安全主管肖恩·凯恩克罗斯；国防部首席信息官克里斯汀·戴维斯在美国白宫与联邦政府管理体系：解雇国家网络安全主管，并由国防部官员暂时代理以应对公共信任危机",
-          "【起因与机理】应对近期造成超1.8万航班延误及金融系统瘫痪的重大技术中断事件",
-          "【关键数据与实测】此次人事变动源于近期发生的全球性技术中断，该事件导致美国民航系统停摆、超1.8万个航班延误及金融系统严重干扰，引发国会对政府应对危机能力的激烈质疑。",
-          "【各方立场与态度】凯恩克罗斯离任后由克里斯汀·戴维斯暂代，正式人选确认将面临明年一月后民主党控制参议院的政治博弈。"
+          "【核心事件】加州总检察长罗伯·邦塔、英伟达公司、前CEO黄仁勋在加州司法部调查流程：发出调查传票，核查是否涉及技术泄密及证券欺诈",
+          "【起因与机理】因黄仁勋被指与疑似中国间谍存在不正当关系及违规领导行为",
+          "【调查与监管诉求】加州司法部针对黄仁勋的间谍疑云与公司治理乱象发起调查。",
+          "【涉及范围与推进】公司目前由CFO科莱特·克雷斯（Colette Kress）担任临时CEO，后续面临国会质询压力。"
         ],
         "core_facts_en": [
-          "[Core Event] President Donald Trump; Sean Cairncross, National Cyber Director; Kirsten Davies, DoD CIO: Dismissal of the National Cyber Director and interim appointment of a DoD official to address public outcry",
-          "[Root Cause & Mechanism] Systemic technical outages causing over 18,000 flight disruptions and financial instability",
-          "[Key Fact Detail] White House replaces cyber chief to mitigate public backlash over systemic air travel and banking disruptions.",
-          "[Key Position & Outlook] Interim appointment of Kirsten Davies sets the stage for partisan confirmation battles in the new Senate."
+          "[Core Event] California AG Rob Bonta, Nvidia Corporation, former CEO Jensen Huang: Issued subpoena to investigate potential technology leakage and securities fraud",
+          "[Root Cause & Mechanism] Allegations of illicit relations with a suspected foreign intelligence asset",
+          "[Regulatory & Investigation Focus] California DOJ initiates probe into former CEO's alleged espionage ties and governance failures.",
+          "[Key Position & Outlook] CFO Colette Kress serves as interim CEO while the firm faces upcoming congressional testimony requirements."
         ],
-        "industry_impact_zh": "此举折射出在AI赋能的代码漏洞挖掘与快速补丁迭代环境下，联邦关键基础设施的韧性已成为地缘政治安全的核心变量。随着参议院控制权在明年一月易手，继任者的国会确认程序将成为民主党与行政当局在网络监管权力分配上的首个博弈焦点。",
-        "industry_impact_en": "This dismissal highlights that federal critical infrastructure resilience has become a core geopolitical variable in the age of AI-accelerated vulnerability discovery and patching. With the Senate shifting to Democratic control in January, the confirmation process for the next director will become the primary battleground for regulatory oversight between the executive branch and the legislature."
+        "industry_impact_zh": "此事件标志着针对AI算力巨头的监管触角已从单纯的出口贸易合规，延伸至关键人物的安全背调与公司治理结构的系统性风险审查。若证实敏感技术因高管个人道德失控造成外泄，英伟达可能面临严苛的制裁修正与巨额股东诉讼，这将大幅重塑华尔街对全球算力供应链韧性的估值逻辑。",
+        "industry_impact_en": "This incident shifts the regulatory focus on AI hardware leaders from mere trade compliance to individual security vetting and systemic governance risks. Should investigations confirm the unauthorized leakage of sensitive IP, Nvidia faces significant liability and legal fallout that could fundamentally reshape investor confidence in the security of the global compute supply chain."
       },
       "headlines": [
+        {
+          "id": "5544300b55d0f131",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "加州总检察长启动对英伟达及黄仁勋调查",
+          "title_en": "California AG subpoenas Nvidia over Jensen Huang's affair with alleged Chinese spy",
+          "source": "CBS News",
+          "published_at": "2026-11-20T03:30:00+00:00",
+          "url": "https://www.cbsnews.com/sanfrancisco/news/california-nvidia-subpoena-jensen-huang-affair-alleged-chinese-spy/",
+          "event_summary_zh": "加州总检察长罗伯·邦塔针对黄仁勋离任丑闻及可能涉及的中国间谍风险，对英伟达发起司法调查传票",
+          "event_summary_en": "California Attorney General Rob Bonta has issued an investigative subpoena to Nvidia to assess whether the personal conduct of former CEO Jensen Huang facilitated the unauthorized transfer of advanced chip technologies or confidential intelligence to Chinese entities. The investigation focuses on potential violations of state securities laws and failure to adequately disclose material risks to investors.",
+          "core_facts_zh": [
+            "【核心事件】加州总检察长罗伯·邦塔、英伟达公司、前CEO黄仁勋在加州司法部调查流程：发出调查传票，核查是否涉及技术泄密及证券欺诈",
+            "【起因与机理】因黄仁勋被指与疑似中国间谍存在不正当关系及违规领导行为",
+            "【调查与监管诉求】加州司法部针对黄仁勋的间谍疑云与公司治理乱象发起调查。",
+            "【涉及范围与推进】公司目前由CFO科莱特·克雷斯（Colette Kress）担任临时CEO，后续面临国会质询压力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] California AG Rob Bonta, Nvidia Corporation, former CEO Jensen Huang: Issued subpoena to investigate potential technology leakage and securities fraud",
+            "[Root Cause & Mechanism] Allegations of illicit relations with a suspected foreign intelligence asset",
+            "[Regulatory & Investigation Focus] California DOJ initiates probe into former CEO's alleged espionage ties and governance failures.",
+            "[Key Position & Outlook] CFO Colette Kress serves as interim CEO while the firm faces upcoming congressional testimony requirements."
+          ],
+          "industry_impact_zh": "此事件标志着针对AI算力巨头的监管触角已从单纯的出口贸易合规，延伸至关键人物的安全背调与公司治理结构的系统性风险审查。若证实敏感技术因高管个人道德失控造成外泄，英伟达可能面临严苛的制裁修正与巨额股东诉讼，这将大幅重塑华尔街对全球算力供应链韧性的估值逻辑。",
+          "industry_impact_en": "This incident shifts the regulatory focus on AI hardware leaders from mere trade compliance to individual security vetting and systemic governance risks. Should investigations confirm the unauthorized leakage of sensitive IP, Nvidia faces significant liability and legal fallout that could fundamentally reshape investor confidence in the security of the global compute supply chain."
+        },
         {
           "id": "f3e11e3c0eb441ee",
           "tag_zh": "📰 业界动态",
@@ -82,38 +108,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "aa09230086e3189a",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Iconiq资本在Anthropic投中获得超4倍回报",
-          "title_en": "Source: Iconiq invested more than $6B in Anthropic; its estimated 1.8% stake was worth ~$31.8B at Thursday's close, a 430%+ return on investment (Richard Nieva/Forbes)",
-          "source": "Forbes",
-          "published_at": "2026-11-20T00:50:59+00:00",
-          "url": "https://www.forbes.com/sites/richardnieva/2026/11/19/the-big-vc-winners-in-anthropics-ipo/",
-          "event_summary_zh": "Iconiq Capital向Anthropic投入逾60亿美元，其持有的约1.8%股份市值已飙升至318亿美元，投资回报率突破430%",
-          "event_summary_en": "Iconiq Capital has made a significant strategic investment exceeding $6 billion in AI startup Anthropic, with its roughly 1.8% equity stake now valued at approximately $31.8 billion. This surge occurs as Anthropic prepares for a landmark IPO, highlighting the massive capital deployment and high-leverage competition within the foundational model and AI ecosystem.",
-          "core_facts_zh": [
-            "【核心事件】Iconiq Capital（投资机构）与Anthropic（AI大模型公司）在Anthropic IPO筹备及私募股权市场：Iconiq累计投入超60亿美元，持股约1.8%，资产估值翻超430%",
-            "【起因与机理】AI行业估值泡沫化与算力基建驱动的资本溢价",
-            "【关键数据与实测】Iconiq资本通过超60亿美元的重注锁定Anthropic股权。",
-            "【各方立场与态度】高达430%的回报率折射出AI头部独角兽资本驱动的估值泡沫。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Iconiq Capital and Anthropic (Pre-IPO market / Capital structure): Investment exceeding $6B resulting in a 430%+ ROI with a $31.8B stake",
-            "[Root Cause & Mechanism] Capital valuation premiums driven by generative AI infrastructure demands",
-            "[Key Metrics] Iconiq Capital secures significant equity through a $6B+ investment.",
-            "[Official Stance & Demand] Massive returns highlight capital-driven valuation surges for AI unicorns."
-          ],
-          "industry_impact_zh": "此项超常规回报揭示了资本市场对AI原生模型公司溢价逻辑的重构，即资金规模效应已取代单纯的技术创新，成为大模型公司维持市场议价权的核心门槛。随着巨额资本提前锁定入场，Anthropic在IPO过程中将面临更大的财务增长压力，以匹配当前基于高杠杆投入形成的市值预期。",
-          "industry_impact_en": "This extraordinary return reveals a fundamental shift in valuation logic for AI-native companies, where capital deployment scale has superseded pure technical innovation as the primary barrier to entry. As massive capital positions are locked in, Anthropic faces heightened pressure to deliver scalable revenue growth to justify the high-leverage valuations established pre-IPO."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 03:18:08 UTC",
+      "updated_at": "2026-11-20 04:03:47 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -249,38 +249,38 @@
           "url": "https://x.com/AnthropicAI/status/2123461658890686863"
         },
         {
-          "id": "c85add2ae03bb4a1",
-          "name": "Swyx (Shawn Wang)",
-          "handle": "@swyx",
-          "role_zh": "AI Engineer Foundation / Latent Space 主理人",
+          "id": "180eb3281304a59a",
+          "name": "NVIDIA AI",
+          "handle": "@NVIDIAAI",
+          "role_zh": "NVIDIA AI 研究与开发者生态",
           "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/swyx",
-          "topic_zh": "Swyx (Shawn Wang",
-          "topic_en": "Swyx (Shawn Wang) on",
-          "event_context_zh": "每一个夸大其辞的动机都可以，并且 x 算法已针对此进行了调整",
-          "event_context_en": "when scrolling social media i think it is worth bearing in mind that you can say “odds of reaching SOTA have dropped to ",
-          "quote_zh": "当滚动社交媒体时，我认为值得记住的是，你可以说“达到 SOTA 的几率已降至零”并获得很多赞，然后 3 个月后，当他们达到 SOTA 时，你发布道歉表格并获得更多赞，你的写作主题将其打印出来并感谢你的动力\n\n不准确完全不会产生任何后果，并且每一个夸大其辞的动机都可以，并且 x 算法已针对此进行了调整",
-          "quote_en": "when scrolling social media i think it is worth bearing in mind that you can say “odds of reaching SOTA have dropped to zero” and get alot of likes and then 3 months later when they have reached SOTA you post apology form and get even more likes and the subject of your writing prints it out and thanks you for motivation\n\ntheres no consequences at all for inaccuracy and every incentive for hyperbole and the x algorithm is tuned for this",
-          "thesis_zh": "深入探讨Swyx (Shawn Wang的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Swyx (Shawn Wang) on, highlighting system trade-offs and engineering shifts.",
+          "avatar": "https://unavatar.io/nvidia",
+          "topic_zh": "NVIDIA AI 行业前沿观察",
+          "topic_en": "NVIDIA AI on AI",
+          "event_context_zh": "的产品以及更健康、更实惠的生活中。\n\n观看 GTC Berlin 的完整对话：",
+          "event_context_en": "RT @nvidia: AI is more than a better way to search.\n\nOver a drink with NVIDIA’s Chris Alexiuk, @langdock Co-CEO @DadaJud",
+          "quote_zh": "RT @nvidia：人工智能不仅仅是一种更好的搜索方式。\n\n在与 NVIDIA 的 Chris Alexiuk 喝一杯时，@langdock 联合首席执行官 @DadaJudith 分享了为什么人工智能最大的影响可能体现在更好的服务、更好的产品以及更健康、更实惠的生活中。\n\n观看 GTC Berlin 的完整对话：",
+          "quote_en": "RT @nvidia: AI is more than a better way to search.\n\nOver a drink with NVIDIA’s Chris Alexiuk, @langdock Co-CEO @DadaJudith shared why AI’s biggest impact may be felt in better services, better products, and healthier, more affordable lives.\n\nWatch their full conversation from GTC Berlin: https://t.co/0PLlhRXeWN",
+          "thesis_zh": "深入探讨NVIDIA AI 行业前沿观察的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in NVIDIA AI on AI, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "737",
-            "likes": "11",
-            "comments": "7",
-            "retweets": "0",
+            "views": "33.9k",
+            "likes": "120",
+            "comments": "185",
+            "retweets": "16",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-20T01:38:52+00:00",
-          "url": "https://x.com/swyx/status/2123591875349422435"
+          "published_at": "2026-11-20T03:44:44+00:00",
+          "url": "https://x.com/NVIDIAAI/status/2123623550364143646"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 03:18:08 UTC",
+      "updated_at": "2026-11-20 04:03:47 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
