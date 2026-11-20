@@ -7164,7 +7164,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const configLang = (item.config_lang || "bash").toUpperCase();
       const codeSnippet = item.code_snippet || item.prompt_content_zh || item.prompt_content || "";
       const usageGuide = (isZh ? (item.usage_guide_zh || item.usage_guide) : (item.usage_guide_en || item.usage_guide)) || "";
-      const testedModels = item.tested_models || "Claude 5.5 / GPT-6.2";
+      const testedModels = item.tested_models || (isZh ? "主流大模型通用" : "Universal SOTA LLMs");
       const typeBadge = item.type_badge || (isZh ? "🛠️ 工业实战工作流" : "🛠️ Production Playbook");
 
       window.__workflowStore = window.__workflowStore || {};

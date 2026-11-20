@@ -155,7 +155,7 @@ def format_static_prompt_card(it: dict, is_zh: bool) -> str:
 
     is_wf = it.get("is_workflow") or it.get("sub_type") == "workflow"
     badge = ("⚡ 深度工作流" if is_zh else "⚡ Deep Workflow") if is_wf else ("💡 实战提示词" if is_zh else "💡 Production Prompt")
-    tier = safe_text(it.get("target_model") or it.get("tested_models") or it.get("model_tier") or "Claude 5.5 / GPT-6.2", 36)
+    tier = safe_text(it.get("tested_models") or it.get("target_model") or it.get("model_tier") or ("主流大模型通用" if is_zh else "Universal SOTA LLMs"), 36)
 
     return f"""
     <article class="p-3.5 rounded-xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between group space-y-2">
