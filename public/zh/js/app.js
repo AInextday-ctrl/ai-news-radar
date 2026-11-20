@@ -8047,7 +8047,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         });
         const recentNews = sortedNews.filter(it => isWithin24Hours(it.raw_published_at));
         const poolNews = recentNews.length >= 6 ? recentNews : sortedNews;
-        const displayNews = poolNews.slice(0, 10);
+        const displayNews = poolNews.slice(0, 18);
         const streamNews = document.getElementById('stream-news');
         if (streamNews) {
           streamNews.innerHTML = displayNews.length > 0 
@@ -9242,7 +9242,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const ssrMeta = document.querySelector('meta[name="ssr-updated"]');
         const ssrUpdated = ssrMeta ? ssrMeta.getAttribute('content') : '';
         const hasSsrDom = !!(ssrUpdated && (document.querySelector('#stream-news article') || document.querySelector('#topic-focus-section article') || document.querySelector('#viral-ticker-section article') || document.querySelector('#top-three-grid article')));
-        const isSameAsSsr = !isManual && !window._hasInitialRendered && currentTab === 'all' && hasSsrDom;
+        const isSameAsSsr = !isManual && !window._hasInitialRendered && currentTab === 'all' && hasSsrDom && (ssrUpdated && data.updated_at && ssrUpdated === data.updated_at);
 
         // 性能防护锁：仅当已完成首次渲染且后台轮询版本未变时才跳过
         const isSameUpdate = window._hasInitialRendered && cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);

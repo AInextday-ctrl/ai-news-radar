@@ -3066,17 +3066,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             </div>
           </article>"""
 
-        # 2. News Stream English
+        # 2. News Stream English (18条快讯填满桌面端双列自适应布局，与天梯榜等高对齐)
         news_items = []
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd_news = json.load(_f)
-                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:10]
+                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:18]
             except Exception:
                 news_items = []
         if not news_items:
-            news_items = [i for i in items if i.get("category") == "news"][:10]
+            news_items = [i for i in items if i.get("category") == "news"][:18]
 
         news_cards_en_html = ""
         lcp_image_en_url = ""
@@ -3391,15 +3391,27 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:2]
         videos_en_html = "\n".join([format_static_video_card(it, is_zh=False) for it in videos_list_en])
-        en_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+        pattern_videos_en = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_videos_en, en_content):
+            en_content = re.sub(pattern_videos_en, lambda m: f"{m.group(1)}\n{videos_en_html}\n            {m.group(3)}", en_content, count=1)
+        else:
+            en_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
         prompts_list_en = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list if v.get("is_prompt")])[:3]
         prompts_en_html = "\n".join([format_static_prompt_card(it, is_zh=False) for it in prompts_list_en])
-        en_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+        pattern_prompts_en = r'(<div [^>]*id="stream-prompts"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_prompts_en, en_content):
+            en_content = re.sub(pattern_prompts_en, lambda m: f"{m.group(1)}\n{prompts_en_html}\n            {m.group(3)}", en_content, count=1)
+        else:
+            en_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
         arxiv_list_en = (payload.get("arxiv_papers", []) or [])[:6]
         arxiv_en_html = "\n".join([format_static_arxiv_card(it, is_zh=False) for it in arxiv_list_en])
-        en_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_en_html}\n        {m.group(2)}", en_content, flags=re.DOTALL)
+        pattern_arxiv_en = r'(<div [^>]*id="stream-arxiv"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*</div>\s*<!--\s*(?:View 2|视图 2))'
+        if re.search(pattern_arxiv_en, en_content):
+            en_content = re.sub(pattern_arxiv_en, lambda m: f"{m.group(1)}\n{arxiv_en_html}\n        {m.group(3)}", en_content, count=1)
+        else:
+            en_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_en_html}\n        {m.group(2)}", en_content, flags=re.DOTALL)
 
         # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
         en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
@@ -3688,17 +3700,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             </div>
           </article>"""
 
-        # 2. News Stream Chinese
+        # 2. News Stream Chinese (18条快讯填满桌面端双列自适应布局，与天梯榜等高对齐)
         news_items_zh = []
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd_news = json.load(_f)
-                    news_items_zh = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:10]
+                    news_items_zh = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:18]
             except Exception:
                 news_items_zh = []
         if not news_items_zh:
-            news_items_zh = [i for i in items if i.get("category") == "news"][:10]
+            news_items_zh = [i for i in items if i.get("category") == "news"][:18]
         news_items = news_items_zh
 
         news_cards_zh_html = ""
@@ -3953,15 +3965,27 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:2]
         videos_zh_html = "\n".join([format_static_video_card(it, is_zh=True) for it in videos_list_zh])
-        zh_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+        pattern_videos_zh = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_videos_zh, zh_content):
+            zh_content = re.sub(pattern_videos_zh, lambda m: f"{m.group(1)}\n{videos_zh_html}\n            {m.group(3)}", zh_content, count=1)
+        else:
+            zh_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
         prompts_list_zh = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list_zh if v.get("is_prompt")])[:3]
         prompts_zh_html = "\n".join([format_static_prompt_card(it, is_zh=True) for it in prompts_list_zh])
-        zh_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+        pattern_prompts_zh = r'(<div [^>]*id="stream-prompts"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_prompts_zh, zh_content):
+            zh_content = re.sub(pattern_prompts_zh, lambda m: f"{m.group(1)}\n{prompts_zh_html}\n            {m.group(3)}", zh_content, count=1)
+        else:
+            zh_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
         arxiv_list_zh = (payload.get("arxiv_papers", []) or [])[:6]
         arxiv_zh_html = "\n".join([format_static_arxiv_card(it, is_zh=True) for it in arxiv_list_zh])
-        zh_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_zh_html}\n        {m.group(2)}", zh_content, flags=re.DOTALL)
+        pattern_arxiv_zh = r'(<div [^>]*id="stream-arxiv"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*</div>\s*<!--\s*(?:View 2|视图 2))'
+        if re.search(pattern_arxiv_zh, zh_content):
+            zh_content = re.sub(pattern_arxiv_zh, lambda m: f"{m.group(1)}\n{arxiv_zh_html}\n        {m.group(3)}", zh_content, count=1)
+        else:
+            zh_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_zh_html}\n        {m.group(2)}", zh_content, flags=re.DOTALL)
 
         # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
         zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
