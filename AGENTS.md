@@ -151,3 +151,17 @@
 3. **真实配图本地化托管与零版权锁盒**：
    - 官方配图（`imageio.forbes.com`）由爬虫自动下载并本地化托管至 `/images/forbes_{slug}.jpg`；缺省回退中性品牌卡（`og-default.jpg`），严禁使用无关库存假图。
    - 落地页必须具备 3 段以上实质报道正文（`paragraphs` / `paragraphs_zh`），严禁出现版权锁盒（`Protected by source publisher copyright or login requirements...`）占位符。
+
+---
+
+## 10. 欧洲科技信源固锁与高保真抓取守则 (Tech.eu Source Invariants & Contract Lock)
+
+1. **信源契约完全固锁 (Contract Frozen)**：
+   - 欧洲科技信源解析器（`crawlers/techeu_crawler.py`）契约已正式冻结固锁。
+   - 凡涉及 `tech.eu` 的抓取与解析，必须统一经由 `crawl_techeu` 与 `is_techeu_url` 调度。
+2. **零聚合后缀与真实记者署名**：
+   - 严禁聚合平台后缀（如 `(John Reynolds/Tech.eu)`、` - Tech.eu`）泄漏至标题，必须使用 `clean_techeu_title` 彻底剥离。
+   - 记者署名优先从 JSON-LD `NewsArticle`（`author.name`）或标题后缀解析（如 `John Reynolds`、`Tamara Djurickovic`、`Cate Lawrence`），杜绝将作者笼统标记为 `Tech.eu`。
+3. **真实配图本地化托管与零评论杂质**：
+   - 官方高分辨率配图（`cdn.tech.eu/uploads/`）由爬虫自动下载并本地化托管至 `/images/techeu_{slug}.png` 或 `.jpg`；缺省回退中性品牌卡（`og-default.jpg`），严禁使用无关库存假图。
+   - 正文段落提取必须通过 `clean_techeu_paragraphs` 自动过滤 `Would you like to write the first comment?` 评论引导语及邮件订阅杂质，确保正文纯净且落地页具备 3 段以上实质报道正文。

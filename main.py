@@ -1162,6 +1162,7 @@ def load_existing_items() -> list:
     fortune_live_budget = 3
     wsj_live_budget = 3
     forbes_live_budget = 4
+    techeu_live_budget = 4
     verge_live_budget = 4
     nyt_live_budget = 4
     wapo_live_budget = 4
@@ -1345,6 +1346,31 @@ def load_existing_items() -> list:
                                     it["paragraphs_zh"] = f_data["paragraphs_zh"]
                                 if f_data.get("article_content_zh"):
                                     it["article_content_zh"] = f_data["article_content_zh"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
+                        except Exception:
+                            pass
+                    # 若解析还原为 Tech.eu，立即同步获取其源站真实官方标题、署名记者、官方原图与全文
+                    elif "tech.eu" in real_u.lower():
+                        try:
+                            from crawlers.techeu_crawler import crawl_techeu
+                            t_data = crawl_techeu(real_u, title=it.get("title", ""))
+                            if t_data.get("title"):
+                                it["title"] = t_data["title"]
+                                it["title_en"] = t_data["title"]
+                            if t_data.get("author") and t_data["author"].lower() != "tech.eu":
+                                it["author"] = t_data["author"]
+                            if t_data.get("cover_image"):
+                                it["image_url"] = t_data["cover_image"]
+                                it["cover_image"] = t_data["cover_image"]
+                            if t_data.get("is_substantive") and t_data.get("full_text"):
+                                it["paragraphs"] = t_data.get("paragraphs", [])
+                                it["article_content"] = t_data["full_text"]
+                                it["article_content_en"] = t_data["full_text"]
+                                if t_data.get("paragraphs_zh"):
+                                    it["paragraphs_zh"] = t_data["paragraphs_zh"]
+                                if t_data.get("article_content_zh"):
+                                    it["article_content_zh"] = t_data["article_content_zh"]
                                 it["is_substantive"] = True
                                 it["is_paywalled"] = False
                         except Exception:
@@ -1613,6 +1639,68 @@ def load_existing_items() -> list:
                     if fb_data.get("paragraphs_zh") and len(fb_data.get("paragraphs_zh", [])) > 0:
                         it["paragraphs_zh"] = fb_data["paragraphs_zh"]
                         it["article_content_zh"] = fb_data.get("full_text_zh") or "\n\n".join(fb_data["paragraphs_zh"])
+                    elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.4.2 Tech.eu (欧洲科技) 官方真实标题、署名记者、cdn.tech.eu 官方配图与全文自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "tech.eu" in u_now.lower():
+            techeu_ts = parse_time_for_sort(it)
+            is_recent_techeu = (techeu_ts > 0) and ((now_ts_load - techeu_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_techeu_fix = is_recent_techeu and techeu_live_budget > 0 and (
+                ("(" in t_curr and "tech.eu" in t_curr.lower()) or
+                t_curr.startswith("Source:") or
+                not img_curr or
+                not img_curr.startswith("http") or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200 or
+                it.get("author") in ("Tech.eu", "tech.eu", None, "")
+            )
+            if needs_techeu_fix:
+                techeu_live_budget -= 1
+                try:
+                    from crawlers.techeu_crawler import crawl_techeu
+                    techeu_data = crawl_techeu(u_now, title=t_curr)
+                    if techeu_data.get("title"):
+                        it["title"] = techeu_data["title"]
+                        it["title_en"] = techeu_data["title"]
+                    if techeu_data.get("author") and techeu_data["author"].lower() != "tech.eu":
+                        it["author"] = techeu_data["author"]
+                    if techeu_data.get("cover_image") and str(techeu_data["cover_image"]).startswith("http"):
+                        it["image_url"] = techeu_data["cover_image"]
+                        it["cover_image"] = techeu_data["cover_image"]
+                    if techeu_data.get("is_substantive") and len(techeu_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = techeu_data.get("paragraphs", [])
+                        it["article_content"] = techeu_data["full_text"]
+                        it["article_content_en"] = techeu_data["full_text"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = techeu_data["full_text"]
+                    if techeu_data.get("paragraphs_zh") and len(techeu_data.get("paragraphs_zh", [])) > 0:
+                        it["paragraphs_zh"] = techeu_data["paragraphs_zh"]
+                        it["article_content_zh"] = techeu_data.get("full_text_zh") or "\n\n".join(techeu_data["paragraphs_zh"])
                     elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

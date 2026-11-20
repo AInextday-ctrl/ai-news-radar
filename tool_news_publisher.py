@@ -1265,8 +1265,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     is_fortune = "fortune" in (item.get("source") or "").lower() or "fortune.com" in (item.get("url") or "").lower()
     is_wsj = "wsj" in (item.get("source") or "").lower() or "wall street journal" in (item.get("source") or "").lower() or "wsj.com" in (item.get("url") or "").lower()
     is_forbes = "forbes" in (item.get("source") or "").lower() or "forbes.com" in (item.get("url") or "").lower()
+    is_techeu = "tech.eu" in (item.get("source") or "").lower() or "tech.eu" in (item.get("url") or "").lower()
     is_dedicated_full = (
-        is_reuters or is_bloomberg or is_fortune or is_wsj or is_forbes or
+        is_reuters or is_bloomberg or is_fortune or is_wsj or is_forbes or is_techeu or
         any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/", "wired.com/", "technologyreview.com", "techcrunch.com", "arstechnica.com", "cnbc.com", "the-decoder.com", "openai.com/", "siliconangle.com", "semafor.com", "coindesk.com", "cbsnews.com", "ifixit.com", "9to5mac.com", "tomshardware.com", "bbc.com/", "bbc.co.uk/", "nypost.com", "techfundingnews.com", "://ign.com/", ".ign.com/", "anthropic.com/", "claude.com/"))
     )
     is_paywalled = bool((not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and item.get("is_paywalled")) or (not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"])))
@@ -1911,6 +1912,16 @@ def generate_all_landing_pages():
         except Exception:
             pass
 
+    # Load Tech.eu Cache for authentic photography, full verbatim paragraphs, and clean author attribution
+    techeu_cache = {}
+    tc_path = os.path.join(WORKSPACE_DIR, "data", "techeu_cache.json")
+    if os.path.exists(tc_path):
+        try:
+            with open(tc_path, "r", encoding="utf-8") as tcf:
+                techeu_cache = json.load(tcf)
+        except Exception:
+            pass
+
     # Ensure curated headline items (which have landing pages) are always in news
     for hf in ["data/curated_column_highlights.json", "public/data/curated_column_highlights.json"]:
         hp = os.path.join(WORKSPACE_DIR, hf)
@@ -1973,6 +1984,25 @@ def generate_all_landing_pages():
                 it["is_substantive"] = True
                 it["is_paywalled"] = False
 
+        # Check Tech.eu cache
+        if "tech.eu" in u.lower() or "tech.eu" in (it.get("source") or "").lower():
+            clean_u = u.split("#")[0].strip()
+            tc_entry = techeu_cache.get(clean_u)
+            if not tc_entry and clean_u:
+                try:
+                    from crawlers.techeu_crawler import crawl_techeu
+                    tc_entry = crawl_techeu(clean_u, title=it.get("title", ""))
+                except Exception:
+                    pass
+            if tc_entry:
+                for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author", "author_role"):
+                    if tc_entry.get(fld):
+                        it[fld] = tc_entry[fld]
+                if tc_entry.get("cover_image"):
+                    it["image_url"] = tc_entry["cover_image"]
+                it["is_substantive"] = True
+                it["is_paywalled"] = False
+
         if nid and nid in rich_lookup:
             rit = rich_lookup[nid]
             for fld in ("title", "title_en", "title_zh", "author", "author_role", "author_role_en", "author_role_zh", "cover_image", "image_url", "image_caption", "paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images", "is_substantive", "is_paywalled"):
@@ -2023,6 +2053,17 @@ def generate_all_landing_pages():
                                             it[fld] = fc_entry[fld]
                                     if fc_entry.get("cover_image"):
                                         it["image_url"] = fc_entry["cover_image"]
+                                    it["is_substantive"] = True
+                                    it["is_paywalled"] = False
+                            if "tech.eu" in u.lower() or "tech.eu" in (it.get("source") or "").lower():
+                                clean_u = u.split("#")[0].strip()
+                                tc_entry = techeu_cache.get(clean_u)
+                                if tc_entry:
+                                    for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author", "author_role"):
+                                        if tc_entry.get(fld):
+                                            it[fld] = tc_entry[fld]
+                                    if tc_entry.get("cover_image"):
+                                        it["image_url"] = tc_entry["cover_image"]
                                     it["is_substantive"] = True
                                     it["is_paywalled"] = False
                             news.append(it)
