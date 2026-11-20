@@ -7164,7 +7164,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const configLang = (item.config_lang || "bash").toUpperCase();
       const codeSnippet = item.code_snippet || item.prompt_content_zh || item.prompt_content || "";
       const usageGuide = (isZh ? (item.usage_guide_zh || item.usage_guide) : (item.usage_guide_en || item.usage_guide)) || "";
-      const testedModels = item.tested_models || "Claude 3.7 / DeepSeek-V3";
+      const testedModels = item.tested_models || "Claude 5.5 / GPT-6.2";
       const typeBadge = item.type_badge || (isZh ? "🛠️ 工业实战工作流" : "🛠️ Production Playbook");
 
       window.__workflowStore = window.__workflowStore || {};
@@ -8117,10 +8117,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         console.error('Error rendering stream-tools:', err);
       }
 
-      // D. 视频演示板块 (Videos) - 首页仅精选 Top 2 实战演示
+      // D. 视频演示板块 (Videos) - 首页仅精选 Top 3 实战演示 (与落地工具及工作流 3卡片高度完美对齐)
       try {
         const dedupedVideos = dedupVideoItems(allVideos);
-        const displayVideos = dedupedVideos.slice(0, 2);
+        const displayVideos = dedupedVideos.slice(0, 3);
         const streamVideos = document.getElementById('stream-videos');
         if (streamVideos) {
           streamVideos.innerHTML = displayVideos.length > 0

@@ -155,7 +155,7 @@ def format_static_prompt_card(it: dict, is_zh: bool) -> str:
 
     is_wf = it.get("is_workflow") or it.get("sub_type") == "workflow"
     badge = ("⚡ 深度工作流" if is_zh else "⚡ Deep Workflow") if is_wf else ("💡 实战提示词" if is_zh else "💡 Production Prompt")
-    tier = safe_text(it.get("target_model") or it.get("model_tier") or "Claude 3.7 / GPT-4o", 24)
+    tier = safe_text(it.get("target_model") or it.get("tested_models") or it.get("model_tier") or "Claude 5.5 / GPT-6.2", 36)
 
     return f"""
     <article class="p-3.5 rounded-xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between group space-y-2">
@@ -3389,7 +3389,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             en_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
-        videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:2]
+        videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:3]
         videos_en_html = "\n".join([format_static_video_card(it, is_zh=False) for it in videos_list_en])
         pattern_videos_en = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_videos_en, en_content):
@@ -3963,7 +3963,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             zh_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
-        videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:2]
+        videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:3]
         videos_zh_html = "\n".join([format_static_video_card(it, is_zh=True) for it in videos_list_zh])
         pattern_videos_zh = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_videos_zh, zh_content):
