@@ -10,12 +10,14 @@
 1. **零异源通讯社污染**：
    - 严禁将第三方通讯社（如 Reuters）的电讯稿摘要直接拼接到另一家主流媒体（如 Bloomberg）的正文中。
    - 在跨信源兜底事实提取（`fetch_cross_grounding_facts`）中，必须通过正则彻底切除 `By ... (Reuters) -`、`BEIJING (Reuters) -` 等通讯社外电署名前缀。
-2. **零悬空截断杂质**：
+2. **零悬空截断与原文实录字句忠实 (Zero Truncation & Verbatim Fidelity)**：
    - 正文段落末尾严禁出现 `such as ...`、`including ...`、`and other ...` 或无止境的省略号 `...`。
    - 任何提取到的段落必须为标点完整的独立事实表述。
-3. **真实原厂配图，拒绝无关联库存图**：
-   - 权威财经/技术报道（如联想 AI 服务器财报）严禁被关键词误判打上无关的库存无人机（drone）图片。
-   - 优先提取并本地化托管源站真实的官方大图（如 `assets.bwbx.io`、ThinkSystem 算力集群大图）；若无合适图片，优雅降级为文字排版卡片（`feed-card-editorial`），绝不滥用假图。
+   - 对于有明确第一现场报道的主流特稿，核心正文段落必须忠实对齐原作者现场采写报道字句，严禁使用粗糙合成段落替代原厂实录。
+3. **真实原厂配图与零无关库存图原则 (Authentic Editorial Imagery & Zero False Stock Images)**：
+   - 权威财经/技术报道（如联想 AI 服务器财报、GTA VI 彭博社独家深度）严禁被关键词误判或缺省回退打上无关的库存无人机（drone）或机器人坐长椅（Unsplash `photo-1620712943543`）等具象假图。
+   - **缺省兜底中性化**：全站默认配图（`default` fallback）必须且仅能使用站点官方中性品牌卡（`og-default.jpg`）或文字排版卡片（`feed-card-editorial`），绝对严禁使用任何具体事物的库存照片充当通用缺省图。
+   - **付费墙与风控信源大图穿透**：对于受 PerimeterX 403、Cloudflare 或登录墙拦截的主流信源（如 Bloomberg、WSJ 等），爬虫必须建立二级电讯联合网络检索机制（Syndication Wire Resolvers，如 Techmeme、Bing News RSS 等），主动穿透检索官方 CDN 高清大图（如 `assets.bwbx.io`），并自动下载托管至本地 CDN（`/images/...`），确保重大深度报道具备真实第一现场配图。
 4. **零图片注释与邮件推广杂质泄漏 (Zero Leaked Caption & Newsletter Noise)**：
    - 严禁将源站配图注释（Caption，如 `字节跳动联合创始人张一鸣，公司2021年发布的肖像照。`、`View image in fullscreen ... Photograph: ...`）、摄影机构署名（Credit，如 `Photo by ...`、`新华社发`、`视觉中国供图`）当作文章正文段落提取或排版。
    - 严禁将邮件订阅引导语（如 `Get the most important tech news in your inbox each week.`、`每周在您的收件箱中获取最重要的科技新闻。`）泄漏至正文末尾或任何段落中。
@@ -54,6 +56,9 @@
 3. **服务端静态编译与前端轻量化彻底解耦原则 (Backend Source-of-Truth)**：
    - **严禁数据源倒挂**：服务端静态单篇页面生成脚本（如 `tool_news_publisher.py`、`content_publisher.py`）必须以完整的后端主库（`data/latest_news.json` 与 `master_archive.json`）为第一数据源；严禁将面向浏览器精简后的 `public/data/latest_news.json` 作为静态构建的主输入源。
    - **双轨健壮兜底渲染**：正文排版逻辑必须实施多层回退机制——优先读取完整长文字符串，若字段为空则**必须无缝降级读取 `paragraphs` / `paragraphs_zh` 数组**自动拼接还原全景正文，严禁因单一字段缺失导致有数据却渲染出正文空白的落地页。
+4. **全要素持久化原子同步准则 (Atomic Multi-Container & Field Mirror Sync)**：
+   - **多容器一致性**：更新或回填资讯条目时，必须保证全量存储容器（`data/latest_news.json` 中的 `items` 与 `grouped[category]`、`data/master_archive.json`、`data/archive_news.json`、`public/data/latest_news.json`、`public/data/archive/news/vol_{N}.json`）同步更新，严禁出现只改 `items` 却遗漏 `grouped` 导致静态发布器拉取旧数据的现象。
+   - **镜像字段同步**：段落数组（`paragraphs` / `paragraphs_zh`）与长文字符串（`article_content` / `article_content_zh` / `original_content`）以及首段（`lead_paragraph`）必须保持原子级同步，杜绝因字段间数据脱节导致的渲染内容不一致。
 
 ---
 
