@@ -1,118 +1,120 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 18:48:45 UTC",
+  "generated_at": "2026-11-20 19:04:58 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 18:48:45 UTC",
+      "updated_at": "2026-11-20 19:04:58 UTC",
       "headline_item": {
-        "id": "92c0181b1bef07b7",
+        "id": "e073756377b12368",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "特朗普拟限制海外数据中心建设并征收重税",
-        "title_en": "Trump says he would block US companies from building data centers overseas or impose a \"tremendous tax\" on them if they do (Julianna Bragg/Axios)",
-        "source": "Axios",
-        "published_at": "2026-11-20T18:35:01+00:00",
-        "url": "https://www.axios.com/2026/11/20/us-ai-trump-data-centers-overseas",
-        "event_summary_zh": "特朗普公开宣称将通过禁止或重税手段限制美国企业在海外兴建AI数据中心，以确保AI基础设施留在本土",
-        "event_summary_en": "Former President Donald Trump proposed a policy aimed at anchoring AI infrastructure within the U.S., threatening to block American companies from constructing data centers abroad or imposing heavy taxes if they do so. This policy stance follows heightened voter concern over the environmental and financial impacts of domestic data center expansion, though the legal mechanism for implementing such taxes remains unclear given Congressional oversight.",
+        "title_zh": "谷歌Gemini推出Mac后台计算机操控功能",
+        "title_en": "Google's Gemini can now run Mac apps and finish desktop chores in the background while you keep working",
+        "source": "THE DECODER",
+        "published_at": "2026-11-20T18:50:31+00:00",
+        "url": "https://the-decoder.com/googles-gemini-can-now-run-mac-apps-and-finish-desktop-chores-in-the-background-while-you-keep-working/",
+        "event_summary_zh": "谷歌在Mac版Gemini中引入“计算机使用”功能，允许AI在后台自动执行跨应用的复杂多步骤任务",
+        "event_summary_en": "Google has integrated the 'Computer Use' feature into its Gemini Mac app, allowing the AI to simulate mouse clicks, keyboard inputs, and menu navigation within isolated background windows. This enables the autonomous execution of multi-step tasks across local files and web applications while allowing users to maintain foreground workflow continuity.",
         "core_facts_zh": [
-          "【核心事件】美国前总统唐纳德·特朗普在美国本土及国际数字贸易政策环境：拟禁止企业海外建设数据中心或征收高额税收",
-          "【起因与机理】回应国内对数据中心能耗的担忧，试图强化AI基础设施主权",
-          "【核心事实细节】特朗普提议通过禁令或高额税收强制数据中心回流美国。",
-          "【各方立场与态度】该主张面临国会税收权限约束及全球化分布式部署商业逻辑的矛盾。"
+          "【核心事件】谷歌（Alphabet 公司）在macOS桌面端生态：推出“计算机使用”功能，实现AI代理对本地应用与网页的跨平台自动化操作",
+          "【起因与机理】旨在通过自动化工作流闭环，解决AI辅助办公从对话交互向任务执行的跨越",
+          "【调查与监管诉求】核心功能：支持Gemini自主跨应用操作本地文件与浏览器界面。",
+          "【行业影响与走向】行业竞争：该技术直接对标OpenAI的Astra模型，加速AI代理落地桌面办公场景。"
         ],
         "core_facts_en": [
-          "[Core Event] Former U.S. President Donald Trump: Proposing bans on overseas data center construction or levying heavy taxes",
-          "[Root Cause & Mechanism] Addressing domestic energy concerns and reinforcing AI infrastructure sovereignty",
-          "[Key Fact Detail] Trump proposes blocking overseas data center expansion or imposing heavy taxes.",
-          "[Key Position & Outlook] Proposal faces significant legal hurdles with Congress and contradicts the logic of distributed computing."
+          "[Core Event] Google (Alphabet Inc.) (macOS Desktop Ecosystem): Introduced 'Computer Use' feature for cross-application autonomous task completion",
+          "[Root Cause & Mechanism] To bridge the gap between conversational AI and functional task-oriented agentic workflows",
+          "[Key Fact Detail] Feature: Gemini autonomously operates local apps and browser interfaces.",
+          "[Key Position & Outlook] Competitive Landscape: Directly challenges OpenAI's Astra, accelerating AI agent adoption in desktop workflows."
         ],
-        "industry_impact_zh": "该政策倾向忽视了全球分布式计算对低延迟、数据驻留合规及灾备冗余的刚性商业需求，强制回流可能导致美国科技企业在国际市场失去交付效率竞争优势。短期内此类言论更偏向政治叙事，若转化为行政指令，将引发全球云服务供应链的剧烈重组与合规成本激增。",
-        "industry_impact_en": "This policy stance overlooks the commercial necessity of distributed computing for low latency, data residency compliance, and disaster recovery, potentially sacrificing the global delivery efficiency of U.S. tech firms. While currently more rhetorical, such measures would trigger massive disruption in global cloud supply chains and surging compliance costs if enacted as administrative orders."
+        "industry_impact_zh": "此次更新标志着大模型从意图理解范式向基于GUI驱动的Agent范式转型，通过将执行层剥离至受控后台，规避了AI实时交互与用户生产力冲突的痛点。该技术栈的成熟将迫使操作系统厂商重新定义系统级权限框架，以应对AI应用在复杂应用链条中对本地数据的自主获取与操作需求。",
+        "industry_impact_en": "This update signals a shift from pure intent-understanding to GUI-driven agentic workflows, decoupling the execution layer to preserve user productivity. The maturation of such technology necessitates a fundamental redesign of OS-level permission frameworks to manage AI-driven autonomous access to heterogeneous local application data."
       },
       "headlines": [
         {
-          "id": "92c0181b1bef07b7",
+          "id": "e073756377b12368",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "特朗普拟限制海外数据中心建设并征收重税",
-          "title_en": "Trump says he would block US companies from building data centers overseas or impose a \"tremendous tax\" on them if they do (Julianna Bragg/Axios)",
-          "source": "Axios",
-          "published_at": "2026-11-20T18:35:01+00:00",
-          "url": "https://www.axios.com/2026/11/20/us-ai-trump-data-centers-overseas",
-          "event_summary_zh": "特朗普公开宣称将通过禁止或重税手段限制美国企业在海外兴建AI数据中心，以确保AI基础设施留在本土",
-          "event_summary_en": "Former President Donald Trump proposed a policy aimed at anchoring AI infrastructure within the U.S., threatening to block American companies from constructing data centers abroad or imposing heavy taxes if they do so. This policy stance follows heightened voter concern over the environmental and financial impacts of domestic data center expansion, though the legal mechanism for implementing such taxes remains unclear given Congressional oversight.",
+          "title_zh": "谷歌Gemini推出Mac后台计算机操控功能",
+          "title_en": "Google's Gemini can now run Mac apps and finish desktop chores in the background while you keep working",
+          "source": "THE DECODER",
+          "published_at": "2026-11-20T18:50:31+00:00",
+          "url": "https://the-decoder.com/googles-gemini-can-now-run-mac-apps-and-finish-desktop-chores-in-the-background-while-you-keep-working/",
+          "event_summary_zh": "谷歌在Mac版Gemini中引入“计算机使用”功能，允许AI在后台自动执行跨应用的复杂多步骤任务",
+          "event_summary_en": "Google has integrated the 'Computer Use' feature into its Gemini Mac app, allowing the AI to simulate mouse clicks, keyboard inputs, and menu navigation within isolated background windows. This enables the autonomous execution of multi-step tasks across local files and web applications while allowing users to maintain foreground workflow continuity.",
           "core_facts_zh": [
-            "【核心事件】美国前总统唐纳德·特朗普在美国本土及国际数字贸易政策环境：拟禁止企业海外建设数据中心或征收高额税收",
-            "【起因与机理】回应国内对数据中心能耗的担忧，试图强化AI基础设施主权",
-            "【核心事实细节】特朗普提议通过禁令或高额税收强制数据中心回流美国。",
-            "【各方立场与态度】该主张面临国会税收权限约束及全球化分布式部署商业逻辑的矛盾。"
+            "【核心事件】谷歌（Alphabet 公司）在macOS桌面端生态：推出“计算机使用”功能，实现AI代理对本地应用与网页的跨平台自动化操作",
+            "【起因与机理】旨在通过自动化工作流闭环，解决AI辅助办公从对话交互向任务执行的跨越",
+            "【调查与监管诉求】核心功能：支持Gemini自主跨应用操作本地文件与浏览器界面。",
+            "【行业影响与走向】行业竞争：该技术直接对标OpenAI的Astra模型，加速AI代理落地桌面办公场景。"
           ],
           "core_facts_en": [
-            "[Core Event] Former U.S. President Donald Trump: Proposing bans on overseas data center construction or levying heavy taxes",
-            "[Root Cause & Mechanism] Addressing domestic energy concerns and reinforcing AI infrastructure sovereignty",
-            "[Key Fact Detail] Trump proposes blocking overseas data center expansion or imposing heavy taxes.",
-            "[Key Position & Outlook] Proposal faces significant legal hurdles with Congress and contradicts the logic of distributed computing."
+            "[Core Event] Google (Alphabet Inc.) (macOS Desktop Ecosystem): Introduced 'Computer Use' feature for cross-application autonomous task completion",
+            "[Root Cause & Mechanism] To bridge the gap between conversational AI and functional task-oriented agentic workflows",
+            "[Key Fact Detail] Feature: Gemini autonomously operates local apps and browser interfaces.",
+            "[Key Position & Outlook] Competitive Landscape: Directly challenges OpenAI's Astra, accelerating AI agent adoption in desktop workflows."
           ],
-          "industry_impact_zh": "该政策倾向忽视了全球分布式计算对低延迟、数据驻留合规及灾备冗余的刚性商业需求，强制回流可能导致美国科技企业在国际市场失去交付效率竞争优势。短期内此类言论更偏向政治叙事，若转化为行政指令，将引发全球云服务供应链的剧烈重组与合规成本激增。",
-          "industry_impact_en": "This policy stance overlooks the commercial necessity of distributed computing for low latency, data residency compliance, and disaster recovery, potentially sacrificing the global delivery efficiency of U.S. tech firms. While currently more rhetorical, such measures would trigger massive disruption in global cloud supply chains and surging compliance costs if enacted as administrative orders."
+          "industry_impact_zh": "此次更新标志着大模型从意图理解范式向基于GUI驱动的Agent范式转型，通过将执行层剥离至受控后台，规避了AI实时交互与用户生产力冲突的痛点。该技术栈的成熟将迫使操作系统厂商重新定义系统级权限框架，以应对AI应用在复杂应用链条中对本地数据的自主获取与操作需求。",
+          "industry_impact_en": "This update signals a shift from pure intent-understanding to GUI-driven agentic workflows, decoupling the execution layer to preserve user productivity. The maturation of such technology necessitates a fundamental redesign of OS-level permission frameworks to manage AI-driven autonomous access to heterogeneous local application data."
         },
         {
-          "id": "b6cdd2372e065ea5",
+          "id": "c8293aa2b7f7dc9e",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "黄乐关联实体涉华防军工供应链核查",
-          "title_en": "Spying Suspect’s Chip Network Has Ties to Chinese Military Suppliers",
-          "source": "New York Times",
-          "published_at": "2026-11-20T18:30:04+00:00",
-          "url": "https://www.nytimes.com/2026/11/20/us/politics/nvidia-alice-huang-chips-china.html",
-          "event_summary_zh": "黄乐及其关联公司被指通过复杂网络获取英伟达芯片，资金流向与中国军工及国家安全部门存在高度关联",
-          "event_summary_en": "Intelligence firm Strider Technologies identified that Alice Huang and her associates built a complex network utilizing $3.6 billion in Chinese government funding for data centers equipped with Nvidia AI chips. The investigation reveals that these entities maintain deep ties to Chinese military contractors and the Ministry of State Security, posing significant compliance risks regarding the diversion of restricted hardware into military research.",
+          "title_zh": "特朗普拟对海外建设数据中心课重税",
+          "title_en": "Trump threatens ‘tremendous tax’ for moving AI data centers outside the US",
+          "source": "The Verge AI",
+          "published_at": "2026-11-20T18:50:19+00:00",
+          "url": "https://www.theverge.com/policy/1038892/trump-foreign-data-centers-tax",
+          "event_summary_zh": "美国总统特朗普提议对在海外建设AI数据中心的企业征收“巨额税款”，以防止算力基础设施外流",
+          "event_summary_en": "U.S. President Donald Trump has proposed a 'tremendous tax' on American companies that construct AI data centers outside the country. This policy initiative is framed as a matter of national security, aiming to prevent the offshore migration of critical computing infrastructure and ensure the sovereignty of the domestic AI supply chain.",
           "core_facts_zh": [
-            "【核心事件】黄乐（涉案人员）、英伟达（芯片供应商）、Strider Technologies（情报分析机构）：通过复杂股权网络规避制裁，获取高性能芯片并输送至涉军科研项目",
-            "【起因与机理】利用复杂企业架构掩盖资金与资源流向，以支持中国军工人工智能能力升级",
-            "【关键数据与实测】黄乐通过关联企业网络动用36亿美元政府资金投建算力中心。",
-            "【各方立场与态度】英伟达高性能芯片通过受控链条流入潜在敏感军事应用领域。"
+            "【核心事件】美国总统唐纳德·特朗普在美国政经决策会议场合：威胁对海外数据中心建设施加重税，强制算力资产回流美国",
+            "【起因与机理】防范地缘竞争对手获取算力资源及防止美国在AI基础设施领域被边缘化",
+            "【关键技术规格】核心诉求：防止算力基础设施外流，通过关税手段强制企业本土化建设。",
+            "【行业影响与走向】后续影响：面临国会两党法律博弈，或将重塑科技巨头全球基础设施布局策略。"
           ],
           "core_facts_en": [
-            "[Core Event] Alice Huang, Nvidia, Strider Technologies: Bypassing sanctions through shell companies to supply high-end chips for military-linked R&D",
-            "[Root Cause & Mechanism] Utilizing intricate corporate structures to mask financial flows and hardware deployment for China's AI-driven defense advancement",
-            "[Key Metrics] Huang utilized $3.6 billion in state funding through a network of shell companies to build computing centers.",
-            "[Key Position & Outlook] High-end Nvidia chips were funneled into potentially sensitive military-AI applications."
+            "[Core Event] U.S. President Donald Trump: Threatened a 'tremendous tax' on offshore data centers to force domestic infrastructure investment",
+            "[Root Cause & Mechanism] To prevent geopolitical rivals from gaining computing power and to secure American AI infrastructure dominance",
+            "[Key Fact Detail] Core Demand: Preventing computing infrastructure flight via punitive tax measures.",
+            "[Industry Impact & Outlook] Outlook: Subject to legislative hurdles in Congress; likely to reshape global infrastructure strategy for tech giants."
           ],
-          "industry_impact_zh": "此案暴露了当前对高性能计算集群（HPC）终端用户识别的重大监管漏洞，单纯基于实体清单的管控手段在复杂股权架构面前已显得捉襟见肘。随着军民融合（MCF）深度的增加，英伟达及同类算力提供商的合规门槛将由“销售端核查”转向对数据中心算力归属的“全生命周期溯源与穿透式审计”。",
-          "industry_impact_en": "This case highlights significant loopholes in verifying end-users for High-Performance Computing (HPC) clusters, proving that entity-based trade controls are insufficient against complex, opaque corporate structures. As civil-military fusion deepens, the compliance burden for Nvidia and peers will shift from point-of-sale verification to full lifecycle traceability and forensic auditing of computational resource allocation."
+          "industry_impact_zh": "此举本质上是将算力基础设施提升至战略资源高度的强制性产业回流手段，可能大幅抬升跨国科技企业的资本支出成本。在该政策背景下，超大规模算力集群的规划将不再仅遵循电力与低成本土地的经济逻辑，而是必须接受国家地缘政治安全框架的严格规制，加剧全球算力供应链的碎片化进程。",
+          "industry_impact_en": "This move elevates computing infrastructure to a strategic resource, enforcing industrial reshoring at the cost of significantly higher CAPEX for multinational tech firms. Future hyper-scale cluster planning must now balance traditional economic factors like power availability with restrictive geopolitical mandates, accelerating the fragmentation of the global AI supply chain."
         },
         {
-          "id": "0682a15d33147059",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "METR：AI模型编程能力远超判断力",
-          "title_en": "The most misunderstood graph in AI just got a major update",
-          "source": "MIT Tech Review",
-          "published_at": "2026-11-20T18:15:15+00:00",
-          "url": "https://www.technologyreview.com/2026/11/20/1149399/the-most-misunderstood-graph-in-ai-just-got-a-major-update/",
-          "event_summary_zh": "人工智能评估组织METR发布报告显示，模型在编程等可验证任务上进步神速，但在决策判断类任务中表现滞后",
-          "event_summary_en": "Nonprofit evaluation group METR has updated its time-horizon plot for AI capabilities, indicating that models show exponential growth in verifiable tasks like coding and mathematics, but lag in judgment-based tasks that lack automated verification. The report highlights the technological bottleneck in applying reinforcement learning to complex, open-ended research decisions, a capability critical for future autonomous R&D.",
+          "id": "bc460e47e96bbe71",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "YouTube拟赔偿数十亿美元解决成瘾指控",
+          "title_en": "YouTube Finalizing Multibillion-Dollar Settlement With Schools Over Social Media Addiction Claims",
+          "source": "Bloomberg",
+          "published_at": "2026-11-20T18:50:02+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-20/youtube-finalizing-multibillion-dollar-schools-settlement-over-addiction-claims",
+          "event_summary_zh": "YouTube正就美国学区提出的“社交媒体成瘾”诉讼达成原则性协议，拟支付约30亿美元赔偿金",
+          "event_summary_en": "YouTube, a subsidiary of Alphabet, is finalizing an agreement-in-principle with various U.S. school districts to settle litigation regarding the addictive nature of its platform features. The proposed settlement is valued at approximately $3 billion, with final execution expected to take several months.",
           "core_facts_zh": [
-            "【核心事件】非营利性评估组织METR更新了关于AI能力时序演进的分析框架，指出AI在编程与数学等具备明确验证逻辑的任务上表现呈指数级增长，但处理研发判断类等难以自动化量化任务的能力明显薄弱。",
-            "【关键技术规格】报告揭示了当前强化学习在处理复杂、开放性决策任务时的技术瓶颈，这类能力对于实现AI全自主研发至关重要。",
-            "【核心事实细节】A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that require judgment as they are at coding.。"
+            "【核心事件】字母表公司 (YouTube)在美国学区集体诉讼案：达成约30亿美元的初步赔偿意向，以解决平台成瘾机制诉讼",
+            "【起因与机理】规避长期的法律纠纷及应对舆论对青少年身心健康的监管压力",
+            "【关键数据与实测】财务细节：原则上同意支付约30亿美元和解金。",
+            "【涉及范围与推进】后续进展：预计最终协议在未来数月内签署，将成为互联网平台内容生态监管的参考案例。"
           ],
           "core_facts_en": [
-            "[Core Event] Nonprofit evaluation group METR has updated its time-horizon plot for AI capabilities, indicating that models show exponential growth in verifiable tasks like coding and mathematics, but lag in judgment-based tasks that lack automated verification.",
-            "[Context & Motivation] The report highlights the technological bottleneck in applying reinforcement learning to complex, open-ended research decisions, a capability critical for future autonomous R&D..",
-            "[Key Fact] A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that require judgment as they are at coding."
+            "[Core Event] Alphabet Inc. (YouTube): Reaching an agreement-in-principle for ~$3 billion to settle claims over addictive platform design",
+            "[Root Cause & Mechanism] To mitigate protracted litigation risks and alleviate regulatory pressure regarding teen mental health",
+            "[Key Metrics] Financial Details: Approximately $3 billion settlement in principle.",
+            "[Key Position & Outlook] Timeline/Outlook: Finalization expected in coming months; will serve as a precedent for internet platform regulation."
           ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+          "industry_impact_zh": "此案是全球社交媒体平台面临算法问责制的关键里程碑，显示出法律界对数字产品“设计成瘾性”的赔偿责任认定已趋于严苛。对于科技巨头而言，支付高额和解金已成为降低合规摩擦成本的常规手段，但这也意味着后续平台必须重构推荐算法的伦理边界，以防范针对“注意力掠夺”模式的更广泛集体诉讼。",
+          "industry_impact_en": "This settlement marks a significant milestone in holding social media platforms accountable for algorithmic design choices. For tech giants, paying large settlements is becoming a standard mechanism to manage litigation friction, yet it forces an urgent re-evaluation of ethical boundaries in recommendation algorithms to avoid further liability regarding 'attention-capture' business models."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 18:48:45 UTC",
+      "updated_at": "2026-11-20 19:04:58 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -248,7 +250,7 @@
           "url": "https://x.com/AravSrinivas/status/2123811155605164259"
         },
         {
-          "id": "bd7d27d388af3e99",
+          "id": "b40eac4fd3545e41",
           "name": "OpenAI Developers",
           "handle": "@OpenAIDevs",
           "role_zh": "OpenAI 开发者官方平台",
@@ -256,30 +258,30 @@
           "avatar": "https://unavatar.io/openai",
           "topic_zh": "OpenAI Developer",
           "topic_en": "OpenAI Developers on",
-          "event_context_zh": "RT @ShayWithCare：将永远感谢我在 2026 年 @OpenAI @OpenAIDevs DevDay 非常高兴见到的每一个人。我不知道未来会怎样，但我知道非凡的人和美好的回忆。会继续努力，做得更好、更多。我",
-          "event_context_en": "RT @ShayWithCare: Will forever be grateful to everyone I had the absolute pleasure of meeting at 2026 @OpenAI @OpenAIDev",
-          "quote_zh": "RT @ShayWithCare：将永远感谢我在 2026 年 @OpenAI @OpenAIDevs DevDay 非常高兴见到的每一个人。\n\n我不知道未来会怎样，但我知道非凡的人和美好的回忆。会继续努力，做得更好、更多。祝大家人生成功！",
-          "quote_en": "RT @ShayWithCare: Will forever be grateful to everyone I had the absolute pleasure of meeting at 2026 @OpenAI @OpenAIDevs DevDay.\n\nI don’t know what the future holds, but remarkable people and beautiful memories. Will continue to strive to do better and more. I wish everyone success in life! https://t.co/BtjuliOgEq",
+          "event_context_zh": "RT @xdofai：GPT 6.2 Astra 在我们的机器人基准测试之一 Ember-0 上得分高达 41.2%（！）。与 9 月初相比，这是一个巨大的飞跃，当时 GPT 6 Astra 的得分为 19.6%。我们预计 Ember-0 很快就会饱和。",
+          "event_context_en": "RT @xdofai: GPT 6.2 Astra has scored a whopping 41.2%(!) on Ember-0, one of our robotics benchmarks.\n\nThis is a HUGE jum",
+          "quote_zh": "RT @xdofai：GPT 6.2 Astra 在我们的机器人基准测试之一 Ember-0 上得分高达 41.2%（！）。\n\n与 9 月初相比，这是一个巨大的飞跃，当时 GPT 6 Astra 的得分为 19.6%。\n\n我们预计 Ember-0 很快就会饱和。",
+          "quote_en": "RT @xdofai: GPT 6.2 Astra has scored a whopping 41.2%(!) on Ember-0, one of our robotics benchmarks.\n\nThis is a HUGE jump from early Sept, when GPT 6 Astra scored 19.6%.\n\nWe expect Ember-0 to be saturated very soon. https://t.co/gelwZPPNWu",
           "thesis_zh": "深入探讨OpenAI Developer的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in OpenAI Developers on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "2.6k",
-            "likes": "16",
-            "comments": "0",
-            "retweets": "3",
+            "views": "5.3k",
+            "likes": "76",
+            "comments": "3",
+            "retweets": "10",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-20T17:36:45+00:00",
-          "url": "https://x.com/OpenAIDevs/status/2123832936927760874"
+          "published_at": "2026-11-20T18:36:58+00:00",
+          "url": "https://x.com/OpenAIDevs/status/2123848088049881539"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 18:48:45 UTC",
+      "updated_at": "2026-11-20 19:04:58 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
