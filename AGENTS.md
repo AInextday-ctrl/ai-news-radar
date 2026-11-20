@@ -26,6 +26,13 @@
    - 外部信源（如 Bloomberg、Reuters 等）URL 路径中若含有前导/尾随特殊连字符（如 `/-grand-theft-auto...`）、特殊符号或多余斜杠，在提取 slug 时必须强制使用 `re.sub(r'^-+|-+$', '', slug)` 彻底过滤。
    - 严禁将带有前导 `-` 的原始 slug 直接拼入外部搜索引擎（如 Google News RSS 的 `site:bloomberg.com "..."`）作为关键词，避免触发搜索引擎的排除运算符（Negative Operator）导致穿透抓取自锁。
    - 所有搜索引擎 Query 构造函数必须具备符号转义与净化层，保证搜索穿透具备高容错性。
+6. **零付费墙试读片段与登录诱导泄漏准则 (Zero Paywall Teasers & Login Noise)**：
+   - 严禁将任何受付费墙（Paywall / Teaser Wall）截断的残篇片段（如 Bloomberg Law、WSJ 试读版等）直接入库或渲染到前台落地页。
+   - 所有段落提取与清洗必须通过 `is_paywall_or_login_noise` 与 `has_paywall_or_truncation_noise` 严格过滤 `Log in to keep reading...`、`Bloomberg Law provides...`、`Sign in to access...`、`彭博法律提供可信的时事报道...`、`登录以继续阅读`、`订阅以解锁` 等提示语。
+   - **本地缓存防投毒强校验**：严禁无条件信任本地磁盘缓存（如 `bloomberg_cache.json`）；在从任何持久化缓存加载历史条目时，必须执行 `has_paywall_or_truncation_noise` 校验，一旦检出试读杂质或截断，必须强制废弃该缓存并穿透重新抓取合法全文字句。
+7. **电讯穿透语义相关度校验与泛型头像拦截准则 (Semantic Syndication Relevance & Anti-Avatar Invariants)**：
+   - **语义相关度强制双向校验**：在通过二级电讯检索网络（Bing News RSS / open syndication）寻找主流受限信源的全文授权镜像时，必须比对候选电讯文章标题与核心摘要的语义关键词重合度（$\ge 35\%$），严禁仅凭单点关键词匹配便将搜索结果中首个抓取成功的无关第三方文章误收为报道全文。
+   - **泛型作者头像与占位符严格阻断**：严禁将任何形如 `bwrite-generic-profile`、`author-profile`、`avatar`、`width=44`、`headshot` 等小尺寸作者头像或泛型占位图作为文章封面配图收录或发布。此类图片必须自动丢弃，触发全网穿透检索 1200×800 现场摄影大图，无法检索时仅能回退官方中性品牌卡（`og-default.jpg`）。
 
 ---
 
