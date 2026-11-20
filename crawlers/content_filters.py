@@ -154,6 +154,59 @@ NEWSLETTER_PROMO_INDICATORS = [
     re.compile(r"^(?:每周在您的收件箱中获取|订阅我们的通讯|点击订阅|更多报道请关注|本文最初发表于|阅读原文请访问)"),
 ]
 
+PAYWALL_LOGIN_NOISE_INDICATORS = [
+    re.compile(r"\b(?:bloomberg law|law\.com)\s+provides\s+trusted\s+coverage\b", re.I),
+    re.compile(r"^\s*(?:log\s*in|sign\s*in)\s+to\s+(?:keep\s+reading|continue|access)\b", re.I),
+    re.compile(r"^\s*(?:subscribe|join\s+now)\s+to\s+(?:keep\s+reading|continue|access|read)\b", re.I),
+    re.compile(r"^\s*to\s+continue\s+reading,?\s*(?:please\s+)?(?:log\s*in|subscribe|sign\s*in)\b", re.I),
+    re.compile(r"\b(?:already a subscriber|already have an account)\??\s+(?:log\s*in|sign\s*in)\b", re.I),
+    re.compile(r"^(?:彭博法律提供可信的时事报道|登录以继续阅读|订阅以继续阅读|付费订阅以解锁|登录或注册以继续|成为会员以阅读|立即登录继续阅读)"),
+]
+
+TRUNCATION_INDICATORS = [
+    re.compile(r"(?:\.\.\.|…|……)\s*$", re.I),
+    re.compile(r"\b(?:such as|including|and other)\s*(?:\.\.\.|…|……)?\s*$", re.I),
+    re.compile(r"^\s*(?:such as|including)\s*\.{2,}\s*$", re.I),
+]
+
+
+def is_paywall_or_login_noise(text: str) -> bool:
+    """Detects paywall prompts, subscription walls, or login gates."""
+    if not text:
+        return False
+    t = text.strip()
+    return any(rx.search(t) for rx in PAYWALL_LOGIN_NOISE_INDICATORS)
+
+
+def is_truncated_paragraph(text: str) -> bool:
+    """Detects hanging, mid-sentence truncated text ending in ellipses or trailing prepositions."""
+    if not text:
+        return False
+    t = text.strip()
+    # In verbatim podcast or interview transcripts, conversational speaker lines ("Speaker: ...") may reflect vocal pauses
+    if re.match(r'^[A-Z][a-zA-Z\s]{1,30}:', t):
+        return False
+    return any(rx.search(t) for rx in TRUNCATION_INDICATORS)
+
+
+def has_paywall_or_truncation_noise(paragraphs: Iterable[Any]) -> bool:
+    """
+    Returns True if any paragraph in the candidate list is a paywall gate,
+    login prompt, or cut-off hanging ellipsis.
+    """
+    if not paragraphs:
+        return True
+    for p in paragraphs:
+        p_str = str(p or "").strip()
+        if not p_str:
+            continue
+        if is_paywall_or_login_noise(p_str):
+            return True
+        if is_truncated_paragraph(p_str):
+            return True
+    return False
+
+
 
 def clean_guardian_fullscreen_prefix(text: str) -> str:
     """
@@ -252,7 +305,9 @@ def clean_article_paragraphs(
     1. Un-gluing and stripping 'View image in fullscreen' prefixes.
     2. Dropping pure image captions and photo credits.
     3. Dropping newsletter signup footers and promotional noise.
-    4. Removing empty or trivial fragments.
+    4. Dropping paywall teaser notices and login gates.
+    5. Dropping hanging truncated sentences ending with ellipses.
+    6. Removing empty or trivial fragments.
     """
     if not paragraphs:
         return []
@@ -268,6 +323,12 @@ def clean_article_paragraphs(
             continue
         # Check newsletter promo
         if is_newsletter_or_promo_noise(p_str):
+            continue
+        # Check paywall & login prompt noise
+        if is_paywall_or_login_noise(p_str):
+            continue
+        # Check hanging truncation
+        if is_truncated_paragraph(p_str):
             continue
         # Check photo caption/credit
         if is_photo_caption_or_credit(p_str, inline_images=inline_images, cover_caption=cover_caption, is_zh=is_zh):

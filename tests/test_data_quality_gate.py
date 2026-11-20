@@ -444,10 +444,11 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(fake_time_videos) == 0, f"断言 18 失败：检测到 {len(fake_time_videos)} 个历史视频被伪造时效标签: {fake_time_videos[:3]}"
     print(f"✅ 断言 18 通过: 视频真实发布时间与防伪造标签门禁达标 (全网 {len(videos)} 个视频零虚假 TODAY / 24h 飙升)")
 
-    # 19. 信源纯正性与零异源通讯社污染 / 零悬空截断门禁 (Source Integrity & Clean Truncation)
+    # 19. 信源纯正性与零异源通讯社污染 / 零悬空截断 / 零付费墙登录门禁 (Source Integrity, Clean Truncation & Zero Paywall Noise)
     pollution_violations = []
     wire_agency_regex = re.compile(r'By\s+[A-Za-z\s,]+?\((?:Reuters|AFP|AP|Xinhua|Kyodo|Bloomberg)\)\s*[-–]', re.IGNORECASE)
     trailing_trunc_regex = re.compile(r'(?:such as|including|and other|以及|例如)\s*(?:\.{2,3}|…)\s*$', re.IGNORECASE)
+    from crawlers.content_filters import is_paywall_or_login_noise, is_truncated_paragraph
 
     for it in news:
         nid = it.get("id")
@@ -465,17 +466,31 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             if wire_agency_regex.search(p_str):
                 pollution_violations.append((nid, src, f"段落[{idx}]存在外电记者署名残留", p_str[:80]))
             # 悬空截断检测 (如 such as ...)
-            if trailing_trunc_regex.search(p_str):
+            if trailing_trunc_regex.search(p_str) or is_truncated_paragraph(p_str):
                 pollution_violations.append((nid, src, f"段落[{idx}]存在未闭合悬空截断", p_str[-40:]))
+            # 付费墙引导与登录提示残留
+            if is_paywall_or_login_noise(p_str):
+                pollution_violations.append((nid, src, f"段落[{idx}]存在付费墙/登录引导残留", p_str[:80]))
+
+        # 检查中文正文段落
+        paras_zh = it.get("paragraphs_zh") or []
+        for idx, p in enumerate(paras_zh):
+            p_str = str(p or "").strip()
+            if trailing_trunc_regex.search(p_str) or is_truncated_paragraph(p_str):
+                pollution_violations.append((nid, src, f"中文段落[{idx}]存在未闭合悬空截断", p_str[-40:]))
+            if is_paywall_or_login_noise(p_str):
+                pollution_violations.append((nid, src, f"中文段落[{idx}]存在付费墙/登录引导残留", p_str[:80]))
 
         # 检查摘要与核心事实
         for fld in ("summary_en", "summary_zh", "app_hook"):
             val = str(it.get(fld) or "").strip()
-            if trailing_trunc_regex.search(val):
+            if trailing_trunc_regex.search(val) or is_truncated_paragraph(val):
                 pollution_violations.append((nid, src, f"{fld}存在未闭合悬空截断", val[-40:]))
+            if is_paywall_or_login_noise(val):
+                pollution_violations.append((nid, src, f"{fld}存在付费墙/登录引导残留", val[:80]))
 
-    assert len(pollution_violations) == 0, f"断言 19 失败：检测到 {len(pollution_violations)} 处信源污染或悬空截断杂质: {pollution_violations[:3]}"
-    print(f"✅ 断言 19 通过: 信源纯正性与零异源通讯社污染/零悬空截断门禁达标 (0 处污染 / 全站 {len(news)} 篇深度资讯)")
+    assert len(pollution_violations) == 0, f"断言 19 失败：检测到 {len(pollution_violations)} 处信源污染、付费墙或悬空截断杂质: {pollution_violations[:3]}"
+    print(f"✅ 断言 19 通过: 信源纯正性、零异源污染、零付费墙引导与零悬空截断门禁达标 (0 处污染 / 全站 {len(news)} 篇深度资讯)")
 
     # 20. 静态落地页多段正文保全度与零脱落门禁 (Landing Page Body Integrity)
     landing_page_violations = []

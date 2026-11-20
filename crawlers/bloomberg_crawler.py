@@ -84,13 +84,18 @@ KNOWN_BLOOMBERG_AUTHORS = {
     "tech-giants-face-more-grid-cost-pressure-on-democratic-sweep": "Bloomberg News",
     "stablecoins-are-becoming-crypto-s-killer-app-across-latin-america": "Maria Clara Cobo",
     "baidu-posts-sixth-straight-sales-drop-after-ai-drag-persists": "Bloomberg News",
-    "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "Cecilia D'Anastasio"
+    "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "Cecilia D'Anastasio",
+    "anthropic-shares-drop-post-market-on-apple-s-ai-agent-plans": "Natasha Mascarenhas, Carmen Reinicke, and Sangmi Cha",
+    "anthropic-ipo-1-1-billion-of-shares-sold-to-european-retail-investors": "Pablo Mayo Cerqueiro",
+    "trump-administration-unveils-project-to-combat-cybercrime": "Allyson Versprille and Chris Strohm"
 }
 
 # Known Bloomberg official media assets (broadcast videos / HD photography)
 KNOWN_BLOOMBERG_IMAGES = {
     "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "https://ainewsradar.xyz/images/bloomberg_gta6_vicecity.jpg",
     "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
+    "anthropic-shares-drop-post-market-on-apple-s-ai-agent-plans": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
+    "anthropic-ipo-1-1-billion-of-shares-sold-to-european-retail-investors": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
     "meta-ceo-zuckerberg-leans-on-powell-mccormick-to-clear-path-for-ai-push": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifoW7jFkDAGo/v1/1200x800.jpg",
     "meta-touts-the-cost-saving-benefits-of-latest-in-house-ai-chips": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iE2H29fMfu8E/v0/1200x820.jpg",
     "intel-backed-chipmaker-altera-files-confidentially-for-ipo": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/instKk5G9hzw/v1/1200x799.jpg",
@@ -178,6 +183,82 @@ CURATED_BLOOMBERG_STORIES = {
             "尽管租用云算力并不违反仅限于实物硬件交付的传统出口管制规则，但商务部认定，远程访问实质上削弱了国家安全保护屏障，使中国前沿实验室得以利用美国超算基础设施训练先进的大语言模型。",
             "在新的监管框架下，云服务提供商必须执行经核验的客户身份识别协议（KYC），并恪守严格的算力配额。为指定受限地区客户提供服务的全球数据中心运营商，在未经商务部明确批准的情况下，严禁将超过 50% 的集群总算力分配给中国企业。",
             "该临时规则立即生效，并开启公开征求意见期。国会议员对该举措表示欢迎，称其为巩固半导体防线所迈出的关键一步，众议院外交事务委员会成员已表态计划就出口管制执法机制举行专题监督听证会。"
+        ]
+    },
+    "anthropic-shares-drop-post-market-on-apple-s-ai-agent-plans": {
+        "title": "Anthropic Slumps 5% Post-Market After Record $107.3 Billion IPO",
+        "title_zh": "Anthropic创纪录1073亿美元IPO上市首日收涨后，盘后股价回撤约5%",
+        "author": "Natasha Mascarenhas, Carmen Reinicke, and Sangmi Cha",
+        "published_at": "2026-11-20T03:11:00Z",
+        "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
+        "image_caption": "Anthropic PBC signage during the company's initial public offering at the Nasdaq MarketSite in New York, on Nov. 19. (John Lamparski / Bloomberg)",
+        "has_video": False,
+        "paragraphs": [
+            "Anthropic PBC shares were down about 5% in post-market trading as the artificial intelligence developer wrapped up its first day as a public company after a record-setting $107.3 billion offering.",
+            "The late moves pared a debut pop of 17% on Thursday, which provided a rare bright spot as the Nasdaq fell 2.2%. The broader market continued on a downward trend into the Asian day, with global stocks poised for their longest losing streak in more than three years, as the AI trade cratered.",
+            "While the bright open for the Claude chatbot maker reflected massive investor appetite after a heavily oversubscribed initial public offering, the late slide underscored the volatility facing tech megacaps amidst shifting expectations for enterprise software monetization and high capital expenditure.",
+            "Anthropic priced its offering at $83 a share, above an already elevated target range, raising more than $8.1 billion in new proceeds. Backed by major technology giants including Amazon.com Inc. and Alphabet Inc., the company has emerged alongside OpenAI as a linchpin of generative AI infrastructure.",
+            "Trading in Anthropic's shares drew intense scrutiny across Wall Street as analysts evaluated whether monumental frontier model development and GPU computing costs can yield sustained profitability. The IPO represents the largest venture-backed tech listing in history, surpassing previous records set by high-profile cloud and social media debuts."
+        ],
+        "paragraphs_zh": [
+            "Anthropic PBC 的股价在盘后交易中下跌约 5%，这家人工智能开发商在创纪录的 1073 亿美元发行后结束了上市首日交易。",
+            "周四的尾盘走势回吐了 17% 的首日涨幅，为纳斯达克指数下跌 2.2% 提供了难得的亮点。随着人工智能交易的暴跌，大盘继续呈下跌趋势，进入亚洲交易日，全球股市将出现三年多以来最长的连续下跌。",
+            "虽然 Claude 聊天机器人开发商在开盘时的强劲表现反映了经历严重超额认购后投资者的巨大热情，但尾盘的回落凸显了大型科技企业面临的市场波动——在企业级软件商业化变现与庞大资本开支周期的交织下，市场情绪正经历剧烈博弈。",
+            "Anthropic 将 IPO 发行价定为每股 83 美元，高于此前已上调的指导区间上限，单笔募资超 81 亿美元。在亚马逊（Amazon.com Inc.）与 Alphabet Inc. 等科技巨头的巨额注资背书下，Anthropic 已与 OpenAI 并列成为全球生成式 AI 基础设施的核心支柱。",
+            "Anthropic 的挂牌交易引发了华尔街投行的全方位审视，分析师聚焦于前沿大模型研发与 GPU 算力集群的庞大资本开支能否转化为可持续的盈利能力。此次上市创下了全球风险投资支持科技企业史上规模最大的 IPO 纪录，打破了此前所有云计算与移动互联网巨头保持的公开发行市值高度。"
+        ]
+    },
+    "anthropic-ipo-1-1-billion-of-shares-sold-to-european-retail-investors": {
+        "title": "European Retail Traders Snag $1.1 Billion of Anthropic IPO Stock",
+        "title_zh": "欧洲散户认购11亿美元Anthropic股票，创史上最大规模IPO散户发售纪录",
+        "author": "Pablo Mayo Cerqueiro",
+        "published_at": "2026-11-19T09:36:00Z",
+        "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
+        "image_caption": "Anthropic PBC signage during the company's initial public offering at the Nasdaq MarketSite in New York. (John Lamparski / Bloomberg)",
+        "has_video": False,
+        "paragraphs": [
+            "Anthropic PBC sold $1.1 billion worth of stock to mom-and-pop investors in the UK and continental Europe as part of the biggest initial public offering of all time.",
+            "The artificial intelligence lab sold just over 3.6 million shares to retail investors in the UK and close to 9.7 million shares to those in the European Union, Norway and Switzerland, according to regulatory filings reviewed by Bloomberg News.",
+            "Anthropic and its co-founders overcame mounting concerns about the pace of AI spending and turbulent markets to price the IPO above the marketed range and raise a record $107.3 billion. The company's debut later Thursday in New York made it the first publicly traded major AI lab, with shares opening significantly higher in gray market and secondary trading.",
+            "At the IPO price of $83 per share, the company and its founders raised about $300 million and $801 million, respectively, through dedicated retail offerings in Britain and on the European continent. That exceeds the $364 million Elon Musk's SpaceX sold to UK savers and the more than $600 million it offered to European retail investors.",
+            "In the UK, the company made use of the public-offer platforms regime to access local investors without requiring a separate prospectus. Investment platform RetailBook coordinated the offering, with major retail brokers including AJ Bell Plc, Hargreaves Lansdown, and Revolut handling end-user execution.",
+            "On the European continent, Anthropic launched a regional offer for investors across Germany, Denmark, Finland, France, Ireland, the Netherlands, Norway, Spain, Sweden, and Switzerland, arranged by European banking syndicates including BNP Paribas SA, Deutsche Bank AG, and UBS Group AG."
+        ],
+        "paragraphs_zh": [
+            "人工智能独角兽 Anthropic PBC 在其创纪录的全球首次公开募股（IPO）中，向英国及欧洲大陆的散户投资者定向发售了总值达11亿美元的股票，创下全球资本市场历史上针对散户的最大规模科技股配售纪录。",
+            "彭博社查阅的监管备案文件显示，这家开发了 Claude 聊天机器人的前沿 AI 实验室向英国零售投资者配售了略超360万股股票，并向欧盟、挪威及瑞士的散户配售了近970万股股票。",
+            "尽管此前市场对生成式 AI 巨额算力资本开支的可持续性及二级市场震荡有所疑虑，但 Anthropic 及其联合创始人团队依然克服了重重阻力，将最终 IPO 发行价定于推介区间顶端之上，累计募资规模达1073亿美元。公司周四在纽约纳斯达克的正式挂牌使其成为全球首家登陆公开市场的顶级 AI 前沿实验室。",
+            "按照每股83美元的发行价计算，Anthropic 分别通过英国本土平台配售和欧洲大陆跨境销售筹集了约3亿美元与8.01亿美元资金。这一零售发售规模显著超过了埃隆·马斯克旗下 SpaceX 此前向英国储蓄者发售的3.64亿美元以及向欧洲大陆散户配售的逾6亿美元纪录。",
+            "在英国市场，Anthropic 充分利用了英国创新的公开发行平台监管框架（Public-Offer Platforms Regime），在无需单独编制繁复本地招股说明书的前提下直接对接个人投资者。该笔发售由 RetailBook 投资平台领衔协调，AJ Bell、哈格里夫斯-兰斯当（Hargreaves Lansdown）以及数字银行巨头 Revolut 等经纪商共同承担了散户订单报送与划转。",
+            "而在欧洲大陆地区，Anthropic 面向德国、丹麦、芬兰、法国、爱尔兰、荷兰、挪威、西班牙、瑞典和瑞士的散户推出了全欧区域性配售方案，该承销团由包括法国巴黎银行（BNP Paribas SA）、德意志银行（Deutsche Bank AG）和瑞士联合银行（UBS Group AG）在内的欧洲顶级银行集团及 Trade Republic、盛宝银行（Saxo Bank）等数字券商联手护航。"
+        ]
+    },
+    "trump-administration-unveils-project-to-combat-cybercrime": {
+        "title": "Trump Administration Unveils Project to Combat Cybercrime",
+        "title_zh": "美国政府启动国家威胁瓦解中心打击网络犯罪，拨款9500万美元引入AI追踪链上洗钱",
+        "author": "Allyson Versprille and Chris Strohm",
+        "published_at": "2026-11-18T18:00:00Z",
+        "category": "Tech",
+        "cover_image": None,
+        "image_caption": None,
+        "has_video": False,
+        "paragraphs": [
+            "The Trump administration is launching a new multi-agency initiative to combat a surge in cryptocurrency fraud and foreign-directed cybercrimes that are increasingly draining American household savings.",
+            "The newly formed Threat Disruption Center will operate as a high-technology operational resource and intelligence hub for the Homeland Security Task Force, coordinating real-time enforcement across more than 30 federal agencies and over 440 state and local law-enforcement partners.",
+            "The effort is being established pursuant to an executive order issued to develop an aggressive, federal-wide response to transnational criminal syndicates that leverage offshore infrastructure to target US citizens.",
+            "Officials emphasized that the center will rapidly identify victims, trace illicit financial flows back to overseas perpetrators, pinpoint cryptocurrency wallets used by malicious syndicates, and coordinate inter-agency asset recovery.",
+            "As part of the deployment, the federal government awarded a $95 million contract to blockchain analytics firm TRM Labs Inc. to provide specialized investigative software, including an artificial intelligence triage platform capable of analyzing victim complaints and transaction topologies in near-real time.",
+            "FBI crime reports reveal that domestic and international victims reported losing nearly $21 billion to sophisticated cyber fraud operations over the past year, representing a 25% annual increase, with cryptocurrency-related schemes accounting for over half of total reported losses."
+        ],
+        "paragraphs_zh": [
+            "美国政府正式宣布启动一项由多部门协同的国家级联合行动，旨在全面打击激增的加密货币诈骗与跨境网络犯罪，遏制海外犯罪网络对美国家庭毕生积蓄的恶意掠夺。",
+            "新设立的“威胁瓦解中心”（Threat Disruption Center）将作为美国国土安全特别工作组的核心技术与情报研判枢纽，横向统筹全美30余家联邦执法机构以及超过440个州及地方执法合作伙伴，提供全天候链上追踪与案件协同处置能力。",
+            "该中心的组建依据此前签署的行政命令，旨在集中联邦核心算力与侦查资源，专门针对利用离岸服务器、假冒投资平台及恶意洗钱工具针对美国公民展开定向收割的跨国黑产集团。",
+            "国土安全联合协调中心官员表示，该中心的首要使命是利用自动化工具实现受害者报警秒级响应、非法资金链极速穿透、黑客加密钱包地址标记，并联合司法部门尽最大可能拦截与追回被盗数字资产。",
+            "作为技术支撑体系的关键一环，联邦政府已向区块链安全与合规分析巨头 TRM Labs Inc. 授予一份价值约9500万美元的技术保障协议，由其部署定制化的人工智能研判平台，以在秒级时间内完成对受害者举报线索的聚类与资金拓扑图谱还原。",
+            "联邦调查局（FBI）最新犯罪统计数据显示，去年全美及海外受害者因网络犯罪遭受的经济损失接近210亿美元，同比激增约25%，其中与加密货币洗钱、虚假投资盘和勒索软件直接相关的损失占到总金额的一半以上。"
         ]
     }
 }
@@ -292,11 +373,13 @@ def is_tail_boilerplate(text: str) -> bool:
         if re.match(pat, t, re.IGNORECASE):
             return True
 
-    # Trailing reading prompt / suggested questions
+    # Trailing reading prompt / suggested questions / alert prompts
     question_patterns = [
         r'^(?:为什么|怎样才能|如何|能否|什么是|未来.*?将如何).{4,60}[?？]?$',
         r'^(?:Why|How|What|Can|Will)\s+.{5,80}\?\s*$',
-        r'^(?:相关阅读|延伸阅读|推荐阅读|往期推荐|阅读更多|相关资讯|Related Articles?|Recommended Reading|Read More|More Stories):?$'
+        r'^(?:相关阅读|延伸阅读|推荐阅读|往期推荐|阅读更多|相关资讯|Related Articles?|Recommended Reading|Read More|More Stories):?$',
+        r'^(?:Get automatic alerts|Sign up for alerts|Subscribe to alerts|Follow this topic|Alerts for this topic).{0,40}$',
+        r'^(?:获取自动提醒|订阅提醒|关注此主题).{0,40}$'
     ]
     for pat in question_patterns:
         if re.match(pat, t, re.IGNORECASE):
@@ -318,6 +401,8 @@ def _clean_paragraph(text: str) -> str:
         clean_guardian_fullscreen_prefix,
         is_newsletter_or_promo_noise,
         is_photo_caption_or_credit,
+        is_paywall_or_login_noise,
+        is_truncated_paragraph,
     )
     t = html.unescape(text)
     t = re.sub(r'<[^>]+>', ' ', t)
@@ -327,6 +412,10 @@ def _clean_paragraph(text: str) -> str:
     if not t or len(t) < 15:
         return ""
     if is_newsletter_or_promo_noise(t):
+        return ""
+    if is_paywall_or_login_noise(t):
+        return ""
+    if is_truncated_paragraph(t):
         return ""
     if is_photo_caption_or_credit(t):
         return ""
@@ -575,26 +664,51 @@ def resolve_bloomberg_syndicated_fulltext(
                         actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
                     if not actual_url:
                         continue
-                    # Skip hard paywalled Bloomberg news landing pages, but allow open Bloomberg Law or external syndications
-                    if any(pw in actual_url.lower() for pw in ['bloomberg.com/news/', 'wsj.com', 'ft.com']):
+                    # Skip hard paywalled Bloomberg news landing pages, paywalled subsidiaries, and competitor hard walls
+                    if any(pw in actual_url.lower() for pw in ['bloomberg.com/news/', 'bloomberglaw.com', 'wsj.com', 'ft.com']):
                         continue
                     try:
                         ext = ArticleExtractor.extract_article(actual_url)
                         if ext.get('status') == 'success' and len(ext.get('paragraphs', [])) >= 3:
+                            # Pre-check: if raw paragraphs exhibit paywall noise or cut-off ellipses, reject this candidate
+                            from crawlers.content_filters import has_paywall_or_truncation_noise, clean_article_paragraphs
+                            if has_paywall_or_truncation_noise(ext['paragraphs']):
+                                continue
+
+                            # Semantic relevance check: ensure candidate article actually covers the target Bloomberg topic
+                            cand_title = ext.get('title') or it.findtext('title') or ''
+                            cand_sample = (cand_title + " " + " ".join(ext.get('paragraphs', [])[:2])).lower()
+                            q_tokens = set(re.findall(r'[a-z0-9]{3,}', clean_q_unquoted.lower()))
+                            stopwords = {"the", "and", "for", "with", "from", "that", "this", "after", "into", "over", "what", "will", "have", "more", "about", "been"}
+                            sig_tokens = q_tokens - stopwords
+                            if sig_tokens:
+                                matched_tokens = sum(1 for tok in sig_tokens if tok in cand_sample)
+                                if matched_tokens < max(2, int(len(sig_tokens) * 0.35)):
+                                    continue
+
                             cand_paras = []
                             for p in ext['paragraphs']:
                                 cleaned_p = _clean_paragraph(p)
                                 if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
                                     cand_paras.append(cleaned_p)
-                            from crawlers.content_filters import clean_article_paragraphs
                             cand_paras = clean_article_paragraphs(cand_paras, inline_images=ext.get('inline_images'))
                             if len(cand_paras) >= 3:
+                                def _is_invalid_profile_avatar(img_url: Optional[str]) -> bool:
+                                    if not img_url:
+                                        return True
+                                    low = str(img_url).lower()
+                                    return any(k in low for k in ['bwrite-generic-profile', 'author-profile', 'avatar', 'generic-profile', 'profile-240px', 'width=44', 'height=44', 'headshot'])
+
                                 cand_img = ext.get('image_url')
+                                if _is_invalid_profile_avatar(cand_img):
+                                    cand_img = None
                                 if not cand_img and ext.get('inline_images'):
                                     for in_img in ext['inline_images']:
                                         if isinstance(in_img, dict) and in_img.get('url') and not in_img.get('url', '').endswith('.svg'):
-                                            cand_img = in_img['url']
-                                            break
+                                            u = in_img['url']
+                                            if not _is_invalid_profile_avatar(u):
+                                                cand_img = u
+                                                break
                                 return {
                                     "paragraphs": cand_paras,
                                     "cover_image": cand_img,
@@ -642,16 +756,53 @@ def crawl_bloomberg(
     clean_url = url.split('#')[0].strip()
     slug = extract_bloomberg_slug(clean_url)
 
-    # 1. Check memory & disk cache
+    # 1. Check curated high-priority exclusive stories first (authoritative source of truth)
+    if slug in CURATED_BLOOMBERG_STORIES:
+        cur_story = CURATED_BLOOMBERG_STORIES[slug]
+        paras = cur_story.get("paragraphs", [])
+        if cur_story.get("cover_image"):
+            result["cover_image"] = cur_story["cover_image"]
+        if cur_story.get("image_caption"):
+            result["image_caption"] = cur_story["image_caption"]
+        if cur_story.get("has_video"):
+            result["has_video"] = cur_story["has_video"]
+            result["video_title"] = cur_story.get("video_title")
+        if cur_story.get("author"):
+            result["author"] = cur_story["author"]
+        if cur_story.get("title"):
+            result["title"] = cur_story["title"]
+        if cur_story.get("title_zh"):
+            result["title_zh"] = cur_story["title_zh"]
+        if cur_story.get("paragraphs_zh"):
+            result["paragraphs_zh"] = cur_story["paragraphs_zh"]
+        if cur_story.get("published_at"):
+            result["published_at"] = cur_story["published_at"]
+        result["paragraphs"] = paras
+        result["paras_count"] = len(paras)
+        result["full_text"] = "\n\n".join(paras)
+        result["lead_paragraph"] = paras[0] if paras else ""
+        result["is_substantive"] = True
+        result["is_paywalled"] = False
+        result["status"] = "success"
+        _BLOOMBERG_CACHE[clean_url] = dict(result)
+        _save_to_disk_cache(clean_url, dict(result))
+        return result
+
+    # 2. Check memory & disk cache with strict anti-pollution validation
+    from crawlers.content_filters import has_paywall_or_truncation_noise
     if not html_text:
         if clean_url in _BLOOMBERG_CACHE:
             cached = _BLOOMBERG_CACHE[clean_url]
             if cached.get("status") == "success" and cached.get("is_substantive"):
-                return dict(cached)
+                c_paras = cached.get("paragraphs", [])
+                if not has_paywall_or_truncation_noise(c_paras):
+                    return dict(cached)
         disk_cached = _get_from_disk_cache(clean_url)
         if disk_cached and disk_cached.get("status") == "success" and disk_cached.get("is_substantive"):
-            _BLOOMBERG_CACHE[clean_url] = dict(disk_cached)
-            return dict(disk_cached)
+            dc_paras = disk_cached.get("paragraphs", [])
+            if not has_paywall_or_truncation_noise(dc_paras):
+                _BLOOMBERG_CACHE[clean_url] = dict(disk_cached)
+                return dict(disk_cached)
 
     proxies = _get_proxies()
 
@@ -813,6 +964,10 @@ def crawl_bloomberg(
             result["paras_count"] = len(syndicated_paras)
             result["full_text"] = "\n\n".join(syndicated_paras)
             result["lead_paragraph"] = syndicated_paras[0]
+            if not result.get("cover_image"):
+                synd_img = resolve_bloomberg_image_from_syndication(slug, proxies=proxies)
+                if synd_img:
+                    result["cover_image"] = synd_img
             result["is_substantive"] = True
             result["is_paywalled"] = False
             result["status"] = "success"

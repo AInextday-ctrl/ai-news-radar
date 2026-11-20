@@ -1017,7 +1017,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         source_label = "Primary Source"
         lang_switch_label = "🇨🇳 Chinese Edition"
 
-    raw_img = item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
+    raw_img = item.get("cover_image") or item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
     image_url = get_optimized_og_image(raw_img, title, item.get("category", ""))
     image_mime = "image/png" if image_url.lower().endswith(".png") else "image/jpeg"
     source_name = item.get("source") or "Tech Source"
@@ -1064,6 +1064,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         r"when you purchase through links in our articles|we may earn a (?:small )?commission|"
         r"doesn['’]t affect our editorial independence|income earning auto affiliate links|"
         r"subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|where was nvidia['’]s security team\?|"
+        r"bloomberg law provides trusted coverage|log in to keep reading|sign in to access|subscribe to continue|"
+        r"彭博法律提供可信的时事报道|登录以继续阅读|订阅以继续阅读|付费订阅以解锁|"
         r"预付一年.*省\s*\d+%|每月\s*\d+\s*美元.*数字访问|完整数字访问|基本数字访问|订阅以解锁|"
         r"每周在您的收件箱中获取|订阅我们的通讯|公司\d{4}年发布的肖像照|资料照片|新华社发|视觉中国供图|"
         r"通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)",
@@ -1886,8 +1888,59 @@ def generate_all_landing_pages():
             except Exception:
                 pass
 
+    # Load Bloomberg Cache for authentic photography, full verbatim paragraphs, and clean author attribution
+    bloomberg_cache = {}
+    bc_path = os.path.join(WORKSPACE_DIR, "data", "bloomberg_cache.json")
+    if os.path.exists(bc_path):
+        try:
+            with open(bc_path, "r", encoding="utf-8") as bcf:
+                bloomberg_cache = json.load(bcf)
+        except Exception:
+            pass
+
+    # Ensure curated headline items (which have landing pages) are always in news
+    for hf in ["data/curated_column_highlights.json", "public/data/curated_column_highlights.json"]:
+        hp = os.path.join(WORKSPACE_DIR, hf)
+        if os.path.exists(hp):
+            try:
+                with open(hp, "r", encoding="utf-8") as hfile:
+                    hdata = json.load(hfile)
+                    hnews = hdata.get("columns", {}).get("news", {})
+                    h_cands = []
+                    if hnews.get("headline_item"):
+                        h_cands.append(hnews["headline_item"])
+                    h_cands.extend(hnews.get("headlines", []))
+                    existing_ids = {n.get("id") for n in news if n.get("id")}
+                    for hc in h_cands:
+                        hc_id = hc.get("id")
+                        if hc_id and hc_id not in existing_ids:
+                            news.append(hc)
+                            existing_ids.add(hc_id)
+            except Exception:
+                pass
+
     for it in news:
         nid = it.get("id")
+        u = it.get("url") or ""
+        # Check Bloomberg cache
+        if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
+            clean_u = u.split("#")[0].strip()
+            bc_entry = bloomberg_cache.get(clean_u)
+            if not bc_entry and clean_u:
+                try:
+                    from crawlers.bloomberg_crawler import crawl_bloomberg
+                    bc_entry = crawl_bloomberg(clean_u)
+                except Exception:
+                    pass
+            if bc_entry:
+                for fld in ("paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                    if bc_entry.get(fld):
+                        it[fld] = bc_entry[fld]
+                if bc_entry.get("cover_image"):
+                    it["image_url"] = bc_entry["cover_image"]
+                it["is_substantive"] = True
+                it["is_paywalled"] = False
+
         if nid and nid in rich_lookup:
             rit = rich_lookup[nid]
             for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
@@ -1912,6 +1965,18 @@ def generate_all_landing_pages():
                             for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
                                 if rit.get(fld) and not it.get(fld):
                                     it[fld] = rit[fld]
+                        u = it.get("url") or ""
+                        if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
+                            clean_u = u.split("#")[0].strip()
+                            bc_entry = bloomberg_cache.get(clean_u)
+                            if bc_entry:
+                                for fld in ("paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                                    if bc_entry.get(fld):
+                                        it[fld] = bc_entry[fld]
+                                if bc_entry.get("cover_image"):
+                                    it["image_url"] = bc_entry["cover_image"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
                         news.append(it)
                         existing_ids.add(i_id)
         except Exception as e:
