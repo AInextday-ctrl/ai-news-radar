@@ -1,12 +1,34 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-20 22:04:25Z
+生成时间: 2026-11-20 22:20:14Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### 人工分析称 Inkling 2 Mini 具有 5.4B 的活动参数，其智能指数与 Qwen3.8 27B (xhigh) 相匹配，但活动参数少约 5 倍（人工分析）
+- 落地页链接: https://ainewsradar.xyz/zh/news/eed97af23850c34f
+- 原始信源: Artificial Analysis (https://artificialanalysis.ai/articles/inkling-2-mini)
+- 核心摘要: Thinking Machines推出具备5.4B激活参数的Inkling 2 Mini模型，在保持高性能的同时显著降低计算成本
+- 核验事实清单:
+  * 【核心事件】Thinking Machines（模型开发机构）：发布Inkling 2 Mini开源模型，实现高效推理架构
+  * 【起因与机理】在帕累托前沿提升模型智能与计算资源使用的匹配度
+  * 【关键数据与实测】计算效率对比：较Qwen3.8 27B减少约5倍激活参数及2.8倍计算功耗。
+  * 【各方立场与态度】采用26B总参数、5.4B激活参数的MoE循环架构，支持1M上下文。
+- 独家研判与技术透视: {'briefing_zh': 'Thinking Machines发布开源模型Inkling 2 Mini，该模型采用混合专家（MoE）架构，拥有26B总参数与5.4B激活参数。通过循环Transformer技术，该模型在1M上下文窗口下，以Qwen3.8 27B约五分之一的激活参数量实现了同等智能指标，并以Apache 2.0协议开源。', 'briefing_en': 'Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.', 'elements_zh': {'who': 'Thinking Machines（模型开发机构）', 'where': 'Artificial Analysis情报指数评测场景', 'what': '发布Inkling 2 Mini开源模型，实现高效推理架构', 'why': '在帕累托前沿提升模型智能与计算资源使用的匹配度'}, 'elements_en': {'who': 'Thinking Machines', 'where': 'Artificial Analysis Intelligence Index', 'what': 'Released Inkling 2 Mini with high efficiency MoE architecture', 'why': 'To improve Pareto frontier efficiency between model intelligence and compute cost'}, 'insight_zh': '循环Transformer技术通过高频复用固定参数层，在不显著增加显存负担的前提下有效提升了模型的逻辑推演能力。这一架构演进标志着开源模型正跨越参数堆叠的粗放阶段，进入以计算成本为核心竞争力、追求帕累托最优的精细化部署时期。', 'insight_en': 'The use of looped Transformer layers successfully enhances logical reasoning without linearly scaling memory overhead, signaling a shift in open-weights model design toward compute-efficient Pareto optimization. This approach highlights that future model deployment competition will center on maximizing intelligence density per unit of compute rather than mere parameter scaling.', 'digest_zh': 'Thinking Machines发布开源模型Inkling 2 Mini，该模型采用混合专家（MoE）架构，拥有26B总参数与5.4B激活参数。通过循环Transformer技术，该模型在1M上下文窗口下，以Qwen3.8 27B约五分之一的激活参数量实现了同等智能指标，并以Apache 2.0协议开源。', 'digest_en': 'Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.', 'key_points_zh': ['Thinking Machines推出Apache 2.0开源的Inkling 2 Mini模型', '采用26B总参数、5.4B激活参数的MoE循环架构，支持1M上下文', '计算效率对比：较Qwen3.8 27B减少约5倍激活参数及2.8倍计算功耗'], 'key_points_en': ['Thinking Machines launched the Apache 2.0 open-weights Inkling 2 Mini model.', 'Features 26B total/5.4B active MoE looped architecture with 1M context window.', 'Efficiency: achieves parity with Qwen3.8 27B using ~5x fewer active parameters and ~2.8x less compute.'], 'takeaway_zh': '循环Transformer技术通过高频复用固定参数层，在不显著增加显存负担的前提下有效提升了模型的逻辑推演能力。这一架构演进标志着开源模型正跨越参数堆叠的粗放阶段，进入以计算成本为核心竞争力、追求帕累托最优的精细化部署时期。', 'takeaway_en': 'The use of looped Transformer layers successfully enhances logical reasoning without linearly scaling memory overhead, signaling a shift in open-weights model design toward compute-efficient Pareto optimization. This approach highlights that future model deployment competition will center on maximizing intelligence density per unit of compute rather than mere parameter scaling.'}
+- 深度报道全文精录:
+  > Thinking Machines has released Inkling 2 Mini at 20 on the Artificial Analysis Intelligence Index, an open weights looped transformer on the Pareto frontier for Intelligence vs. Active Parameters
+  > Inkling 2 Mini is a 26B total, 5.4B active parameter mixture-of-experts model. The 5.4B active parameter count includes three passes through its looped layers; it uses 3.1B unique weights per text token, and it is small enough to run on a MacBook or DGX Spark.
+  > It is released under an Apache 2.0 license, with text and image input and a 1M token context window.
+  > Inkling 2 Mini matches Qwen3.8 27B (xhigh) and Nanbeige4.3-33B on the Intelligence Index with ~5x and ~6x fewer active parameters, respectively.
+  > It is on the Pareto frontier for Intelligence vs. size on both total and active parameters.
+  > Inkling 2 Mini uses ~38% more output tokens than Qwen3.8 27B for the same Intelligence Index score, but ~2.8x less compute.
+  > Twelve of its 24 layers run three times per token, adding compute without adding output tokens. It averages ~152K output tokens per Intelligence Index task vs. ~110K for Qwen3.8 27B and ~158K for Nanbeige4.3-33B. On our compute proxy measure (active parameters × tokens), it sits on the Pareto frontier, using ~2.8x less compute than Qwen3.8 27B and ~5x less than Nanbeige4.3-33B.
+  > Inkling 2 Mini is ~6x cheaper and ~4x faster per task than Qwen3.8 27B.
+  > It costs $0.59 and takes 9.0 minutes per Intelligence Index task vs. $3.53 and 38.2 minutes for Qwen3.8 27B. GPT-6 Luna (max) scores 28 for $0.15 per task. Cost uses Thinking Machines' first-party pricing ($0.15/$0.50/$0.015 per 1M input/output/cache hit tokens).
+  > OpenAI’s release of GPT-6.2 Astra and GPT-6.2 Sol delivers the #2 model in the Artificial Analysis Intelligence Index and most of the Cost per Task Pareto frontier
 
 ### Cognition AI洽谈20亿美元融资，估值飙升至750亿美元
 - 落地页链接: https://ainewsradar.xyz/zh/news/efcdab1c7bba25cb
@@ -592,22 +614,6 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
   > According to Bloomberg, the agent could arrive as early as late next year, though it remains in an early stage. Apple’s new CEO, John Ternus, is pushing software chief Craig Federighi toward a bolder AI strategy, the report says. After many delays, the company recently rolled out generative AI features for Siri. The road to that release was marked by internal rifts and staff departures.
   > Meanwhile, macOS 27.3 now requires 14 steps instead of four for users to let third-party agents like ChatGPT control their Macs. Apple says the change protects users, though some AI companies and users see it as an effort to slow down competitors, Bloomberg reports.
 
-### 英伟达拟斥资5亿美元收购AI初创公司Inception
-- 落地页链接: https://ainewsradar.xyz/zh/news/c3badbe1eb4b7496
-- 原始信源: THE DECODER (https://the-decoder.com/nvidia-bets-at-least-500-million-on-inceptions-diffusion-models-to-strengthen-its-open-source-nemotron-lineup/)
-- 核心摘要: 英伟达正洽谈以至少5亿美元收购Diffusion模型研发商Inception，旨在强化Nemotron开源模型矩阵与机器人物理建模能力
-- 核验事实清单:
-  * 【核心事件】英伟达（Nvidia）、Inception（AI初创公司）在美国旧金山湾区：斥资至少5亿美元收购Inception及其研发团队
-  * 【起因与机理】抗衡OpenAI与Anthropic，并通过非自回归模型架构强化开源生态与机器人物理建模能力
-  * 【关键数据与实测】以至少5亿美元收购Inception及其核心研发团队。
-  * 【各方立场与态度】战略重心转向增强Nemotron开源模型矩阵与机器人物理建模竞争力。
-- 独家研判与技术透视: {'briefing_zh': '英伟达正就收购旧金山湾区初创公司Inception进行最终谈判，交易对价不低于5亿美元，涉及其创始人Stefano Ermon、Aditya Grover及Volodymyr Kuleshov团队的全职加入。Inception的核心技术在于利用扩散模型处理文本生成，其Mercury 3模型打破了传统自回归模型Token逐个生成的范式，旨在通过该架构优化英伟达Nemotron系列开源模型及机器人物理仿真性能。', 'briefing_en': "Nvidia is in advanced talks to acquire AI startup Inception for at least $500 million, including full-time integration of founders Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov. Inception specializes in diffusion-based language models, such as Mercury 3, which refine responses globally rather than token-by-token. This acquisition is designed to enhance Nvidia's Nemotron open-source lineup and accelerate its physical simulation capabilities for robotics.", 'elements_zh': {'who': '英伟达（Nvidia）、Inception（AI初创公司）', 'where': '美国旧金山湾区', 'what': '斥资至少5亿美元收购Inception及其研发团队', 'why': '抗衡OpenAI与Anthropic，并通过非自回归模型架构强化开源生态与机器人物理建模能力'}, 'elements_en': {'who': 'Nvidia, Inception', 'where': 'San Francisco Bay Area', 'what': 'Acquisition deal valued at minimum $500 million', 'why': 'Countering OpenAI/Anthropic and scaling open-source robotics/LLM capabilities'}, 'insight_zh': '英伟达此举不仅是扩充技术储备，更意在通过非自回归的扩散模型路线实现底层架构差异化，从而摆脱对Transformer单一技术路径的路径依赖。通过将Inception的扩散模型集成至Nemotron，英伟达意图在推理侧构筑对抗OpenAI与Anthropic自研芯片算力优化的软硬协同护城河，特别是在机器人感知与复杂物理环境仿真领域抢占先机。', 'insight_en': 'Nvidia’s move represents a strategic pivot toward diffusion-based architectures to differentiate from standard transformer-based inference. By integrating this into the Nemotron ecosystem, Nvidia seeks to create a proprietary software-hardware moat that counters the move by OpenAI and Anthropic toward vertical integration, while simultaneously gaining an edge in high-fidelity physical modeling for robotics.', 'digest_zh': '英伟达正就收购旧金山湾区初创公司Inception进行最终谈判，交易对价不低于5亿美元，涉及其创始人Stefano Ermon、Aditya Grover及Volodymyr Kuleshov团队的全职加入。Inception的核心技术在于利用扩散模型处理文本生成，其Mercury 3模型打破了传统自回归模型Token逐个生成的范式，旨在通过该架构优化英伟达Nemotron系列开源模型及机器人物理仿真性能。', 'digest_en': "Nvidia is in advanced talks to acquire AI startup Inception for at least $500 million, including full-time integration of founders Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov. Inception specializes in diffusion-based language models, such as Mercury 3, which refine responses globally rather than token-by-token. This acquisition is designed to enhance Nvidia's Nemotron open-source lineup and accelerate its physical simulation capabilities for robotics.", 'key_points_zh': ['以至少5亿美元收购Inception及其核心研发团队', '利用扩散模型架构（Mercury 3）替代传统自回归生成路径', '战略重心转向增强Nemotron开源模型矩阵与机器人物理建模竞争力'], 'key_points_en': ['Acquisition of Inception and its core team for at least $500M', 'Shifting from token-by-token generation to diffusion-based refinement (Mercury 3)', 'Bolstering the Nemotron ecosystem to challenge OpenAI/Anthropic in robotics and inference'], 'takeaway_zh': '英伟达此举不仅是扩充技术储备，更意在通过非自回归的扩散模型路线实现底层架构差异化，从而摆脱对Transformer单一技术路径的路径依赖。通过将Inception的扩散模型集成至Nemotron，英伟达意图在推理侧构筑对抗OpenAI与Anthropic自研芯片算力优化的软硬协同护城河，特别是在机器人感知与复杂物理环境仿真领域抢占先机。', 'takeaway_en': 'Nvidia’s move represents a strategic pivot toward diffusion-based architectures to differentiate from standard transformer-based inference. By integrating this into the Nemotron ecosystem, Nvidia seeks to create a proprietary software-hardware moat that counters the move by OpenAI and Anthropic toward vertical integration, while simultaneously gaining an edge in high-fidelity physical modeling for robotics.'}
-- 深度报道全文精录:
-  > Nvidia is nearing a deal to acquire AI startup Inception for at least $500 million. That's according to three people familiar with the talks told The Information. The deal also includes performance bonuses for the more than 30 employees at the two-year-old San Francisco Bay Area startup.
-  > Inception builds language models using the diffusion process known from image generation. Rather than generating responses token by token like the conventional models behind ChatGPT and Claude, they refine a full response step by step. The startup most recently released Mercury 3.
-  > The acquisition aims to bolster Nvidia's open-source Nemotron models and physical models for robots, helping it compete with OpenAI and Anthropic as both build their own inference chips. Palantir and US government agencies already use Nemotron as an alternative to Chinese models. Talks began before Nvidia CEO Jensen Huang's resignation and after Microsoft expressed interest. Inception co-founders and professors Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov are expected to join Nvidia full time. Neither company initially commented.
-  > We covered Inception's approach alongside 40 other neolabs in our latest AI Radar #5.
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -616,8 +622,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,691 Stars，总计 53,068 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,691 Stars (总星标 53,068)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,691 Stars，总计 53,069 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,691 Stars (总星标 53,069)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -625,8 +631,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/62a8982796e5111f
 - 官方/开源地址: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
 - 一句话亮点: 封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。
-- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,624 Stars，总计 13,059 Stars）。封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,624 Stars (总星标 13,059)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,624 Stars，总计 13,060 Stars）。封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,624 Stars (总星标 13,060)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/CopilotKit/OpenBot.git`
 
@@ -643,17 +649,17 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0831ca93321eceea
 - 官方/开源地址: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - 一句话亮点: 用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式
-- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,517 Stars，总计 14,061 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,517 Stars (总星标 14,061)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,517 Stars，总计 14,077 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,517 Stars (总星标 14,077)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
 ### ffmpeg-skill
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5765d0dd8c4b61bf
 - 官方/开源地址: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
-- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、Cursor 和 Codex。剪
-- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +2,998 Stars，总计 8,795 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,998 Stars (总星标 8,795)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切
+- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +2,998 Stars，总计 8,799 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,998 Stars (总星标 8,799)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🎬 视频剪辑与生成 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -661,8 +667,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f689ccec41c0119a
 - 官方/开源地址: https://github.com/dream-num/univer?ref=ainewsradar
 - 一句话亮点: 使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔
-- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +7,248 Stars，总计 30,927 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +7,248 Stars (总星标 30,927)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +7,248 Stars，总计 30,929 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +7,248 Stars (总星标 30,929)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/dream-num/univer.git`
 
@@ -670,8 +676,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,977 Stars，总计 31,318 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,977 Stars (总星标 31,318)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,977 Stars，总计 31,320 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,977 Stars (总星标 31,320)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
@@ -679,8 +685,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
 - 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
-- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,455 Stars，总计 20,797 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,455 Stars (总星标 20,797)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,455 Stars，总计 20,798 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,455 Stars (总星标 20,798)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -688,17 +694,17 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/1c5edee7c934959a
 - 官方/开源地址: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - 一句话亮点: 用于编码代理的 Chrome DevTools
-- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,229 Stars，总计 58,520 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,229 Stars (总星标 58,520)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,229 Stars，总计 58,521 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,229 Stars (总星标 58,521)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
 ### last30days-skill
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5b083f806d24b3ce
 - 官方/开源地址: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
-- 一句话亮点: AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要
-- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,179 Stars，总计 71,390 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,179 Stars (总星标 71,390)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 一句话亮点: AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有依据的摘要
+- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,179 Stars，总计 71,393 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有依据的摘要，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,179 Stars (总星标 71,393)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -706,8 +712,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/3924c8f295303f30
 - 官方/开源地址: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - 一句话亮点: 安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释
-- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +4,492 Stars，总计 54,746 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,492 Stars (总星标 54,746)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +4,492 Stars，总计 54,748 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,492 Stars (总星标 54,748)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -715,8 +721,8 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,858 Stars，总计 9,504 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,858 Stars (总星标 9,504)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,858 Stars，总计 9,506 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,858 Stars (总星标 9,506)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -724,10 +730,19 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/6eabee8f4881846c
 - 官方/开源地址: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - 一句话亮点: 保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席
-- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,468 Stars，总计 13,869 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,468 Stars (总星标 13,869)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,468 Stars，总计 13,870 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,468 Stars (总星标 13,870)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/backnotprop/plannotator.git`
+
+### hermes-agent
+- 落地页链接: https://ainewsradar.xyz/zh/tools/60ff2010aa4a95f7
+- 官方/开源地址: https://hermes-agent.nousresearch.com?ref=ainewsradar
+- 一句话亮点: 与您共同成长的代理商
+- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,146 Stars，总计 264,979 Stars）。与您共同成长的代理商，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,146 Stars (总星标 264,979)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/hermes-agent.git`
 
 ### oh-my-pi
 - 落地页链接: https://ainewsradar.xyz/zh/tools/fe2cb26e6766533f
@@ -742,19 +757,10 @@ Linq 为 AI 代理提供短信和呼叫基础设施，继 2 月份筹集了 2000
 - 落地页链接: https://ainewsradar.xyz/zh/tools/a3cea48fa89b965a
 - 官方/开源地址: https://yogurt.so?ref=ainewsradar
 - 一句话亮点: 私人人工智能会议记录保留在您的计算机上。适用于 Mac、Windows 和 Linux 的 Granola 的免费开源替代品。
-- 核心概览: yogurt 是一款专注于 📊 办公文档与 PPT 的开源 AI 工具（本周新增 +1,914 Stars，总计 2,757 Stars）。私人人工智能会议记录保留在您的计算机上。适用于 Mac、Windows 和 Linux 的 Granola 的免费开源替代品。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,914 Stars (总星标 2,757)', '🎯 针对 📊 办公文档与 PPT 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 核心概览: yogurt 是一款专注于 📊 办公文档与 PPT 的开源 AI 工具（本周新增 +1,913 Stars，总计 2,758 Stars）。私人人工智能会议记录保留在您的计算机上。适用于 Mac、Windows 和 Linux 的 Granola 的免费开源替代品。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,913 Stars (总星标 2,758)', '🎯 针对 📊 办公文档与 PPT 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 📊 办公文档与 PPT 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/yogurt.git`
-
-### hermes-agent
-- 落地页链接: https://ainewsradar.xyz/zh/tools/60ff2010aa4a95f7
-- 官方/开源地址: https://hermes-agent.nousresearch.com?ref=ainewsradar
-- 一句话亮点: 与您共同成长的代理商
-- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,145 Stars，总计 264,977 Stars）。与您共同成长的代理商，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,145 Stars (总星标 264,977)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/hermes-agent.git`
 
 ### linger
 - 落地页链接: https://ainewsradar.xyz/zh/tools/00684a38e2d04723

@@ -1,12 +1,34 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-20 22:04:25Z
+Generated: 2026-11-20 22:20:14Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### Artificial Analysis says Inkling 2 Mini, with 5.4B active parameters, matches Qwen3.8 27B (xhigh) on its Intelligence Index with ~5x fewer active parameters (Artificial Analysis)
+- Canonical URL: https://ainewsradar.xyz/news/eed97af23850c34f
+- Primary Source: Artificial Analysis (https://artificialanalysis.ai/articles/inkling-2-mini)
+- Executive Summary: Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.
+- Key Verified Facts:
+* [Core Event] Thinking Machines: Released Inkling 2 Mini with high efficiency MoE architecture
+* [Root Cause & Mechanism] To improve Pareto frontier efficiency between model intelligence and compute cost
+* [Key Metrics] Features 26B total/5.4B active MoE looped architecture with 1M context window.
+* [Key Position & Outlook] Efficiency: achieves parity with Qwen3.8 27B using ~5x fewer active parameters and ~2.8x less compute.
+- Strategic AI Analysis: {'briefing_zh': 'Thinking MachinesInkling 2 MiniMoE26B5.4BTransformer1MQwen3.8 27BApache 2.0', 'briefing_en': 'Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.', 'elements_zh': {'who': 'Thinking Machines', 'where': 'Artificial Analysis', 'what': 'Inkling 2 Mini', 'why': ''}, 'elements_en': {'who': 'Thinking Machines', 'where': 'Artificial Analysis Intelligence Index', 'what': 'Released Inkling 2 Mini with high efficiency MoE architecture', 'why': 'To improve Pareto frontier efficiency between model intelligence and compute cost'}, 'insight_zh': 'Transformer', 'insight_en': 'The use of looped Transformer layers successfully enhances logical reasoning without linearly scaling memory overhead, signaling a shift in open-weights model design toward compute-efficient Pareto optimization. This approach highlights that future model deployment competition will center on maximizing intelligence density per unit of compute rather than mere parameter scaling.', 'digest_zh': 'Thinking MachinesInkling 2 MiniMoE26B5.4BTransformer1MQwen3.8 27BApache 2.0', 'digest_en': 'Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.', 'key_points_zh': ['Thinking MachinesApache 2.0Inkling 2 Mini', '26B5.4BMoE1M', 'Qwen3.8 27B52.8'], 'key_points_en': ['Thinking Machines launched the Apache 2.0 open-weights Inkling 2 Mini model.', 'Features 26B total/5.4B active MoE looped architecture with 1M context window.', 'Efficiency: achieves parity with Qwen3.8 27B using ~5x fewer active parameters and ~2.8x less compute.'], 'takeaway_zh': 'Transformer', 'takeaway_en': 'The use of looped Transformer layers successfully enhances logical reasoning without linearly scaling memory overhead, signaling a shift in open-weights model design toward compute-efficient Pareto optimization. This approach highlights that future model deployment competition will center on maximizing intelligence density per unit of compute rather than mere parameter scaling.'}
+- Substantive Intelligence Report:
+> Thinking Machines has released Inkling 2 Mini at 20 on the Artificial Analysis Intelligence Index, an open weights looped transformer on the Pareto frontier for Intelligence vs. Active Parameters
+> Inkling 2 Mini is a 26B total, 5.4B active parameter mixture-of-experts model. The 5.4B active parameter count includes three passes through its looped layers; it uses 3.1B unique weights per text token, and it is small enough to run on a MacBook or DGX Spark.
+> It is released under an Apache 2.0 license, with text and image input and a 1M token context window.
+> Inkling 2 Mini matches Qwen3.8 27B (xhigh) and Nanbeige4.3-33B on the Intelligence Index with ~5x and ~6x fewer active parameters, respectively.
+> It is on the Pareto frontier for Intelligence vs. size on both total and active parameters.
+> Inkling 2 Mini uses ~38% more output tokens than Qwen3.8 27B for the same Intelligence Index score, but ~2.8x less compute.
+> Twelve of its 24 layers run three times per token, adding compute without adding output tokens. It averages ~152K output tokens per Intelligence Index task vs. ~110K for Qwen3.8 27B and ~158K for Nanbeige4.3-33B. On our compute proxy measure (active parameters × tokens), it sits on the Pareto frontier, using ~2.8x less compute than Qwen3.8 27B and ~5x less than Nanbeige4.3-33B.
+> Inkling 2 Mini is ~6x cheaper and ~4x faster per task than Qwen3.8 27B.
+> It costs $0.59 and takes 9.0 minutes per Intelligence Index task vs. $3.53 and 38.2 minutes for Qwen3.8 27B. GPT-6 Luna (max) scores 28 for $0.15 per task. Cost uses Thinking Machines' first-party pricing ($0.15/$0.50/$0.015 per 1M input/output/cache hit tokens).
+> OpenAI’s release of GPT-6.2 Astra and GPT-6.2 Sol delivers the #2 model in the Artificial Analysis Intelligence Index and most of the Cost per Task Pareto frontier
 
 ### Cognition in Talks for $75 Billion Value With New Funding
 - Canonical URL: https://ainewsradar.xyz/news/efcdab1c7bba25cb
@@ -593,22 +615,6 @@ Canonical: https://ainewsradar.xyz
 > According to Bloomberg, the agent could arrive as early as late next year, though it remains in an early stage. Apple’s new CEO, John Ternus, is pushing software chief Craig Federighi toward a bolder AI strategy, the report says. After many delays, the company recently rolled out generative AI features for Siri. The road to that release was marked by internal rifts and staff departures.
 > Meanwhile, macOS 27.3 now requires 14 steps instead of four for users to let third-party agents like ChatGPT control their Macs. Apple says the change protects users, though some AI companies and users see it as an effort to slow down competitors, Bloomberg reports.
 
-### Nvidia bets at least $500 million on Inception's diffusion models to strengthen its open-source Nemotron lineup
-- Canonical URL: https://ainewsradar.xyz/news/c3badbe1eb4b7496
-- Primary Source: THE DECODER (https://the-decoder.com/nvidia-bets-at-least-500-million-on-inceptions-diffusion-models-to-strengthen-its-open-source-nemotron-lineup/)
-- Executive Summary: Nvidia is in advanced talks to acquire AI startup Inception for at least $500 million, including full-time integration of founders Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov. Inception specializes in diffusion-based language models, such as Mercury 3, which refine responses globally rather than token-by-token. This acquisition is designed to enhance Nvidia's Nemotron open-source lineup and accelerate its physical simulation capabilities for robotics.
-- Key Verified Facts:
-* [Core Event] Nvidia, Inception (San Francisco Bay Area): Acquisition deal valued at minimum $500 million
-* [Root Cause & Mechanism] Countering OpenAI/Anthropic and scaling open-source robotics/LLM capabilities
-* [Key Metrics] Acquisition of Inception and its core team for at least $500M.
-* [Key Position & Outlook] Bolstering the Nemotron ecosystem to challenge OpenAI/Anthropic in robotics and inference.
-- Strategic AI Analysis: {'briefing_zh': 'Inception5Stefano ErmonAditya GroverVolodymyr KuleshovInceptionMercury 3TokenNemotron', 'briefing_en': "Nvidia is in advanced talks to acquire AI startup Inception for at least $500 million, including full-time integration of founders Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov. Inception specializes in diffusion-based language models, such as Mercury 3, which refine responses globally rather than token-by-token. This acquisition is designed to enhance Nvidia's Nemotron open-source lineup and accelerate its physical simulation capabilities for robotics.", 'elements_zh': {'who': 'NvidiaInceptionAI', 'where': '', 'what': '5Inception', 'why': 'OpenAIAnthropic'}, 'elements_en': {'who': 'Nvidia, Inception', 'where': 'San Francisco Bay Area', 'what': 'Acquisition deal valued at minimum $500 million', 'why': 'Countering OpenAI/Anthropic and scaling open-source robotics/LLM capabilities'}, 'insight_zh': 'TransformerInceptionNemotronOpenAIAnthropic', 'insight_en': 'Nvidia’s move represents a strategic pivot toward diffusion-based architectures to differentiate from standard transformer-based inference. By integrating this into the Nemotron ecosystem, Nvidia seeks to create a proprietary software-hardware moat that counters the move by OpenAI and Anthropic toward vertical integration, while simultaneously gaining an edge in high-fidelity physical modeling for robotics.', 'digest_zh': 'Inception5Stefano ErmonAditya GroverVolodymyr KuleshovInceptionMercury 3TokenNemotron', 'digest_en': "Nvidia is in advanced talks to acquire AI startup Inception for at least $500 million, including full-time integration of founders Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov. Inception specializes in diffusion-based language models, such as Mercury 3, which refine responses globally rather than token-by-token. This acquisition is designed to enhance Nvidia's Nemotron open-source lineup and accelerate its physical simulation capabilities for robotics.", 'key_points_zh': ['5Inception', 'Mercury 3', 'Nemotron'], 'key_points_en': ['Acquisition of Inception and its core team for at least $500M', 'Shifting from token-by-token generation to diffusion-based refinement (Mercury 3)', 'Bolstering the Nemotron ecosystem to challenge OpenAI/Anthropic in robotics and inference'], 'takeaway_zh': 'TransformerInceptionNemotronOpenAIAnthropic', 'takeaway_en': 'Nvidia’s move represents a strategic pivot toward diffusion-based architectures to differentiate from standard transformer-based inference. By integrating this into the Nemotron ecosystem, Nvidia seeks to create a proprietary software-hardware moat that counters the move by OpenAI and Anthropic toward vertical integration, while simultaneously gaining an edge in high-fidelity physical modeling for robotics.'}
-- Substantive Intelligence Report:
-> Nvidia is nearing a deal to acquire AI startup Inception for at least $500 million. That's according to three people familiar with the talks told The Information. The deal also includes performance bonuses for the more than 30 employees at the two-year-old San Francisco Bay Area startup.
-> Inception builds language models using the diffusion process known from image generation. Rather than generating responses token by token like the conventional models behind ChatGPT and Claude, they refine a full response step by step. The startup most recently released Mercury 3.
-> The acquisition aims to bolster Nvidia's open-source Nemotron models and physical models for robots, helping it compete with OpenAI and Anthropic as both build their own inference chips. Palantir and US government agencies already use Nemotron as an alternative to Chinese models. Talks began before Nvidia CEO Jensen Huang's resignation and after Microsoft expressed interest. Inception co-founders and professors Stefano Ermon, Aditya Grover, and Volodymyr Kuleshov are expected to join Nvidia full time. Neither company initially commented.
-> We covered Inception's approach alongside 40 other neolabs in our latest AI Radar #5.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -617,8 +623,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,691 stars this week, 53,068 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +2,691 stars this week (53,068 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,691 stars this week, 53,069 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +2,691 stars this week (53,069 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -626,8 +632,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/62a8982796e5111f
 - Official Source: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
 - Headline: The open, self-hostable alternative to closed AI bots. Production-ready, fully c
-- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,624 stars this week, 13,059 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
-- Features: ['📈 Exponential community momentum: +1,624 stars this week (13,059 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,624 stars this week, 13,060 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
+- Features: ['📈 Exponential community momentum: +1,624 stars this week (13,060 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/CopilotKit/OpenBot.git`
 
@@ -644,8 +650,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/0831ca93321eceea
 - Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - Headline: A Claude Code skill bundle for bug hunting and external red-team work - 82 skill
-- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,517 stars this week, 14,061 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
-- Features: ['📈 Exponential community momentum: +6,517 stars this week (14,061 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,517 stars this week, 14,077 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
+- Features: ['📈 Exponential community momentum: +6,517 stars this week (14,077 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -653,8 +659,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
 - Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,998 stars this week, 8,795 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +2,998 stars this week (8,795 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,998 stars this week, 8,799 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +2,998 stars this week (8,799 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
 - Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -662,8 +668,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+7,248 stars this week, 30,927 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +7,248 stars this week (30,927 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+7,248 stars this week, 30,929 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +7,248 stars this week (30,929 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -671,8 +677,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,977 stars this week, 31,318 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +4,977 stars this week (31,318 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,977 stars this week, 31,320 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +4,977 stars this week (31,320 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -680,8 +686,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,455 stars this week, 20,797 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +3,455 stars this week (20,797 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,455 stars this week, 20,798 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +3,455 stars this week (20,798 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -689,8 +695,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/1c5edee7c934959a
 - Official Source: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - Headline: Chrome DevTools for coding agents
-- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,229 stars this week, 58,520 total). Chrome DevTools for coding agents.
-- Features: ['📈 Exponential community momentum: +3,229 stars this week (58,520 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,229 stars this week, 58,521 total). Chrome DevTools for coding agents.
+- Features: ['📈 Exponential community momentum: +3,229 stars this week (58,521 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -698,8 +704,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
 - Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,179 stars this week, 71,390 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +3,179 stars this week (71,390 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,179 stars this week, 71,393 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +3,179 stars this week (71,393 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -707,8 +713,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,492 stars this week, 54,746 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +4,492 stars this week (54,746 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,492 stars this week, 54,748 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +4,492 stars this week (54,748 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -716,8 +722,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,858 stars this week, 9,504 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +6,858 stars this week (9,504 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,858 stars this week, 9,506 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +6,858 stars this week (9,506 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -725,10 +731,19 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,468 stars this week, 13,869 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +3,468 stars this week (13,869 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,468 stars this week, 13,870 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +3,468 stars this week (13,870 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
+
+### hermes-agent
+- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
+- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
+- Headline: The agent that grows with you
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,146 stars this week, 264,979 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +5,146 stars this week (264,979 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### oh-my-pi
 - URL: https://ainewsradar.xyz/tools/fe2cb26e6766533f
@@ -743,19 +758,10 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a3cea48fa89b965a
 - Official Source: https://yogurt.so?ref=ainewsradar
 - Headline: Private AI meeting notes that stay on your computer. A free, open-source alterna
-- Overview: yogurt is a fast-growing open-source AI tool for Office, Docs & Slides (+1,914 stars this week, 2,757 total). Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux..
-- Features: ['📈 Exponential community momentum: +1,914 stars this week (2,757 total)', '🎯 Specialized engineering for Office, Docs & Slides', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Overview: yogurt is a fast-growing open-source AI tool for Office, Docs & Slides (+1,913 stars this week, 2,758 total). Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux..
+- Features: ['📈 Exponential community momentum: +1,913 stars this week (2,758 total)', '🎯 Specialized engineering for Office, Docs & Slides', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Office, Docs & Slides workflows
 - Quickstart: `git clone https://github.com/yogurt.git`
-
-### hermes-agent
-- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
-- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
-- Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,145 stars this week, 264,977 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +5,145 stars this week (264,977 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### linger
 - URL: https://ainewsradar.xyz/tools/00684a38e2d04723
