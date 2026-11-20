@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 20:03:59 UTC",
+  "generated_at": "2026-11-20 20:18:38 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 20:03:59 UTC",
+      "updated_at": "2026-11-20 20:18:38 UTC",
       "headline_item": {
-        "id": "0795f5d9d8dffd83",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "Signal封锁截图功能以防AI读取私密聊天",
-        "title_en": "Signal blocks screenshots on iOS 27 and Android to stop AI agents from reading private chats",
-        "source": "THE DECODER",
-        "published_at": "2026-11-20T19:50:27+00:00",
-        "url": "https://the-decoder.com/signal-blocks-screenshots-on-ios-27-and-android-to-stop-ai-agents-from-reading-private-chats/",
-        "event_summary_zh": "Signal在iOS与Android端强制拦截截图，旨在切断Meta Muse等AI智能体对端到端加密内容的读取通道",
-        "event_summary_en": "Signal has implemented screenshot blocking on iOS 27 and specific Android versions to counter OS-level AI agents like Siri, Gemini, and Meta's Muse, which can scrape screen contents. Signal warns that these AI agents, often leveraging system-level permissions or accessibility tools, undermine end-to-end encryption by extracting decrypted messages directly from the display interface.",
+        "id": "eb023fe5ea1cad41",
+        "tag_zh": "🎁 算力福利",
+        "tag_en": "🎁 Promos & Credits",
+        "title_zh": "KKR拟斥资百亿美元收购EdgeCore，加码AI算力基建",
+        "title_en": "KKR in Talks to Buy EdgeCore at Valuation of at Least $8 Billion",
+        "source": "Bloomberg",
+        "published_at": "2026-11-20T20:05:01+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-20/kkr-in-talks-to-buy-edgecore-at-valuation-of-at-least-8-billion",
+        "event_summary_zh": "KKR拟通过旗下Helix平台以80亿至100亿美元收购数据中心运营商EdgeCore，以巩固AI算力供应链布局",
+        "event_summary_en": "Private equity firm KKR is in advanced negotiations to acquire data center operator EdgeCore Digital Infrastructure from Partners Group, with a valuation between $8 billion and $10 billion. The acquisition, executed through KKR's Helix platform, aims to consolidate EdgeCore's 2.27+ gigawatts of capacity across key U.S. markets to meet the insatiable demand for AI infrastructure.",
         "core_facts_zh": [
-          "【核心事件】Signal (通讯平台)在iOS 27及Android操作系统端：限制屏幕截图功能，阻断AI助手通过辅助功能提取聊天数据",
-          "【起因与机理】AI智能体绕过端到端加密机制，直接抓取用户隐私内容",
-          "【核心事实细节】Signal封锁系统级截图以防AI抓取聊天内容。",
-          "【核心诉求与态度】呼吁操作系统厂商提供应用级屏蔽AI访问的标准化接口。"
+          "【核心事件】KKR & Co LP（收购方）、Partners Group（出让方）、EdgeCore Digital Infrastructure（标的）在全球数字基础设施与AI算力底层建设领域：拟以80亿至100亿美元收购EdgeCore多数股权，获取其2.27吉瓦规模的算力基础设施储备",
+          "【起因与机理】通过资本杠杆整合关键算力资产，以满足AI行业激增的底层算力需求",
+          "【关键数据与实测】标的估值区间为80亿至100亿美元，涉及超过2.27吉瓦的算力容量。",
+          "【各方立场与态度】反映资本市场对AI算力物理基础设施的长期持有价值认可。"
         ],
         "core_facts_en": [
-          "[Core Event] Signal (Communication Platform) (iOS 27 and Android OS): Blocking screenshots to prevent AI agents from scraping chat data via accessibility tools",
-          "[Root Cause & Mechanism] AI agents are bypassing end-to-end encryption by accessing displayed messages",
-          "[Key Technical Spec] Signal blocks system-level screenshots to prevent AI scraping.",
-          "[Official Stance & Demand] Calls for standardized OS-level controls to restrict AI access to specific applications."
+          "[Core Event] KKR & Co LP, Partners Group, EdgeCore Digital Infrastructure: Proposed acquisition of EdgeCore at an $8B-$10B valuation, securing 2.27GW of infrastructure capacity",
+          "[Root Cause & Mechanism] Scaling compute assets to meet the surging demand from AI model training and deployment",
+          "[Key Metrics] Valuation ranges from $8 billion to $10 billion, covering 2.27GW of power capacity.",
+          "[Key Position & Outlook] Reflects capital market appetite for long-term ownership of physical AI infrastructure assets."
         ],
-        "industry_impact_zh": "此次技术博弈揭示了端到端加密在‘多模态AI驱动的OS’时代面临的降维打击，加密保护已从传输层延伸至视觉渲染层。随着操作系统与AI智能体的一体化，如何在保障用户便捷交互与防止敏感数据被模型训练/提取之间实现合规隔离，将成为下一代端侧隐私保护架构的核心竞技场。",
-        "industry_impact_en": "This technical conflict reveals that end-to-end encryption faces a significant challenge in the era of multimodal, AI-integrated operating systems, shifting the focus from transport layer protection to the visual rendering layer. As OS and AI agents merge, the primary strategic challenge will be establishing privacy-preserving architectures that prevent model training or data extraction while maintaining user interface functionality."
+        "industry_impact_zh": "本笔交易标志着AI基础设施重心正从单纯的芯片竞争转向“能源与空间”的物理资产壁垒争夺。KKR通过Helix平台引入英伟达与主权基金背书，不仅是在进行资产并购，更是在构建底层算力供应链的金融化闭环，以缓解AI基建中日益突出的电力瓶颈与交付周期压力。",
+        "industry_impact_en": "This deal signals a shift in AI infrastructure competition from pure silicon performance to the control of physical assets: power and real estate. By leveraging backing from Nvidia and sovereign funds for the Helix platform, KKR is orchestrating a financialized closed-loop for the AI supply chain to mitigate the escalating power bottlenecks and deployment lead times."
       },
       "headlines": [
+        {
+          "id": "eb023fe5ea1cad41",
+          "tag_zh": "🎁 算力福利",
+          "tag_en": "🎁 Promos & Credits",
+          "title_zh": "KKR拟斥资百亿美元收购EdgeCore，加码AI算力基建",
+          "title_en": "KKR in Talks to Buy EdgeCore at Valuation of at Least $8 Billion",
+          "source": "Bloomberg",
+          "published_at": "2026-11-20T20:05:01+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-20/kkr-in-talks-to-buy-edgecore-at-valuation-of-at-least-8-billion",
+          "event_summary_zh": "KKR拟通过旗下Helix平台以80亿至100亿美元收购数据中心运营商EdgeCore，以巩固AI算力供应链布局",
+          "event_summary_en": "Private equity firm KKR is in advanced negotiations to acquire data center operator EdgeCore Digital Infrastructure from Partners Group, with a valuation between $8 billion and $10 billion. The acquisition, executed through KKR's Helix platform, aims to consolidate EdgeCore's 2.27+ gigawatts of capacity across key U.S. markets to meet the insatiable demand for AI infrastructure.",
+          "core_facts_zh": [
+            "【核心事件】KKR & Co LP（收购方）、Partners Group（出让方）、EdgeCore Digital Infrastructure（标的）在全球数字基础设施与AI算力底层建设领域：拟以80亿至100亿美元收购EdgeCore多数股权，获取其2.27吉瓦规模的算力基础设施储备",
+            "【起因与机理】通过资本杠杆整合关键算力资产，以满足AI行业激增的底层算力需求",
+            "【关键数据与实测】标的估值区间为80亿至100亿美元，涉及超过2.27吉瓦的算力容量。",
+            "【各方立场与态度】反映资本市场对AI算力物理基础设施的长期持有价值认可。"
+          ],
+          "core_facts_en": [
+            "[Core Event] KKR & Co LP, Partners Group, EdgeCore Digital Infrastructure: Proposed acquisition of EdgeCore at an $8B-$10B valuation, securing 2.27GW of infrastructure capacity",
+            "[Root Cause & Mechanism] Scaling compute assets to meet the surging demand from AI model training and deployment",
+            "[Key Metrics] Valuation ranges from $8 billion to $10 billion, covering 2.27GW of power capacity.",
+            "[Key Position & Outlook] Reflects capital market appetite for long-term ownership of physical AI infrastructure assets."
+          ],
+          "industry_impact_zh": "本笔交易标志着AI基础设施重心正从单纯的芯片竞争转向“能源与空间”的物理资产壁垒争夺。KKR通过Helix平台引入英伟达与主权基金背书，不仅是在进行资产并购，更是在构建底层算力供应链的金融化闭环，以缓解AI基建中日益突出的电力瓶颈与交付周期压力。",
+          "industry_impact_en": "This deal signals a shift in AI infrastructure competition from pure silicon performance to the control of physical assets: power and real estate. By leveraging backing from Nvidia and sovereign funds for the Helix platform, KKR is orchestrating a financialized closed-loop for the AI supply chain to mitigate the escalating power bottlenecks and deployment lead times."
+        },
+        {
+          "id": "7175ebdb7f29c896",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "GTA VI首日营收37.9亿美元，重塑娱乐业经济量级",
+          "title_en": "Take-Two says GTA VI generated $3.79B in day-one sales, surpassing the $2.9B lifetime box-office gross of the highest-grossing film Avengers: Endgame (Jennifer Maas/Variety)",
+          "source": "Variety",
+          "published_at": "2026-11-20T20:01:14+00:00",
+          "url": "https://variety.com/2026/gaming/news/gta-6-sales-3-79-billion-1236954198/",
+          "event_summary_zh": "Take-Two旗下游戏《GTA VI》首日营收达37.9亿美元，打破全球单项娱乐产品首日销售记录",
+          "event_summary_en": "Take-Two Interactive’s 'Grand Theft Auto VI', developed by Rockstar Games, generated $3.79 billion in sales on its launch day, surpassing the lifetime global box-office gross of 'Avengers: Endgame' and setting a new record for the entertainment industry. The title, released on PS5 and Xbox, priced at $80-$100, achieved a Metacritic score of 99, cementing its dominant position in interactive entertainment.",
+          "core_facts_zh": [
+            "【核心事件】Take-Two Interactive（发行商）、Rockstar Games（开发商）、Sam Houser（创始人）在全球互动娱乐市场：首日销售额达37.9亿美元，打破单款娱乐产品历史最高单日营收记录",
+            "【起因与机理】基于强IP号召力、长周期研发投入与高质量游戏体验的市场爆发",
+            "【关键数据与实测】首日营收37.9亿美元，打破单项娱乐产品历史最高销售记录。",
+            "【各方立场与态度】Metacritic评分达99分，展现出极强的IP号召力与长期市场统治力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Take-Two Interactive, Rockstar Games, Sam Houser: Generated $3.79 billion in day-one sales, surpassing any historical single-day entertainment record",
+            "[Root Cause & Mechanism] Unprecedented IP loyalty, high-quality production, and massive pre-order demand",
+            "[Key Metrics] Day-one revenue reached $3.79 billion, breaking all-time single-product entertainment records.",
+            "[Key Position & Outlook] Achieved a Metacritic score of 99, reflecting immense IP influence and sustained market dominance."
+          ],
+          "industry_impact_zh": "《GTA VI》的爆发表明，顶级游戏IP已取代传统好莱坞院线，成为全球文化消费的绝对核心。其单日37.9亿美元的吸金能力揭示了“互动娱乐+深度叙事+长周期变现”模式在跨代算力支持下，已具备远超流媒体与传统影视的单位变现价值，将倒逼全球内容产业向极高制作预算的“工业化单品”加速集聚。",
+          "industry_impact_en": "The blockbuster launch of 'GTA VI' confirms that top-tier gaming IPs have eclipsed traditional Hollywood blockbusters as the core of global cultural consumption. Its $3.79 billion day-one performance demonstrates the superior unit-monetization potential of the 'interactive-narrative-long-tail' model, forcing the content industry to consolidate further into hyper-budgeted industrial-grade flagship titles."
+        },
         {
           "id": "0795f5d9d8dffd83",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "此次技术博弈揭示了端到端加密在‘多模态AI驱动的OS’时代面临的降维打击，加密保护已从传输层延伸至视觉渲染层。随着操作系统与AI智能体的一体化，如何在保障用户便捷交互与防止敏感数据被模型训练/提取之间实现合规隔离，将成为下一代端侧隐私保护架构的核心竞技场。",
           "industry_impact_en": "This technical conflict reveals that end-to-end encryption faces a significant challenge in the era of multimodal, AI-integrated operating systems, shifting the focus from transport layer protection to the visual rendering layer. As OS and AI agents merge, the primary strategic challenge will be establishing privacy-preserving architectures that prevent model training or data extraction while maintaining user interface functionality."
-        },
-        {
-          "id": "a849dc2414d03369",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "加拿大10月零售额预计下滑1.5%",
-          "title_en": "Canada Retail Sales Tracking Largest Decline Since Feb. 2025",
-          "source": "Bloomberg",
-          "published_at": "2026-11-20T19:35:00+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-20/trump-says-huang-should-return-as-nvidia-ceo-after-big-apology",
-          "event_summary_zh": "受宏观经济疲软及劳动力市场停滞影响，加拿大10月零售销售额初步估计下降1.5%，创下2025年2月以来的最大跌幅",
-          "event_summary_en": "Statistics Canada reports an estimated 1.5% decline in retail sales for October, marking the sharpest drop since February 2025. CIBC senior economist Andrew Grantham noted that the decline reflects broader volume contraction and stagnant labor market growth, signaling weakening economic momentum heading into the final quarter of 2026.",
-          "core_facts_zh": [
-            "【核心事件】加拿大统计局、CIBC高级经济学家安德鲁·格兰瑟姆在加拿大宏观经济与零售市场：10月零售销售额预计下滑1.5%，为2025年2月以来最大单月跌幅",
-            "【起因与机理】消费需求减弱、汽油价格波动及劳动力市场长期缺乏增长动能",
-            "【关键数据与实测】10月零售额预计环比下滑1.5%，远逊于预期。",
-            "【各方立场与态度】分析人士建议加拿大央行暂缓紧缩政策以观察经济韧性。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Statistics Canada, CIBC Senior Economist Andrew Grantham: Retail sales estimated to decline by 1.5%, the largest drop since Feb 2025",
-            "[Root Cause & Mechanism] Weakening consumer demand, fuel price volatility, and stagnant labor market",
-            "[Key Metrics] 10% retail sales expected to fall 1.5%, significantly below forecasts.",
-            "[Key Position & Outlook] Analysts suggest the Bank of Canada pause tightening to monitor economic resilience."
-          ],
-          "industry_impact_zh": "劳动力市场的结构性停滞已演变为消费下行的核心驱动力，这意味着加拿大央行在货币政策上将面临更强的暂停加息或转向宽松的压力。在外部贸易保护主义干扰下，内部需求疲软可能导致该国经济进入长期的低速增长通道。",
-          "industry_impact_en": "The structural stagnation of the labor market has become the primary driver of consumption decline, forcing the Bank of Canada to reconsider its rate trajectory toward potential easing. Internal demand weakness, exacerbated by external trade frictions, suggests a shift toward a prolonged period of low-growth economic cycles."
-        },
-        {
-          "id": "e073756377b12368",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "谷歌Gemini推出Mac后台计算机操控功能",
-          "title_en": "Google's Gemini can now run Mac apps and finish desktop chores in the background while you keep working",
-          "source": "THE DECODER",
-          "published_at": "2026-11-20T18:50:31+00:00",
-          "url": "https://the-decoder.com/googles-gemini-can-now-run-mac-apps-and-finish-desktop-chores-in-the-background-while-you-keep-working/",
-          "event_summary_zh": "谷歌在Mac版Gemini中引入“计算机使用”功能，允许AI在后台自动执行跨应用的复杂多步骤任务",
-          "event_summary_en": "Google has integrated the 'Computer Use' feature into its Gemini Mac app, allowing the AI to simulate mouse clicks, keyboard inputs, and menu navigation within isolated background windows. This enables the autonomous execution of multi-step tasks across local files and web applications while allowing users to maintain foreground workflow continuity.",
-          "core_facts_zh": [
-            "【核心事件】谷歌（Alphabet 公司）在macOS桌面端生态：推出“计算机使用”功能，实现AI代理对本地应用与网页的跨平台自动化操作",
-            "【起因与机理】旨在通过自动化工作流闭环，解决AI辅助办公从对话交互向任务执行的跨越",
-            "【调查与监管诉求】核心功能：支持Gemini自主跨应用操作本地文件与浏览器界面。",
-            "【行业影响与走向】行业竞争：该技术直接对标OpenAI的Astra模型，加速AI代理落地桌面办公场景。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google (Alphabet Inc.) (macOS Desktop Ecosystem): Introduced 'Computer Use' feature for cross-application autonomous task completion",
-            "[Root Cause & Mechanism] To bridge the gap between conversational AI and functional task-oriented agentic workflows",
-            "[Key Fact Detail] Feature: Gemini autonomously operates local apps and browser interfaces.",
-            "[Key Position & Outlook] Competitive Landscape: Directly challenges OpenAI's Astra, accelerating AI agent adoption in desktop workflows."
-          ],
-          "industry_impact_zh": "此次更新标志着大模型从意图理解范式向基于GUI驱动的Agent范式转型，通过将执行层剥离至受控后台，规避了AI实时交互与用户生产力冲突的痛点。该技术栈的成熟将迫使操作系统厂商重新定义系统级权限框架，以应对AI应用在复杂应用链条中对本地数据的自主获取与操作需求。",
-          "industry_impact_en": "This update signals a shift from pure intent-understanding to GUI-driven agentic workflows, decoupling the execution layer to preserve user productivity. The maturation of such technology necessitates a fundamental redesign of OS-level permission frameworks to manage AI-driven autonomous access to heterogeneous local application data."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 20:03:59 UTC",
+      "updated_at": "2026-11-20 20:18:38 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 20:03:59 UTC",
+      "updated_at": "2026-11-20 20:18:38 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
