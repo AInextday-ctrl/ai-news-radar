@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 12:34:02 UTC",
+  "generated_at": "2026-11-20 12:50:44 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 12:34:02 UTC",
+      "updated_at": "2026-11-20 12:50:44 UTC",
       "headline_item": {
-        "id": "b952719c121b8ac8",
+        "id": "1d0bd065ca72f1a2",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Signal封禁系统级截屏以防御AI代理数据爬取",
-        "title_en": "Signal is blocking Gemini and Siri AI from reading your screen",
-        "source": "The Verge AI",
-        "published_at": "2026-11-20T12:30:47+00:00",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
-        "event_summary_zh": "Signal总裁Meredith Whittaker宣布在iOS与Android端默认禁用截屏功能，以防止Gemini与Siri等系统级AI代理抓取用户加密通讯隐私",
-        "event_summary_en": "Meredith Whittaker, President of Signal, announced that integrated OS-level AI agents undermine app-level privacy. To mitigate this, Signal has disabled screenshot functionality on iOS and Android to prevent AI assistants from harvesting encrypted message data, while demanding that OS providers implement transparent technical controls for developer-side AI access management.",
+        "title_zh": "英伟达CEO黄仁勋管理风格争议披露",
+        "title_en": "How Jensen Huang used humiliation in his management style for decades; Huang's behavior once led to a settlement with an exec who said he \"terrorized\" staff (New York Times)",
+        "source": "New York Times",
+        "published_at": "2026-11-20T12:40:01+00:00",
+        "url": "https://www.nytimes.com/2026/11/20/technology/jensen-huang-nvidia-culture.html",
+        "event_summary_zh": "英伟达CEO黄仁勋被指以羞辱作为激励手段，应对员工因公司股价上涨获得财务自由后的动力缺失问题",
+        "event_summary_en": "Nvidia founder and CEO Jensen Huang has reportedly utilized aggressive management tactics, allegedly stating that as employees achieve financial independence due to the company's soaring market cap, humiliation becomes the primary tool to ensure continued high-intensity output. This governance philosophy has triggered internal concerns regarding organizational cohesion and long-term talent retention.",
         "core_facts_zh": [
-          "【核心事件】Signal总裁 Meredith Whittaker在iOS与Android移动操作系统生态：默认禁用截屏功能，防止AI代理读取屏幕信息",
-          "【起因与机理】操作系统集成的AI代理缺乏应用层权限隔离，构成隐私泄露威胁",
-          "【核心事实细节】Signal默认禁用截屏以切断AI代理的视觉数据采集入口。",
-          "【各方立场与态度】要求苹果、谷歌、微软建立技术规范以遏制第三方代理的深层访问。"
+          "【核心事件】黄仁勋（英伟达创始人兼CEO）在英伟达内部管理层会议：通过羞辱下属以取代传统财务激励，试图维持员工在高薪状态下的工作压力与输出效能",
+          "【起因与机理】因员工财富快速积累导致传统绩效激励失效，试图寻找新的替代性驱动机制",
+          "【核心事实细节】黄仁勋被指以羞辱作为应对高薪员工动力缺失的核心手段。",
+          "【各方立场与态度】该管理风格可能导致高端技术人才流失，削弱公司的长期技术研发护城河。"
         ],
         "core_facts_en": [
-          "[Core Event] Meredith Whittaker, President of Signal (iOS and Android OS ecosystems): Restricting screenshot capabilities to block AI agent data harvesting",
-          "[Root Cause & Mechanism] Lack of granular application-level permissions for OS-integrated AI agents",
-          "[Key Technical Spec] Signal disables screenshots to block AI agent vision-based data harvesting.",
-          "[Official Stance & Demand] Call for Apple, Google, and Microsoft to establish technical frameworks to curb deep-link AI access."
+          "[Core Event] Jensen Huang, Founder and CEO of Nvidia: Using public humiliation to replace traditional financial incentives to maintain employee work intensity and performance output",
+          "[Root Cause & Mechanism] Traditional performance-based incentives have lost efficacy due to the rapid wealth accumulation of employees",
+          "[Key Fact Detail] Jensen Huang reportedly uses humiliation as a core management tactic to address reduced motivation among wealthy staff.",
+          "[Industry Impact & Outlook] Such management styles risk talent attrition, potentially weakening the company's long-term R&D moat."
         ],
-        "industry_impact_zh": "此举揭示了移动端操作系统厂商与第三方开发者在AI权限控制上的结构性冲突：操作系统底层代理正将“屏幕访问权限”转化为通用入口，迫使垂直隐私应用通过物理级功能降级进行防御。这种博弈不仅加剧了端侧计算环境的信任危机，还预示着未来移动应用开发框架必须将“抗AI抓取”列为核心安全标准，以应对操作系统层面的“数据越权”常态化。",
-        "industry_impact_en": "This move highlights the structural conflict between OS vendors and app developers over AI permission management, where system-level agents leverage 'screen access' as a universal entry point. It forces privacy-centric apps to adopt functional degradation as a defense, signaling that anti-AI harvesting protocols must become a core standard for mobile application security frameworks in the era of pervasive OS-integrated AI."
+        "industry_impact_zh": "当核心人力资本因公司市值增长而陷入财务边际效应递减时，以公开羞辱作为绩效驱动的极权式治理将直接引爆人才流失风险。在AI芯片寡头竞争的关键窗口期，这种治理范式若导致技术人才结构性流失，将可能从根本上动摇英伟达在CUDA生态与硬件架构迭代中的领先地位。",
+        "industry_impact_en": "When core human capital experiences diminishing marginal returns on wealth due to massive market cap growth, autocratic management styles relying on public humiliation pose an existential risk of technical talent attrition. During a critical window of AI chip competition, such governance paradigms threaten to undermine Nvidia's leadership in the CUDA ecosystem and hardware roadmap iteration if they trigger a structural brain drain."
       },
       "headlines": [
+        {
+          "id": "1d0bd065ca72f1a2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英伟达CEO黄仁勋管理风格争议披露",
+          "title_en": "How Jensen Huang used humiliation in his management style for decades; Huang's behavior once led to a settlement with an exec who said he \"terrorized\" staff (New York Times)",
+          "source": "New York Times",
+          "published_at": "2026-11-20T12:40:01+00:00",
+          "url": "https://www.nytimes.com/2026/11/20/technology/jensen-huang-nvidia-culture.html",
+          "event_summary_zh": "英伟达CEO黄仁勋被指以羞辱作为激励手段，应对员工因公司股价上涨获得财务自由后的动力缺失问题",
+          "event_summary_en": "Nvidia founder and CEO Jensen Huang has reportedly utilized aggressive management tactics, allegedly stating that as employees achieve financial independence due to the company's soaring market cap, humiliation becomes the primary tool to ensure continued high-intensity output. This governance philosophy has triggered internal concerns regarding organizational cohesion and long-term talent retention.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（英伟达创始人兼CEO）在英伟达内部管理层会议：通过羞辱下属以取代传统财务激励，试图维持员工在高薪状态下的工作压力与输出效能",
+            "【起因与机理】因员工财富快速积累导致传统绩效激励失效，试图寻找新的替代性驱动机制",
+            "【核心事实细节】黄仁勋被指以羞辱作为应对高薪员工动力缺失的核心手段。",
+            "【各方立场与态度】该管理风格可能导致高端技术人才流失，削弱公司的长期技术研发护城河。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang, Founder and CEO of Nvidia: Using public humiliation to replace traditional financial incentives to maintain employee work intensity and performance output",
+            "[Root Cause & Mechanism] Traditional performance-based incentives have lost efficacy due to the rapid wealth accumulation of employees",
+            "[Key Fact Detail] Jensen Huang reportedly uses humiliation as a core management tactic to address reduced motivation among wealthy staff.",
+            "[Industry Impact & Outlook] Such management styles risk talent attrition, potentially weakening the company's long-term R&D moat."
+          ],
+          "industry_impact_zh": "当核心人力资本因公司市值增长而陷入财务边际效应递减时，以公开羞辱作为绩效驱动的极权式治理将直接引爆人才流失风险。在AI芯片寡头竞争的关键窗口期，这种治理范式若导致技术人才结构性流失，将可能从根本上动摇英伟达在CUDA生态与硬件架构迭代中的领先地位。",
+          "industry_impact_en": "When core human capital experiences diminishing marginal returns on wealth due to massive market cap growth, autocratic management styles relying on public humiliation pose an existential risk of technical talent attrition. During a critical window of AI chip competition, such governance paradigms threaten to undermine Nvidia's leadership in the CUDA ecosystem and hardware roadmap iteration if they trigger a structural brain drain."
+        },
         {
           "id": "b952719c121b8ac8",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举实质上终结了通过VIE或离岸红筹架构规避境内行业准入的监管灰色地带，标志着中国资本市场对外开放进入“实质穿透”新阶段。该政策将显著推高企业的合规成本与上市周期，预计香港及其他海外市场的中国IPO项目储备将面临大规模清理与架构重组压力。",
           "industry_impact_en": "This regulatory shift effectively eliminates the grey areas previously used to bypass domestic industry entry barriers through offshore structures, marking a new phase of 'substantive transparency' in market regulation. The move will significantly increase compliance costs and IPO timelines, likely forcing a major restructuring or abandonment of offshore listing plans for many Chinese issuers."
-        },
-        {
-          "id": "180458ef1dad8d57",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "原阿里AI高管创企估值翻倍至50亿美元",
-          "title_en": "Ex-Alibaba Star’s AI Startup Doubles Valuation to $5 Billion",
-          "source": "Bloomberg",
-          "published_at": "2026-11-20T11:10:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-20/ex-alibaba-star-s-ai-startup-doubles-valuation-to-5-billion",
-          "event_summary_zh": "原阿里巴巴AI业务负责人创立的初创公司在数月内完成新一轮融资，估值攀升至50亿美元",
-          "event_summary_en": "A generative AI startup founded by the former head of Alibaba Group's AI division has secured new funding, doubling its valuation to $5 billion within a few months. This capital injection underscores sustained investor confidence in the commercial viability of high-tier foundational model developers.",
-          "core_facts_zh": [
-            "【核心事件】原阿里巴巴AI业务负责人创立的AI初创企业：完成新一轮融资，估值达到50亿美元",
-            "【起因与机理】资本市场对AI核心技术团队及模型商业化能力的溢价认可",
-            "【关键数据与实测】数月内估值实现2倍增幅至50亿美元。",
-            "【行业影响与走向】反映出AI领域向头部核心技术型企业加速集中的资本态势。"
-          ],
-          "core_facts_en": [
-            "[Core Event] AI startup founded by former Alibaba AI leader (Private equity financing market): Closed a new funding round with a $5 billion valuation",
-            "[Root Cause & Mechanism] Market premium on top-tier AI talent and commercialization potential",
-            "[Key Metrics] Valuation doubled to $5 billion within months.",
-            "[Key Position & Outlook] Capital concentration towards top-tier AI incumbents."
-          ],
-          "industry_impact_zh": "在通用大模型竞争白热化的背景下，具备大厂背景的核心团队依然是资本配置的首选，其核心逻辑在于技术迭代周期缩短对工程化落地经验的极高要求。该估值跃迁折射出AI行业正从单纯的技术模型比拼，迅速转向商业闭环与生态防御能力的竞争。",
-          "industry_impact_en": "Amidst intensifying competition in LLMs, startups led by alumni from big-tech AI labs remain the primary target for capital, driven by the requirement for rapid industrial-scale deployment. This valuation surge signals a shift from pure model performance benchmarks to a focus on commercial closed-loop and ecological moat construction."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 12:34:02 UTC",
+      "updated_at": "2026-11-20 12:50:44 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 12:34:02 UTC",
+      "updated_at": "2026-11-20 12:50:44 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
