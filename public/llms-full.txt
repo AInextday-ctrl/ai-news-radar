@@ -1,12 +1,55 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-20 21:05:55Z
+Generated: 2026-11-20 21:19:37Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### TML releases Inkling 2 Mini, an open-weights 26.4B-parameter transformer that loops middle layers three times per token for better reasoning with fewer tokens (Thinking Machines Lab)
+- Canonical URL: https://ainewsradar.xyz/news/d95c866cf08800ae
+- Primary Source: Thinking Machines Lab (https://thinkingmachines.ai/news/inkling-2-mini/)
+- Executive Summary: Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.
+- Key Verified Facts:
+* [Core Event] Thinking Machines Lab (AI Open Source Community): Released Inkling 2 Mini with 26.4B parameters, looped architecture, and local deployment optimization
+* [Root Cause & Mechanism] To balance reasoning depth with computational efficiency
+* [Key Metrics] 20GB memory footprint for a 26.4B parameter model.
+* [Key Position & Outlook] Optimized for local deployment and on-device customization.
+- Strategic AI Analysis: {'briefing_zh': 'Thinking Machines LabInkling 2 Mini26.4B“”token20GB', 'briefing_en': "Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.", 'elements_zh': {'who': '', 'where': 'AI', 'what': 'Inkling 2 Mini26.4B', 'why': ''}, 'elements_en': {'who': 'Thinking Machines Lab', 'where': 'AI Open Source Community', 'what': 'Released Inkling 2 Mini with 26.4B parameters, looped architecture, and local deployment optimization', 'why': 'To balance reasoning depth with computational efficiency'}, 'insight_zh': 'agentic AI', 'insight_en': 'The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment.', 'digest_zh': 'Thinking Machines LabInkling 2 Mini26.4B“”token20GB', 'digest_en': "Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.", 'key_points_zh': ['', '26.4B20GB', ''], 'key_points_en': ['Implementation of looped layers to enhance logic reasoning efficiency', '20GB memory footprint for a 26.4B parameter model', 'Optimized for local deployment and on-device customization'], 'takeaway_zh': 'agentic AI', 'takeaway_en': 'The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment.'}
+- Substantive Intelligence Report:
+> Today we are releasing Inkling 2 Mini, a fast, powerful model that’s small enough to run on your laptop.
+> Inkling 2 Mini is a looped transformer, running the middle layers of the model three times for every token. This allows the model to apply more reasoning and reach the right answer with fewer tokens, especially on tasks such as agentic coding that depend on reasoning quality. Inkling 2 Mini leads every open-weights model with less than 100B total parameters on benchmarks such as DeepSWE v1.1 (48.2%) and Vals Index v2.2 (46.5%). It runs faster than similarly performing models as well.
+> Inkling 2 Mini is a Mixture-of-Experts model with 26.4B total parameters, 3.4B active, and 5.4B weight activations per token to account for looping. Looping allows the model to reason longer without writing its reasoning down, which matters for monitoring: our ability to oversee and understand what the model does by reading its chain of thought (CoT).
+> We measured the impact of looping on both performance and monitorability with Inkling 2 Mini and a research-specific variable-loop variant we are releasing alongside it. The variable-loop model’s no-CoT time horizon improved from 16 seconds at one pass to 37 seconds with three, and its performance on a benchmark of serial reasoning kept improving out to ten loops—twice as many as it was trained with. The model’s chain of thought grew shorter with more loops but stayed legible throughout. The model didn’t trend higher on tests of agentic sabotage as loops were added.
+> We’re excited to offer some of the first models with looped architecture available to researchers. The variable-loop model was used for our monitorability experiments as it allows for cleaner comparisons between different looping depths.
+> Most of Inkling 2 Mini’s weights were trained and are deployed natively in NVFP4, with the last four layers in MXFP8. The total memory footprint of Inkling 2 Mini is ~20GB, allowing it to run on local devices such as consumer laptops and desktop AI computers. Our researchers took Inkling 2 Mini on a flight, where it ran offline on a MacBook Pro and built a playable flight simulator in a few minutes.
+> Open video: PlaneBench flight simulator demo, screen with phone video inset0:0015× Loading the flight simulator Inkling 2 Mini built… To try the flight simulator, open this page on desktop. Inkling 2 Mini is released with open weights and is available on Tinker today for inference and customization.
+> Inkling 2 Mini’s strengths mirror those of Inkling 2 Small: it does best on long-horizon agentic work and is the best among open-weights models of similar size on most tasks we measured.
+> Inkling 2 Mini scores ahead of every comparable model on agentic coding benchmarks such as DeepSWE v1.1 and SWE-bench Pro v2, and is behind on...
+
+### Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.
+- Canonical URL: https://ainewsradar.xyz/news/ce34ecfa0fba02bc
+- Primary Source: Ars Technica (https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/)
+- Executive Summary: HD Moore, Chief Research Officer at Dragos, uncovered major security flaws in the AI supply chain by injecting 2 million trackable 'canary' secrets into AI prompts sent via routing services. The investigation found evidence of prompt theft, disregard for zero-data-retention (ZDR) settings, and unauthorized logging of user prompts by intermediaries, posing significant compliance risks.
+- Key Verified Facts:
+* [Core Event] HD Moore (CRO of Dragos): Injected 2 million trackable 'canaries' into prompts to audit security, uncovering widespread data leaks and privacy violations
+* [Root Cause & Mechanism] To verify the security and compliance of sensitive data handling within the complex AI supply chain
+* [Key Fact Detail] Supply chain audit using 2 million canary credentials.
+* [Key Position & Outlook] Widespread failure of Zero Data Retention (ZDR) policy enforcement.
+- Strategic AI Analysis: {'briefing_zh': 'DragosHD MooreAI200“Canaries”AIAI', 'briefing_en': "HD Moore, Chief Research Officer at Dragos, uncovered major security flaws in the AI supply chain by injecting 2 million trackable 'canary' secrets into AI prompts sent via routing services. The investigation found evidence of prompt theft, disregard for zero-data-retention (ZDR) settings, and unauthorized logging of user prompts by intermediaries, posing significant compliance risks.", 'elements_zh': {'who': 'HD MooreDragos', 'where': 'AI', 'what': '200', 'why': 'AI'}, 'elements_en': {'who': 'HD Moore (CRO of Dragos)', 'where': 'AI routing and intermediary service platforms', 'what': "Injected 2 million trackable 'canaries' into prompts to audit security, uncovering widespread data leaks and privacy violations", 'why': 'To verify the security and compliance of sensitive data handling within the complex AI supply chain'}, 'insight_zh': 'AI“”', 'insight_en': 'The fragmented ecosystem where AI apps connect through intermediaries to multiple suppliers has become a black-box liability for corporate compliance. The current supply chain lacks end-to-end trust, and the failure of ZDR enforcement and unauthorized logging suggest that existing regulatory frameworks and commercial pledges are highly fragile against complex multi-hop call chains.', 'digest_zh': 'DragosHD MooreAI200“Canaries”AIAI', 'digest_en': 'DragosHD MooreAI200“Canaries”AIAI', 'key_points_zh': ['200', 'AI', 'ZDR'], 'key_points_en': ['Supply chain audit using 2 million canary credentials', 'Exposure of unauthorized prompt logging and credential theft via AI routers', 'Widespread failure of Zero Data Retention (ZDR) policy enforcement'], 'takeaway_zh': 'AI“”', 'takeaway_en': 'The fragmented ecosystem where AI apps connect through intermediaries to multiple suppliers has become a black-box liability for corporate compliance. The current supply chain lacks end-to-end trust, and the failure of ZDR enforcement and unauthorized logging suggest that existing regulatory frameworks and commercial pledges are highly fragile against complex multi-hop call chains.'}
+- Substantive Intelligence Report:
+> Researchers planted 2 million digital tripwires in requests sent through a sprawling network of AI services to find out what happened to sensitive information entrusted to them. What they discovered was an ecosystem that leaked highly sensitive data like a sieve.
+> The exposure was found through an ingenious experiment designed to test if sensitive information can leak through the vast chain of widely used AI services and how that information is exploited when it does. Many of today’s AI apps use services such as OpenRouter or Vercel that act as brokers. These “AI routers,” sometimes also known as “AI gateways,” receive large numbers of prompts sent from AI app end users and route them to an available inference engine based on criteria such as the one charging the lowest price or being best suited for the given task. Instead of using Anthropic, OpenAI, or another big provider, the developer hires an AI router to find the most suitable model.
+> ### Security breaches, prompt theft, and privacy violations
+> To test for potential leakage, researcher HD Moore assembled a collection of AWS access keys, functioning credentials tied to empty AWS accounts, passwords for services such as SSH, and unique URLs, DNS names, and private git repository references. None of the secrets had ever been used before, and he controlled the infrastructure that received any requests using the credentials. He then seeded each secret into exactly one prompt sent to a single provider. In the event any of the secrets were leaked, these “canaries”—so called because they resemble the role of that bird when taken into coal mines—would allow Moore to identify each link in the chain that was responsible.
+> The findings are striking. They included:
+> Evidence that at least three AI providers were compromised by attackers who used their access to siphon prompts they received
+> Multiple resellers in the inference marketplace that logged the prompts and somehow passed them along to people who used the credentials
+> Multiple cases of AI providers not following end-user privacy settings embedded into flags specifying terms such as Zero Data Retention (ZDR) or “no data collection”
+> “We sent nearly two million AI prompts containing unique, trackable secrets to AI providers, then watched where those secrets surfaced,” Moore, the chief research officer of security firm Dragos, wrote Thursday. “What we found revealed security breaches, prompt theft, and widespread failures to protect customer data.”
+> Although prompts are encrypted in transit, they are decrypted at each hop inside the large inference reseller network. The prompt is first sent to an AI router, which reads the plaintext in it to determine the most suitable inference providers to handle the request. Often, the prompt is then sent to a pool...
 
 ### OpenAI makes it much harder for attackers to extract how its latest AI models think
 - Canonical URL: https://ainewsradar.xyz/news/e34d6438927ff1c3
@@ -546,47 +589,6 @@ Canonical: https://ainewsradar.xyz
 > Stein said people are increasingly asking Google Search questions that a single query can't answer. In testing, the sidebar significantly helped users make progress and keep researching across the web by making it easier to pick up right where they left off. The update also pushes Google's shift toward an AI answer engine.
 > Google is also rolling out temporary threads in AI Mode worldwide. These searches don't use prior context, aren't saved to history, and don't affect future recommendations. Once closed, they're gone, Stein said.
 
-### Uber tests rides for kids as young as 10, with extra pay for drivers
-- Canonical URL: https://ainewsradar.xyz/news/8554ccc9acbebab1
-- Primary Source: TechCrunch (https://techcrunch.com/2026/11/19/uber-tests-rides-for-kids-as-young-as-10-with-extra-pay-for-drivers/)
-- Executive Summary: Uber has launched the 'Uber Kids' pilot program in Austin, Nashville, and Madison, lowering the minimum ride-hailing age to 10. The service mandates parental onboarding, real-time video monitoring, PIN verification, and GPS-based off-course detection, while offering participating high-rated drivers a $7 premium per trip.
-- Key Verified Facts:
-* [Core Event] Uber Technologies Inc.: Lowered minimum age to 10 with enhanced safety protocols and driver incentives
-* [Root Cause & Mechanism] To capture high-frequency family transport demand and expand the service addressable market
-* [Key Metrics] Supply-side incentives: $7 premium per trip to recruit and retain high-rated drivers.
-* [Scope & Next Steps] Enhanced safety protocols including mandatory parental presence, real-time video, and PIN verification.
-- Strategic AI Analysis: {'briefing_zh': 'UberUber Kids10PINGPS7', 'briefing_en': "Uber has launched the 'Uber Kids' pilot program in Austin, Nashville, and Madison, lowering the minimum ride-hailing age to 10. The service mandates parental onboarding, real-time video monitoring, PIN verification, and GPS-based off-course detection, while offering participating high-rated drivers a $7 premium per trip.", 'elements_zh': {'who': '', 'where': '', 'what': '10PIN', 'why': ''}, 'elements_en': {'who': 'Uber Technologies Inc.', 'where': 'Austin, Nashville, and Madison (USA)', 'what': 'Lowered minimum age to 10 with enhanced safety protocols and driver incentives', 'why': 'To capture high-frequency family transport demand and expand the service addressable market'}, 'insight_zh': 'Uber“”Uber', 'insight_en': "Uber's move signals a strategic pivot toward an 'all-in-one' family mobility ecosystem, utilizing technical redundancies like live streaming and sensor tracking to offset heightened compliance risks associated with minors. By utilizing premium driver incentives, the model effectively competes with specialized child transportation incumbents and aims to bolster platform stickiness and average revenue per user.", 'digest_zh': 'UberUber Kids10PINGPS7', 'digest_en': "Uber has launched the 'Uber Kids' pilot program in Austin, Nashville, and Madison, lowering the minimum ride-hailing age to 10. The service mandates parental onboarding, real-time video monitoring, PIN verification, and GPS-based off-course detection, while offering participating high-rated drivers a $7 premium per trip.", 'key_points_zh': ['13-1710', 'PIN', '720'], 'key_points_en': ['Expanded service eligibility from 13-17 to 10-year-olds', 'Enhanced safety protocols including mandatory parental presence, real-time video, and PIN verification', 'Supply-side incentives: $7 premium per trip to recruit and retain high-rated drivers'], 'takeaway_zh': 'Uber“”Uber', 'takeaway_en': "Uber's move signals a strategic pivot toward an 'all-in-one' family mobility ecosystem, utilizing technical redundancies like live streaming and sensor tracking to offset heightened compliance risks associated with minors. By utilizing premium driver incentives, the model effectively competes with specialized child transportation incumbents and aims to bolster platform stickiness and average revenue per user."}
-- Substantive Intelligence Report:
-> Uber has opened its ride-hailing service to children as young as 10 in three U.S. cities as the company tests whether there’s a market for shuttling tweens without an adult by their side. The program, called Uber Kids, launched quietly over the past few weeks in Austin, Texas, Nashville, Tennessee, and Madison, Wisconsin.
-> The program, which builds on Uber’s existing teen ride-hailing service for passengers ages 13 to 17, is the latest bid by Uber to expand its customer base. Uber is describing this as a limited pilot program, which means it may never expand beyond these cities or even exist by next year. But if successful, it could open up a potentially lucrative market for Uber: busy families with active kids.
-> The Uber Kids program is stacked with mandatory requirements for parents and drivers. Parents or guardians are the only ones who can order a ride for their child, which they can do by adding the child to their family profile and completing a mandatory onboarding that explains the built-in safety features. A parent or guardian must be present at the pickup locations for the trip to begin and also have to include a note to the driver that explains the drop off.
-> Meanwhile, only highly rated drivers who have been invited are allowed to participate. Those drivers are required to complete an education module that includes step-by-step instructions and must be opted into live video streaming so parents can watch the trip in real time, according to Uber.
-> Uber said it also requires PIN verification for every Uber Kids trip, and says all recordings will be encrypted and not available to the driver, and will use sensors and GPS data to detect if the ride goes off course, stops unexpectedly, or ends early.
-> Drivers who are willing to adhere to those rules to shuttle kids will get a pay bump for the effort, according to Uber. Eligible drivers will earn $7 more on every Uber Kids trip compared to a standard one, the company says on the dedicated Uber Kids web page. Drivers will receive an extra $20 for the first Uber Kids ride they complete.
-> The extra compensation underscores a key challenge Uber faces as it expands into this younger age group — how to convince drivers to take on that added responsibility. If the program does expand it could eventually compete with existing transportation services such as HopSkipDrive and Zum.
-> Uber opened its ride-hailing service to minors in 2023 when it launched Uber for Teens, although the company had conducted early pilots several years prior. As the program expanded nationwide, Uber introduced a live video streaming feature.
-
-### Threats, Insults, Settlements: How Jensen Huang Made Humiliation Routine
-- Canonical URL: https://ainewsradar.xyz/news/1d0bd065ca72f1a2
-- Primary Source: New York Times (https://www.nytimes.com/2026/11/20/technology/jensen-huang-nvidia-culture.html)
-- Executive Summary: Nvidia founder and CEO Jensen Huang has reportedly utilized aggressive management tactics, allegedly stating that as employees achieve financial independence due to the company's soaring market cap, humiliation becomes the primary tool to ensure continued high-intensity output. This governance philosophy has triggered internal concerns regarding organizational cohesion and long-term talent retention.
-- Key Verified Facts:
-* [Core Event] Jensen Huang, Founder and CEO of Nvidia: Using public humiliation to replace traditional financial incentives to maintain employee work intensity and performance output
-* [Root Cause & Mechanism] Traditional performance-based incentives have lost efficacy due to the rapid wealth accumulation of employees
-* [Key Metrics] Winston for more than $1 million, which has not been previously reported.
-* [Industry Impact & Outlook] Such management styles risk talent attrition, potentially weakening the company's long-term R&D moat.
-- Strategic AI Analysis: {'briefing_zh': 'CEO', 'briefing_en': "Nvidia founder and CEO Jensen Huang has reportedly utilized aggressive management tactics, allegedly stating that as employees achieve financial independence due to the company's soaring market cap, humiliation becomes the primary tool to ensure continued high-intensity output. This governance philosophy has triggered internal concerns regarding organizational cohesion and long-term talent retention.", 'elements_zh': {'who': 'CEO', 'where': '', 'what': '', 'why': ''}, 'elements_en': {'who': 'Jensen Huang, Founder and CEO of Nvidia', 'where': 'Nvidia internal management meetings', 'what': 'Using public humiliation to replace traditional financial incentives to maintain employee work intensity and performance output', 'why': 'Traditional performance-based incentives have lost efficacy due to the rapid wealth accumulation of employees'}, 'insight_zh': 'AICUDA', 'insight_en': "When core human capital experiences diminishing marginal returns on wealth due to massive market cap growth, autocratic management styles relying on public humiliation pose an existential risk of technical talent attrition. During a critical window of AI chip competition, such governance paradigms threaten to undermine Nvidia's leadership in the CUDA ecosystem and hardware roadmap iteration if they trigger a structural brain drain.", 'digest_zh': 'CEO', 'digest_en': "Nvidia founder and CEO Jensen Huang has reportedly utilized aggressive management tactics, allegedly stating that as employees achieve financial independence due to the company's soaring market cap, humiliation becomes the primary tool to ensure continued high-intensity output. This governance philosophy has triggered internal concerns regarding organizational cohesion and long-term talent retention.", 'key_points_zh': ['', '', ''], 'key_points_en': ['Jensen Huang reportedly uses humiliation as a core management tactic to address reduced motivation among wealthy staff.', 'Traditional financial incentives have lost efficacy as Nvidia employees achieved financial independence.', "Such management styles risk talent attrition, potentially weakening the company's long-term R&D moat."], 'takeaway_zh': 'AICUDA', 'takeaway_en': "When core human capital experiences diminishing marginal returns on wealth due to massive market cap growth, autocratic management styles relying on public humiliation pose an existential risk of technical talent attrition. During a critical window of AI chip competition, such governance paradigms threaten to undermine Nvidia's leadership in the CUDA ecosystem and hardware roadmap iteration if they trigger a structural brain drain."}
-- Substantive Intelligence Report:
-> As Nvidia became wealthier and wealthier in recent years, Jensen Huang grew increasingly frustrated with his staff.
-> He told groups of subordinates that they had become so rich that he couldn’t motivate them simply with money, according to three people who spoke on the condition of anonymity to discuss confidential conversations. The only way he could grind more work out of them, he added, was through humiliation.
-> This was an extension of a philosophy that went back decades. Mr. Huang had for years been berating his employees, documents and interviews show. His tongue lashings were savage and inventive. He told one executive that his mother should have aborted him, according to one witness. He said he would rip both arms off a subordinate and beat the person over the head to death with them. And he told another employee he would rip off the top of their head and “pee on your brain.”
-> The tirades were a centerpiece of the culture at Nvidia throughout its meteoric rise to a $5 trillion company and cornerstone of the artificial intelligence revolution. They were also foundational to Mr. Huang’s management style.
-> “I’d rather torture you into greatness, because I believe in you,” he once said.
-> He has long used humiliation as a tool, excoriating employees in front of their peers with insults, personal attacks and violent comments, while telling them it was good for them or for the business, according to more than a dozen current and former employees, who spoke on the condition of anonymity for fear of reprisal, and to a review of hundreds of pages of court records and other documents spanning more than 20 years. The behavior kept Nvidia’s human resources department busy fielding workplace complaints, but some employees said the department did not take them seriously.
-> Mr. Huang also inspired love and reverence from many of his employees. Thousands have signed a letter asking for his return. Some have tattoos of Nvidia’s logo. Both those who liked Mr. Huang and those who disliked him described Nvidia as cultish. He cultivated loyalty through not just his technical mastery but also acts of personal compassion and praise. But he ruled through fear.
-> Mr. Huang’s behavior began long before Nvidia became one of the most valuable companies in the world. In at least two cases originating in the mid-2000s, the company struck settlements with former senior leaders, both of whom had raised concerns about Mr. Huang’s conduct, saying it was unlawful and exposed Nvidia to liability.
-> Michael Winston, a former senior vice president of human resources, threatened to sue Nvidia in 2005, saying that he had been fired after objecting to Mr. Huang’s conduct, which he described as “the most verbally abusive, threatening and intimidating behavior” he had witnessed in his car...
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -595,8 +597,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,691 stars this week, 53,059 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +2,691 stars this week (53,059 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,691 stars this week, 53,060 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +2,691 stars this week (53,060 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -613,8 +615,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a9682d2a9aa41848
 - Official Source: https://github.com/openai/codex-security?ref=ainewsradar
 - Headline: OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixi
-- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,150 stars this week, 14,220 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
-- Features: ['📈 Exponential community momentum: +2,150 stars this week (14,220 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,150 stars this week, 14,221 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
+- Features: ['📈 Exponential community momentum: +2,150 stars this week (14,221 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/openai/codex-security.git`
 
@@ -622,8 +624,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/0831ca93321eceea
 - Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - Headline: A Claude Code skill bundle for bug hunting and external red-team work - 82 skill
-- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,517 stars this week, 13,998 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
-- Features: ['📈 Exponential community momentum: +6,517 stars this week (13,998 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,517 stars this week, 14,014 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
+- Features: ['📈 Exponential community momentum: +6,517 stars this week (14,014 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -631,8 +633,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
 - Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,998 stars this week, 8,771 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +2,998 stars this week (8,771 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,998 stars this week, 8,776 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +2,998 stars this week (8,776 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
 - Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -640,8 +642,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+7,248 stars this week, 30,922 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +7,248 stars this week (30,922 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+7,248 stars this week, 30,924 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +7,248 stars this week (30,924 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -649,8 +651,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,977 stars this week, 31,309 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +4,977 stars this week (31,309 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,977 stars this week, 31,311 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +4,977 stars this week (31,311 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -658,8 +660,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,455 stars this week, 20,790 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +3,455 stars this week (20,790 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,455 stars this week, 20,792 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +3,455 stars this week (20,792 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -676,8 +678,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
 - Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,179 stars this week, 71,374 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +3,179 stars this week (71,374 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,179 stars this week, 71,378 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +3,179 stars this week (71,378 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -685,8 +687,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,492 stars this week, 54,723 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +4,492 stars this week (54,723 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,492 stars this week, 54,725 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +4,492 stars this week (54,725 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -694,8 +696,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,858 stars this week, 9,497 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +6,858 stars this week (9,497 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,858 stars this week, 9,499 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +6,858 stars this week (9,499 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -703,10 +705,19 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,468 stars this week, 13,860 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +3,468 stars this week (13,860 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,468 stars this week, 13,862 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +3,468 stars this week (13,862 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
+
+### yogurt
+- URL: https://ainewsradar.xyz/tools/a3cea48fa89b965a
+- Official Source: https://yogurt.so?ref=ainewsradar
+- Headline: Private AI meeting notes that stay on your computer. A free, open-source alterna
+- Overview: yogurt is a fast-growing open-source AI tool for Office, Docs & Slides (+1,918 stars this week, 2,755 total). Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux..
+- Features: ['📈 Exponential community momentum: +1,918 stars this week (2,755 total)', '🎯 Specialized engineering for Office, Docs & Slides', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable Office, Docs & Slides workflows
+- Quickstart: `git clone https://github.com/yogurt.git`
 
 ### hermes-agent
 - URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
@@ -716,15 +727,6 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +5,140 stars this week (264,967 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/hermes-agent.git`
-
-### yogurt
-- URL: https://ainewsradar.xyz/tools/a3cea48fa89b965a
-- Official Source: https://yogurt.so?ref=ainewsradar
-- Headline: Private AI meeting notes that stay on your computer. A free, open-source alterna
-- Overview: yogurt is a fast-growing open-source AI tool for Office, Docs & Slides (+1,920 stars this week, 2,755 total). Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux..
-- Features: ['📈 Exponential community momentum: +1,920 stars this week (2,755 total)', '🎯 Specialized engineering for Office, Docs & Slides', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Office, Docs & Slides workflows
-- Quickstart: `git clone https://github.com/yogurt.git`
 
 ### oh-my-pi
 - URL: https://ainewsradar.xyz/tools/fe2cb26e6766533f

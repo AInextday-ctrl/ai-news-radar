@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 21:04:57 UTC",
+  "generated_at": "2026-11-20 21:18:55 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 21:04:57 UTC",
+      "updated_at": "2026-11-20 21:18:55 UTC",
       "headline_item": {
-        "id": "e34d6438927ff1c3",
+        "id": "d95c866cf08800ae",
         "tag_zh": "🔬 前沿技术",
         "tag_en": "🔬 Frontier Tech",
-        "title_zh": "OpenAI强化推理层防护，抑制大模型蒸馏攻击",
-        "title_en": "OpenAI makes it much harder for attackers to extract how its latest AI models think",
-        "source": "THE DECODER",
-        "published_at": "2026-11-20T20:31:50+00:00",
-        "url": "https://the-decoder.com/openai-makes-it-much-harder-for-attackers-to-extract-how-its-latest-ai-models-think/",
-        "event_summary_zh": "OpenAI大幅提升GPT-6.2系列模型安全性，通过多层过滤机制将推理数据泄露攻击成功率降至0.2%以下",
-        "event_summary_en": "OpenAI has deployed layered security mechanisms for GPT-6.2 Astra and GPT-6.2 Sol models, reducing the success rate of black-box inference-extraction attacks from 54% to under 0.2% through targeted training, input/output filtering, and API access restrictions. These measures are designed to neutralize distillation attacks that attempt to reconstruct core reasoning paths, supplemented by the weekly suspension of tens of thousands of illicit accounts.",
+        "title_zh": "TML 发布了 Inkling 2 Mini，这是一个开放权重 26.4B 参数转换器，每个 token 循环中间层 3 次，以便用更少的 token 进行更好的推理（Thinking Machines La）",
+        "title_en": "TML releases Inkling 2 Mini, an open-weights 26.4B-parameter transformer that loops middle layers three times per token for better reasoning with fewer tokens (Thinking Machines Lab)",
+        "source": "Thinking Machines Lab",
+        "published_at": "2026-11-20T21:15:02+00:00",
+        "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+        "event_summary_zh": "今天，我们发布了 Inkling 2 Mini，这是一款快速、功能强大的型号，其体积足够小，可以在笔记本电脑上运行。 Inkling 2 Mini 是一个循环变压器，为每个令牌运行模型的中间层三次。这使得模型能够应用更多的推理并用更少的标记得出正确的答案，尤其是在",
+        "event_summary_en": "Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.",
         "core_facts_zh": [
-          "【核心事件】OpenAI（模型开发者）在企业内部模型安全生产环境：部署针对推理数据的多层防护架构，包括输入/输出过滤、API访问拦截及针对性强化训练",
-          "【起因与机理】防止攻击者通过模型蒸馏技术窃取核心推理逻辑，保护模型技术壁垒",
-          "【关键数据与实测】技术细节：攻击成功率从54%降至0.2%（先前模型）及0.9%（当前活跃请求）。",
-          "【涉及范围与推进】行业动向：包括Anthropic在内的头部厂商正通过大规模封禁账户与协同政策倡议，建立防御阵线。"
+          "【核心事件】思维机器实验室在AI模型开源社区：发布Inkling 2 Mini模型，具备26.4B总参数、循环层架构及本地化部署能力",
+          "【起因与机理】旨在通过架构创新解决推理深度与算力消耗间的矛盾",
+          "【关键技术规格】引入循环层机制提升逻辑推理效能。",
+          "【各方立场与态度】支持本地设备端离线运行与高并发定制。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI: Implemented layered defenses including I/O filtering, API blocking, and adversarial training",
-          "[Root Cause & Mechanism] To prevent distillation-based theft of internal reasoning logic and protect proprietary model intellectual property",
-          "[Key Metrics] Technical metrics: Attack success rate dropped from 54% to 0.2% for prior models, and 22.9% to 0.9% for active requests.",
-          "[Industry Impact & Outlook] Industry trend: Leading vendors like Anthropic are scaling up account suspensions and advocating for coordinated policy responses."
+          "[Core Event] Thinking Machines Lab (AI Open Source Community): Released Inkling 2 Mini with 26.4B parameters, looped architecture, and local deployment optimization",
+          "[Root Cause & Mechanism] To balance reasoning depth with computational efficiency",
+          "[Key Metrics] 20GB memory footprint for a 26.4B parameter model.",
+          "[Key Position & Outlook] Optimized for local deployment and on-device customization."
         ],
-        "industry_impact_zh": "大模型竞争已进入以‘知识产权保全’为核心的防蒸馏防御战阶段。随着模型推理逻辑的价值攀升，闭源大模型厂商正通过强化API黑盒化与流量合规清洗，从底层逻辑上切断廉价获取高质量蒸馏数据的路径，这将迫使后续开源模型生态面临更严苛的训练数据合规审查压力。",
-        "industry_impact_en": "Competition in the large model sector has shifted toward intellectual property preservation via anti-distillation defense. As reasoning logic becomes a primary value driver, proprietary model vendors are increasingly 'black-boxing' APIs and cleansing traffic to block cost-effective distillation, likely forcing the open-source community to face significantly higher scrutiny regarding training data provenance."
+        "industry_impact_zh": "模型架构从单纯的堆叠参数转向利用循环权重优化算术逻辑效率，这是应对边缘侧高强度推理需求的关键转向。此举通过复用推理深度而非单纯堆叠权重，不仅降低了训练与推理的显存成本，更在可控性与思维链透明度上为agentic AI的商业化落地提供了更低部署门槛的范式。",
+        "industry_impact_en": "The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment."
       },
       "headlines": [
+        {
+          "id": "d95c866cf08800ae",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "TML 发布了 Inkling 2 Mini，这是一个开放权重 26.4B 参数转换器，每个 token 循环中间层 3 次，以便用更少的 token 进行更好的推理（Thinking Machines La）",
+          "title_en": "TML releases Inkling 2 Mini, an open-weights 26.4B-parameter transformer that loops middle layers three times per token for better reasoning with fewer tokens (Thinking Machines Lab)",
+          "source": "Thinking Machines Lab",
+          "published_at": "2026-11-20T21:15:02+00:00",
+          "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+          "event_summary_zh": "今天，我们发布了 Inkling 2 Mini，这是一款快速、功能强大的型号，其体积足够小，可以在笔记本电脑上运行。 Inkling 2 Mini 是一个循环变压器，为每个令牌运行模型的中间层三次。这使得模型能够应用更多的推理并用更少的标记得出正确的答案，尤其是在",
+          "event_summary_en": "Thinking Machines Lab released Inkling 2 Mini, an open-weights model with 26.4B parameters, utilizing a 'looped transformer' architecture that executes middle layers three times per token. This design enhances reasoning capabilities for agentic coding and serial tasks while maintaining a 20GB memory footprint suitable for local deployment on consumer hardware.",
+          "core_facts_zh": [
+            "【核心事件】思维机器实验室在AI模型开源社区：发布Inkling 2 Mini模型，具备26.4B总参数、循环层架构及本地化部署能力",
+            "【起因与机理】旨在通过架构创新解决推理深度与算力消耗间的矛盾",
+            "【关键技术规格】引入循环层机制提升逻辑推理效能。",
+            "【各方立场与态度】支持本地设备端离线运行与高并发定制。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Thinking Machines Lab (AI Open Source Community): Released Inkling 2 Mini with 26.4B parameters, looped architecture, and local deployment optimization",
+            "[Root Cause & Mechanism] To balance reasoning depth with computational efficiency",
+            "[Key Metrics] 20GB memory footprint for a 26.4B parameter model.",
+            "[Key Position & Outlook] Optimized for local deployment and on-device customization."
+          ],
+          "industry_impact_zh": "模型架构从单纯的堆叠参数转向利用循环权重优化算术逻辑效率，这是应对边缘侧高强度推理需求的关键转向。此举通过复用推理深度而非单纯堆叠权重，不仅降低了训练与推理的显存成本，更在可控性与思维链透明度上为agentic AI的商业化落地提供了更低部署门槛的范式。",
+          "industry_impact_en": "The shift from sheer parameter scaling to looped weight execution marks a critical pivot in optimizing logic efficiency for edge-side high-intensity inference. By reusing depth rather than stacking weights, this architecture lowers memory costs and improves chain-of-thought transparency, offering a more accessible paradigm for commercial agentic AI deployment."
+        },
+        {
+          "id": "ce34ecfa0fba02bc",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "AI供应链隐私审计：200万次蜜罐测试揭露数据泄露",
+          "title_en": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
+          "source": "Ars Technica",
+          "published_at": "2026-11-20T20:59:08+00:00",
+          "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
+          "event_summary_zh": "安全研究员HD Moore通过200万次蜜罐测试发现，AI路由与中介服务存在严重的数据隐私泄露漏洞",
+          "event_summary_en": "HD Moore, Chief Research Officer at Dragos, uncovered major security flaws in the AI supply chain by injecting 2 million trackable 'canary' secrets into AI prompts sent via routing services. The investigation found evidence of prompt theft, disregard for zero-data-retention (ZDR) settings, and unauthorized logging of user prompts by intermediaries, posing significant compliance risks.",
+          "core_facts_zh": [
+            "【核心事件】HD Moore（Dragos首席研究官）在AI服务路由与中介平台：植入200万个可追踪的伪造敏感凭证进行安全审计，发现严重数据泄露与隐私违规",
+            "【起因与机理】验证当前复杂的AI供应链对敏感信息处理的合规性与安全性",
+            "【关键数据与实测】利用200万个蜜罐凭证实现供应链审计。",
+            "【各方立场与态度】零数据留存政策（ZDR）在执行端全面失效。"
+          ],
+          "core_facts_en": [
+            "[Core Event] HD Moore (CRO of Dragos): Injected 2 million trackable 'canaries' into prompts to audit security, uncovering widespread data leaks and privacy violations",
+            "[Root Cause & Mechanism] To verify the security and compliance of sensitive data handling within the complex AI supply chain",
+            "[Key Fact Detail] Supply chain audit using 2 million canary credentials.",
+            "[Key Position & Outlook] Widespread failure of Zero Data Retention (ZDR) policy enforcement."
+          ],
+          "industry_impact_zh": "AI应用通过路由中介连接多层供应商的碎片化生态，已成为企业数据合规的“黑盒”灾难点。当前的供应链缺乏端到端的信任保障，中介平台的无差别日志记录与零数据留存政策的执行失效，表明现行法律监管与商业承诺在复杂的调用链面前显得极其脆弱。",
+          "industry_impact_en": "The fragmented ecosystem where AI apps connect through intermediaries to multiple suppliers has become a black-box liability for corporate compliance. The current supply chain lacks end-to-end trust, and the failure of ZDR enforcement and unauthorized logging suggest that existing regulatory frameworks and commercial pledges are highly fragile against complex multi-hop call chains."
+        },
         {
           "id": "e34d6438927ff1c3",
           "tag_zh": "🔬 前沿技术",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "大模型竞争已进入以‘知识产权保全’为核心的防蒸馏防御战阶段。随着模型推理逻辑的价值攀升，闭源大模型厂商正通过强化API黑盒化与流量合规清洗，从底层逻辑上切断廉价获取高质量蒸馏数据的路径，这将迫使后续开源模型生态面临更严苛的训练数据合规审查压力。",
           "industry_impact_en": "Competition in the large model sector has shifted toward intellectual property preservation via anti-distillation defense. As reasoning logic becomes a primary value driver, proprietary model vendors are increasingly 'black-boxing' APIs and cleansing traffic to block cost-effective distillation, likely forcing the open-source community to face significantly higher scrutiny regarding training data provenance."
-        },
-        {
-          "id": "7f2fb3b759df68f0",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "欧四大电信巨头拟组建财团竞标卫星频谱",
-          "title_en": "Bloomberg Europe",
-          "source": "Bloomberg",
-          "published_at": "2026-11-20T20:30:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-20/bitcoin-falls-to-more-than-two-year-low-as-global-markets-sink",
-          "event_summary_zh": "德国电信、Orange、沃达丰及西班牙电信正筹划竞标欧盟2GHz卫星频段，意在构建欧洲自主可控的卫星通讯服务以抗衡Starlink",
-          "event_summary_en": "Deutsche Telekom, Orange, Vodafone, and Telefónica are in early talks to form a consortium to bid for the EU's 2 GHz satellite spectrum. The initiative aims to secure a European-controlled operator status for the reserved band, effectively creating a strategic counterweight to SpaceX's Starlink in the consumer direct-to-device satellite market.",
-          "core_facts_zh": [
-            "【核心事件】德国电信、Orange、沃达丰、西班牙电信在欧盟卫星频谱拍卖市场（针对2GHz频段）：拟组建财团参与欧盟委员会组织的频谱竞标，争取自主经营权",
-            "【起因与机理】应对欧盟对关键通讯基础设施主权的监管要求，并削弱Starlink在欧洲直接连网市场的支配力",
-            "【核心事实细节】电信巨头拟组建财团竞标欧盟2GHz卫星频谱，以获取独立运营权。",
-            "【各方立场与态度】战略目标在于通过频谱控制权，迫使Starlink在欧转为下游分销商而非直接竞争对手。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Deutsche Telekom, Orange, Vodafone, Telefónica: Forming a consortium to bid for exclusive European-controlled operator status",
-            "[Root Cause & Mechanism] To comply with EU sovereignty requirements and challenge Starlink's market dominance",
-            "[Key Metrics] Spain’s Sateliot is seeking €150m to beam 5G to phones.",
-            "[Key Position & Outlook] Strategic leverage to force Starlink into a subordinate provider role in the EU market."
-          ],
-          "industry_impact_zh": "欧洲电信巨头此举本质上是通过频谱准入壁垒，强行将Starlink从“基础设施主导者”拉回到“被监管的服务提供商”角色。若财团竞标成功，将迫使SpaceX在欧洲不得不通过电信联盟进行流量转售，从而有效剥离其对欧洲核心通信链路的渗透能力，这是典型的主权网络防御策略。",
-          "industry_impact_en": "The consortium strategy uses regulatory spectrum barriers to demote Starlink from infrastructure owner to a subordinate service provider. By controlling the EU-reserved band, these carriers effectively force SpaceX to operate as a wholesale partner rather than a sovereign network competitor, marking a shift toward protectionist infrastructure control."
-        },
-        {
-          "id": "1a33c5cfbeb808d8",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达遭美国证券交易委员会会计调查",
-          "title_en": "Nvidia's accounting is a focus of US SEC investigation, sources say",
-          "source": "Reuters",
-          "published_at": "2026-11-20T20:25:00+00:00",
-          "url": "https://www.reuters.com/world/us-secs-nvidia-probe-is-examining-potential-accounting-issues-sources-say-2026-11-20/",
-          "event_summary_zh": "美国证券交易委员会正对英伟达会计实务展开调查，旨在审查其财务合规性，叠加公司高层治理危机，市场压力显著加剧",
-          "event_summary_en": "The US Securities and Exchange Commission (SEC) has launched an investigation into Nvidia's accounting practices. Enforcement staff are scrutinizing potential irregularities, a probe that compounds the company's existing challenges, including the leadership scandal and ongoing investigations into illicit chip shipments to China via regional partners.",
-          "core_facts_zh": [
-            "【核心事件】英伟达（NVIDIA）、美国证券交易委员会（SEC）在美国资本市场监管审查与合规调查：SEC对公司会计实务及相关财务记录启动调查",
-            "【起因与机理】公司内部治理失控叠加与其业务合作伙伴有关的芯片出口管制合规质疑",
-            "【调查与监管诉求】SEC执法人员正针对英伟达会计实务进行合规性审查。",
-            "【行业影响与走向】监管后续动作可能影响其全球地理营收报表合规性及长期市场估值。"
-          ],
-          "core_facts_en": [
-            "[Core Event] NVIDIA, US Securities and Exchange Commission (SEC) (US market regulatory probe): Formal investigation into Nvidia's accounting practices",
-            "[Root Cause & Mechanism] Corporate governance scandals and ongoing scrutiny over export control violations by downstream partners",
-            "[Key Metrics] The Justice Department has also been reviewing Nvidia's $12.",
-            "[Industry Impact & Outlook] Regulatory outcome may impact financial reporting transparency and long-term valuation."
-          ],
-          "industry_impact_zh": "此项会计调查若深挖，可能揭示英伟达在过往财报中对于地缘政治敏感地区营收分类的模糊处理，这将成为美国政府强化技术制裁的“铁证”。该事件不仅是财务合规审查，更是美国监管机构对其全球供应链话语权进行清理与重新定价的政治博弈，英伟达作为AI核心基建的估值逻辑将承受长期压制。",
-          "industry_impact_en": "If the accounting probe reveals obfuscation in revenue reporting related to geopolitically sensitive regions, it will provide the legal basis for further US tech crackdown. Beyond financial compliance, this intervention represents a systemic reassessment of Nvidia’s supply chain influence, likely leading to a long-term valuation discount for the AI bellwether."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 21:04:57 UTC",
+      "updated_at": "2026-11-20 21:18:55 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 21:04:57 UTC",
+      "updated_at": "2026-11-20 21:18:55 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
