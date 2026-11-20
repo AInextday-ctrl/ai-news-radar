@@ -37,6 +37,7 @@ from .techfundingnews_crawler import crawl_techfundingnews, is_techfundingnews_u
 from .ign_crawler import crawl_ign, is_ign_url
 from .anthropic_crawler import crawl_anthropic, is_anthropic_url
 from .techeu_crawler import crawl_techeu, is_techeu_url
+from .deepmind_crawler import crawl_deepmind, is_deepmind_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -101,6 +102,8 @@ __all__ = [
     "is_anthropic_url",
     "crawl_techeu",
     "is_techeu_url",
+    "crawl_deepmind",
+    "is_deepmind_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]

@@ -165,3 +165,20 @@
 3. **真实配图本地化托管与零评论杂质**：
    - 官方高分辨率配图（`cdn.tech.eu/uploads/`）由爬虫自动下载并本地化托管至 `/images/techeu_{slug}.png` 或 `.jpg`；缺省回退中性品牌卡（`og-default.jpg`），严禁使用无关库存假图。
    - 正文段落提取必须通过 `clean_techeu_paragraphs` 自动过滤 `Would you like to write the first comment?` 评论引导语及邮件订阅杂质，确保正文纯净且落地页具备 3 段以上实质报道正文。
+
+---
+
+## 11. 谷歌 DeepMind Institute 信源固锁与高保真抓取守则 (DeepMind Institute Source Invariants & Contract Lock)
+
+1. **信源契约完全固锁 (Contract Frozen)**：
+   - 谷歌 DeepMind Institute 解析器（`crawlers/deepmind_crawler.py`）契约已正式冻结固锁。
+   - 凡涉及 `institute.deepmind.com` 及 `deepmind.google` 的特稿与深度前瞻博文，必须统一经由 `crawl_deepmind` 与 `is_deepmind_url` 调度。
+2. **零聚合语法泄漏与真实科学家署名**：
+   - 严禁聚合平台格式（如 Techmeme 前后缀）泄漏至标题，必须使用 `clean_deepmind_title` 彻底净化。
+   - 署名优先从 JSON-LD `Article`（`author.name`、`author.jobTitle`）精准解析作者（如 `Tim Genewein`、`Demis Hassabis`、`Shane Legg` 等）及其官方研究职务（如 `Research Scientist at Google DeepMind`），杜绝笼统标记为 `DeepMind`。
+3. **真实配图本地化托管与零版权锁盒**：
+   - 官方高分辨率学术/视觉大图（`lh3.googleusercontent.com`）由爬虫自动下载并本地化托管至 `/images/deepmind_{slug}.jpg`；缺省回退中性品牌卡（`og-default.jpg`），严禁使用无关库存假图。
+   - 落地页必须具备完整前沿特稿全文（`paragraphs` / `paragraphs_zh`），严禁出现版权锁盒（`Protected by source publisher copyright or login requirements...`）占位符。
+4. **站点地图主动发现机制 (Sitemap Proactive Discovery)**：
+   - 解析器集成 `crawl_deepmind_sitemap`，支持定期巡检 `https://institute.deepmind.com/sitemap.xml` 索引，实现对超级智能（ASI）、AI 伦理与宏观治理深度论文的秒级自主捕获与入库。
+

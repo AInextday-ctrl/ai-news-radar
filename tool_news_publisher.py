@@ -1266,8 +1266,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     is_wsj = "wsj" in (item.get("source") or "").lower() or "wall street journal" in (item.get("source") or "").lower() or "wsj.com" in (item.get("url") or "").lower()
     is_forbes = "forbes" in (item.get("source") or "").lower() or "forbes.com" in (item.get("url") or "").lower()
     is_techeu = "tech.eu" in (item.get("source") or "").lower() or "tech.eu" in (item.get("url") or "").lower()
+    is_deepmind = "deepmind" in (item.get("source") or "").lower() or "deepmind.com" in (item.get("url") or "").lower() or "deepmind.google" in (item.get("url") or "").lower()
     is_dedicated_full = (
-        is_reuters or is_bloomberg or is_fortune or is_wsj or is_forbes or is_techeu or
+        is_reuters or is_bloomberg or is_fortune or is_wsj or is_forbes or is_techeu or is_deepmind or
         any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/", "wired.com/", "technologyreview.com", "techcrunch.com", "arstechnica.com", "cnbc.com", "the-decoder.com", "openai.com/", "siliconangle.com", "semafor.com", "coindesk.com", "cbsnews.com", "ifixit.com", "9to5mac.com", "tomshardware.com", "bbc.com/", "bbc.co.uk/", "nypost.com", "techfundingnews.com", "://ign.com/", ".ign.com/", "anthropic.com/", "claude.com/"))
     )
     is_paywalled = bool((not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and item.get("is_paywalled")) or (not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"])))
@@ -1922,6 +1923,16 @@ def generate_all_landing_pages():
         except Exception:
             pass
 
+    # Load DeepMind Cache for authentic photography, full verbatim paragraphs, and clean author attribution
+    deepmind_cache = {}
+    dc_path = os.path.join(WORKSPACE_DIR, "data", "deepmind_cache.json")
+    if os.path.exists(dc_path):
+        try:
+            with open(dc_path, "r", encoding="utf-8") as dcf:
+                deepmind_cache = json.load(dcf)
+        except Exception:
+            pass
+
     # Ensure curated headline items (which have landing pages) are always in news
     for hf in ["data/curated_column_highlights.json", "public/data/curated_column_highlights.json"]:
         hp = os.path.join(WORKSPACE_DIR, hf)
@@ -2003,6 +2014,25 @@ def generate_all_landing_pages():
                 it["is_substantive"] = True
                 it["is_paywalled"] = False
 
+        # Check DeepMind cache
+        if "deepmind" in u.lower() or "deepmind" in (it.get("source") or "").lower():
+            clean_u = u.split("#")[0].strip()
+            dc_entry = deepmind_cache.get(clean_u)
+            if not dc_entry and clean_u:
+                try:
+                    from crawlers.deepmind_crawler import crawl_deepmind
+                    dc_entry = crawl_deepmind(clean_u, title=it.get("title", ""))
+                except Exception:
+                    pass
+            if dc_entry:
+                for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author", "author_role"):
+                    if dc_entry.get(fld):
+                        it[fld] = dc_entry[fld]
+                if dc_entry.get("cover_image"):
+                    it["image_url"] = dc_entry["cover_image"]
+                it["is_substantive"] = True
+                it["is_paywalled"] = False
+
         if nid and nid in rich_lookup:
             rit = rich_lookup[nid]
             for fld in ("title", "title_en", "title_zh", "author", "author_role", "author_role_en", "author_role_zh", "cover_image", "image_url", "image_caption", "paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images", "is_substantive", "is_paywalled"):
@@ -2064,6 +2094,17 @@ def generate_all_landing_pages():
                                             it[fld] = tc_entry[fld]
                                     if tc_entry.get("cover_image"):
                                         it["image_url"] = tc_entry["cover_image"]
+                                    it["is_substantive"] = True
+                                    it["is_paywalled"] = False
+                            if "deepmind" in u.lower() or "deepmind" in (it.get("source") or "").lower():
+                                clean_u = u.split("#")[0].strip()
+                                dc_entry = deepmind_cache.get(clean_u)
+                                if dc_entry:
+                                    for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author", "author_role"):
+                                        if dc_entry.get(fld):
+                                            it[fld] = dc_entry[fld]
+                                    if dc_entry.get("cover_image"):
+                                        it["image_url"] = dc_entry["cover_image"]
                                     it["is_substantive"] = True
                                     it["is_paywalled"] = False
                             news.append(it)

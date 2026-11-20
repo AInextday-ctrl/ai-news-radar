@@ -1163,6 +1163,7 @@ def load_existing_items() -> list:
     wsj_live_budget = 3
     forbes_live_budget = 4
     techeu_live_budget = 4
+    deepmind_live_budget = 4
     verge_live_budget = 4
     nyt_live_budget = 4
     wapo_live_budget = 4
@@ -1371,6 +1372,31 @@ def load_existing_items() -> list:
                                     it["paragraphs_zh"] = t_data["paragraphs_zh"]
                                 if t_data.get("article_content_zh"):
                                     it["article_content_zh"] = t_data["article_content_zh"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
+                        except Exception:
+                            pass
+                    # 若解析还原为 DeepMind Institute，立即同步获取其官方真实标题、研究员署名、官方配图与全文
+                    elif "institute.deepmind.com" in real_u.lower() or "deepmind.google" in real_u.lower():
+                        try:
+                            from crawlers.deepmind_crawler import crawl_deepmind
+                            d_data = crawl_deepmind(real_u, title=it.get("title", ""))
+                            if d_data.get("title"):
+                                it["title"] = d_data["title"]
+                                it["title_en"] = d_data["title"]
+                            if d_data.get("author") and "deepmind institute" not in d_data["author"].lower():
+                                it["author"] = d_data["author"]
+                            if d_data.get("cover_image"):
+                                it["image_url"] = d_data["cover_image"]
+                                it["cover_image"] = d_data["cover_image"]
+                            if d_data.get("is_substantive") and d_data.get("full_text"):
+                                it["paragraphs"] = d_data.get("paragraphs", [])
+                                it["article_content"] = d_data["full_text"]
+                                it["article_content_en"] = d_data["full_text"]
+                                if d_data.get("paragraphs_zh"):
+                                    it["paragraphs_zh"] = d_data["paragraphs_zh"]
+                                if d_data.get("article_content_zh"):
+                                    it["article_content_zh"] = d_data["article_content_zh"]
                                 it["is_substantive"] = True
                                 it["is_paywalled"] = False
                         except Exception:
@@ -1701,6 +1727,68 @@ def load_existing_items() -> list:
                     if techeu_data.get("paragraphs_zh") and len(techeu_data.get("paragraphs_zh", [])) > 0:
                         it["paragraphs_zh"] = techeu_data["paragraphs_zh"]
                         it["article_content_zh"] = techeu_data.get("full_text_zh") or "\n\n".join(techeu_data["paragraphs_zh"])
+                    elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.4.3 DeepMind Institute (谷歌DeepMind智库) 官方真实标题、署名研究员、Google UserContent 官方原图与深度论文自愈保真机制
+        if "institute.deepmind.com" in u_now.lower() or "deepmind.google" in u_now.lower():
+            dm_ts = parse_time_for_sort(it)
+            is_recent_dm = (dm_ts > 0) and ((now_ts_load - dm_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_dm_fix = is_recent_dm and deepmind_live_budget > 0 and (
+                ("(" in t_curr and "deepmind" in t_curr.lower()) or
+                t_curr.startswith("Source:") or
+                not img_curr or
+                not img_curr.startswith("http") or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200 or
+                it.get("author") in ("DeepMind Institute", "Google DeepMind", "DeepMind", None, "")
+            )
+            if needs_dm_fix:
+                deepmind_live_budget -= 1
+                try:
+                    from crawlers.deepmind_crawler import crawl_deepmind
+                    dm_data = crawl_deepmind(u_now, title=t_curr)
+                    if dm_data.get("title"):
+                        it["title"] = dm_data["title"]
+                        it["title_en"] = dm_data["title"]
+                    if dm_data.get("author") and "deepmind institute" not in dm_data["author"].lower():
+                        it["author"] = dm_data["author"]
+                    if dm_data.get("cover_image") and str(dm_data["cover_image"]).startswith("http"):
+                        it["image_url"] = dm_data["cover_image"]
+                        it["cover_image"] = dm_data["cover_image"]
+                    if dm_data.get("is_substantive") and len(dm_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = dm_data.get("paragraphs", [])
+                        it["article_content"] = dm_data["full_text"]
+                        it["article_content_en"] = dm_data["full_text"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = dm_data["full_text"]
+                    if dm_data.get("paragraphs_zh") and len(dm_data.get("paragraphs_zh", [])) > 0:
+                        it["paragraphs_zh"] = dm_data["paragraphs_zh"]
+                        it["article_content_zh"] = dm_data.get("full_text_zh") or "\n\n".join(dm_data["paragraphs_zh"])
                     elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
