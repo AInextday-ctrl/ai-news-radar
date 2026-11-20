@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 20:48:53 UTC",
+  "generated_at": "2026-11-20 21:04:57 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 20:48:53 UTC",
+      "updated_at": "2026-11-20 21:04:57 UTC",
       "headline_item": {
-        "id": "7f2fb3b759df68f0",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "欧四大电信巨头拟组建财团竞标卫星频谱",
-        "title_en": "Bloomberg Europe",
-        "source": "Bloomberg",
-        "published_at": "2026-11-20T20:30:01+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-20/bitcoin-falls-to-more-than-two-year-low-as-global-markets-sink",
-        "event_summary_zh": "德国电信、Orange、沃达丰及西班牙电信正筹划竞标欧盟2GHz卫星频段，意在构建欧洲自主可控的卫星通讯服务以抗衡Starlink",
-        "event_summary_en": "Deutsche Telekom, Orange, Vodafone, and Telefónica are in early talks to form a consortium to bid for the EU's 2 GHz satellite spectrum. The initiative aims to secure a European-controlled operator status for the reserved band, effectively creating a strategic counterweight to SpaceX's Starlink in the consumer direct-to-device satellite market.",
+        "id": "e34d6438927ff1c3",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "OpenAI强化推理层防护，抑制大模型蒸馏攻击",
+        "title_en": "OpenAI makes it much harder for attackers to extract how its latest AI models think",
+        "source": "THE DECODER",
+        "published_at": "2026-11-20T20:31:50+00:00",
+        "url": "https://the-decoder.com/openai-makes-it-much-harder-for-attackers-to-extract-how-its-latest-ai-models-think/",
+        "event_summary_zh": "OpenAI大幅提升GPT-6.2系列模型安全性，通过多层过滤机制将推理数据泄露攻击成功率降至0.2%以下",
+        "event_summary_en": "OpenAI has deployed layered security mechanisms for GPT-6.2 Astra and GPT-6.2 Sol models, reducing the success rate of black-box inference-extraction attacks from 54% to under 0.2% through targeted training, input/output filtering, and API access restrictions. These measures are designed to neutralize distillation attacks that attempt to reconstruct core reasoning paths, supplemented by the weekly suspension of tens of thousands of illicit accounts.",
         "core_facts_zh": [
-          "【核心事件】德国电信、Orange、沃达丰、西班牙电信在欧盟卫星频谱拍卖市场（针对2GHz频段）：拟组建财团参与欧盟委员会组织的频谱竞标，争取自主经营权",
-          "【起因与机理】应对欧盟对关键通讯基础设施主权的监管要求，并削弱Starlink在欧洲直接连网市场的支配力",
-          "【核心事实细节】电信巨头拟组建财团竞标欧盟2GHz卫星频谱，以获取独立运营权。",
-          "【各方立场与态度】战略目标在于通过频谱控制权，迫使Starlink在欧转为下游分销商而非直接竞争对手。"
+          "【核心事件】OpenAI（模型开发者）在企业内部模型安全生产环境：部署针对推理数据的多层防护架构，包括输入/输出过滤、API访问拦截及针对性强化训练",
+          "【起因与机理】防止攻击者通过模型蒸馏技术窃取核心推理逻辑，保护模型技术壁垒",
+          "【关键数据与实测】技术细节：攻击成功率从54%降至0.2%（先前模型）及0.9%（当前活跃请求）。",
+          "【涉及范围与推进】行业动向：包括Anthropic在内的头部厂商正通过大规模封禁账户与协同政策倡议，建立防御阵线。"
         ],
         "core_facts_en": [
-          "[Core Event] Deutsche Telekom, Orange, Vodafone, Telefónica: Forming a consortium to bid for exclusive European-controlled operator status",
-          "[Root Cause & Mechanism] To comply with EU sovereignty requirements and challenge Starlink's market dominance",
-          "[Key Metrics] Spain’s Sateliot is seeking €150m to beam 5G to phones.",
-          "[Key Position & Outlook] Strategic leverage to force Starlink into a subordinate provider role in the EU market."
+          "[Core Event] OpenAI: Implemented layered defenses including I/O filtering, API blocking, and adversarial training",
+          "[Root Cause & Mechanism] To prevent distillation-based theft of internal reasoning logic and protect proprietary model intellectual property",
+          "[Key Metrics] Technical metrics: Attack success rate dropped from 54% to 0.2% for prior models, and 22.9% to 0.9% for active requests.",
+          "[Industry Impact & Outlook] Industry trend: Leading vendors like Anthropic are scaling up account suspensions and advocating for coordinated policy responses."
         ],
-        "industry_impact_zh": "欧洲电信巨头此举本质上是通过频谱准入壁垒，强行将Starlink从“基础设施主导者”拉回到“被监管的服务提供商”角色。若财团竞标成功，将迫使SpaceX在欧洲不得不通过电信联盟进行流量转售，从而有效剥离其对欧洲核心通信链路的渗透能力，这是典型的主权网络防御策略。",
-        "industry_impact_en": "The consortium strategy uses regulatory spectrum barriers to demote Starlink from infrastructure owner to a subordinate service provider. By controlling the EU-reserved band, these carriers effectively force SpaceX to operate as a wholesale partner rather than a sovereign network competitor, marking a shift toward protectionist infrastructure control."
+        "industry_impact_zh": "大模型竞争已进入以‘知识产权保全’为核心的防蒸馏防御战阶段。随着模型推理逻辑的价值攀升，闭源大模型厂商正通过强化API黑盒化与流量合规清洗，从底层逻辑上切断廉价获取高质量蒸馏数据的路径，这将迫使后续开源模型生态面临更严苛的训练数据合规审查压力。",
+        "industry_impact_en": "Competition in the large model sector has shifted toward intellectual property preservation via anti-distillation defense. As reasoning logic becomes a primary value driver, proprietary model vendors are increasingly 'black-boxing' APIs and cleansing traffic to block cost-effective distillation, likely forcing the open-source community to face significantly higher scrutiny regarding training data provenance."
       },
       "headlines": [
+        {
+          "id": "e34d6438927ff1c3",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "OpenAI强化推理层防护，抑制大模型蒸馏攻击",
+          "title_en": "OpenAI makes it much harder for attackers to extract how its latest AI models think",
+          "source": "THE DECODER",
+          "published_at": "2026-11-20T20:31:50+00:00",
+          "url": "https://the-decoder.com/openai-makes-it-much-harder-for-attackers-to-extract-how-its-latest-ai-models-think/",
+          "event_summary_zh": "OpenAI大幅提升GPT-6.2系列模型安全性，通过多层过滤机制将推理数据泄露攻击成功率降至0.2%以下",
+          "event_summary_en": "OpenAI has deployed layered security mechanisms for GPT-6.2 Astra and GPT-6.2 Sol models, reducing the success rate of black-box inference-extraction attacks from 54% to under 0.2% through targeted training, input/output filtering, and API access restrictions. These measures are designed to neutralize distillation attacks that attempt to reconstruct core reasoning paths, supplemented by the weekly suspension of tens of thousands of illicit accounts.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI（模型开发者）在企业内部模型安全生产环境：部署针对推理数据的多层防护架构，包括输入/输出过滤、API访问拦截及针对性强化训练",
+            "【起因与机理】防止攻击者通过模型蒸馏技术窃取核心推理逻辑，保护模型技术壁垒",
+            "【关键数据与实测】技术细节：攻击成功率从54%降至0.2%（先前模型）及0.9%（当前活跃请求）。",
+            "【涉及范围与推进】行业动向：包括Anthropic在内的头部厂商正通过大规模封禁账户与协同政策倡议，建立防御阵线。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI: Implemented layered defenses including I/O filtering, API blocking, and adversarial training",
+            "[Root Cause & Mechanism] To prevent distillation-based theft of internal reasoning logic and protect proprietary model intellectual property",
+            "[Key Metrics] Technical metrics: Attack success rate dropped from 54% to 0.2% for prior models, and 22.9% to 0.9% for active requests.",
+            "[Industry Impact & Outlook] Industry trend: Leading vendors like Anthropic are scaling up account suspensions and advocating for coordinated policy responses."
+          ],
+          "industry_impact_zh": "大模型竞争已进入以‘知识产权保全’为核心的防蒸馏防御战阶段。随着模型推理逻辑的价值攀升，闭源大模型厂商正通过强化API黑盒化与流量合规清洗，从底层逻辑上切断廉价获取高质量蒸馏数据的路径，这将迫使后续开源模型生态面临更严苛的训练数据合规审查压力。",
+          "industry_impact_en": "Competition in the large model sector has shifted toward intellectual property preservation via anti-distillation defense. As reasoning logic becomes a primary value driver, proprietary model vendors are increasingly 'black-boxing' APIs and cleansing traffic to block cost-effective distillation, likely forcing the open-source community to face significantly higher scrutiny regarding training data provenance."
+        },
         {
           "id": "7f2fb3b759df68f0",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此项会计调查若深挖，可能揭示英伟达在过往财报中对于地缘政治敏感地区营收分类的模糊处理，这将成为美国政府强化技术制裁的“铁证”。该事件不仅是财务合规审查，更是美国监管机构对其全球供应链话语权进行清理与重新定价的政治博弈，英伟达作为AI核心基建的估值逻辑将承受长期压制。",
           "industry_impact_en": "If the accounting probe reveals obfuscation in revenue reporting related to geopolitically sensitive regions, it will provide the legal basis for further US tech crackdown. Beyond financial compliance, this intervention represents a systemic reassessment of Nvidia’s supply chain influence, likely leading to a long-term valuation discount for the AI bellwether."
-        },
-        {
-          "id": "eb023fe5ea1cad41",
-          "tag_zh": "🎁 算力福利",
-          "tag_en": "🎁 Promos & Credits",
-          "title_zh": "KKR拟斥资百亿美元收购EdgeCore，加码AI算力基建",
-          "title_en": "KKR in Talks to Buy EdgeCore at Valuation of at Least $8 Billion",
-          "source": "Bloomberg",
-          "published_at": "2026-11-20T20:05:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-20/kkr-in-talks-to-buy-edgecore-at-valuation-of-at-least-8-billion",
-          "event_summary_zh": "KKR拟通过旗下Helix平台以80亿至100亿美元收购数据中心运营商EdgeCore，以巩固AI算力供应链布局",
-          "event_summary_en": "Private equity firm KKR is in advanced negotiations to acquire data center operator EdgeCore Digital Infrastructure from Partners Group, with a valuation between $8 billion and $10 billion. The acquisition, executed through KKR's Helix platform, aims to consolidate EdgeCore's 2.27+ gigawatts of capacity across key U.S. markets to meet the insatiable demand for AI infrastructure.",
-          "core_facts_zh": [
-            "【核心事件】KKR & Co LP（收购方）、Partners Group（出让方）、EdgeCore Digital Infrastructure（标的）在全球数字基础设施与AI算力底层建设领域：拟以80亿至100亿美元收购EdgeCore多数股权，获取其2.27吉瓦规模的算力基础设施储备",
-            "【起因与机理】通过资本杠杆整合关键算力资产，以满足AI行业激增的底层算力需求",
-            "【关键数据与实测】标的估值区间为80亿至100亿美元，涉及超过2.27吉瓦的算力容量。",
-            "【各方立场与态度】反映资本市场对AI算力物理基础设施的长期持有价值认可。"
-          ],
-          "core_facts_en": [
-            "[Core Event] KKR & Co LP, Partners Group, EdgeCore Digital Infrastructure: Proposed acquisition of EdgeCore at an $8B-$10B valuation, securing 2.27GW of infrastructure capacity",
-            "[Root Cause & Mechanism] Scaling compute assets to meet the surging demand from AI model training and deployment",
-            "[Key Metrics] Valuation ranges from $8 billion to $10 billion, covering 2.27GW of power capacity.",
-            "[Key Position & Outlook] Reflects capital market appetite for long-term ownership of physical AI infrastructure assets."
-          ],
-          "industry_impact_zh": "本笔交易标志着AI基础设施重心正从单纯的芯片竞争转向“能源与空间”的物理资产壁垒争夺。KKR通过Helix平台引入英伟达与主权基金背书，不仅是在进行资产并购，更是在构建底层算力供应链的金融化闭环，以缓解AI基建中日益突出的电力瓶颈与交付周期压力。",
-          "industry_impact_en": "This deal signals a shift in AI infrastructure competition from pure silicon performance to the control of physical assets: power and real estate. By leveraging backing from Nvidia and sovereign funds for the Helix platform, KKR is orchestrating a financialized closed-loop for the AI supply chain to mitigate the escalating power bottlenecks and deployment lead times."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 20:48:53 UTC",
+      "updated_at": "2026-11-20 21:04:57 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -250,38 +250,38 @@
           "url": "https://x.com/DrJimFan/status/2123820604256288978"
         },
         {
-          "id": "b88c4af0666d20b2",
-          "name": "OpenAI 官方",
-          "handle": "@OpenAI",
-          "role_zh": "OpenAI 官方发布与模型前沿",
+          "id": "fcfd74e4fe9073b0",
+          "name": "OpenAI Developers",
+          "handle": "@OpenAIDevs",
+          "role_zh": "OpenAI 开发者官方平台",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/openai",
-          "topic_zh": "OpenAI 官方 行业前沿观察",
-          "topic_en": "OpenAI 官方 on AI",
-          "event_context_zh": "蒸馏可以重现强大的人工智能功能，而无需围绕它们建立保障措施。我们正在分享关于我们的工作的新研究，以对抗模型的蒸馏，这些能力如何转移，以及我们如何检测和破坏协调的尝试。论文",
-          "event_context_en": "Distillation can reproduce powerful AI capabilities without the safeguards built around them.\n\nWe’re sharing new researc",
-          "quote_zh": "蒸馏可以重现强大的人工智能功能，而无需围绕它们建立保障措施。\n\n我们正在分享关于我们的工作的新研究，以对抗模型的蒸馏，这些能力如何转移，以及我们如何检测和破坏协调的尝试。\n\n这些发现正在帮助我们加强防御并支持整个行业的保障措施。",
-          "quote_en": "Distillation can reproduce powerful AI capabilities without the safeguards built around them.\n\nWe’re sharing new research on our work to combat distillation of our models, how these capabilities transfer, and how we detect and disrupt coordinated attempts.\n\nThese findings are helping us sharpen our defenses and support safeguards across the industry.\n\nhttps://t.co/FGQ0PHllIO",
-          "thesis_zh": "深入探讨OpenAI 官方 行业前沿观察的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in OpenAI 官方 on AI, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "OpenAI Developer",
+          "topic_en": "OpenAI Developers on",
+          "event_context_zh": "使用 GPT-6.2 Astra 或 Sol 构建时需要速度吗？\n\n在 ChatGPT Pro 200 上，您可以将 Ultrafast 与 Sol 结合使用。以下是 @dkundel 如何使用 Ultrafast 快速迭代，以及他如何决定",
+          "event_context_en": "Need speed when building with GPT-6.2 Astra or Sol?\n\nOn ChatGPT Pro 200, you can use Ultrafast with Sol. Here’s how @dku",
+          "quote_zh": "使用 GPT-6.2 Astra 或 Sol 构建时需要速度吗？\n\n在 ChatGPT Pro 200 上，您可以将 Ultrafast 与 Sol 结合使用。以下是 @dkundel 如何使用 Ultrafast 快速迭代，以及他如何决定何时值得额外的速度：",
+          "quote_en": "Need speed when building with GPT-6.2 Astra or Sol?\n\nOn ChatGPT Pro 200, you can use Ultrafast with Sol. Here’s how @dkundel uses Ultrafast to rapidly iterate and how he decides when the extra speed is worth it:",
+          "thesis_zh": "深入探讨OpenAI Developer的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in OpenAI Developers on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "124.7k",
-            "likes": "1.2k",
-            "comments": "169",
-            "retweets": "66",
+            "views": "7.0k",
+            "likes": "59",
+            "comments": "15",
+            "retweets": "1",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-20T19:33:37+00:00",
-          "url": "https://x.com/OpenAI/status/2123862344422088794"
+          "published_at": "2026-11-20T20:46:35+00:00",
+          "url": "https://x.com/OpenAIDevs/status/2123880710843048001"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 20:48:53 UTC",
+      "updated_at": "2026-11-20 21:04:57 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
