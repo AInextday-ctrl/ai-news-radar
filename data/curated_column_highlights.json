@@ -1,37 +1,87 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 18:18:54 UTC",
+  "generated_at": "2026-11-20 18:35:24 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 18:18:55 UTC",
+      "updated_at": "2026-11-20 18:35:24 UTC",
       "headline_item": {
-        "id": "50044438b7041c70",
+        "id": "b6cdd2372e065ea5",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "参议员指控卢特尼克无视美芯片流向中国",
-        "title_en": "Top Republican Senator Says Lutnick Ignored His China Chip Warnings",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-20T18:10:02+00:00",
-        "url": "https://www.wsj.com/politics/national-security/top-republican-senator-says-lutnick-ignored-his-china-chip-warnings-512f64fd?st=3ZECin",
-        "event_summary_zh": "美国参议院情报委员会主席汤姆·科顿指责商务部长卢特尼克在英伟达芯片对华违规出口问题上监管失职",
-        "event_summary_en": "Senator Tom Cotton, Chair of the Senate Intelligence Committee, accused Commerce Secretary Howard Lutnick of repeatedly ignoring warnings regarding the smuggling of AI chips to China. This criticism, following the Nvidia scandal, highlights growing congressional dissatisfaction with the Department of Commerce's regulatory oversight and enforcement efficacy.",
+        "title_zh": "黄乐关联实体涉华防军工供应链核查",
+        "title_en": "Spying Suspect’s Chip Network Has Ties to Chinese Military Suppliers",
+        "source": "New York Times",
+        "published_at": "2026-11-20T18:30:04+00:00",
+        "url": "https://www.nytimes.com/2026/11/20/us/politics/nvidia-alice-huang-chips-china.html",
+        "event_summary_zh": "黄乐及其关联公司被指通过复杂网络获取英伟达芯片，资金流向与中国军工及国家安全部门存在高度关联",
+        "event_summary_en": "Intelligence firm Strider Technologies identified that Alice Huang and her associates built a complex network utilizing $3.6 billion in Chinese government funding for data centers equipped with Nvidia AI chips. The investigation reveals that these entities maintain deep ties to Chinese military contractors and the Ministry of State Security, posing significant compliance risks regarding the diversion of restricted hardware into military research.",
         "core_facts_zh": [
-          "【核心事件】参议院情报委员会主席汤姆·科顿（Tom Cotton）；商务部长霍华德·卢特尼克（Howard Lutnick）在美国华盛顿特区；参议院情报委员会：指责商务部在AI芯片对华出口限制执行上监管不力，忽略风险预警",
-          "【起因与机理】针对近期英伟达芯片规避禁令流入中国的安全风险事件",
-          "【调查与监管诉求】参议院情报委员会对商务部在华芯片管制执行力的合规质疑。",
-          "【涉及范围与推进】卢特尼克在出口管制中的政治信任度及后续监管趋严预期。"
+          "【核心事件】黄乐（涉案人员）、英伟达（芯片供应商）、Strider Technologies（情报分析机构）：通过复杂股权网络规避制裁，获取高性能芯片并输送至涉军科研项目",
+          "【起因与机理】利用复杂企业架构掩盖资金与资源流向，以支持中国军工人工智能能力升级",
+          "【关键数据与实测】黄乐通过关联企业网络动用36亿美元政府资金投建算力中心。",
+          "【各方立场与态度】英伟达高性能芯片通过受控链条流入潜在敏感军事应用领域。"
         ],
         "core_facts_en": [
-          "[Core Event] Senator Tom Cotton (Chair of the Senate Intelligence Committee); Commerce Secretary Howard Lutnick: Accusing the Department of Commerce of regulatory negligence and ignoring risk warnings regarding AI chip exports",
-          "[Root Cause & Mechanism] In response to the recent security crisis involving Nvidia chips reaching China despite export restrictions",
-          "[Regulatory & Investigation Focus] Congressional scrutiny of BIS enforcement capabilities.",
-          "[Key Position & Outlook] Political standing of Secretary Lutnick and outlook for stricter trade compliance."
+          "[Core Event] Alice Huang, Nvidia, Strider Technologies: Bypassing sanctions through shell companies to supply high-end chips for military-linked R&D",
+          "[Root Cause & Mechanism] Utilizing intricate corporate structures to mask financial flows and hardware deployment for China's AI-driven defense advancement",
+          "[Key Metrics] Huang utilized $3.6 billion in state funding through a network of shell companies to build computing centers.",
+          "[Key Position & Outlook] High-end Nvidia chips were funneled into potentially sensitive military-AI applications."
         ],
-        "industry_impact_zh": "此轮政治施压预示着美国商务部工业与安全局（BIS）将面临更严苛的行政合规审查，出口限制政策重心将从“技术界定”转向“供应链穿透式穿透审计”。对英伟达等头部厂商而言，未来在华销售的合规性审查成本将激增，且监管机构可能引入更具强制性的终端用户信息溯源机制。",
-        "industry_impact_en": "This political pressure suggests the Bureau of Industry and Security (BIS) will face intensified compliance audits, shifting policy focus from defining technology specs to transparent supply chain auditing. For companies like Nvidia, this implies significantly higher compliance costs and the likely introduction of mandatory end-user traceability mechanisms."
+        "industry_impact_zh": "此案暴露了当前对高性能计算集群（HPC）终端用户识别的重大监管漏洞，单纯基于实体清单的管控手段在复杂股权架构面前已显得捉襟见肘。随着军民融合（MCF）深度的增加，英伟达及同类算力提供商的合规门槛将由“销售端核查”转向对数据中心算力归属的“全生命周期溯源与穿透式审计”。",
+        "industry_impact_en": "This case highlights significant loopholes in verifying end-users for High-Performance Computing (HPC) clusters, proving that entity-based trade controls are insufficient against complex, opaque corporate structures. As civil-military fusion deepens, the compliance burden for Nvidia and peers will shift from point-of-sale verification to full lifecycle traceability and forensic auditing of computational resource allocation."
       },
       "headlines": [
+        {
+          "id": "b6cdd2372e065ea5",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄乐关联实体涉华防军工供应链核查",
+          "title_en": "Spying Suspect’s Chip Network Has Ties to Chinese Military Suppliers",
+          "source": "New York Times",
+          "published_at": "2026-11-20T18:30:04+00:00",
+          "url": "https://www.nytimes.com/2026/11/20/us/politics/nvidia-alice-huang-chips-china.html",
+          "event_summary_zh": "黄乐及其关联公司被指通过复杂网络获取英伟达芯片，资金流向与中国军工及国家安全部门存在高度关联",
+          "event_summary_en": "Intelligence firm Strider Technologies identified that Alice Huang and her associates built a complex network utilizing $3.6 billion in Chinese government funding for data centers equipped with Nvidia AI chips. The investigation reveals that these entities maintain deep ties to Chinese military contractors and the Ministry of State Security, posing significant compliance risks regarding the diversion of restricted hardware into military research.",
+          "core_facts_zh": [
+            "【核心事件】黄乐（涉案人员）、英伟达（芯片供应商）、Strider Technologies（情报分析机构）：通过复杂股权网络规避制裁，获取高性能芯片并输送至涉军科研项目",
+            "【起因与机理】利用复杂企业架构掩盖资金与资源流向，以支持中国军工人工智能能力升级",
+            "【关键数据与实测】黄乐通过关联企业网络动用36亿美元政府资金投建算力中心。",
+            "【各方立场与态度】英伟达高性能芯片通过受控链条流入潜在敏感军事应用领域。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Alice Huang, Nvidia, Strider Technologies: Bypassing sanctions through shell companies to supply high-end chips for military-linked R&D",
+            "[Root Cause & Mechanism] Utilizing intricate corporate structures to mask financial flows and hardware deployment for China's AI-driven defense advancement",
+            "[Key Metrics] Huang utilized $3.6 billion in state funding through a network of shell companies to build computing centers.",
+            "[Key Position & Outlook] High-end Nvidia chips were funneled into potentially sensitive military-AI applications."
+          ],
+          "industry_impact_zh": "此案暴露了当前对高性能计算集群（HPC）终端用户识别的重大监管漏洞，单纯基于实体清单的管控手段在复杂股权架构面前已显得捉襟见肘。随着军民融合（MCF）深度的增加，英伟达及同类算力提供商的合规门槛将由“销售端核查”转向对数据中心算力归属的“全生命周期溯源与穿透式审计”。",
+          "industry_impact_en": "This case highlights significant loopholes in verifying end-users for High-Performance Computing (HPC) clusters, proving that entity-based trade controls are insufficient against complex, opaque corporate structures. As civil-military fusion deepens, the compliance burden for Nvidia and peers will shift from point-of-sale verification to full lifecycle traceability and forensic auditing of computational resource allocation."
+        },
+        {
+          "id": "0682a15d33147059",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "METR：AI模型编程能力远超判断力",
+          "title_en": "The most misunderstood graph in AI just got a major update",
+          "source": "MIT Tech Review",
+          "published_at": "2026-11-20T18:15:15+00:00",
+          "url": "https://www.technologyreview.com/2026/11/20/1149399/the-most-misunderstood-graph-in-ai-just-got-a-major-update/",
+          "event_summary_zh": "人工智能评估组织METR发布报告显示，模型在编程等可验证任务上进步神速，但在决策判断类任务中表现滞后",
+          "event_summary_en": "Nonprofit evaluation group METR has updated its time-horizon plot for AI capabilities, indicating that models show exponential growth in verifiable tasks like coding and mathematics, but lag in judgment-based tasks that lack automated verification. The report highlights the technological bottleneck in applying reinforcement learning to complex, open-ended research decisions, a capability critical for future autonomous R&D.",
+          "core_facts_zh": [
+            "【核心事件】非营利性评估组织METR更新了关于AI能力时序演进的分析框架，指出AI在编程与数学等具备明确验证逻辑的任务上表现呈指数级增长，但处理研发判断类等难以自动化量化任务的能力明显薄弱。",
+            "【关键技术规格】报告揭示了当前强化学习在处理复杂、开放性决策任务时的技术瓶颈，这类能力对于实现AI全自主研发至关重要。",
+            "【核心事实细节】A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that require judgment as they are at coding.。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nonprofit evaluation group METR has updated its time-horizon plot for AI capabilities, indicating that models show exponential growth in verifiable tasks like coding and mathematics, but lag in judgment-based tasks that lack automated verification.",
+            "[Context & Motivation] The report highlights the technological bottleneck in applying reinforcement learning to complex, open-ended research decisions, a capability critical for future autonomous R&D..",
+            "[Key Fact] A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that require judgment as they are at coding."
+          ],
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        },
         {
           "id": "50044438b7041c70",
           "tag_zh": "📰 业界动态",
@@ -57,63 +107,12 @@
           ],
           "industry_impact_zh": "此轮政治施压预示着美国商务部工业与安全局（BIS）将面临更严苛的行政合规审查，出口限制政策重心将从“技术界定”转向“供应链穿透式穿透审计”。对英伟达等头部厂商而言，未来在华销售的合规性审查成本将激增，且监管机构可能引入更具强制性的终端用户信息溯源机制。",
           "industry_impact_en": "This political pressure suggests the Bureau of Industry and Security (BIS) will face intensified compliance audits, shifting policy focus from defining technology specs to transparent supply chain auditing. For companies like Nvidia, this implies significantly higher compliance costs and the likely introduction of mandatory end-user traceability mechanisms."
-        },
-        {
-          "id": "cf09fc2b4be82e56",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "中美达成AI军事决策人工管控共识",
-          "title_en": "Trump, Xi agreed humans must stay in charge of AI military decisions, Bessent says",
-          "source": "Reuters",
-          "published_at": "2026-11-20T17:20:01+00:00",
-          "url": "https://www.reuters.com/world/china/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says-2026-11-20/",
-          "event_summary_zh": "美国总统特朗普与中国国家主席习近平在深圳会晤期间，明确AI军事决策需保留人类参与，严禁超级智能自主执行重大军事行动",
-          "event_summary_en": "U.S. President Donald Trump and Chinese President Xi Jinping agreed during their meeting at the APEC summit in Shenzhen that humans must maintain control over military decisions involving artificial intelligence, prohibiting autonomous 'superintelligence' (SI) in major military actions, as confirmed by U.S. Treasury Secretary Scott Bessent. The leaders also engaged in robust discussions regarding nuclear non-proliferation, trade policy, and the Russia-Ukraine conflict, culminating in a joint declaration emphasizing that nuclear war must never be fought.",
-          "core_facts_zh": [
-            "【核心事件】美国总统唐纳德·特朗普、中国国家主席习近平、美国财政部长斯科特·贝森特在中国深圳亚太经合组织（APEC）峰会：确立AI军事决策人工管控红线，禁止超级智能自主执行重大作战指令",
-            "【起因与机理】在全球地缘博弈背景下，为防止AI军事应用失控引发非预期的全球冲突",
-            "【核心事实细节】美中领导人达成AI军事决策必须有人类介入的共识。",
-            "【各方立场与态度】同步签署核战争不可赢且必须避免发生的联合声明。"
-          ],
-          "core_facts_en": [
-            "[Core Event] U.S. President Donald Trump, Chinese President Xi Jinping, Treasury Secretary Scott Bessent (APEC Summit, Shenzhen, China): Established a 'human-in-the-loop' requirement for AI-driven military decisions",
-            "[Root Cause & Mechanism] To prevent accidental escalation and ensure strategic stability in AI-enabled warfare",
-            "[Key Fact Detail] US-China consensus on human-in-the-loop for AI military decisions.",
-            "[Key Position & Outlook] Joint declaration on the necessity of avoiding nuclear conflict."
-          ],
-          "industry_impact_zh": "将AI军事决策的“人类介入权”确立为大国博弈的底线红线，意味着AI军备竞赛正式从单纯的技术压制转向规则架构的抢滩战。该共识实质性地设定了AI武器化开发的合规边界，未来全球国防工业将重点布局“可解释与可中断”的AI架构，以确保战略博弈的物理可控性，防止算法黑箱触发不可逆的军事对抗。",
-          "industry_impact_en": "Establishing a 'human-in-the-loop' mandate for AI military decisions shifts the arms race from pure performance metrics to structural governance control. This consensus creates a hard compliance floor for global defense contractors, forcing future AI weapon systems to prioritize deterministic 'kill-switch' architectures to prevent algorithmic-induced military escalation."
-        },
-        {
-          "id": "f832d359196eec02",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "人择数学家声称已经与克劳德解决了久负盛名的千年奖问题",
-          "title_en": "Anthropic mathematician claims to have solved prestigious Millennium Prize problem with Claude",
-          "source": "The Verge AI",
-          "published_at": "2026-11-20T16:34:13+00:00",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1010051/anthropic-riemann-hypothesis-millennium-prize-problem",
-          "event_summary_zh": "人择数学家莱文特·阿尔波格 (Levent Alpöge) 声称，他在克劳德的帮助下证明了黎曼猜想，这是数学中最臭名昭著的难题之一，破解了数十年来世界上一些最优秀数学家一直未能解决的难题。如果得到证实，这将标志着人工智能的又一重大成就",
-          "event_summary_en": "Anthropic mathematician Levent Alpöge claims he has proved the Riemann hypothesis, one of mathematics’s most notoriously difficult problems, with the help of Claude, cracking a puzzle that has eluded some of the world’s best mathematicians for decades. If verified, it would mark yet another seismic achievement for AI in mathematics and add to the upheaval already unleashed by OpenAI’s previous, often inelegant forays into the field.\n\nAlpöge’s solution has yet to be verified independently. Anthro",
-          "core_facts_zh": [
-            "【核心事件】OpenAI 官方团队：人择数学家声称已经与克劳德解决了久负盛名的千年奖问题",
-            "【核心事实细节】人择数学家声称已经与克劳德解决了久负盛名的千年奖问题。",
-            "【行业研判】如果得到证实，这将标志着人工智能在数学领域取得的又一重大成就，并为人类的发展增添了色彩。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Robert Hart and Emma Roth: Anthropic mathematician claims to have solved prestigious Millennium Prize problem with Claude",
-            "[Root Cause & Mechanism] Anthropic mathematician Levent Alpöge claims he has proved the Riemann hypothesis, one of mathematics’s most notoriously difficult problems, with the help of Claude, cracking a puzzle that has eluded some of the world’s best mathematicians for decades.",
-            "[Key Fact Detail] If verified, it would mark yet another seismic achievement for AI in mathematics and add to the upheaval already unleashed by OpenAI’s previous, often inelegant forays into the field.",
-            "[Industry Analysis] Alpöge’s solution has yet to be verified independently."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 18:18:55 UTC",
+      "updated_at": "2026-11-20 18:35:24 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -280,7 +279,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 18:18:55 UTC",
+      "updated_at": "2026-11-20 18:35:24 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
