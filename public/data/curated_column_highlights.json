@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 12:18:29 UTC",
+  "generated_at": "2026-11-20 12:34:02 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 12:18:29 UTC",
+      "updated_at": "2026-11-20 12:34:02 UTC",
       "headline_item": {
-        "id": "74262c647535916e",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "证监会严控红筹架构企业境外上市注册地",
-        "title_en": "China tightens approvals for offshore listings by red-chip firms, threatening Hong Kong IPO market: Reuters",
-        "source": "Reuters",
-        "published_at": "2026-11-20T11:25:03+00:00",
-        "url": "https://www.reuters.com/world/beijing-bar-young-red-chip-firms-listing-outside-mainland-china-sources-say-2026-11-20/",
-        "event_summary_zh": "中国证监会要求2023年后设立的红筹企业须迁回境内注册方可境外上市，大幅收紧海外募资合规门槛",
-        "event_summary_en": "The China Securities Regulatory Commission (CSRC) has informed law firms that red-chip companies established after the 2023 administrative measures for overseas securities offerings must relocate their place of incorporation to mainland China to receive approval for offshore listings. This policy signals a rigorous shift toward enforcing substantive domestic jurisdiction over overseas fundraising vehicles.",
+        "id": "b952719c121b8ac8",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "Signal封禁系统级截屏以防御AI代理数据爬取",
+        "title_en": "Signal is blocking Gemini and Siri AI from reading your screen",
+        "source": "The Verge AI",
+        "published_at": "2026-11-20T12:30:47+00:00",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
+        "event_summary_zh": "Signal总裁Meredith Whittaker宣布在iOS与Android端默认禁用截屏功能，以防止Gemini与Siri等系统级AI代理抓取用户加密通讯隐私",
+        "event_summary_en": "Meredith Whittaker, President of Signal, announced that integrated OS-level AI agents undermine app-level privacy. To mitigate this, Signal has disabled screenshot functionality on iOS and Android to prevent AI assistants from harvesting encrypted message data, while demanding that OS providers implement transparent technical controls for developer-side AI access management.",
         "core_facts_zh": [
-          "【核心事件】中国证券监督管理委员会（CSRC）在中国境内证券监管框架与境外资本市场：强制要求2023年后成立的红筹企业迁回境内注册，收紧境外上市合规审查",
-          "【起因与机理】强化对红筹架构企业的穿透监管，消除法律实体与业务实质分离带来的合规风险",
-          "【调查与监管诉求】监管禁止2023年后设立的红筹企业保留境外注册地进行上市。",
-          "【行业影响与走向】该政策收紧直接导致红筹架构上市难度激增，并将重塑中企海外募资路径。"
+          "【核心事件】Signal总裁 Meredith Whittaker在iOS与Android移动操作系统生态：默认禁用截屏功能，防止AI代理读取屏幕信息",
+          "【起因与机理】操作系统集成的AI代理缺乏应用层权限隔离，构成隐私泄露威胁",
+          "【核心事实细节】Signal默认禁用截屏以切断AI代理的视觉数据采集入口。",
+          "【各方立场与态度】要求苹果、谷歌、微软建立技术规范以遏制第三方代理的深层访问。"
         ],
         "core_facts_en": [
-          "[Core Event] China Securities Regulatory Commission (CSRC): Mandating the relocation of incorporation to China for post-2023 red-chip entities as a prerequisite for offshore listing approval",
-          "[Root Cause & Mechanism] To strengthen substantive oversight and mitigate risks associated with the decoupling of offshore corporate entities from domestic business operations",
-          "[Market & Financial Detail] CSRC mandates relocation of incorporation for post-2023 red-chip firms seeking offshore listing.",
-          "[Key Position & Outlook] The tightening effectively curtails the viability of traditional red-chip structures for new IPO candidates."
+          "[Core Event] Meredith Whittaker, President of Signal (iOS and Android OS ecosystems): Restricting screenshot capabilities to block AI agent data harvesting",
+          "[Root Cause & Mechanism] Lack of granular application-level permissions for OS-integrated AI agents",
+          "[Key Technical Spec] Signal disables screenshots to block AI agent vision-based data harvesting.",
+          "[Official Stance & Demand] Call for Apple, Google, and Microsoft to establish technical frameworks to curb deep-link AI access."
         ],
-        "industry_impact_zh": "此举实质上终结了通过VIE或离岸红筹架构规避境内行业准入的监管灰色地带，标志着中国资本市场对外开放进入“实质穿透”新阶段。该政策将显著推高企业的合规成本与上市周期，预计香港及其他海外市场的中国IPO项目储备将面临大规模清理与架构重组压力。",
-        "industry_impact_en": "This regulatory shift effectively eliminates the grey areas previously used to bypass domestic industry entry barriers through offshore structures, marking a new phase of 'substantive transparency' in market regulation. The move will significantly increase compliance costs and IPO timelines, likely forcing a major restructuring or abandonment of offshore listing plans for many Chinese issuers."
+        "industry_impact_zh": "此举揭示了移动端操作系统厂商与第三方开发者在AI权限控制上的结构性冲突：操作系统底层代理正将“屏幕访问权限”转化为通用入口，迫使垂直隐私应用通过物理级功能降级进行防御。这种博弈不仅加剧了端侧计算环境的信任危机，还预示着未来移动应用开发框架必须将“抗AI抓取”列为核心安全标准，以应对操作系统层面的“数据越权”常态化。",
+        "industry_impact_en": "This move highlights the structural conflict between OS vendors and app developers over AI permission management, where system-level agents leverage 'screen access' as a universal entry point. It forces privacy-centric apps to adopt functional degradation as a defense, signaling that anti-AI harvesting protocols must become a core standard for mobile application security frameworks in the era of pervasive OS-integrated AI."
       },
       "headlines": [
+        {
+          "id": "b952719c121b8ac8",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Signal封禁系统级截屏以防御AI代理数据爬取",
+          "title_en": "Signal is blocking Gemini and Siri AI from reading your screen",
+          "source": "The Verge AI",
+          "published_at": "2026-11-20T12:30:47+00:00",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
+          "event_summary_zh": "Signal总裁Meredith Whittaker宣布在iOS与Android端默认禁用截屏功能，以防止Gemini与Siri等系统级AI代理抓取用户加密通讯隐私",
+          "event_summary_en": "Meredith Whittaker, President of Signal, announced that integrated OS-level AI agents undermine app-level privacy. To mitigate this, Signal has disabled screenshot functionality on iOS and Android to prevent AI assistants from harvesting encrypted message data, while demanding that OS providers implement transparent technical controls for developer-side AI access management.",
+          "core_facts_zh": [
+            "【核心事件】Signal总裁 Meredith Whittaker在iOS与Android移动操作系统生态：默认禁用截屏功能，防止AI代理读取屏幕信息",
+            "【起因与机理】操作系统集成的AI代理缺乏应用层权限隔离，构成隐私泄露威胁",
+            "【核心事实细节】Signal默认禁用截屏以切断AI代理的视觉数据采集入口。",
+            "【各方立场与态度】要求苹果、谷歌、微软建立技术规范以遏制第三方代理的深层访问。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Meredith Whittaker, President of Signal (iOS and Android OS ecosystems): Restricting screenshot capabilities to block AI agent data harvesting",
+            "[Root Cause & Mechanism] Lack of granular application-level permissions for OS-integrated AI agents",
+            "[Key Technical Spec] Signal disables screenshots to block AI agent vision-based data harvesting.",
+            "[Official Stance & Demand] Call for Apple, Google, and Microsoft to establish technical frameworks to curb deep-link AI access."
+          ],
+          "industry_impact_zh": "此举揭示了移动端操作系统厂商与第三方开发者在AI权限控制上的结构性冲突：操作系统底层代理正将“屏幕访问权限”转化为通用入口，迫使垂直隐私应用通过物理级功能降级进行防御。这种博弈不仅加剧了端侧计算环境的信任危机，还预示着未来移动应用开发框架必须将“抗AI抓取”列为核心安全标准，以应对操作系统层面的“数据越权”常态化。",
+          "industry_impact_en": "This move highlights the structural conflict between OS vendors and app developers over AI permission management, where system-level agents leverage 'screen access' as a universal entry point. It forces privacy-centric apps to adopt functional degradation as a defense, signaling that anti-AI harvesting protocols must become a core standard for mobile application security frameworks in the era of pervasive OS-integrated AI."
+        },
         {
           "id": "74262c647535916e",
           "tag_zh": "🔬 前沿技术",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "在通用大模型竞争白热化的背景下，具备大厂背景的核心团队依然是资本配置的首选，其核心逻辑在于技术迭代周期缩短对工程化落地经验的极高要求。该估值跃迁折射出AI行业正从单纯的技术模型比拼，迅速转向商业闭环与生态防御能力的竞争。",
           "industry_impact_en": "Amidst intensifying competition in LLMs, startups led by alumni from big-tech AI labs remain the primary target for capital, driven by the requirement for rapid industrial-scale deployment. This valuation surge signals a shift from pure model performance benchmarks to a focus on commercial closed-loop and ecological moat construction."
-        },
-        {
-          "id": "4f8fb0bee0f0cba6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Signal拟限截图功能以防AI读取私密对话",
-          "title_en": "Signal to Restrict Screenshots to Block AI Agents, Urges Regulation on Apple, Google and Microsoft",
-          "source": "Reuters",
-          "published_at": "2026-11-20T11:00:39+00:00",
-          "url": "https://www.reuters.com/legal/litigation/signal-restricts-screenshots-block-ai-agents-reading-messages-2026-11-20/",
-          "event_summary_zh": "Signal宣布将默认限制屏幕截图功能，防止苹果、谷歌及微软的操作系统级AI代理读取端到端加密信息",
-          "event_summary_en": "Signal has introduced default screenshot restrictions to prevent OS-level AI agents, such as Apple Siri and Google Gemini, from scraping screen data and bypassing end-to-end encryption. The company stated that these agents pose a severe privacy threat by leveraging system-level permissions and has urged Apple, Google, and Microsoft to provide more granular platform control tools.",
-          "core_facts_zh": [
-            "【核心事件】Signal (即时通讯软件供应商)：默认开启截图屏蔽功能，并呼吁科技巨头加强对AI读取行为的权限管控",
-            "【起因与机理】AI代理深度集成导致端到端加密数据在显示端被泄露的风险激增",
-            "【核心事实细节】Signal默认限制截图功能以对抗AI代理对屏幕内容的读取。",
-            "【各方立场与态度】Signal要求苹果、谷歌、微软开放对AI读取行为的底层控制权。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Signal (Secure messaging service provider) (OS-level privacy and security): Implemented default screenshot blocking and urged tech giants to restrict AI screen-scraping capabilities",
-            "[Root Cause & Mechanism] OS-integrated AI agents are effectively bypassing encryption by reading content directly from the screen",
-            "[Key Metrics] After news of Apple's AI agent development emerged, Meta shares fell about 2% and Anthropic more than 3% in after-hours trading.",
-            "[Official Stance & Demand] Signal demands platforms provide granular control over AI agents' access."
-          ],
-          "industry_impact_zh": "端到端加密架构正面临‘显示端泄露’的系统性失效风险，AI代理对屏幕像素的直接读取将彻底重构应用层的权限模型。科技巨头若不开放底层的‘隐私权限围栏’，将引发开发者与操作系统商在系统调用与数据捕获权上的剧烈对抗，隐私安全协议的基准线或将被迫重写。",
-          "industry_impact_en": "End-to-end encryption is facing a systemic failure risk at the 'display layer,' where AI agents' ability to scrape screen pixels renders traditional encryption moot. Unless platform owners establish more granular 'privacy fences,' we will see an escalation in conflicts between app developers and OS providers over data accessibility, likely necessitating a fundamental rewrite of privacy protocols."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 12:18:29 UTC",
+      "updated_at": "2026-11-20 12:34:02 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 12:18:29 UTC",
+      "updated_at": "2026-11-20 12:34:02 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
