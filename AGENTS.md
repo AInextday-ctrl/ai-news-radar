@@ -59,6 +59,10 @@
 4. **全要素持久化原子同步准则 (Atomic Multi-Container & Field Mirror Sync)**：
    - **多容器一致性**：更新或回填资讯条目时，必须保证全量存储容器（`data/latest_news.json` 中的 `items` 与 `grouped[category]`、`data/master_archive.json`、`data/archive_news.json`、`public/data/latest_news.json`、`public/data/archive/news/vol_{N}.json`）同步更新，严禁出现只改 `items` 却遗漏 `grouped` 导致静态发布器拉取旧数据的现象。
    - **镜像字段同步**：段落数组（`paragraphs` / `paragraphs_zh`）与长文字符串（`article_content` / `article_content_zh` / `original_content`）以及首段（`lead_paragraph`）必须保持原子级同步，杜绝因字段间数据脱节导致的渲染内容不一致。
+5. **首页与流水线零割裂同步铁律 (Zero-Disconnection Homepage & Pipeline Sync)**：
+   - **静态容器无状态幂等替换原则 (Idempotent SSR Container Replacement)**：服务端静态发布器（`content_publisher.py` 等）在向 HTML 模板注入最新内容流（`stream-news`、`stream-videos`、`stream-prompts`、`stream-tools`、`stream-arxiv` 等）时，**严禁使用单次匹配规则（如只匹配 HTML 注释 `<!--.*?-->`）**。所有流容器替换必须使用基于边界锚点的无状态全内容覆盖正则（`r'(<div [^>]*id="stream-..."[^>]*>)([\s\S]*?)(</div>\s*</div>...)'`），确保无论页面之前残留的是初始模板还是历史卡片，后续流水线每次运行均可 100% 覆盖刷新，绝不发生静默失效与内容冻结。
+   - **前后端水合时效强校验 (Strict Timestamp Hydration Sync)**：前端 SPA（`app.js`）在首屏复用静态 SSR DOM 时，**必须强制校验版本时间戳**（`ssrUpdated && data.updated_at && ssrUpdated === data.updated_at`）。严禁仅凭页面已有卡片 DOM 就盲目判定数据新鲜并提前 `return`；一旦远程数据版本更新，前端必须强制执行 `renderUI()` 重新水合渲染，保证前台看板与后台抓取永远保持秒级同频。
+   - **视觉布局与数据切片刚性耦合 (Visual Layout & Slice Capacity Coupling)**：栅格定高容器（如 `section-col-news` 与 `section-col-arena` 的 `1280px` 对齐）必须与卡片渲染切片数量严格精算匹配。严禁在预留双列 18-20 行大尺寸框架中仅注入 10 条数据导致下半区留下数百像素的刺眼白色空洞；切片水位线必须完全填满视觉框架，消除布局失衡与内容未填满感。
 
 ---
 
