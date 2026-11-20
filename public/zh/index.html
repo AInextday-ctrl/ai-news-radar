@@ -1852,8 +1852,36 @@ Ally 的条款称，客户“对人工智能采取的任何行动负责”。
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('123c4418a467174f', event)" itemscope itemtype="https://schema.org/NewsArticle">
+                <a href="/zh/news/123c4418a467174f" onclick="handleNewsTitleClick('123c4418a467174f', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="/images/cnbc_0c37f0c6c84d6562.jpg" alt="美商务部批准向中企出口87.9万颗AI芯片" width="480" height="270" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest('a')||this.parentElement; if(p) p.style.display='none';"></a>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ CNBC</span>
+                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
+                    </div>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
+                      <a href="/zh/news/123c4418a467174f" onclick="handleNewsTitleClick('123c4418a467174f', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
+                        美商务部批准向中企出口87.9万颗AI芯片
+                      </a>
+                    </h3>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      美国众议院外交事务委员会披露，商务部工业与安全局已批准向中国企业出口超87.9万颗AI芯片，引发国会对其监管有效性的质疑
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('123c4418a467174f')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>资讯概要</span>
+                    </button>
+                    <a href="https://www.cnbc.com/2026/11/19/nvidia-amd-china-chip-sales-congress.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      阅读原文 ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('f3e11e3c0eb441ee', event)" itemscope itemtype="https://schema.org/NewsArticle">
-                <a href="/zh/news/f3e11e3c0eb441ee" onclick="handleNewsTitleClick('f3e11e3c0eb441ee', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="/images/reuters_5302c24bf7ddc179.jpg" alt="特朗普解雇白宫网络安全主管" width="480" height="270" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest('a')||this.parentElement; if(p) p.style.display='none';"></a>
+                <a href="/zh/news/f3e11e3c0eb441ee" onclick="handleNewsTitleClick('f3e11e3c0eb441ee', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="/images/reuters_5302c24bf7ddc179.jpg" alt="特朗普解雇白宫网络安全主管" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest('a')||this.parentElement; if(p) p.style.display='none';"></a>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -2325,34 +2353,6 @@ Ally 的条款称，客户“对人工智能采取的任何行动负责”。
                       <span>资讯概要</span>
                     </button>
                     <a href="https://www.theinformation.com/articles/meta-bets-300-muse-charm-boost-ai-hardware-business" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      阅读原文 ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('a4b4c647fe434703', event)" itemscope itemtype="https://schema.org/NewsArticle">
-                <a href="/zh/news/a4b4c647fe434703" onclick="handleNewsTitleClick('a4b4c647fe434703', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="/images/decoder_6646d473a819af32.jpg" alt="AI模型单位算力成本急剧下探，用量与支出背离" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest('a')||this.parentElement; if(p) p.style.display='none';"></a>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ THE DECODER</span>
-                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
-                    </div>
-                    <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
-                      <a href="/zh/news/a4b4c647fe434703" onclick="handleNewsTitleClick('a4b4c647fe434703', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
-                        AI模型单位算力成本急剧下探，用量与支出背离
-                      </a>
-                    </h3>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Ramp与OpenRouter数据显示，AI模型Token单价六周内骤降21.2%，企业调用量持续创新高但总支出增速显著放缓
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a4b4c647fe434703')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>资讯概要</span>
-                    </button>
-                    <a href="https://the-decoder.com/ai-industry-growth-remains-strong-but-the-pace-is-slowing/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       阅读原文 ↗
                     </a>
                   </div>
