@@ -1161,6 +1161,7 @@ def load_existing_items() -> list:
     reuters_live_budget = 3
     fortune_live_budget = 3
     wsj_live_budget = 3
+    forbes_live_budget = 4
     verge_live_budget = 4
     nyt_live_budget = 4
     wapo_live_budget = 4
@@ -1320,6 +1321,30 @@ def load_existing_items() -> list:
                                 it["paragraphs"] = r_data.get("paragraphs", [])
                                 it["article_content"] = r_data["full_text"]
                                 it["article_content_en"] = r_data["full_text"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
+                        except Exception:
+                            pass
+                    # 若解析还原为 Forbes 福布斯，立即同步获取其源站真实官方标题、署名记者、官方原图与全文
+                    elif "forbes.com" in real_u.lower():
+                        try:
+                            from crawlers.forbes_crawler import crawl_forbes
+                            f_data = crawl_forbes(real_u, title=it.get("title", ""))
+                            if f_data.get("title"):
+                                it["title"] = f_data["title"]
+                                it["title_en"] = f_data["title"]
+                            if f_data.get("author") and f_data["author"] != "Forbes":
+                                it["author"] = f_data["author"]
+                            if f_data.get("cover_image"):
+                                it["image_url"] = f_data["cover_image"]
+                            if f_data.get("is_substantive") and f_data.get("full_text"):
+                                it["paragraphs"] = f_data.get("paragraphs", [])
+                                it["article_content"] = f_data["full_text"]
+                                it["article_content_en"] = f_data["full_text"]
+                                if f_data.get("paragraphs_zh"):
+                                    it["paragraphs_zh"] = f_data["paragraphs_zh"]
+                                if f_data.get("article_content_zh"):
+                                    it["article_content_zh"] = f_data["article_content_zh"]
                                 it["is_substantive"] = True
                                 it["is_paywalled"] = False
                         except Exception:
@@ -1527,6 +1552,68 @@ def load_existing_items() -> list:
                         it["is_paywalled"] = False
                         art_en_curr = w_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.4.1 福布斯 (Forbes) 官方真实标题、署名记者、imageio 官方原图与全文自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "forbes.com" in u_now.lower():
+            fb_ts = parse_time_for_sort(it)
+            is_recent_fb = (fb_ts > 0) and ((now_ts_load - fb_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_fb_fix = is_recent_fb and forbes_live_budget > 0 and (
+                ("(" in t_curr and "forbes" in t_curr.lower()) or
+                t_curr.startswith("Source:") or
+                not img_curr or
+                not img_curr.startswith("http") or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200 or
+                it.get("author") in ("Forbes", None, "")
+            )
+            if needs_fb_fix:
+                forbes_live_budget -= 1
+                try:
+                    from crawlers.forbes_crawler import crawl_forbes
+                    fb_data = crawl_forbes(u_now, title=t_curr)
+                    if fb_data.get("title"):
+                        it["title"] = fb_data["title"]
+                        it["title_en"] = fb_data["title"]
+                    if fb_data.get("author") and fb_data["author"] != "Forbes":
+                        it["author"] = fb_data["author"]
+                    if fb_data.get("cover_image") and str(fb_data["cover_image"]).startswith("http"):
+                        it["image_url"] = fb_data["cover_image"]
+                        it["cover_image"] = fb_data["cover_image"]
+                    if fb_data.get("is_substantive") and len(fb_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = fb_data.get("paragraphs", [])
+                        it["article_content"] = fb_data["full_text"]
+                        it["article_content_en"] = fb_data["full_text"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = fb_data["full_text"]
+                    if fb_data.get("paragraphs_zh") and len(fb_data.get("paragraphs_zh", [])) > 0:
+                        it["paragraphs_zh"] = fb_data["paragraphs_zh"]
+                        it["article_content_zh"] = fb_data.get("full_text_zh") or "\n\n".join(fb_data["paragraphs_zh"])
+                    elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
                         buf = ""

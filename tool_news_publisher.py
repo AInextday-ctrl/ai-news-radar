@@ -103,6 +103,8 @@ def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') ->
     if not raw_url or not isinstance(raw_url, str) or len(raw_url.strip()) < 10:
         return get_thematic_fallback_image(title, category)
     raw_url = raw_url.strip()
+    if raw_url.startswith('/images/') or raw_url.startswith('/img/'):
+        return f'https://ainewsradar.xyz{raw_url}'
     if not raw_url.startswith('https://') and not raw_url.startswith('http://'):
         return get_thematic_fallback_image(title, category)
     if raw_url.startswith('http://'):
@@ -1262,8 +1264,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     is_bloomberg = "bloomberg" in (item.get("source") or "").lower() or "bloomberg.com" in (item.get("url") or "").lower()
     is_fortune = "fortune" in (item.get("source") or "").lower() or "fortune.com" in (item.get("url") or "").lower()
     is_wsj = "wsj" in (item.get("source") or "").lower() or "wall street journal" in (item.get("source") or "").lower() or "wsj.com" in (item.get("url") or "").lower()
+    is_forbes = "forbes" in (item.get("source") or "").lower() or "forbes.com" in (item.get("url") or "").lower()
     is_dedicated_full = (
-        is_reuters or is_bloomberg or is_fortune or is_wsj or
+        is_reuters or is_bloomberg or is_fortune or is_wsj or is_forbes or
         any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/", "wired.com/", "technologyreview.com", "techcrunch.com", "arstechnica.com", "cnbc.com", "the-decoder.com", "openai.com/", "siliconangle.com", "semafor.com", "coindesk.com", "cbsnews.com", "ifixit.com", "9to5mac.com", "tomshardware.com", "bbc.com/", "bbc.co.uk/", "nypost.com", "techfundingnews.com", "://ign.com/", ".ign.com/", "anthropic.com/", "claude.com/"))
     )
     is_paywalled = bool((not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and item.get("is_paywalled")) or (not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"])))
@@ -1898,6 +1901,16 @@ def generate_all_landing_pages():
         except Exception:
             pass
 
+    # Load Forbes Cache for authentic photography, full verbatim paragraphs, and clean author attribution
+    forbes_cache = {}
+    fc_path = os.path.join(WORKSPACE_DIR, "data", "forbes_cache.json")
+    if os.path.exists(fc_path):
+        try:
+            with open(fc_path, "r", encoding="utf-8") as fcf:
+                forbes_cache = json.load(fcf)
+        except Exception:
+            pass
+
     # Ensure curated headline items (which have landing pages) are always in news
     for hf in ["data/curated_column_highlights.json", "public/data/curated_column_highlights.json"]:
         hp = os.path.join(WORKSPACE_DIR, hf)
@@ -1941,6 +1954,25 @@ def generate_all_landing_pages():
                 it["is_substantive"] = True
                 it["is_paywalled"] = False
 
+        # Check Forbes cache
+        if "forbes" in u.lower() or "forbes" in (it.get("source") or "").lower():
+            clean_u = u.split("#")[0].strip()
+            fc_entry = forbes_cache.get(clean_u)
+            if not fc_entry and clean_u:
+                try:
+                    from crawlers.forbes_crawler import crawl_forbes
+                    fc_entry = crawl_forbes(clean_u, title=it.get("title", ""))
+                except Exception:
+                    pass
+            if fc_entry:
+                for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                    if fc_entry.get(fld):
+                        it[fld] = fc_entry[fld]
+                if fc_entry.get("cover_image"):
+                    it["image_url"] = fc_entry["cover_image"]
+                it["is_substantive"] = True
+                it["is_paywalled"] = False
+
         if nid and nid in rich_lookup:
             rit = rich_lookup[nid]
             for fld in ("paragraphs", "paragraphs_zh", "article_content", "article_content_en", "article_content_zh", "subheadings", "inline_images"):
@@ -1975,6 +2007,17 @@ def generate_all_landing_pages():
                                         it[fld] = bc_entry[fld]
                                 if bc_entry.get("cover_image"):
                                     it["image_url"] = bc_entry["cover_image"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
+                        if "forbes" in u.lower() or "forbes" in (it.get("source") or "").lower():
+                            clean_u = u.split("#")[0].strip()
+                            fc_entry = forbes_cache.get(clean_u)
+                            if fc_entry:
+                                for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                                    if fc_entry.get(fld):
+                                        it[fld] = fc_entry[fld]
+                                if fc_entry.get("cover_image"):
+                                    it["image_url"] = fc_entry["cover_image"]
                                 it["is_substantive"] = True
                                 it["is_paywalled"] = False
                         news.append(it)

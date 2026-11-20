@@ -11,6 +11,7 @@ from .reuters_crawler import crawl_reuters, is_reuters_url
 from .bloomberg_crawler import crawl_bloomberg, is_bloomberg_url, resolve_bloomberg_broadcast_media
 from .fortune_crawler import crawl_fortune, is_fortune_url
 from .wsj_crawler import crawl_wsj, is_wsj_url
+from .forbes_crawler import crawl_forbes, is_forbes_url
 from .verge_crawler import crawl_verge, is_verge_url
 from .nyt_crawler import crawl_nyt, is_nyt_url
 from .wapo_crawler import crawl_wapo, is_wapo_url
@@ -47,6 +48,8 @@ __all__ = [
     "is_fortune_url",
     "crawl_wsj",
     "is_wsj_url",
+    "crawl_forbes",
+    "is_forbes_url",
     "crawl_verge",
     "is_verge_url",
     "crawl_nyt",
