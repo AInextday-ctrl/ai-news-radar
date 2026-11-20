@@ -7875,7 +7875,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return scoreB - scoreA;
       });
 
-      const displayPrompts = list.slice(0, 3);
+      // 自适应容器高度动态切片：工作流卡片自带大代码块预览(~360px)，切片 3 个即可填满(~1100px)；
+      // 纯提示词卡片为紧凑文本卡(~120px)，切片 8 个方可完全填满(~1100px)，彻底消除底部大片空白！
+      const targetCount = (homePromptFilter === 'wf') ? 3 : 8;
+      const displayPrompts = list.slice(0, targetCount);
       const streamPrompts = document.getElementById('stream-prompts');
       if (streamPrompts) {
         streamPrompts.innerHTML = displayPrompts.length > 0
@@ -8117,10 +8120,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         console.error('Error rendering stream-tools:', err);
       }
 
-      // D. 视频演示板块 (Videos) - 首页仅精选 Top 3 实战演示 (与落地工具及工作流 3卡片高度完美对齐)
+      // D. 视频演示板块 (Videos) - 首页精选 24~48h 内 Top 4 实战演示，完全填满视觉容器高度
       try {
         const dedupedVideos = dedupVideoItems(allVideos);
-        const displayVideos = dedupedVideos.slice(0, 3);
+        const displayVideos = dedupedVideos.slice(0, 4);
         const streamVideos = document.getElementById('stream-videos');
         if (streamVideos) {
           streamVideos.innerHTML = displayVideos.length > 0

@@ -3389,7 +3389,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             en_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
-        videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:3]
+        videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:4]
         videos_en_html = "\n".join([format_static_video_card(it, is_zh=False) for it in videos_list_en])
         pattern_videos_en = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_videos_en, en_content):
@@ -3397,7 +3397,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             en_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
-        prompts_list_en = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list if v.get("is_prompt")])[:3]
+        prompts_list_en = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list if v.get("is_prompt")])[:8]
         prompts_en_html = "\n".join([format_static_prompt_card(it, is_zh=False) for it in prompts_list_en])
         pattern_prompts_en = r'(<div [^>]*id="stream-prompts"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_prompts_en, en_content):
@@ -3963,7 +3963,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             zh_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
-        videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:3]
+        videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:4]
         videos_zh_html = "\n".join([format_static_video_card(it, is_zh=True) for it in videos_list_zh])
         pattern_videos_zh = r'(<div [^>]*id="stream-videos"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_videos_zh, zh_content):
@@ -3971,7 +3971,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         else:
             zh_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
-        prompts_list_zh = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list_zh if v.get("is_prompt")])[:3]
+        prompts_list_zh = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list_zh if v.get("is_prompt")])[:8]
         prompts_zh_html = "\n".join([format_static_prompt_card(it, is_zh=True) for it in prompts_list_zh])
         pattern_prompts_zh = r'(<div [^>]*id="stream-prompts"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
         if re.search(pattern_prompts_zh, zh_content):
