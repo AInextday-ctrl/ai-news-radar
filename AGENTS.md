@@ -62,7 +62,15 @@
 5. **首页与流水线零割裂同步铁律 (Zero-Disconnection Homepage & Pipeline Sync)**：
    - **静态容器无状态幂等替换原则 (Idempotent SSR Container Replacement)**：服务端静态发布器（`content_publisher.py` 等）在向 HTML 模板注入最新内容流（`stream-news`、`stream-videos`、`stream-prompts`、`stream-tools`、`stream-arxiv` 等）时，**严禁使用单次匹配规则（如只匹配 HTML 注释 `<!--.*?-->`）**。所有流容器替换必须使用基于边界锚点的无状态全内容覆盖正则（`r'(<div [^>]*id="stream-..."[^>]*>)([\s\S]*?)(</div>\s*</div>...)'`），确保无论页面之前残留的是初始模板还是历史卡片，后续流水线每次运行均可 100% 覆盖刷新，绝不发生静默失效与内容冻结。
    - **前后端水合时效强校验 (Strict Timestamp Hydration Sync)**：前端 SPA（`app.js`）在首屏复用静态 SSR DOM 时，**必须强制校验版本时间戳**（`ssrUpdated && data.updated_at && ssrUpdated === data.updated_at`）。严禁仅凭页面已有卡片 DOM 就盲目判定数据新鲜并提前 `return`；一旦远程数据版本更新，前端必须强制执行 `renderUI()` 重新水合渲染，保证前台看板与后台抓取永远保持秒级同频。
-   - **视觉布局与数据切片刚性耦合 (Visual Layout & Slice Capacity Coupling)**：栅格定高容器（如 `section-col-news` 与 `section-col-arena` 的 `1280px` 对齐）必须与卡片渲染切片数量严格精算匹配。严禁在预留双列 18-20 行大尺寸框架中仅注入 10 条数据导致下半区留下数百像素的刺眼白色空洞；切片水位线必须完全填满视觉框架，消除布局失衡与内容未填满感。
+   - **视觉布局与数据切片刚性耦合 (Visual Layout & Slice Capacity Coupling)**：栅格定高容器（如 `section-col-news` 与 `section-col-arena` 的 `1280px` 对齐）必须与卡片渲染切片数量严格精算匹配。在底部三列板块（落地工具、实战视频、工作流/提示词）中，**严禁使用固定少量切片导致下半区出现发白空洞**。实战视频必须动态回溯 24~48 小时内的优质内容切片取满 4 张横版视频卡（~1180px），紧凑提示词取满 8 张卡，深度工作流取满 3 张卡，确保三列视觉高度严格等高对齐，消除任何视觉断崖。
+6. **24 小时极致时效性静态优先与极限 SEO/GEO 架构准则 (24h Static-First & Advanced SEO/GEO Invariants)**：
+   - **快讯首屏时间戳绝对倒序**：服务端静态生成器（`content_publisher.py`）向首页快讯流（`stream-news`）注入内容时，必须优先以完整主库（`data/latest_news.json`）为源，严格按 `raw_published_at` 倒序切片，前台优先固化近 1~6 小时内发布的突发资讯，确保访客与爬虫首屏即见最新进展。
+   - **Schema.org 强结构化微数据闭环**：静态渲染的每一条快讯 `<article>` 必须显式声明 `itemscope itemtype="https://schema.org/NewsArticle"`，并内置 `<meta itemprop="headline">`、`<meta itemprop="datePublished">` 与 `<meta itemprop="dateModified">`，最大化触发 Google News **QDF (Query Deserves Freshness)** 算法，并为 AI 搜索引擎（Perplexity、Copilot、ChatGPT Search 等）提供结构化时效证明。
+   - **Core Web Vitals 零闪烁与首屏 LCP 极速直出**：
+     - 首屏英雄多媒体必须在 `<head>` 中动态注入 `<link rel="preload" as="image" href="..." fetchpriority="high">`；
+     - 严禁对视频封面等依赖第三方不可靠反代（如 `wsrv.nl`），必须直接使用源站官方 CDN（如 YouTube `i.ytimg.com`）或自托管 CDN，缺省回退中性卡（`/images/og-default.jpg`），严禁库存假图；
+     - 所有媒体容器必须显式声明固定宽高比（如 `aspect-video`、`width="480" height="270"`），彻底将累积布局位移消除至零（`CLS = 0`）。
+   - **自动化 IndexNow 实时索引推送到端**：静态页面生成完成后，必须同步向 Bing / Microsoft Copilot 的 IndexNow API 批量推送最新变动的公开 URL，达成全网秒级收录。
 
 ---
 
@@ -106,3 +114,19 @@
    - 任何“图注混入正文”、“付费墙穿透失败”或“列表冒充长文”，根源均在于系统自身解析规则不严、防御性卫语句缺失或规范化不足，严禁将内部工程缺陷归因于“信源有问题”。
 2. **所有偶发缺陷必须通过门禁代码化固锁**：
    - 每解决一个解析或排版异常，必须将对应的防御逻辑同时写入爬虫模块、前端提取器和 `tests/test_data_quality_gate.py` 硬性断言，杜绝口头修补与历史回退。
+
+---
+
+## 8. 模型版本泛化与时效保鲜准则 (Model Version Abstraction & Evergreen Invariants)
+
+1. **零硬编码易碎微版本号**：
+   - 现代前沿大模型以周/月为周期高频迭代。在工作流、提示词库、实战指南或前台标签中，凡非官方专属依赖的通用技术方案，**严禁自行捏造或追加具体的模型微版本号**（如 `Claude 3.7 / 3.5 Sonnet`、`GPT-4o`、`DeepSeek-V3` 等易随时间迅速过时的旧代号）。
+2. **能力分级抽象与长期通用体系**：
+   - 所有模型适配范围必须统一抽象为通用的**技术栈/能力梯队系列**：
+     - 编程/Agent 架构类：`主流编程大模型通用 (Claude / GPT / DeepSeek 系列)` / `Universal LLMs (Claude / GPT / DeepSeek)`；
+     - 协议与智能体类：`Claude 系列 / 支持 MCP 协议的智能体` / `Agents with MCP Protocol Support`；
+     - 本地与开源推理类：`DeepSeek 系列 / 本地开源推理模型` / `Open-Source Reasoning LLMs`；
+     - 复杂逻辑与数学推导：`主流长思维链 / 复杂推理大模型` / `Frontier Reasoning LLMs`；
+     - 默认通用：`主流大语言模型通用` / `Universal SOTA LLMs`。
+3. **跨语言镜像纯正性保障**：
+   - 英文版静态渲染与客户端必须对模型适用范围做原生英文化（如 `Universal LLMs`），严禁将带中文的字符直接裁剪导致产生半截括号（如 `(Claude / GPT / DeepSeek`）的破损排版。
