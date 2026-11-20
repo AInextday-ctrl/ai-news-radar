@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-20 22:46:30 UTC",
+  "generated_at": "2026-11-20 23:04:22 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-20 22:46:30 UTC",
+      "updated_at": "2026-11-20 23:04:22 UTC",
       "headline_item": {
-        "id": "eed97af23850c34f",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "人工分析称 Inkling 2 Mini 具有 5.4B 的活动参数，其智能指数与 Qwen3.8 27B (xhigh) 相匹配，但活动参数少约 5 倍（人工分析）",
-        "title_en": "Artificial Analysis says Inkling 2 Mini, with 5.4B active parameters, matches Qwen3.8 27B (xhigh) on its Intelligence Index with ~5x fewer active parameters (Artificial Analysis)",
-        "source": "Artificial Analysis",
-        "published_at": "2026-11-20T22:10:00+00:00",
-        "url": "https://artificialanalysis.ai/articles/inkling-2-mini",
-        "event_summary_zh": "Thinking Machines推出具备5.4B激活参数的Inkling 2 Mini模型，在保持高性能的同时显著降低计算成本",
-        "event_summary_en": "Thinking Machines has released the open-weights Inkling 2 Mini model, utilizing a mixture-of-experts (MoE) architecture with 26B total and 5.4B active parameters. By employing looped Transformer layers, the model achieves performance parity with Qwen3.8 27B while utilizing only 20% of the active parameters, all under an Apache 2.0 license.",
+        "id": "1071ca08ccc035bd",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "美国农业部遭遇网络攻击，涉农民支付系统安全",
+        "title_en": "Sources: hackers breached the US Department of Agriculture's system that facilitates payments to farmers this week (Julia Ainsley/NBC News)",
+        "source": "NBC News",
+        "published_at": "2026-11-20T22:50:01+00:00",
+        "url": "https://www.nbcnews.com/politics/national-security/agriculture-department-breached-hackers-sources-say-rcna610497",
+        "event_summary_zh": "美国农业部本周遭遇网络攻击，引发针对关键农产品支付系统及敏感数据保护的严峻合规担忧",
+        "event_summary_en": "The U.S. Department of Agriculture (USDA) suffered a cyberattack this week, impacting the core system responsible for processing payments to farmers. This breach raises significant concerns regarding the compromise of sensitive data and the vulnerability of critical federal infrastructure to sophisticated cyber threats.",
         "core_facts_zh": [
-          "【核心事件】Thinking Machines（模型开发机构）：发布Inkling 2 Mini开源模型，实现高效推理架构",
-          "【起因与机理】在帕累托前沿提升模型智能与计算资源使用的匹配度",
-          "【关键数据与实测】计算效率对比：较Qwen3.8 27B减少约5倍激活参数及2.8倍计算功耗。",
-          "【各方立场与态度】采用26B总参数、5.4B激活参数的MoE循环架构，支持1M上下文。"
+          "【核心事件】美国农业部（USDA）在美国联邦农业支付处理系统：遭遇恶意网络入侵，存在敏感个人及财务数据泄露风险",
+          "【起因与机理】作为国家粮食安全与农业经济核心枢纽，农业部系统成为网络攻击的高价值目标",
+          "【核心事实细节】核心事件：美国农业部遭受网络入侵导致支付系统安全受损。",
+          "【行业影响与走向】后续影响：引发政府部门对关键基础设施数字资产保护及数据合规性的严苛审查。"
         ],
         "core_facts_en": [
-          "[Core Event] Thinking Machines: Released Inkling 2 Mini with high efficiency MoE architecture",
-          "[Root Cause & Mechanism] To improve Pareto frontier efficiency between model intelligence and compute cost",
-          "[Key Metrics] Features 26B total/5.4B active MoE looped architecture with 1M context window.",
-          "[Key Position & Outlook] Efficiency: achieves parity with Qwen3.8 27B using ~5x fewer active parameters and ~2.8x less compute."
+          "[Core Event] U.S. Department of Agriculture (USDA): Cyberattack resulting in potential exposure of sensitive financial and personal data",
+          "[Root Cause & Mechanism] Targeting of essential national food and economic security infrastructure",
+          "[Key Fact Detail] Core incident: USDA hit by a cyberattack compromising payment system integrity.",
+          "[Industry Impact & Outlook] Impact: Triggers immediate scrutiny over digital asset protection and compliance across federal critical infrastructure."
         ],
-        "industry_impact_zh": "循环Transformer技术通过高频复用固定参数层，在不显著增加显存负担的前提下有效提升了模型的逻辑推演能力。这一架构演进标志着开源模型正跨越参数堆叠的粗放阶段，进入以计算成本为核心竞争力、追求帕累托最优的精细化部署时期。",
-        "industry_impact_en": "The use of looped Transformer layers successfully enhances logical reasoning without linearly scaling memory overhead, signaling a shift in open-weights model design toward compute-efficient Pareto optimization. This approach highlights that future model deployment competition will center on maximizing intelligence density per unit of compute rather than mere parameter scaling."
+        "industry_impact_zh": "此次攻击凸显了联邦部门在数字化转型进程中，核心业务流程向云端迁移后的合规性与边界防御盲区。农业支付系统作为国家粮食安全供应链的数字孪生，一旦被篡改或瘫痪，将直接引发行业信用体系动荡，其暴露的防御短板需警示关键基础设施运营商对分布式系统进行深度安全加固。",
+        "industry_impact_en": "This breach highlights the security blind spots and compliance risks faced by federal agencies during digital transformation. As the digital proxy for agricultural supply chain security, the compromise of payment systems signals a systemic vulnerability that necessitates immediate, hardened security protocols for all critical infrastructure distributed networks."
       },
       "headlines": [
+        {
+          "id": "1071ca08ccc035bd",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国农业部遭遇网络攻击，涉农民支付系统安全",
+          "title_en": "Sources: hackers breached the US Department of Agriculture's system that facilitates payments to farmers this week (Julia Ainsley/NBC News)",
+          "source": "NBC News",
+          "published_at": "2026-11-20T22:50:01+00:00",
+          "url": "https://www.nbcnews.com/politics/national-security/agriculture-department-breached-hackers-sources-say-rcna610497",
+          "event_summary_zh": "美国农业部本周遭遇网络攻击，引发针对关键农产品支付系统及敏感数据保护的严峻合规担忧",
+          "event_summary_en": "The U.S. Department of Agriculture (USDA) suffered a cyberattack this week, impacting the core system responsible for processing payments to farmers. This breach raises significant concerns regarding the compromise of sensitive data and the vulnerability of critical federal infrastructure to sophisticated cyber threats.",
+          "core_facts_zh": [
+            "【核心事件】美国农业部（USDA）在美国联邦农业支付处理系统：遭遇恶意网络入侵，存在敏感个人及财务数据泄露风险",
+            "【起因与机理】作为国家粮食安全与农业经济核心枢纽，农业部系统成为网络攻击的高价值目标",
+            "【核心事实细节】核心事件：美国农业部遭受网络入侵导致支付系统安全受损。",
+            "【行业影响与走向】后续影响：引发政府部门对关键基础设施数字资产保护及数据合规性的严苛审查。"
+          ],
+          "core_facts_en": [
+            "[Core Event] U.S. Department of Agriculture (USDA): Cyberattack resulting in potential exposure of sensitive financial and personal data",
+            "[Root Cause & Mechanism] Targeting of essential national food and economic security infrastructure",
+            "[Key Fact Detail] Core incident: USDA hit by a cyberattack compromising payment system integrity.",
+            "[Industry Impact & Outlook] Impact: Triggers immediate scrutiny over digital asset protection and compliance across federal critical infrastructure."
+          ],
+          "industry_impact_zh": "此次攻击凸显了联邦部门在数字化转型进程中，核心业务流程向云端迁移后的合规性与边界防御盲区。农业支付系统作为国家粮食安全供应链的数字孪生，一旦被篡改或瘫痪，将直接引发行业信用体系动荡，其暴露的防御短板需警示关键基础设施运营商对分布式系统进行深度安全加固。",
+          "industry_impact_en": "This breach highlights the security blind spots and compliance risks faced by federal agencies during digital transformation. As the digital proxy for agricultural supply chain security, the compromise of payment systems signals a systemic vulnerability that necessitates immediate, hardened security protocols for all critical infrastructure distributed networks."
+        },
         {
           "id": "eed97af23850c34f",
           "tag_zh": "🔬 前沿技术",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "Cognition AI在数月内实现估值跨越式膨胀，反映出资本市场已从大模型底座的博弈转向对具备业务闭环能力的AI Agent落地潜力的押注。这种高溢价融资将加剧AI应用层的马太效应，通过雄厚的资本储备加速对全栈工程自动化开发工具的垄断，进而对传统软件开发岗位及外包业务模式产生深层冲击。",
           "industry_impact_en": "The meteoric valuation of Cognition AI signals a pivot in venture capital from foundational LLMs to autonomous agents with tangible execution capabilities. This aggressive funding trajectory will likely entrench market dominance through capital-intensive R&D, accelerating the displacement of traditional software engineering workflows."
-        },
-        {
-          "id": "5bda8a3d21f41db6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Etsy新规引发创作者集体出走",
-          "title_en": "Many Etsy Sellers Close Up Shop Over Site’s New A.I. Policy",
-          "source": "New York Times",
-          "published_at": "2026-11-20T21:30:03+00:00",
-          "url": "https://www.nytimes.com/2026/11/20/arts/etsy-ai-policy.html",
-          "event_summary_zh": "Etsy因调整服务条款，授权第三方调用卖家数据训练AI，导致资深商家关闭店铺抵制",
-          "event_summary_en": "Etsy has introduced new terms of service, effective December 16, allowing the company and its third-party partners to use seller content for training and testing AI models. This prompted widespread backlash and shop closures from creators, despite claims from James Ossman, VP of customer operations, that data use is restricted to fraud detection and advertising, as users remain concerned about the lack of opt-out mechanisms and potential IP exploitation.",
-          "core_facts_zh": [
-            "【核心事件】Etsy（电商平台），James Ossman（客户运营副总裁）在Etsy平台服务条款更新：强制授权平台及第三方利用卖家作品训练AI模型，且未提供拒绝选项",
-            "【起因与机理】平台面临股东压力需拥抱AI技术，而创作者面临知识产权变现与流失风险",
-            "【核心事实细节】Etsy新条款强制授权AI数据训练权限，缺乏退出机制。",
-            "【各方立场与态度】平台需平衡AI技术部署与核心卖家的权益保护。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Etsy, James Ossman (VP of Customer Operations) (Updated Etsy Terms of Service): Compulsory authorization for AI training using seller data without opt-out options",
-            "[Root Cause & Mechanism] Institutional pressure to integrate AI vs. creator rights protection",
-            "[Key Fact Detail] Etsy mandates AI training rights on user content with no opt-out.",
-            "[Key Position & Outlook] Platform struggle to balance AI integration vs. seller rights."
-          ],
-          "industry_impact_zh": "此事件反映了内容平台在AI转型期的合规性危机，即平台“数据所有权”与创作者“知识产权”的结构性矛盾。若缺乏透明的授权机制与收益对价，平台通过AI榨取长尾内容价值将导致生态失衡，最终造成高质量创作资源的流失与社区价值的毁灭性衰减。",
-          "industry_impact_en": "This incident highlights the structural conflict between platform data-mining mandates and creator IP rights during the AI transition. Without transparent authorization and value-sharing mechanisms, the forced extraction of creator data to train AI risks long-term ecological depletion and the exodus of the platform's core creative capital."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-20 22:46:31 UTC",
+      "updated_at": "2026-11-20 23:04:22 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-20 22:46:31 UTC",
+      "updated_at": "2026-11-20 23:04:22 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
