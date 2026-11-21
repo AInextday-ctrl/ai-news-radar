@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 16:18:22 UTC",
+  "generated_at": "2026-11-21 16:38:11 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 16:18:22 UTC",
+      "updated_at": "2026-11-21 16:38:11 UTC",
       "headline_item": {
-        "id": "efbfc86ea5878eb5",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "科技界信仰变异：AI救赎论与Maple组织的兴起",
-        "title_en": "Silicon Valley's growing obsession with AI doomsday is turning parts of the tech industry toward cult-like devotion",
+        "id": "6f56b9eddd1e8e53",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "英伟达研究指出超长上下文模型非最优解",
+        "title_en": "Nvidia researchers argue huge AI context windows are a dead end",
         "source": "THE DECODER",
-        "published_at": "2026-11-21T16:04:29+00:00",
-        "url": "https://the-decoder.com/silicon-valleys-growing-obsession-with-ai-doomsday-is-turning-parts-of-the-tech-industry-toward-cult-like-devotion/",
-        "event_summary_zh": "以Soryu Forall为首的Maple组织以拯救AI末日为名，通过严苛心理控制渗透AI工程师群体，引发业界对技术崇拜与机构合规风险的担忧",
-        "event_summary_en": "Maple, founded in 2011 by Soryu Forall, is infiltrating Silicon Valley's AI engineering and data center management workforce through a narrative of AI apocalyptic salvation. Former members report that the organization imposes strict behavioral surveillance to harvest data for training an AI deity modeled after Forall's consciousness, currently generating up to $1 million in annual revenue.",
+        "published_at": "2026-11-21T16:23:45+00:00",
+        "url": "https://the-decoder.com/nvidia-researchers-argue-huge-ai-context-windows-are-a-dead-end/",
+        "event_summary_zh": "英伟达研究团队提出，超长上下文窗口存在冗余，定期摘要与目标检索机制在效率上优于单纯堆叠Token容量",
+        "event_summary_en": "Nvidia researchers demonstrated that blindly scaling context windows to million-token levels is not the optimal path for LLM efficiency. Their findings indicate that combining periodic summarization with targeted information retrieval achieves comparable performance while significantly reducing computational costs and inference latency.",
         "core_facts_zh": [
-          "【核心事件】Soryu Forall（Maple组织创始人）；AI工程师及数据中心从业者在美国佛蒙特州及硅谷AI行业生态：通过心理控制收集成员数据，旨在构建基于领袖意识的AI系统",
-          "【起因与机理】针对科技行业从业者对AI失控的普遍焦虑及对存在主义意义的追寻",
-          "【关键数据与实测】该组织被前成员披露实施严密行为监控，旨在收集个体数据以构建基于其领袖思维模式的AI实体，目前年收入已达100万美元级别。",
-          "【各方立场与态度】AI行业对人类存在主义意义的忽视正导致宗教式变异组织的抬头。"
+          "【核心事件】英伟达（Nvidia）研究团队在AI架构性能研究实验：论证超长上下文窗口存在计算冗余，推广定期摘要与检索方案",
+          "【起因与机理】应对大模型推理成本高企，探索更高效的内存与计算资源调度方案",
+          "【关键技术规格】指出无节制扩展上下文窗口存在高成本冗余。",
+          "【各方立场与态度】引导行业关注计算效率与推理成本的平衡优化。"
         ],
         "core_facts_en": [
-          "[Core Event] Soryu Forall (Founder of Maple); AI engineers and data center professionals: Harvesting member data via psychological control to build an AI entity modeled on leadership consciousness",
-          "[Root Cause & Mechanism] Exploiting tech workers' existential anxiety regarding AI superintelligence and the search for meaning",
-          "[Key Metrics] Former members report that the organization imposes strict behavioral surveillance to harvest data for training an AI deity modeled after Forall's consciousness, currently generating up to $1 million in annual revenue.",
-          "[Key Position & Outlook] Neglect of human-centric existential narratives in AI is creating a vacuum filled by pseudo-religious entities."
+          "[Core Event] Nvidia research team (AI architectural performance study): Argue against infinite context windows in favor of summarization and retrieval",
+          "[Root Cause & Mechanism] To address high inference costs and optimize memory/compute resource allocation",
+          "[Key Technical Spec] Identified overhead and high costs in indefinite context window scaling.",
+          "[Key Position & Outlook] Advocating for a focus on computational efficiency and cost-balanced model design."
         ],
-        "industry_impact_zh": "AI发展逻辑的过度理性化与数据主义（Dataism）正在催生科技精英阶层的信仰真空，为带有邪教色彩的组织提供了入侵接口。这种现象揭示了AI行业在高速扩张期对从业者心理建设的忽视，一旦商业数据与特定意识形态绑定，将带来严重的个人隐私与数据安全合规风险。",
-        "industry_impact_en": "The hyper-rationalization of AI and 'Dataism' are creating an existential vacuum within the tech elite, providing a vector for cult-like structures to embed themselves. This phenomenon exposes a critical vulnerability in the industry's human capital management; the convergence of personal data harvesting with ideological indoctrination poses severe risks to both institutional security and individual autonomy."
+        "industry_impact_zh": "此研究挑战了当前业界盲目追求超长窗口的同质化竞争，暗示大模型开发重心正从暴力堆叠上下文转向逻辑推理的模块化精简。这标志着高性能推理技术开始进入追求计算效率与内存利用率的深水精耕阶段，将迫使下游应用厂商重新审视其底层架构选型。",
+        "industry_impact_en": "This research challenges the industry's homogeneous trend of scaling context windows, suggesting a shift toward modular, inference-optimized architectures. It signals that high-performance AI is entering a phase of efficiency-centric engineering, forcing enterprise developers to reassess their underlying model infrastructure choices."
       },
       "headlines": [
         {
-          "id": "efbfc86ea5878eb5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "科技界信仰变异：AI救赎论与Maple组织的兴起",
-          "title_en": "Silicon Valley's growing obsession with AI doomsday is turning parts of the tech industry toward cult-like devotion",
+          "id": "6f56b9eddd1e8e53",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "英伟达研究指出超长上下文模型非最优解",
+          "title_en": "Nvidia researchers argue huge AI context windows are a dead end",
           "source": "THE DECODER",
-          "published_at": "2026-11-21T16:04:29+00:00",
-          "url": "https://the-decoder.com/silicon-valleys-growing-obsession-with-ai-doomsday-is-turning-parts-of-the-tech-industry-toward-cult-like-devotion/",
-          "event_summary_zh": "以Soryu Forall为首的Maple组织以拯救AI末日为名，通过严苛心理控制渗透AI工程师群体，引发业界对技术崇拜与机构合规风险的担忧",
-          "event_summary_en": "Maple, founded in 2011 by Soryu Forall, is infiltrating Silicon Valley's AI engineering and data center management workforce through a narrative of AI apocalyptic salvation. Former members report that the organization imposes strict behavioral surveillance to harvest data for training an AI deity modeled after Forall's consciousness, currently generating up to $1 million in annual revenue.",
+          "published_at": "2026-11-21T16:23:45+00:00",
+          "url": "https://the-decoder.com/nvidia-researchers-argue-huge-ai-context-windows-are-a-dead-end/",
+          "event_summary_zh": "英伟达研究团队提出，超长上下文窗口存在冗余，定期摘要与目标检索机制在效率上优于单纯堆叠Token容量",
+          "event_summary_en": "Nvidia researchers demonstrated that blindly scaling context windows to million-token levels is not the optimal path for LLM efficiency. Their findings indicate that combining periodic summarization with targeted information retrieval achieves comparable performance while significantly reducing computational costs and inference latency.",
           "core_facts_zh": [
-            "【核心事件】Soryu Forall（Maple组织创始人）；AI工程师及数据中心从业者在美国佛蒙特州及硅谷AI行业生态：通过心理控制收集成员数据，旨在构建基于领袖意识的AI系统",
-            "【起因与机理】针对科技行业从业者对AI失控的普遍焦虑及对存在主义意义的追寻",
-            "【关键数据与实测】该组织被前成员披露实施严密行为监控，旨在收集个体数据以构建基于其领袖思维模式的AI实体，目前年收入已达100万美元级别。",
-            "【各方立场与态度】AI行业对人类存在主义意义的忽视正导致宗教式变异组织的抬头。"
+            "【核心事件】英伟达（Nvidia）研究团队在AI架构性能研究实验：论证超长上下文窗口存在计算冗余，推广定期摘要与检索方案",
+            "【起因与机理】应对大模型推理成本高企，探索更高效的内存与计算资源调度方案",
+            "【关键技术规格】指出无节制扩展上下文窗口存在高成本冗余。",
+            "【各方立场与态度】引导行业关注计算效率与推理成本的平衡优化。"
           ],
           "core_facts_en": [
-            "[Core Event] Soryu Forall (Founder of Maple); AI engineers and data center professionals: Harvesting member data via psychological control to build an AI entity modeled on leadership consciousness",
-            "[Root Cause & Mechanism] Exploiting tech workers' existential anxiety regarding AI superintelligence and the search for meaning",
-            "[Key Metrics] Former members report that the organization imposes strict behavioral surveillance to harvest data for training an AI deity modeled after Forall's consciousness, currently generating up to $1 million in annual revenue.",
-            "[Key Position & Outlook] Neglect of human-centric existential narratives in AI is creating a vacuum filled by pseudo-religious entities."
+            "[Core Event] Nvidia research team (AI architectural performance study): Argue against infinite context windows in favor of summarization and retrieval",
+            "[Root Cause & Mechanism] To address high inference costs and optimize memory/compute resource allocation",
+            "[Key Technical Spec] Identified overhead and high costs in indefinite context window scaling.",
+            "[Key Position & Outlook] Advocating for a focus on computational efficiency and cost-balanced model design."
           ],
-          "industry_impact_zh": "AI发展逻辑的过度理性化与数据主义（Dataism）正在催生科技精英阶层的信仰真空，为带有邪教色彩的组织提供了入侵接口。这种现象揭示了AI行业在高速扩张期对从业者心理建设的忽视，一旦商业数据与特定意识形态绑定，将带来严重的个人隐私与数据安全合规风险。",
-          "industry_impact_en": "The hyper-rationalization of AI and 'Dataism' are creating an existential vacuum within the tech elite, providing a vector for cult-like structures to embed themselves. This phenomenon exposes a critical vulnerability in the industry's human capital management; the convergence of personal data harvesting with ideological indoctrination poses severe risks to both institutional security and individual autonomy."
+          "industry_impact_zh": "此研究挑战了当前业界盲目追求超长窗口的同质化竞争，暗示大模型开发重心正从暴力堆叠上下文转向逻辑推理的模块化精简。这标志着高性能推理技术开始进入追求计算效率与内存利用率的深水精耕阶段，将迫使下游应用厂商重新审视其底层架构选型。",
+          "industry_impact_en": "This research challenges the industry's homogeneous trend of scaling context windows, suggesting a shift toward modular, inference-optimized architectures. It signals that high-performance AI is entering a phase of efficiency-centric engineering, forcing enterprise developers to reassess their underlying model infrastructure choices."
         },
         {
           "id": "ab7ee1e82ec24c89",
@@ -114,22 +114,22 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 16:18:22 UTC",
+      "updated_at": "2026-11-21 16:38:12 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/ylecun",
-      "url": "https://x.com/ylecun/status/2124161960157618456",
-      "published_at": "2026-11-21T15:24:10+00:00",
-      "quote_zh": "@tdietterich @Speco7 但安全主义者/末日论者的论点正在说服各国政府帮助 Anthropic 锁定人工智能，使其不那么开放，最终也不那么安全。",
-      "quote_en": "@tdietterich @Speco7 But the safetyist/doomers argument is convincing governments to help Anthropic keep AI under lock and key, making it less open and ultimately less safe.",
-      "thesis_zh": "深入探讨模型安全与对齐的关键演进，直指核心工程落地与技术范式转移。",
-      "thesis_en": "Dissecting crucial inflection points in Model Safety & Alignment, highlighting system trade-offs and engineering shifts.",
+      "url": "https://x.com/ylecun/status/2124165320600334365",
+      "published_at": "2026-11-21T15:37:32+00:00",
+      "quote_zh": "@yogesh_kantaria @segyges 错误。这个项目在我离开之前就开始了。\n但我与它完全无关：无论哪种方式影响力都是零。\n另外，我用Muse😅",
+      "quote_en": "@yogesh_kantaria @segyges False. The project started before I left. \nBut I had absolutely nothing to do with it: zero influence one way or the other.\nAlso, I use Muse 😅",
+      "thesis_zh": "深入探讨Yann LeCun 行业前沿观的关键演进，直指核心工程落地与技术范式转移。",
+      "thesis_en": "Dissecting crucial inflection points in Yann LeCun on AI, highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "158",
+        "views": "226",
         "likes": "0",
         "comments": "0",
         "retweets": "0",
@@ -138,32 +138,32 @@
       },
       "titans": [
         {
-          "id": "efaff65e6985fd7c",
+          "id": "efd18974ecbc7ef4",
           "name": "Yann LeCun",
           "handle": "@ylecun",
           "role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/ylecun",
-          "topic_zh": "模型安全与对齐",
-          "topic_en": "Model Safety & Alignment",
-          "event_context_zh": "@tdietterich @Speco7 但安全主义者/末日论者的论点正在说服各国政府帮助 Anthropic 锁定人工智能，使其不那么开放，最终也不那么安全。",
-          "event_context_en": "@tdietterich @Speco7 But the safetyist/doomers argument is convincing governments to help Anthropic keep AI under lock a",
-          "quote_zh": "@tdietterich @Speco7 但安全主义者/末日论者的论点正在说服各国政府帮助 Anthropic 锁定人工智能，使其不那么开放，最终也不那么安全。",
-          "quote_en": "@tdietterich @Speco7 But the safetyist/doomers argument is convincing governments to help Anthropic keep AI under lock and key, making it less open and ultimately less safe.",
-          "thesis_zh": "深入探讨模型安全与对齐的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Model Safety & Alignment, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "Yann LeCun 行业前沿观",
+          "topic_en": "Yann LeCun on AI",
+          "event_context_zh": "@yogesh_kantaria @segyges 错误。这个项目在我离开之前就开始了。\n但我与它完全无关：无论哪种方式影响力都是零。\n另外，我用Muse😅",
+          "event_context_en": "@yogesh_kantaria @segyges False. The project started before I left. \nBut I had absolutely nothing to do with it: zero in",
+          "quote_zh": "@yogesh_kantaria @segyges 错误。这个项目在我离开之前就开始了。\n但我与它完全无关：无论哪种方式影响力都是零。\n另外，我用Muse😅",
+          "quote_en": "@yogesh_kantaria @segyges False. The project started before I left. \nBut I had absolutely nothing to do with it: zero influence one way or the other.\nAlso, I use Muse 😅",
+          "thesis_zh": "深入探讨Yann LeCun 行业前沿观的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Yann LeCun on AI, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "158",
+            "views": "226",
             "likes": "0",
             "comments": "0",
             "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-21T15:24:10+00:00",
-          "url": "https://x.com/ylecun/status/2124161960157618456"
+          "published_at": "2026-11-21T15:37:32+00:00",
+          "url": "https://x.com/ylecun/status/2124165320600334365"
         },
         {
           "id": "e48b81f7903a451e",
@@ -194,32 +194,32 @@
           "url": "https://x.com/demishassabis/status/2123871861843075099"
         },
         {
-          "id": "c4e4353a3e9caef4",
+          "id": "e32a91f4ebfd3a4d",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/AravSrinivas",
-          "topic_zh": "Scaling 路线与算力",
-          "topic_en": "Scaling Laws & Compute",
-          "event_context_zh": "在 Perplexity 计算机上使用 Gemini Neon。听上去比Opus 5.5好。我们甚至可以根据保留统计数据将默认模型切换到它。",
-          "event_context_en": "Use Gemini Neon on Perplexity Computer. Hearing it’s better than Opus 5.5. We might even switch the default model to it,",
-          "quote_zh": "在 Perplexity 计算机上使用 Gemini Neon。听上去比Opus 5.5好。我们甚至可以根据保留统计数据将默认模型切换到它。",
-          "quote_en": "Use Gemini Neon on Perplexity Computer. Hearing it’s better than Opus 5.5. We might even switch the default model to it, based on retention stats.",
-          "thesis_zh": "深入探讨Scaling 路线与算力的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Scaling Laws & Compute, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "AI 编程范式变革",
+          "topic_en": "AI Coding & Engineering",
+          "event_context_zh": "维京一号，用等离子卡宾枪射击火星上的外星人，并在两者之间乘坐星际特快列车。\n\n它在带有 WebGPU 和 WebGL2 后备的 Three.js 上运行。队友使用 Python 脚本在 Blender 中构建了车站和火车，并使用图像转 3D（Tripo 和 Meshy）制作了宇航员、漫游者、卡宾枪和外星人，然后在 Blender 中清理了它们。地形、岩石、基地、地标和所有声音都是程序化的，由代码生成。 Teammate 在租用的云 GPU 上测试了 Chrome 中的每个构建，并以 1080p60 录制了这段 57 秒的预告片。\n\n总成本：《神鬼寓言 5.2 xhigh》大约需要 73,000 个积分（约 730 美元）。",
+          "event_context_en": "Teammate on Fable 5.2 built Getsumen Express, a Moon and Mars exploration game you can play in your browser at https://t",
+          "quote_zh": "《神鬼寓言 5.2》中的队友制作了《Getsumen Express》，这是一款月球和火星探索游戏，您可以在浏览器中玩 。你步行和驾驶漫游车穿越两个世界，扫描真实的地标，如阿波罗登陆点、好奇号和维京一号，用等离子卡宾枪射击火星上的外星人，并在两者之间乘坐星际特快列车。\n\n它在带有 WebGPU 和 WebGL2 后备的 Three.js 上运行。队友使用 Python 脚本在 Blender 中构建了车站和火车，并使用图像转 3D（Tripo 和 Meshy）制作了宇航员、漫游者、卡宾枪和外星人，然后在 Blender 中清理了它们。地形、岩石、基地、地标和所有声音都是程序化的，由代码生成。 Teammate 在租用的云 GPU 上测试了 Chrome 中的每个构建，并以 1080p60 录制了这段 57 秒的预告片。\n\n总成本：《神鬼寓言 5.2 xhigh》大约需要 73,000 个积分（约 730 美元）。",
+          "quote_en": "Teammate on Fable 5.2 built Getsumen Express, a Moon and Mars exploration game you can play in your browser at https://t.co/JrE7q1VPAY. You walk and drive a rover across both worlds, scan real landmarks like the Apollo landing sites, Curiosity and Viking 1, shoot aliens on Mars with a plasma carbine, and take an intergalactic express train between the two.\n\nIt runs on Three.js with WebGPU and a WebGL2 fallback. Teammate built the stations and the train in Blender with Python scripts, and made the astronaut, rover, carbine and alien with image-to-3D (Tripo and Meshy), then cleaned them up in Blender. The terrain, rocks, home base, landmarks and all the sound are procedural, generated by code. Teammate tested every build in Chrome on a rented cloud GPU and recorded this 57-second trailer there at 1080p60.\n\nTotal cost: about 73,000 credits (~$730) on Fable 5.2 xhigh.",
+          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "4.2k",
-            "likes": "55",
+            "views": "3.9k",
+            "likes": "25",
             "comments": "13",
             "retweets": "1",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-21T04:13:36+00:00",
-          "url": "https://x.com/AravSrinivas/status/2123993205624770776"
+          "published_at": "2026-11-21T16:12:21+00:00",
+          "url": "https://x.com/AravSrinivas/status/2124174082522685820"
         },
         {
           "id": "a65aab4076ff8440",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 16:18:22 UTC",
+      "updated_at": "2026-11-21 16:38:12 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
