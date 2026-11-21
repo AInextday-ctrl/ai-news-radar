@@ -6,32 +6,84 @@
       "category": "news",
       "updated_at": "2026-11-21 15:24:42 UTC",
       "headline_item": {
-        "id": "b4129d0623749fd6",
-        "tag_zh": "💡 实战技巧",
-        "tag_en": "💡 Practical Skills",
-        "title_zh": "OpenAI发布GPT-6.2模型提示词优化指南",
-        "title_en": "OpenAI shares new prompting tips for GPT-6.2 Astra and Sol to fix brief answers and unnecessary questions",
-        "source": "THE DECODER",
-        "published_at": "2026-11-21T13:32:35+00:00",
-        "url": "https://the-decoder.com/openai-shares-new-prompting-tips-for-gpt-6-2-astra-and-sol-to-fix-brief-answers-and-unnecessary-questions/",
-        "event_summary_zh": "OpenAI发布针对Astra与Sol模型的提示词模版，旨在解决回复过于简略及过度询问的问题，并更新API以支持舍弃推理过程数据",
-        "event_summary_en": "OpenAI released new system prompt templates for the GPT-6.2 model family, specifically Astra and Sol, to mitigate excessive brevity and repetitive clarification queries. The update includes API modifications allowing developers to discard internal reasoning traces, ensuring final outputs are self-contained for end-users.",
+        "id": "ab7ee1e82ec24c89",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "中国AI产业面临资本困境与营收缺口",
+        "title_en": "China’s A.I. Ambitions Are Running Into a Money Problem",
+        "source": "New York Times",
+        "published_at": "2026-11-21T15:10:01+00:00",
+        "url": "https://www.nytimes.com/2026/11/20/business/china-ai-investment-spending.html?unlocked_article_code=1.SFE.jZ7m.KdwX3UsrRw18&smid=url-share",
+        "event_summary_zh": "中国AI企业在资本回报率偏低背景下，面临资本支出激增与融资渠道受限的双重挑战，长期增长空间承压",
+        "event_summary_en": "China's leading tech firms, including Alibaba, Baidu, and Tencent, face an extreme mismatch between AI R&D expenditure and revenue returns. According to the Rhodium Group, their combined capital expenditure is projected to double to $139 billion in 2024, with revenue covering less than 8%. Amidst cooling venture capital and tightening export controls, the long-term financial sustainability of China’s AI labs is emerging as a more formidable barrier than chip supply constraints.",
         "core_facts_zh": [
-          "【核心事件】OpenAI在开发者文档及模型API接口：发布提示词模版及API更新，旨在优化模型回复风格、主动性及输出质量",
-          "【起因与机理】解决模型在复杂任务中回复冗余、过度依赖推理过程记录及交互逻辑滞后的问题",
-          "【关键技术规格】针对Astra（高性能）与Sol（高性价比）模型发布标准化提示词模版。",
-          "【各方立场与态度】调整模型行为预期，要求在具备授权前提下主动采取行动而非被动询问确认。"
+          "【核心事件】阿里巴巴、百度、腾讯及中国AI初创企业；龙洲经讯（Rhodium Group）研究员Logan Wright：资本支出预计至2027年攀升至1930亿美元，营收与研发投入存在严重脱节，风险投资显著萎缩",
+          "【起因与机理】AI模型训练成本指数级增长与国内资本市场退出机制及融资环境疲软的矛盾",
+          "【关键数据与实测】中国头部科技企业如阿里巴巴、百度、腾讯正面临AI研发投入与营收产出的极端失衡，龙洲经讯（Rhodium Group）报告显示其2024年资本开支预计翻倍至1390亿美元，但营收回笼率不足8%。",
+          "【各方立场与态度】长期财务可持续性成为制约产业发展的核心变量。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI: Issued prompt templates and API updates to optimize response style and agency",
-          "[Root Cause & Mechanism] To address issues with excessive brevity, reasoning leakages, and hesitant agent behavior",
-          "[Key Metrics] Through the API, Astra costs $8 per million input tokens and $40 per million output tokens.",
-          "[Key Position & Outlook] Shifted model behavior to favor autonomous execution over confirmation-seeking loops."
+          "[Core Event] Alibaba, Baidu, Tencent; Logan Wright (Partner, Rhodium Group): Capex forecasted to hit $193B by 2027; significant revenue-to-capex mismatch; shrinking VC support",
+          "[Root Cause & Mechanism] Exponential growth in frontier model training costs colliding with domestic capital market stagnation",
+          "[Key Metrics] According to the Rhodium Group, their combined capital expenditure is projected to double to $139 billion in 2024, with revenue covering less than 8%.",
+          "[Key Position & Outlook] Financial sustainability emerging as the primary bottleneck for long-term AI development."
         ],
-        "industry_impact_zh": "模型向更高效的推理及任务自动执行演进时，如何通过Prompt约束强制模型脱离‘推理链式思考（CoT）’惯性是当前应用层优化的关键。此举反映了OpenAI试图解决大模型作为Agent时因过度谨慎导致的‘交互磨损’，通过系统级设定将模型输出与思维链路彻底解耦，是提升复杂业务流自动化效率的必然路径。",
-        "industry_impact_en": "The transition to agentic workflows requires decoupling final outputs from internal Chain-of-Thought (CoT) traces to prevent response degradation. OpenAI's move highlights the industry struggle with agent 'interaction friction,' where reducing model latency and cognitive burden is now as critical as scaling model performance."
+        "industry_impact_zh": "中国AI产业链的核心矛盾已从早期的算力供给转变为资本投资回报的边际效益恶化。这种营收与Capex的严重错配，预示着未来几年内中国AI企业将面临残酷的行业整合，仅靠融资支撑的单纯模型研发模式已无空间，必须转向应用场景的高效变现以寻求生存。",
+        "industry_impact_en": "The core dilemma for China's AI ecosystem has shifted from initial compute constraints to a critical deterioration in return on investment. This extreme revenue-to-capex mismatch signals imminent sector consolidation, where purely research-driven models without immediate commercial monetization will struggle to survive the liquidity crunch."
       },
       "headlines": [
+        {
+          "id": "ab7ee1e82ec24c89",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "中国AI产业面临资本困境与营收缺口",
+          "title_en": "China’s A.I. Ambitions Are Running Into a Money Problem",
+          "source": "New York Times",
+          "published_at": "2026-11-21T15:10:01+00:00",
+          "url": "https://www.nytimes.com/2026/11/20/business/china-ai-investment-spending.html?unlocked_article_code=1.SFE.jZ7m.KdwX3UsrRw18&smid=url-share",
+          "event_summary_zh": "中国AI企业在资本回报率偏低背景下，面临资本支出激增与融资渠道受限的双重挑战，长期增长空间承压",
+          "event_summary_en": "China's leading tech firms, including Alibaba, Baidu, and Tencent, face an extreme mismatch between AI R&D expenditure and revenue returns. According to the Rhodium Group, their combined capital expenditure is projected to double to $139 billion in 2024, with revenue covering less than 8%. Amidst cooling venture capital and tightening export controls, the long-term financial sustainability of China’s AI labs is emerging as a more formidable barrier than chip supply constraints.",
+          "core_facts_zh": [
+            "【核心事件】阿里巴巴、百度、腾讯及中国AI初创企业；龙洲经讯（Rhodium Group）研究员Logan Wright：资本支出预计至2027年攀升至1930亿美元，营收与研发投入存在严重脱节，风险投资显著萎缩",
+            "【起因与机理】AI模型训练成本指数级增长与国内资本市场退出机制及融资环境疲软的矛盾",
+            "【关键数据与实测】中国头部科技企业如阿里巴巴、百度、腾讯正面临AI研发投入与营收产出的极端失衡，龙洲经讯（Rhodium Group）报告显示其2024年资本开支预计翻倍至1390亿美元，但营收回笼率不足8%。",
+            "【各方立场与态度】长期财务可持续性成为制约产业发展的核心变量。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Alibaba, Baidu, Tencent; Logan Wright (Partner, Rhodium Group): Capex forecasted to hit $193B by 2027; significant revenue-to-capex mismatch; shrinking VC support",
+            "[Root Cause & Mechanism] Exponential growth in frontier model training costs colliding with domestic capital market stagnation",
+            "[Key Metrics] According to the Rhodium Group, their combined capital expenditure is projected to double to $139 billion in 2024, with revenue covering less than 8%.",
+            "[Key Position & Outlook] Financial sustainability emerging as the primary bottleneck for long-term AI development."
+          ],
+          "industry_impact_zh": "中国AI产业链的核心矛盾已从早期的算力供给转变为资本投资回报的边际效益恶化。这种营收与Capex的严重错配，预示着未来几年内中国AI企业将面临残酷的行业整合，仅靠融资支撑的单纯模型研发模式已无空间，必须转向应用场景的高效变现以寻求生存。",
+          "industry_impact_en": "The core dilemma for China's AI ecosystem has shifted from initial compute constraints to a critical deterioration in return on investment. This extreme revenue-to-capex mismatch signals imminent sector consolidation, where purely research-driven models without immediate commercial monetization will struggle to survive the liquidity crunch."
+        },
+        {
+          "id": "abdf4bf54302e645",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Anthropic上市后的商业与安全博弈",
+          "title_en": "Can Anthropic afford to put safety first?",
+          "source": "The Verge AI",
+          "published_at": "2026-11-21T15:00:00+00:00",
+          "url": "https://www.theverge.com/podcast/1038701/anthropic-ipo-ai-safety-openai-nvidia-structure",
+          "event_summary_zh": "Anthropic完成纳斯达克上市，如何在维持AI安全愿景与满足公众股东短期利润诉求之间寻求平衡成为关键挑战",
+          "event_summary_en": "AI lab Anthropic has completed its IPO on the Nasdaq, entering the public market with massive capital demands. Faced with projected infrastructure and compute expenses totaling approximately $900 billion over the coming years, the company must now strike a delicate balance between aggressive shareholder profit expectations and its foundational commitment to AI safety governance.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic，公司创始人及高管团队在纳斯达克证券交易所：完成公开上市，同时面临未来数年约9000亿美元的巨额算力支出压力",
+            "【起因与机理】需要通过资本市场融资以支持大规模计算需求，同时应对公开公司特有的监管与治理挑战",
+            "【关键数据与实测】未来数年面临高达9000亿美元的巨额算力支出挑战。",
+            "【各方立场与态度】平衡公司独特的安全治理结构与股东回报诉求。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic, founders and executive leadership (Nasdaq Stock Market): Completed IPO; faces projected compute costs of ~$900 billion over the coming years",
+            "[Root Cause & Mechanism] Need to leverage public markets to finance massive compute requirements while managing public company governance",
+            "[Key Metrics] Projected $900 billion compute expenditure over the coming years.",
+            "[Key Position & Outlook] Balancing unique safety-focused governance with shareholder profit mandates."
+          ],
+          "industry_impact_zh": "Anthropic的上市标志着 frontier AI 公司从精英实验室向财务公开化转型，其独特的公司治理结构旨在抗衡资本压力，但市场最终会以季度财报逻辑审视其安全投入。此举将测试安全 Branding 在商业扩张中的溢价能力，若无法在盈利水平上对标其计算开支，其安全治理愿景将面临空前的市场化重塑风险。",
+          "industry_impact_en": "Anthropic's IPO marks a transition from elite lab to public financial entity. While its unique governance structure is designed to mitigate capital pressures, the market will inevitably evaluate its safety investments through the lens of quarterly earnings. This will test whether 'AI safety' holds genuine pricing power; without revenue scalability commensurate with massive compute bills, its governance framework faces the risk of being forced into commercial alignment."
+        },
         {
           "id": "b4129d0623749fd6",
           "tag_zh": "💡 实战技巧",
@@ -57,58 +109,6 @@
           ],
           "industry_impact_zh": "模型向更高效的推理及任务自动执行演进时，如何通过Prompt约束强制模型脱离‘推理链式思考（CoT）’惯性是当前应用层优化的关键。此举反映了OpenAI试图解决大模型作为Agent时因过度谨慎导致的‘交互磨损’，通过系统级设定将模型输出与思维链路彻底解耦，是提升复杂业务流自动化效率的必然路径。",
           "industry_impact_en": "The transition to agentic workflows requires decoupling final outputs from internal Chain-of-Thought (CoT) traces to prevent response degradation. OpenAI's move highlights the industry struggle with agent 'interaction friction,' where reducing model latency and cognitive burden is now as critical as scaling model performance."
-        },
-        {
-          "id": "7c75676bf2e8aaf6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "DeepMind聘任哲学家以应对AGI意识挑战",
-          "title_en": "Google DeepMind’s Henry Shevlin: ‘This is the most important part of being human’",
-          "source": "Financial Times",
-          "published_at": "2026-11-21T11:30:01+00:00",
-          "url": "https://www.ft.com/content/6f807d57-f0ea-4251-9f4d-75a6edc8d49a?accessToken=zwAAAaH8y_kikc9vgH1X8OpCUdOfTXWm7cjUmg.MEQCIACh-UVIJLvZdJk2Ho7Q-qsVRoQLNyCmy5zPK9w3Y1lTAiB-BgoDqcF7LPJ1R7yF4te0TrGCjIV8E56IAgl4GYcrnA&sharetype=gift&token=956073db-4440-473e-97bd-a0af2932464c",
-          "event_summary_zh": "剑桥大学学者Henry Shevlin加入Google DeepMind，负责研究AI意识、人机关系及通用人工智能就绪性",
-          "event_summary_en": "Henry Shevlin, former associate director at the Leverhulme Centre for the Future of Intelligence, has joined Google DeepMind as an in-house philosopher. He is tasked with researching machine consciousness, human-AI ethics, and AGI readiness to address growing public and academic concerns regarding existential risks and AI autonomy.",
-          "core_facts_zh": [
-            "【核心事件】Henry Shevlin（Google DeepMind哲学家、前剑桥大学学者）在Google DeepMind内部研究团队：负责机器意识、人机交互伦理及AGI发展准备度评估",
-            "【起因与机理】针对AI领域日益增长的安全性担忧及对AI意识觉醒的理论探索需求",
-            "【核心事实细节】Google DeepMind扩容伦理研究团队以应对AGI发展中的认知科学风险。",
-            "【核心诉求与态度】大型科技公司正通过制度化引入跨学科专家来回应AI安全性与生存威胁争议。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Henry Shevlin (Google DeepMind Philosopher): Leading research on machine consciousness and AGI social readiness",
-            "[Root Cause & Mechanism] Addressing intensifying safety concerns and the philosophical implications of AI development",
-            "[Key Fact Detail] Google DeepMind expands ethics research to address AGI-related cognitive risks.",
-            "[Key Position & Outlook] Tech firms are institutionalizing interdisciplinary oversight to manage AI safety concerns."
-          ],
-          "industry_impact_zh": "头部大模型厂商通过高薪吸纳哲学与伦理学者，本质上是将社会契约与安全性验证前置于技术路径中，以缓解监管压力。此举反映了AI研发重心已从单纯的性能指标迭代，转向对认知边界与主体性风险的防御性治理，试图在AGI爆发前建立“合规护栏”的知识体系。",
-          "industry_impact_en": "By integrating philosophers into core research teams, tech giants are proactively internalizing ethical compliance to mitigate regulatory scrutiny. This shift signifies that AI development is moving beyond raw performance scaling toward establishing robust conceptual frameworks for AI safety and autonomy governance."
-        },
-        {
-          "id": "096807d64b70da17",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "黎曼猜想证明引发AI与人类数学家角力",
-          "title_en": "Hours after Anthropic claims a Claude proof of the Riemann hypothesis, Stanford releases an all-human competing draft",
-          "source": "THE DECODER",
-          "published_at": "2026-11-21T11:19:49+00:00",
-          "url": "https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/",
-          "event_summary_zh": "Anthropic数学家Levent Alpöge声称利用Claude证明了黎曼猜想，随后Stanford学者发布人类独立证明草案",
-          "event_summary_en": "Anthropic mathematician Levent Alpöge announced a proof for the Riemann Hypothesis using the Claude model, utilizing simulated derivatives. Shortly after, Stanford math professor and AMS president Ravi Vakil released an independent, human-only draft proof by Alessandro Masullo, emphasizing the exclusion of AI assistance.",
-          "core_facts_zh": [
-            "【核心事件】Levent Alpöge (Anthropic)、Alessandro Masullo (斯坦福大学研究员)、Ravi Vakil (美国数学会主席)：Alpöge通过AI辅助提出证明方案；斯坦福团队发布纯人工验证草案",
-            "【起因与机理】AI在高端数论推演中的介入引发了学界关于“AI辅助证明”有效性与学术主权的竞逐",
-            "【核心事实细节】数学界核心课题黎曼猜想成为AI证明效力的“压力测试”场景。",
-            "【各方立场与态度】学术界以纯人工草案对冲AI产出，凸显数学证明中的伦理与权属争议。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Levent Alpöge (Anthropic), Alessandro Masullo (Stanford), Ravi Vakil (AMS President): Alpöge presented an AI-assisted proof; Stanford released a purely human-authored competing draft",
-            "[Root Cause & Mechanism] Rising tension over the validity and attribution of AI-assisted mathematical proofs",
-            "[Key Fact Detail] The Riemann Hypothesis serves as a stress test for AI-assisted mathematical reasoning.",
-            "[Key Position & Outlook] Academia counter-positions human-authored work against AI output, intensifying attribution debates."
-          ],
-          "industry_impact_zh": "黎曼猜想证明权的争夺战本质是AI原生科学发现与传统学术范式的权责碰撞。人类学者通过“抢发”纯人工草案重申数学研究的解释权与可追溯性，这凸显了在基础科学高地，由于AI幻觉风险与“黑箱”逻辑，学界对大模型输出结果的信任度依然处于极低水平。",
-          "industry_impact_en": "The competing claims on the Riemann Hypothesis highlight a friction between AI-native scientific discovery and traditional academic paradigms. The rapid release of a human-only proof underscores the academic community's deep skepticism toward AI-assisted results, driven by concerns over hallucination and the 'black box' nature of LLM reasoning."
         }
       ]
     },
