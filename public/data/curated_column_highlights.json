@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 09:18:53 UTC",
+  "generated_at": "2026-11-21 09:35:05 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 09:18:53 UTC",
+      "updated_at": "2026-11-21 09:35:05 UTC",
       "headline_item": {
-        "id": "b5472723360ae54e",
+        "id": "441bfa26310d0de1",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "谷歌量子计算战略从单一路径转向多线对冲",
-        "title_en": "The Race to Build a Quantum Computer Has Become a Sprint",
-        "source": "New York Times",
-        "published_at": "2026-11-21T07:30:00+00:00",
-        "url": "https://www.nytimes.com/2026/11/20/science/quantum-computer-neutral-atoms.html?unlocked_article_code=1.R1E.PGHV.x5mP00wlvgC0&smid=nytcore-ios-share",
-        "event_summary_zh": "谷歌通过在科罗拉多州新建实验室，并行开发不同技术路线，以应对量子纠错技术难题与日益激烈的全球算力竞赛",
-        "event_summary_en": "Google has opened a new lab in Colorado to develop alternative quantum computing architectures alongside its existing superconducting qubit program to solve the critical error correction bottleneck. This strategic hedging reflects the escalating race against industry rivals like Amazon, IBM, and Microsoft as the competition shifts from theoretical milestones to practical engineering deployment.",
+        "title_zh": "字节跳动提出精简AI训练范式并发布开源模型",
+        "title_en": "Bytedance argues most AI training phases are unnecessary and backs it up with a competitive open model",
+        "source": "THE DECODER",
+        "published_at": "2026-11-21T09:17:24+00:00",
+        "url": "https://the-decoder.com/bytedance-argues-most-ai-training-phases-are-unnecessary-and-backs-it-up-with-a-competitive-open-model/",
+        "event_summary_zh": "字节跳动联合学术界通过论文与开源模型证明，AI智能体执行复杂任务无需冗长的训练管线",
+        "event_summary_en": "ByteDance's research team, in collaboration with US universities, argues that contemporary AI agent training pipelines are unnecessarily nested, leading to opaque logic and excessive costs. They demonstrate that only three essential training phases are sufficient for complex task execution and have released an open-source model to validate this streamlined paradigm.",
         "core_facts_zh": [
-          "【核心事件】谷歌（Google）量子实验室、Hartmut Neven（谷歌物理学家）：开发超导量子位以外的并行技术路径，强化量子纠错能力",
-          "【起因与机理】超导路径仍面临纠错难题，且全球范围内商业与政府资金激增导致赛道进入白热化阶段",
-          "【核心事实细节】谷歌策略重心从超导单一路线转向并行技术储备。",
-          "【各方立场与态度】全球科技巨头及各国政府正进入量子计算领域的高强度资金投入期。"
+          "【核心事件】字节跳动（Bytedance）研发团队与多所美国大学科研人员在AI技术研究论文与开源社区：发布精简AI智能体训练路径的研究，提出“三阶段训练法”，并发布配套开源模型",
+          "【起因与机理】针对当前AI模型训练管线日益臃肿、复现困难及成本高企的行业痛点进行矫正",
+          "【关键技术规格】指出当前AI智能体训练流程过度冗余及成本高昂的现状。",
+          "【各方立场与态度】通过发布开源模型验证极简路径的鲁棒性与性能指标。"
         ],
         "core_facts_en": [
-          "[Core Event] Google Quantum Lab, Hartmut Neven (Physicist): Developing parallel quantum architectures beyond superconducting qubits to address error correction",
-          "[Root Cause & Mechanism] Unresolved error correction bottlenecks and intensified global commercial and state-level competition",
-          "[Key Metrics] In May, after China vowed to pump more than $15.",
-          "[Key Position & Outlook] Global capital influx marks the onset of an intensive commercialization race."
+          "[Core Event] ByteDance research team and US university researchers: Published research on a 3-step training paradigm and released an open-source model",
+          "[Root Cause & Mechanism] To address the bloated, costly, and opaque nature of existing multi-stage AI training pipelines",
+          "[Key Technical Spec] Highlighted the redundancy and high costs of current agent training pipelines.",
+          "[Key Position & Outlook] Validated the efficiency of the new paradigm through an open-source model release."
         ],
-        "industry_impact_zh": "深度产业智库研判（与insight_zh一致）",
-        "industry_impact_en": "Strategic industry perspective (same as insight_en)"
+        "industry_impact_zh": "该研究标志着大模型行业正从追求“暴力堆砌参数与训练轮次”转向“训练工程效率与可解释性优化”。若该极简范式在工业界大规模验证成功，将显著降低推理型AI的准入门槛，并削弱头部厂商在算力消耗战上的护城河优势。",
+        "industry_impact_en": "This research signals a shift in the LLM industry from 'brute-force parameter stacking' toward 'training efficiency and interpretability optimization'. Validating a streamlined paradigm could significantly lower barriers for agentic AI and diminish the competitive advantage of incumbents heavily reliant on massive, opaque compute expenditures."
       },
       "headlines": [
+        {
+          "id": "441bfa26310d0de1",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "字节跳动提出精简AI训练范式并发布开源模型",
+          "title_en": "Bytedance argues most AI training phases are unnecessary and backs it up with a competitive open model",
+          "source": "THE DECODER",
+          "published_at": "2026-11-21T09:17:24+00:00",
+          "url": "https://the-decoder.com/bytedance-argues-most-ai-training-phases-are-unnecessary-and-backs-it-up-with-a-competitive-open-model/",
+          "event_summary_zh": "字节跳动联合学术界通过论文与开源模型证明，AI智能体执行复杂任务无需冗长的训练管线",
+          "event_summary_en": "ByteDance's research team, in collaboration with US universities, argues that contemporary AI agent training pipelines are unnecessarily nested, leading to opaque logic and excessive costs. They demonstrate that only three essential training phases are sufficient for complex task execution and have released an open-source model to validate this streamlined paradigm.",
+          "core_facts_zh": [
+            "【核心事件】字节跳动（Bytedance）研发团队与多所美国大学科研人员在AI技术研究论文与开源社区：发布精简AI智能体训练路径的研究，提出“三阶段训练法”，并发布配套开源模型",
+            "【起因与机理】针对当前AI模型训练管线日益臃肿、复现困难及成本高企的行业痛点进行矫正",
+            "【关键技术规格】指出当前AI智能体训练流程过度冗余及成本高昂的现状。",
+            "【各方立场与态度】通过发布开源模型验证极简路径的鲁棒性与性能指标。"
+          ],
+          "core_facts_en": [
+            "[Core Event] ByteDance research team and US university researchers: Published research on a 3-step training paradigm and released an open-source model",
+            "[Root Cause & Mechanism] To address the bloated, costly, and opaque nature of existing multi-stage AI training pipelines",
+            "[Key Technical Spec] Highlighted the redundancy and high costs of current agent training pipelines.",
+            "[Key Position & Outlook] Validated the efficiency of the new paradigm through an open-source model release."
+          ],
+          "industry_impact_zh": "该研究标志着大模型行业正从追求“暴力堆砌参数与训练轮次”转向“训练工程效率与可解释性优化”。若该极简范式在工业界大规模验证成功，将显著降低推理型AI的准入门槛，并削弱头部厂商在算力消耗战上的护城河优势。",
+          "industry_impact_en": "This research signals a shift in the LLM industry from 'brute-force parameter stacking' toward 'training efficiency and interpretability optimization'. Validating a streamlined paradigm could significantly lower barriers for agentic AI and diminish the competitive advantage of incumbents heavily reliant on massive, opaque compute expenditures."
+        },
         {
           "id": "b5472723360ae54e",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "AI在基础科学研究中正从辅助工具转化为核心竞争的策源地，其对数学证明的介入迫使传统学术评审机制必须向计算验证流程转型。学术成果发布的“抢跑”现象不仅揭示了模型驱动型发现的效率跃迁，更暴露了科技大厂在调用高阶数学算力资源时，对数据隐私与智力资本归属所引发的深层信任危机。",
           "industry_impact_en": "AI is transitioning from a research assistant to the primary driver of fundamental breakthroughs, forcing traditional academic review mechanisms to incorporate computational verification. This rush for priority not only reflects a paradigm shift in model-driven discovery but also exposes deep-seated tensions regarding data privacy and intellectual property ownership in corporate-led high-stakes research."
-        },
-        {
-          "id": "3dcfeaf686b36c16",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "微软宣布将于2027年停用To Do应用",
-          "title_en": "Microsoft plans to retire its To Do app on June 30, 2027, offering migration to Planner for work and school accounts, but no replacement for personal accounts (Todd Bishop/GeekWire)",
-          "source": "GeekWire",
-          "published_at": "2026-11-21T06:10:02+00:00",
-          "url": "https://www.geekwire.com/2026/microsoft-to-do-users-make-a-big-to-do-over-popular-task-apps-retirement/",
-          "event_summary_zh": "微软计划在2027年6月30日正式关闭To Do应用，企业用户将迁移至Planner，个人用户尚无替代方案",
-          "event_summary_en": "Microsoft announced the retirement of the To Do app effective June 30, 2027. Work and school accounts will transition tasks to Planner, while personal account users currently lack a replacement strategy, raising concerns over data migration and feature parity.",
-          "core_facts_zh": [
-            "【核心事件】微软公司（Microsoft）在Microsoft Ignite年度技术大会：宣布停用To Do应用，并将其工作负载整合至Planner",
-            "【起因与机理】旨在将个人与团队任务统一底层架构，以适配Copilot及AI智能体调度",
-            "【核心事实细节】微软将于2027年6月30日终止To Do应用服务。",
-            "【各方立场与态度】此次整合旨在将个人任务纳入Copilot智能体调度框架。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Microsoft (Microsoft Ignite Conference): Plan to deprecate To Do and consolidate workloads into Planner",
-            "[Root Cause & Mechanism] To unify task management architecture for Copilot and AI agent integration",
-            "[Key Metrics] Reber and his co-founders sold Wunderlist’s parent company, 6Wunderkinder, to Microsoft in 2015 for a reported $100 million to $200 million.",
-            "[Key Position & Outlook] Consolidation aims to integrate task management into Copilot AI agent ecosystem."
-          ],
-          "industry_impact_zh": "此举揭示了微软在AI时代对生产力软件架构的深度重构，即以‘智能体为中心’取代以‘轻量级应用为中心’的逻辑。通过牺牲用户体验的连续性以强制整合底层数据库，微软意在降低Copilot调用个人任务数据的技术门槛，但这也反映了其在AI战略激进推进中，对存量用户粘性与功能兼容性博弈的忽视。",
-          "industry_impact_en": "This move signals a strategic shift towards an 'agent-centric' architecture, prioritizing AI-integrated workflows over standalone lightweight applications. By forcing data consolidation into Planner to lower technical barriers for Copilot, Microsoft is betting that AI-driven utility will outweigh the churn risk from sacrificing legacy user experience continuity."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 09:18:53 UTC",
+      "updated_at": "2026-11-21 09:35:05 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 09:18:53 UTC",
+      "updated_at": "2026-11-21 09:35:05 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
