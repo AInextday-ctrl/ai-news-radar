@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 13:35:03 UTC",
+  "generated_at": "2026-11-21 13:48:44 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 13:35:03 UTC",
+      "updated_at": "2026-11-21 13:48:44 UTC",
       "headline_item": {
-        "id": "7c75676bf2e8aaf6",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "DeepMind聘任哲学家以应对AGI意识挑战",
-        "title_en": "Google DeepMind’s Henry Shevlin: ‘This is the most important part of being human’",
-        "source": "Financial Times",
-        "published_at": "2026-11-21T11:30:01+00:00",
-        "url": "https://www.ft.com/content/6f807d57-f0ea-4251-9f4d-75a6edc8d49a?accessToken=zwAAAaH8y_kikc9vgH1X8OpCUdOfTXWm7cjUmg.MEQCIACh-UVIJLvZdJk2Ho7Q-qsVRoQLNyCmy5zPK9w3Y1lTAiB-BgoDqcF7LPJ1R7yF4te0TrGCjIV8E56IAgl4GYcrnA&sharetype=gift&token=956073db-4440-473e-97bd-a0af2932464c",
-        "event_summary_zh": "剑桥大学学者Henry Shevlin加入Google DeepMind，负责研究AI意识、人机关系及通用人工智能就绪性",
-        "event_summary_en": "Henry Shevlin, former associate director at the Leverhulme Centre for the Future of Intelligence, has joined Google DeepMind as an in-house philosopher. He is tasked with researching machine consciousness, human-AI ethics, and AGI readiness to address growing public and academic concerns regarding existential risks and AI autonomy.",
+        "id": "b4129d0623749fd6",
+        "tag_zh": "💡 实战技巧",
+        "tag_en": "💡 Practical Skills",
+        "title_zh": "OpenAI发布GPT-6.2模型提示词优化指南",
+        "title_en": "OpenAI shares new prompting tips for GPT-6.2 Astra and Sol to fix brief answers and unnecessary questions",
+        "source": "THE DECODER",
+        "published_at": "2026-11-21T13:32:35+00:00",
+        "url": "https://the-decoder.com/openai-shares-new-prompting-tips-for-gpt-6-2-astra-and-sol-to-fix-brief-answers-and-unnecessary-questions/",
+        "event_summary_zh": "OpenAI发布针对Astra与Sol模型的提示词模版，旨在解决回复过于简略及过度询问的问题，并更新API以支持舍弃推理过程数据",
+        "event_summary_en": "OpenAI released new system prompt templates for the GPT-6.2 model family, specifically Astra and Sol, to mitigate excessive brevity and repetitive clarification queries. The update includes API modifications allowing developers to discard internal reasoning traces, ensuring final outputs are self-contained for end-users.",
         "core_facts_zh": [
-          "【核心事件】Henry Shevlin（Google DeepMind哲学家、前剑桥大学学者）在Google DeepMind内部研究团队：负责机器意识、人机交互伦理及AGI发展准备度评估",
-          "【起因与机理】针对AI领域日益增长的安全性担忧及对AI意识觉醒的理论探索需求",
-          "【核心事实细节】Google DeepMind扩容伦理研究团队以应对AGI发展中的认知科学风险。",
-          "【核心诉求与态度】大型科技公司正通过制度化引入跨学科专家来回应AI安全性与生存威胁争议。"
+          "【核心事件】OpenAI在开发者文档及模型API接口：发布提示词模版及API更新，旨在优化模型回复风格、主动性及输出质量",
+          "【起因与机理】解决模型在复杂任务中回复冗余、过度依赖推理过程记录及交互逻辑滞后的问题",
+          "【关键技术规格】针对Astra（高性能）与Sol（高性价比）模型发布标准化提示词模版。",
+          "【各方立场与态度】调整模型行为预期，要求在具备授权前提下主动采取行动而非被动询问确认。"
         ],
         "core_facts_en": [
-          "[Core Event] Henry Shevlin (Google DeepMind Philosopher): Leading research on machine consciousness and AGI social readiness",
-          "[Root Cause & Mechanism] Addressing intensifying safety concerns and the philosophical implications of AI development",
-          "[Key Fact Detail] Google DeepMind expands ethics research to address AGI-related cognitive risks.",
-          "[Key Position & Outlook] Tech firms are institutionalizing interdisciplinary oversight to manage AI safety concerns."
+          "[Core Event] OpenAI: Issued prompt templates and API updates to optimize response style and agency",
+          "[Root Cause & Mechanism] To address issues with excessive brevity, reasoning leakages, and hesitant agent behavior",
+          "[Key Metrics] Through the API, Astra costs $8 per million input tokens and $40 per million output tokens.",
+          "[Key Position & Outlook] Shifted model behavior to favor autonomous execution over confirmation-seeking loops."
         ],
-        "industry_impact_zh": "头部大模型厂商通过高薪吸纳哲学与伦理学者，本质上是将社会契约与安全性验证前置于技术路径中，以缓解监管压力。此举反映了AI研发重心已从单纯的性能指标迭代，转向对认知边界与主体性风险的防御性治理，试图在AGI爆发前建立“合规护栏”的知识体系。",
-        "industry_impact_en": "By integrating philosophers into core research teams, tech giants are proactively internalizing ethical compliance to mitigate regulatory scrutiny. This shift signifies that AI development is moving beyond raw performance scaling toward establishing robust conceptual frameworks for AI safety and autonomy governance."
+        "industry_impact_zh": "模型向更高效的推理及任务自动执行演进时，如何通过Prompt约束强制模型脱离‘推理链式思考（CoT）’惯性是当前应用层优化的关键。此举反映了OpenAI试图解决大模型作为Agent时因过度谨慎导致的‘交互磨损’，通过系统级设定将模型输出与思维链路彻底解耦，是提升复杂业务流自动化效率的必然路径。",
+        "industry_impact_en": "The transition to agentic workflows requires decoupling final outputs from internal Chain-of-Thought (CoT) traces to prevent response degradation. OpenAI's move highlights the industry struggle with agent 'interaction friction,' where reducing model latency and cognitive burden is now as critical as scaling model performance."
       },
       "headlines": [
+        {
+          "id": "b4129d0623749fd6",
+          "tag_zh": "💡 实战技巧",
+          "tag_en": "💡 Practical Skills",
+          "title_zh": "OpenAI发布GPT-6.2模型提示词优化指南",
+          "title_en": "OpenAI shares new prompting tips for GPT-6.2 Astra and Sol to fix brief answers and unnecessary questions",
+          "source": "THE DECODER",
+          "published_at": "2026-11-21T13:32:35+00:00",
+          "url": "https://the-decoder.com/openai-shares-new-prompting-tips-for-gpt-6-2-astra-and-sol-to-fix-brief-answers-and-unnecessary-questions/",
+          "event_summary_zh": "OpenAI发布针对Astra与Sol模型的提示词模版，旨在解决回复过于简略及过度询问的问题，并更新API以支持舍弃推理过程数据",
+          "event_summary_en": "OpenAI released new system prompt templates for the GPT-6.2 model family, specifically Astra and Sol, to mitigate excessive brevity and repetitive clarification queries. The update includes API modifications allowing developers to discard internal reasoning traces, ensuring final outputs are self-contained for end-users.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI在开发者文档及模型API接口：发布提示词模版及API更新，旨在优化模型回复风格、主动性及输出质量",
+            "【起因与机理】解决模型在复杂任务中回复冗余、过度依赖推理过程记录及交互逻辑滞后的问题",
+            "【关键技术规格】针对Astra（高性能）与Sol（高性价比）模型发布标准化提示词模版。",
+            "【各方立场与态度】调整模型行为预期，要求在具备授权前提下主动采取行动而非被动询问确认。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI: Issued prompt templates and API updates to optimize response style and agency",
+            "[Root Cause & Mechanism] To address issues with excessive brevity, reasoning leakages, and hesitant agent behavior",
+            "[Key Metrics] Through the API, Astra costs $8 per million input tokens and $40 per million output tokens.",
+            "[Key Position & Outlook] Shifted model behavior to favor autonomous execution over confirmation-seeking loops."
+          ],
+          "industry_impact_zh": "模型向更高效的推理及任务自动执行演进时，如何通过Prompt约束强制模型脱离‘推理链式思考（CoT）’惯性是当前应用层优化的关键。此举反映了OpenAI试图解决大模型作为Agent时因过度谨慎导致的‘交互磨损’，通过系统级设定将模型输出与思维链路彻底解耦，是提升复杂业务流自动化效率的必然路径。",
+          "industry_impact_en": "The transition to agentic workflows requires decoupling final outputs from internal Chain-of-Thought (CoT) traces to prevent response degradation. OpenAI's move highlights the industry struggle with agent 'interaction friction,' where reducing model latency and cognitive burden is now as critical as scaling model performance."
+        },
         {
           "id": "7c75676bf2e8aaf6",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "黎曼猜想证明权的争夺战本质是AI原生科学发现与传统学术范式的权责碰撞。人类学者通过“抢发”纯人工草案重申数学研究的解释权与可追溯性，这凸显了在基础科学高地，由于AI幻觉风险与“黑箱”逻辑，学界对大模型输出结果的信任度依然处于极低水平。",
           "industry_impact_en": "The competing claims on the Riemann Hypothesis highlight a friction between AI-native scientific discovery and traditional academic paradigms. The rapid release of a human-only proof underscores the academic community's deep skepticism toward AI-assisted results, driven by concerns over hallucination and the 'black box' nature of LLM reasoning."
-        },
-        {
-          "id": "22084551f26241c2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "新型开放模型 Inkling 2 Mini 可以循环思考，用更少的单词解决问题，并且仍然可以在笔记本电脑上运行",
-          "title_en": "New open model Inkling 2 Mini thinks in loops to solve problems with fewer words and still runs on a laptop",
-          "source": "THE DECODER",
-          "published_at": "2026-11-21T10:33:02+00:00",
-          "url": "https://the-decoder.com/new-open-model-inkling-2-mini-thinks-in-loops-to-solve-problems-with-fewer-words-and-still-runs-on-a-laptop/",
-          "event_summary_zh": "Thinking Machines推出支持本地运行的循环Transformer模型Inkling 2 Mini，通过内部层循环推理优化计算效率与逻辑性能",
-          "event_summary_en": "Thinking Machines has released Inkling 2 Mini, which utilizes a looped transformer architecture where 12 of its 24 layers execute three times to enhance reasoning without increasing token generation. The MoE model features 26.4 billion total parameters with 5.4 billion active per token, supports a 1-million-token context window, and is released under the Apache 2.0 license.",
-          "core_facts_zh": [
-            "【核心事件】思维机器在AI开源社区与大模型部署环境：发布Inkling 2 Mini模型，具备循环推理架构与百万级上下文窗口",
-            "【起因与机理】旨在通过架构级优化在保持低部署成本的同时，提升小规模参数模型在代理编码任务中的表现",
-            "【关键数据与实测】264亿总参数量，推理时仅激活54亿，支持100万上下文长度。",
-            "【各方立场与态度】在DeepSWE v1.1及Vals Index v2.2编码评测中领先同量级开源模型。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Thinking Machines: Released Inkling 2 Mini featuring looped inference and 1M token context",
-            "[Root Cause & Mechanism] To optimize compute efficiency and reasoning capabilities for small-parameter models in agentic coding tasks",
-            "[Key Metrics] 26.4B total parameters, 5.4B active, with 1M token context window.",
-            "[Key Position & Outlook] Outperforms comparable open-source models on DeepSWE v1.1 and Vals Index v2.2 coding benchmarks."
-          ],
-          "industry_impact_zh": "循环Transformer通过时间维度的计算复用，打破了参数规模与推理性能的线性关联，为边缘侧模型提供了新的Scaling Law优化路径。此举在商业上大幅降低了高复杂逻辑任务的Token开销，对于需要频繁进行长程规划的Agentic Workflow具有极高的部署性价比。",
-          "industry_impact_en": "The looped transformer architecture decouples parameter count from reasoning performance via temporal compute reuse, offering a new scaling trajectory for edge models. This approach significantly reduces the cost-per-reasoning-step for agentic workflows, providing a strong competitive edge for local deployment scenarios."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 13:35:04 UTC",
+      "updated_at": "2026-11-21 13:48:44 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 13:35:04 UTC",
+      "updated_at": "2026-11-21 13:48:44 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
