@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 11:18:16 UTC",
+  "generated_at": "2026-11-21 11:35:44 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 11:18:16 UTC",
+      "updated_at": "2026-11-21 11:35:44 UTC",
       "headline_item": {
-        "id": "22084551f26241c2",
+        "id": "7c75676bf2e8aaf6",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "新型开放模型 Inkling 2 Mini 可以循环思考，用更少的单词解决问题，并且仍然可以在笔记本电脑上运行",
-        "title_en": "New open model Inkling 2 Mini thinks in loops to solve problems with fewer words and still runs on a laptop",
-        "source": "THE DECODER",
-        "published_at": "2026-11-21T10:33:02+00:00",
-        "url": "https://the-decoder.com/new-open-model-inkling-2-mini-thinks-in-loops-to-solve-problems-with-fewer-words-and-still-runs-on-a-laptop/",
-        "event_summary_zh": "Thinking Machines推出支持本地运行的循环Transformer模型Inkling 2 Mini，通过内部层循环推理优化计算效率与逻辑性能",
-        "event_summary_en": "Thinking Machines has released Inkling 2 Mini, which utilizes a looped transformer architecture where 12 of its 24 layers execute three times to enhance reasoning without increasing token generation. The MoE model features 26.4 billion total parameters with 5.4 billion active per token, supports a 1-million-token context window, and is released under the Apache 2.0 license.",
+        "title_zh": "DeepMind聘任哲学家以应对AGI意识挑战",
+        "title_en": "Google DeepMind’s Henry Shevlin: ‘This is the most important part of being human’",
+        "source": "Financial Times",
+        "published_at": "2026-11-21T11:30:01+00:00",
+        "url": "https://www.ft.com/content/6f807d57-f0ea-4251-9f4d-75a6edc8d49a?accessToken=zwAAAaH8y_kikc9vgH1X8OpCUdOfTXWm7cjUmg.MEQCIACh-UVIJLvZdJk2Ho7Q-qsVRoQLNyCmy5zPK9w3Y1lTAiB-BgoDqcF7LPJ1R7yF4te0TrGCjIV8E56IAgl4GYcrnA&sharetype=gift&token=956073db-4440-473e-97bd-a0af2932464c",
+        "event_summary_zh": "剑桥大学学者Henry Shevlin加入Google DeepMind，负责研究AI意识、人机关系及通用人工智能就绪性",
+        "event_summary_en": "Henry Shevlin, former associate director at the Leverhulme Centre for the Future of Intelligence, has joined Google DeepMind as an in-house philosopher. He is tasked with researching machine consciousness, human-AI ethics, and AGI readiness to address growing public and academic concerns regarding existential risks and AI autonomy.",
         "core_facts_zh": [
-          "【核心事件】思维机器在AI开源社区与大模型部署环境：发布Inkling 2 Mini模型，具备循环推理架构与百万级上下文窗口",
-          "【起因与机理】旨在通过架构级优化在保持低部署成本的同时，提升小规模参数模型在代理编码任务中的表现",
-          "【关键数据与实测】264亿总参数量，推理时仅激活54亿，支持100万上下文长度。",
-          "【各方立场与态度】在DeepSWE v1.1及Vals Index v2.2编码评测中领先同量级开源模型。"
+          "【核心事件】Henry Shevlin（Google DeepMind哲学家、前剑桥大学学者）在Google DeepMind内部研究团队：负责机器意识、人机交互伦理及AGI发展准备度评估",
+          "【起因与机理】针对AI领域日益增长的安全性担忧及对AI意识觉醒的理论探索需求",
+          "【核心事实细节】Google DeepMind扩容伦理研究团队以应对AGI发展中的认知科学风险。",
+          "【核心诉求与态度】大型科技公司正通过制度化引入跨学科专家来回应AI安全性与生存威胁争议。"
         ],
         "core_facts_en": [
-          "[Core Event] Thinking Machines: Released Inkling 2 Mini featuring looped inference and 1M token context",
-          "[Root Cause & Mechanism] To optimize compute efficiency and reasoning capabilities for small-parameter models in agentic coding tasks",
-          "[Key Metrics] 26.4B total parameters, 5.4B active, with 1M token context window.",
-          "[Key Position & Outlook] Outperforms comparable open-source models on DeepSWE v1.1 and Vals Index v2.2 coding benchmarks."
+          "[Core Event] Henry Shevlin (Google DeepMind Philosopher): Leading research on machine consciousness and AGI social readiness",
+          "[Root Cause & Mechanism] Addressing intensifying safety concerns and the philosophical implications of AI development",
+          "[Key Fact Detail] Google DeepMind expands ethics research to address AGI-related cognitive risks.",
+          "[Key Position & Outlook] Tech firms are institutionalizing interdisciplinary oversight to manage AI safety concerns."
         ],
-        "industry_impact_zh": "循环Transformer通过时间维度的计算复用，打破了参数规模与推理性能的线性关联，为边缘侧模型提供了新的Scaling Law优化路径。此举在商业上大幅降低了高复杂逻辑任务的Token开销，对于需要频繁进行长程规划的Agentic Workflow具有极高的部署性价比。",
-        "industry_impact_en": "The looped transformer architecture decouples parameter count from reasoning performance via temporal compute reuse, offering a new scaling trajectory for edge models. This approach significantly reduces the cost-per-reasoning-step for agentic workflows, providing a strong competitive edge for local deployment scenarios."
+        "industry_impact_zh": "头部大模型厂商通过高薪吸纳哲学与伦理学者，本质上是将社会契约与安全性验证前置于技术路径中，以缓解监管压力。此举反映了AI研发重心已从单纯的性能指标迭代，转向对认知边界与主体性风险的防御性治理，试图在AGI爆发前建立“合规护栏”的知识体系。",
+        "industry_impact_en": "By integrating philosophers into core research teams, tech giants are proactively internalizing ethical compliance to mitigate regulatory scrutiny. This shift signifies that AI development is moving beyond raw performance scaling toward establishing robust conceptual frameworks for AI safety and autonomy governance."
       },
       "headlines": [
+        {
+          "id": "7c75676bf2e8aaf6",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "DeepMind聘任哲学家以应对AGI意识挑战",
+          "title_en": "Google DeepMind’s Henry Shevlin: ‘This is the most important part of being human’",
+          "source": "Financial Times",
+          "published_at": "2026-11-21T11:30:01+00:00",
+          "url": "https://www.ft.com/content/6f807d57-f0ea-4251-9f4d-75a6edc8d49a?accessToken=zwAAAaH8y_kikc9vgH1X8OpCUdOfTXWm7cjUmg.MEQCIACh-UVIJLvZdJk2Ho7Q-qsVRoQLNyCmy5zPK9w3Y1lTAiB-BgoDqcF7LPJ1R7yF4te0TrGCjIV8E56IAgl4GYcrnA&sharetype=gift&token=956073db-4440-473e-97bd-a0af2932464c",
+          "event_summary_zh": "剑桥大学学者Henry Shevlin加入Google DeepMind，负责研究AI意识、人机关系及通用人工智能就绪性",
+          "event_summary_en": "Henry Shevlin, former associate director at the Leverhulme Centre for the Future of Intelligence, has joined Google DeepMind as an in-house philosopher. He is tasked with researching machine consciousness, human-AI ethics, and AGI readiness to address growing public and academic concerns regarding existential risks and AI autonomy.",
+          "core_facts_zh": [
+            "【核心事件】Henry Shevlin（Google DeepMind哲学家、前剑桥大学学者）在Google DeepMind内部研究团队：负责机器意识、人机交互伦理及AGI发展准备度评估",
+            "【起因与机理】针对AI领域日益增长的安全性担忧及对AI意识觉醒的理论探索需求",
+            "【核心事实细节】Google DeepMind扩容伦理研究团队以应对AGI发展中的认知科学风险。",
+            "【核心诉求与态度】大型科技公司正通过制度化引入跨学科专家来回应AI安全性与生存威胁争议。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Henry Shevlin (Google DeepMind Philosopher): Leading research on machine consciousness and AGI social readiness",
+            "[Root Cause & Mechanism] Addressing intensifying safety concerns and the philosophical implications of AI development",
+            "[Key Fact Detail] Google DeepMind expands ethics research to address AGI-related cognitive risks.",
+            "[Key Position & Outlook] Tech firms are institutionalizing interdisciplinary oversight to manage AI safety concerns."
+          ],
+          "industry_impact_zh": "头部大模型厂商通过高薪吸纳哲学与伦理学者，本质上是将社会契约与安全性验证前置于技术路径中，以缓解监管压力。此举反映了AI研发重心已从单纯的性能指标迭代，转向对认知边界与主体性风险的防御性治理，试图在AGI爆发前建立“合规护栏”的知识体系。",
+          "industry_impact_en": "By integrating philosophers into core research teams, tech giants are proactively internalizing ethical compliance to mitigate regulatory scrutiny. This shift signifies that AI development is moving beyond raw performance scaling toward establishing robust conceptual frameworks for AI safety and autonomy governance."
+        },
+        {
+          "id": "096807d64b70da17",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黎曼猜想证明引发AI与人类数学家角力",
+          "title_en": "Hours after Anthropic claims a Claude proof of the Riemann hypothesis, Stanford releases an all-human competing draft",
+          "source": "THE DECODER",
+          "published_at": "2026-11-21T11:19:49+00:00",
+          "url": "https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/",
+          "event_summary_zh": "Anthropic数学家Levent Alpöge声称利用Claude证明了黎曼猜想，随后Stanford学者发布人类独立证明草案",
+          "event_summary_en": "Anthropic mathematician Levent Alpöge announced a proof for the Riemann Hypothesis using the Claude model, utilizing simulated derivatives. Shortly after, Stanford math professor and AMS president Ravi Vakil released an independent, human-only draft proof by Alessandro Masullo, emphasizing the exclusion of AI assistance.",
+          "core_facts_zh": [
+            "【核心事件】Levent Alpöge (Anthropic)、Alessandro Masullo (斯坦福大学研究员)、Ravi Vakil (美国数学会主席)：Alpöge通过AI辅助提出证明方案；斯坦福团队发布纯人工验证草案",
+            "【起因与机理】AI在高端数论推演中的介入引发了学界关于“AI辅助证明”有效性与学术主权的竞逐",
+            "【核心事实细节】数学界核心课题黎曼猜想成为AI证明效力的“压力测试”场景。",
+            "【各方立场与态度】学术界以纯人工草案对冲AI产出，凸显数学证明中的伦理与权属争议。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Levent Alpöge (Anthropic), Alessandro Masullo (Stanford), Ravi Vakil (AMS President): Alpöge presented an AI-assisted proof; Stanford released a purely human-authored competing draft",
+            "[Root Cause & Mechanism] Rising tension over the validity and attribution of AI-assisted mathematical proofs",
+            "[Key Fact Detail] The Riemann Hypothesis serves as a stress test for AI-assisted mathematical reasoning.",
+            "[Key Position & Outlook] Academia counter-positions human-authored work against AI output, intensifying attribution debates."
+          ],
+          "industry_impact_zh": "黎曼猜想证明权的争夺战本质是AI原生科学发现与传统学术范式的权责碰撞。人类学者通过“抢发”纯人工草案重申数学研究的解释权与可追溯性，这凸显了在基础科学高地，由于AI幻觉风险与“黑箱”逻辑，学界对大模型输出结果的信任度依然处于极低水平。",
+          "industry_impact_en": "The competing claims on the Riemann Hypothesis highlight a friction between AI-native scientific discovery and traditional academic paradigms. The rapid release of a human-only proof underscores the academic community's deep skepticism toward AI-assisted results, driven by concerns over hallucination and the 'black box' nature of LLM reasoning."
+        },
         {
           "id": "22084551f26241c2",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "循环Transformer通过时间维度的计算复用，打破了参数规模与推理性能的线性关联，为边缘侧模型提供了新的Scaling Law优化路径。此举在商业上大幅降低了高复杂逻辑任务的Token开销，对于需要频繁进行长程规划的Agentic Workflow具有极高的部署性价比。",
           "industry_impact_en": "The looped transformer architecture decouples parameter count from reasoning performance via temporal compute reuse, offering a new scaling trajectory for edge models. This approach significantly reduces the cost-per-reasoning-step for agentic workflows, providing a strong competitive edge for local deployment scenarios."
-        },
-        {
-          "id": "b5472723360ae54e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "谷歌量子计算战略从单一路径转向多线对冲",
-          "title_en": "The Race to Build a Quantum Computer Has Become a Sprint",
-          "source": "New York Times",
-          "published_at": "2026-11-21T07:30:00+00:00",
-          "url": "https://www.nytimes.com/2026/11/20/science/quantum-computer-neutral-atoms.html?unlocked_article_code=1.R1E.PGHV.x5mP00wlvgC0&smid=nytcore-ios-share",
-          "event_summary_zh": "谷歌通过在科罗拉多州新建实验室，并行开发不同技术路线，以应对量子纠错技术难题与日益激烈的全球算力竞赛",
-          "event_summary_en": "Google has opened a new lab in Colorado to develop alternative quantum computing architectures alongside its existing superconducting qubit program to solve the critical error correction bottleneck. This strategic hedging reflects the escalating race against industry rivals like Amazon, IBM, and Microsoft as the competition shifts from theoretical milestones to practical engineering deployment.",
-          "core_facts_zh": [
-            "【核心事件】谷歌（Google）量子实验室、Hartmut Neven（谷歌物理学家）：开发超导量子位以外的并行技术路径，强化量子纠错能力",
-            "【起因与机理】超导路径仍面临纠错难题，且全球范围内商业与政府资金激增导致赛道进入白热化阶段",
-            "【核心事实细节】谷歌策略重心从超导单一路线转向并行技术储备。",
-            "【各方立场与态度】全球科技巨头及各国政府正进入量子计算领域的高强度资金投入期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google Quantum Lab, Hartmut Neven (Physicist): Developing parallel quantum architectures beyond superconducting qubits to address error correction",
-            "[Root Cause & Mechanism] Unresolved error correction bottlenecks and intensified global commercial and state-level competition",
-            "[Key Metrics] In May, after China vowed to pump more than $15.",
-            "[Key Position & Outlook] Global capital influx marks the onset of an intensive commercialization race."
-          ],
-          "industry_impact_zh": "深度产业智库研判（与insight_zh一致）",
-          "industry_impact_en": "Strategic industry perspective (same as insight_en)"
-        },
-        {
-          "id": "6743a18f11a2d56c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "纳维-斯托克斯方程解法争议升级",
-          "title_en": "NYU's Tristan Buckmaster and Anthropic's Levent Alpöge publish an AI-aided proof of Navier-Stokes blowup, saying it closes a loophole in OpenAI's solution (Peter Hall/Scientific American)",
-          "source": "Scientific American",
-          "published_at": "2026-11-21T06:30:00+00:00",
-          "url": "https://www.scientificamerican.com/article/ai-just-solved-the-real-navier-stokes-problem/",
-          "event_summary_zh": "纽约大学教授Buckmaster与Anthropic研究员Alpöge发布AI辅助证明，旨在修复OpenAI此前被指存在逻辑漏洞的流体力学解法",
-          "event_summary_en": "NYU Professor Tristan Buckmaster and Anthropic researcher Levent Alpöge released an AI-aided proof addressing the infinite fluid velocity paradox in the Navier-Stokes equations. This work aims to close the loophole in OpenAI's September solution, which was criticized for relying on unrealistic external forces, and addresses prior tensions over intellectual property and competitive timing.",
-          "core_facts_zh": [
-            "【核心事件】Tristan Buckmaster（纽约大学教授）、Levent Alpöge（Anthropic研究员）：发布AI辅助证明以修正OpenAI关于纳维-斯托克斯方程解法的逻辑漏洞",
-            "【起因与机理】针对OpenAI此前方案的物理可行性争议及学术界对数据竞争的担忧",
-            "【核心事实细节】研究者挑战OpenAI此前关于流体动力学解法的数学完备性。",
-            "【各方立场与态度】AI作为证明辅助工具的使用正导致科研领域发布周期与验证标准发生剧烈重构。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Tristan Buckmaster (NYU Professor) and Levent Alpöge (Anthropic researcher): Published an AI-aided proof to address logical loopholes in OpenAI's Navier-Stokes solution",
-            "[Root Cause & Mechanism] Addressing controversies over the physical validity of OpenAI's previous method and competitive data practices",
-            "[Key Fact Detail] Challenging the mathematical completeness of OpenAI's previous fluid dynamics solution.",
-            "[Key Position & Outlook] AI-assisted proofs are forcing a rapid re-evaluation of publication and validation standards in high-stakes research."
-          ],
-          "industry_impact_zh": "AI在基础科学研究中正从辅助工具转化为核心竞争的策源地，其对数学证明的介入迫使传统学术评审机制必须向计算验证流程转型。学术成果发布的“抢跑”现象不仅揭示了模型驱动型发现的效率跃迁，更暴露了科技大厂在调用高阶数学算力资源时，对数据隐私与智力资本归属所引发的深层信任危机。",
-          "industry_impact_en": "AI is transitioning from a research assistant to the primary driver of fundamental breakthroughs, forcing traditional academic review mechanisms to incorporate computational verification. This rush for priority not only reflects a paradigm shift in model-driven discovery but also exposes deep-seated tensions regarding data privacy and intellectual property ownership in corporate-led high-stakes research."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 11:18:16 UTC",
+      "updated_at": "2026-11-21 11:35:44 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 11:18:16 UTC",
+      "updated_at": "2026-11-21 11:35:44 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -410,7 +410,7 @@
         {
           "name": "astryx",
           "icon": "🤖",
-          "stars": "31.5k",
+          "stars": "31.6k",
           "growth_badge_zh": "本周暴增 +13,660 ★",
           "growth_badge_en": "+13,660 ★ this week",
           "category_zh": "🤖 自主智能体与协作编排",
