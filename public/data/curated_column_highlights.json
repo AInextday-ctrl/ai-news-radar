@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 06:18:33 UTC",
+  "generated_at": "2026-11-21 06:35:17 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 06:18:33 UTC",
+      "updated_at": "2026-11-21 06:35:17 UTC",
       "headline_item": {
-        "id": "3dcfeaf686b36c16",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "微软宣布将于2027年停用To Do应用",
-        "title_en": "Microsoft plans to retire its To Do app on June 30, 2027, offering migration to Planner for work and school accounts, but no replacement for personal accounts (Todd Bishop/GeekWire)",
-        "source": "GeekWire",
-        "published_at": "2026-11-21T06:10:02+00:00",
-        "url": "https://www.geekwire.com/2026/microsoft-to-do-users-make-a-big-to-do-over-popular-task-apps-retirement/",
-        "event_summary_zh": "微软计划在2027年6月30日正式关闭To Do应用，企业用户将迁移至Planner，个人用户尚无替代方案",
-        "event_summary_en": "Microsoft announced the retirement of the To Do app effective June 30, 2027. Work and school accounts will transition tasks to Planner, while personal account users currently lack a replacement strategy, raising concerns over data migration and feature parity.",
+        "id": "6743a18f11a2d56c",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "纳维-斯托克斯方程解法争议升级",
+        "title_en": "NYU's Tristan Buckmaster and Anthropic's Levent Alpöge publish an AI-aided proof of Navier-Stokes blowup, saying it closes a loophole in OpenAI's solution (Peter Hall/Scientific American)",
+        "source": "Scientific American",
+        "published_at": "2026-11-21T06:30:00+00:00",
+        "url": "https://www.scientificamerican.com/article/ai-just-solved-the-real-navier-stokes-problem/",
+        "event_summary_zh": "纽约大学教授Buckmaster与Anthropic研究员Alpöge发布AI辅助证明，旨在修复OpenAI此前被指存在逻辑漏洞的流体力学解法",
+        "event_summary_en": "NYU Professor Tristan Buckmaster and Anthropic researcher Levent Alpöge released an AI-aided proof addressing the infinite fluid velocity paradox in the Navier-Stokes equations. This work aims to close the loophole in OpenAI's September solution, which was criticized for relying on unrealistic external forces, and addresses prior tensions over intellectual property and competitive timing.",
         "core_facts_zh": [
-          "【核心事件】微软公司（Microsoft）在Microsoft Ignite年度技术大会：宣布停用To Do应用，并将其工作负载整合至Planner",
-          "【起因与机理】旨在将个人与团队任务统一底层架构，以适配Copilot及AI智能体调度",
-          "【核心事实细节】微软将于2027年6月30日终止To Do应用服务。",
-          "【各方立场与态度】此次整合旨在将个人任务纳入Copilot智能体调度框架。"
+          "【核心事件】Tristan Buckmaster（纽约大学教授）、Levent Alpöge（Anthropic研究员）：发布AI辅助证明以修正OpenAI关于纳维-斯托克斯方程解法的逻辑漏洞",
+          "【起因与机理】针对OpenAI此前方案的物理可行性争议及学术界对数据竞争的担忧",
+          "【核心事实细节】研究者挑战OpenAI此前关于流体动力学解法的数学完备性。",
+          "【各方立场与态度】AI作为证明辅助工具的使用正导致科研领域发布周期与验证标准发生剧烈重构。"
         ],
         "core_facts_en": [
-          "[Core Event] Microsoft (Microsoft Ignite Conference): Plan to deprecate To Do and consolidate workloads into Planner",
-          "[Root Cause & Mechanism] To unify task management architecture for Copilot and AI agent integration",
-          "[Key Metrics] Reber and his co-founders sold Wunderlist’s parent company, 6Wunderkinder, to Microsoft in 2015 for a reported $100 million to $200 million.",
-          "[Key Position & Outlook] Consolidation aims to integrate task management into Copilot AI agent ecosystem."
+          "[Core Event] Tristan Buckmaster (NYU Professor) and Levent Alpöge (Anthropic researcher): Published an AI-aided proof to address logical loopholes in OpenAI's Navier-Stokes solution",
+          "[Root Cause & Mechanism] Addressing controversies over the physical validity of OpenAI's previous method and competitive data practices",
+          "[Key Fact Detail] Challenging the mathematical completeness of OpenAI's previous fluid dynamics solution.",
+          "[Key Position & Outlook] AI-assisted proofs are forcing a rapid re-evaluation of publication and validation standards in high-stakes research."
         ],
-        "industry_impact_zh": "此举揭示了微软在AI时代对生产力软件架构的深度重构，即以‘智能体为中心’取代以‘轻量级应用为中心’的逻辑。通过牺牲用户体验的连续性以强制整合底层数据库，微软意在降低Copilot调用个人任务数据的技术门槛，但这也反映了其在AI战略激进推进中，对存量用户粘性与功能兼容性博弈的忽视。",
-        "industry_impact_en": "This move signals a strategic shift towards an 'agent-centric' architecture, prioritizing AI-integrated workflows over standalone lightweight applications. By forcing data consolidation into Planner to lower technical barriers for Copilot, Microsoft is betting that AI-driven utility will outweigh the churn risk from sacrificing legacy user experience continuity."
+        "industry_impact_zh": "AI在基础科学研究中正从辅助工具转化为核心竞争的策源地，其对数学证明的介入迫使传统学术评审机制必须向计算验证流程转型。学术成果发布的“抢跑”现象不仅揭示了模型驱动型发现的效率跃迁，更暴露了科技大厂在调用高阶数学算力资源时，对数据隐私与智力资本归属所引发的深层信任危机。",
+        "industry_impact_en": "AI is transitioning from a research assistant to the primary driver of fundamental breakthroughs, forcing traditional academic review mechanisms to incorporate computational verification. This rush for priority not only reflects a paradigm shift in model-driven discovery but also exposes deep-seated tensions regarding data privacy and intellectual property ownership in corporate-led high-stakes research."
       },
       "headlines": [
+        {
+          "id": "6743a18f11a2d56c",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "纳维-斯托克斯方程解法争议升级",
+          "title_en": "NYU's Tristan Buckmaster and Anthropic's Levent Alpöge publish an AI-aided proof of Navier-Stokes blowup, saying it closes a loophole in OpenAI's solution (Peter Hall/Scientific American)",
+          "source": "Scientific American",
+          "published_at": "2026-11-21T06:30:00+00:00",
+          "url": "https://www.scientificamerican.com/article/ai-just-solved-the-real-navier-stokes-problem/",
+          "event_summary_zh": "纽约大学教授Buckmaster与Anthropic研究员Alpöge发布AI辅助证明，旨在修复OpenAI此前被指存在逻辑漏洞的流体力学解法",
+          "event_summary_en": "NYU Professor Tristan Buckmaster and Anthropic researcher Levent Alpöge released an AI-aided proof addressing the infinite fluid velocity paradox in the Navier-Stokes equations. This work aims to close the loophole in OpenAI's September solution, which was criticized for relying on unrealistic external forces, and addresses prior tensions over intellectual property and competitive timing.",
+          "core_facts_zh": [
+            "【核心事件】Tristan Buckmaster（纽约大学教授）、Levent Alpöge（Anthropic研究员）：发布AI辅助证明以修正OpenAI关于纳维-斯托克斯方程解法的逻辑漏洞",
+            "【起因与机理】针对OpenAI此前方案的物理可行性争议及学术界对数据竞争的担忧",
+            "【核心事实细节】研究者挑战OpenAI此前关于流体动力学解法的数学完备性。",
+            "【各方立场与态度】AI作为证明辅助工具的使用正导致科研领域发布周期与验证标准发生剧烈重构。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Tristan Buckmaster (NYU Professor) and Levent Alpöge (Anthropic researcher): Published an AI-aided proof to address logical loopholes in OpenAI's Navier-Stokes solution",
+            "[Root Cause & Mechanism] Addressing controversies over the physical validity of OpenAI's previous method and competitive data practices",
+            "[Key Fact Detail] Challenging the mathematical completeness of OpenAI's previous fluid dynamics solution.",
+            "[Key Position & Outlook] AI-assisted proofs are forcing a rapid re-evaluation of publication and validation standards in high-stakes research."
+          ],
+          "industry_impact_zh": "AI在基础科学研究中正从辅助工具转化为核心竞争的策源地，其对数学证明的介入迫使传统学术评审机制必须向计算验证流程转型。学术成果发布的“抢跑”现象不仅揭示了模型驱动型发现的效率跃迁，更暴露了科技大厂在调用高阶数学算力资源时，对数据隐私与智力资本归属所引发的深层信任危机。",
+          "industry_impact_en": "AI is transitioning from a research assistant to the primary driver of fundamental breakthroughs, forcing traditional academic review mechanisms to incorporate computational verification. This rush for priority not only reflects a paradigm shift in model-driven discovery but also exposes deep-seated tensions regarding data privacy and intellectual property ownership in corporate-led high-stakes research."
+        },
         {
           "id": "3dcfeaf686b36c16",
           "tag_zh": "⚡ 职场提效",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举标志着美方对华半导体封锁逻辑从‘性能导向’转向‘物理节点导向’的全面覆盖，通过卡死14纳米以上先进制程，迫使全球代工厂剥离非美国背景客户。这对消费电子供应链而言是结构性利空，将极大提升芯片设计的合规成本，并加速东南亚等新兴市场在半导体自主化进程中的战略收缩。",
           "industry_impact_en": "This shift from performance-based restrictions to node-based physical constraints marks an attempt to decouple global foundries from non-U.S. aligned developers. The move significantly raises compliance burdens across the consumer electronics value chain and will likely force a consolidation of design ambitions in emerging Asian semiconductor markets."
-        },
-        {
-          "id": "27a259a147572b10",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "育碧成立Motherbrain子公司深耕AI生成式NPC",
-          "title_en": "Ubisoft launches Motherbrain, a subsidiary focused on developing \"smart NPCs with memory and AI game masters that manage large-scale systemic worlds\" (Sophie McEvoy/GamesIndustry.biz)",
-          "source": "GamesIndustry.biz",
-          "published_at": "2026-11-21T05:15:00+00:00",
-          "url": "https://www.gamesindustry.biz/ubisoft-launches-motherbrain-a-new-subsidiary-focused-on-ai-driven-gameplay-innovation",
-          "event_summary_zh": "育碧正式组建全资子公司Motherbrain，旨在研发具备记忆功能的智能NPC及管理大规模系统化世界的AI游戏引擎",
-          "event_summary_en": "Ubisoft has launched its subsidiary Motherbrain, integrating the generative AI team behind the Teammates project to develop smart NPCs with long-term memory and autonomous systemic world-management engines. The subsidiary intends to provide technical support for internal Creative House workflows while seeking external strategic partnerships.",
-          "core_facts_zh": [
-            "【核心事件】育碧（Ubisoft）及其首席执行官Yves Guillemot在公司2024/25财年上半年财报会议：成立AI研发子公司Motherbrain，旨在开发具备长期记忆的NPC与系统化世界管理AI",
-            "【起因与机理】通过生产力工具升级弥补开发周期与运营成本压力，同时配合近期生产环境的人员结构性调整",
-            "【关键数据与实测】同步执行蒙特利尔与魁北克工作室约166人的裁员以优化资源分配。",
-            "【各方立场与态度】核心技术栈锁定智能NPC记忆系统与大规模世界自动化管理。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Ubisoft and CEO Yves Guillemot (H1 Financial Results announcement): Launched Motherbrain to develop smart NPCs and large-scale systemic world-management AI",
-            "[Root Cause & Mechanism] To optimize production workflows amidst staff layoffs and drive long-term immersive experience innovation",
-            "[Key Metrics] biz understands, the cuts accounted for less than 4% of the studios' total headcount and included members of Vantage Studios.",
-            "[Key Position & Outlook] Concurrent layoffs of 166 staff across Montreal and Quebec studios to realign resources."
-          ],
-          "industry_impact_zh": "育碧此举显示其正试图从单纯的数字内容生产商转向AI基础设施提供商，利用AI介入底层逻辑架构来降低高成本3A游戏的可持续运营压力。在进行规模性人员裁撤的同时高调注资AI子公司，反映出其将核心生产要素从人力密集型转向模型驱动型的紧迫商业转型意图。",
-          "industry_impact_en": "Ubisoft's strategy marks a transition from a pure content producer to an AI-infrastructure player, aiming to mitigate the unsustainable operational costs of 3A games via systemic AI logic. By coupling headcount reductions with dedicated AI investment, the firm is signaling a forced migration from labor-intensive development toward model-driven production workflows."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 06:18:33 UTC",
+      "updated_at": "2026-11-21 06:35:17 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 06:18:33 UTC",
+      "updated_at": "2026-11-21 06:35:17 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -410,7 +410,7 @@
         {
           "name": "astryx",
           "icon": "🤖",
-          "stars": "31.4k",
+          "stars": "31.5k",
           "growth_badge_zh": "本周暴增 +13,660 ★",
           "growth_badge_en": "+13,660 ★ this week",
           "category_zh": "🤖 自主智能体与协作编排",
