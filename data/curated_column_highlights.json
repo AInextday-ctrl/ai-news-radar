@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-21 10:35:24 UTC",
+  "generated_at": "2026-11-21 10:48:21 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-21 10:35:25 UTC",
+      "updated_at": "2026-11-21 10:48:21 UTC",
       "headline_item": {
-        "id": "4e4e78a62ec13404",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅",
-        "title_en": "US technology stocks suffer their worst weekly loss since the pandemic as AI doubts pile up",
+        "id": "22084551f26241c2",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "新型开放模型 Inkling 2 Mini 可以循环思考，用更少的单词解决问题，并且仍然可以在笔记本电脑上运行",
+        "title_en": "New open model Inkling 2 Mini thinks in loops to solve problems with fewer words and still runs on a laptop",
         "source": "THE DECODER",
-        "published_at": "2026-11-21T10:27:44+00:00",
-        "url": "https://the-decoder.com/us-technology-stocks-suffer-their-worst-weekly-loss-since-the-pandemic-as-ai-doubts-pile-up/",
-        "event_summary_zh": "美国科技股正在暴跌。以科技股为主的纳斯达克 100 指数周五下跌 5.6%，本周下跌 10.4%，这是自 Covid-19 危机以来最糟糕的表现。据英国《金融时报》报道，这使得该指数比 10 月份的峰值低 20%，处于熊市区域",
-        "event_summary_en": "US tech stocks are tumbling. The tech-heavy Nasdaq 100 fell 5.6 percent on Friday and dropped 10.4 percent for the week, its worst showing since the Covid-19 crisis. That leaves the index 20 percent below its October peak and in bear market territory, according to the Financial Times. Doubts over multibillion-dollar AI buildouts, the Nvidia scandal and questionable China deals, and political headwinds after Democrats' midterm win are driving the sell-off like a perfect storm.\n\nInvestors are also",
+        "published_at": "2026-11-21T10:33:02+00:00",
+        "url": "https://the-decoder.com/new-open-model-inkling-2-mini-thinks-in-loops-to-solve-problems-with-fewer-words-and-still-runs-on-a-laptop/",
+        "event_summary_zh": "Thinking Machines推出支持本地运行的循环Transformer模型Inkling 2 Mini，通过内部层循环推理优化计算效率与逻辑性能",
+        "event_summary_en": "Thinking Machines has released Inkling 2 Mini, which utilizes a looped transformer architecture where 12 of its 24 layers execute three times to enhance reasoning without increasing token generation. The MoE model features 26.4 billion total parameters with 5.4 billion active per token, supports a 1-million-token context window, and is released under the Apache 2.0 license.",
         "core_facts_zh": [
-          "【核心事件】英伟达 (NVIDIA / 黄仁勋)：由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅",
-          "【起因与机理】由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅。",
-          "【关键数据与实测】以科技股为主的纳斯达克 100 指数周五下跌 5.6%，本周下跌 10.4%，这是自 Covid-19 危机以来最糟糕的表现。",
-          "【行业研判】对数十亿美元人工智能建设的质疑、英伟达丑闻。"
+          "【核心事件】思维机器在AI开源社区与大模型部署环境：发布Inkling 2 Mini模型，具备循环推理架构与百万级上下文窗口",
+          "【起因与机理】旨在通过架构级优化在保持低部署成本的同时，提升小规模参数模型在代理编码任务中的表现",
+          "【关键数据与实测】264亿总参数量，推理时仅激活54亿，支持100万上下文长度。",
+          "【各方立场与态度】在DeepSWE v1.1及Vals Index v2.2编码评测中领先同量级开源模型。"
         ],
         "core_facts_en": [
-          "[Core Event] Matthias Bastian: US technology stocks suffer their worst weekly loss since the pandemic as AI doubts pile up",
-          "[Context & Motivation] US tech stocks are tumbling.",
-          "[Market & Financial Detail] US tech stocks are tumbling.",
-          "[Industry Analysis] Doubts over multibillion-dollar AI buildouts, the Nvidia scandal and questionable China deals, and political headwinds after Democrats' midterm win are driving the sell-off like a perfect storm."
+          "[Core Event] Thinking Machines: Released Inkling 2 Mini featuring looped inference and 1M token context",
+          "[Root Cause & Mechanism] To optimize compute efficiency and reasoning capabilities for small-parameter models in agentic coding tasks",
+          "[Key Metrics] 26.4B total parameters, 5.4B active, with 1M token context window.",
+          "[Key Position & Outlook] Outperforms comparable open-source models on DeepSWE v1.1 and Vals Index v2.2 coding benchmarks."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "循环Transformer通过时间维度的计算复用，打破了参数规模与推理性能的线性关联，为边缘侧模型提供了新的Scaling Law优化路径。此举在商业上大幅降低了高复杂逻辑任务的Token开销，对于需要频繁进行长程规划的Agentic Workflow具有极高的部署性价比。",
+        "industry_impact_en": "The looped transformer architecture decouples parameter count from reasoning performance via temporal compute reuse, offering a new scaling trajectory for edge models. This approach significantly reduces the cost-per-reasoning-step for agentic workflows, providing a strong competitive edge for local deployment scenarios."
       },
       "headlines": [
         {
-          "id": "4e4e78a62ec13404",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅",
-          "title_en": "US technology stocks suffer their worst weekly loss since the pandemic as AI doubts pile up",
+          "id": "22084551f26241c2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "新型开放模型 Inkling 2 Mini 可以循环思考，用更少的单词解决问题，并且仍然可以在笔记本电脑上运行",
+          "title_en": "New open model Inkling 2 Mini thinks in loops to solve problems with fewer words and still runs on a laptop",
           "source": "THE DECODER",
-          "published_at": "2026-11-21T10:27:44+00:00",
-          "url": "https://the-decoder.com/us-technology-stocks-suffer-their-worst-weekly-loss-since-the-pandemic-as-ai-doubts-pile-up/",
-          "event_summary_zh": "美国科技股正在暴跌。以科技股为主的纳斯达克 100 指数周五下跌 5.6%，本周下跌 10.4%，这是自 Covid-19 危机以来最糟糕的表现。据英国《金融时报》报道，这使得该指数比 10 月份的峰值低 20%，处于熊市区域",
-          "event_summary_en": "US tech stocks are tumbling. The tech-heavy Nasdaq 100 fell 5.6 percent on Friday and dropped 10.4 percent for the week, its worst showing since the Covid-19 crisis. That leaves the index 20 percent below its October peak and in bear market territory, according to the Financial Times. Doubts over multibillion-dollar AI buildouts, the Nvidia scandal and questionable China deals, and political headwinds after Democrats' midterm win are driving the sell-off like a perfect storm.\n\nInvestors are also",
+          "published_at": "2026-11-21T10:33:02+00:00",
+          "url": "https://the-decoder.com/new-open-model-inkling-2-mini-thinks-in-loops-to-solve-problems-with-fewer-words-and-still-runs-on-a-laptop/",
+          "event_summary_zh": "Thinking Machines推出支持本地运行的循环Transformer模型Inkling 2 Mini，通过内部层循环推理优化计算效率与逻辑性能",
+          "event_summary_en": "Thinking Machines has released Inkling 2 Mini, which utilizes a looped transformer architecture where 12 of its 24 layers execute three times to enhance reasoning without increasing token generation. The MoE model features 26.4 billion total parameters with 5.4 billion active per token, supports a 1-million-token context window, and is released under the Apache 2.0 license.",
           "core_facts_zh": [
-            "【核心事件】英伟达 (NVIDIA / 黄仁勋)：由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅",
-            "【起因与机理】由于人工智能疑虑堆积，美国科技股遭遇大流行以来最严重的单周跌幅。",
-            "【关键数据与实测】以科技股为主的纳斯达克 100 指数周五下跌 5.6%，本周下跌 10.4%，这是自 Covid-19 危机以来最糟糕的表现。",
-            "【行业研判】对数十亿美元人工智能建设的质疑、英伟达丑闻。"
+            "【核心事件】思维机器在AI开源社区与大模型部署环境：发布Inkling 2 Mini模型，具备循环推理架构与百万级上下文窗口",
+            "【起因与机理】旨在通过架构级优化在保持低部署成本的同时，提升小规模参数模型在代理编码任务中的表现",
+            "【关键数据与实测】264亿总参数量，推理时仅激活54亿，支持100万上下文长度。",
+            "【各方立场与态度】在DeepSWE v1.1及Vals Index v2.2编码评测中领先同量级开源模型。"
           ],
           "core_facts_en": [
-            "[Core Event] Matthias Bastian: US technology stocks suffer their worst weekly loss since the pandemic as AI doubts pile up",
-            "[Context & Motivation] US tech stocks are tumbling.",
-            "[Market & Financial Detail] US tech stocks are tumbling.",
-            "[Industry Analysis] Doubts over multibillion-dollar AI buildouts, the Nvidia scandal and questionable China deals, and political headwinds after Democrats' midterm win are driving the sell-off like a perfect storm."
+            "[Core Event] Thinking Machines: Released Inkling 2 Mini featuring looped inference and 1M token context",
+            "[Root Cause & Mechanism] To optimize compute efficiency and reasoning capabilities for small-parameter models in agentic coding tasks",
+            "[Key Metrics] 26.4B total parameters, 5.4B active, with 1M token context window.",
+            "[Key Position & Outlook] Outperforms comparable open-source models on DeepSWE v1.1 and Vals Index v2.2 coding benchmarks."
           ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+          "industry_impact_zh": "循环Transformer通过时间维度的计算复用，打破了参数规模与推理性能的线性关联，为边缘侧模型提供了新的Scaling Law优化路径。此举在商业上大幅降低了高复杂逻辑任务的Token开销，对于需要频繁进行长程规划的Agentic Workflow具有极高的部署性价比。",
+          "industry_impact_en": "The looped transformer architecture decouples parameter count from reasoning performance via temporal compute reuse, offering a new scaling trajectory for edge models. This approach significantly reduces the cost-per-reasoning-step for agentic workflows, providing a strong competitive edge for local deployment scenarios."
         },
         {
           "id": "b5472723360ae54e",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-21 10:35:25 UTC",
+      "updated_at": "2026-11-21 10:48:21 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-21 10:35:25 UTC",
+      "updated_at": "2026-11-21 10:48:21 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
