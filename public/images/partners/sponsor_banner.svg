@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="sp-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141124" />
+      <stop offset="50%" stop-color="#1f1838" />
+      <stop offset="100%" stop-color="#0e0a1c" />
+    </linearGradient>
+    <radialGradient id="sp-glow" cx="65%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4" />
+      <stop offset="40%" stop-color="#ec4899" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#141124" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="amber-pink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="360" fill="url(#sp-bg)" rx="20" />
+  <rect width="640" height="360" fill="url(#sp-glow)" rx="20" />
+
+  <!-- Grid lines -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="90" x2="640" y2="90" />
+    <line x1="0" y1="180" x2="640" y2="180" />
+    <line x1="0" y1="270" x2="640" y2="270" />
+    <line x1="160" y1="0" x2="160" y2="360" />
+    <line x1="320" y1="0" x2="320" y2="360" />
+    <line x1="480" y1="0" x2="480" y2="360" />
+  </g>
+
+  <!-- Spotlight Radar Graphic on Right -->
+  <g transform="translate(420, 80)">
+    <!-- Concentric radar circles -->
+    <circle cx="90" cy="90" r="85" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.3" stroke-dasharray="4,4" />
+    <circle cx="90" cy="90" r="60" fill="none" stroke="#ec4899" stroke-width="1" opacity="0.4" />
+    <circle cx="90" cy="90" r="35" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="90" cy="90" r="8" fill="#fbbf24" />
+
+    <!-- Radar beam sweep -->
+    <polygon points="90,90 175,50 175,90" fill="url(#amber-pink)" opacity="0.3" />
+
+    <!-- Floating target nodes -->
+    <circle cx="45" cy="55" r="5" fill="#38bdf8" />
+    <circle cx="140" cy="135" r="4" fill="#a855f7" />
+    <circle cx="130" cy="40" r="4" fill="#10b981" />
+
+    <text x="90" y="198" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#fde68a">50,000+ AI Builders &amp; Devs</text>
+  </g>
+
+  <!-- Left Content -->
+  <g transform="translate(48, 56)">
+    <!-- Brand/Type -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="27" font-family="Inter, -apple-system, sans-serif" font-size="28" font-weight="900" fill="#ffffff">AI News Radar</text>
+    </g>
+
+    <!-- Pill -->
+    <g transform="translate(0, 58)">
+      <rect x="0" y="0" width="160" height="26" rx="13" fill="rgba(245,158,11,0.2)" stroke="rgba(251,191,36,0.4)" stroke-width="1" />
+      <circle cx="14" cy="13" r="4" fill="#fbbf24" />
+      <text x="26" y="17" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#fde68a" letter-spacing="0.5">SPONSOR SPOTLIGHT</text>
+    </g>
+
+    <text x="0" y="128" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="-0.3">
+      Feature Your AI Tool &amp;
+    </text>
+    <text x="0" y="156" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#fbbf24" letter-spacing="-0.3">
+      Accelerate Global Growth
+    </text>
+
+    <text x="0" y="194" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">
+      Top positioning in AI Tool Matrix, News Streams &amp; Daily Briefs
+    </text>
+
+    <g transform="translate(0, 222)">
+      <text x="0" y="0" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fbbf24">✦ Verified High-Intent Audience</text>
+      <text x="180" y="0" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fbbf24">✦ Self-Serve Onboarding</text>
+    </g>
+  </g>
+
+  <!-- Top Right Badge -->
+  <g transform="translate(488, 28)">
+    <rect x="0" y="0" width="124" height="24" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+    <text x="62" y="16" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#e2e8f0" letter-spacing="0.5">DIRECT BOOKING</text>
+  </g>
+
+  <rect x="1" y="1" width="638" height="358" rx="19" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+</svg>

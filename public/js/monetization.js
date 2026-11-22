@@ -1,71 +1,48 @@
 /**
- * AI News Radar - Unified Monetization & Native Partner Engine (v1.0)
+ * AI News Radar - Unified Monetization & Native Partner Engine (v2.0)
  *
- * Strategy for early-stage, high-value AI/Developer traffic:
- *   Layer 1 (Active by default, AdBlock-immune, highest RPM):
- *     - Bilingual (EN / ZH) Curated AI Infrastructure & SaaS Affiliate Native Cards
- *     - Direct "Promote Your AI Tool / Sponsor" self-serve CTA
- *   Layer 2 (Zero-traffic-minimum clean display — plug in your IDs below):
- *     - A-Ads (Anonymous Ads): lightweight pure HTML/CSS iframe, zero CLS, dark-mode safe
- *     - Adsterra Native Banner: global fill native widget (NO popunders / NO redirects)
- *   Layer 3 (Scale-up ready):
- *     - EthicalAds (developer-first privacy ads)
- *     - Google AdSense (flip enabled: true when ready for re-review)
- *
- * Performance guarantees:
- *   - Deferred script execution + IntersectionObserver lazy mounting (0ms LCP impact)
- *   - Fixed min-height containers (CLS = 0)
- *   - Automatic graceful fallback to Layer 1 Native Cards if ad network is unconfigured or blocked
+ * Visual Graphic Ad Showcase & Performance Engine:
+ *   - Visual Graphic Banners & Rich Thumbnails for every partner card
+ *   - Dual Layouts: Horizontal Leaderboard Strip & 3-Column Visual Grid
+ *   - Zero Cumulative Layout Shift (CLS = 0) with reserved min-heights
+ *   - Dark/Light Theme Auto-Adaptation (Glassmorphism + Neon Accents)
+ *   - Deferred loading + IntersectionObserver (0ms LCP impact)
+ *   - AdBlock-proof native affiliate routing
  */
 (function () {
   'use strict';
 
   // =========================================================================
   // 1. CENTRALIZED AD NETWORK & AFFILIATE CONFIGURATION
-  //    Replace placeholder IDs / affiliate URLs as soon as your accounts are active.
   // =========================================================================
   var CONFIG = window.AINR_MONETIZATION_CONFIG || {
     networks: {
-      // A-Ads (https://a-ads.com) — Instant approval, 0 traffic minimum, accepts .xyz
-      // Create an "Adaptive" ad unit and paste its numeric unitId below.
       aads: {
         enabled: false,
-        leaderboardUnitId: '', // e.g. '2345678' (728x90 / Adaptive)
-        inContentUnitId: '',   // e.g. '2345679' (Adaptive / 468x60)
-        mobileUnitId: ''       // e.g. '2345680' (320x100 / Adaptive)
+        leaderboardUnitId: '',
+        inContentUnitId: '',
+        mobileUnitId: ''
       },
-
-      // Adsterra Native Banner (https://adsterra.com) — 0 traffic minimum, global fill
-      // IMPORTANT: Use ONLY "Native Banner" format. Never enable Popunder / Social Bar.
       adsterra: {
         enabled: false,
-        containerId: '',       // e.g. 'container-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-        scriptSrc: ''          // e.g. '//pl12345678.highrevenuenetwork.com/.../invoke.js'
+        containerId: '',
+        scriptSrc: ''
       },
-
-      // EthicalAds (https://www.ethicalads.io) — Upgrade target at 10k-50k+ dev pageviews/mo
       ethicalads: {
         enabled: false,
-        publisher: ''          // e.g. 'ainewsradar'
+        publisher: ''
       },
-
-      // Google AdSense — Keep false while unapproved to avoid wasted network requests.
-      // Flip to true when re-submitting for AdSense review.
       adsense: {
         enabled: false,
         client: 'ca-pub-4912808437101130'
       }
     },
 
-    // Direct sponsorship / tool-listing contact URLs
     sponsorUrl: {
       en: '/contact#sponsor',
       zh: '/zh/contact#sponsor'
     },
 
-    // =========================================================================
-    // Layer 1: High-Intent AI & Dev Affiliate Partners (Replace `url` with your tracking links)
-    // =========================================================================
     partners: {
       en: [
         {
@@ -76,6 +53,8 @@
           name: 'ElevenLabs Frontier Voice AI',
           tagline: 'Industry-leading real-time voice streaming, voice cloning, and Conversational AI Agents for builders.',
           cta: 'Try Voice AI Free',
+          hint: 'Free 10,000 Credits/mo',
+          image: '/images/partners/elevenlabs_banner.svg',
           url: 'https://try.elevenlabs.io/bwnugci42q5y'
         },
         {
@@ -86,7 +65,8 @@
           name: 'High-Speed NVMe VPS & n8n Hosting',
           tagline: 'Self-host AI Agents, MCP servers, and n8n automation workflows with 1-click templates.',
           cta: 'Explore Plans',
-          // Replace with your Hostinger / Impact affiliate link
+          hint: 'Up to 75% Off Dev Plans',
+          image: '/images/partners/hostinger_banner.svg',
           url: 'https://www.hostinger.com/vps-hosting?ref=ainewsradar'
         },
         {
@@ -95,45 +75,50 @@
           accent: 'amber',
           icon: '✨',
           name: 'Promote Your AI Tool on AI News Radar',
-          tagline: 'Reach frontier AI engineers, indie builders, and technical decision-makers daily.',
+          tagline: 'Reach 50,000+ frontier AI engineers, indie builders, and technical decision-makers daily.',
           cta: 'Submit / Sponsor',
+          hint: 'Direct Booking ↗',
+          image: '/images/partners/sponsor_banner.svg',
           url: '/contact#sponsor',
           internal: true
         }
       ],
       zh: [
         {
-          id: 'siliconflow-api',
-          badge: '大模型 API',
+          id: 'elevenlabs-voice-zh',
+          badge: '语音合成 & 智能体 API',
           accent: 'indigo',
+          icon: '🎙️',
+          name: 'ElevenLabs 全球领先 AI 语音与智能体',
+          tagline: '好莱坞级超逼真语音克隆、多语言实时语音流式交互与 Conversational AI 开发者平台。',
+          cta: '免费体验语音 AI',
+          hint: '每月免费领 10,000 额度',
+          image: '/images/partners/elevenlabs_banner.svg',
+          url: 'https://try.elevenlabs.io/bwnugci42q5y'
+        },
+        {
+          id: 'siliconflow-api',
+          badge: '大模型推理 API',
+          accent: 'sky',
           icon: '⚡',
           name: 'SiliconFlow 硅基流动推理云',
-          tagline: '一站式调用前沿开源大模型 API，低延迟高并发推理，注册即领免费开发者体验额度。',
-          cta: '领取 API 额度',
-          // 替换为你的硅基流动邀请返佣链接 (https://cloud.siliconflow.cn)
+          tagline: '一站式调用全球前沿开源大模型 API，低延迟高并发推理，注册即送免费开发者体验额度。',
+          cta: '领取免费 API 额度',
+          hint: '支持 DeepSeek / Qwen 全系列',
+          image: '/images/partners/siliconflow_banner.svg',
           url: 'https://cloud.siliconflow.cn/?ref=ainewsradar'
         },
         {
-          id: 'autodl-gpu',
-          badge: 'GPU 算力',
+          id: 'hostinger-vps-zh',
+          badge: '高速 NVMe VPS',
           accent: 'emerald',
-          icon: '🖥️',
-          name: 'AutoDL / 弹性 GPU 算力集群',
-          tagline: '按小时弹性租用高性能 GPU，一键部署开源推理模型、微调框架与本地 Agent 工作流。',
-          cta: '查看算力方案',
-          // 替换为你的 AutoDL / 算力平台邀请返佣链接
-          url: 'https://www.autodl.com/?ref=ainewsradar'
-        },
-        {
-          id: 'cloud-dev-cn',
-          badge: '开发者特惠',
-          accent: 'sky',
-          icon: '☁️',
-          name: '云服务器与 AI 应用部署专享',
-          tagline: '高性价比轻量云主机与容器集群，快速上线 n8n 工作流、MCP 服务与个人 AI 站点。',
-          cta: '获取开发者优惠',
-          // 替换为你的阿里云 / 腾讯云 / 火山引擎推广返佣链接
-          url: 'https://www.aliyun.com/?ref=ainewsradar'
+          icon: '🚀',
+          name: 'Hostinger AI 主机与 n8n 自动化服务器',
+          tagline: '高性能 NVMe 云服务器，一键部署 AI 智能体、MCP 服务与自动化工作流，全球低延迟节点。',
+          cta: '查看特惠方案',
+          hint: '开发者专享特惠',
+          image: '/images/partners/hostinger_banner.svg',
+          url: 'https://www.hostinger.com/vps-hosting?ref=ainewsradar'
         },
         {
           id: 'sponsor-direct-zh',
@@ -141,8 +126,10 @@
           accent: 'amber',
           icon: '✨',
           name: '置顶推广你的 AI 产品与工具',
-          tagline: '精准触达一线 AI 工程师、全栈开发者与科技决策者，支持工具库置顶与原生专题合作。',
+          tagline: '每日精准触达数万名一线 AI 工程师、独立开发者与科技决策者，支持工具库置顶与原生专题合作。',
           cta: '申请置顶合作',
+          hint: '官方展位直投 ↗',
+          image: '/images/partners/sponsor_banner.svg',
           url: '/zh/contact#sponsor',
           internal: true
         }
@@ -162,7 +149,6 @@
   function isDarkPage() {
     var html = document.documentElement;
     if (html && html.classList && html.classList.contains('dark')) return true;
-    // Flagship articles / light pages without .dark class
     return false;
   }
 
@@ -189,34 +175,72 @@
     style.id = 'ainr-monetization-css';
     style.textContent = [
       '.ainr-slot{box-sizing:border-box;width:100%;font-family:Inter,system-ui,-apple-system,sans-serif;}',
-      '.ainr-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;border-radius:16px;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;}',
-      '.ainr-card:hover{transform:translateY(-1px);}',
-      '.ainr-theme-light .ainr-card{background:linear-gradient(135deg,rgba(255,255,255,0.96),rgba(248,250,252,0.96));border:1px solid rgba(203,213,225,0.85);color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.08);}',
-      '.ainr-theme-light .ainr-card:hover{border-color:rgba(99,102,241,0.45);box-shadow:0 10px 24px -10px rgba(79,70,229,0.18);}',
-      '.ainr-theme-dark .ainr-card{background:linear-gradient(135deg,rgba(15,23,42,0.82),rgba(15,23,42,0.62));border:1px solid rgba(51,65,85,0.75);color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.55);backdrop-filter:blur(12px);}',
-      '.ainr-theme-dark .ainr-card:hover{border-color:rgba(129,140,248,0.55);box-shadow:0 12px 28px -10px rgba(99,102,241,0.22);}',
-      '.ainr-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}',
+      
+      /* Horizontal Leaderboard Card */
+      '.ainr-card{position:relative;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;text-decoration:none;transition:transform .18s cubic-bezier(0.16,1,0.3,1),border-color .18s ease,box-shadow .18s ease;overflow:hidden;}',
+      '.ainr-card:hover{transform:translateY(-1.5px);}',
+      '.ainr-theme-light .ainr-card{background:linear-gradient(135deg,#ffffff,#f8fafc);border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.08);}',
+      '.ainr-theme-light .ainr-card:hover{border-color:#818cf8;box-shadow:0 10px 24px -10px rgba(99,102,241,0.22);}',
+      '.ainr-theme-dark .ainr-card{background:linear-gradient(135deg,rgba(15,23,42,0.92),rgba(15,23,42,0.72));border:1px solid rgba(51,65,85,0.85);color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.55);backdrop-filter:blur(12px);}',
+      '.ainr-theme-dark .ainr-card:hover{border-color:rgba(129,140,248,0.65);box-shadow:0 12px 28px -10px rgba(99,102,241,0.3);}',
+
+      /* Card Thumbnail Image */
+      '.ainr-thumb{position:relative;width:140px;height:80px;flex-shrink:0;border-radius:9px;overflow:hidden;background:#090d16;border:1px solid rgba(255,255,255,0.08);box-shadow:0 3px 10px rgba(0,0,0,0.25);}',
+      '.ainr-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease;}',
+      '.ainr-card:hover .ainr-thumb img{transform:scale(1.05);}',
+      '.ainr-thumb-badge{position:absolute;top:5px;left:5px;font-size:8.5px;font-weight:800;padding:1.5px 5.5px;border-radius:4px;background:rgba(15,23,42,0.88);backdrop-filter:blur(4px);color:#f8fafc;border:1px solid rgba(255,255,255,0.18);letter-spacing:.04em;text-transform:uppercase;z-index:2;line-height:1.2;}',
+
+      /* Card Body & Meta */
+      '.ainr-body{min-width:0;flex:1;}',
+      '.ainr-pill-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;}',
+      '.ainr-pill{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:800;padding:1.5px 7px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;}',
+      '.ainr-pill-indigo{background:rgba(99,102,241,0.15);color:#818cf8;border:1px solid rgba(99,102,241,0.3);}',
+      '.ainr-pill-emerald{background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.3);}',
+      '.ainr-pill-sky{background:rgba(14,165,233,0.15);color:#38bdf8;border:1px solid rgba(14,165,233,0.3);}',
+      '.ainr-pill-amber{background:rgba(245,158,11,0.15);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);}',
+      '.ainr-verified{font-size:9.5px;font-weight:700;color:#10b981;letter-spacing:.02em;}',
+      '.ainr-title{font-size:13.5px;font-weight:800;line-height:1.3;margin:0;letter-spacing:-0.01em;}',
+      '.ainr-desc{font-size:11.5px;line-height:1.42;margin:3px 0 0;opacity:0.82;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}',
+
+      /* Action CTA */
+      '.ainr-action-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}',
+      '.ainr-cta{display:inline-flex;align-items:center;gap:4px;padding:6.5px 13px;border-radius:9px;font-size:11.5px;font-weight:700;white-space:nowrap;transition:background .15s ease,transform .15s ease;}',
+      '.ainr-theme-light .ainr-cta{background:#4f46e5;color:#ffffff;box-shadow:0 2px 8px rgba(79,70,229,0.25);}',
+      '.ainr-theme-light .ainr-card:hover .ainr-cta{background:#4338ca;}',
+      '.ainr-theme-dark .ainr-cta{background:rgba(99,102,241,0.25);color:#e0e7ff;border:1px solid rgba(129,140,248,0.4);}',
+      '.ainr-theme-dark .ainr-card:hover .ainr-cta{background:#4f46e5;color:#ffffff;border-color:#6366f1;}',
+      '.ainr-sub-hint{font-size:10px;font-weight:600;opacity:0.65;letter-spacing:.02em;}',
+
+      /* 3-Column Visual Grid Showcase (home-bottom-native) */
+      '.ainr-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}',
       '.ainr-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}',
-      '@media (max-width:900px){.ainr-grid-3{grid-template-columns:1fr;}}',
-      '@media (max-width:720px){.ainr-grid-2{grid-template-columns:1fr;}.ainr-card{flex-direction:column;align-items:flex-start;}}',
+      '.ainr-grid-card{position:relative;display:flex;flex-direction:column;border-radius:16px;text-decoration:none;overflow:hidden;transition:transform .2s cubic-bezier(0.16,1,0.3,1),border-color .2s ease,box-shadow .2s ease;}',
+      '.ainr-grid-card:hover{transform:translateY(-2.5px);}',
+      '.ainr-theme-light .ainr-grid-card{background:#ffffff;border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.08);}',
+      '.ainr-theme-light .ainr-grid-card:hover{border-color:#818cf8;box-shadow:0 12px 28px -10px rgba(99,102,241,0.2);}',
+      '.ainr-theme-dark .ainr-grid-card{background:linear-gradient(135deg,rgba(15,23,42,0.92),rgba(15,23,42,0.72));border:1px solid rgba(51,65,85,0.85);color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.55);}',
+      '.ainr-theme-dark .ainr-grid-card:hover{border-color:rgba(129,140,248,0.65);box-shadow:0 14px 32px -10px rgba(99,102,241,0.35);}',
+
+      /* Grid Card Image Banner */
+      '.ainr-grid-thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#090d16;}',
+      '.ainr-grid-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}',
+      '.ainr-grid-card:hover .ainr-grid-thumb img{transform:scale(1.04);}',
+      '.ainr-grid-content{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1;}',
+      '.ainr-grid-content .ainr-title{font-size:14.5px;margin:4px 0 0;}',
+      '.ainr-grid-content .ainr-desc{font-size:12px;margin:6px 0 14px;flex:1;}',
+      '.ainr-grid-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(148,163,184,0.18);}',
+
+      /* Meta Bar */
       '.ainr-meta-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:11px;letter-spacing:.03em;}',
       '.ainr-theme-light .ainr-meta-bar{color:#64748b;}',
       '.ainr-theme-dark .ainr-meta-bar{color:#94a3b8;}',
-      '.ainr-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;}',
-      '.ainr-pill-indigo{background:rgba(99,102,241,0.12);color:#6366f1;border:1px solid rgba(99,102,241,0.25);}',
-      '.ainr-pill-emerald{background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.25);}',
-      '.ainr-pill-sky{background:rgba(14,165,233,0.12);color:#0ea5e9;border:1px solid rgba(14,165,233,0.25);}',
-      '.ainr-pill-amber{background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.25);}',
-      '.ainr-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;padding:7px 13px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap;transition:background .15s ease;}',
-      '.ainr-theme-light .ainr-cta{background:#4f46e5;color:#ffffff;}',
-      '.ainr-theme-light .ainr-card:hover .ainr-cta{background:#4338ca;}',
-      '.ainr-theme-dark .ainr-cta{background:rgba(99,102,241,0.2);color:#c7d2fe;border:1px solid rgba(129,140,248,0.35);}',
-      '.ainr-theme-dark .ainr-card:hover .ainr-cta{background:#4f46e5;color:#ffffff;border-color:#6366f1;}',
-      '.ainr-title{font-size:13.5px;font-weight:800;line-height:1.35;margin:0;}',
-      '.ainr-desc{font-size:12px;line-height:1.48;margin:4px 0 0;opacity:0.8;}',
       '.ainr-sponsor-link{color:inherit;text-decoration:none;opacity:0.78;font-weight:600;transition:opacity .15s ease;}',
       '.ainr-sponsor-link:hover{opacity:1;text-decoration:underline;}',
-      '.ainr-iframe-wrap{display:flex;align-items:center;justify-content:center;width:100%;overflow:hidden;border-radius:12px;}'
+
+      /* Responsive Breakpoints */
+      '@media (max-width:1024px){.ainr-grid-3{grid-template-columns:1fr;}}',
+      '@media (max-width:900px){.ainr-grid-2{grid-template-columns:1fr;}}',
+      '@media (max-width:640px){.ainr-card{flex-direction:column;align-items:flex-start;}.ainr-thumb{width:100%;height:140px;}.ainr-action-wrap{width:100%;flex-direction:row;justify-content:space-between;align-items:center;margin-top:10px;}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -240,7 +264,7 @@
   function tryMountAAds(el, unitId, fallbackFn) {
     if (!CONFIG.networks.aads.enabled || !unitId) return false;
     var wrap = document.createElement('div');
-    wrap.className = 'ainr-iframe-wrap';
+    wrap.style.cssText = 'display:flex;justify-content:center;width:100%;overflow:hidden;border-radius:12px;';
     var iframe = document.createElement('iframe');
     iframe.setAttribute('data-aa', String(unitId));
     iframe.src = '//ad.a-ads.com/' + encodeURIComponent(unitId) + '?size=Adaptive';
@@ -253,7 +277,6 @@
     wrap.appendChild(iframe);
     el.innerHTML = '';
     el.appendChild(wrap);
-    // Graceful AdBlock recovery if iframe is blocked/collapsed
     setTimeout(function () {
       if (!loaded && iframe.clientHeight < 20) {
         fallbackFn();
@@ -284,7 +307,6 @@
   }
 
   function maybeLoadGlobalNetworks() {
-    // EthicalAds script (only when enabled)
     if (CONFIG.networks.ethicalads && CONFIG.networks.ethicalads.enabled && CONFIG.networks.ethicalads.publisher) {
       if (!document.querySelector('script[src*="ethicalads.min.js"]')) {
         var ea = document.createElement('script');
@@ -293,7 +315,6 @@
         document.head.appendChild(ea);
       }
     }
-    // Google AdSense (only when explicitly re-enabled)
     if (CONFIG.networks.adsense && CONFIG.networks.adsense.enabled && CONFIG.networks.adsense.client) {
       if (!document.querySelector('script[src*="adsbygoogle.js"]')) {
         var ga = document.createElement('script');
@@ -306,21 +327,60 @@
   }
 
   // =========================================================================
-  // 4. NATIVE FORMAT RENDERERS (4 FORMATS: LEADERBOARD, GRID, GATEWAY, IN-CONTENT, MOBILE)
+  // 4. NATIVE FORMAT RENDERERS WITH REAL IMAGES & BANNERS
   // =========================================================================
   function renderCardHtml(p, compact) {
     var pillClass = 'ainr-pill-' + (p.accent || 'indigo');
+    var imageHtml = p.image
+      ? '<div class="ainr-thumb">' +
+          '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async" />' +
+          '<span class="ainr-thumb-badge">' + esc(p.badge) + '</span>' +
+        '</div>'
+      : '';
+
     return (
       '<a class="ainr-card" ' + linkAttrs(p) + '>' +
-        '<div style="min-width:0;flex:1;">' +
-          '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">' +
-            '<span style="font-size:15px;line-height:1;">' + esc(p.icon) + '</span>' +
-            '<span class="ainr-pill ' + pillClass + '">' + esc(p.badge) + '</span>' +
-            '<h4 class="ainr-title">' + esc(p.name) + '</h4>' +
+        imageHtml +
+        '<div class="ainr-body">' +
+          '<div class="ainr-pill-row">' +
+            '<span class="ainr-pill ' + pillClass + '">✦ ' + esc(p.badge) + '</span>' +
+            '<span class="ainr-verified">✓ Official</span>' +
           '</div>' +
+          '<h4 class="ainr-title">' + esc(p.name) + '</h4>' +
           (compact ? '' : '<p class="ainr-desc">' + esc(p.tagline) + '</p>') +
         '</div>' +
-        '<span class="ainr-cta">' + esc(p.cta) + ' ↗</span>' +
+        '<div class="ainr-action-wrap">' +
+          '<span class="ainr-cta">' + esc(p.cta) + ' ↗</span>' +
+          '<span class="ainr-sub-hint">' + esc(p.hint || 'Special Offer') + '</span>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  function renderGridCardHtml(p) {
+    var pillClass = 'ainr-pill-' + (p.accent || 'indigo');
+    var imageHtml = p.image
+      ? '<div class="ainr-grid-thumb">' +
+          '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async" />' +
+          '<span class="ainr-thumb-badge">' + esc(p.badge) + '</span>' +
+        '</div>'
+      : '';
+
+    return (
+      '<a class="ainr-grid-card" ' + linkAttrs(p) + '>' +
+        imageHtml +
+        '<div class="ainr-grid-content">' +
+          '<div class="ainr-pill-row">' +
+            '<span class="ainr-pill ' + pillClass + '">✦ ' + esc(p.badge) + '</span>' +
+            '<span class="ainr-verified">✓ Partner</span>' +
+          '</div>' +
+          '<h4 class="ainr-title">' + esc(p.name) + '</h4>' +
+          '<p class="ainr-desc">' + esc(p.tagline) + '</p>' +
+          '<div class="ainr-grid-footer">' +
+            '<span class="ainr-sub-hint">' + esc(p.hint || 'Verified Resource') + '</span>' +
+            '<span class="ainr-cta">' + esc(p.cta) + ' ↗</span>' +
+          '</div>' +
+        '</div>' +
       '</a>'
     );
   }
@@ -349,12 +409,12 @@
   }
 
   function renderNativeShowcaseGrid(el, lang) {
-    var items = pickPartners(lang, 3, 1);
+    var items = pickPartners(lang, 3, 0);
     el.innerHTML =
       '<div class="ainr-slot ' + getThemeClass(el) + '">' +
         renderMetaBar(lang, 'RECOMMENDED AI INFRASTRUCTURE & DEVELOPER PARTNERS', '精选 AI 算力、API 与开发者生态推荐') +
         '<div class="ainr-grid-3">' +
-          items.map(function (p) { return renderCardHtml(p, false); }).join('') +
+          items.map(function (p) { return renderGridCardHtml(p); }).join('') +
         '</div>' +
       '</div>';
   }
@@ -396,7 +456,6 @@
     var slotType = el.getAttribute('data-ad-slot') || 'article-native';
     var lang = isZhPage() ? 'zh' : 'en';
 
-    // Route by format: try configured third-party network first, fallback cleanly to Layer 1 Native
     if (slotType === 'home-mid-leaderboard') {
       var fallbackMid = function () { renderNativeLeaderboard(el, lang); };
       if (!tryMountAAds(el, CONFIG.networks.aads.leaderboardUnitId, fallbackMid)) {
@@ -472,7 +531,7 @@
             io.unobserve(entries[i].target);
           }
         }
-      }, { rootMargin: '260px 0px' });
+      }, { rootMargin: '300px 0px' });
 
       for (var j = 0; j < slots.length; j++) {
         io.observe(slots[j]);
