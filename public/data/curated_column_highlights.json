@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 06:35:31 UTC",
+  "generated_at": "2026-11-22 06:48:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 06:35:31 UTC",
+      "updated_at": "2026-11-22 06:48:04 UTC",
       "headline_item": {
-        "id": "c2d9fa550c13be18",
+        "id": "5870c79890243395",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "数学界证实勒文·阿尔伯格完成黎曼猜想形式化证明",
-        "title_en": "A joint statement by the Lean and Mathlib communities says \"we have full confidence that Alpöge's proof of the Riemann Hypothesis is correct\" (Lean community blog)",
-        "source": "Lean community blog",
-        "published_at": "2026-11-22T06:00:02+00:00",
-        "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
-        "event_summary_zh": "数学家勒文·阿尔伯格通过1700万行Lean代码完成黎曼猜想证明，并获Lean与Mathlib社区官方认证",
-        "event_summary_en": "Mathematician Levent Alpöge released a formal proof of the Riemann Hypothesis on November 20, 2026, consisting of 17 million lines of Lean code relying on the Mathlib library. The Lean and Mathlib communities have officially certified the proof's correctness after comprehensive verification of its logic and codebase.",
+        "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
+        "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
+        "source": "Gizmodo",
+        "published_at": "2026-11-22T06:40:16+00:00",
+        "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
+        "event_summary_zh": "特斯拉正式向部分车型推送FSD V15系统，核心升级在于抛弃传统游戏引擎，通过实时AI视频生成技术实现车载环境的写实级渲染",
+        "event_summary_en": "Tesla has rolled out FSD v15 to select vehicles this Saturday, featuring a visualization system that abandons game engine rendering in favor of real-time AI video generation. This transition represents a shift in Tesla's perception architecture from traditional rule-based rendering to end-to-end generative AI synthesis for real-time environment representation.",
         "core_facts_zh": [
-          "【核心事件】数学家勒文·阿尔伯格；Lean与Mathlib社区；Lean FRO在Lean与Mathlib社区官方博客：完成黎曼猜想的形式化证明，包含1700万行代码，并获得社区技术合规认证",
-          "【起因与机理】利用交互式定理证明器消除传统数学证明中的复杂性与人工错误，推动计算数学范式变革",
-          "【关键数据与实测】关键细节：包含1700万行Lean代码的黎曼猜想证明，通过了严苛的四项形式化合规审查。",
-          "【行业影响与走向】后续影响：形式化证明成为数学研究的新标准，将重塑纯数学研究的验证流程。"
+          "【核心事件】特斯拉（Tesla Inc.），首席执行官埃隆·马斯克（Elon Musk）在自动驾驶软件部署与视觉感知系统：发布FSD V15版本，引入基于生成式AI的实时视频渲染技术",
+          "【起因与机理】旨在通过消除游戏引擎负载优化自动驾驶的决策感知链路",
+          "【核心事实细节】FSD V15版本正式上线，核心替换渲染技术栈。",
+          "【各方立场与态度】技术革新旨在提升系统感知实时性并降低对底层渲染算力依赖。"
         ],
         "core_facts_en": [
-          "[Core Event] Levent Alpöge; Lean and Mathlib communities; Lean FRO (Lean and Mathlib community blog): Completed a formal proof of the Riemann Hypothesis via 17 million lines of code, certified by the community",
-          "[Root Cause & Mechanism] Leveraging interactive theorem provers to eliminate complexity and human error in traditional proofs",
-          "[Key Metrics] com/2026/1/and-the-proof-is-checked-in-lean/ are all satisfied.",
-          "[Key Position & Outlook] Outlook: Formal proofs become the new standard, reshaping verification workflows in pure mathematics."
+          "[Core Event] Tesla Inc., CEO Elon Musk: Released FSD v15 with generative AI-based real-time video rendering",
+          "[Root Cause & Mechanism] To optimize decision-making and perception latency by eliminating reliance on game engines",
+          "[Key Fact Detail] FSD v15 launch with a new rendering stack.",
+          "[Key Position & Outlook] Strategic focus on reducing latency and reliance on traditional rendering compute."
         ],
-        "industry_impact_zh": "此次证明标志着“形式化数学”从学术边缘走向核心，证明了超大规模计算验证复杂猜想的可行性。该事件将极大加速数学定理验证的自动化进程，并为AI辅助科学发现提供了高置信度的底层范式。",
-        "industry_impact_en": "This milestone marks the transition of 'formal mathematics' from the academic periphery to the core, validating the feasibility of using massive-scale computation to resolve complex conjectures. It will accelerate the automation of theorem verification and establish a high-confidence paradigm for AI-driven scientific discovery."
+        "industry_impact_zh": "从传统游戏引擎向实时视频生成的跨越，暗示特斯拉正在将大模型能力向车辆端侧边缘计算迁移，以解决感知信息到三维空间建模的延迟损耗。此技术路线的成功将直接重塑高阶智驾对于高精地图的依赖程度，强制竞争对手在算力利用效率和端侧模型架构上进行防御性升级。",
+        "industry_impact_en": "The transition from game engine rendering to real-time video synthesis signals a shift toward edge-based large model integration, minimizing the latency between perception and 3D spatial modeling. This advancement significantly diminishes the necessity for high-definition maps and mandates a defensive architectural pivot from competitors focusing on hardware-agnostic, rule-based autonomous driving systems."
       },
       "headlines": [
+        {
+          "id": "5870c79890243395",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
+          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
+          "source": "Gizmodo",
+          "published_at": "2026-11-22T06:40:16+00:00",
+          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
+          "event_summary_zh": "特斯拉正式向部分车型推送FSD V15系统，核心升级在于抛弃传统游戏引擎，通过实时AI视频生成技术实现车载环境的写实级渲染",
+          "event_summary_en": "Tesla has rolled out FSD v15 to select vehicles this Saturday, featuring a visualization system that abandons game engine rendering in favor of real-time AI video generation. This transition represents a shift in Tesla's perception architecture from traditional rule-based rendering to end-to-end generative AI synthesis for real-time environment representation.",
+          "core_facts_zh": [
+            "【核心事件】特斯拉（Tesla Inc.），首席执行官埃隆·马斯克（Elon Musk）在自动驾驶软件部署与视觉感知系统：发布FSD V15版本，引入基于生成式AI的实时视频渲染技术",
+            "【起因与机理】旨在通过消除游戏引擎负载优化自动驾驶的决策感知链路",
+            "【核心事实细节】FSD V15版本正式上线，核心替换渲染技术栈。",
+            "【各方立场与态度】技术革新旨在提升系统感知实时性并降低对底层渲染算力依赖。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Tesla Inc., CEO Elon Musk: Released FSD v15 with generative AI-based real-time video rendering",
+            "[Root Cause & Mechanism] To optimize decision-making and perception latency by eliminating reliance on game engines",
+            "[Key Fact Detail] FSD v15 launch with a new rendering stack.",
+            "[Key Position & Outlook] Strategic focus on reducing latency and reliance on traditional rendering compute."
+          ],
+          "industry_impact_zh": "从传统游戏引擎向实时视频生成的跨越，暗示特斯拉正在将大模型能力向车辆端侧边缘计算迁移，以解决感知信息到三维空间建模的延迟损耗。此技术路线的成功将直接重塑高阶智驾对于高精地图的依赖程度，强制竞争对手在算力利用效率和端侧模型架构上进行防御性升级。",
+          "industry_impact_en": "The transition from game engine rendering to real-time video synthesis signals a shift toward edge-based large model integration, minimizing the latency between perception and 3D spatial modeling. This advancement significantly diminishes the necessity for high-definition maps and mandates a defensive architectural pivot from competitors focusing on hardware-agnostic, rule-based autonomous driving systems."
+        },
         {
           "id": "c2d9fa550c13be18",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "该现象暴露出AI硬件市场的卖方市场格局已具备极强的价格垄断属性，传统合同履约信誉在极端供需压力下正面临重构。对于算力需求方而言，供应链稳定性风险已取代采购成本成为制约业务扩容的首要因素。",
           "industry_impact_en": "This trend reveals a robust seller's market in the AI hardware sector, where traditional contract enforcement is fracturing under extreme supply-demand pressures. For compute buyers, supply chain stability risks have now superseded procurement costs as the primary constraint on business scaling."
-        },
-        {
-          "id": "4b9411cc12cb8e23",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "新加坡华裔李明涉嫌向中国违规出口英伟达芯片",
-          "title_en": "The Alice Huang Associate Accused of Funneling Nvidia Chips to China",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-22T05:45:01+00:00",
-          "url": "https://www.wsj.com/tech/li-ming-megaspeed-nvidia-chips-china-6260d836?st=HzXMZU",
-          "event_summary_zh": "新加坡警方逮捕并保释涉嫌运营贸易网络、非法向中国走私英伟达AI芯片的关键人物李明",
-          "event_summary_en": "Li Ming, a 52-year-old Chinese national based in Singapore, is accused of operating a smuggling network that funneled restricted Nvidia AI chips to China by utilizing front companies including Megaspeed. Li is currently out on bail, having played a central role in orchestrating the bypass of U.S. export controls.",
-          "core_facts_zh": [
-            "【核心事件】李明（涉案贸易商）、Megaspeed（涉案新加坡贸易公司）在新加坡：通过多层贸易网络将受限AI芯片违规出口至中国",
-            "【起因与机理】规避美国商务部针对中国高性能计算集群的严苛出口许可审查",
-            "【调查与监管诉求】核心涉案：李明被指控作为幕后主谋通过新加坡公司向中国非法供货。",
-            "【行业影响与走向】后续影响：新加坡监管机构加强对高科技贸易实体的合规审计与跨境物流追踪。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Li Ming (trader), Megaspeed (Singapore-based trading firm) (Singapore): Illicit export of restricted AI chips to China via complex supply chain networks",
-            "[Root Cause & Mechanism] To circumvent U.S. Bureau of Industry and Security (BIS) export licensing requirements",
-            "[Regulatory & Investigation Focus] Core Allegation: Li Ming accused of orchestrating illegal Nvidia chip exports to China.",
-            "[Key Position & Outlook] Outlook: Singaporean authorities expected to tighten compliance audits on high-tech trade intermediaries."
-          ],
-          "industry_impact_zh": "该案揭示了出口管制政策下，利用离岸贸易中心（如新加坡）作为货物流转节点的洗白路径正在遭受严厉监管排查。芯片走私链条的精密化迫使供应链透明度合规义务从一级渠道商延伸至二级代理，未来英伟达的区域分销合规性审查将面临更严苛的审计成本压力。",
-          "industry_impact_en": "This case highlights the growing reliance on offshore trading hubs to bypass export controls and suggests a shift toward more rigorous end-user verification requirements. As supply chain opacity becomes a primary regulatory target, Nvidia must significantly heighten its audit burden for regional distributors to mitigate secondary sanctions risk."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 06:35:31 UTC",
+      "updated_at": "2026-11-22 06:48:04 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 06:35:31 UTC",
+      "updated_at": "2026-11-22 06:48:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
