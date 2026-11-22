@@ -1,164 +1,64 @@
 {
-  "updated_at": "2026-11-22T16:17:45.712511+00:00",
+  "updated_at": "2026-11-22T20:20:06.549458+00:00",
   "topics": [
     {
-      "topic_id": "topic_tesla_fsd_v15_ai_rendering",
+      "topic_id": "topic_openai_perplexity_metric_clash",
       "heat_score": 9.8,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "端到端自动驾驶",
-      "category_tag_en": "End-to-End Autonomous Driving",
-      "title_zh": "特斯拉推送FSD V15：抛弃游戏引擎，引入实时AI视频渲染",
-      "title_en": "Tesla Rolls Out FSD V15: Ditching Game Engines for Real-Time AI Video Generation",
-      "summary_zh": "特斯拉最新发布的FSD V15系统标志着自动驾驶可视化技术的重大范式转移。马斯克确认该系统不再依赖传统游戏引擎渲染，而是通过实时AI生成技术实现写实级的周边环境映射，这一极高计算负荷的方案正挑战车载SoC处理能力的极限。",
-      "summary_en": "Tesla's release of FSD V15 marks a paradigm shift in autonomous visualization. Elon Musk confirmed the abandonment of traditional game engines in favor of real-time AI video generation for photorealistic environment rendering. This compute-intensive approach directly stresses current SoC limits, signaling a move toward pure-AI environment synthesis.",
-      "perspective_pro": {
-        "role_zh": "🟢 演进派 / 特斯拉支持者",
-        "role_en": "🟢 The Evolutionist / Tesla Supporters",
-        "speaker_zh": "特斯拉工程团队",
-        "speaker_en": "Tesla Engineering Team",
-        "point_zh": "实时生成的环境模型消除了引擎转换的延迟与数据损失，能更精准地与神经网络的决策链路对接，为实现完全自动驾驶提供底层支撑。",
-        "point_en": "Real-time generation eliminates engine latency and data loss, allowing for seamless integration with neural network decision pipelines, essential for achieving true autonomy."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业理性派 / 安全质疑者",
-        "role_en": "🔴 Industrial Pragmatist / Safety Skeptic",
-        "speaker_zh": "车载系统安全分析师",
-        "speaker_en": "Automotive System Safety Analysts",
-        "point_zh": "将核心显示路径从确定性代码转向生成式AI，引入了无法预知的“幻觉”风险。在高速驾驶决策中，显示内容的精确度若被生成式AI模糊化，极易诱发致命误判。",
-        "point_en": "Moving critical display pipelines from deterministic code to generative AI introduces unpredictable 'hallucination' risks. If generative AI blurs precision in high-speed scenarios, it creates lethal misjudgments."
-      },
-      "linked_news": [
-        {
-          "id": "5870c79890243395",
-          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
-          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
-          "source": "Gizmodo",
-          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
-          "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-22T06:40:16+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "809c8f086f98bc1f",
-          "author": "Elon Musk",
-          "author_handle": "@elonmusk",
-          "author_avatar": "https://unavatar.io/x/elonmusk",
-          "content_zh": "@schrep 我们设计了自己的超精确雷达系统，它存在于一些 X 和 X 设备上，但已关闭。超人的视力只会粉碎它。",
-          "content_en": "@schrep We designed our own super precise radar system and it’s there on some X and X units, but turned off. Superhuman vision just crushes it.",
-          "url": "https://x.com/elonmusk/status/2124469602700956103",
-          "platform": "x"
-        },
-        {
-          "id": "bf4a07bbb3c2d15a",
-          "author": "Elon Musk",
-          "author_handle": "@elonmusk",
-          "author_avatar": "https://unavatar.io/x/elonmusk",
-          "content_zh": "@BLKMDL3 @wholemars 如果有人好奇：\n\n自去年以来，我们已经有了一个像素完美的世界模型，这对于合成数据的生成至关重要。\n\n汽车中的（小得多）版本是条件平均流模型，基于 Tesla 通用视觉编码器功能的最新序列，这些功能与插入到产生驾驶动作的 3B 编码器模型中的功能相同。\n\n我们从这些 UVE 功能中分叉出来，然后运行一个单独的 ~1B 扩散模型。这会吸收先前生成的添加了噪声的现实视图，然后将其降噪到当前的可视化中。\n\n然后它会生成一个小视频块（8 个图像，36 fps，UI 屏幕的分辨率）。这项工作由 TRIP 引擎在 18 Hz 的每个 UVE 帧上完成，并分布在 4 个周期内。\n\n目前，由于计算限制，延迟有点高，但我们有办法沿着扩散转换器层交错更新的 UVE 功能，以减少大约 35% 的延迟。",
-          "content_en": "@BLKMDL3 @wholemars In case anyone is curious:\n\nWe’ve had a ~pixel-perfect world model since last year, which is critical for synthetic data generation. \n\nThe (much) smaller version of that in the car is a conditional mean-flow model, based on the recent sequence of Tesla Universal Vision Encoder features, which are the same ones that are plugged into the 3B encoder model that produces the driving actions. \n\nWe fork off from these UVE features, then run a separate ~1B diffusion model. This takes in the previous reality-view generation with added noise and then denoises it to the current visualization. \n\nIt then produces a small video chunk (8 images at 36 fps, at the resolution of the UI screen). This work is done by 1/2 of a TRIP engine every UVE frame at 18 hz and is spread over 4 cycles. \n\nCurrently, the latency is a bit high due to compute constraints, but we have ways to interleave newer UVE features along the diffusion transformer layers to cut roughly 35% of the latency.",
-          "url": "https://x.com/elonmusk/status/2124458557525397780",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
-      },
-      "linked_counts": {
-        "news": 1,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_tesla_fsd_v15_ai_rendering",
-      "stance_matrix": {
-        "pro_point_zh": "实时生成的环境模型消除了引擎转换的延迟与数据损失，能更精准地与神经网络的决策链路对接，为实现完全自动驾驶提供底层支撑。",
-        "pro_author": "特斯拉工程团队",
-        "con_point_zh": "将核心显示路径从确定性代码转向生成式AI，引入了无法预知的“幻觉”风险。在高速驾驶决策中，显示内容的精确度若被生成式AI模糊化，极易诱发致命误判。",
-        "con_author": "车载系统安全分析师",
-        "action_advice_zh": "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。",
-        "pro_point_en": "Real-time generation eliminates engine latency and data loss, allowing for seamless integration with neural network decision pipelines, essential for achieving true autonomy.",
-        "con_point_en": "Moving critical display pipelines from deterministic code to generative AI introduces unpredictable 'hallucination' risks. If generative AI blurs precision in high-speed scenarios, it creates lethal misjudgments.",
-        "action_advice_en": "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
-      }
-    },
-    {
-      "topic_id": "topic_ai_coding_agent_failure_rate",
-      "heat_score": 9.6,
       "badge_zh": "🔥 24h 领跑爆点",
       "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "智能体实测崩盘",
-      "category_tag_en": "Agent Capability Gap",
-      "title_zh": "AI编程智能体虚火：模拟办公环境任务成功率不足10%",
-      "title_en": "AI Coding Agents Fail: Under 10% Success Rate in Simulated Workplace Environments",
-      "summary_zh": "针对SWE-bench等基准测试的最新研究显示，AI编程智能体虽然在隔离测试中表现亮眼，但在复杂协作、多方反馈的真实工作流模拟中，任务成功率断崖式下跌至10%以下。这揭示了当前模型在复杂上下文维护与业务逻辑对齐上的核心缺失。",
-      "summary_en": "New research reveals that while AI coding agents excel in isolated benchmarks like SWE-bench, their success rate in simulated workplace environments drops below 10%. This exposes a critical gap in model capabilities regarding multi-agent coordination, persistent context maintenance, and alignment with complex business workflows.",
+      "category_tag_zh": "行业标准与合规博弈",
+      "category_tag_en": "Industry Standards & Compliance",
+      "title_zh": "OpenAI 拟推“困惑度”定标，挑战算力与模型透明度标准",
+      "title_en": "OpenAI Pushes 'Perplexity' as Industry Metric Amid Transparency Clashes",
+      "summary_zh": "OpenAI 首席科学家 Jakub Pachocki 提议将“困惑度（Perplexity）”作为评估模型预训练进程与安全性的通用基准，试图取代传统的 FLOPS 指标，旨在提升行业透明度与监管一致性，但引发了关于模型真实性能衡量标准的激烈争论。",
+      "summary_en": "OpenAI's Chief Scientist Jakub Pachocki proposes using 'perplexity' as a universal metric for tracking model pre-training progress and safety, aiming to move beyond FLOPS. This push for standardization seeks to improve industry transparency, yet triggers debates over whether this metric truly reflects a model's underlying capability and competitive edge.",
       "perspective_pro": {
-        "role_zh": "🟢 研发支持者 / 智能体派",
-        "role_en": "🟢 Research Proponent / Agent Enthusiast",
-        "speaker_zh": "大模型辅助编程开发者",
-        "speaker_en": "AI-assisted Software Engineers",
-        "point_zh": "当前的失败率是系统整合期的阵痛。一旦Agent工作流与企业级CI/CD流程深度闭环，其生产力跃升将是量级上的改变，不应以孤立失败否认路径方向。",
-        "point_en": "High failure rates are growing pains. Once agent workflows achieve deep integration with enterprise CI/CD pipelines, the jump in productivity will be orders of magnitude, making it unwise to reject the path based on isolated failures."
+        "role_zh": "🟢 行业规范倡导者",
+        "role_en": "🟢 Regulatory Standardizers",
+        "speaker_zh": "OpenAI 研发与管理层",
+        "speaker_en": "OpenAI Leadership",
+        "point_zh": "通过困惑度建立可量化的行业基准，能有效引导模型开发走向可观测的科学路径，避免算力军备竞赛导致的无序泡沫。",
+        "point_en": "Establishing a quantifiable industry benchmark via perplexity steers model development toward an observable, scientific path, mitigating the chaotic bubble fueled by unbridled compute races."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业理性派 / 质疑者",
-        "role_en": "🔴 Industrial Pragmatist / Critic",
-        "speaker_zh": "软件架构师与安全专家",
-        "speaker_en": "Software Architects & Security Experts",
-        "point_zh": "“Vibe-coding”造就了一批只会写简单功能的半吊子，缺乏对大型项目完整性的理解。模型目前仅是在代码片段上做概率拟合，而非真正的软件工程治理。",
-        "point_en": "'Vibe-coding' creates a generation of 'starters' lacking deeper project integrity. Current models perform probabilistic fitting on code snippets rather than actual software engineering governance."
+        "role_zh": "🔴 质疑派工程师",
+        "role_en": "🔴 Skeptical Engineers",
+        "speaker_zh": "开源社区开发者及独立研究员",
+        "speaker_en": "Independent Researchers & Developers",
+        "point_zh": "困惑度无法涵盖复杂推理任务中的真实能力，且大厂可能通过特化语料优化该指标，掩盖模型在实际生产任务中的鲁棒性缺失。",
+        "point_en": "Perplexity fails to capture true performance on complex reasoning tasks; tech giants could exploit it via data tailoring to mask inherent robustness failures in production environments."
       },
       "linked_news": [
         {
-          "id": "e3a7ac59fcc5ace0",
-          "title_zh": "AI编程智能体实测：模拟环境任务完成率不足一成",
-          "title_en": "AI coding agents ace isolated tests but complete fewer than one in ten tasks in a simulated workplace",
+          "id": "215f6f625f6c6109",
+          "title_zh": "OpenAI新模型Astra与Sol侧重响应效率牺牲透明度",
+          "title_en": "GPT-6.2 Astra and Sol get to the point faster but score lower on transparency than Claude",
           "source": "THE DECODER",
-          "url": "https://the-decoder.com/ai-coding-agents-ace-isolated-tests-but-complete-fewer-than-one-in-ten-tasks-in-a-simulated-workplace/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_53f6ef00db8447c6.jpg",
+          "url": "https://the-decoder.com/gpt-6-2-astra-and-sol-get-to-the-point-faster-but-score-lower-on-transparency-than-claude/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_420d6516b8554737.jpg",
           "hot_score": 4,
-          "published_at": "2026-11-22T15:15:48+00:00"
+          "published_at": "2026-11-22T09:41:37+00:00"
         },
         {
-          "id": "7395d437c81cfa91",
-          "title_zh": "大模型“意念编程”开启消费电子硬件破解潮",
-          "title_en": "The vibe-coding revolution is coming to all the gadgets",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera",
-          "image_url": "https://ainewsradar.xyz/images/verge_564b8081b7bd0008.jpg",
-          "hot_score": 3,
-          "published_at": "2026-11-22T13:00:00+00:00"
+          "id": "40aa9e046f6a3b18",
+          "title_zh": "OpenAI首席科学家主张确立困惑度作为行业模型衡量标准",
+          "title_en": "Perplexity and Intelligence",
+          "source": "OpenAI 官方动态",
+          "url": "https://openai.com/index/perplexity-and-intelligence",
+          "image_url": "https://ainewsradar.xyz/images/openai_9a13ce3cabd12734.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-22T00:00:00+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "2c9743f75496ac5f",
-          "author": "CyrilXBT",
-          "author_handle": "@cyrilXBT",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2035229727414534145/aWap3Jbq_normal.jpg",
-          "content_zh": "VIBE 编码并没有创造一代建造者。它创造了一代先发者。\n\n麻省理工学院刚刚发表了关于人工智能编码的最令人不安的论文。\n\n在编码代理出现后，他们跟踪了 App Store、Play Store 和 Chrome Web Store 上的每一个新应用程序。\n\n使用自主代理的开发人员编写的代码增加了 25.5 倍。\n\n承诺增长 240%。\n\n实际发布？\n\n上涨 30%。\n\n情况变得更糟。\n\n采用 Claude Code 等工具后，开发人员编写的行数增加了 7 倍，删除的行数增加了 12.2 倍。\n\n30 天内放弃的回购协议从 60% 上升到 69%。\n\n自 2025 年初以来，新应用的发布量大约增加了一倍。\n\n用户参与度没有变化。\n\n应用程序数量是原来的两倍。\n\n使用它们的人数相同。\n\n这一点我个人是有感觉的。\n\n上个月我用 Claude Code 交付了三个“项目”。\n\n几乎可以肯定，零个人使用过其中任何一个。\n\n这是我的看法。\n\n人工智能并没有让人们成为更好的建设者。\n\n它让开始变得如此廉价，以至于结束变得毫无意义。\n\n编写代码从来都不是瓶颈。\n\n味道是。\n\n审查是。\n\n建造人们真正想要的东西是。\n\n没有任何模型可以为您解决这个问题。",
-          "content_en": "VIBE CODING DIDN'T CREATE A GENERATION OF BUILDERS. IT CREATED A GENERATION OF STARTERS.\n\nMIT just published the most uncomfortable paper on AI coding.\n\nThey tracked every new app on the App Store, Play Store and Chrome Web Store after coding agents showed up.\n\nDevs using autonomous agents wrote 25.5x more code.\n\nCommits up 240%.\n\nActual releases?\n\nUp 30%.\n\nIt gets worse.\n\nAfter adopting tools like Claude Code, devs wrote 7x more lines and deleted 12.2x more.\n\nRepos abandoned within 30 days went from 60% to 69%.\n\nNew apps launching roughly DOUBLED since early 2025.\n\nUser engagement didn't move.\n\nTwice as many apps.\n\nSame number of people using them.\n\nI felt this one personally.\n\nI shipped three \"projects\" last month with Claude Code.\n\nPretty sure zero humans used any of them.\n\nHere's my take.\n\nAI didn't make people better builders.\n\nIt made starting so cheap that finishing stopped meaning anything.\n\nWriting code was never the bottleneck.\n\nTaste was.\n\nReviewing was.\n\nBuilding something people actually want was.\n\nAnd no model is fixing that for you.",
-          "url": "https://x.com/cyrilXBT/status/2124344646348440059",
-          "platform": "x"
-        },
-        {
-          "id": "b6ac5c5640430fa1",
-          "author": "Сarm1ne",
-          "author_handle": "@carm1nee",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1961723732151484416/_-g3KJ2o_normal.jpg",
-          "content_zh": "天哪……麻省理工学院的学生在 Citadel 和 Jane Street 竞赛的一场现场比赛中通过 GitHub 上免费的一个 Python 笔记本赚了 2600 万美元\n\n第三名，一台笔记本，高盛1990年生产的型号：Black-Litterman。没有深度学习，没有 GPU，只有数学\n\n自 10 月份以来，我对 9 只真实股票执行了他们的精确规则，并让 Claude Fable 5.2 做出每一次预测：纸质书上涨 2.1%，而 SPY 下跌 7.5%\n\n首先了解它是如何工作的：\n\n> 每个团队都获得相同的股票、实时价格和 3 位分析师的价格预测，然后比赛对投资组合进行实时评分\n\n> Black-Litterman 从市场已经掌握的情况开始，并倾向于分析师，只要数学相信他们\n\n> 夏普门只有在击败当前投资组合时才会保留新的投资组合，并且机器人完成了现场融资 2600 万美元\n\n如何使用 Claude Code 运行它：\n\n1.告诉Claude Code克隆并打开case3.ipynb\n\n2. 首先让它在 case3data 上运行笔记本（它是为 Colab 编写的，因此 Claude 将 Google Drive 路径替换为本地路径）\n\n3.要求Claude将真实股票和真实分析师价格目标互换作为观点，雅虎两者都有\n\n4. 保留他们的夏普门，这样新的目标只有在击败当前的书时才进入\n\n5. 每天结束后运行一次并将每个目标记录到 csv\n\n6. 让 Claude 决定每次重新平衡，执行还是保留，并给出一个理由（这就是《神鬼寓言 5.2》视频中所做的）\n\n7. 每周纸质交易这本书并与 SPY 进行比较\n\n8. 限制单笔空头，原始规则有时要求 89% 的净空头\n\n9. 仅在您喜欢的几个月的纸质结果后才转移到真实账户\n\n我不再多说：",
-          "content_en": "HOLY F*CK... MIT students made $26 MILLION in ONE live round at a Citadel & Jane Street contest... from a single Python notebook that's on GitHub for free\n\n3rd place, one notebook, the model Goldman Sachs built in 1990: Black-Litterman. no deep learning, no GPUs, just MATH\n\ni ran their exact rule on 9 real stocks since October & let Claude Fable 5.2 make every call: the paper book is up 2.1% while SPY dropped 7.5%\n\nfirst understand how this works:\n\n> every team got the same stocks, live prices & 3 analysts' price predictions, then the contest scored the portfolios live\n\n> Black-Litterman starts from what the market already holds & tilts toward the analysts, only as far as the math trusts them\n\n> a Sharpe gate keeps a new portfolio only when it beats the current one, & the bot finished the live round $26 MILLION up\n\nhow to run it with Claude Code:\n\n1. tell Claude Code to clone https://t.co/dhTzZnC1fI & open case3.ipynb\n\n2. have it run the notebook on their case3data first (it was written for Colab, so Claude swaps the Google Drive paths for local ones)\n\n3. ask Claude to swap in real stocks & real analyst price targets as the views, Yahoo has both\n\n4. keep their Sharpe gate, so a new target only goes in when it beats the current book\n\n5. run it once a day after the close & log every target to a csv\n\n6. let Claude decide each rebalance, execute or hold, with a reason (that's what Fable 5.2 does in the video)\n\n7. paper trade the book & compare it with SPY every week\n\n8. cap any single short, the raw rule sometimes asks for 89% net short\n\n9. move to a live account only after a few months of paper results you like\n\ni won't say anything more:",
-          "url": "https://x.com/carm1nee/status/2124344405897167237",
+          "id": "86aee689bf57b767",
+          "author": "Swyx (Shawn Wang)",
+          "author_handle": "@swyx",
+          "author_avatar": "https://unavatar.io/x/swyx",
+          "content_zh": "OpenAI 提出将困惑度作为行业自我调节和节奏的通用指标（而不是 FLOPS）\n\n“鉴于新的令人惊讶的能力出现的主要方式是压缩方面的进步，无论开发过程的自动化程度如何，植根于困惑度的衡量标准都可以为我们提供通用智能的共同基准。从最近的进展推断，当我们进入 ~0.68-0.7 log-perplexity 窗口时，我们应该期待进一步的变革能力。”\n\n这张图表是讲述过去 4 年故事的最美丽的方式之一。它还表明，我们争论的许多训练后问题有点像大规模训练前进展的总体 A 图的 B 图。",
+          "content_en": "OpenAI proposes perplexity as the universal metric for industry self regulation and pacing (as opposed to eg FLOPS)\n\n“Given that the main way new surprising capabilities emerge is by progress on compression, a measure rooted in perplexity could give us a shared benchmark for general intelligence, regardless of the degree of automation of the development process. Extrapolating from recent progress, we should expect further transformative capabilities as we enter the ~0.68-0.7 log-perplexity window.”\n\nthis chart is one of the most beautiful ways to tell the story of the last 4 years. it also shows that a lot of the post training issues we debate is kinda the B plot to the overall A plot of large scale pretrain progress.",
+          "url": "https://x.com/swyx/status/2124583459356373052",
           "platform": "x"
         }
       ],
@@ -176,47 +76,137 @@
       },
       "linked_counts": {
         "news": 2,
-        "tweets": 2,
+        "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_ai_coding_agent_failure_rate",
+      "id": "topic_openai_perplexity_metric_clash",
       "stance_matrix": {
-        "pro_point_zh": "当前的失败率是系统整合期的阵痛。一旦Agent工作流与企业级CI/CD流程深度闭环，其生产力跃升将是量级上的改变，不应以孤立失败否认路径方向。",
-        "pro_author": "大模型辅助编程开发者",
-        "con_point_zh": "“Vibe-coding”造就了一批只会写简单功能的半吊子，缺乏对大型项目完整性的理解。模型目前仅是在代码片段上做概率拟合，而非真正的软件工程治理。",
-        "con_author": "软件架构师与安全专家",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "High failure rates are growing pains. Once agent workflows achieve deep integration with enterprise CI/CD pipelines, the jump in productivity will be orders of magnitude, making it unwise to reject the path based on isolated failures.",
-        "con_point_en": "'Vibe-coding' creates a generation of 'starters' lacking deeper project integrity. Current models perform probabilistic fitting on code snippets rather than actual software engineering governance.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+        "pro_point_zh": "通过困惑度建立可量化的行业基准，能有效引导模型开发走向可观测的科学路径，避免算力军备竞赛导致的无序泡沫。",
+        "pro_author": "OpenAI 研发与管理层",
+        "con_point_zh": "困惑度无法涵盖复杂推理任务中的真实能力，且大厂可能通过特化语料优化该指标，掩盖模型在实际生产任务中的鲁棒性缺失。",
+        "con_author": "开源社区开发者及独立研究员",
+        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
+        "pro_point_en": "Establishing a quantifiable industry benchmark via perplexity steers model development toward an observable, scientific path, mitigating the chaotic bubble fueled by unbridled compute races.",
+        "con_point_en": "Perplexity fails to capture true performance on complex reasoning tasks; tech giants could exploit it via data tailoring to mask inherent robustness failures in production environments.",
+        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
       }
     },
     {
-      "topic_id": "topic_math_proof_lean_verification",
-      "heat_score": 9.3,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "AI辅助数学证明",
-      "category_tag_en": "AI-Assisted Formal Proofs",
-      "title_zh": "黎曼猜想被证明：Lean形式化验证掀起数学自动化浪潮",
-      "title_en": "Riemann Hypothesis Formally Proven: Lean Verification Triggers Math Automation Wave",
-      "summary_zh": "斯坦福数学家勒文特·阿尔珀格通过Lean语言完成黎曼猜想的证明，并经由Mathlib社区经1700万行代码确认无误。这一事件标志着机器形式化验证正式成为数学界认可的“真理裁判”，深刻改变了人类探索复杂数学问题的范式。",
-      "summary_en": "Stanford mathematician Levent Alpöge has formally proven the Riemann Hypothesis using Lean, verified by the Mathlib community through 17 million lines of code. This landmark event confirms machine-aided formal verification as the gold standard for mathematical truth, fundamentally shifting the paradigm of exploring complex mathematical conjectures.",
+      "topic_id": "topic_tesla_fsd_rendering_dispute",
+      "heat_score": 9.5,
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "自动驾驶技术演进",
+      "category_tag_en": "Autonomous Driving Tech",
+      "title_zh": "特斯拉 FSD V15 抛弃游戏引擎，引入实时 AI 视频生成",
+      "title_en": "Tesla FSD V15 Shifts to Real-Time AI Video Rendering, Ditching Game Engines",
+      "summary_zh": "特斯拉向车辆推送 FSD V15 系统，核心突破在于废弃传统游戏渲染引擎，转而采用原生实时 AI 视频生成技术实现车载环境写实渲染。此举不仅展示了 Tesla 端到端神经网络的算力飞跃，也引发了关于其系统安全边际与透明度的质疑。",
+      "summary_en": "Tesla has rolled out FSD V15, featuring a shift from traditional game engines to native, real-time AI video generation for environmental rendering. While this marks a leap in end-to-end neural network efficiency, it raises concerns regarding the reliability of 'AI-hallucinated' real-time visual perception for driver safety.",
       "perspective_pro": {
-        "role_zh": "🟢 愿景派 / 计算数学推动者",
-        "role_en": "🟢 Visionary / Computational Math Proponent",
-        "speaker_zh": "数学工具开发者",
-        "speaker_en": "Lean/Mathlib Community",
-        "point_zh": "形式化验证消除了学术界对于人类证明逻辑漏洞的长期猜疑。Lean作为基础设施，实现了数学真理的客观、可重现与可执行化，是文明认知的重大迭代。",
-        "point_en": "Formal verification eliminates the lingering suspicion of logical flaws in human-led proofs. Lean serves as infrastructure that renders mathematical truth objective, reproducible, and executable—a major iteration in civilization."
+        "role_zh": "🟢 演进派推动者",
+        "role_en": "🟢 Advancement Advocates",
+        "speaker_zh": "特斯拉 FSD 研发团队",
+        "speaker_en": "Tesla FSD Development Team",
+        "point_zh": "原生 AI 视频生成消除了底层交互延迟，通过端到端学习直接处理感知与渲染，是实现完全自动驾驶不可或缺的算力效率优化路径。",
+        "point_en": "Native AI video generation eliminates underlying latency; by processing perception and rendering through end-to-end learning, it is an essential efficiency path toward full autonomy."
       },
       "perspective_con": {
-        "role_zh": "🔴 传统主义派 / 数学哲学家",
-        "role_en": "🔴 Traditionalist / Math Philosopher",
-        "speaker_zh": "古典数学研究者",
-        "speaker_en": "Classical Mathematical Scholars",
-        "point_zh": "依赖庞大的形式化代码库验证，削弱了人类直觉在数学构思中的地位。当证明过程变为代码堆砌，数学的审美与发现感将逐渐丧失。",
-        "point_en": "Reliance on massive formal codebases diminishes the role of human intuition in mathematical conception. When proofs become stacks of code, the inherent beauty and spirit of mathematical discovery may be lost."
+        "role_zh": "🔴 工业理性派",
+        "role_en": "🔴 Industrial Rationalists",
+        "speaker_zh": "视觉工程与安全领域学者",
+        "speaker_en": "Vision Engineering & Safety Experts",
+        "point_zh": "AI 生成的实时画面本质上是一种不可控的‘幻觉’输出，在关键交通决策中，过度依赖概率预测而非确定性计算存在致命风险。",
+        "point_en": "Real-time AI-generated imagery is fundamentally an uncontrollable 'hallucination.' Relying on probabilistic generation over deterministic computation in critical traffic decisions poses catastrophic risks."
+      },
+      "linked_news": [
+        {
+          "id": "5870c79890243395",
+          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
+          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
+          "source": "Gizmodo",
+          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
+          "image_url": null,
+          "hot_score": 5,
+          "published_at": "2026-11-22T06:40:16+00:00"
+        },
+        {
+          "id": "a505a8ca60a14dbd",
+          "title_zh": "AI服务器供应吃紧，供应商违约提价达45%",
+          "title_en": "Tech suppliers raise AI server prices up to 45% months after deals are signed",
+          "source": "Financial Times",
+          "url": "https://www.ft.com/content/dd2a6594-6146-4ff1-ac8e-54749c1fc99f",
+          "image_url": "https://ainewsradar.xyz/images/ft_c612bc585d4f49a0.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-22T05:50:01+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "6abff065cdaa1082",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
+          "content_zh": "@XFreeze 综合考虑，硬件性能大约提高了一个数量级。\n\n内存带宽是一个限制。",
+          "content_en": "@XFreeze Roughly an order of magnitude hardware performance improvement, all things considered. \n\nMemory bandwidth is a constraint.",
+          "url": "https://x.com/elonmusk/status/2124581034419499420",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_tesla_fsd_rendering_dispute",
+      "stance_matrix": {
+        "pro_point_zh": "原生 AI 视频生成消除了底层交互延迟，通过端到端学习直接处理感知与渲染，是实现完全自动驾驶不可或缺的算力效率优化路径。",
+        "pro_author": "特斯拉 FSD 研发团队",
+        "con_point_zh": "AI 生成的实时画面本质上是一种不可控的‘幻觉’输出，在关键交通决策中，过度依赖概率预测而非确定性计算存在致命风险。",
+        "con_author": "视觉工程与安全领域学者",
+        "action_advice_zh": "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。",
+        "pro_point_en": "Native AI video generation eliminates underlying latency; by processing perception and rendering through end-to-end learning, it is an essential efficiency path toward full autonomy.",
+        "con_point_en": "Real-time AI-generated imagery is fundamentally an uncontrollable 'hallucination.' Relying on probabilistic generation over deterministic computation in critical traffic decisions poses catastrophic risks.",
+        "action_advice_en": "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
+      }
+    },
+    {
+      "topic_id": "topic_riemann_hypothesis_formal_proof",
+      "heat_score": 9.2,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "计算科学与数学突破",
+      "category_tag_en": "Math & Formal Verification",
+      "title_zh": "斯坦福数学家勒文特完成黎曼猜想的 1700 万行形式化证明",
+      "title_en": "Stanford Mathematician Alpöge Confirms Riemann Hypothesis with 17M Lines of Lean",
+      "summary_zh": "斯坦福大学数学家勒文特·阿尔珀格（Levent Alpöge）利用 Lean 证明助手完成黎曼猜想的形式化证明，并经由 Mathlib 社区验证无误。这一成就标志着形式化数学进入“自动机辅助验证”新阶段，引发关于人类数学直觉与机器算力边界的探讨。",
+      "summary_en": "Stanford mathematician Levent Alpöge has formally proven the Riemann Hypothesis using Lean, with 17 million lines of code verified by the Mathlib community. This milestone signals a transition into an era of machine-assisted mathematical rigor, sparking debate over the future of human intuition versus machine-verified computational proof.",
+      "perspective_pro": {
+        "role_zh": "🟢 数学形式化派",
+        "role_en": "🟢 Formal Math Proponents",
+        "speaker_zh": "Lean 与 Mathlib 开源社区",
+        "speaker_en": "Lean & Mathlib Community",
+        "point_zh": "形式化验证是人类知识传承的最强工具，通过计算机消除证明中的逻辑隐患，确保了这一世纪难题的答案在数学严谨性上无可挑剔。",
+        "point_en": "Formal verification is the ultimate tool for knowledge preservation, eliminating logical fallacies through machine computation and ensuring the centuries-old problem is settled with absolute rigor."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 传统直觉派",
+        "role_en": "🔴 Traditionalist Intuitionists",
+        "speaker_zh": "古典数学学者",
+        "speaker_en": "Classical Math Scholars",
+        "point_zh": "过分依赖自动化验证可能削弱数学家对结构洞察的深度，如果只承认机器能读懂的证明，数学将失去其作为艺术的灵性。",
+        "point_en": "Over-reliance on automated verification risks eroding the depth of structural insight; if we only accept machine-readable proofs, mathematics loses its essence as a creative art form."
       },
       "linked_news": [
         {
@@ -258,15 +248,15 @@
         "tweets": 0,
         "has_tool": true
       },
-      "id": "topic_math_proof_lean_verification",
+      "id": "topic_riemann_hypothesis_formal_proof",
       "stance_matrix": {
-        "pro_point_zh": "形式化验证消除了学术界对于人类证明逻辑漏洞的长期猜疑。Lean作为基础设施，实现了数学真理的客观、可重现与可执行化，是文明认知的重大迭代。",
-        "pro_author": "数学工具开发者",
-        "con_point_zh": "依赖庞大的形式化代码库验证，削弱了人类直觉在数学构思中的地位。当证明过程变为代码堆砌，数学的审美与发现感将逐渐丧失。",
-        "con_author": "古典数学研究者",
+        "pro_point_zh": "形式化验证是人类知识传承的最强工具，通过计算机消除证明中的逻辑隐患，确保了这一世纪难题的答案在数学严谨性上无可挑剔。",
+        "pro_author": "Lean 与 Mathlib 开源社区",
+        "con_point_zh": "过分依赖自动化验证可能削弱数学家对结构洞察的深度，如果只承认机器能读懂的证明，数学将失去其作为艺术的灵性。",
+        "con_author": "古典数学学者",
         "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
-        "pro_point_en": "Formal verification eliminates the lingering suspicion of logical flaws in human-led proofs. Lean serves as infrastructure that renders mathematical truth objective, reproducible, and executable—a major iteration in civilization.",
-        "con_point_en": "Reliance on massive formal codebases diminishes the role of human intuition in mathematical conception. When proofs become stacks of code, the inherent beauty and spirit of mathematical discovery may be lost.",
+        "pro_point_en": "Formal verification is the ultimate tool for knowledge preservation, eliminating logical fallacies through machine computation and ensuring the centuries-old problem is settled with absolute rigor.",
+        "con_point_en": "Over-reliance on automated verification risks eroding the depth of structural insight; if we only accept machine-readable proofs, mathematics loses its essence as a creative art form.",
         "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
       }
     }
