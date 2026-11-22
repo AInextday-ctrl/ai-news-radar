@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="agent-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070c18" />
+      <stop offset="50%" stop-color="#0d1527" />
+      <stop offset="100%" stop-color="#050813" />
+    </linearGradient>
+    <radialGradient id="agent-glow" cx="68%" cy="42%" r="65%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35" />
+      <stop offset="45%" stop-color="#6366f1" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#070c18" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="pulse-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <filter id="agent-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="360" fill="url(#agent-bg)" rx="20" />
+  <rect width="640" height="360" fill="url(#agent-glow)" rx="20" />
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="90" x2="640" y2="90" />
+    <line x1="0" y1="180" x2="640" y2="180" />
+    <line x1="0" y1="270" x2="640" y2="270" />
+    <line x1="160" y1="0" x2="160" y2="360" />
+    <line x1="320" y1="0" x2="320" y2="360" />
+    <line x1="480" y1="0" x2="480" y2="360" />
+  </g>
+
+  <!-- Right Visual: Conversational Agent Network & Pulse Wave -->
+  <g transform="translate(420, 80)">
+    <!-- Concentric radar circles -->
+    <circle cx="85" cy="95" r="95" fill="none" stroke="rgba(56,189,248,0.15)" stroke-width="1" stroke-dasharray="4,4" />
+    <circle cx="85" cy="95" r="70" fill="none" stroke="rgba(129,140,248,0.22)" stroke-width="1.5" />
+    <circle cx="85" cy="95" r="45" fill="none" stroke="rgba(192,132,252,0.3)" stroke-width="1.5" stroke-dasharray="6,4" />
+
+    <!-- Central Agent Core -->
+    <circle cx="85" cy="95" r="28" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5" filter="url(#agent-blur)" />
+    
+    <!-- Central Voice Wave in Core -->
+    <g transform="translate(73, 85)" fill="#38bdf8">
+      <rect x="0" y="4" width="3" height="12" rx="1.5" />
+      <rect x="6" y="0" width="3" height="20" rx="1.5" />
+      <rect x="12" y="2" width="3" height="16" rx="1.5" />
+      <rect x="18" y="5" width="3" height="10" rx="1.5" />
+    </g>
+
+    <!-- Satellite Nodes (Agent integrations) -->
+    <!-- Top node: WebRTC -->
+    <g transform="translate(85, 12)">
+      <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#818cf8" stroke-width="1.5" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="monospace" font-size="7.5" font-weight="700" fill="#c7d2fe">RTC</text>
+      <line x1="0" y1="14" x2="0" y2="55" stroke="rgba(129,140,248,0.4)" stroke-width="1" stroke-dasharray="2,2" />
+    </g>
+
+    <!-- Bottom Left node: LLM -->
+    <g transform="translate(20, 155)">
+      <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="monospace" font-size="7.5" font-weight="700" fill="#7dd3fc">LLM</text>
+      <line x1="9" y1="-9" x2="60" y2="-40" stroke="rgba(56,189,248,0.4)" stroke-width="1" stroke-dasharray="2,2" />
+    </g>
+
+    <!-- Right node: Voice SDK -->
+    <g transform="translate(155, 130)">
+      <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#c084fc" stroke-width="1.5" />
+      <text x="0" y="3.5" text-anchor="middle" font-family="monospace" font-size="7.5" font-weight="700" fill="#e9d5ff">SDK</text>
+      <line x1="-9" y1="-9" x2="-45" y2="-25" stroke="rgba(192,132,252,0.4)" stroke-width="1" stroke-dasharray="2,2" />
+    </g>
+
+    <!-- Latency Badge -->
+    <g transform="translate(25, 205)">
+      <rect x="0" y="0" width="120" height="22" rx="11" fill="rgba(15,23,42,0.9)" stroke="rgba(56,189,248,0.3)" stroke-width="1" />
+      <circle cx="12" cy="11" r="3.5" fill="#10b981" />
+      <text x="22" y="14.5" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#e2e8f0">Latency &lt; 150ms</text>
+    </g>
+  </g>
+
+  <!-- Left Content: Brand & Identity -->
+  <g transform="translate(48, 56)">
+    <!-- ElevenLabs Logo Icon -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="8" height="36" rx="4" fill="#ffffff" />
+      <rect x="15" y="0" width="8" height="36" rx="4" fill="#ffffff" />
+      <text x="36" y="27" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" fill="#ffffff" letter-spacing="-0.5">ElevenLabs</text>
+    </g>
+
+    <!-- Category Pill -->
+    <g transform="translate(0, 58)">
+      <rect x="0" y="0" width="195" height="26" rx="13" fill="rgba(14,165,233,0.18)" stroke="rgba(56,189,248,0.4)" stroke-width="1" />
+      <circle cx="14" cy="13" r="4" fill="#38bdf8" />
+      <text x="26" y="17" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#bae6fd" letter-spacing="0.5">CONVERSATIONAL AGENTS</text>
+    </g>
+
+    <!-- Main Headline -->
+    <text x="0" y="128" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="-0.3">
+      Voice-First AI Agents
+    </text>
+    <text x="0" y="156" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#38bdf8" letter-spacing="-0.3">
+      Deploy in Minutes
+    </text>
+
+    <!-- Subtitle / Value prop -->
+    <text x="0" y="194" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">
+      Real-time WebRTC, dynamic turn-taking &amp; full API
+    </text>
+
+    <!-- Feature Tags -->
+    <g transform="translate(0, 222)">
+      <text x="0" y="0" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#818cf8">✦ WebRTC &amp; WebSocket</text>
+      <text x="148" y="0" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#818cf8">✦ Python &amp; JS SDKs</text>
+    </g>
+  </g>
+
+  <!-- Corner Official Partner Badge -->
+  <g transform="translate(488, 28)">
+    <rect x="0" y="0" width="124" height="24" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+    <text x="62" y="16" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#e2e8f0" letter-spacing="0.5">OFFICIAL PARTNER</text>
+  </g>
+
+  <!-- Border Highlight -->
+  <rect x="1" y="1" width="638" height="358" rx="19" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+</svg>
