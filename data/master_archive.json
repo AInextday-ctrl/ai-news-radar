@@ -2602,6 +2602,43 @@
       "title": "💡【OpenAI 推理引擎】o1 / o3-mini 对抗性逆向验证：防偷懒、无漏洞的形式化推导模板"
     },
     {
+      "id": "prompt_arxiv_deep_dive",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 前沿顶会论文 5 步穿透精读",
+      "purpose_en": "🔬 Research & Papers · 5-Step ArXiv Paper Penetration",
+      "title_zh": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
+      "title_en": "💡 [Paper Deep Dive] ArXiv 5-Step Paper Penetration & RTX 4090 Reproduction Bottleneck Audit",
+      "url": "https://arxiv.org/",
+      "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "科研极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-22T04:40:26Z",
+      "recommended_model": "长上下文与深度研报大模型 (Claude / Gemini / GPT)",
+      "temp_advice": "建议温度 0.3 | 极客文献精读",
+      "metrics": {
+        "type": "🔬 论文拆解",
+        "model": "Gemini 4 Pro",
+        "temp": "0.3"
+      },
+      "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
+      "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
+      "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "tags": [
+        "论文精读",
+        "科研拆解",
+        "Prompt神咒"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-22T04:40:26Z",
+      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板"
+    },
+    {
       "id": "5a0ec8eced4523f3",
       "title": "【SoduWork】适用于团队及其代理的人工智能原生引擎。多线束、多代理、自托管。",
       "title_zh": "【SoduWork】适用于团队及其代理的人工智能原生引擎。多线束、多代理、自托管。",
@@ -5213,6 +5250,43 @@
       }
     },
     {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-21T22:40:26Z",
+      "recommended_model": "主流高阶代码模型通用 (Claude / GPT / DeepSeek 系列)",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "SOTA通用",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-21T22:40:26Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
+    },
+    {
       "id": "d07ac2eb85b8739f",
       "status_id": "2124271258502099340",
       "category": "celebrity",
@@ -7087,27 +7161,27 @@
       "url": "https://github.com/",
       "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
       "source": "实战技巧 · Prompt",
-      "author": "DBA极客",
+      "author": "游戏主策",
       "category": "prompts",
       "is_prompt": true,
       "raw_published_at": "2026-11-21T17:33:24Z",
       "recommended_model": "主流代码与 SQL 调优模型通用",
       "temp_advice": "建议温度 0.1 | 数据库内核调优",
       "metrics": {
-        "type": "💻 SQL调优",
-        "model": "DeepSeek-Coder",
-        "temp": "0.1"
+        "type": "🎮 游戏剧情",
+        "model": "SOTA通用",
+        "temp": "0.7"
       },
-      "content_snippet": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
-      "summary_zh": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引建议。",
-      "summary_en": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
-      "prompt_content_zh": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
-      "prompt_content_en": "You are a Staff Database Administrator specializing in high-concurrency SQL optimization. Analyze the following slow SQL query along with its EXPLAIN ANALYZE execution plan:\n1. Pinpoint performance bottlenecks (e.g., table scans, temporary filesort, nested loop skew);\n2. Rewrite the query utilizing deferred joins, covering index optimization, or CTE materialization;\n3. Provide the exact composite index recommendation ordered by cardinality and leftmost prefix rules, estimating index maintenance overhead.",
-      "prompt_content": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+      "content_snippet": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
+      "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树。",
+      "summary_en": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
+      "prompt_content_zh": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
+      "prompt_content_en": "You are a Lead Narrative Designer on a AAA open-world RPG. Generate a dynamic branching dialogue system for the specified NPC:\n1. Persona & Subtext: Define distinct verbal tics, a hidden agenda, and moral vulnerability;\n2. State Machine Integration: Provide 3 divergent branches conditioned on the player's [Reputation], [Prior Quest Flags], and [Affinity Tier];\n3. Output Specification: Output clean JSON schema parseable by Unity/Unreal dialogue managers, including node_id, speaker, lines, choices, condition_predicates, and state_mutations.",
+      "prompt_content": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
       "tags": [
-        "SQL调优",
-        "数据库实战",
-        "Prompt模板"
+        "游戏剧情",
+        "NPC对话",
+        "叙事设计"
       ],
       "generation_tier": "sota",
       "model_tier_score": 90,
@@ -7578,6 +7652,89 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-travel-itinerary-01",
+      "title_zh": "深度游旅行规划师：高密度路线设计与预算避坑",
+      "title_en": "Deep Travel Itinerary Planner & Budgeting",
+      "category": "prompts",
+      "scenario_label": "✈️ 生活旅行",
+      "target_model": "Claude 5.5 / DeepSeek-R4",
+      "model_family": "Universal",
+      "model_tier_score": 93,
+      "generation_tier": "sota",
+      "purpose_zh": "合理不走回头路的日程与美食预算规划",
+      "temp_advice": "温度 0.4",
+      "variables": [
+        "{{目的地城市}}",
+        "{{出行天数}}",
+        "{{同行人员}}",
+        "{{人均预算}}"
+      ],
+      "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
+      "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+      "sample_output": {
+        "type": "text",
+        "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
+        "content": "【Day 1：古蜀遗风与老茶馆时光】\n- 上午 09:00：直奔【人民公园 · 鹤鸣茶社】，点一杯蒙顶甘露（¥25），体验非遗采耳，避开下午的旅行团拥堵；\n- 中午 12:00：步行800米至【纯阳馆鱼香排骨面】，必点椒麻牛肉与鱼香排骨面（人均¥22）；\n- 下午 14:00：地铁2号线直达【杜甫草堂】，红墙竹影漫步，打卡浣花溪公园；\n- 傍晚 18:30：九眼桥望江楼看锦江夜景，就餐【老街小吃火锅】；\n\n【避坑锦囊】：\n1. 宽窄巷子和锦里建议只拍照别买小吃，均价比普通街区贵 2~3 倍且多为预制冻品；\n2. 大熊猫繁育研究基地务必约早晨 07:30 入园，超过 10:30 大熊猫基本全部回室内睡觉。",
+        "title_en": "Verified Sample Output (Claude 5.5 / DeepSeek-R4)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 / DeepSeek-R4\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "只需填入城市、天数和预算，即刻收获一份可直接打印随身带的专业级行程攻略。",
+      "created_at": "2026-11-21T15:40:26Z",
+      "variables_en": [
+        "{{Destination City}}",
+        "{{Trip Duration}}",
+        "{{Travel Companions}}",
+        "{{Budget Per Person}}"
+      ],
+      "scenario_label_en": "✈️ Travel & Lifestyle",
+      "purpose_en": "Loop-Free Deep Travel Itinerary & Budget Planning",
+      "temp_advice_en": "Temp 0.4 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-21T15:40:26Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "title": "深度游旅行规划师：高密度路线设计与预算避坑",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_video_product_macro",
+      "sub_type": "video_gen",
+      "purpose_zh": "🎥 视频生成 · 商业广告级流体光影微距特写",
+      "purpose_en": "🎥 Video Gen · Commercial Macro Liquid & Product Showcase",
+      "title_zh": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语",
+      "title_en": "💡 [Luxury Commercial Video] High-End Watch & Macro Liquid Droplets Slow-Mo Showcase",
+      "url": "https://klingai.com/",
+      "image_url": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "广告视效",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-21T15:40:26Z",
+      "recommended_model": "Kling 1.5 / Sora / Luma Dream",
+      "temp_advice": "Motion: 3 | 极致慢动作",
+      "metrics": {
+        "type": "🎥 商业广告",
+        "model": "Kling 1.5",
+        "temp": "Motion 3"
+      },
+      "content_snippet": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
+      "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射。",
+      "summary_en": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
+      "prompt_content_zh": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.\n\n【中文使用解析】：适用于高端 3C 数码、香水、珠宝首饰等出海广告视频一键生成。通过限定 phantom slow motion 与 caustic light patterns 获得极具说服力的物理渲染感。",
+      "prompt_content_en": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
+      "prompt_content": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
+      "tags": [
+        "商业广告",
+        "流体慢动作",
+        "快手可灵"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-21T15:40:26Z",
+      "title": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语"
     },
     {
       "id": "efd18974ecbc7ef4",
@@ -8446,15 +8603,15 @@
       "author_handle": "@MalvaAI",
       "author_avatar": "https://unavatar.io/youtube/Malva AI",
       "source": "YouTube · Malva AI",
-      "views": "1.2万 播放",
-      "views_count": 12227,
-      "velocity": 815.1,
-      "momentum_score": 2119.3,
+      "views": "1.3万 播放",
+      "views_count": 12627,
+      "velocity": 789.2,
+      "momentum_score": 1973.0,
       "metrics": {
-        "views": "1.2万 播放",
-        "views_count": 12227,
-        "velocity": "+815/h",
-        "momentum_score": 2119.3,
+        "views": "1.3万 播放",
+        "views_count": 12627,
+        "velocity": "+789/h",
+        "momentum_score": 1973.0,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -8472,7 +8629,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+815/h)",
+        "🔥 24h飙升 (+789/h)",
         "Malva AI",
         "🔥 极客实操"
       ],
@@ -10434,14 +10591,14 @@
       "author_avatar": "https://unavatar.io/youtube/Crypto Horizon",
       "source": "YouTube · Crypto Horizon",
       "views": "3.5万 播放",
-      "views_count": 34762,
-      "velocity": 1655.3,
-      "momentum_score": 3547.1,
+      "views_count": 34885,
+      "velocity": 1585.7,
+      "momentum_score": 3315.5,
       "metrics": {
         "views": "3.5万 播放",
-        "views_count": 34762,
-        "velocity": "+1,655/h",
-        "momentum_score": 3547.1,
+        "views_count": 34885,
+        "velocity": "+1,585/h",
+        "momentum_score": 3315.5,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -10459,7 +10616,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,655/h)",
+        "🔥 24h飙升 (+1,585/h)",
         "Crypto Horizon",
         "🔥 极客实操"
       ],
@@ -20210,15 +20367,15 @@
       "author_handle": "@NetworkChuckandMattPocock",
       "author_avatar": "https://unavatar.io/youtube/NetworkChuck and Matt Pocock",
       "source": "YouTube · NetworkChuck and Matt Pocock",
-      "views": "32.1万 播放",
-      "views_count": 321398,
-      "velocity": 13391.6,
-      "momentum_score": 26783.2,
+      "views": "32.3万 播放",
+      "views_count": 322899,
+      "velocity": 13454.1,
+      "momentum_score": 26908.2,
       "metrics": {
-        "views": "32.1万 播放",
-        "views_count": 321398,
-        "velocity": "+13,391/h",
-        "momentum_score": 26783.2,
+        "views": "32.3万 播放",
+        "views_count": 322899,
+        "velocity": "+13,454/h",
+        "momentum_score": 26908.2,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -20236,7 +20393,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+13,391/h)",
+        "🔥 24h飙升 (+13,454/h)",
         "NetworkChuck and Matt Pocock",
         "🛠️ 实战教学"
       ],
@@ -31309,14 +31466,14 @@
       "author_avatar": "https://unavatar.io/youtube/Unreal Engine",
       "source": "YouTube · Unreal Engine",
       "views": "1.4万 播放",
-      "views_count": 13823,
-      "velocity": 288.0,
-      "momentum_score": 432.0,
+      "views_count": 14017,
+      "velocity": 292.0,
+      "momentum_score": 438.0,
       "metrics": {
         "views": "1.4万 播放",
-        "views_count": 13823,
-        "velocity": "+288/h",
-        "momentum_score": 432.0,
+        "views_count": 14017,
+        "velocity": "+292/h",
+        "momentum_score": 438.0,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -31334,19 +31491,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+288/h)",
+        "⚡ 48h实测 (+292/h)",
         "Unreal Engine",
         "🛠️ 实战教学"
       ],
       "content_snippet": "Unreal Engine 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Unreal Engine 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Unreal Engine: How to Set Up Unreal MCP in UE 5.8 | Connect Claude Code, Cursor & More",
-      "is_pinned": false,
-      "primary_tag": "practical_skills",
-      "primary_tag_zh": "💡 实战技巧",
-      "primary_tag_en": "💡 Practical Skills",
-      "primary_tag_color": "indigo",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-22T06:34:42.959163+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -489147,7 +489298,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Waymo plans to launch its robotaxis in Toronto in 2028 in partnership with Element Fleet Management, the company's first deployment in Canada (Prathik Jayaprakash/Reuters)",
         "[Context & Motivation] Google's (GOOGL.O) Waymo said on Friday it plans to bring its autonomous ride-hailing service to Toronto in 2028, marking the self-driving company's ….",
-        "[Key Fact Detail] According to Reuters (Technology Focus: Embodied Intelligent Robots): More technical measurements and industry impact will continue to be tracked."
+        "[Key Fact Detail] According to Reuters (Technology Focus: Embodied Intelligent Robots): More technical measurements and industry impacts will continue to be tracked."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -500726,7 +500877,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta发布Muse Spark Open，称其是功能最强大的美国开放权重模型，共有816B个总参数和42B个活动参数，以及一个1M-token上下文窗口（Meta AI Research）",
-      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量型号。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
+      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量模型。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
       "hot_score": 5,
       "is_recent_24h": false,
       "fact_bullets_zh": [
@@ -615168,7 +615319,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license (Financial Times)",
         "[Context & Motivation] Financial Times:\nSources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license&nbsp; &mdash;&nbsp; Securities regulators looking at use of legal exemption by world's biggest crypto.",
-        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearing and federal regulatory review site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -648055,7 +648206,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: How AI's acceleration created a global policy vacuum, as EU AI Act enforcement lags and regulators remain torn between harnessing AI and fearing its risks",
         "[Root Cause & Mechanism] New York Times:\nHow AI's acceleration created a global policy vacuum, as EU AI Act enforcement lags and regulators remain torn between harnessing AI and fearing its risks&nbsp; &mdash;&nbsp; Ursula von der Leyen, the president of the European Commission, gathered senior officials.",
-        "[Regulatory & Investigation Focus] European Commission at U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] European Commission at US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -689776,7 +689927,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027",
         "[Context & Motivation] The Information:\nSources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027&nbsp; &mdash;&nbsp; DeepSeek CEO Liang Wenfeng told investors that a major priority for his company is.",
-        "[Key Technical Spec] Deep Seek (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
+        "[Key Technical Spec] Deep Search (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -741627,7 +741778,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Bernie Sanders and Steve Bannon to share a stage to promote curbs on AI",
         "[Context & Motivation] Bernie Sanders and Steve Bannon to share a stage to promote curbs on AI&nbsp;&nbsp;NPR.",
-        "[Official Stance & Demand] What makes the extreme left and the right shake hands and make peace is not love, but the terrifying speed at which AI steals everyone's votes."
+        "[Official Stance & Demand] What can make the extreme left and the right shake hands and make peace is not love, but the terrifying speed at which AI steals everyone's votes."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -747628,7 +747779,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: the European Commission plans to propose an EU KIDS Act on Thursday to set a minimum age for accessing social media, video platforms, games, and more (Politico)",
         "[Context & Motivation] Politico:\nDocuments: the European Commission plans to propose an EU KIDS Act on Thursday to set a minimum age for accessing social media, video platforms, games, and more&nbsp; &mdash;&nbsp; The proposal will propose a new enforcement structure similar to existing laws'.&nbsp; &m.",
-        "[Regulatory & Investigation Focus] European Commission at U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] European Commission at US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
