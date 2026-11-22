@@ -43,6 +43,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Fetcher & AI Summarizer
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[crawl]')
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_TOPICS: ${{ secrets.GEMINI_API_KEY_TOPICS }}
@@ -58,6 +59,7 @@ jobs:
           python curator_engine.py || echo "⚠️ curator_engine.py 偶发异常，自愈放行"
 
       - name: Localize Tool Preview Images
+        if: github.event_name != 'push' || contains(github.event.head_commit.message, '[crawl]')
         run: |
           python scripts/localize_tool_images.py || echo "⚠️ 工具预览图本地化异常，已安全自愈放行"
 

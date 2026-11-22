@@ -182,3 +182,21 @@
 4. **站点地图主动发现机制 (Sitemap Proactive Discovery)**：
    - 解析器集成 `crawl_deepmind_sitemap`，支持定期巡检 `https://institute.deepmind.com/sitemap.xml` 索引，实现对超级智能（ASI）、AI 伦理与宏观治理深度论文的秒级自主捕获与入库。
 
+---
+
+## 13. 线上即时交付与纯现金变现工程守则 (Deployment Cadence & Cash Monetization Invariants)
+
+1. **即时推送部署铁律 (Zero-Local-Stagnation & Immediate Push)**：
+   - 凡对前端展示、页面模板、脚本（如 `monetization.js`）、配置或外链所作的任何修改，在本地执行测试门禁后，**严禁停留在本地工作区**。
+   - 本地验证通过后，必须立即执行 `git commit` 并 `git push origin main` 触发 CI/CD 自动部署至生产环境（Firebase Hosting CDN）。
+   - 严禁“本地改完即宣告完成”；所有面向用户的改动必须以“生产环境已触发部署 / 已上线”为真正完成判定标准。
+
+2. **纯真金白银现金变现准则 (Strict Cash Monetization & Zero-Coupon Invariant)**：
+   - 接入任何商业赞助、广告联盟或分销推广时，**必须且仅能选择支持直接现金结算与提现（银行卡、Wise ACH、支付宝、PayPal 等）的正规返佣或广告联盟**。
+   - 绝对严禁接入任何形式的「代金券」、「折扣券」、「积分」或「平台内 Token」等非现金返利计划，杜绝用站点的真实商业流量换取无法提现的虚幻额度。
+
+3. **多品类聚合与防机器人拒审准则 (Anti-Bot Rejection & Multi-Product Aggregation)**：
+   - 严禁孤立单打独斗推销单一小众产品，优先依托聚合联盟（如 PartnerStack 内部大市场）或全自动展示轮播网（如 Adsterra Native）实现产品矩阵覆盖；
+   - 严禁向用户推荐对新站、独立站或 `.xyz` 域名存在黑盒机器秒拒风控的平台（如 Impact 等），避免浪费用户审核时间与信任成本。
+
+

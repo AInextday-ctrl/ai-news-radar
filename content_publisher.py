@@ -367,7 +367,7 @@ ZH_INDEX_FILE = os.path.join(ZH_DIR, "index.html")
 ZH_DAILY_DIR = os.path.join(ZH_DIR, "daily")
 ZH_ARTICLES_DIR = os.path.join(ZH_DIR, "articles")
 
-ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>"""
+ADSENSE_SCRIPT = """<script defer src="/js/monetization.js"></script>"""
 CLARITY_SCRIPT = """<script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
