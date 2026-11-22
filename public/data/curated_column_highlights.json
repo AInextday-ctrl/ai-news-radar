@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 06:48:04 UTC",
+  "generated_at": "2026-11-22 07:04:46 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 06:48:04 UTC",
+      "updated_at": "2026-11-22 07:04:46 UTC",
       "headline_item": {
-        "id": "5870c79890243395",
+        "id": "b18c61c4d97aae66",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
-        "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
-        "source": "Gizmodo",
-        "published_at": "2026-11-22T06:40:16+00:00",
-        "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
-        "event_summary_zh": "特斯拉正式向部分车型推送FSD V15系统，核心升级在于抛弃传统游戏引擎，通过实时AI视频生成技术实现车载环境的写实级渲染",
-        "event_summary_en": "Tesla has rolled out FSD v15 to select vehicles this Saturday, featuring a visualization system that abandons game engine rendering in favor of real-time AI video generation. This transition represents a shift in Tesla's perception architecture from traditional rule-based rendering to end-to-end generative AI synthesis for real-time environment representation.",
+        "title_zh": "中国国安部强化获取高端芯片的情报攻势",
+        "title_en": "China’s Spies Set Sights on A.I. Chips Years Before Nvidia Scandal",
+        "source": "New York Times",
+        "published_at": "2026-11-22T07:00:41+00:00",
+        "url": "https://www.nytimes.com/2026/11/21/world/asia/china-nvidia-spy-chips-state-security.html?unlocked_article_code=1.SVE.6AIw.4HHCTzFjtDId&smid=url-share",
+        "event_summary_zh": "中国国家安全部被曝设立专门工作组，旨在突破美国高端AI芯片出口限制，并涉嫌通过商业情报收集手段获取技术核心",
+        "event_summary_en": "China's Ministry of State Security, led by Minister Chen Yixin, has established a specialized task force reporting directly to him to bypass U.S. semiconductor export restrictions. The unit focuses on illicit procurement of restricted high-end Nvidia AI chips and intelligence gathering on key chip executives to counter Western technological blockades.",
         "core_facts_zh": [
-          "【核心事件】特斯拉（Tesla Inc.），首席执行官埃隆·马斯克（Elon Musk）在自动驾驶软件部署与视觉感知系统：发布FSD V15版本，引入基于生成式AI的实时视频渲染技术",
-          "【起因与机理】旨在通过消除游戏引擎负载优化自动驾驶的决策感知链路",
-          "【核心事实细节】FSD V15版本正式上线，核心替换渲染技术栈。",
-          "【各方立场与态度】技术革新旨在提升系统感知实时性并降低对底层渲染算力依赖。"
+          "【核心事件】中国国家安全部部长陈一新及其直属专项工作组，英伟达首席执行官黄仁勋在中国与全球半导体供应链环境：设立专项工作组实施“反封锁”战略，包括走私高端芯片与搜集企业高管情报",
+          "【起因与机理】落实习近平总书记关于突破未来产业“卡脖子”技术的指示，应对美国出口管制",
+          "【核心事实细节】核心动因：响应国家层面关于解决高端半导体“卡脖子”技术难题的最高战略指示。",
+          "【行业影响与走向】后续影响：强化了美方对中国科技公司的人员背景调查与供应链透明度要求，提升贸易摩擦烈度。"
         ],
         "core_facts_en": [
-          "[Core Event] Tesla Inc., CEO Elon Musk: Released FSD v15 with generative AI-based real-time video rendering",
-          "[Root Cause & Mechanism] To optimize decision-making and perception latency by eliminating reliance on game engines",
-          "[Key Fact Detail] FSD v15 launch with a new rendering stack.",
-          "[Key Position & Outlook] Strategic focus on reducing latency and reliance on traditional rendering compute."
+          "[Core Event] Minister of State Security Chen Yixin and his dedicated task force; Nvidia CEO Jensen Huang: Implementing an anti-blockade strategy involving illicit chip procurement and intelligence operations against tech executives",
+          "[Root Cause & Mechanism] To address 'chokehold' problems and overcome U.S. export controls as directed by President Xi Jinping",
+          "[Key Fact Detail] Core motivation: Response to national-level directives to overcome 'chokehold' technological bottlenecks in high-end semiconductors.",
+          "[Industry Impact & Outlook] Strategic impact: Intensification of U.S. supply chain vetting and personnel background checks, escalating technological trade friction."
         ],
-        "industry_impact_zh": "从传统游戏引擎向实时视频生成的跨越，暗示特斯拉正在将大模型能力向车辆端侧边缘计算迁移，以解决感知信息到三维空间建模的延迟损耗。此技术路线的成功将直接重塑高阶智驾对于高精地图的依赖程度，强制竞争对手在算力利用效率和端侧模型架构上进行防御性升级。",
-        "industry_impact_en": "The transition from game engine rendering to real-time video synthesis signals a shift toward edge-based large model integration, minimizing the latency between perception and 3D spatial modeling. This advancement significantly diminishes the necessity for high-definition maps and mandates a defensive architectural pivot from competitors focusing on hardware-agnostic, rule-based autonomous driving systems."
+        "industry_impact_zh": "此举标志着中国已将芯片获取提升至国家安全情报优先级，预示全球半导体贸易合规审查将向更深层的反间谍与供应链安全审查转化。英伟达等核心厂商未来在华业务的战略空间将被迫收缩，供应链管控将从单纯的贸易禁令演变为涵盖人员背景调查的复杂合规泥潭。",
+        "industry_impact_en": "This development signals that chip procurement has shifted to a high-priority national security intelligence mission, forcing a transition from standard trade compliance to complex counter-espionage and supply chain vetting. Key manufacturers like Nvidia will face significant shrinkage in their operational flexibility, as compliance protocols evolve to cover personnel security and deep-tier espionage risks."
       },
       "headlines": [
+        {
+          "id": "b18c61c4d97aae66",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "中国国安部强化获取高端芯片的情报攻势",
+          "title_en": "China’s Spies Set Sights on A.I. Chips Years Before Nvidia Scandal",
+          "source": "New York Times",
+          "published_at": "2026-11-22T07:00:41+00:00",
+          "url": "https://www.nytimes.com/2026/11/21/world/asia/china-nvidia-spy-chips-state-security.html?unlocked_article_code=1.SVE.6AIw.4HHCTzFjtDId&smid=url-share",
+          "event_summary_zh": "中国国家安全部被曝设立专门工作组，旨在突破美国高端AI芯片出口限制，并涉嫌通过商业情报收集手段获取技术核心",
+          "event_summary_en": "China's Ministry of State Security, led by Minister Chen Yixin, has established a specialized task force reporting directly to him to bypass U.S. semiconductor export restrictions. The unit focuses on illicit procurement of restricted high-end Nvidia AI chips and intelligence gathering on key chip executives to counter Western technological blockades.",
+          "core_facts_zh": [
+            "【核心事件】中国国家安全部部长陈一新及其直属专项工作组，英伟达首席执行官黄仁勋在中国与全球半导体供应链环境：设立专项工作组实施“反封锁”战略，包括走私高端芯片与搜集企业高管情报",
+            "【起因与机理】落实习近平总书记关于突破未来产业“卡脖子”技术的指示，应对美国出口管制",
+            "【核心事实细节】核心动因：响应国家层面关于解决高端半导体“卡脖子”技术难题的最高战略指示。",
+            "【行业影响与走向】后续影响：强化了美方对中国科技公司的人员背景调查与供应链透明度要求，提升贸易摩擦烈度。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Minister of State Security Chen Yixin and his dedicated task force; Nvidia CEO Jensen Huang: Implementing an anti-blockade strategy involving illicit chip procurement and intelligence operations against tech executives",
+            "[Root Cause & Mechanism] To address 'chokehold' problems and overcome U.S. export controls as directed by President Xi Jinping",
+            "[Key Fact Detail] Core motivation: Response to national-level directives to overcome 'chokehold' technological bottlenecks in high-end semiconductors.",
+            "[Industry Impact & Outlook] Strategic impact: Intensification of U.S. supply chain vetting and personnel background checks, escalating technological trade friction."
+          ],
+          "industry_impact_zh": "此举标志着中国已将芯片获取提升至国家安全情报优先级，预示全球半导体贸易合规审查将向更深层的反间谍与供应链安全审查转化。英伟达等核心厂商未来在华业务的战略空间将被迫收缩，供应链管控将从单纯的贸易禁令演变为涵盖人员背景调查的复杂合规泥潭。",
+          "industry_impact_en": "This development signals that chip procurement has shifted to a high-priority national security intelligence mission, forcing a transition from standard trade compliance to complex counter-espionage and supply chain vetting. Key manufacturers like Nvidia will face significant shrinkage in their operational flexibility, as compliance protocols evolve to cover personnel security and deep-tier espionage risks."
+        },
         {
           "id": "5870c79890243395",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次证明标志着“形式化数学”从学术边缘走向核心，证明了超大规模计算验证复杂猜想的可行性。该事件将极大加速数学定理验证的自动化进程，并为AI辅助科学发现提供了高置信度的底层范式。",
           "industry_impact_en": "This milestone marks the transition of 'formal mathematics' from the academic periphery to the core, validating the feasibility of using massive-scale computation to resolve complex conjectures. It will accelerate the automation of theorem verification and establish a high-confidence paradigm for AI-driven scientific discovery."
-        },
-        {
-          "id": "a505a8ca60a14dbd",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI服务器供应吃紧，供应商违约提价达45%",
-          "title_en": "Tech suppliers raise AI server prices up to 45% months after deals are signed",
-          "source": "Financial Times",
-          "published_at": "2026-11-22T05:50:01+00:00",
-          "url": "https://www.ft.com/content/dd2a6594-6146-4ff1-ac8e-54749c1fc99f",
-          "event_summary_zh": "受AI基础设施需求激增驱动，部分供应商在签署供货协议后将服务器价格调涨高达45%",
-          "event_summary_en": "Global data center equipment suppliers are significantly increasing prices for previously contracted AI servers, with hikes reaching up to 45%. This surge is driven by extreme supply-demand imbalances in AI infrastructure, forcing manufacturers to bypass existing contract terms to pass on rising memory and component costs.",
-          "core_facts_zh": [
-            "【核心事件】数据中心设备供应商；Nvidia系AI服务器买方在全球数据中心硬件供应链：在合同签订后强行将AI服务器售价上调至多45%",
-            "【起因与机理】AI算力基建需求暴增，内存等上游元器件供给短缺，导致供应商利润空间被挤压",
-            "【关键数据与实测】合同签订后执行45%的提价，供应链议价逻辑发生剧变。",
-            "【行业影响与走向】市场影响：算力采购从财务预算驱动转向紧迫的供应保障驱动。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Data center equipment suppliers; Buyers of Nvidia-powered AI servers: Unilaterally increasing AI server prices by up to 45% post-contract",
-            "[Root Cause & Mechanism] Explosive demand for AI compute infrastructure and upstream memory shortages squeezing supplier margins",
-            "[Key Metrics] 45% price hike post-contract, shift in supply chain bargaining power.",
-            "[Industry Impact & Outlook] Market impact: Transition from budget-driven to supply-security-driven compute procurement."
-          ],
-          "industry_impact_zh": "该现象暴露出AI硬件市场的卖方市场格局已具备极强的价格垄断属性，传统合同履约信誉在极端供需压力下正面临重构。对于算力需求方而言，供应链稳定性风险已取代采购成本成为制约业务扩容的首要因素。",
-          "industry_impact_en": "This trend reveals a robust seller's market in the AI hardware sector, where traditional contract enforcement is fracturing under extreme supply-demand pressures. For compute buyers, supply chain stability risks have now superseded procurement costs as the primary constraint on business scaling."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 06:48:04 UTC",
+      "updated_at": "2026-11-22 07:04:46 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 06:48:04 UTC",
+      "updated_at": "2026-11-22 07:04:46 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
