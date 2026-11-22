@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 05:48:36 UTC",
+  "generated_at": "2026-11-22 06:05:33 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 05:48:36 UTC",
+      "updated_at": "2026-11-22 06:05:33 UTC",
       "headline_item": {
-        "id": "4b9411cc12cb8e23",
+        "id": "c2d9fa550c13be18",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "新加坡华裔李明涉嫌向中国违规出口英伟达芯片",
-        "title_en": "The Alice Huang Associate Accused of Funneling Nvidia Chips to China",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-22T05:45:01+00:00",
-        "url": "https://www.wsj.com/tech/li-ming-megaspeed-nvidia-chips-china-6260d836?st=HzXMZU",
-        "event_summary_zh": "新加坡警方逮捕并保释涉嫌运营贸易网络、非法向中国走私英伟达AI芯片的关键人物李明",
-        "event_summary_en": "Li Ming, a 52-year-old Chinese national based in Singapore, is accused of operating a smuggling network that funneled restricted Nvidia AI chips to China by utilizing front companies including Megaspeed. Li is currently out on bail, having played a central role in orchestrating the bypass of U.S. export controls.",
+        "title_zh": "数学界证实勒文·阿尔伯格完成黎曼猜想形式化证明",
+        "title_en": "A joint statement by the Lean and Mathlib communities says \"we have full confidence that Alpöge's proof of the Riemann Hypothesis is correct\" (Lean community blog)",
+        "source": "Lean community blog",
+        "published_at": "2026-11-22T06:00:02+00:00",
+        "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+        "event_summary_zh": "数学家勒文·阿尔伯格通过1700万行Lean代码完成黎曼猜想证明，并获Lean与Mathlib社区官方认证",
+        "event_summary_en": "Mathematician Levent Alpöge released a formal proof of the Riemann Hypothesis on November 20, 2026, consisting of 17 million lines of Lean code relying on the Mathlib library. The Lean and Mathlib communities have officially certified the proof's correctness after comprehensive verification of its logic and codebase.",
         "core_facts_zh": [
-          "【核心事件】李明（涉案贸易商）、Megaspeed（涉案新加坡贸易公司）在新加坡：通过多层贸易网络将受限AI芯片违规出口至中国",
-          "【起因与机理】规避美国商务部针对中国高性能计算集群的严苛出口许可审查",
-          "【调查与监管诉求】核心涉案：李明被指控作为幕后主谋通过新加坡公司向中国非法供货。",
-          "【行业影响与走向】后续影响：新加坡监管机构加强对高科技贸易实体的合规审计与跨境物流追踪。"
+          "【核心事件】数学家勒文·阿尔伯格；Lean与Mathlib社区；Lean FRO在Lean与Mathlib社区官方博客：完成黎曼猜想的形式化证明，包含1700万行代码，并获得社区技术合规认证",
+          "【起因与机理】利用交互式定理证明器消除传统数学证明中的复杂性与人工错误，推动计算数学范式变革",
+          "【关键数据与实测】关键细节：包含1700万行Lean代码的黎曼猜想证明，通过了严苛的四项形式化合规审查。",
+          "【行业影响与走向】后续影响：形式化证明成为数学研究的新标准，将重塑纯数学研究的验证流程。"
         ],
         "core_facts_en": [
-          "[Core Event] Li Ming (trader), Megaspeed (Singapore-based trading firm) (Singapore): Illicit export of restricted AI chips to China via complex supply chain networks",
-          "[Root Cause & Mechanism] To circumvent U.S. Bureau of Industry and Security (BIS) export licensing requirements",
-          "[Regulatory & Investigation Focus] Core Allegation: Li Ming accused of orchestrating illegal Nvidia chip exports to China.",
-          "[Key Position & Outlook] Outlook: Singaporean authorities expected to tighten compliance audits on high-tech trade intermediaries."
+          "[Core Event] Levent Alpöge; Lean and Mathlib communities; Lean FRO (Lean and Mathlib community blog): Completed a formal proof of the Riemann Hypothesis via 17 million lines of code, certified by the community",
+          "[Root Cause & Mechanism] Leveraging interactive theorem provers to eliminate complexity and human error in traditional proofs",
+          "[Key Metrics] com/2026/1/and-the-proof-is-checked-in-lean/ are all satisfied.",
+          "[Key Position & Outlook] Outlook: Formal proofs become the new standard, reshaping verification workflows in pure mathematics."
         ],
-        "industry_impact_zh": "该案揭示了出口管制政策下，利用离岸贸易中心（如新加坡）作为货物流转节点的洗白路径正在遭受严厉监管排查。芯片走私链条的精密化迫使供应链透明度合规义务从一级渠道商延伸至二级代理，未来英伟达的区域分销合规性审查将面临更严苛的审计成本压力。",
-        "industry_impact_en": "This case highlights the growing reliance on offshore trading hubs to bypass export controls and suggests a shift toward more rigorous end-user verification requirements. As supply chain opacity becomes a primary regulatory target, Nvidia must significantly heighten its audit burden for regional distributors to mitigate secondary sanctions risk."
+        "industry_impact_zh": "此次证明标志着“形式化数学”从学术边缘走向核心，证明了超大规模计算验证复杂猜想的可行性。该事件将极大加速数学定理验证的自动化进程，并为AI辅助科学发现提供了高置信度的底层范式。",
+        "industry_impact_en": "This milestone marks the transition of 'formal mathematics' from the academic periphery to the core, validating the feasibility of using massive-scale computation to resolve complex conjectures. It will accelerate the automation of theorem verification and establish a high-confidence paradigm for AI-driven scientific discovery."
       },
       "headlines": [
+        {
+          "id": "c2d9fa550c13be18",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "数学界证实勒文·阿尔伯格完成黎曼猜想形式化证明",
+          "title_en": "A joint statement by the Lean and Mathlib communities says \"we have full confidence that Alpöge's proof of the Riemann Hypothesis is correct\" (Lean community blog)",
+          "source": "Lean community blog",
+          "published_at": "2026-11-22T06:00:02+00:00",
+          "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+          "event_summary_zh": "数学家勒文·阿尔伯格通过1700万行Lean代码完成黎曼猜想证明，并获Lean与Mathlib社区官方认证",
+          "event_summary_en": "Mathematician Levent Alpöge released a formal proof of the Riemann Hypothesis on November 20, 2026, consisting of 17 million lines of Lean code relying on the Mathlib library. The Lean and Mathlib communities have officially certified the proof's correctness after comprehensive verification of its logic and codebase.",
+          "core_facts_zh": [
+            "【核心事件】数学家勒文·阿尔伯格；Lean与Mathlib社区；Lean FRO在Lean与Mathlib社区官方博客：完成黎曼猜想的形式化证明，包含1700万行代码，并获得社区技术合规认证",
+            "【起因与机理】利用交互式定理证明器消除传统数学证明中的复杂性与人工错误，推动计算数学范式变革",
+            "【关键数据与实测】关键细节：包含1700万行Lean代码的黎曼猜想证明，通过了严苛的四项形式化合规审查。",
+            "【行业影响与走向】后续影响：形式化证明成为数学研究的新标准，将重塑纯数学研究的验证流程。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Levent Alpöge; Lean and Mathlib communities; Lean FRO (Lean and Mathlib community blog): Completed a formal proof of the Riemann Hypothesis via 17 million lines of code, certified by the community",
+            "[Root Cause & Mechanism] Leveraging interactive theorem provers to eliminate complexity and human error in traditional proofs",
+            "[Key Metrics] com/2026/1/and-the-proof-is-checked-in-lean/ are all satisfied.",
+            "[Key Position & Outlook] Outlook: Formal proofs become the new standard, reshaping verification workflows in pure mathematics."
+          ],
+          "industry_impact_zh": "此次证明标志着“形式化数学”从学术边缘走向核心，证明了超大规模计算验证复杂猜想的可行性。该事件将极大加速数学定理验证的自动化进程，并为AI辅助科学发现提供了高置信度的底层范式。",
+          "industry_impact_en": "This milestone marks the transition of 'formal mathematics' from the academic periphery to the core, validating the feasibility of using massive-scale computation to resolve complex conjectures. It will accelerate the automation of theorem verification and establish a high-confidence paradigm for AI-driven scientific discovery."
+        },
+        {
+          "id": "a505a8ca60a14dbd",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "AI服务器供应吃紧，供应商违约提价达45%",
+          "title_en": "Tech suppliers hike AI server prices up to 45% months after deals are signed",
+          "source": "Financial Times",
+          "published_at": "2026-11-22T05:50:01+00:00",
+          "url": "https://www.ft.com/content/dd2a6594-6146-4ff1-ac8e-54749c1fc99f",
+          "event_summary_zh": "受AI基础设施需求激增驱动，部分供应商在签署供货协议后将服务器价格调涨高达45%",
+          "event_summary_en": "Global data center equipment suppliers are significantly increasing prices for previously contracted AI servers, with hikes reaching up to 45%. This surge is driven by extreme supply-demand imbalances in AI infrastructure, forcing manufacturers to bypass existing contract terms to pass on rising memory and component costs.",
+          "core_facts_zh": [
+            "【核心事件】数据中心设备供应商；Nvidia系AI服务器买方在全球数据中心硬件供应链：在合同签订后强行将AI服务器售价上调至多45%",
+            "【起因与机理】AI算力基建需求暴增，内存等上游元器件供给短缺，导致供应商利润空间被挤压",
+            "【关键数据与实测】合同签订后执行45%的提价，供应链议价逻辑发生剧变。",
+            "【行业影响与走向】市场影响：算力采购从财务预算驱动转向紧迫的供应保障驱动。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Data center equipment suppliers; Buyers of Nvidia-powered AI servers: Unilaterally increasing AI server prices by up to 45% post-contract",
+            "[Root Cause & Mechanism] Explosive demand for AI compute infrastructure and upstream memory shortages squeezing supplier margins",
+            "[Key Metrics] 45% price hike post-contract, shift in supply chain bargaining power.",
+            "[Industry Impact & Outlook] Market impact: Transition from budget-driven to supply-security-driven compute procurement."
+          ],
+          "industry_impact_zh": "该现象暴露出AI硬件市场的卖方市场格局已具备极强的价格垄断属性，传统合同履约信誉在极端供需压力下正面临重构。对于算力需求方而言，供应链稳定性风险已取代采购成本成为制约业务扩容的首要因素。",
+          "industry_impact_en": "This trend reveals a robust seller's market in the AI hardware sector, where traditional contract enforcement is fracturing under extreme supply-demand pressures. For compute buyers, supply chain stability risks have now superseded procurement costs as the primary constraint on business scaling."
+        },
         {
           "id": "4b9411cc12cb8e23",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "该案揭示了出口管制政策下，利用离岸贸易中心（如新加坡）作为货物流转节点的洗白路径正在遭受严厉监管排查。芯片走私链条的精密化迫使供应链透明度合规义务从一级渠道商延伸至二级代理，未来英伟达的区域分销合规性审查将面临更严苛的审计成本压力。",
           "industry_impact_en": "This case highlights the growing reliance on offshore trading hubs to bypass export controls and suggests a shift toward more rigorous end-user verification requirements. As supply chain opacity becomes a primary regulatory target, Nvidia must significantly heighten its audit burden for regional distributors to mitigate secondary sanctions risk."
-        },
-        {
-          "id": "59df1c7dad19705e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "联合国自主武器管制谈判进展停滞",
-          "title_en": "The UN fails to agree on rules regulating ‘killer robots’",
-          "source": "The Verge AI",
-          "published_at": "2026-11-21T20:03:37+00:00",
-          "url": "https://www.theverge.com/tech/1039554/un-regulations-killer-robots",
-          "event_summary_zh": "联合国日内瓦会议未能就致命性自主武器系统监管达成共识，仅承诺在未来两年内继续探讨监管框架方案",
-          "event_summary_en": "UN diplomats failed to establish a legally binding framework for lethal autonomous weapons systems at the Geneva meeting, settling only on a two-year window to discuss potential regulatory options. Led by Russia, Israel, and the United States, significant resistance has stalled progress on defining enforceable compliance standards.",
-          "core_facts_zh": [
-            "【核心事件】联合国各成员国代表、俄罗斯、以色列、美国在瑞士日内瓦联合国裁军相关会议：未能签署监管协议，仅达成未来两年内讨论监管方案的折中意见",
-            "【起因与机理】主要军事强国对自主武器技术发展的战略控制权博弈以及对强制性合规的排斥",
-            "【核心事实细节】未能签署具强制力的法律文书，仅达成两年期方案讨论延期。",
-            "【各方立场与态度】半自主武器与无人机在乌克兰、加沙等地区的使用频率增加与平民伤亡引发人道争议。"
-          ],
-          "core_facts_en": [
-            "[Core Event] UN member state representatives, Russia, Israel, US (UN meetings in Geneva): Failed to reach a binding agreement, agreeing only to a two-year timeframe for further discussion",
-            "[Root Cause & Mechanism] Strategic control over autonomous military technology and resistance to mandatory compliance mechanisms",
-            "[Regulatory & Investigation Focus] Failure to produce a legally binding treaty; agreement limited to a two-year consultation period.",
-            "[Key Position & Outlook] Rising humanitarian concerns due to increased use of semi-autonomous systems and drones in ongoing global conflicts."
-          ],
-          "industry_impact_zh": "军事强国在自主武器协议上的消极态度，本质上是由于无法在维持技术领先优势与建立国际安全红线之间达成战略互信。短期内，国际社会将难以形成统一的监管约束，这将导致各国加速在实战场景中测试与部署半自主武器系统，从而进一步恶化冲突区域的人道主义边界。",
-          "industry_impact_en": "The reluctance of major military powers reflects a fundamental conflict between maintaining technological superiority and establishing international security guardrails. Without a binding framework, nations will likely accelerate the battlefield deployment of semi-autonomous systems, further eroding humanitarian red lines in active conflict zones."
-        },
-        {
-          "id": "1a1a7355902c7ce6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达高端芯片非法走私链调查",
-          "title_en": "Alice Huang’s links to the chip underworld",
-          "source": "Financial Times",
-          "published_at": "2026-11-21T18:55:01+00:00",
-          "url": "https://www.ft.com/content/f3ad8a81-3890-4a8a-8853-ff0a94b08ba9",
-          "event_summary_zh": "前Megaspeed高管Alice Huang被曝卷入通过空壳公司网络向中国走私英伟达芯片的非法贸易链",
-          "event_summary_en": "Former Megaspeed executive Alice Huang is accused of orchestrating a complex shell company network to illicitly transfer advanced Nvidia AI chips to China. The network engaged cloud providers, gambling entities, and Cambodian organizations, utilizing infrastructure linked to former Nvidia partner Inspur to bypass US export controls.",
-          "core_facts_zh": [
-            "【核心事件】Alice Huang（前Megaspeed高管）、英伟达（Nvidia）、浪潮集团（Inspur）在美国出口管制体系及东南亚、中国非法芯片贸易网络：通过数百家空壳公司将高端GPU绕过制裁转售至中国，涉及军事用途关联调查",
-            "【起因与机理】利用英伟达芯片在AI研发中的战略稀缺性，满足中国市场高额溢价需求并规避美方禁运",
-            "【调查与监管诉求】核心主体通过数百家空壳公司掩盖物流流向，非法向中国转运受限算力资源。",
-            "【涉及范围与推进】美国出口管制政策正遭遇严重的“影子供应链”渗透，后续将引发更严格的芯片溯源及跨境支付追踪调查。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Alice Huang (ex-Megaspeed executive), Nvidia, Inspur: Circumventing sanctions to channel high-end GPUs into China via hundreds of shell companies",
-            "[Root Cause & Mechanism] Capitalizing on the strategic scarcity of AI chips to meet Chinese demand while bypassing US trade restrictions",
-            "[Key Metrics] The declared value of goods imported from Aivres by Speedmatrix, a Megaspeed subsidiary in Malaysia, was about $4.",
-            "[Industry Impact & Outlook] US export controls are facing significant 'shadow supply chain' infiltration, likely triggering stricter chip provenance and cross-border payment investigations."
-          ],
-          "industry_impact_zh": "此次事件揭示了高端算力贸易已演化为类同军火的地下黑市，单纯依赖终端用户审查（End-User Check）在层层嵌套的空壳公司结构面前已近失效。随着美国对华算力围堵进入深水区，英伟达等头部供应商需建立基于硬件指纹与实时遥测的追踪体系，否则供应链合规的崩溃将导致出口控制政策沦为徒具形式的法律条文。",
-          "industry_impact_en": "This incident demonstrates that high-end computing trade has evolved into a black market akin to the arms trade, where standard end-user verification is rendered ineffective by complex shell structures. As US restrictions intensify, major suppliers must adopt hardware-level telemetry and cryptographic tracking to prevent systemic compliance failure."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 05:48:36 UTC",
+      "updated_at": "2026-11-22 06:05:33 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 05:48:36 UTC",
+      "updated_at": "2026-11-22 06:05:33 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
