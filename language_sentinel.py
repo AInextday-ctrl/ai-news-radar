@@ -527,14 +527,17 @@ if __name__ == "__main__":
                     elif cat == 'news':
                         if c.get('content_snippet') == c.get('summary_en'):
                             c.pop('content_snippet', None)
-                        if c.get('article_content') and len(c['article_content']) > 3500:
-                            c['article_content'] = c['article_content'][:3500] + '...'
-                        if c.get('article_content_zh') and len(c['article_content_zh']) > 2200:
-                            c['article_content_zh'] = c['article_content_zh'][:2200] + '...'
+                        if c.get('article_content') and len(c['article_content']) > 2800:
+                            c['article_content'] = c['article_content'][:2800] + '...'
+                        if c.get('article_content_zh') and len(c['article_content_zh']) > 1800:
+                            c['article_content_zh'] = c['article_content_zh'][:1800] + '...'
+                        if isinstance(c.get('paragraphs'), list) and len(c['paragraphs']) > 12:
+                            c['paragraphs'] = c['paragraphs'][:12]
                     return c
 
                 category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}
-                d.pop("items", None)
+                for strip_k in ["items", "celebrity", "leader_opinions"]:
+                    d.pop(strip_k, None)
                 if "grouped" in d and isinstance(d["grouped"], dict):
                     for cat_k, cat_list in d["grouped"].items():
                         if isinstance(cat_list, list):

@@ -205,19 +205,20 @@ def build_robust_meta_description(raw_desc: str, title: str, source: str = "", i
     cleaned = re.sub(r'<[^>]+>', '', str(raw_desc or '')).strip()
     cleaned = re.sub(r'\s+', ' ', cleaned)
     
-    min_len = 35 if is_zh else 60
+    # Bing/Google SEO standard: 70-160 characters. Target 80-150 chars to avoid "too short" warnings.
+    min_len = 80 if is_zh else 70
     if len(cleaned) < min_len:
         clean_title = re.sub(r'\s+', ' ', title or '').strip()
         if is_tool:
             if is_zh:
-                fallback = f"{clean_title}：精选前沿 AI 生产力与开发者工具，提供技术特性评测、上手指令与配置解析。"
+                fallback = f"{clean_title}：精选前沿高生产力 AI 开发者工具，提供技术架构评测、上手指令、功能特性与生产配置解析。"
             else:
                 fallback = f"{clean_title} - In-depth breakdown of key capabilities, quickstart setup, features, and production architecture on AI News Radar."
             cleaned = f"{cleaned} | {fallback}" if cleaned else fallback
         else:
             if is_zh:
                 src_clause = f"来自 {source} 的第一现场报道：" if source else ""
-                fallback = f"{src_clause}{clean_title}。AI 资讯雷达为您提供全球前沿大模型演进、工程实录与技术影响深度研报。"
+                fallback = f"{src_clause}{clean_title}。AI 资讯雷达为您提供全球前沿大模型突破、工程实录、领袖动态与深度技术影响研报。"
             else:
                 src_clause = f"Reported by {source}: " if source else ""
                 fallback = f"{src_clause}{clean_title}. Follow real-time artificial intelligence updates, engineering benchmarks, and deep-dive analysis on AI News Radar."
@@ -225,14 +226,15 @@ def build_robust_meta_description(raw_desc: str, title: str, source: str = "", i
             
     if not cleaned:
         if is_zh:
-            cleaned = "AI 资讯雷达为您提供全球前沿大模型突破、工程实录、领袖动态与开发者工具深度研报。"
+            cleaned = "AI 资讯雷达为您提供全球前沿大模型突破、工程实录、行业领袖动态与高生产力 AI 工具深度研报。"
         else:
             cleaned = "Explore frontier artificial intelligence breakthroughs, developer tools, and engineering benchmarks on AI News Radar."
 
     if not is_zh:
         cleaned = sanitize_for_en(cleaned)
 
-    return escape(cleaned[:155].strip())
+    cleaned = cleaned[:150].strip()
+    return escape(cleaned)
 
 def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: List[Dict[str, Any]] = None) -> str:
     tool_id = str(tool.get("id") or "")
@@ -1891,7 +1893,7 @@ def build_news_hub_html(news_items: List[Dict[str, Any]], is_zh: bool = False) -
     lang_code = "zh-CN" if is_zh else "en"
     title = "全球前沿 AI 行业资讯与技术突破雷达 | AI 资讯雷达" if is_zh else "Breaking AI News & Frontier Intelligence Hub | AI News Radar"
     description = (
-        "AI 资讯雷达实时追踪全球人工智能突破、顶尖大模型架构演进、行业领袖动态与深度工程实录，为技术决策者与开发者提供无水分第一现场技术快讯。"
+        "AI 资讯雷达实时追踪全球人工智能突破、顶尖大模型架构演进、70+ 硅谷行业领袖动态与深度工程实录，为全球技术决策者与开发者提供真实权威、零水分的第一现场前沿技术快讯。"
         if is_zh
         else "Real-time intelligence radar tracking breaking AI model releases, frontier research breakthroughs, verified industry signals, and technical teardowns."
     )
@@ -2056,7 +2058,7 @@ def build_tools_hub_html(tool_items: List[Dict[str, Any]], is_zh: bool = False) 
     lang_code = "zh-CN" if is_zh else "en"
     title = "前沿 AI 生产力与开发者工具库 | AI 资讯雷达" if is_zh else "Applied AI Tools Directory & Benchmarks | AI News Radar"
     description = (
-        "精选全球高生产力 AI 工具库与开发者组件，涵盖代码辅助、多模态智能体、自动化工作流与本地部署指南，经过深度评测与实战验证。"
+        "精选全球前沿高生产力 AI 工具库与开发者组件，涵盖代码智能辅助、多模态智能体架构、自动化工作流与本地开源大模型部署指南，经 AI 资讯雷达深度评测与实战基准验证。"
         if is_zh
         else "Explore, benchmark, and deploy top AI productivity tools, developer frameworks, LLM integrations, and coding assistants vetted by AI News Radar."
     )

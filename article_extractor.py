@@ -1041,6 +1041,36 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "forbes.com" in domain:
+            try:
+                from crawlers.forbes_crawler import crawl_forbes
+                forbes_data = crawl_forbes(url, html_text=html_text)
+                if forbes_data.get("is_substantive") or forbes_data.get("paras_count", 0) >= 1 or forbes_data.get("title"):
+                    result.update(forbes_data)
+                    return result
+            except Exception:
+                pass
+
+        if "tech.eu" in domain:
+            try:
+                from crawlers.techeu_crawler import crawl_techeu
+                techeu_data = crawl_techeu(url, html_text=html_text)
+                if techeu_data.get("is_substantive") or techeu_data.get("paras_count", 0) >= 1 or techeu_data.get("title"):
+                    result.update(techeu_data)
+                    return result
+            except Exception:
+                pass
+
+        if "deepmind.google" in domain or "institute.deepmind.com" in domain:
+            try:
+                from crawlers.deepmind_crawler import crawl_deepmind
+                deepmind_data = crawl_deepmind(url, html_text=html_text)
+                if deepmind_data.get("is_substantive") or deepmind_data.get("paras_count", 0) >= 1 or deepmind_data.get("title"):
+                    result.update(deepmind_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

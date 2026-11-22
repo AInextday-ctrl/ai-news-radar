@@ -1160,11 +1160,11 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 深度智库 · 独家技术专题与产业研报全景库 | AI 资讯雷达</title>
-  <meta name="description" content="AI 资讯雷达独家深度专栏库：全景收录针对 DeepSeek、OpenAI、Cursor、大模型底层架构、多智能体协同与产业落地成本的重磅深度拆解与实操报告。">
+  <meta name="description" content="AI 资讯雷达独家出品前沿深度技术研报智库：深度聚焦开源与商业大模型私有化部署、端侧智能体架构演化、高吞吐低延迟推理量化以及企业级生产 RAG 实战落地 Teardown。">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ainewsradar.xyz/articles">
   <meta property="og:title" content="AI 深度智库 · 独家技术专题与产业研报全景库">
-  <meta property="og:description" content="全景收录针对 DeepSeek、OpenAI、Cursor、底层架构与产业落地的重磅深度拆解报告。">
+  <meta property="og:description" content="AI 资讯雷达独家出品前沿深度技术研报智库：深度聚焦开源与商业大模型私有化部署、端侧智能体架构演化、高吞吐低延迟推理量化以及企业级生产 RAG 实战落地 Teardown。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ainewsradar.xyz/articles">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
@@ -1441,7 +1441,7 @@ def backfill_historical_daily_briefings() -> List[str]:
 
         if is_en_hub:
             hub_title = "AI Daily Briefings Historical Archives | AI News Radar"
-            hub_desc = "AI News Radar Historical Daily Archive Hub: Chronological daily records of global artificial intelligence breakthroughs, industry developments, leadership insights, and benchmark shifts."
+            hub_desc = "AI News Radar Historical Daily Archives: Chronological records of global artificial intelligence breakthroughs, industry insights, and benchmark shifts."
             hub_lang = "en"
             hub_canon = "https://ainewsradar.xyz/daily"
             hub_alt_en = "https://ainewsradar.xyz/daily"
@@ -1471,7 +1471,7 @@ def backfill_historical_daily_briefings() -> List[str]:
             hub_footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). All Rights Reserved."
         else:
             hub_title = "AI 历史简报归档 · 每日资讯雷达 | AI 资讯雷达"
-            hub_desc = "AI 资讯雷达每日简报历史归档库：按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动，全量支持时间线检索与历史回溯。"
+            hub_desc = "AI 资讯雷达每日早晚报与历史归档库：按日期全量归档全球人工智能重大突破、行业权威快讯、领袖核心研判与天梯榜动态，全面支持多维度时间线极速检索与历史技术纵深回溯。"
             hub_lang = "zh-CN"
             hub_canon = "https://ainewsradar.xyz/zh/daily"
             hub_alt_en = "https://ainewsradar.xyz/daily"
@@ -1856,7 +1856,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). Curated via automated intelligence pipeline & editorial review · All rights belong to original authors."
     else:
         page_title = f"AI 日报 · {date_zh} | AI 资讯雷达"
-        page_desc = f"{date_zh} AI 资讯雷达历史精选：涵盖大模型突破、硅谷动态、AI 工具与领袖发声。经人工审核与交叉验证，附完整原始信源。"
+        page_desc = f"{date_zh} AI 资讯雷达前沿精选：全天候深度追踪大模型底层突破、硅谷领袖发声、AI 高频生产力工具与前沿研报。经多源交叉验证，附完整原始报道溯源。"
         html_lang = "zh-CN"
         canonical_url = f"https://ainewsradar.xyz/zh/daily/{date_slug}"
         alt_en = f"https://ainewsradar.xyz/daily/{date_slug}"

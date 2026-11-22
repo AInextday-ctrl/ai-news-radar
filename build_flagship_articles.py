@@ -370,7 +370,7 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
 
     site_name = "AI 资讯雷达" if is_zh else "AI News Radar"
     hub_title = "AI 深度特稿智库 · 独家专栏合集" if is_zh else "AI Engineering Deep-Dive Guides & Reports"
-    hub_desc = "AI 资讯雷达独家出品：聚焦大模型私有部署、终端智能体架构、高吞吐量化与企业级 RAG 实战。" if is_zh else "Authoritative, code-rich AI engineering teardowns, systems benchmarks, and production playbooks verified in the Radar Hardware Lab."
+    hub_desc = "AI 资讯雷达独家出品前沿深度技术研报智库：深度聚焦开源与商业大模型私有化部署、端侧智能体架构演化、高吞吐低延迟推理量化以及企业级生产 RAG 实战落地 Teardown。" if is_zh else "Authoritative, code-rich AI engineering teardowns, systems benchmarks, and production playbooks verified in the Radar Hardware Lab."
     home_link = "/zh" if is_zh else "/"
     home_text = "首页" if is_zh else "Home"
     hub_link = "/zh/articles" if is_zh else "/articles"

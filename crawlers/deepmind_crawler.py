@@ -251,7 +251,7 @@ def _save_to_disk_cache(url: str, entry: Dict[str, Any]) -> None:
         pass
 
 
-def crawl_deepmind(url: str, html_content: Optional[str] = None, title: str = "", force_refresh: bool = False) -> Dict[str, Any]:
+def crawl_deepmind(url: str, html_text: Optional[str] = None, title: str = "", force_refresh: bool = False, html_content: Optional[str] = None) -> Dict[str, Any]:
     """
     Main entry point for DeepMind Institute essay crawling and metadata extraction.
     Guarantees authentic official titles, researcher bylines, localized imagery, and full-text paragraphs.
@@ -312,7 +312,7 @@ def crawl_deepmind(url: str, html_content: Optional[str] = None, title: str = ""
     published_at = ""
     paragraphs: List[str] = []
 
-    fetched_html = html_content
+    fetched_html = html_content or html_text
     if not fetched_html and HAS_REQUESTS:
         try:
             headers = {

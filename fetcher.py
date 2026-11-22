@@ -726,8 +726,15 @@ def decode_gnews_url_fast(raw_link: str) -> Optional[str]:
     if not googlenewsdecoder:
         return None
     try:
-        dec = googlenewsdecoder.new_decoderv1(raw_link, interval=0.0)
-        if isinstance(dec, dict) and dec.get("status"):
+        dec = None
+        if hasattr(googlenewsdecoder, "gnewsdecoder"):
+            dec = googlenewsdecoder.gnewsdecoder(raw_link)
+        elif hasattr(googlenewsdecoder, "new_decoderv1"):
+            dec = googlenewsdecoder.new_decoderv1(raw_link, interval=0.0)
+        elif hasattr(googlenewsdecoder, "decoderv1"):
+            dec = googlenewsdecoder.decoderv1(raw_link)
+
+        if isinstance(dec, dict) and (dec.get("status") or dec.get("success")):
             real_url = dec.get("decoded_url")
             _DECODED_URL_CACHE[raw_link] = real_url
             return real_url

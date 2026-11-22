@@ -430,7 +430,7 @@ def resolve_forbes_headline_via_gnews(url: str, slug: str) -> Optional[Dict[str,
     return None
 
 
-def crawl_forbes(url: str, html_content: Optional[str] = None, title: str = "") -> Dict[str, Any]:
+def crawl_forbes(url: str, html_text: Optional[str] = None, title: str = "", html_content: Optional[str] = None) -> Dict[str, Any]:
     """
     Main entry point for Forbes article crawling and metadata extraction.
     Guarantees authentic headlines, journalist bylines, HD images, and full-text paragraphs.
@@ -491,6 +491,29 @@ def crawl_forbes(url: str, html_content: Optional[str] = None, title: str = "") 
     resolved_image = KNOWN_FORBES_IMAGES.get(slug, "")
     published_at = ""
     lead_summary = ""
+    html_paragraphs = []
+
+    raw_html = html_text or html_content
+    if raw_html:
+        try:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(raw_html, "html.parser")
+            h1 = soup.find("h1")
+            if h1 and h1.get_text(strip=True):
+                resolved_title = clean_forbes_title(h1.get_text(strip=True))
+            og_img = soup.find("meta", property="og:image")
+            if og_img and og_img.get("content"):
+                resolved_image = og_img["content"]
+            author_meta = soup.find("meta", attrs={"name": "author"})
+            if author_meta and author_meta.get("content"):
+                resolved_author = author_meta["content"]
+            article = soup.find("article") or soup
+            for p in article.find_all("p"):
+                txt = p.get_text(strip=True)
+                if txt and len(txt) > 25 and not txt.startswith("By ") and not txt.startswith("Forbes"):
+                    html_paragraphs.append(txt)
+        except Exception:
+            pass
 
     # Try RSS feeds first
     feed_meta = resolve_forbes_image_and_metadata_from_feeds(clean_u, slug)
@@ -528,9 +551,9 @@ def crawl_forbes(url: str, html_content: Optional[str] = None, title: str = "") 
         "author": resolved_author or "Forbes",
         "published_at": published_at,
         "cover_image": resolved_image,
-        "paragraphs": [lead_summary] if lead_summary else [],
-        "full_text": lead_summary,
-        "is_substantive": bool(lead_summary and len(lead_summary) >= 100),
+        "paragraphs": html_paragraphs if html_paragraphs else ([lead_summary] if lead_summary else []),
+        "full_text": "\n\n".join(html_paragraphs) if html_paragraphs else lead_summary,
+        "is_substantive": bool(html_paragraphs or (lead_summary and len(lead_summary) >= 100)),
         "is_paywalled": False,
         "status": "success",
         "source": "Forbes"
