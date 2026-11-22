@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 17:04:44 UTC",
+  "generated_at": "2026-11-22 17:19:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 17:04:44 UTC",
+      "updated_at": "2026-11-22 17:19:04 UTC",
       "headline_item": {
-        "id": "e3a7ac59fcc5ace0",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "AI编程智能体实测：模拟环境任务完成率不足一成",
-        "title_en": "AI coding agents ace isolated tests but complete fewer than one in ten tasks in a simulated workplace",
-        "source": "THE DECODER",
-        "published_at": "2026-11-22T15:15:48+00:00",
-        "url": "https://the-decoder.com/ai-coding-agents-ace-isolated-tests-but-complete-fewer-than-one-in-ten-tasks-in-a-simulated-workplace/",
-        "event_summary_zh": "研究显示，尽管AI编程智能体在SWE-bench等基准测试中表现优异，但在集成项目协作流程的模拟工作环境中，任务成功率低于10%",
-        "event_summary_en": "In a simulated software development environment featuring project boards, chat logs, and collaborative workflows, leading models like GPT-6 Astra and Claude Opus 5.5 achieved a task completion rate of less than 10%. The findings highlight a critical performance gap between high scores on isolated code benchmarks and the requirements of complex, collaborative system engineering.",
+        "id": "913b4f181258b813",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家",
+        "title_en": "Like SpaceX, Anthropic ran an unusual IPO process, chafing some bankers",
+        "source": "Reuters",
+        "published_at": "2026-11-22T17:15:01+00:00",
+        "url": "https://www.reuters.com/world/like-spacex-anthropic-ran-an-unusual-ipo-process-chafing-some-bankers-2026-11-22/",
+        "event_summary_zh": "业务记录器 • 2026 年 11 月 22 日下午 5:00（太平洋时间） • 阅读 1 分钟\n\nBusiness Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5 亿美元的承销费，但引起了一些银行家对其运营方式的抱怨。此次发行超过了 SpaceX 6 月份的上市，银行家们",
+        "event_summary_en": "Business Recorder • 22 Nov 2026, 5:00 PM PKT • 1 min read\n\nBusiness Recorder reported that Anthropic’s IPO, which took place on Thursday, raised more than half a billion dollars in underwriting fees but drew complaints from some bankers about the way it was run. The offering surpassed SpaceX’s June listing, and bankers cited a compressed timetable, late changes, delayed financial projections and rushed approvals. Anthropic also limited some underwriters to four senior bankers and required certai",
         "core_facts_zh": [
-          "【核心事件】Anthropic（Claude模型开发方）、OpenAI（GPT系列模型开发方）在集成化模拟软件开发工作环境：前沿模型在复杂系统工程任务中的实测成功率低于10%",
-          "【起因与机理】当前评估指标与真实复杂工作流之间存在显著的环境偏差",
-          "【关键数据与实测】在包含项目看板、聊天记录及多角色协作的模拟软件开发环境实测中，即使是GPT-6 Astra与Claude Opus 5.5等前沿模型，在处理完整开发任务时的成功率亦不足10%。",
-          "【各方立场与态度】软件工程中AI智能体的实际交付门槛远高于孤立编码。"
+          "【核心事件】Anthropic (Claude 研发团队)：与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家",
+          "【起因与机理】巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
+          "【关键数据与实测】业务记录器 • 2026 年 11 月 22 日下午 5:00（太平洋时间） • 阅读 1 分钟\n\nBusiness Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5 亿美元的承销费，但引起了一些银行家对其运营方式的抱怨。",
+          "【各方立场与态度】与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家。"
         ],
         "core_facts_en": [
-          "[Core Event] Anthropic and OpenAI: Frontier models achieved less than 10% task completion in complex workflows",
-          "[Root Cause & Mechanism] Significant discrepancy between synthetic benchmarks and real-world system complexity",
-          "[Key Metrics] In a simulated software development environment featuring project boards, chat logs, and collaborative workflows, leading models like GPT-6 Astra and Claude Opus 5.5 achieved a task completion rate of less than 10%.",
-          "[Key Position & Outlook] Actual delivery barriers for AI coding agents exceed isolated code generation."
+          "[Core Event] Industry Leaders: Like SpaceX, Anthropic ran an unusual IPO process, chafing some bankers",
+          "[Root Cause & Mechanism] Business Recorder • 22 Nov 2026, 5:00 PM PKT • 1 min read\n\nBusiness Recorder reported that Anthropic’s IPO, which took place on Thursday, raised more than half a billion dollars in underwriting fees but drew complaints from some bankers about the way it was run.",
+          "[Key Metrics] Anthropic’s shares rose 17% on their first day, then closed 8.",
+          "[Industry Analysis] Anthropic also limited some underwriters to four senior bankers and required certai."
         ],
-        "industry_impact_zh": "现有基准测试正陷入过度拟合的陷阱，由于缺乏对多轮长逻辑协作、沟通成本及系统性上下文的覆盖，导致模型在实验室环境的卓越表现无法转化为生产力。企业在部署AI智能体时应摒弃对基准分数的盲目崇拜，转而建立基于内部长上下文工作流的效能审计框架。",
-        "industry_impact_en": "Existing benchmarks are falling into an overfitting trap, failing to capture the complexity of multi-turn logic, communication overhead, and systemic context required for production. Enterprises must pivot away from benchmark-driven procurement and instead establish performance audit frameworks grounded in their specific long-context operational workflows."
+        "industry_impact_zh": "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
+        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
       },
       "headlines": [
+        {
+          "id": "913b4f181258b813",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家",
+          "title_en": "Like SpaceX, Anthropic ran an unusual IPO process, chafing some bankers",
+          "source": "Reuters",
+          "published_at": "2026-11-22T17:15:01+00:00",
+          "url": "https://www.reuters.com/world/like-spacex-anthropic-ran-an-unusual-ipo-process-chafing-some-bankers-2026-11-22/",
+          "event_summary_zh": "业务记录器 • 2026 年 11 月 22 日下午 5:00（太平洋时间） • 阅读 1 分钟\n\nBusiness Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5 亿美元的承销费，但引起了一些银行家对其运营方式的抱怨。此次发行超过了 SpaceX 6 月份的上市，银行家们",
+          "event_summary_en": "Business Recorder • 22 Nov 2026, 5:00 PM PKT • 1 min read\n\nBusiness Recorder reported that Anthropic’s IPO, which took place on Thursday, raised more than half a billion dollars in underwriting fees but drew complaints from some bankers about the way it was run. The offering surpassed SpaceX’s June listing, and bankers cited a compressed timetable, late changes, delayed financial projections and rushed approvals. Anthropic also limited some underwriters to four senior bankers and required certai",
+          "core_facts_zh": [
+            "【核心事件】Anthropic (Claude 研发团队)：与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家",
+            "【起因与机理】巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
+            "【关键数据与实测】业务记录器 • 2026 年 11 月 22 日下午 5:00（太平洋时间） • 阅读 1 分钟\n\nBusiness Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5 亿美元的承销费，但引起了一些银行家对其运营方式的抱怨。",
+            "【各方立场与态度】与 SpaceX 一样，Anthropic 也进行了不同寻常的 IPO 流程，惹恼了一些银行家。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Like SpaceX, Anthropic ran an unusual IPO process, chafing some bankers",
+            "[Root Cause & Mechanism] Business Recorder • 22 Nov 2026, 5:00 PM PKT • 1 min read\n\nBusiness Recorder reported that Anthropic’s IPO, which took place on Thursday, raised more than half a billion dollars in underwriting fees but drew complaints from some bankers about the way it was run.",
+            "[Key Metrics] Anthropic’s shares rose 17% on their first day, then closed 8.",
+            "[Industry Analysis] Anthropic also limited some underwriters to four senior bankers and required certai."
+          ],
+          "industry_impact_zh": "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        },
         {
           "id": "e3a7ac59fcc5ace0",
           "tag_zh": "⚡ 职场提效",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "将品味定义为“护城河”本质上是硅谷在高溢价内容市场对模型平庸化的防御性策略，若模型无法跨越审美的主观性壁垒，内容产业的底层逻辑将回归至‘人类策展+AI执行’的协作范式。长期看，这不仅关乎美学，更关乎在AI边际成本趋零的背景下，人类如何通过复杂的主观选择定义产品的溢价权。",
           "industry_impact_en": "Defining taste as a 'moat' is a strategic defense against the commoditization of AI-generated content. If models fail to bridge the subjectivity gap in aesthetics, the industry will pivot to a 'human curation + AI execution' paradigm, where human choice remains the primary determinant of price premiums in a zero-marginal-cost content ecosystem."
-        },
-        {
-          "id": "3a6733e6a6e3100b",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "Perplexity推出Monitor API支持自动化实时监控",
-          "title_en": "Perplexity's new Monitor API turns web search from a one-off query into a nonstop watchdog",
-          "source": "THE DECODER",
-          "published_at": "2026-11-22T14:20:28+00:00",
-          "url": "https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/",
-          "event_summary_zh": "Perplexity发布Monitor API，通过自定义自然语言目标实现对全网及特定页面的自动化监控与智能筛选更新",
-          "event_summary_en": "Perplexity has launched the Monitor API, allowing developers to define monitoring goals via natural language for periodic scanning of specific web pages or global information. The service integrates a decision model to filter out noise, pushing verified updates via webhooks only when findings meet predefined criteria for relevance, credibility, and novelty.",
-          "core_facts_zh": [
-            "【核心事件】困惑人工智能在企业开发者生态平台：发布Monitor API，支持全网查询监控与特定页面变更监测",
-            "【起因与机理】解决工程团队自行维护重复搜索代码及处理噪声信息的工程负担",
-            "【关键技术规格】企业级API通过自然语言定义任务，替代传统重复性爬虫代码。",
-            "【各方立场与态度】支持全网监控与特定URL变更比对，直接对标Firecrawl等存量市场玩家。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Perplexity AI (Enterprise developer ecosystem): Launch of Monitor API for web search and page change monitoring",
-            "[Root Cause & Mechanism] To alleviate the engineering overhead of building custom recurring search pipelines and noise reduction logic",
-            "[Key Metrics] Web monitors cost $1 per 1,000 successful runs, and page monitors cost $1 per 1,000 fetched URLs.",
-            "[Scope & Next Steps] Features include global search monitoring and targeted URL diffing to compete with incumbents like Firecrawl."
-          ],
-          "industry_impact_zh": "Perplexity通过将底层搜索聚合能力封装为实时智能代理（Agentic）接口，试图从单纯的问答工具转型为企业的自动化情报基建。此举不仅对传统抓取服务供应商形成降维打击，更通过引入决策模型过滤层，进一步确立了其在AI应用链条中作为智能中枢的技术壁垒。",
-          "industry_impact_en": "By encapsulating search aggregation into agentic APIs, Perplexity is pivoting from a consumer Q&A tool to a critical automation infrastructure. This move disrupts traditional scraping services and establishes a competitive moat by positioning itself as the intelligent middleware within the AI agentic workflow."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 17:04:44 UTC",
+      "updated_at": "2026-11-22 17:19:04 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 17:04:44 UTC",
+      "updated_at": "2026-11-22 17:19:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
