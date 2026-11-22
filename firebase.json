@@ -152,10 +152,6 @@
         "destination": "/news/index.html"
       },
       {
-        "source": "/zh/**",
-        "destination": "/zh/index.html"
-      },
-      {
         "source": "/articles",
         "destination": "/articles/index.html"
       },
@@ -278,7 +274,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=300, stale-while-revalidate=1200"
           }
         ]
       },
@@ -287,7 +283,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -296,7 +292,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -305,7 +301,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -314,7 +310,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -323,7 +319,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -332,7 +328,25 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/articles/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
+          }
+        ]
+      },
+      {
+        "source": "/zh/articles/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
           }
         ]
       },
@@ -341,7 +355,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=120, s-maxage=600, stale-while-revalidate=1800"
           }
         ]
       },
@@ -350,7 +364,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=120, s-maxage=600, stale-while-revalidate=1800"
           }
         ]
       },
@@ -359,7 +373,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=120, s-maxage=600, stale-while-revalidate=1800"
           }
         ]
       },

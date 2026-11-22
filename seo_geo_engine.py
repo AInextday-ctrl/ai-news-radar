@@ -743,7 +743,11 @@ def update_complete_sitemap(daily_dates: List[str],
     # 1. Root Pages
     add_bilingual_url("/", "/zh", "1.0", "hourly", now_date)
 
-    # 2. Trust and Legal Pages
+    # 2. Directory Hub Pages (News & Tools)
+    add_bilingual_url("/news", "/zh/news", "0.95", "hourly", now_date)
+    add_bilingual_url("/tools", "/zh/tools", "0.90", "daily", now_date)
+
+    # 3. Trust and Legal Pages
     for tp in ["about", "editorial-policy", "contact", "privacy", "terms"]:
         add_bilingual_url(f"/{tp}", f"/zh/{tp}", "0.75", "monthly", now_date)
 
@@ -938,6 +942,13 @@ Disallow: /go
 Disallow: /go/
 Disallow: /r/
 
+User-agent: msnbot
+Allow: /
+Disallow: /cdn-cgi/
+Disallow: /go
+Disallow: /go/
+Disallow: /r/
+
 User-agent: BingPreview
 Allow: /
 Disallow: /cdn-cgi/
@@ -973,8 +984,6 @@ Disallow: /cdn-cgi/
 # https://ainewsradar.xyz/zh/llms-full.txt
 Sitemap: https://ainewsradar.xyz/sitemap.xml
 Sitemap: https://ainewsradar.xyz/news-sitemap.xml
-Sitemap: https://ainewsradar.xyz/feed.xml
-Sitemap: https://ainewsradar.xyz/zh/feed.xml
 """
     robots_path = os.path.join(PUBLIC_DIR, "robots.txt")
     atomic_write_text(robots_path, content.strip() + "\n")

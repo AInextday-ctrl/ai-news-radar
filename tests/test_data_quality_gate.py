@@ -752,6 +752,14 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
             for it in items:
                 for k in STRIP_PUB:
                     it.pop(k, None)
+                if cat_k in ('celebrity', 'viral_posts'):
+                    it.pop('quote_en', None)
+                    it.pop('quote_zh', None)
+    if "top_three" in data and isinstance(data["top_three"], list):
+        for it in data["top_three"]:
+            it.pop("paragraphs", None)
+            for k in STRIP_PUB:
+                it.pop(k, None)
 
     # 6. 双轨持久化至后端 data/ 与前端 public/
     backend_latest = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")

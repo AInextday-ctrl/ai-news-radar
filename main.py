@@ -4071,6 +4071,8 @@ def save_news(items: list):
                 for k in ['quote_zh', 'summary_zh', 'title_zh']:
                     if (c_it.get(k) or '').strip() == ftz:
                         c_it.pop(k, None)
+            c_it.pop('quote_en', None)
+            c_it.pop('quote_zh', None)
         elif cat == 'news':
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
@@ -4126,6 +4128,8 @@ def save_news(items: list):
         public_payload["viral_ticker_tweets"] = [_clean_archive_item(x, "celebrity") for x in public_payload["viral_ticker_tweets"]]
     if "top_three" in public_payload and isinstance(public_payload["top_three"], list):
         public_payload["top_three"] = [_clean_public_item(x, "news") for x in public_payload["top_three"]]
+        for top_it in public_payload["top_three"]:
+            top_it.pop("paragraphs", None)
     public_payload["archive_meta"] = {
         "total_archived": len(all_archive_items),
         "category_totals": category_totals

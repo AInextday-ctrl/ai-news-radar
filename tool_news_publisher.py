@@ -201,6 +201,39 @@ def extract_entities_for_jsonld(text: str) -> tuple:
 
     return about, mentions
 
+def build_robust_meta_description(raw_desc: str, title: str, source: str = "", is_zh: bool = False, is_tool: bool = False) -> str:
+    cleaned = re.sub(r'<[^>]+>', '', str(raw_desc or '')).strip()
+    cleaned = re.sub(r'\s+', ' ', cleaned)
+    
+    min_len = 35 if is_zh else 60
+    if len(cleaned) < min_len:
+        clean_title = re.sub(r'\s+', ' ', title or '').strip()
+        if is_tool:
+            if is_zh:
+                fallback = f"{clean_title}：精选前沿 AI 生产力与开发者工具，提供技术特性评测、上手指令与配置解析。"
+            else:
+                fallback = f"{clean_title} - In-depth breakdown of key capabilities, quickstart setup, features, and production architecture on AI News Radar."
+            cleaned = f"{cleaned} | {fallback}" if cleaned else fallback
+        else:
+            if is_zh:
+                src_clause = f"来自 {source} 的第一现场报道：" if source else ""
+                fallback = f"{src_clause}{clean_title}。AI 资讯雷达为您提供全球前沿大模型演进、工程实录与技术影响深度研报。"
+            else:
+                src_clause = f"Reported by {source}: " if source else ""
+                fallback = f"{src_clause}{clean_title}. Follow real-time artificial intelligence updates, engineering benchmarks, and deep-dive analysis on AI News Radar."
+            cleaned = f"{cleaned} — {fallback}" if cleaned else fallback
+            
+    if not cleaned:
+        if is_zh:
+            cleaned = "AI 资讯雷达为您提供全球前沿大模型突破、工程实录、领袖动态与开发者工具深度研报。"
+        else:
+            cleaned = "Explore frontier artificial intelligence breakthroughs, developer tools, and engineering benchmarks on AI News Radar."
+
+    if not is_zh:
+        cleaned = sanitize_for_en(cleaned)
+
+    return escape(cleaned[:155].strip())
+
 def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: List[Dict[str, Any]] = None) -> str:
     tool_id = str(tool.get("id") or "")
     app_name = tool.get("app_name") or tool.get("title") or "AI Tool"
@@ -283,7 +316,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         overview_str = " ".join(str(x) for x in overview if x)
     else:
         overview_str = str(overview or "")
-    clean_meta_desc = escape(re.sub(r'<[^>]+>', '', overview_str)[:160])
+    clean_meta_desc = build_robust_meta_description(overview_str, display_name, source="", is_zh=is_zh, is_tool=True)
 
     if isinstance(features, list):
         features_flat = "; ".join(str(x) for x in features if x)
@@ -1030,7 +1063,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     sep = "&" if "?" in source_url else "?"
     source_target_url = f"{source_url}{sep}ref=ainewsradar" if source_url.startswith("http") else source_url
 
-    clean_meta_desc = escape(re.sub(r'<[^>]+>', '', summary)[:160])
+    clean_meta_desc = build_robust_meta_description(summary, title, source=source_name, is_zh=is_zh, is_tool=False)
     news_brand = site_brand
     brand_suffix = f" | {news_brand}"
     avail = 65 - len(brand_suffix)
@@ -1854,6 +1887,331 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 </html>
 """
 
+def build_news_hub_html(news_items: List[Dict[str, Any]], is_zh: bool = False) -> str:
+    lang_code = "zh-CN" if is_zh else "en"
+    title = "全球前沿 AI 行业资讯与技术突破雷达 | AI 资讯雷达" if is_zh else "Breaking AI News & Frontier Intelligence Hub | AI News Radar"
+    description = (
+        "AI 资讯雷达实时追踪全球人工智能突破、顶尖大模型架构演进、行业领袖动态与深度工程实录，为技术决策者与开发者提供无水分第一现场技术快讯。"
+        if is_zh
+        else "Real-time intelligence radar tracking breaking AI model releases, frontier research breakthroughs, verified industry signals, and technical teardowns."
+    )
+    canonical_url = "https://ainewsradar.xyz/zh/news" if is_zh else "https://ainewsradar.xyz/news"
+    alt_en_url = "https://ainewsradar.xyz/news"
+    alt_zh_url = "https://ainewsradar.xyz/zh/news"
+    image_url = "https://ainewsradar.xyz/images/og-default.jpg"
+    headline = "前沿 AI 资讯与技术突破" if is_zh else "Breaking AI News & Intelligence"
+    subhead = "实时汇聚全球权威信源与第一现场特稿，深度穿透大模型演进脉络" if is_zh else "Real-time intelligence tracking frontier AI breakthroughs and verified industry signals"
+    cta_text = "进入实时交互快讯看板" if is_zh else "Open Full Interactive Radar"
+    cta_link = "/zh#news" if is_zh else "/#news"
+
+    cards_html = []
+    item_list_elements = []
+    for pos, item in enumerate(news_items[:16], 1):
+        item_id = item.get("id", "")
+        item_title = item.get("title" if is_zh else "title_en") or item.get("title") or "AI News"
+        if not is_zh:
+            item_title = sanitize_for_en(item_title)
+        item_summary = item.get("summary_zh" if is_zh else "summary_en") or item.get("summary") or ""
+        if not is_zh:
+            item_summary = sanitize_for_en(item_summary)
+        raw_img = item.get("cover_image") or item.get("image_url") or "/images/og-default.jpg"
+        item_img = get_optimized_og_image(raw_img, item_title, item.get("category", ""))
+        item_source = item.get("source") or "Tech Source"
+        if not is_zh:
+            item_source = sanitize_for_en(item_source)
+        item_url = f"/zh/news/{item_id}" if is_zh else f"/news/{item_id}"
+        full_url = f"https://ainewsradar.xyz{item_url}"
+        
+        item_list_elements.append({
+            "@type": "ListItem",
+            "position": pos,
+            "name": escape(item_title),
+            "url": full_url
+        })
+        
+        cards_html.append(f"""
+        <article class="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/50 transition-all flex flex-col justify-between">
+          <div>
+            <div class="h-36 sm:h-44 rounded-xl overflow-hidden bg-slate-950 mb-3 relative">
+              <img src="{escape(item_img)}" alt="{escape(item_title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='/images/og-default.jpg'">
+              <span class="absolute top-2.5 left-2.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-blue-400 border border-slate-700/60 backdrop-blur-xs">{escape(item_source)}</span>
+            </div>
+            <h2 class="text-base font-bold text-slate-100 line-clamp-2 hover:text-blue-400 transition-colors">
+              <a href="{item_url}">{escape(item_title)}</a>
+            </h2>
+            <p class="text-xs text-slate-400 line-clamp-2 mt-2 leading-relaxed">{escape(item_summary[:120])}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+            <a href="{item_url}" class="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1">
+              <span>{'阅读详情' if is_zh else 'Read Details'}</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </article>
+        """)
+
+    json_ld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical_url,
+                "url": canonical_url,
+                "name": title,
+                "description": description,
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "AI News Radar",
+                    "url": "https://ainewsradar.xyz/"
+                }
+            },
+            {
+                "@type": "ItemList",
+                "itemListElement": item_list_elements
+            }
+        ]
+    }
+    json_ld_str = json.dumps(json_ld, ensure_ascii=False, indent=2)
+
+    redirect_script = f"""
+  <script>
+    if (!navigator.userAgent.match(/bot|spider|crawl|slurp|bingbot|googlebot/i) && window.location.search.indexOf('no_redirect=1') === -1) {{
+      setTimeout(function() {{
+        if (window.location.hash === '') {{
+          window.location.replace('{cta_link}');
+        }}
+      }}, 50);
+    }}
+  </script>
+    """
+
+    res = f"""<!DOCTYPE html>
+<html lang="{lang_code}" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{escape(title)}</title>
+  <meta name="description" content="{escape(description)}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="{canonical_url}">
+  <link rel="alternate" hreflang="en" href="{alt_en_url}">
+  <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
+  <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
+  <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
+  
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="{escape(title)}">
+  <meta property="og:description" content="{escape(description)}">
+  <meta property="og:image" content="{image_url}">
+  <meta property="og:url" content="{canonical_url}">
+  <meta property="og:type" content="website">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:title" content="{escape(title)}">
+  <meta name="twitter:description" content="{escape(description)}">
+  <meta name="twitter:image" content="{image_url}">
+  
+  <script type="application/ld+json">
+{json_ld_str}
+  </script>
+  {redirect_script}
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col justify-between">
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <a href="{'/zh' if is_zh else '/'}" class="flex items-center gap-2.5 font-bold text-base text-white">
+        <span class="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-xs font-black">AI</span>
+        <span>{'AI 资讯雷达' if is_zh else 'AI News Radar'}</span>
+      </a>
+      <nav class="flex items-center gap-4 text-xs font-medium text-slate-300">
+        <a href="{cta_link}" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors">{cta_text}</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+    <div class="mb-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{escape(headline)}</h1>
+      <p class="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">{escape(subhead)}</p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      {''.join(cards_html)}
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>&copy; 2026 AI News Radar (ainewsradar.xyz). All rights reserved.</p>
+  </footer>
+</body>
+</html>
+"""
+    if not is_zh:
+        res = re.sub(r'[\u4e00-\u9fff]', '', res)
+    return res
+
+def build_tools_hub_html(tool_items: List[Dict[str, Any]], is_zh: bool = False) -> str:
+    lang_code = "zh-CN" if is_zh else "en"
+    title = "前沿 AI 生产力与开发者工具库 | AI 资讯雷达" if is_zh else "Applied AI Tools Directory & Benchmarks | AI News Radar"
+    description = (
+        "精选全球高生产力 AI 工具库与开发者组件，涵盖代码辅助、多模态智能体、自动化工作流与本地部署指南，经过深度评测与实战验证。"
+        if is_zh
+        else "Explore, benchmark, and deploy top AI productivity tools, developer frameworks, LLM integrations, and coding assistants vetted by AI News Radar."
+    )
+    canonical_url = "https://ainewsradar.xyz/zh/tools" if is_zh else "https://ainewsradar.xyz/tools"
+    alt_en_url = "https://ainewsradar.xyz/tools"
+    alt_zh_url = "https://ainewsradar.xyz/zh/tools"
+    image_url = "https://ainewsradar.xyz/images/og-default.jpg"
+    headline = "前沿 AI 工具与生产力框架" if is_zh else "Applied AI Tools & Productivity Hub"
+    subhead = "精选高星开源项目、商业套件与智能体组件，深度测评上手实战与性能评级" if is_zh else "Vetted developer utilities, open-source repositories, and autonomous agent frameworks"
+    cta_text = "进入交互式工具库" if is_zh else "Open Interactive Tools Hub"
+    cta_link = "/zh#tools" if is_zh else "/#tools"
+
+    cards_html = []
+    item_list_elements = []
+    for pos, item in enumerate(tool_items[:16], 1):
+        item_id = item.get("id", "")
+        item_title = item.get("app_name" if is_zh else "app_name_en") or item.get("title") or "AI Tool"
+        if not is_zh:
+            item_title = sanitize_for_en(item_title)
+        item_hook = item.get("app_hook" if is_zh else "app_hook_en") or item.get("summary_zh" if is_zh else "summary_en") or ""
+        if not is_zh:
+            item_hook = sanitize_for_en(item_hook)
+        item_img = item.get("image_url") or "/images/og-default.jpg"
+        item_url = f"/zh/tools/{item_id}" if is_zh else f"/tools/{item_id}"
+        full_url = f"https://ainewsradar.xyz{item_url}"
+        
+        item_list_elements.append({
+            "@type": "ListItem",
+            "position": pos,
+            "name": escape(item_title),
+            "url": full_url
+        })
+        
+        cards_html.append(f"""
+        <article class="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 transition-all flex flex-col justify-between">
+          <div>
+            <div class="h-36 sm:h-44 rounded-xl overflow-hidden bg-slate-950 mb-3 relative">
+              <img src="{escape(item_img)}" alt="{escape(item_title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='/images/og-default.jpg'">
+            </div>
+            <h2 class="text-base font-bold text-slate-100 line-clamp-1 hover:text-emerald-400 transition-colors">
+              <a href="{item_url}">{escape(item_title)}</a>
+            </h2>
+            <p class="text-xs text-slate-400 line-clamp-2 mt-2 leading-relaxed">{escape(item_hook[:120])}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+            <a href="{item_url}" class="text-emerald-400 hover:text-emerald-300 font-medium flex items-center gap-1">
+              <span>{'查看详情' if is_zh else 'Explore'}</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </article>
+        """)
+
+    json_ld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical_url,
+                "url": canonical_url,
+                "name": title,
+                "description": description,
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "AI News Radar",
+                    "url": "https://ainewsradar.xyz/"
+                }
+            },
+            {
+                "@type": "ItemList",
+                "itemListElement": item_list_elements
+            }
+        ]
+    }
+    json_ld_str = json.dumps(json_ld, ensure_ascii=False, indent=2)
+
+    redirect_script = f"""
+  <script>
+    if (!navigator.userAgent.match(/bot|spider|crawl|slurp|bingbot|googlebot/i) && window.location.search.indexOf('no_redirect=1') === -1) {{
+      setTimeout(function() {{
+        if (window.location.hash === '') {{
+          window.location.replace('{cta_link}');
+        }}
+      }}, 50);
+    }}
+  </script>
+    """
+
+    res = f"""<!DOCTYPE html>
+<html lang="{lang_code}" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{escape(title)}</title>
+  <meta name="description" content="{escape(description)}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="{canonical_url}">
+  <link rel="alternate" hreflang="en" href="{alt_en_url}">
+  <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
+  <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
+  <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
+  
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="{escape(title)}">
+  <meta property="og:description" content="{escape(description)}">
+  <meta property="og:image" content="{image_url}">
+  <meta property="og:url" content="{canonical_url}">
+  <meta property="og:type" content="website">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:title" content="{escape(title)}">
+  <meta name="twitter:description" content="{escape(description)}">
+  <meta name="twitter:image" content="{image_url}">
+  
+  <script type="application/ld+json">
+{json_ld_str}
+  </script>
+  {redirect_script}
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col justify-between">
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <a href="{'/zh' if is_zh else '/'}" class="flex items-center gap-2.5 font-bold text-base text-white">
+        <span class="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-xs font-black">AI</span>
+        <span>{'AI 资讯雷达' if is_zh else 'AI News Radar'}</span>
+      </a>
+      <nav class="flex items-center gap-4 text-xs font-medium text-slate-300">
+        <a href="{cta_link}" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-colors">{cta_text}</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+    <div class="mb-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{escape(headline)}</h1>
+      <p class="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">{escape(subhead)}</p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      {''.join(cards_html)}
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>&copy; 2026 AI News Radar (ainewsradar.xyz). All rights reserved.</p>
+  </footer>
+</body>
+</html>
+"""
+    if not is_zh:
+        res = re.sub(r'[\u4e00-\u9fff]', '', res)
+    return res
+
 def generate_all_landing_pages():
     # Prioritize rich backend data (which holds complete article bodies, full translations, and multi-paragraph records)
     data_path = os.path.join(WORKSPACE_DIR, "data", "latest_news.json")
@@ -2150,11 +2508,11 @@ def generate_all_landing_pages():
         with open(os.path.join(zh_news_dir, f"{n_id}.html"), "w", encoding="utf-8") as f:
             f.write(zh_html)
 
-    # 3. Create Fallback index.html for hubs
-    en_tool_idx = "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0;url=/#tools'></head><body>Redirecting to AI Tools...</body></html>"
-    zh_tool_idx = "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0;url=/zh#tools'></head><body>正在跳转至 AI 工具库...</body></html>"
-    en_news_idx = "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0;url=/#news'></head><body>Redirecting to AI News...</body></html>"
-    zh_news_idx = "<!DOCTYPE html><html><head><meta http-equiv='refresh' content='0;url=/zh#news'></head><body>正在跳转至 AI 资讯...</body></html>"
+    # 3. Create Full-Fledged Hub index.html for Directories
+    en_tool_idx = build_tools_hub_html(tools, is_zh=False)
+    zh_tool_idx = build_tools_hub_html(tools, is_zh=True)
+    en_news_idx = build_news_hub_html(news, is_zh=False)
+    zh_news_idx = build_news_hub_html(news, is_zh=True)
 
     with open(os.path.join(en_tools_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(en_tool_idx)

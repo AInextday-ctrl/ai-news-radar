@@ -287,6 +287,10 @@ def is_photo_caption_or_credit(
         tw = set(t_low.split())
         cw = set(cap.split())
         if len(tw) >= 5 and len(cw) >= 5:
+            # If the paragraph has significantly more words than the caption,
+            # it's a full article paragraph from which the caption was excerpted, not an isolated caption.
+            if len(tw) >= len(cw) + 5:
+                continue
             overlap = len(tw & cw) / float(min(len(tw), len(cw)))
             if overlap >= 0.85:
                 return True
