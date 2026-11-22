@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 14:18:55 UTC",
+  "generated_at": "2026-11-22 14:35:24 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 14:18:55 UTC",
+      "updated_at": "2026-11-22 14:35:25 UTC",
       "headline_item": {
-        "id": "b5934cc79e03c1c9",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "METR预警：AI自主研发能力增长或将突破安全边界",
-        "title_en": "AI is getting better faster than experts can reliably test whether new systems are safe, METR warns",
+        "id": "3a6733e6a6e3100b",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "Perplexity推出Monitor API支持自动化实时监控",
+        "title_en": "Perplexity's new Monitor API turns web search from a one-off query into a nonstop watchdog",
         "source": "THE DECODER",
-        "published_at": "2026-11-22T13:00:43+00:00",
-        "url": "https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/",
-        "event_summary_zh": "AI测评机构METR发布报告指出，AI模型在复杂研发任务上的执行力正以每3.6个月翻倍的速度激增，现有评估框架已难以准确预测其灾难性风险",
-        "event_summary_en": "AI research evaluation firm METR reports that large models are closing the gap with human experts in coding and computational tasks, with the complexity of autonomous tasks they can handle doubling every 3.6 months. METR warns that current evaluation environments consistently overestimate model performance for real-world scenarios, and if this trajectory continues, models are projected to reach a 50% success rate on 200-hour complex tasks by July 2027, potentially exceeding human capacity to monitor catastrophic risks.",
+        "published_at": "2026-11-22T14:20:28+00:00",
+        "url": "https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/",
+        "event_summary_zh": "Perplexity发布Monitor API，通过自定义自然语言目标实现对全网及特定页面的自动化监控与智能筛选更新",
+        "event_summary_en": "Perplexity has launched the Monitor API, allowing developers to define monitoring goals via natural language for periodic scanning of specific web pages or global information. The service integrates a decision model to filter out noise, pushing verified updates via webhooks only when findings meet predefined criteria for relevance, credibility, and novelty.",
         "core_facts_zh": [
-          "【核心事件】人工智能评估组织METR在AI安全性评估与行业研究领域：揭示AI自主研发能力以3.6个月翻倍的惊人速度增长，并指出当前安全测评工具严重滞后",
-          "【起因与机理】模型在科研任务中的迭代速度已超越现有治理框架的监测与反应能力",
-          "【关键数据与实测】模型执行复杂科研任务的成功率正以每3.6个月翻倍的速度增长。",
-          "【各方立场与态度】预计2027年7月模型将具备处理200小时长周期研发任务的能力。"
+          "【核心事件】困惑人工智能在企业开发者生态平台：发布Monitor API，支持全网查询监控与特定页面变更监测",
+          "【起因与机理】解决工程团队自行维护重复搜索代码及处理噪声信息的工程负担",
+          "【关键技术规格】企业级API通过自然语言定义任务，替代传统重复性爬虫代码。",
+          "【各方立场与态度】支持全网监控与特定URL变更比对，直接对标Firecrawl等存量市场玩家。"
         ],
         "core_facts_en": [
-          "[Core Event] AI evaluation organization METR: The discovery that AI research capabilities are doubling every 3.6 months, rendering current safety benchmarks inadequate",
-          "[Root Cause & Mechanism] Rapid model iteration in research tasks is outpacing existing governance and human monitoring capacity",
-          "[Key Metrics] Projections estimate a 50% success rate on 200-hour complex tasks by July 2027.",
-          "[Key Position & Outlook] Current test environments diverge from real-world usage, leading to overestimated safety profiles."
+          "[Core Event] Perplexity AI (Enterprise developer ecosystem): Launch of Monitor API for web search and page change monitoring",
+          "[Root Cause & Mechanism] To alleviate the engineering overhead of building custom recurring search pipelines and noise reduction logic",
+          "[Key Metrics] Web monitors cost $1 per 1,000 successful runs, and page monitors cost $1 per 1,000 fetched URLs.",
+          "[Scope & Next Steps] Features include global search monitoring and targeted URL diffing to compete with incumbents like Firecrawl."
         ],
-        "industry_impact_zh": "评估基准的失效反映了AI从单一工具向自主研发主体进化的质变，传统的静态评测已无法覆盖模型在长流程任务中的逻辑推理风险。产业界需从单一性能测试转向针对模型行为逻辑的“环境压力测试”，防范AI在缺乏有效监督的闭环科研中诱发不可控的灾难性反馈。",
-        "industry_impact_en": "The failure of current benchmarks highlights a qualitative shift from AI as a tool to an autonomous research agent, where static evaluations cannot capture long-horizon reasoning risks. The industry must pivot from performance-centric benchmarks to behavioral 'stress testing' to mitigate the risks of unmonitored catastrophic outcomes in autonomous AI research loops."
+        "industry_impact_zh": "Perplexity通过将底层搜索聚合能力封装为实时智能代理（Agentic）接口，试图从单纯的问答工具转型为企业的自动化情报基建。此举不仅对传统抓取服务供应商形成降维打击，更通过引入决策模型过滤层，进一步确立了其在AI应用链条中作为智能中枢的技术壁垒。",
+        "industry_impact_en": "By encapsulating search aggregation into agentic APIs, Perplexity is pivoting from a consumer Q&A tool to a critical automation infrastructure. This move disrupts traditional scraping services and establishes a competitive moat by positioning itself as the intelligent middleware within the AI agentic workflow."
       },
       "headlines": [
         {
-          "id": "b5934cc79e03c1c9",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "METR预警：AI自主研发能力增长或将突破安全边界",
-          "title_en": "AI is getting better faster than experts can reliably test whether new systems are safe, METR warns",
+          "id": "3a6733e6a6e3100b",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "Perplexity推出Monitor API支持自动化实时监控",
+          "title_en": "Perplexity's new Monitor API turns web search from a one-off query into a nonstop watchdog",
           "source": "THE DECODER",
-          "published_at": "2026-11-22T13:00:43+00:00",
-          "url": "https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/",
-          "event_summary_zh": "AI测评机构METR发布报告指出，AI模型在复杂研发任务上的执行力正以每3.6个月翻倍的速度激增，现有评估框架已难以准确预测其灾难性风险",
-          "event_summary_en": "AI research evaluation firm METR reports that large models are closing the gap with human experts in coding and computational tasks, with the complexity of autonomous tasks they can handle doubling every 3.6 months. METR warns that current evaluation environments consistently overestimate model performance for real-world scenarios, and if this trajectory continues, models are projected to reach a 50% success rate on 200-hour complex tasks by July 2027, potentially exceeding human capacity to monitor catastrophic risks.",
+          "published_at": "2026-11-22T14:20:28+00:00",
+          "url": "https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/",
+          "event_summary_zh": "Perplexity发布Monitor API，通过自定义自然语言目标实现对全网及特定页面的自动化监控与智能筛选更新",
+          "event_summary_en": "Perplexity has launched the Monitor API, allowing developers to define monitoring goals via natural language for periodic scanning of specific web pages or global information. The service integrates a decision model to filter out noise, pushing verified updates via webhooks only when findings meet predefined criteria for relevance, credibility, and novelty.",
           "core_facts_zh": [
-            "【核心事件】人工智能评估组织METR在AI安全性评估与行业研究领域：揭示AI自主研发能力以3.6个月翻倍的惊人速度增长，并指出当前安全测评工具严重滞后",
-            "【起因与机理】模型在科研任务中的迭代速度已超越现有治理框架的监测与反应能力",
-            "【关键数据与实测】模型执行复杂科研任务的成功率正以每3.6个月翻倍的速度增长。",
-            "【各方立场与态度】预计2027年7月模型将具备处理200小时长周期研发任务的能力。"
+            "【核心事件】困惑人工智能在企业开发者生态平台：发布Monitor API，支持全网查询监控与特定页面变更监测",
+            "【起因与机理】解决工程团队自行维护重复搜索代码及处理噪声信息的工程负担",
+            "【关键技术规格】企业级API通过自然语言定义任务，替代传统重复性爬虫代码。",
+            "【各方立场与态度】支持全网监控与特定URL变更比对，直接对标Firecrawl等存量市场玩家。"
           ],
           "core_facts_en": [
-            "[Core Event] AI evaluation organization METR: The discovery that AI research capabilities are doubling every 3.6 months, rendering current safety benchmarks inadequate",
-            "[Root Cause & Mechanism] Rapid model iteration in research tasks is outpacing existing governance and human monitoring capacity",
-            "[Key Metrics] Projections estimate a 50% success rate on 200-hour complex tasks by July 2027.",
-            "[Key Position & Outlook] Current test environments diverge from real-world usage, leading to overestimated safety profiles."
+            "[Core Event] Perplexity AI (Enterprise developer ecosystem): Launch of Monitor API for web search and page change monitoring",
+            "[Root Cause & Mechanism] To alleviate the engineering overhead of building custom recurring search pipelines and noise reduction logic",
+            "[Key Metrics] Web monitors cost $1 per 1,000 successful runs, and page monitors cost $1 per 1,000 fetched URLs.",
+            "[Scope & Next Steps] Features include global search monitoring and targeted URL diffing to compete with incumbents like Firecrawl."
           ],
-          "industry_impact_zh": "评估基准的失效反映了AI从单一工具向自主研发主体进化的质变，传统的静态评测已无法覆盖模型在长流程任务中的逻辑推理风险。产业界需从单一性能测试转向针对模型行为逻辑的“环境压力测试”，防范AI在缺乏有效监督的闭环科研中诱发不可控的灾难性反馈。",
-          "industry_impact_en": "The failure of current benchmarks highlights a qualitative shift from AI as a tool to an autonomous research agent, where static evaluations cannot capture long-horizon reasoning risks. The industry must pivot from performance-centric benchmarks to behavioral 'stress testing' to mitigate the risks of unmonitored catastrophic outcomes in autonomous AI research loops."
+          "industry_impact_zh": "Perplexity通过将底层搜索聚合能力封装为实时智能代理（Agentic）接口，试图从单纯的问答工具转型为企业的自动化情报基建。此举不仅对传统抓取服务供应商形成降维打击，更通过引入决策模型过滤层，进一步确立了其在AI应用链条中作为智能中枢的技术壁垒。",
+          "industry_impact_en": "By encapsulating search aggregation into agentic APIs, Perplexity is pivoting from a consumer Q&A tool to a critical automation infrastructure. This move disrupts traditional scraping services and establishes a competitive moat by positioning itself as the intelligent middleware within the AI agentic workflow."
         },
         {
           "id": "7395d437c81cfa91",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 14:18:55 UTC",
+      "updated_at": "2026-11-22 14:35:25 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -194,34 +194,6 @@
           "url": "https://x.com/AravSrinivas/status/2124254600723394644"
         },
         {
-          "id": "51567a88cc9a0c55",
-          "name": "Swyx (Shawn Wang)",
-          "handle": "@swyx",
-          "role_zh": "AI Engineer Foundation / Latent Space 主理人",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/swyx",
-          "topic_zh": "Swyx (Shawn Wang",
-          "topic_en": "Swyx (Shawn Wang) on",
-          "event_context_zh": "对于这些提供者偷偷打电话回家的原因，是否有任何可能的良性解释？因为天哪",
-          "event_context_en": "is there any possible benign explanation why these providers were secretly phoning home? because wtf",
-          "quote_zh": "对于这些提供者偷偷打电话回家的原因，是否有任何可能的良性解释？因为天哪",
-          "quote_en": "is there any possible benign explanation why these providers were secretly phoning home? because wtf",
-          "thesis_zh": "深入探讨Swyx (Shawn Wang的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Swyx (Shawn Wang) on, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "3.5k",
-            "likes": "32",
-            "comments": "32",
-            "retweets": "2",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-21T14:26:26+00:00",
-          "url": "https://x.com/swyx/status/2124147427313861009"
-        },
-        {
           "id": "809c8f086f98bc1f",
           "name": "Elon Musk",
           "handle": "@elonmusk",
@@ -250,38 +222,66 @@
           "url": "https://x.com/elonmusk/status/2124469602700956103"
         },
         {
-          "id": "bf7f844c0316adae",
-          "name": "𝙋𝙐𝙇⭕𝙆 🍌",
-          "handle": "@Cpulok",
-          "role_zh": "Exploring | Connecting | Growing | Fan of Bones by Jarritos",
-          "role_en": "Exploring | Connecting | Growing | Fan of Bones by Jarritos",
-          "avatar": "https://pbs.twimg.com/profile_images/2066166748395745281/ObI9dPC4_normal.jpg",
+          "id": "b0a9bfaa818c5e9c",
+          "name": "𝙰𝚜𝚒F",
+          "handle": "@FixAsif",
+          "role_zh": "ᴡᴇʙ3 ᴍᴀʀᴋᴇᴛɪɴɢ || ɴғᴛ ᴄᴏʟʟᴀʙs || ᴄᴏɴᴛᴇɴᴛ ᴄʀᴇᴀᴛᴏʀ || ᴅᴍ ғᴏʀ ᴄᴏʟʟᴀʙs & ᴘᴀʀᴛɴᴇʀsʜɪᴘs",
+          "role_en": "ᴡᴇʙ3 ᴍᴀʀᴋᴇᴛɪɴɢ || ɴғᴛ ᴄᴏʟʟᴀʙs || ᴄᴏɴᴛᴇɴᴛ ᴄʀᴇᴀᴛᴏʀ || ᴅᴍ ғᴏʀ ᴄᴏʟʟᴀʙs & ᴘᴀʀᴛɴᴇʀsʜɪᴘs",
+          "avatar": "https://pbs.twimg.com/profile_images/2034641435853795328/h3LEbDPD_normal.jpg",
           "topic_zh": "智能体架构与协同",
           "topic_en": "Agentic Workflows",
-          "event_context_zh": "您可以设置每个订单可以交易的最大规模的市场，并且这些规则位于帐户中。\n\n然后，每个订单在达到超流动性之前都会受到检查。\n\n因此，如果限额为 100 美元，代理不能突然决定 101 美元就可以了，哈哈。\n\n对我来说有趣的是，代理仍然有空间做出自己的决定。\n\n它可以选择策略并执行交易，但账户规则不受其控制。\n\n不过我可能添加了一件事。\n\n每个订单的上限并不能真正告诉您一整天可能会发生多少损坏。\n\n我确实也想要每日损失限制，特别是如果该策略在我不观看时继续运行。\n\n因为给予代理人交易许可是一回事。\n\n确切地决定该许可的范围是另一回事。\n\n如果您在 @FensoryApp 上设置代理，您会更关心最大订单大小还是每日损失限制？",
-          "event_context_en": "Ever notice how an ai agent can follow your instructions a little too literally.\n\nhttps://t.co/nzjQQj85UT\n\nThat is why i",
-          "quote_zh": "有没有注意到人工智能代理是如何过于字面地遵循你的指令的。\n\n这就是为什么我一直在研究 @FensoryApp 如何处理在我看来真正重要的部分。\n\n这些限制不仅仅是您在聊天中告诉客服人员的事情。\n\n您可以设置每个订单可以交易的最大规模的市场，并且这些规则位于帐户中。\n\n然后，每个订单在达到超流动性之前都会受到检查。\n\n因此，如果限额为 100 美元，代理不能突然决定 101 美元就可以了，哈哈。\n\n对我来说有趣的是，代理仍然有空间做出自己的决定。\n\n它可以选择策略并执行交易，但账户规则不受其控制。\n\n不过我可能添加了一件事。\n\n每个订单的上限并不能真正告诉您一整天可能会发生多少损坏。\n\n我确实也想要每日损失限制，特别是如果该策略在我不观看时继续运行。\n\n因为给予代理人交易许可是一回事。\n\n确切地决定该许可的范围是另一回事。\n\n如果您在 @FensoryApp 上设置代理，您会更关心最大订单大小还是每日损失限制？",
-          "quote_en": "Ever notice how an ai agent can follow your instructions a little too literally.\n\nhttps://t.co/nzjQQj85UT\n\nThat is why i have been looking at how @FensoryApp handles the part that actually matters imo.\n\nThe limits are not just something you tell the agent in chat.\n\nYou set the markets it can trade the max size for each order and those rules sit on the account.\n\nThen every order gets checked before it reaches hyperliquid.\n\nSo if the limit is $100 the agent can not suddenly decide $101 is fine lol.\n\nThe interesting part for me is that the agent still gets room to make its own decisions.\n\nIt can choose the strategy and execute trades but the account rules stay outside its control.\n\nOne thing i did probably add though.\n\nA per order cap does not really tell you how much damage can happen across a whole day.\n\nI did want a daily loss limit too especially if the strategy keeps running while i am not watching.\n\nBecause giving an agent permission to trade is one thing.\n\nDeciding exactly how far that permission goes is another.\n\nIf you were setting up an agent on @FensoryApp would you care more about a max order size or a daily loss limit?",
+          "event_context_zh": "ium 上，提前移动该工作成为一个重要的架构决策。\n\nHypesium 描述了一种准备优先的执行模型：\n\n➜ 交易路径是提前构建的。\n➜ Calldata 在池事件之前准备好。\n➜ 气体信息被刷新。\n➜ 维持钱包随机数状态。\n➜ 池创建日志触发提交过程。\n\n记录的热路径目标为 5 毫秒以下，并使用四个通信通道同时提交。\n\n我发现有趣的是块时序和软件架构之间的关系。 100 毫秒的区块间隔不仅仅奖励更快的计算机。它还奖励那些最大限度地减少最后时刻剩余工作量的系统。\n\n交易提交、区块包含和最终确认之间仍然存在区别。这些绝不应该被视为相同的性能测量。\n\n@Hypesium 的架构提供了一个有趣的案例研究，将计算从时间敏感的执行窗口中移开。\n\n真正的工程问题不仅仅是系统的反应速度有多快，而是在做出反应之前它完成了多少准备工作。",
+          "event_context_en": "The first block tells a bigger story about @Hypesium than a simple speed benchmark.\n\nElysium operates with 100ms block i",
+          "quote_zh": "第一个块讲述了关于 @Hypesium 的更大故事，而不是简单的速度基准。\n\nElysium 以 100 毫秒的区块间隔运行，没有公共内存池。这改变了应用程序处理事务准备的方式。在传统的工作流程中，机会出现后可能会发生多个操作。在 Elysium 上，提前移动该工作成为一个重要的架构决策。\n\nHypesium 描述了一种准备优先的执行模型：\n\n➜ 交易路径是提前构建的。\n➜ Calldata 在池事件之前准备好。\n➜ 气体信息被刷新。\n➜ 维持钱包随机数状态。\n➜ 池创建日志触发提交过程。\n\n记录的热路径目标为 5 毫秒以下，并使用四个通信通道同时提交。\n\n我发现有趣的是块时序和软件架构之间的关系。 100 毫秒的区块间隔不仅仅奖励更快的计算机。它还奖励那些最大限度地减少最后时刻剩余工作量的系统。\n\n交易提交、区块包含和最终确认之间仍然存在区别。这些绝不应该被视为相同的性能测量。\n\n@Hypesium 的架构提供了一个有趣的案例研究，将计算从时间敏感的执行窗口中移开。\n\n真正的工程问题不仅仅是系统的反应速度有多快，而是在做出反应之前它完成了多少准备工作。",
+          "quote_en": "The first block tells a bigger story about @Hypesium than a simple speed benchmark.\n\nElysium operates with 100ms block intervals and no public mempool. That changes the way applications need to approach transaction preparation. In a conventional workflow, several operations may happen after an opportunity appears. On Elysium, moving that work earlier becomes an important architectural decision.\n\nHypesium describes a preparation-first execution model:\n\n➜ The transaction route is constructed in advance.\n➜ Calldata is prepared before the pool event.\n➜ Gas information is refreshed.\n➜ Wallet nonce state is maintained.\n➜ The pool creation log triggers the submission process.\n\nThe documented hot path targets under 5ms, with four communication lanes used for simultaneous submission.\n\nWhat I find interesting is the relationship between block timing and software architecture. A 100ms block interval doesn't simply reward faster computers. It also rewards systems that minimize the amount of work left for the final moment.\n\nThere is still a distinction between transaction submission, block inclusion and final confirmation. These should never be treated as identical performance measurements.\n\n@Hypesium's architecture offers an interesting case study in moving computation away from a time-sensitive execution window.\n\nThe real engineering question is not just how quickly a system reacts, but how much preparation it completes before there is anything to react to.",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "455",
-            "likes": "54",
-            "comments": "53",
-            "retweets": "12",
+            "views": "272",
+            "likes": "94",
+            "comments": "103",
+            "retweets": "11",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-22T03:38:29+00:00",
-          "url": "https://x.com/Cpulok/status/2124346755324301419"
+          "published_at": "2026-11-22T08:49:47+00:00",
+          "url": "https://x.com/FixAsif/status/2124425094504366491"
+        },
+        {
+          "id": "e25488204515fecb",
+          "name": "Kumail Sikandar",
+          "handle": "@Aiwithkumail",
+          "role_zh": "Ai & tech| Sharing tools, gadgets & trends | @GlobalGPT Creator Partner | ✉️ kumailsikandar47@gmail.com",
+          "role_en": "Ai & tech| Sharing tools, gadgets & trends | @GlobalGPT Creator Partner | ✉️ kumailsikandar47@gmail.com",
+          "avatar": "https://pbs.twimg.com/profile_images/1950618844331937792/x10hjqQi_normal.jpg",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "划先于代码。\n\n失败的测试先于修复。\n\n每个更改都会由尚未了解其编写方式的上下文进行审查。\n\n→ 规划：你给它一个句子并在一行出现之前批准该计划\n→ 审阅：每种语言都有不同的审阅者，从头开始读取您的差异\n→ 构建修复：每个工具链都有一个修复程序，包括 PyTorch 和 CUDA\n→ 安全性：代理配置中的完整 OWASP 扫描和注入扫描\n→ 架构：在迁移之前检测设计错误，当它们仍然便宜时\n→ 领域：数据库、ML 管道、E2E 测试和文档\n\n安全部分几乎没有人设置。\n\n外部 OWASP 审核的费用为四位数和一周。这个在你吃之前已经准备好了。\n\n这些技能涵盖测试、Python、Go、Rust、Django、Next.js、Docker 和 CI/CD。\n\n也就是说，不要一次激活所有 286 个，否则您最终会得到一个比您原来的配置更糟糕的配置。\n\n这是它很好地集成的方式：\n\n→ 在复制任何内容之前创建一个 fork 并阅读 README\n→ 仅从规划代理和您的主要语言的规则包开始\n→ 仅将本周要使用的代理和技能复制到您的 .claude 文件夹\n→ 随后添加代码审查人员和安全人员，因为它们产出最多\n→ 首先在一个小型仓库上进行测试，而不是在生产环境中进行测试\n→ 如果有多余的东西，就把它剪掉。如果您遗漏了什么，请再添加一件\n\n规则很简单：如果您不知道代理的用途，那么您还不需要它。\n\n谁在这个周末整合得好，谁就会在下个季度回顾工作而不是编写工作。\n\n保存这篇文章，你会感谢我的🔖",
+          "event_context_en": "THE WINNER OF ANTHROPIC'S OFFICIAL HACKATHON HAS PUBLISHED HIS CLAUDE CODE SETUP AND IT'S PURE GOLD\n\n68 subagents, 286 s",
+          "quote_zh": "ANTHROPIC 官方黑客马拉松的获胜者已经发布了他的 Claude Code 设置，并且它是纯金的\n\n68 个子代理、286 种技能、94 条命令、MIT 许可证。\n\nECC 将 Claude Code 打造为一支完整的工程团队。\n\n计划先于代码。\n\n失败的测试先于修复。\n\n每个更改都会由尚未了解其编写方式的上下文进行审查。\n\n→ 规划：你给它一个句子并在一行出现之前批准该计划\n→ 审阅：每种语言都有不同的审阅者，从头开始读取您的差异\n→ 构建修复：每个工具链都有一个修复程序，包括 PyTorch 和 CUDA\n→ 安全性：代理配置中的完整 OWASP 扫描和注入扫描\n→ 架构：在迁移之前检测设计错误，当它们仍然便宜时\n→ 领域：数据库、ML 管道、E2E 测试和文档\n\n安全部分几乎没有人设置。\n\n外部 OWASP 审核的费用为四位数和一周。这个在你吃之前已经准备好了。\n\n这些技能涵盖测试、Python、Go、Rust、Django、Next.js、Docker 和 CI/CD。\n\n也就是说，不要一次激活所有 286 个，否则您最终会得到一个比您原来的配置更糟糕的配置。\n\n这是它很好地集成的方式：\n\n→ 在复制任何内容之前创建一个 fork 并阅读 README\n→ 仅从规划代理和您的主要语言的规则包开始\n→ 仅将本周要使用的代理和技能复制到您的 .claude 文件夹\n→ 随后添加代码审查人员和安全人员，因为它们产出最多\n→ 首先在一个小型仓库上进行测试，而不是在生产环境中进行测试\n→ 如果有多余的东西，就把它剪掉。如果您遗漏了什么，请再添加一件\n\n规则很简单：如果您不知道代理的用途，那么您还不需要它。\n\n谁在这个周末整合得好，谁就会在下个季度回顾工作而不是编写工作。\n\n保存这篇文章，你会感谢我的🔖",
+          "quote_en": "THE WINNER OF ANTHROPIC'S OFFICIAL HACKATHON HAS PUBLISHED HIS CLAUDE CODE SETUP AND IT'S PURE GOLD\n\n68 subagents, 286 skills, 94 commands, MIT license.\n\nECC turns Claude Code into a full engineering team.\n\nThe plan comes before the code.\n\nThe failing test comes before the fix.\n\nEvery change is reviewed by a context that hasn't seen how it was written.\n\n→ Planning: you give it a sentence and approve the plan before a single line exists  \n→ Review: a different reviewer per language that reads your diff from scratch  \n→ Build fixes: a fixer per toolchain, including PyTorch and CUDA  \n→ Security: full OWASP sweep and injection scanning in the agent config  \n→ Architecture: detects design errors when they're still cheap, before migration  \n→ Domain: databases, ML pipelines, E2E tests, and documentation\n\nThe security part is what almost nobody sets up.\n\nAn external OWASP audit costs four figures and a week. This one is ready before you eat.\n\nThe skills cover testing, Python, Go, Rust, Django, Next.js, Docker, and CI/CD.\n\nThat said, don't activate all 286 at once or you'll end up with a config worse than the one you had.\n\nThis is how it integrates well:\n\n→ Make a fork and read the README before copying anything  \n→ Start only with the planning agent and the rules pack for your main language  \n→ Copy to your .claude folder only the agents and skills you're going to use this week  \n→ Add the code reviewer and the security one afterward, as they yield the most  \n→ Test it first on a small repo, not in production  \n→ If something's extra, cut it. If you miss something, add just one more piece\n\nThe rule is simple: if you don't know what an agent is for, you don't need it yet.\n\nWhoever integrates it well this weekend will spend the next quarter reviewing work instead of writing it.\n\nSave this post, you'll thank me 🔖",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "1.4k",
+            "likes": "46",
+            "comments": "12",
+            "retweets": "36",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-22T06:48:11+00:00",
+          "url": "https://x.com/Aiwithkumail/status/2124394494028022042"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 14:18:55 UTC",
+      "updated_at": "2026-11-22 14:35:25 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
