@@ -1,56 +1,156 @@
 {
-  "updated_at": "2026-11-22T12:05:10.970326+00:00",
+  "updated_at": "2026-11-22T16:17:45.712511+00:00",
   "topics": [
     {
-      "topic_id": "topic_navier_stokes_ai_proof_controversy",
+      "topic_id": "topic_tesla_fsd_v15_ai_rendering",
       "heat_score": 9.8,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "数学界权威重构",
-      "category_tag_en": "Math Proof Authority",
-      "title_zh": "Anthropic与NYU修复纳维-斯托克斯方程解法漏洞",
-      "title_en": "Anthropic and NYU Patch Navier-Stokes Proof Vulnerabilities",
-      "summary_zh": "针对OpenAI此前关于纳维-斯托克斯方程的研究，NYU教授Buckmaster与Anthropic研究员Alpöge发布了AI辅助证明的修正方案。此事件核心争议在于AI在处理底层流体力学数学逻辑时，是否存在自我修正的幻觉，以及AI辅助证明在严苛数学界的可信度阈值。",
-      "summary_en": "NYU professor Buckmaster and Anthropic's Alpöge released an AI-assisted proof to patch previous logical loopholes in OpenAI’s Navier-Stokes research. The core controversy centers on whether AI exhibits 'proof-hallucinations' in complex fluid dynamics and the credibility threshold of AI-generated proofs within the rigorous mathematical community.",
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "端到端自动驾驶",
+      "category_tag_en": "End-to-End Autonomous Driving",
+      "title_zh": "特斯拉推送FSD V15：抛弃游戏引擎，引入实时AI视频渲染",
+      "title_en": "Tesla Rolls Out FSD V15: Ditching Game Engines for Real-Time AI Video Generation",
+      "summary_zh": "特斯拉最新发布的FSD V15系统标志着自动驾驶可视化技术的重大范式转移。马斯克确认该系统不再依赖传统游戏引擎渲染，而是通过实时AI生成技术实现写实级的周边环境映射，这一极高计算负荷的方案正挑战车载SoC处理能力的极限。",
+      "summary_en": "Tesla's release of FSD V15 marks a paradigm shift in autonomous visualization. Elon Musk confirmed the abandonment of traditional game engines in favor of real-time AI video generation for photorealistic environment rendering. This compute-intensive approach directly stresses current SoC limits, signaling a move toward pure-AI environment synthesis.",
       "perspective_pro": {
-        "role_zh": "🟢 研发范式演进派",
-        "role_en": "🟢 AI-Native Research Advocates",
-        "speaker_zh": "Anthropic AI 研究组",
-        "speaker_en": "Anthropic Research Team",
-        "point_zh": "AI不仅是验证工具，更能发现人类数学家易忽略的逻辑断点，其在处理长链逻辑推理上的准确性将开启数学证明自动化时代。",
-        "point_en": "AI serves as a force multiplier that identifies logic gaps humans overlook, heralding a new era of automated mathematical verification."
+        "role_zh": "🟢 演进派 / 特斯拉支持者",
+        "role_en": "🟢 The Evolutionist / Tesla Supporters",
+        "speaker_zh": "特斯拉工程团队",
+        "speaker_en": "Tesla Engineering Team",
+        "point_zh": "实时生成的环境模型消除了引擎转换的延迟与数据损失，能更精准地与神经网络的决策链路对接，为实现完全自动驾驶提供底层支撑。",
+        "point_en": "Real-time generation eliminates engine latency and data loss, allowing for seamless integration with neural network decision pipelines, essential for achieving true autonomy."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业理性派",
-        "role_en": "🔴 Mathematical Traditionalists",
-        "speaker_zh": "纯粹数学家群体",
-        "speaker_en": "Pure Mathematicians",
-        "point_zh": "AI辅助证明缺乏可解释性，修复逻辑漏洞的过程更像是在参数空间中对齐结果，而非真正理解数学本质，存在伪证明风险。",
-        "point_en": "AI proofs lack explainability; patching loopholes through AI feels like black-box parameter alignment rather than deep mathematical comprehension, risking pseudo-proofs."
+        "role_zh": "🔴 工业理性派 / 安全质疑者",
+        "role_en": "🔴 Industrial Pragmatist / Safety Skeptic",
+        "speaker_zh": "车载系统安全分析师",
+        "speaker_en": "Automotive System Safety Analysts",
+        "point_zh": "将核心显示路径从确定性代码转向生成式AI，引入了无法预知的“幻觉”风险。在高速驾驶决策中，显示内容的精确度若被生成式AI模糊化，极易诱发致命误判。",
+        "point_en": "Moving critical display pipelines from deterministic code to generative AI introduces unpredictable 'hallucination' risks. If generative AI blurs precision in high-speed scenarios, it creates lethal misjudgments."
       },
       "linked_news": [
         {
-          "id": "6743a18f11a2d56c",
-          "title_zh": "纳维-斯托克斯方程解法争议升级",
-          "title_en": "NYU's Tristan Buckmaster and Anthropic's Levent Alpöge publish an AI-aided proof of Navier-Stokes blowup, saying it closes a loophole in OpenAI's solution (Peter Hall/Scientific American)",
-          "source": "Scientific American",
-          "url": "https://www.scientificamerican.com/article/ai-just-solved-the-real-navier-stokes-problem/",
-          "image_url": "https://static.scientificamerican.com/dam/asset/db38600e-6f8e-47d4-b6e4-0f8cecf97259/New-navier-stokes-fluid-dynamics.jpg?m=1795195169.637&w=1200",
+          "id": "5870c79890243395",
+          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
+          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
+          "source": "Gizmodo",
+          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
+          "image_url": null,
           "hot_score": 5,
-          "published_at": "2026-11-21T06:30:00+00:00"
-        },
-        {
-          "id": "096807d64b70da17",
-          "title_zh": "黎曼猜想证明引发AI与人类数学家角力",
-          "title_en": "Hours after Anthropic claims a Claude proof of the Riemann hypothesis, Stanford releases an all-human competing draft",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_869f02056fb0beb1.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-21T11:19:49+00:00"
+          "published_at": "2026-11-22T06:40:16+00:00"
         }
       ],
       "linked_tweets": [
+        {
+          "id": "809c8f086f98bc1f",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
+          "content_zh": "@schrep 我们设计了自己的超精确雷达系统，它存在于一些 X 和 X 设备上，但已关闭。超人的视力只会粉碎它。",
+          "content_en": "@schrep We designed our own super precise radar system and it’s there on some X and X units, but turned off. Superhuman vision just crushes it.",
+          "url": "https://x.com/elonmusk/status/2124469602700956103",
+          "platform": "x"
+        },
+        {
+          "id": "bf4a07bbb3c2d15a",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
+          "content_zh": "@BLKMDL3 @wholemars 如果有人好奇：\n\n自去年以来，我们已经有了一个像素完美的世界模型，这对于合成数据的生成至关重要。\n\n汽车中的（小得多）版本是条件平均流模型，基于 Tesla 通用视觉编码器功能的最新序列，这些功能与插入到产生驾驶动作的 3B 编码器模型中的功能相同。\n\n我们从这些 UVE 功能中分叉出来，然后运行一个单独的 ~1B 扩散模型。这会吸收先前生成的添加了噪声的现实视图，然后将其降噪到当前的可视化中。\n\n然后它会生成一个小视频块（8 个图像，36 fps，UI 屏幕的分辨率）。这项工作由 TRIP 引擎在 18 Hz 的每个 UVE 帧上完成，并分布在 4 个周期内。\n\n目前，由于计算限制，延迟有点高，但我们有办法沿着扩散转换器层交错更新的 UVE 功能，以减少大约 35% 的延迟。",
+          "content_en": "@BLKMDL3 @wholemars In case anyone is curious:\n\nWe’ve had a ~pixel-perfect world model since last year, which is critical for synthetic data generation. \n\nThe (much) smaller version of that in the car is a conditional mean-flow model, based on the recent sequence of Tesla Universal Vision Encoder features, which are the same ones that are plugged into the 3B encoder model that produces the driving actions. \n\nWe fork off from these UVE features, then run a separate ~1B diffusion model. This takes in the previous reality-view generation with added noise and then denoises it to the current visualization. \n\nIt then produces a small video chunk (8 images at 36 fps, at the resolution of the UI screen). This work is done by 1/2 of a TRIP engine every UVE frame at 18 hz and is spread over 4 cycles. \n\nCurrently, the latency is a bit high due to compute constraints, but we have ways to interleave newer UVE features along the diffusion transformer layers to cut roughly 35% of the latency.",
+          "url": "https://x.com/elonmusk/status/2124458557525397780",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
+      },
+      "linked_counts": {
+        "news": 1,
+        "tweets": 2,
+        "has_tool": true
+      },
+      "id": "topic_tesla_fsd_v15_ai_rendering",
+      "stance_matrix": {
+        "pro_point_zh": "实时生成的环境模型消除了引擎转换的延迟与数据损失，能更精准地与神经网络的决策链路对接，为实现完全自动驾驶提供底层支撑。",
+        "pro_author": "特斯拉工程团队",
+        "con_point_zh": "将核心显示路径从确定性代码转向生成式AI，引入了无法预知的“幻觉”风险。在高速驾驶决策中，显示内容的精确度若被生成式AI模糊化，极易诱发致命误判。",
+        "con_author": "车载系统安全分析师",
+        "action_advice_zh": "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。",
+        "pro_point_en": "Real-time generation eliminates engine latency and data loss, allowing for seamless integration with neural network decision pipelines, essential for achieving true autonomy.",
+        "con_point_en": "Moving critical display pipelines from deterministic code to generative AI introduces unpredictable 'hallucination' risks. If generative AI blurs precision in high-speed scenarios, it creates lethal misjudgments.",
+        "action_advice_en": "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
+      }
+    },
+    {
+      "topic_id": "topic_ai_coding_agent_failure_rate",
+      "heat_score": 9.6,
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "智能体实测崩盘",
+      "category_tag_en": "Agent Capability Gap",
+      "title_zh": "AI编程智能体虚火：模拟办公环境任务成功率不足10%",
+      "title_en": "AI Coding Agents Fail: Under 10% Success Rate in Simulated Workplace Environments",
+      "summary_zh": "针对SWE-bench等基准测试的最新研究显示，AI编程智能体虽然在隔离测试中表现亮眼，但在复杂协作、多方反馈的真实工作流模拟中，任务成功率断崖式下跌至10%以下。这揭示了当前模型在复杂上下文维护与业务逻辑对齐上的核心缺失。",
+      "summary_en": "New research reveals that while AI coding agents excel in isolated benchmarks like SWE-bench, their success rate in simulated workplace environments drops below 10%. This exposes a critical gap in model capabilities regarding multi-agent coordination, persistent context maintenance, and alignment with complex business workflows.",
+      "perspective_pro": {
+        "role_zh": "🟢 研发支持者 / 智能体派",
+        "role_en": "🟢 Research Proponent / Agent Enthusiast",
+        "speaker_zh": "大模型辅助编程开发者",
+        "speaker_en": "AI-assisted Software Engineers",
+        "point_zh": "当前的失败率是系统整合期的阵痛。一旦Agent工作流与企业级CI/CD流程深度闭环，其生产力跃升将是量级上的改变，不应以孤立失败否认路径方向。",
+        "point_en": "High failure rates are growing pains. Once agent workflows achieve deep integration with enterprise CI/CD pipelines, the jump in productivity will be orders of magnitude, making it unwise to reject the path based on isolated failures."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 工业理性派 / 质疑者",
+        "role_en": "🔴 Industrial Pragmatist / Critic",
+        "speaker_zh": "软件架构师与安全专家",
+        "speaker_en": "Software Architects & Security Experts",
+        "point_zh": "“Vibe-coding”造就了一批只会写简单功能的半吊子，缺乏对大型项目完整性的理解。模型目前仅是在代码片段上做概率拟合，而非真正的软件工程治理。",
+        "point_en": "'Vibe-coding' creates a generation of 'starters' lacking deeper project integrity. Current models perform probabilistic fitting on code snippets rather than actual software engineering governance."
+      },
+      "linked_news": [
+        {
+          "id": "e3a7ac59fcc5ace0",
+          "title_zh": "AI编程智能体实测：模拟环境任务完成率不足一成",
+          "title_en": "AI coding agents ace isolated tests but complete fewer than one in ten tasks in a simulated workplace",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/ai-coding-agents-ace-isolated-tests-but-complete-fewer-than-one-in-ten-tasks-in-a-simulated-workplace/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_53f6ef00db8447c6.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-22T15:15:48+00:00"
+        },
+        {
+          "id": "7395d437c81cfa91",
+          "title_zh": "大模型“意念编程”开启消费电子硬件破解潮",
+          "title_en": "The vibe-coding revolution is coming to all the gadgets",
+          "source": "The Verge AI",
+          "url": "https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera",
+          "image_url": "https://ainewsradar.xyz/images/verge_564b8081b7bd0008.jpg",
+          "hot_score": 3,
+          "published_at": "2026-11-22T13:00:00+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "2c9743f75496ac5f",
+          "author": "CyrilXBT",
+          "author_handle": "@cyrilXBT",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2035229727414534145/aWap3Jbq_normal.jpg",
+          "content_zh": "VIBE 编码并没有创造一代建造者。它创造了一代先发者。\n\n麻省理工学院刚刚发表了关于人工智能编码的最令人不安的论文。\n\n在编码代理出现后，他们跟踪了 App Store、Play Store 和 Chrome Web Store 上的每一个新应用程序。\n\n使用自主代理的开发人员编写的代码增加了 25.5 倍。\n\n承诺增长 240%。\n\n实际发布？\n\n上涨 30%。\n\n情况变得更糟。\n\n采用 Claude Code 等工具后，开发人员编写的行数增加了 7 倍，删除的行数增加了 12.2 倍。\n\n30 天内放弃的回购协议从 60% 上升到 69%。\n\n自 2025 年初以来，新应用的发布量大约增加了一倍。\n\n用户参与度没有变化。\n\n应用程序数量是原来的两倍。\n\n使用它们的人数相同。\n\n这一点我个人是有感觉的。\n\n上个月我用 Claude Code 交付了三个“项目”。\n\n几乎可以肯定，零个人使用过其中任何一个。\n\n这是我的看法。\n\n人工智能并没有让人们成为更好的建设者。\n\n它让开始变得如此廉价，以至于结束变得毫无意义。\n\n编写代码从来都不是瓶颈。\n\n味道是。\n\n审查是。\n\n建造人们真正想要的东西是。\n\n没有任何模型可以为您解决这个问题。",
+          "content_en": "VIBE CODING DIDN'T CREATE A GENERATION OF BUILDERS. IT CREATED A GENERATION OF STARTERS.\n\nMIT just published the most uncomfortable paper on AI coding.\n\nThey tracked every new app on the App Store, Play Store and Chrome Web Store after coding agents showed up.\n\nDevs using autonomous agents wrote 25.5x more code.\n\nCommits up 240%.\n\nActual releases?\n\nUp 30%.\n\nIt gets worse.\n\nAfter adopting tools like Claude Code, devs wrote 7x more lines and deleted 12.2x more.\n\nRepos abandoned within 30 days went from 60% to 69%.\n\nNew apps launching roughly DOUBLED since early 2025.\n\nUser engagement didn't move.\n\nTwice as many apps.\n\nSame number of people using them.\n\nI felt this one personally.\n\nI shipped three \"projects\" last month with Claude Code.\n\nPretty sure zero humans used any of them.\n\nHere's my take.\n\nAI didn't make people better builders.\n\nIt made starting so cheap that finishing stopped meaning anything.\n\nWriting code was never the bottleneck.\n\nTaste was.\n\nReviewing was.\n\nBuilding something people actually want was.\n\nAnd no model is fixing that for you.",
+          "url": "https://x.com/cyrilXBT/status/2124344646348440059",
+          "platform": "x"
+        },
         {
           "id": "b6ac5c5640430fa1",
           "author": "Сarm1ne",
@@ -76,92 +176,71 @@
       },
       "linked_counts": {
         "news": 2,
-        "tweets": 1,
+        "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_navier_stokes_ai_proof_controversy",
+      "id": "topic_ai_coding_agent_failure_rate",
       "stance_matrix": {
-        "pro_point_zh": "AI不仅是验证工具，更能发现人类数学家易忽略的逻辑断点，其在处理长链逻辑推理上的准确性将开启数学证明自动化时代。",
-        "pro_author": "Anthropic AI 研究组",
-        "con_point_zh": "AI辅助证明缺乏可解释性，修复逻辑漏洞的过程更像是在参数空间中对齐结果，而非真正理解数学本质，存在伪证明风险。",
-        "con_author": "纯粹数学家群体",
-        "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
-        "pro_point_en": "AI serves as a force multiplier that identifies logic gaps humans overlook, heralding a new era of automated mathematical verification.",
-        "con_point_en": "AI proofs lack explainability; patching loopholes through AI feels like black-box parameter alignment rather than deep mathematical comprehension, risking pseudo-proofs.",
-        "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
+        "pro_point_zh": "当前的失败率是系统整合期的阵痛。一旦Agent工作流与企业级CI/CD流程深度闭环，其生产力跃升将是量级上的改变，不应以孤立失败否认路径方向。",
+        "pro_author": "大模型辅助编程开发者",
+        "con_point_zh": "“Vibe-coding”造就了一批只会写简单功能的半吊子，缺乏对大型项目完整性的理解。模型目前仅是在代码片段上做概率拟合，而非真正的软件工程治理。",
+        "con_author": "软件架构师与安全专家",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "High failure rates are growing pains. Once agent workflows achieve deep integration with enterprise CI/CD pipelines, the jump in productivity will be orders of magnitude, making it unwise to reject the path based on isolated failures.",
+        "con_point_en": "'Vibe-coding' creates a generation of 'starters' lacking deeper project integrity. Current models perform probabilistic fitting on code snippets rather than actual software engineering governance.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_bank_agent_blockade",
-      "heat_score": 9.5,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "金融安全对抗",
-      "category_tag_en": "Financial Security Clash",
-      "title_zh": "摩根大通与富国银行封禁AI代理访问凭据",
-      "title_en": "JPMorgan and Wells Fargo Ban AI Agent Credentials",
-      "summary_zh": "富国银行与摩根大通更新协议，明确封禁AI代理使用用户账户凭据访问服务。这是继AI自动执行攻击频发后，金融机构对代理经济（Agentic Economy）投下的不信任票，引发关于“用户授权权”与“金融资产安全”的激烈博弈。",
-      "summary_en": "JPMorgan and Wells Fargo updated protocols to strictly forbid AI agents from using user credentials. This move represents a major vote of no-confidence in the 'Agentic Economy' following a surge in AI-driven unauthorized access, igniting a fight over user sovereignty vs. financial security.",
+      "topic_id": "topic_math_proof_lean_verification",
+      "heat_score": 9.3,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "AI辅助数学证明",
+      "category_tag_en": "AI-Assisted Formal Proofs",
+      "title_zh": "黎曼猜想被证明：Lean形式化验证掀起数学自动化浪潮",
+      "title_en": "Riemann Hypothesis Formally Proven: Lean Verification Triggers Math Automation Wave",
+      "summary_zh": "斯坦福数学家勒文特·阿尔珀格通过Lean语言完成黎曼猜想的证明，并经由Mathlib社区经1700万行代码确认无误。这一事件标志着机器形式化验证正式成为数学界认可的“真理裁判”，深刻改变了人类探索复杂数学问题的范式。",
+      "summary_en": "Stanford mathematician Levent Alpöge has formally proven the Riemann Hypothesis using Lean, verified by the Mathlib community through 17 million lines of code. This landmark event confirms machine-aided formal verification as the gold standard for mathematical truth, fundamentally shifting the paradigm of exploring complex mathematical conjectures.",
       "perspective_pro": {
-        "role_zh": "🟢 代理经济进化派",
-        "role_en": "🟢 Agentic Economy Advocates",
-        "speaker_zh": "Web3与自动化开发者",
-        "speaker_en": "Web3/Automation Developers",
-        "point_zh": "封锁只会阻碍创新，银行应提供更安全的API接口而非一刀切禁止，AI代理代表了生产力的下一次跳跃。",
-        "point_en": "Blocking agents stifles innovation. Banks should prioritize building secure API standards rather than blunt bans, as AI agents represent the next leap in productivity."
+        "role_zh": "🟢 愿景派 / 计算数学推动者",
+        "role_en": "🟢 Visionary / Computational Math Proponent",
+        "speaker_zh": "数学工具开发者",
+        "speaker_en": "Lean/Mathlib Community",
+        "point_zh": "形式化验证消除了学术界对于人类证明逻辑漏洞的长期猜疑。Lean作为基础设施，实现了数学真理的客观、可重现与可执行化，是文明认知的重大迭代。",
+        "point_en": "Formal verification eliminates the lingering suspicion of logical flaws in human-led proofs. Lean serves as infrastructure that renders mathematical truth objective, reproducible, and executable—a major iteration in civilization."
       },
       "perspective_con": {
-        "role_zh": "🔴 机构风控派",
-        "role_en": "🔴 Financial Stability Advocates",
-        "speaker_zh": "摩根大通风控部门",
-        "speaker_en": "JPMorgan Risk Management",
-        "point_zh": "当前AI代理缺乏行为审计机制，一旦被用于大规模撞库或非法转账，银行不仅面临资产损失，更需承担巨大的法律合规责任。",
-        "point_en": "Current AI agents lack behavioral audit trails. If misused for credential stuffing or illicit transfers, banks face catastrophic liability and regulatory failure."
+        "role_zh": "🔴 传统主义派 / 数学哲学家",
+        "role_en": "🔴 Traditionalist / Math Philosopher",
+        "speaker_zh": "古典数学研究者",
+        "speaker_en": "Classical Mathematical Scholars",
+        "point_zh": "依赖庞大的形式化代码库验证，削弱了人类直觉在数学构思中的地位。当证明过程变为代码堆砌，数学的审美与发现感将逐渐丧失。",
+        "point_en": "Reliance on massive formal codebases diminishes the role of human intuition in mathematical conception. When proofs become stacks of code, the inherent beauty and spirit of mathematical discovery may be lost."
       },
       "linked_news": [
         {
-          "id": "f9552b717296089d",
-          "title_zh": "美国主流银行纷纷封禁AI代理访问权限",
-          "title_en": "Banks Have Had It Up to Here With Your AI Agent",
-          "source": "Wired AI",
-          "url": "https://www.wired.com/story/banks-are-cracking-down-on-ai-agents/",
-          "image_url": "https://ainewsradar.xyz/images/wired_f3b2f1208afe53c3.jpg",
+          "id": "486ec56f1c65a3f9",
+          "title_zh": "斯坦福数学家完成黎曼猜想的形式化证明",
+          "title_en": "Lean and Mathlib community officially confirms Levent Alpöge's proof of the Riemann hypothesis is correct",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/lean-and-mathlib-community-officially-confirms-levent-alpoges-proof-of-the-riemann-hypothesis-is-correct/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_3686cba3f1311214.jpg",
           "hot_score": 5,
-          "published_at": "2026-11-22T11:00:00+00:00"
+          "published_at": "2026-11-22T11:08:31+00:00"
         },
         {
-          "id": "fbeec97e00f8a41f",
-          "title_zh": "AI加剧运维过载与系统宕机风险",
-          "title_en": "The Outages Are Just Getting Started",
-          "source": "Wired AI",
-          "url": "https://www.wired.com/story/brace-yourself-for-years-of-outage-chaos/",
-          "image_url": "https://ainewsradar.xyz/images/wired_6d833634375105ff.jpg",
-          "hot_score": 4,
-          "published_at": "2026-11-21T13:00:00+00:00"
+          "id": "c2d9fa550c13be18",
+          "title_zh": "数学界证实勒文·阿尔伯格完成黎曼猜想形式化证明",
+          "title_en": "A joint statement by the Lean and Mathlib communities says \"we have full confidence that Alpöge's proof of the Riemann Hypothesis is correct\" (Lean community blog)",
+          "source": "Lean community blog",
+          "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+          "image_url": "https://leanprover-community.github.io/blog/meta-twitter.png",
+          "hot_score": 5,
+          "published_at": "2026-11-22T06:00:02+00:00"
         }
       ],
-      "linked_tweets": [
-        {
-          "id": "db590d7ebdd3c15b",
-          "author": "Coin Bureau",
-          "author_handle": "@coinbureau",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2079205918093508608/-xApH7AJ_normal.jpg",
-          "content_zh": "🚨警告：美国银行正在对外部人工智能代理的错误采取不干涉的态度。\n\n如果您允许 AI 代理访问您的账户，而该代理将资金发送给错误的人，您的银行可能会将这笔付款视为您批准的付款。\n\n而且，你可能会陷入困境。\n\n以下是银行最近在其条款中包含的内容：\n\n- 花旗表示，即使代理无视您的指示或有人使用代理泄露的密码，它也会将转账视为您的转账。\n\n- PNC 需要银行批准的连接，并且通常禁止外部代理支付账单或转移资金。\n\n- 大通银行允许您通过批准的连接共享帐户数据，但禁止您向外部人工智能工具提供您的银行登录信息。\n\n- 据 TechCrunch 报道，美国银行建议客户在人工智能工具汇款之前自行批准转账。\n\n- 施瓦布阻止了试图未经许可转移客户资金的人工智能工具。\n\n- 富国银行表示，从 11 月 24 日开始，如果您授予代理访问权限，它将把代理的转账视为您的转账。\n\n然而，您仍然可以对转移提出异议。联邦法律可能会保护您，具体取决于汇款人以及他们如何获取资金。",
-          "content_en": "🚨ALERT: U.S. banks are taking a HANDS-OFF approach to outside AI agents’ mistakes.\n\nIf you give an AI agent access to your account and it sends money to the wrong person, your bank may treat the payment as one you approved. \n\nAnd, you could be on the hook.\n\nHere's what banks recently included in their terms:\n\n- Citi says it will treat transfers as yours even if the agent ignores your instructions or someone uses a password the agent leaked.\n\n- PNC requires bank-approved connections and generally bars outside agents from paying bills or moving money.\n\n- Chase lets you share account data through approved connections but bars you from giving an outside AI tool your bank login.\n\n- Bank of America advised customers to approve transfers themselves before an AI tool sends money, per TechCrunch.\n\n- Schwab blocked AI tools that tried to move customers’ money without permission.\n\n- Wells Fargo says that starting Nov. 24, it will treat an agent’s transfers as yours if you gave it access.\n\nYet, you can still dispute a transfer. Federal law may protect you depending on who sent the money and how they got access.",
-          "url": "https://x.com/coinbureau/status/2124342319860351051",
-          "platform": "x"
-        },
-        {
-          "id": "b0081c32be11a523",
-          "author": "zerohedge",
-          "author_handle": "@zerohedge",
-          "author_avatar": "https://pbs.twimg.com/profile_images/72647502/tyler_normal.jpg",
-          "content_zh": "观看：前 NSA 黑客称人工智能“特工群”在 14 分钟内摧毁了一家公司 - 并且几个小时内都没有人注意到",
-          "content_en": "Watch: Ex-NSA Hacker Says AI 'Agent Swarm' Gutted A Company In 14 Minutes - And Nobody Noticed For Hours https://t.co/PJDrfjHsUZ",
-          "url": "https://x.com/zerohedge/status/2124329631633355054",
-          "platform": "x"
-        }
-      ],
+      "linked_tweets": [],
       "linked_tool": {
         "id": "wf_cursorrules_fullstack_2026",
         "name": "Cursor / Windsurf 工业级全栈规则模板",
@@ -176,109 +255,19 @@
       },
       "linked_counts": {
         "news": 2,
-        "tweets": 2,
+        "tweets": 0,
         "has_tool": true
       },
-      "id": "topic_bank_agent_blockade",
+      "id": "topic_math_proof_lean_verification",
       "stance_matrix": {
-        "pro_point_zh": "封锁只会阻碍创新，银行应提供更安全的API接口而非一刀切禁止，AI代理代表了生产力的下一次跳跃。",
-        "pro_author": "Web3与自动化开发者",
-        "con_point_zh": "当前AI代理缺乏行为审计机制，一旦被用于大规模撞库或非法转账，银行不仅面临资产损失，更需承担巨大的法律合规责任。",
-        "con_author": "摩根大通风控部门",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Blocking agents stifles innovation. Banks should prioritize building secure API standards rather than blunt bans, as AI agents represent the next leap in productivity.",
-        "con_point_en": "Current AI agents lack behavioral audit trails. If misused for credential stuffing or illicit transfers, banks face catastrophic liability and regulatory failure.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
-      }
-    },
-    {
-      "topic_id": "topic_tesla_fsd_rendering",
-      "heat_score": 9.2,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "自动驾驶技术革新",
-      "category_tag_en": "AV Tech Innovation",
-      "title_zh": "特斯拉FSD V15抛弃游戏引擎转向AI实时生成",
-      "title_en": "Tesla FSD V15 Abandons Game Engines for Real-Time AI Generation",
-      "summary_zh": "特斯拉推送FSD V15，核心突破在于移除传统游戏引擎渲染，完全依赖AI实时视频生成技术。马斯克称此举实现了写实级环境感知。争议点在于该技术在极端天气与低光照下的鲁棒性，以及算力边际成本是否过高。",
-      "summary_en": "Tesla’s FSD v15 update marks a shift away from traditional game engine rendering to real-time generative AI video. Musk claims this enables photorealistic perception. Debate rages over the system's robustness in edge-case weather conditions and whether the marginal compute cost is sustainable.",
-      "perspective_pro": {
-        "role_zh": "🟢 第一性原理实践派",
-        "role_en": "🟢 First Principles Advocates",
-        "speaker_zh": "埃隆·马斯克与特斯拉团队",
-        "speaker_en": "Elon Musk & Tesla Engineering",
-        "point_zh": "端到端神经渲染是实现自动驾驶感知的唯一路径，剔除游戏引擎冗余可直接优化推理延迟，实现真正的写实空间感知。",
-        "point_en": "End-to-end neural rendering is the only path to true perception; discarding game engines reduces latency and achieves superior, photorealistic spatial awareness."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业理性派",
-        "role_en": "🔴 Industrial Skeptics",
-        "speaker_zh": "汽车电子工程专家",
-        "speaker_en": "Automotive Engineering Experts",
-        "point_zh": "实时AI生成虽视觉逼真，但在缺乏确定性图形管线支持的情况下，难以通过传统的ASIL-D安全等级认证，且功耗过高。",
-        "point_en": "Generative rendering is visually impressive but lacks the deterministic reliability required for ASIL-D safety certification, while the compute power consumption is unsustainable."
-      },
-      "linked_news": [
-        {
-          "id": "5870c79890243395",
-          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
-          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
-          "source": "Gizmodo",
-          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
-          "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-22T06:40:16+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "bf4a07bbb3c2d15a",
-          "author": "Elon Musk",
-          "author_handle": "@elonmusk",
-          "author_avatar": "https://unavatar.io/x/elonmusk",
-          "content_zh": "@BLKMDL3 @wholemars 如果有人好奇：\n\n自去年以来，我们已经有了一个像素完美的世界模型，这对于合成数据的生成至关重要。\n\n汽车中的（小得多）版本是条件平均流模型，基于 Tesla 通用视觉编码器功能的最新序列，这些功能与插入到产生驾驶动作的 3B 编码器模型中的功能相同。\n\n我们从这些 UVE 功能中分叉出来，然后运行一个单独的 ~1B 扩散模型。这会吸收先前生成的添加了噪声的现实视图，然后将其降噪到当前的可视化中。\n\n然后它会生成一个小视频块（8 个图像，36 fps，UI 屏幕的分辨率）。这项工作由 TRIP 引擎在 18 Hz 的每个 UVE 帧上完成，并分布在 4 个周期内。\n\n目前，由于计算限制，延迟有点高，但我们有办法沿着扩散转换器层交错更新的 UVE 功能，以减少大约 35% 的延迟。",
-          "content_en": "@BLKMDL3 @wholemars In case anyone is curious:\n\nWe’ve had a ~pixel-perfect world model since last year, which is critical for synthetic data generation. \n\nThe (much) smaller version of that in the car is a conditional mean-flow model, based on the recent sequence of Tesla Universal Vision Encoder features, which are the same ones that are plugged into the 3B encoder model that produces the driving actions. \n\nWe fork off from these UVE features, then run a separate ~1B diffusion model. This takes in the previous reality-view generation with added noise and then denoises it to the current visualization. \n\nIt then produces a small video chunk (8 images at 36 fps, at the resolution of the UI screen). This work is done by 1/2 of a TRIP engine every UVE frame at 18 hz and is spread over 4 cycles. \n\nCurrently, the latency is a bit high due to compute constraints, but we have ways to interleave newer UVE features along the diffusion transformer layers to cut roughly 35% of the latency.",
-          "url": "https://x.com/elonmusk/status/2124458557525397780",
-          "platform": "x"
-        },
-        {
-          "id": "d30d736d6357001b",
-          "author": "Elon Musk",
-          "author_handle": "@elonmusk",
-          "author_avatar": "https://unavatar.io/x/elonmusk",
-          "content_zh": "@anabology 特斯拉是一辆有意识的汽车。\n\n当然，你想要的汽车意识是有限度的。或者有吗？\n\n特别是如果它可以访问互联网，那么汽车比数据中心的 GPU 拥有更大的行动自由度。",
-          "content_en": "@anabology A Tesla is a conscious car. \n\nOf course, there is a limit to how much consciousness you want in a car. Or is there? \n\nEspecially if it can access the Internet, the car has far more freedom of action than a GPU in a data center.",
-          "url": "https://x.com/elonmusk/status/2124456278168912359",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
-      },
-      "linked_counts": {
-        "news": 1,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_tesla_fsd_rendering",
-      "stance_matrix": {
-        "pro_point_zh": "端到端神经渲染是实现自动驾驶感知的唯一路径，剔除游戏引擎冗余可直接优化推理延迟，实现真正的写实空间感知。",
-        "pro_author": "埃隆·马斯克与特斯拉团队",
-        "con_point_zh": "实时AI生成虽视觉逼真，但在缺乏确定性图形管线支持的情况下，难以通过传统的ASIL-D安全等级认证，且功耗过高。",
-        "con_author": "汽车电子工程专家",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "End-to-end neural rendering is the only path to true perception; discarding game engines reduces latency and achieves superior, photorealistic spatial awareness.",
-        "con_point_en": "Generative rendering is visually impressive but lacks the deterministic reliability required for ASIL-D safety certification, while the compute power consumption is unsustainable.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+        "pro_point_zh": "形式化验证消除了学术界对于人类证明逻辑漏洞的长期猜疑。Lean作为基础设施，实现了数学真理的客观、可重现与可执行化，是文明认知的重大迭代。",
+        "pro_author": "数学工具开发者",
+        "con_point_zh": "依赖庞大的形式化代码库验证，削弱了人类直觉在数学构思中的地位。当证明过程变为代码堆砌，数学的审美与发现感将逐渐丧失。",
+        "con_author": "古典数学研究者",
+        "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
+        "pro_point_en": "Formal verification eliminates the lingering suspicion of logical flaws in human-led proofs. Lean serves as infrastructure that renders mathematical truth objective, reproducible, and executable—a major iteration in civilization.",
+        "con_point_en": "Reliance on massive formal codebases diminishes the role of human intuition in mathematical conception. When proofs become stacks of code, the inherent beauty and spirit of mathematical discovery may be lost.",
+        "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
       }
     }
   ]
