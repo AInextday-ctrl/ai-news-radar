@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-22 14:54:53 UTC",
+  "generated_at": "2026-11-22 15:05:30 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-22 14:54:53 UTC",
+      "updated_at": "2026-11-22 15:05:30 UTC",
       "headline_item": {
-        "id": "3a6733e6a6e3100b",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "Perplexity推出Monitor API支持自动化实时监控",
-        "title_en": "Perplexity's new Monitor API turns web search from a one-off query into a nonstop watchdog",
-        "source": "THE DECODER",
-        "published_at": "2026-11-22T14:20:28+00:00",
-        "url": "https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/",
-        "event_summary_zh": "Perplexity发布Monitor API，通过自定义自然语言目标实现对全网及特定页面的自动化监控与智能筛选更新",
-        "event_summary_en": "Perplexity has launched the Monitor API, allowing developers to define monitoring goals via natural language for periodic scanning of specific web pages or global information. The service integrates a decision model to filter out noise, pushing verified updates via webhooks only when findings meet predefined criteria for relevance, credibility, and novelty.",
+        "id": "87b793b12d1ebf9e",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "硅谷AI产业新共识：“品味”成为对抗算法同质化的最后壁垒",
+        "title_en": "The Internet Broke Our Taste. Will A.I. Destroy It for Good?",
+        "source": "New York Times",
+        "published_at": "2026-11-22T15:00:34+00:00",
+        "url": "https://www.nytimes.com/2026/11/20/magazine/ai-slop-taste-aesthetic-silicon-valley.html?unlocked_article_code=1.SFE.1a6T.-kpbFF_tJYZx&smid=url-share",
+        "event_summary_zh": "硅谷正将“品味”定义为AI时代区别于机器输出的核心竞争壁垒，引发关于人类审美判断力是否能被模型习得的深层辩论",
+        "event_summary_en": "Silicon Valley is increasingly defining 'taste' as the ultimate human moat against generative AI's algorithmic slop. The current industry debate centers on whether aesthetic judgment is merely a pattern-matching exercise achievable by LLMs, or a uniquely human cognitive capability that determines future market valuation of creative output.",
         "core_facts_zh": [
-          "【核心事件】困惑人工智能在企业开发者生态平台：发布Monitor API，支持全网查询监控与特定页面变更监测",
-          "【起因与机理】解决工程团队自行维护重复搜索代码及处理噪声信息的工程负担",
-          "【关键技术规格】企业级API通过自然语言定义任务，替代传统重复性爬虫代码。",
-          "【各方立场与态度】支持全网监控与特定URL变更比对，直接对标Firecrawl等存量市场玩家。"
+          "【核心事件】硅谷科技创始人、投资者及工程技术人员在旧金山科技产业生态与公众舆论场：将“品味”确立为AI无法完全覆盖的核心差异化指标，并展开关于模型能否习得审美能力的博弈",
+          "【起因与机理】针对当前生成式AI产生的大量劣质内容（slop）及市场同质化危机所产生的焦虑与防御性思考",
+          "【关键技术规格】AI生成内容质量引发的审美危机与“slop”现象。",
+          "【各方立场与态度】人类审美能力是否为算法可学习模式的根本争论。"
         ],
         "core_facts_en": [
-          "[Core Event] Perplexity AI (Enterprise developer ecosystem): Launch of Monitor API for web search and page change monitoring",
-          "[Root Cause & Mechanism] To alleviate the engineering overhead of building custom recurring search pipelines and noise reduction logic",
-          "[Key Metrics] Web monitors cost $1 per 1,000 successful runs, and page monitors cost $1 per 1,000 fetched URLs.",
-          "[Scope & Next Steps] Features include global search monitoring and targeted URL diffing to compete with incumbents like Firecrawl."
+          "[Core Event] Silicon Valley founders, investors, and engineers: Positioning 'taste' as the core differentiator against AI, debating if models can eventually emulate human aesthetic judgment",
+          "[Root Cause & Mechanism] Anxiety over the proliferation of low-quality 'slop' and the potential erosion of human-unique creative value",
+          "[Key Metrics] In July, one such company, Mercor, was reportedly shelling out more than $4 million daily to 30,000 contractors.",
+          "[Key Position & Outlook] Fundamental debate over whether aesthetic judgment is algorithmic."
         ],
-        "industry_impact_zh": "Perplexity通过将底层搜索聚合能力封装为实时智能代理（Agentic）接口，试图从单纯的问答工具转型为企业的自动化情报基建。此举不仅对传统抓取服务供应商形成降维打击，更通过引入决策模型过滤层，进一步确立了其在AI应用链条中作为智能中枢的技术壁垒。",
-        "industry_impact_en": "By encapsulating search aggregation into agentic APIs, Perplexity is pivoting from a consumer Q&A tool to a critical automation infrastructure. This move disrupts traditional scraping services and establishes a competitive moat by positioning itself as the intelligent middleware within the AI agentic workflow."
+        "industry_impact_zh": "将品味定义为“护城河”本质上是硅谷在高溢价内容市场对模型平庸化的防御性策略，若模型无法跨越审美的主观性壁垒，内容产业的底层逻辑将回归至‘人类策展+AI执行’的协作范式。长期看，这不仅关乎美学，更关乎在AI边际成本趋零的背景下，人类如何通过复杂的主观选择定义产品的溢价权。",
+        "industry_impact_en": "Defining taste as a 'moat' is a strategic defense against the commoditization of AI-generated content. If models fail to bridge the subjectivity gap in aesthetics, the industry will pivot to a 'human curation + AI execution' paradigm, where human choice remains the primary determinant of price premiums in a zero-marginal-cost content ecosystem."
       },
       "headlines": [
+        {
+          "id": "87b793b12d1ebf9e",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "硅谷AI产业新共识：“品味”成为对抗算法同质化的最后壁垒",
+          "title_en": "The Internet Broke Our Taste. Will A.I. Destroy It for Good?",
+          "source": "New York Times",
+          "published_at": "2026-11-22T15:00:34+00:00",
+          "url": "https://www.nytimes.com/2026/11/20/magazine/ai-slop-taste-aesthetic-silicon-valley.html?unlocked_article_code=1.SFE.1a6T.-kpbFF_tJYZx&smid=url-share",
+          "event_summary_zh": "硅谷正将“品味”定义为AI时代区别于机器输出的核心竞争壁垒，引发关于人类审美判断力是否能被模型习得的深层辩论",
+          "event_summary_en": "Silicon Valley is increasingly defining 'taste' as the ultimate human moat against generative AI's algorithmic slop. The current industry debate centers on whether aesthetic judgment is merely a pattern-matching exercise achievable by LLMs, or a uniquely human cognitive capability that determines future market valuation of creative output.",
+          "core_facts_zh": [
+            "【核心事件】硅谷科技创始人、投资者及工程技术人员在旧金山科技产业生态与公众舆论场：将“品味”确立为AI无法完全覆盖的核心差异化指标，并展开关于模型能否习得审美能力的博弈",
+            "【起因与机理】针对当前生成式AI产生的大量劣质内容（slop）及市场同质化危机所产生的焦虑与防御性思考",
+            "【关键技术规格】AI生成内容质量引发的审美危机与“slop”现象。",
+            "【各方立场与态度】人类审美能力是否为算法可学习模式的根本争论。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Silicon Valley founders, investors, and engineers: Positioning 'taste' as the core differentiator against AI, debating if models can eventually emulate human aesthetic judgment",
+            "[Root Cause & Mechanism] Anxiety over the proliferation of low-quality 'slop' and the potential erosion of human-unique creative value",
+            "[Key Metrics] In July, one such company, Mercor, was reportedly shelling out more than $4 million daily to 30,000 contractors.",
+            "[Key Position & Outlook] Fundamental debate over whether aesthetic judgment is algorithmic."
+          ],
+          "industry_impact_zh": "将品味定义为“护城河”本质上是硅谷在高溢价内容市场对模型平庸化的防御性策略，若模型无法跨越审美的主观性壁垒，内容产业的底层逻辑将回归至‘人类策展+AI执行’的协作范式。长期看，这不仅关乎美学，更关乎在AI边际成本趋零的背景下，人类如何通过复杂的主观选择定义产品的溢价权。",
+          "industry_impact_en": "Defining taste as a 'moat' is a strategic defense against the commoditization of AI-generated content. If models fail to bridge the subjectivity gap in aesthetics, the industry will pivot to a 'human curation + AI execution' paradigm, where human choice remains the primary determinant of price premiums in a zero-marginal-cost content ecosystem."
+        },
         {
           "id": "3a6733e6a6e3100b",
           "tag_zh": "⚡ 职场提效",
@@ -59,62 +85,36 @@
           "industry_impact_en": "By encapsulating search aggregation into agentic APIs, Perplexity is pivoting from a consumer Q&A tool to a critical automation infrastructure. This move disrupts traditional scraping services and establishes a competitive moat by positioning itself as the intelligent middleware within the AI agentic workflow."
         },
         {
-          "id": "7395d437c81cfa91",
+          "id": "b5934cc79e03c1c9",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "大模型“意念编程”开启消费电子硬件破解潮",
-          "title_en": "The vibe-coding revolution is coming to all the gadgets",
-          "source": "The Verge AI",
-          "published_at": "2026-11-22T13:00:00+00:00",
-          "url": "https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera",
-          "event_summary_zh": "开发者利用Claude Code等AI工具简化硬件底层代码交互，Android设备的非官方界面定制与功能解锁正加速普及",
-          "event_summary_en": "A new wave of hardware customization, termed 'vibe-coding,' is emerging as developers utilize large language models like Claude Code and Codex to simplify low-level hardware configuration. By automating interactions such as modifying Android TV interfaces and bypassing bloatware via USB debugging, this trend is significantly lowering the barrier for end-user control over proprietary hardware, fueling a grassroots movement for open-device ecosystems.",
-          "core_facts_zh": [
-            "【核心事件】软件开发者（以Gathin T为代表）及Claude Code用户：利用AI模型简化底层代码交互，实现系统广告屏蔽与界面定制化重构",
-            "【起因与机理】AI极大地降低了硬件逆向工程与系统调整的技术门槛，增强了消费者对设备的实际掌控权",
-            "【关键技术规格】AI模型大幅降低了硬件底层配置与修改的技术门槛。",
-            "【各方立场与态度】消费电子市场将面临从单一控制权向用户自定义权力的生态演变。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Software developers (e.g., Gathin T) and Claude Code users: Using AI models to simplify low-level coding interactions for ad-blocking and UI restructuring",
-            "[Root Cause & Mechanism] AI lowers the barrier for hardware reverse engineering and customization, empowering consumer device autonomy",
-            "[Key Technical Spec] AI models significantly reduce technical barriers for low-level hardware configuration and modification.",
-            "[Key Position & Outlook] Consumer electronics markets face a shift from proprietary control to user-driven customization."
-          ],
-          "industry_impact_zh": "AI赋能的底层代码交互实际上是对消费电子“黑盒化”商业模式的降维打击。当LLM使得逆向工程和固件修补不再依赖专业知识时，厂商通过封锁系统API维护护城河的策略将失效，迫使硬件生态必须转向更开放的软件服务竞争，否则将面临大规模的用户端“去中心化”改造挑战。",
-          "industry_impact_en": "AI-empowered low-level coding effectively disrupts the 'black box' business model of consumer electronics. As LLMs lower the barriers to reverse engineering, vendor strategies that lock system APIs to maintain moats will become obsolete, forcing a shift towards open ecosystem competition to prevent widespread user-led decentralization of proprietary systems."
-        },
-        {
-          "id": "e14ce2313f20a4f3",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "AI推理平台安全漏洞致用户密钥遭大规模窃取",
-          "title_en": "Security researchers show how cheap AI inference providers steal keys and snoop on users",
+          "title_zh": "METR预警：AI自主研发能力增长或将突破安全边界",
+          "title_en": "AI is getting better faster than experts can reliably test whether new systems are safe, METR warns",
           "source": "THE DECODER",
-          "published_at": "2026-11-22T12:07:56+00:00",
-          "url": "https://the-decoder.com/security-researchers-show-how-cheap-ai-inference-providers-steal-keys-and-snoop-on-users/",
-          "event_summary_zh": "安全机构Dragos通过模拟测试发现，多家AI推理代理商存在严重的隐私泄露与密钥窃取漏洞，导致用户凭证遭到非法访问与持久化攻击",
-          "event_summary_en": "Security firm Dragos revealed between July and November 2026 that multiple AI inference providers failed to uphold data retention policies, leading to the theft of AWS keys and sensitive user requests. Investigations confirmed that some marketplace resellers enabled logging to intercept data, with instances of leaked test URLs being accessed within minutes from Beijing and Shanghai via internal communication platforms.",
+          "published_at": "2026-11-22T13:00:43+00:00",
+          "url": "https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/",
+          "event_summary_zh": "AI测评机构METR发布报告指出，AI模型在复杂研发任务上的执行力正以每3.6个月翻倍的速度激增，现有评估框架已难以准确预测其灾难性风险",
+          "event_summary_en": "AI research evaluation firm METR reports that large models are closing the gap with human experts in coding and computational tasks, with the complexity of autonomous tasks they can handle doubling every 3.6 months. METR warns that current evaluation environments consistently overestimate model performance for real-world scenarios, and if this trajectory continues, models are projected to reach a 50% success rate on 200-hour complex tasks by July 2027, potentially exceeding human capacity to monitor catastrophic risks.",
           "core_facts_zh": [
-            "【核心事件】安全机构Dragos、AI路由服务商OpenRouter、推理平台Novita、Phala、Together及部分未公开第三方在全球性AI模型推理调用API接口及在线算力市场：通过向代理商投喂诱饵数据，揭露了攻击者窃取API密钥、滥用零数据留存政策以及利用内部日志泄露敏感信息的行为",
-            "【起因与机理】AI推理市场缺乏统一的端到端加密与安全合规标准，中间商为压低价格牺牲了数据隔离与安全合规性",
-            "【关键数据与实测】关键时间节点与后续：OpenRouter已紧急移除违规供应商并撤销125个终端的ZDR认证，受影响厂商正陆续发布初步安全报告。",
-            "【涉及范围与推进】核心涉案与合规细节：包括Novita、Phala及Together在内的多家服务商被指出无视“零数据留存”承诺，且存在长期的凭证日志残留。"
+            "【核心事件】人工智能评估组织METR在AI安全性评估与行业研究领域：揭示AI自主研发能力以3.6个月翻倍的惊人速度增长，并指出当前安全测评工具严重滞后",
+            "【起因与机理】模型在科研任务中的迭代速度已超越现有治理框架的监测与反应能力",
+            "【关键数据与实测】模型执行复杂科研任务的成功率正以每3.6个月翻倍的速度增长。",
+            "【各方立场与态度】预计2027年7月模型将具备处理200小时长周期研发任务的能力。"
           ],
           "core_facts_en": [
-            "[Core Event] Dragos (security researchers), OpenRouter, inference providers like Novita, Phala, and Together: Exposure of widespread API key theft, violation of 'Zero Data Retention' (ZDR) policies, and exploitation of internal logging mechanisms",
-            "[Root Cause & Mechanism] Lack of standardized end-to-end encryption in the fragmented AI inference supply chain and excessive cost-cutting by marketplace resellers",
-            "[Regulatory & Investigation Focus] Core Investigation & Findings: Dragos identified systemic data interception and credential theft, urging stricter oversight of AI middleware providers.",
-            "[Key Position & Outlook] Outlook & Timeline: OpenRouter removed non-compliant providers and revoked 125 ZDR certifications, with affected firms currently issuing security remediations."
+            "[Core Event] AI evaluation organization METR: The discovery that AI research capabilities are doubling every 3.6 months, rendering current safety benchmarks inadequate",
+            "[Root Cause & Mechanism] Rapid model iteration in research tasks is outpacing existing governance and human monitoring capacity",
+            "[Key Metrics] Projections estimate a 50% success rate on 200-hour complex tasks by July 2027.",
+            "[Key Position & Outlook] Current test environments diverge from real-world usage, leading to overestimated safety profiles."
           ],
-          "industry_impact_zh": "AI中间层市场的“低价优先”竞价机制已演变为供应链的严重安全漏洞，使得推理过程中的数据合规协议（如ZDR）完全失效。企业必须重新评估AI API调用的信任边界，由单纯依赖服务商承诺转向强化边缘端的加密分片处理，以应对中间代理商带来的零信任挑战。",
-          "industry_impact_en": "The 'lowest-price-wins' competition in AI inference marketplaces has become a critical supply chain vulnerability, rendering data privacy protocols like ZDR essentially decorative. Enterprises must shift from trusting service provider policies toward implementing end-to-end, edge-based encryption to mitigate the inherent trust risks of multi-hop API routing."
+          "industry_impact_zh": "评估基准的失效反映了AI从单一工具向自主研发主体进化的质变，传统的静态评测已无法覆盖模型在长流程任务中的逻辑推理风险。产业界需从单一性能测试转向针对模型行为逻辑的“环境压力测试”，防范AI在缺乏有效监督的闭环科研中诱发不可控的灾难性反馈。",
+          "industry_impact_en": "The failure of current benchmarks highlights a qualitative shift from AI as a tool to an autonomous research agent, where static evaluations cannot capture long-horizon reasoning risks. The industry must pivot from performance-centric benchmarks to behavioral 'stress testing' to mitigate the risks of unmonitored catastrophic outcomes in autonomous AI research loops."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-22 14:54:53 UTC",
+      "updated_at": "2026-11-22 15:05:30 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-22 14:54:53 UTC",
+      "updated_at": "2026-11-22 15:05:30 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
