@@ -268,26 +268,40 @@
   }
 
   // Direct CDN URL Resolver (Compliance with Rule 4.1: Direct Firebase CDN, Zero overseas proxy jitter)
-  function optimizeImageUrl(url, width = 480) {
+  function optimizeImageUrl(url, width = 640) {
     if (!url || typeof url !== 'string') return '';
-    const clean = url.trim();
+    let clean = url.trim();
     if (!clean || clean === 'null' || clean === 'none' || clean === 'undefined') return '';
+    if (clean.includes('images.openai.com/blob') || clean.includes('574ebad3-c5b7-4147')) return '';
     
-    // Direct Self-Hosted CDN conversion
-    if (clean.includes('ainewsradar.xyz/images/') || clean.startsWith('/images/')) {
+    // 1. Direct Self-Hosted Local CDN images: strictly relative path /images/..., ZERO wsrv.nl proxying (AGENTS.md Rule 4.1)
+    if (clean.includes('/images/')) {
       const parts = clean.split('/images/');
       return `/images/${parts[parts.length - 1].split('?')[0]}`;
     }
-    if (clean.startsWith('/') || clean.startsWith('./')) return clean;
+    if (clean.startsWith('/') || clean.startsWith('./')) {
+      if (clean.includes('/assets/tool-previews/') && !clean.includes('?v=')) {
+        return clean + '?v=4';
+      }
+      return clean;
+    }
+    if (clean.startsWith('data:') || clean.startsWith('blob:')) return clean;
     if (clean.includes('wsrv.nl')) return clean;
-    if (clean.includes('i.ytimg.com')) return clean; // Direct YouTube image
-    
-    // For Unsplash images, resize natively
+    if (clean.includes('i.ytimg.com') || clean.includes('youtube.com')) return clean; // Direct YouTube image
+
+    // 2. Unsplash images: resize natively without third-party proxy
     if (clean.includes('images.unsplash.com')) {
       return clean.includes('w=') ? clean.replace(/w=\d+/, `w=${width}`) : `${clean}${clean.includes('?') ? '&' : '?'}w=${width}&auto=format`;
     }
-    
-    // Fallback external proxy with webp compression
+
+    // 3. For any .xyz or self-hosted domain: never proxy through wsrv.nl (.xyz is blocked by wsrv.nl policy)
+    if (clean.includes('.xyz') || clean.includes('ainewsradar')) {
+      const parts = clean.split('/images/');
+      if (parts.length > 1) return `/images/${parts[parts.length - 1].split('?')[0]}`;
+      return clean;
+    }
+
+    // 4. Fallback external proxy with webp compression for non-blocked external domains
     return `https://wsrv.nl/?url=${encodeURIComponent(clean)}&w=${width}&output=webp&q=80`;
   }
 
@@ -730,9 +744,10 @@
               height="270" 
               alt="${title}" 
               class="w-full h-full object-cover transition-transform duration-300" 
-              ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} 
+              ${idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} 
               decoding="async" 
-              onerror="this.parentElement.style.display='none'"
+              referrerpolicy="no-referrer"
+              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
             >
           </div>
         ` : ''}
@@ -807,9 +822,11 @@
               height="360" 
               alt="${title}" 
               class="w-full h-full object-cover" 
-              loading="lazy" 
+              loading="eager" 
+              fetchpriority="high"
               decoding="async" 
-              onerror="this.parentElement.style.display='none'"
+              referrerpolicy="no-referrer"
+              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
             >
           </div>
         ` : ''}
@@ -910,7 +927,7 @@
 
         ${mediaList.length > 0 ? `
           <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-900 border border-slate-100 dark:border-slate-800/60 cursor-pointer" onclick="window.MobileApp.openLightbox('${optimizeImageUrl(mediaList[0], 800)}')">
-            <img src="${optimizeImageUrl(mediaList[0], 640)}" width="640" height="360" alt="Tweet media" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+            <img src="${optimizeImageUrl(mediaList[0], 640)}" width="640" height="360" alt="Tweet media" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}">
           </div>
         ` : ''}
 
@@ -952,7 +969,7 @@
       >
         <div class="relative aspect-video bg-slate-900">
           ${imgUrl ? `
-            <img src="${imgUrl}" width="640" height="360" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+            <img src="${imgUrl}" width="640" height="360" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" referrerpolicy="no-referrer" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.style.display='none';}">
           ` : ''}
           <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
             <div class="w-12 h-12 rounded-full bg-rose-600/95 text-white flex items-center justify-center text-lg pl-1 shadow-xl">
@@ -1103,7 +1120,11 @@
                 height="360" 
                 alt="${title}" 
                 class="w-full h-full object-cover group-active:scale-98 transition-transform"
+                loading="eager"
+                fetchpriority="high"
                 decoding="async"
+                referrerpolicy="no-referrer"
+                onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
               >
               <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-xs text-white text-[10px] font-bold flex items-center gap-1 shadow-sm">
                 <span>🔍</span>
@@ -1120,7 +1141,7 @@
                     onclick="document.getElementById('article-modal-cover-img').src='${imgUrl.replace(/'/g, "\\'")}'; window.MobileApp.openLightbox('${imgUrl.replace(/'/g, "\\'")}');"
                     class="w-14 h-14 rounded-xl overflow-hidden border-2 ${imgIdx === 0 ? 'border-indigo-600' : 'border-slate-200 dark:border-slate-700 opacity-75'} shrink-0 bg-slate-900 transition-all cursor-pointer"
                   >
-                    <img src="${imgUrl}" width="120" height="120" alt="Thumbnail ${imgIdx+1}" class="w-full h-full object-cover">
+                    <img src="${imgUrl}" width="120" height="120" alt="Thumbnail ${imgIdx+1}" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='/images/og-default.jpg';">
                   </button>
                 `).join('')}
               </div>
