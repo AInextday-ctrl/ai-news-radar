@@ -1,12 +1,22 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-23 03:21:33Z
+生成时间: 2026-11-23 03:35:29Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### Arva AI获2000万美元A轮融资
+- 落地页链接: https://ainewsradar.xyz/zh/news/ca9c632429350d57
+- 原始信源: Axios (https://www.axios.com/pro/fintech-deals/2026/11/17/arva-ai-20-million-series-a-bank-compliance)
+- 核心摘要: Arva AI完成2000万美元A轮融资，将利用资金深化银行金融犯罪合规流程的自动化AI代理技术
+- 核验事实清单:
+  * 【核心事件】Arva AI（首席执行官Rhim Shah）；Arthur Ventures（领投方）在金融合规科技领域：获得2000万美元A轮融资，用于开发银行合规AI代理
+  * 【起因与机理】降低银行人工合规审查的时间成本并提升对可疑行为的识别效率
+  * 【关键数据与实测】Arva AI完成2000万美元A轮融资，Arthur Ventures领投。
+  * 【各方立场与态度】旨在解决传统人工审查在识别可疑交易时的低效与漏检问题。
 
 ### TPG联合Corpay以60亿美元私有化BILL
 - 落地页链接: https://ainewsradar.xyz/zh/news/81f913b15b34cdcc
@@ -302,16 +312,6 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
   * 【调查与监管诉求】核心主体通过数百家空壳公司掩盖物流流向，非法向中国转运受限算力资源。
   * 【涉及范围与推进】美国出口管制政策正遭遇严重的“影子供应链”渗透，后续将引发更严格的芯片溯源及跨境支付追踪调查。
 
-### 亚马逊拟75亿美元收购AI初创公司Decart
-- 落地页链接: https://ainewsradar.xyz/zh/news/8be6d8c063d5546a
-- 原始信源: Financial Times (https://www.ft.com/content/dc7749dc-0f40-44a6-80bc-7f747d383616)
-- 核心摘要: 亚马逊正洽购AI软件开发商Decart，旨在通过其模型效率优化技术提升云服务算力利用率，以制衡英伟达的市场统治地位
-- 核验事实清单:
-  * 【核心事件】亚马逊公司（Amazon）、Decart（目标收购对象）在云基础设施与AI计算领域：拟以约75亿美元收购Decart，旨在整合其模型优化软件以增强AWS算力性能
-  * 【起因与机理】应对AI计算瓶颈，通过软硬结合提升自研Trainium3芯片的竞争力，对标英伟达市场份额
-  * 【关键数据与实测】亚马逊正处于收购AI初创公司Decart的最后谈判阶段，交易估值约为75亿美元。
-  * 【各方立场与态度】此项交易预计于下周达成，旨在增强亚马逊在AI基础设施领域对抗英伟达的能力。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -320,26 +320,107 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,964 Stars，总计 53,445 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,964 Stars (总星标 53,445)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,964 Stars，总计 53,450 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,964 Stars (总星标 53,450)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
+
+### design.md
+- 落地页链接: https://ainewsradar.xyz/zh/tools/9cd3d57e39d17d18
+- 官方/开源地址: https://github.com/google-labs-code/design.md?ref=ainewsradar
+- 一句话亮点: 用于向编码代理描述视觉标识的格式规范。 DESIGN.md 使代理能够对设计系统有持久的、结构化的理解。
+- 核心概览: design.md 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +161 Stars，总计 29,035 Stars）。用于向编码代理描述视觉标识的格式规范。 DESIGN.md 使代理能够对设计系统有持久的、结构化的理解。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +161 Stars (总星标 29,035)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/google-labs-code/design.md.git`
+
+### OpenBot
+- 落地页链接: https://ainewsradar.xyz/zh/tools/62a8982796e5111f
+- 官方/开源地址: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
+- 一句话亮点: 封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。
+- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +844 Stars，总计 13,223 Stars）。封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +844 Stars (总星标 13,223)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/CopilotKit/OpenBot.git`
+
+### lobehub
+- 落地页链接: https://ainewsradar.xyz/zh/tools/dadf770f64fb5aff
+- 官方/开源地址: https://github.com/lobehub/lobehub?ref=ainewsradar
+- 一句话亮点: 🤯 LobeHub - 您团队中的超级代理。将超级代理添加到您的团队已使用的聊天中。他们自己承担工作，并且每周都会变得更好。
+- 核心概览: lobehub 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +498 Stars，总计 86,009 Stars）。🤯 LobeHub - 您团队中的超级代理。将超级代理添加到您的团队已使用的聊天中。他们自己承担工作，并且每周都会变得更好。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +498 Stars (总星标 86,009)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/lobehub/lobehub.git`
+
+### codex-security
+- 落地页链接: https://ainewsradar.xyz/zh/tools/a9682d2a9aa41848
+- 官方/开源地址: https://github.com/openai/codex-security?ref=ainewsradar
+- 一句话亮点: OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npm
+- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +694 Stars，总计 14,284 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +694 Stars (总星标 14,284)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/openai/codex-security.git`
+
+### ardia
+- 落地页链接: https://ainewsradar.xyz/zh/tools/4d8cf7d41550149d
+- 官方/开源地址: https://github.com/ardia-browser/ardia?ref=ainewsradar
+- 一句话亮点: 适用于 Mac 的免费 Chromium 浏览器：Arc 的侧边栏、Dia 的润色。在 Discord 上聊天：discord.gg/TdhuXrbcA6
+- 核心概览: ardia 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +519 Stars，总计 2,848 Stars）。适用于 Mac 的免费 Chromium 浏览器：Arc 的侧边栏、Dia 的润色。在 Discord 上聊天：discord.gg/TdhuXrbcA6，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +519 Stars (总星标 2,848)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/ardia-browser/ardia.git`
+
+### qwen-code
+- 落地页链接: https://ainewsradar.xyz/zh/tools/03ee96d1f7317517
+- 官方/开源地址: https://github.com/QwenLM/qwen-code?ref=ainewsradar
+- 一句话亮点: 位于您终端中的开源人工智能编码代理。
+- 核心概览: qwen-code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +711 Stars，总计 28,454 Stars）。面向AI 编程与开发场景的实用 AI 工具，支持终端命令行交互与自动化脚本执行，赋能全流程代码编写、审查与工程构建，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +711 Stars (总星标 28,454)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/QwenLM/qwen-code.git`
+
+### posthog
+- 落地页链接: https://ainewsradar.xyz/zh/tools/1f2b7790c96f827c
+- 官方/开源地址: https://github.com/PostHog/posthog?ref=ainewsradar
+- 一句话亮点: 🦔 PostHog 是构建自动驾驶产品的领先平台。我们的开发工具 – AI 可观测性、分析、会话重播、标志、实验、错误
+- 核心概览: posthog 是一款专注于 🔌 模型 API 与本地部署 的开源 AI 工具（本周新增 +249 Stars，总计 41,029 Stars）。🦔 PostHog 是构建自动驾驶产品的领先平台。我们的开发工具 – AI 可观测性、分析、会话重播、标志、实验、错误，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +249 Stars (总星标 41,029)', '🎯 针对 🔌 模型 API 与本地部署 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🔌 模型 API 与本地部署 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/PostHog/posthog.git`
 
 ### Claude-BugHunter
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0831ca93321eceea
 - 官方/开源地址: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - 一句话亮点: 用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式
-- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +11,269 Stars，总计 18,048 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +11,269 Stars (总星标 18,048)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +11,269 Stars，总计 18,069 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +11,269 Stars (总星标 18,069)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
+
+### PyRIT
+- 落地页链接: https://ainewsradar.xyz/zh/tools/97b6a2f9f5d7d2ab
+- 官方/开源地址: https://github.com/microsoft/PyRIT?ref=ainewsradar
+- 一句话亮点: Microsoft 的开源 AI 红队工具包。使用自动扫描、自适应多轮攻击和 Web UI 测试生成式 AI 系统。
+- 核心概览: PyRIT 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +174 Stars，总计 5,029 Stars）。Microsoft 的开源 AI 红队工具包。使用自动扫描、自适应多轮攻击和 Web UI 测试生成式 AI 系统。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +174 Stars (总星标 5,029)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/microsoft/PyRIT.git`
+
+### claude-code-templates
+- 落地页链接: https://ainewsradar.xyz/zh/tools/6d6dd5c1f1dfdf98
+- 官方/开源地址: https://github.com/davila7/claude-code-templates?ref=ainewsradar
+- 一句话亮点: Claude Code 组件的开源注册表和 CLI：代理、命令、技能、挂钩、MCP、设置和 mod
+- 核心概览: claude-code-templates 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +387 Stars，总计 34,112 Stars）。Claude Code 组件的开源注册表和 CLI：代理、命令、技能、挂钩、MCP、设置和 mod，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +387 Stars (总星标 34,112)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/davila7/claude-code-templates.git`
 
 ### ffmpeg-skill
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5765d0dd8c4b61bf
 - 官方/开源地址: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
-- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切
-- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +3,748 Stars，总计 9,797 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,748 Stars (总星标 9,797)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、Cursor 和 Codex。剪
+- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +3,748 Stars，总计 9,805 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,748 Stars (总星标 9,805)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🎬 视频剪辑与生成 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -347,8 +428,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f689ccec41c0119a
 - 官方/开源地址: https://github.com/dream-num/univer?ref=ainewsradar
 - 一句话亮点: 使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔
-- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +6,436 Stars，总计 31,302 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,436 Stars (总星标 31,302)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +6,436 Stars，总计 31,305 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,436 Stars (总星标 31,305)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/dream-num/univer.git`
 
@@ -356,8 +437,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,626 Stars，总计 32,276 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,626 Stars (总星标 32,276)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,626 Stars，总计 32,279 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,626 Stars (总星标 32,279)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
@@ -365,8 +446,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
 - 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
-- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,620 Stars，总计 21,224 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,620 Stars (总星标 21,224)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,620 Stars，总计 21,228 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,620 Stars (总星标 21,228)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -374,8 +455,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/1c5edee7c934959a
 - 官方/开源地址: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - 一句话亮点: 用于编码代理的 Chrome DevTools
-- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,268 Stars，总计 58,868 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,268 Stars (总星标 58,868)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,268 Stars，总计 58,872 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,268 Stars (总星标 58,872)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -383,8 +464,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5b083f806d24b3ce
 - 官方/开源地址: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - 一句话亮点: AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要
-- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,731 Stars，总计 72,836 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,731 Stars (总星标 72,836)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,731 Stars，总计 72,843 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,731 Stars (总星标 72,843)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -392,8 +473,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/3924c8f295303f30
 - 官方/开源地址: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - 一句话亮点: 安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释
-- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,700 Stars，总计 55,447 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,700 Stars (总星标 55,447)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,700 Stars，总计 55,451 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,700 Stars (总星标 55,451)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -401,8 +482,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,575 Stars，总计 10,253 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,575 Stars (总星标 10,253)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,575 Stars，总计 10,260 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,575 Stars (总星标 10,260)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -410,8 +491,8 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 落地页链接: https://ainewsradar.xyz/zh/tools/6eabee8f4881846c
 - 官方/开源地址: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - 一句话亮点: 保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席
-- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,815 Stars，总计 14,473 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,815 Stars (总星标 14,473)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,815 Stars，总计 14,476 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,815 Stars (总星标 14,476)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -459,87 +540,6 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
 - 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,782 Stars (总星标 1,937)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/fast-anything.git`
-
-### design.md
-- 落地页链接: https://ainewsradar.xyz/zh/tools/9cd3d57e39d17d18
-- 官方/开源地址: https://github.com/google-labs-code/design.md?ref=ainewsradar
-- 一句话亮点: 用于向编码代理描述视觉标识的格式规范。 DESIGN.md 使代理能够对设计系统有持久的、结构化的理解。
-- 核心概览: design.md 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +150 Stars，总计 29,028 Stars）。用于向编码代理描述视觉标识的格式规范。 DESIGN.md 使代理能够对设计系统有持久的、结构化的理解。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +150 Stars (总星标 29,028)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/google-labs-code/design.md.git`
-
-### OpenBot
-- 落地页链接: https://ainewsradar.xyz/zh/tools/62a8982796e5111f
-- 官方/开源地址: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
-- 一句话亮点: 封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。
-- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +922 Stars，总计 13,204 Stars）。封闭式人工智能机器人的开放、自托管替代方案。生产就绪、完全可定制，并可插入每个堆栈：任何代理、任何模型、任何工具。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +922 Stars (总星标 13,204)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/CopilotKit/OpenBot.git`
-
-### lobehub
-- 落地页链接: https://ainewsradar.xyz/zh/tools/dadf770f64fb5aff
-- 官方/开源地址: https://github.com/lobehub/lobehub?ref=ainewsradar
-- 一句话亮点: 🤯 LobeHub - 您团队中的超级代理。将超级代理添加到您的团队已使用的聊天中。他们自己承担工作，并且每周都会变得更好。
-- 核心概览: lobehub 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +489 Stars，总计 86,001 Stars）。🤯 LobeHub - 您团队中的超级代理。将超级代理添加到您的团队已使用的聊天中。他们自己承担工作，并且每周都会变得更好。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +489 Stars (总星标 86,001)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/lobehub/lobehub.git`
-
-### codex-security
-- 落地页链接: https://ainewsradar.xyz/zh/tools/a9682d2a9aa41848
-- 官方/开源地址: https://github.com/openai/codex-security?ref=ainewsradar
-- 一句话亮点: OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npm
-- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +774 Stars，总计 14,276 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +774 Stars (总星标 14,276)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/openai/codex-security.git`
-
-### qwen-code
-- 落地页链接: https://ainewsradar.xyz/zh/tools/03ee96d1f7317517
-- 官方/开源地址: https://github.com/QwenLM/qwen-code?ref=ainewsradar
-- 一句话亮点: 位于您终端中的开源人工智能编码代理。
-- 核心概览: qwen-code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +711 Stars，总计 28,454 Stars）。面向AI 编程与开发场景的实用 AI 工具，支持终端命令行交互与自动化脚本执行，赋能全流程代码编写、审查与工程构建，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +711 Stars (总星标 28,454)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/QwenLM/qwen-code.git`
-
-### posthog
-- 落地页链接: https://ainewsradar.xyz/zh/tools/1f2b7790c96f827c
-- 官方/开源地址: https://github.com/PostHog/posthog?ref=ainewsradar
-- 一句话亮点: 🦔 PostHog 是构建自动驾驶产品的领先平台。我们的开发工具 – AI 可观察性、分析、会话重放、标志、实验、错误
-- 核心概览: posthog 是一款专注于 🔌 模型 API 与本地部署 的开源 AI 工具（本周新增 +250 Stars，总计 41,022 Stars）。🦔 PostHog 是构建自动驾驶产品的领先平台。我们的开发工具 – AI 可观察性、分析、会话重放、标志、实验、错误，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +250 Stars (总星标 41,022)', '🎯 针对 🔌 模型 API 与本地部署 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🔌 模型 API 与本地部署 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/PostHog/posthog.git`
-
-### PyRIT
-- 落地页链接: https://ainewsradar.xyz/zh/tools/97b6a2f9f5d7d2ab
-- 官方/开源地址: https://github.com/microsoft/PyRIT?ref=ainewsradar
-- 一句话亮点: Microsoft 的开源 AI 红队工具包。使用自动扫描、自适应多轮攻击和 Web UI 测试生成式 AI 系统。
-- 核心概览: PyRIT 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +182 Stars，总计 5,027 Stars）。Microsoft 的开源 AI 红队工具包。使用自动扫描、自适应多轮攻击和 Web UI 测试生成式 AI 系统。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +182 Stars (总星标 5,027)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/microsoft/PyRIT.git`
-
-### claude-code-templates
-- 落地页链接: https://ainewsradar.xyz/zh/tools/6d6dd5c1f1dfdf98
-- 官方/开源地址: https://github.com/davila7/claude-code-templates?ref=ainewsradar
-- 一句话亮点: Claude Code 组件的开源注册表和 CLI：代理、命令、技能、挂钩、MCP、设置和 mod
-- 核心概览: claude-code-templates 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +524 Stars，总计 34,103 Stars）。Claude Code 组件的开源注册表和 CLI：代理、命令、技能、挂钩、MCP、设置和 mod，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +524 Stars (总星标 34,103)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/davila7/claude-code-templates.git`
-
-### yogurt
-- 落地页链接: https://ainewsradar.xyz/zh/tools/a3cea48fa89b965a
-- 官方/开源地址: https://yogurt.so?ref=ainewsradar
-- 一句话亮点: 私人人工智能会议记录保留在您的计算机上。没有会议机器人。适用于 Mac、Windows 和 Linux 的免费开源软件。格兰诺拉麦片、水獭麦片和 Firef 麦
-- 核心概览: yogurt 是一款专注于 📊 办公文档与 PPT 的开源 AI 工具（本周新增 +1,729 Stars，总计 2,949 Stars）。私人人工智能会议记录保留在您的计算机上。没有会议机器人。适用于 Mac、Windows 和 Linux 的免费开源软件。格兰诺拉麦片、水獭麦片和 Firef 麦片的替代品，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,729 Stars (总星标 2,949)', '🎯 针对 📊 办公文档与 PPT 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 📊 办公文档与 PPT 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/yogurt.git`
 
 ---
 
