@@ -102,7 +102,8 @@ def has_chinglish_seams(text: str) -> bool:
         r'Matt\s+AI',
         r'Sam\s+E\s+AI',
         r'Corbin\s+AI',
-        r'Prompt\s+Engineering\s+Daily'
+        r'Prompt\s+Engineering\s+Daily',
+        r'Stefan\s+3D\s+AI(?:\s+and\s+Top\s+3D\s+AI)?(?:\s*-\s*Tutorials\s*&\s*Reviews)?'
     ]
     s_check = re.sub(r'\b(?:' + '|'.join(known_creators) + r')\b', '', s_check, flags=re.IGNORECASE)
 
