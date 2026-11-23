@@ -111,6 +111,10 @@
    - 所有在 GitHub Actions CI 中被调用的核心 Python 脚本（`main.py`、`content_publisher.py`、`tool_news_publisher.py`、`curator_engine.py` 等），其 `if __name__ == '__main__':` 必须具备顶层 `try...except BaseException` 护盾，打印详细堆栈并实施自愈降级，严禁因偶发非关键报错以 exit code 1 导致整条 24x7 部署流水线中断。
 4. **数据存储序列化防污染与体积守恒 (Serialization Invariants)**：
    - 数据文件（`latest_news.json` 等）必须保持既定的序列化紧凑规范（`separators=(',', ':')`），严禁在修改时随意切换格式导致产生数十万行无意义 diff，污染代码审查与历史记录。
+5. **海量数据快速索引与零慢扫描铁律 (Fast Indexing & Zero Slow-Scan Invariants)**：
+   - 严禁对 `data/` 目录下的海量归档 JSON 文件（如 `master_archive.json`、`archive_news.json` 等 50MB+ 文件）使用 PowerShell `Select-String` 或未加过滤的命令行全文搜索，杜绝单线程全局正则遍历导致进程长时挂起。
+   - 数据定位必须优先编写轻量 Python 脚本，基于 `id` 或 `url` 进行内存哈希键值直查（$O(1)$ 秒级响应）。
+   - 代码与文本检索必须优先使用多线程索引工具（如 `ripgrep / rg`），并显式排除 `data/*.json` 归档仓或增加 `--max-filesize 5M` 限制。
 
 ---
 
@@ -181,6 +185,25 @@
    - 落地页必须具备完整前沿特稿全文（`paragraphs` / `paragraphs_zh`），严禁出现版权锁盒（`Protected by source publisher copyright or login requirements...`）占位符。
 4. **站点地图主动发现机制 (Sitemap Proactive Discovery)**：
    - 解析器集成 `crawl_deepmind_sitemap`，支持定期巡检 `https://institute.deepmind.com/sitemap.xml` 索引，实现对超级智能（ASI）、AI 伦理与宏观治理深度论文的秒级自主捕获与入库。
+
+---
+
+## 12. 彭博社信源固锁与高保真电讯穿透守则 (Bloomberg Source Invariants & Contract Lock)
+
+1. **信源契约完全固锁 (Contract Frozen)**：
+   - 彭博社信源解析器（`crawlers/bloomberg_crawler.py`）契约已正式冻结固锁。
+   - 凡涉及 `bloomberg.com` 的抓取与解析，必须统一经由 `crawl_bloomberg` 与 `is_bloomberg_url` 调度。
+2. **多源双向字段契约对齐 (Schema Dual-Track Compatibility)**：
+   - 在接收第三方文章提取器（如 `ArticleExtractor`）数据时，严禁假设单一图片字段名，必须双向兼容 `ext.get('cover_image') or ext.get('image_url')`，杜绝合法配图被系统静默抛弃。
+3. **电讯穿透质量加权评分与防金融爬虫截断 (Syndication Quality Scoring & Anti-Scraper)**：
+   - 二级电讯检索网络（Bing News RSS / open syndication）必须显式屏蔽无图、机翻且截断严重的金融股票评级爬虫（`marketscreener.com`、`zonebourse.com`、`streetinsider.com`、`investing.com`、`finviz.com` 等）。
+   - 遍历候选结果时，严禁仅凭首个达到 3 段文字的候选即盲目提前 `return`；必须执行多候选综合质量评分（含高清原图 +100 分、权威电讯伙伴 +30 分、含真实记者署名 +20 分），优先收录图文俱全的权威报道。
+   - 官方或授权的高清大图（1200×800 / 1200×628）必须通过 `localize_bloomberg_image` 自动下载并自托管至 `/images/bloomberg_{slug}.jpg`，严禁使用无关库存假图。
+4. **零图注与社媒推广杂质泄漏 (Zero Leaked Caption & Social Noise)**：
+   - 正文段落必须通过 `_clean_paragraph` 强力正则熔断剥离前置图注（如 `... | Bloomberg`）与社交分享引导语（`SHARE/SAVE X Facebook LinkedIn ...`）。
+   - 优先从电讯首段或正文中提取现场撰稿记者真实姓名（如 `Saritha Rai`），杜绝笼统标记为 `Bloomberg News`。
+5. **全站头条与数据看板全链路字段透传 (Full-Pipeline Cover Image Transit)**：
+   - 服务端精选头条引擎（`curator_engine.py`）在组装 `curated_column_highlights.json` 时，必须显式保留并透传资讯的 `cover_image`、`image_url` 与 `author` 字段，严禁在组装顶层卡片数据时遗漏核心视觉资产，导致前台误回退默认品牌卡。
 
 ---
 
