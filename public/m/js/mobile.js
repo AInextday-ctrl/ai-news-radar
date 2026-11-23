@@ -14,13 +14,14 @@
   'use strict';
 
   // 1. Language & Environment State
-  const isZh = Boolean(
+  let currentSiteLang = localStorage.getItem('ai_radar_user_site_lang');
+  let isZh = Boolean(
+    (currentSiteLang === 'chinese_simplified' || currentSiteLang === 'chinese_traditional') ||
     window.__IS_ZH || 
     window.location.pathname.startsWith('/zh') || 
     new URLSearchParams(window.location.search).get('lang') === 'zh'
   );
 
-  let currentSiteLang = localStorage.getItem('ai_radar_user_site_lang');
   if (!currentSiteLang) {
     currentSiteLang = isZh ? 'chinese_simplified' : 'english';
   }
@@ -186,7 +187,7 @@
     }
   };
 
-  const t = isZh ? I18N.zh : I18N.en;
+  let t = isZh ? I18N.zh : I18N.en;
 
   // 2. Global Runtime State
   let cachedData = null;
@@ -200,6 +201,78 @@
   // Modal active article state
   let currentModalItem = null;
   let currentModalActiveLang = isZh ? 'zh' : 'en';
+
+  // Dynamic Navigation & Language State Synchronizer
+  function updateLanguageState(lang, rerender = true) {
+    if (lang) {
+      currentSiteLang = lang;
+    } else {
+      currentSiteLang = localStorage.getItem('ai_radar_user_site_lang') || (window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
+    }
+    isZh = Boolean(
+      currentSiteLang === 'chinese_simplified' || 
+      currentSiteLang === 'chinese_traditional' || 
+      window.location.pathname.startsWith('/zh') || 
+      Boolean(window.__IS_ZH)
+    );
+    t = isZh ? I18N.zh : I18N.en;
+    currentModalActiveLang = isZh ? 'zh' : 'en';
+
+    // 1. Dynamic sync of top Channel Navigation tabs
+    const tabLabels = {
+      news: isZh ? '📰 行业资讯' : '📰 Intel & News',
+      social: isZh ? '💬 社交推文' : '💬 Social Radar',
+      videos: isZh ? '🎬 实战视频' : '🎬 Videos',
+      top: isZh ? '🔥 今日必读' : '🔥 Top 3 Digest'
+    };
+    document.querySelectorAll('[data-tab-target]').forEach(el => {
+      const target = el.dataset.tabTarget;
+      if (tabLabels[target]) {
+        el.innerHTML = tabLabels[target];
+      }
+    });
+
+    // 2. Dynamic sync of Bottom App Dock
+    const dockLabels = {
+      news: isZh ? '资讯' : 'News',
+      social: isZh ? '社交' : 'Social',
+      videos: isZh ? '视频' : 'Videos',
+      top: isZh ? '必读' : 'Top 3'
+    };
+    document.querySelectorAll('[data-dock-target]').forEach(el => {
+      const target = el.dataset.dockTarget;
+      const label = dockLabels[target];
+      if (label) {
+        const textSpan = el.querySelector('span.text-\\[10px\\]') || el.children[1];
+        if (textSpan) textSpan.textContent = label;
+      }
+    });
+
+    // 3. Search bar placeholder
+    const searchInput = document.getElementById('mobile-search-input');
+    if (searchInput) {
+      searchInput.placeholder = t.searchPlaceholder;
+    }
+
+    // 4. Desktop switcher button in footer
+    const deskBtn = document.querySelector('footer button[onclick*="switchToDesktop"]');
+    if (deskBtn) {
+      deskBtn.innerHTML = `<span>${t.switchToDesktop}</span>`;
+    }
+
+    // 5. Header Language Flag & Code
+    updateLangButtonLabel(currentSiteLang);
+
+    // 6. Sub-filters bar re-render
+    if (typeof renderSubFilters === 'function') {
+      renderSubFilters();
+    }
+
+    // 7. Rerender feed cards
+    if (rerender && cachedData && typeof renderCurrentView === 'function') {
+      renderCurrentView();
+    }
+  }
 
   // 3. Theme Init
   function initTheme() {
@@ -1520,6 +1593,7 @@
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateLanguageState(currentSiteLang, false);
     renderCurrentView();
   }
 
@@ -1738,7 +1812,7 @@
       if (typeof translate !== 'undefined' && translate.reset) {
         try { translate.reset(); } catch (e) {}
       }
-      updateLangButtonLabel('chinese_simplified');
+      updateLanguageState('chinese_simplified', true);
       showToast('已切换至简体中文');
       return;
     }
@@ -1755,12 +1829,12 @@
       if (typeof translate !== 'undefined' && translate.reset) {
         try { translate.reset(); } catch (e) {}
       }
+      updateLanguageState('chinese_traditional', true);
       ensureChineseConverter(() => {
         if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
           try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
         }
       });
-      updateLangButtonLabel('chinese_traditional');
       showToast('已切換至繁體中文');
       return;
     }
@@ -1777,7 +1851,7 @@
       if (typeof translate !== 'undefined' && translate.reset) {
         try { translate.reset(); } catch (e) {}
       }
-      updateLangButtonLabel('english');
+      updateLanguageState('english', true);
       showToast('Switched to English');
       return;
     }
@@ -1788,6 +1862,7 @@
     if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
       try { window.ChineseConverter.revertDomToSimplified(); } catch (e) {}
     }
+    updateLanguageState(targetLang, true);
     loadTranslatePlugin(targetLang);
   }
 
@@ -1863,7 +1938,12 @@
     }
     if (typeof translate !== 'undefined' && translate.execute) {
       setTimeout(() => {
-        try { translate.execute(); } catch (e) {}
+        try {
+          if (translate.changeLanguage) {
+            translate.changeLanguage(lang);
+          }
+          translate.execute();
+        } catch (e) {}
       }, 50);
     } else {
       loadTranslatePlugin(lang);
@@ -2050,6 +2130,21 @@
       const savedSiteLang = localStorage.getItem('ai_radar_user_site_lang');
       if (savedSiteLang) {
         currentSiteLang = savedSiteLang;
+        // Seamless cross-edition redirect if user lands on the wrong SSG edition
+        if ((savedSiteLang === 'chinese_simplified' || savedSiteLang === 'chinese_traditional') && !window.location.pathname.startsWith('/zh')) {
+          const search = window.location.search || '';
+          const hash = window.location.hash || '';
+          window.location.replace('/zh/m' + search + hash);
+          return;
+        } else if (savedSiteLang === 'english' && window.location.pathname.startsWith('/zh')) {
+          const search = window.location.search || '';
+          const hash = window.location.hash || '';
+          window.location.replace('/m' + search + hash);
+          return;
+        }
+
+        updateLanguageState(savedSiteLang, false);
+
         if (savedSiteLang === 'chinese_traditional' && isZh) {
           ensureChineseConverter(() => {
             if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
@@ -2059,8 +2154,9 @@
         } else if (savedSiteLang !== 'english' && savedSiteLang !== 'chinese_simplified' && savedSiteLang !== 'chinese_traditional') {
           loadTranslatePlugin(savedSiteLang);
         }
+      } else {
+        updateLanguageState(isZh ? 'chinese_simplified' : 'english', false);
       }
-      updateLangButtonLabel(currentSiteLang);
 
       // Parse URL hash to activate requested tab
       const rawHash = (window.location.hash || '').replace('#', '').trim().toLowerCase();

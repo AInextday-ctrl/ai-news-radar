@@ -12,7 +12,9 @@
         var preferDesk = sessionStorage.getItem('prefer_desktop') === '1';
         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
         if (isMobile && !preferDesk) {
-          window.location.replace('/zh/m');
+          var userLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+          var isEn = userLang === 'english' || (!userLang && ((navigator.language || navigator.userLanguage || '').toLowerCase().startsWith('en')));
+          window.location.replace(isEn ? '/m' : '/zh/m');
         }
       } catch (e) {}
     })();

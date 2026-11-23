@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <script>
+    (function() {
+      try {
+        var userLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+        if (userLang === 'chinese_simplified' || userLang === 'chinese_traditional') {
+          window.location.replace('/zh/m' + window.location.search + window.location.hash);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +26,7 @@
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/m">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="stylesheet" href="/css/style.min.css">
-  <link rel="stylesheet" href="/m/css/mobile.css?v=20261123_1135">
+  <link rel="stylesheet" href="/m/css/mobile.css?v=20261123_1400">
   <link rel="preload" href="/data/latest_news.json" as="fetch" crossorigin>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
@@ -299,7 +309,7 @@
   <script>
     window.__IS_ZH = false;
   </script>
-  <script src="/m/js/mobile.js?v=20261123_1135"></script>
+  <script src="/m/js/mobile.js?v=20261123_1400"></script>
   <!-- Microsoft Clarity (Deferred) -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
