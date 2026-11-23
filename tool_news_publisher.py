@@ -473,6 +473,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="/js/monetization.js"></script>
+  <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   
   <script type="application/ld+json">
@@ -579,7 +580,12 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
           {back_text}
         </a>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 notranslate">
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
+          <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
+          <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
+          <span class="text-[10px] text-slate-400">▼</span>
+        </button>
         <a href="{alt_zh_url if not is_zh else alt_en_url}" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
           {lang_switch_label}
         </a>
@@ -1717,6 +1723,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="/js/monetization.js"></script>
+  <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   
   <script type="application/ld+json">
@@ -1738,7 +1745,12 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
           {back_text}
         </a>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 notranslate">
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
+          <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
+          <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
+          <span class="text-[10px] text-slate-400">▼</span>
+        </button>
         <a href="{alt_zh_url if not is_zh else alt_en_url}" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
           {lang_switch_label}
         </a>

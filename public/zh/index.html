@@ -3880,9 +3880,13 @@ Business Recorder 报道称，Anthropic 于周四进行的 IPO 筹集了超过 5
               <span>📰</span>
               <span id="ai-modal-original-title">深度报道原文实录</span>
             </div>
-            <div id="ai-modal-lang-toggle" class="hidden flex items-center p-0.5 rounded-lg bg-slate-200/70 dark:bg-slate-800 text-[11px] font-semibold border border-slate-300/40 dark:border-slate-700/60">
+            <div id="ai-modal-lang-toggle" class="hidden flex items-center p-0.5 rounded-lg bg-slate-200/70 dark:bg-slate-800 text-[11px] font-semibold border border-slate-300/40 dark:border-slate-700/60 notranslate">
               <button id="ai-modal-btn-zh" type="button" class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer">中文精读</button>
               <button id="ai-modal-btn-en" type="button" class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer">English</button>
+              <button id="ai-modal-btn-more-lang" type="button" onclick="var s=document.getElementById('site-lang-select'); if(s){s.focus(); s.click();} else if(window.PageLanguage){window.PageLanguage.openPicker();}" class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer flex items-center gap-1 font-bold" title="切换全站 31 种语言版本">
+                <span>🌐</span>
+                <span id="ai-modal-lang-label">多语言</span>
+              </button>
             </div>
           </div>
           <div id="ai-modal-original-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal space-y-3.5"></div>

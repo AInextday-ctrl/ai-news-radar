@@ -666,12 +666,8 @@
       </div>
     `;
 
-    // Apply Traditional Chinese if active
-    if (isZh && currentSiteLang === 'chinese_traditional') {
-      if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
-        try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
-      }
-    }
+    // Apply Traditional Chinese or dynamic translate.js if active
+    applyCurrentTranslation();
   }
 
   // 10. Card Renderers
@@ -1190,7 +1186,7 @@
               <span id="article-modal-coverage-title">${t.coverageTitle}</span>
             </h4>
             ${hasBilingual ? `
-              <div class="flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 p-0.5 text-[10px] font-bold">
+              <div class="flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 p-0.5 text-[10px] font-bold notranslate">
                 <button 
                   type="button" 
                   id="btn-modal-lang-zh" 
@@ -1207,8 +1203,31 @@
                 >
                   🇬🇧 EN
                 </button>
+                <button 
+                  type="button" 
+                  id="btn-modal-lang-picker" 
+                  onclick="window.MobileApp.openLangPicker()" 
+                  class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer flex items-center gap-1 font-bold"
+                  title="31 Languages"
+                >
+                  <span>🌐</span>
+                  <span>${(ALL_SITE_LANGUAGES.find(it => it.id === currentSiteLang) || {}).code || '31'}</span>
+                </button>
               </div>
-            ` : ''}
+            ` : `
+              <div class="flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 p-0.5 text-[10px] font-bold notranslate">
+                <button 
+                  type="button" 
+                  id="btn-modal-lang-picker" 
+                  onclick="window.MobileApp.openLangPicker()" 
+                  class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer flex items-center gap-1 font-bold"
+                  title="31 Languages"
+                >
+                  <span>🌐</span>
+                  <span>${(ALL_SITE_LANGUAGES.find(it => it.id === currentSiteLang) || {}).code || '31'}</span>
+                </button>
+              </div>
+            `}
           </div>
 
           <div id="article-modal-paras" class="space-y-3 text-[13px] text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -1250,6 +1269,7 @@
               const parasContainer = document.getElementById('article-modal-paras');
               if (parasContainer) {
                 parasContainer.innerHTML = articleDiv.innerHTML;
+                applyCurrentTranslation();
               }
             }
           }
@@ -1263,6 +1283,8 @@
     modalOverlay.onclick = (e) => {
       if (e.target === modalOverlay) closeArticleModal();
     };
+
+    applyCurrentTranslation();
   }
 
   function renderArticleParas() {
@@ -1323,6 +1345,7 @@
         </div>
       `;
     }
+    applyCurrentTranslation();
   }
 
   function switchArticleLang(lang) {
@@ -1356,6 +1379,7 @@
               const parasContainer = document.getElementById('article-modal-paras');
               if (parasContainer) {
                 parasContainer.innerHTML = articleDiv.innerHTML;
+                applyCurrentTranslation();
               }
             }
           }
@@ -1763,16 +1787,24 @@
           translate.selectLanguageTag.show = false;
           translate.service.use('client.edge');
           translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
+          if (translate.listener) {
+            translate.listener.use = true;
+          }
           translate.ignore.class.push('notranslate');
           translate.ignore.id.push('lang-picker-modal');
-          translate.ignore.id.push('article-modal-overlay');
           translate.ignore.id.push('image-lightbox-modal');
+          translate.ignore.tag.push('code');
+          translate.ignore.tag.push('pre');
           translate.execute();
           translate.changeLanguage(targetLang);
           updateLangButtonLabel(targetLang);
           const langObj = ALL_SITE_LANGUAGES.find(it => it.id === targetLang);
           const name = langObj ? (isZh ? langObj.nameZh : langObj.nameEn) : targetLang;
           showToast(isZh ? `已实时翻译为 ${name}` : `Translated to ${name}`);
+
+          setTimeout(() => {
+            try { translate.execute(); } catch (e) {}
+          }, 120);
         }
       } catch (err) {
         console.warn('Translate execution error:', err);
@@ -1786,6 +1818,30 @@
       document.body.appendChild(script);
     } else {
       exec();
+    }
+  }
+
+  function applyCurrentTranslation() {
+    const lang = localStorage.getItem('ai_radar_user_site_lang') || currentSiteLang;
+    if (lang === 'chinese_traditional') {
+      ensureChineseConverter(() => {
+        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+          setTimeout(() => {
+            try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+          }, 30);
+        }
+      });
+      return;
+    }
+    if (lang === 'chinese_simplified' || lang === 'english') {
+      return;
+    }
+    if (typeof translate !== 'undefined' && translate.execute) {
+      setTimeout(() => {
+        try { translate.execute(); } catch (e) {}
+      }, 50);
+    } else {
+      loadTranslatePlugin(lang);
     }
   }
 

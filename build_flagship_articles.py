@@ -151,6 +151,7 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
   {f'<link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">\n  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">' if is_zh else ''}
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}
+  <script defer src="/js/page_language.js"></script>
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
@@ -455,6 +456,7 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}
+  <script defer src="/js/page_language.js"></script>
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",

@@ -1096,7 +1096,13 @@
     }
 
     function initTranslateEngine() {
-      if (typeof translate === 'undefined') return;
+      if (typeof translate === 'undefined') {
+        const savedLang = localStorage.getItem('ai_radar_user_site_lang') || currentSiteLang;
+        if (savedLang && savedLang !== 'english' && savedLang !== 'chinese_simplified' && savedLang !== 'chinese_traditional') {
+          loadAndExecuteTranslatePlugin(savedLang);
+        }
+        return;
+      }
 
       translate.selectLanguageTag.show = false;
       translate.service.use('client.edge');
@@ -1438,6 +1444,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
         window.ChineseConverter.revertDomToSimplified();
       }
+      // 刷新当前视图基底，确保所有卡片、标题和统计徽标基于纯净原文本重译
+      if (currentTab === 'all' && typeof renderUI === 'function') {
+        renderUI(cachedData);
+      } else if (typeof renderCategoryView === 'function') {
+        renderCategoryView(currentTab);
+      }
       loadAndExecuteTranslatePlugin(targetLang);
       updateNavTabsLanguage(targetLang);
     }
@@ -1450,13 +1462,51 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             translate.selectLanguageTag.show = false;
             translate.service.use('client.edge');
             translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
+            if (translate.listener) {
+              translate.listener.use = true;
+            }
             translate.ignore.class.push('notranslate');
             translate.ignore.id.push('nav-tabs');
+            translate.ignore.id.push('site-lang-container');
+            translate.ignore.id.push('lang-picker-modal');
             translate.ignore.class.push('code-box');
             translate.ignore.tag.push('code');
             translate.ignore.tag.push('pre');
+
+            // 注册全局专业精简术语表
+            if (translate.nomenclature && translate.nomenclature.append) {
+              try {
+                translate.nomenclature.append('chinese_simplified', 'english', `
+综合全景=Overview
+行业快讯=News
+社交雷达=Social Radar
+落地工具=Tools
+实战视频=Videos
+提示词库=Prompts
+全量归档=Archive
+全网热点=Trending
+前沿发声=Frontier Feed
+24h 热门讨论=Trending Buzz
+官方机构=Official Labs
+大V与研发者=Creators
+AI资讯雷达=AI News Radar
+今日 AI 风向标=Today AI Highlights
+自动刷新=Auto Refresh
+刷新=Refresh
+                `.trim());
+              } catch (e) {}
+            }
+
             translate.execute();
             translate.changeLanguage(targetLang);
+            updateNavTabsLanguage(targetLang);
+
+            setTimeout(() => {
+              try { translate.execute(); } catch (e) {}
+            }, 100);
+            setTimeout(() => {
+              try { translate.execute(); } catch (e) {}
+            }, 300);
           }
         } catch (err) {
           console.warn('Translate execution failed:', err);
@@ -1488,24 +1538,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         });
         return;
       }
-      if (lang === 'chinese_simplified') {
-        if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
-          setTimeout(() => {
-            try {
-              window.ChineseConverter.revertDomToSimplified();
-            } catch (e) {}
-          }, 30);
-        }
+      if (lang === 'chinese_simplified' || lang === 'english') {
         return;
       }
       if (typeof translate !== 'undefined' && translate.execute) {
-        if (lang && lang !== 'chinese_simplified' && lang !== 'english') {
-          setTimeout(() => {
-            try {
-              translate.execute();
-            } catch (e) {}
-          }, 60);
-        }
+        setTimeout(() => {
+          try {
+            translate.execute();
+          } catch (e) {}
+        }, 50);
+      } else {
+        loadAndExecuteTranslatePlugin(lang);
       }
     }
 
@@ -2287,6 +2330,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
           executeTabRender();
         }
+        applyCurrentTranslation();
       }
 
       // 仅当不在页面顶部时即时重置位置，避免平滑滚动动画期间产生中间态 CLS
@@ -10062,18 +10106,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                       originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
                     }
                     if (expandWrapEl) expandWrapEl.classList.add('hidden');
+                    applyCurrentTranslation();
                   }
                 }
               })
               .catch(() => {});
           }
+          applyCurrentTranslation();
           return;
         }
 
         if (langToggleEl) {
-          if (hasValidZh && hasValidEn) {
-            langToggleEl.classList.remove('hidden');
-            if (btnZhEl && btnEnEl) {
+          langToggleEl.classList.remove('hidden');
+          if (btnZhEl && btnEnEl) {
+            if (!hasValidZh || !hasValidEn) {
+              btnZhEl.classList.add('hidden');
+              btnEnEl.classList.add('hidden');
+            } else {
+              btnZhEl.classList.remove('hidden');
+              btnEnEl.classList.remove('hidden');
               if (activeArticleLang === 'zh') {
                 btnZhEl.className = 'px-2 py-0.5 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs font-bold transition-all';
                 btnEnEl.className = 'px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer';
@@ -10084,8 +10135,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               btnZhEl.onclick = () => { activeArticleLang = 'zh'; renderArticleView(); };
               btnEnEl.onclick = () => { activeArticleLang = 'en'; renderArticleView(); };
             }
-          } else {
-            langToggleEl.classList.add('hidden');
+          }
+          const moreLangLabelEl = document.getElementById('ai-modal-lang-label');
+          if (moreLangLabelEl && currentSiteLang) {
+            moreLangLabelEl.textContent = (currentSiteLang === 'english' ? 'EN' : (currentSiteLang === 'chinese_simplified' ? '简' : (currentSiteLang === 'chinese_traditional' ? '繁' : currentSiteLang.slice(0, 4).toUpperCase())));
           }
         }
 
@@ -10170,6 +10223,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             expandWrapEl.classList.add('hidden');
           }
         }
+        applyCurrentTranslation();
       };
 
       if (originalCardEl) {

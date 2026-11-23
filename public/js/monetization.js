@@ -504,6 +504,16 @@
   }
 
   function init() {
+    // Auto-mount Page Language Engine on static article detail pages (/news/..., /tools/..., /articles/...)
+    if (typeof window !== 'undefined' && !window.PageLanguage && !document.getElementById('site-lang-container') && !document.getElementById('mobile-feed')) {
+      if (!document.querySelector('script[src*="page_language.js"]')) {
+        var plScript = document.createElement('script');
+        plScript.src = '/js/page_language.js';
+        plScript.defer = true;
+        document.head.appendChild(plScript);
+      }
+    }
+
     injectStylesOnce();
     maybeLoadGlobalNetworks();
     observeThemeChanges();
