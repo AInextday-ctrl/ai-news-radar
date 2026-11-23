@@ -1,200 +1,134 @@
 {
-  "updated_at": "2026-11-23T00:37:41.497046+00:00",
+  "updated_at": "2026-11-23T05:06:29.527263+00:00",
   "topics": [
     {
-      "topic_id": "topic_nvidia_espionage_probe",
+      "topic_id": "topic_openai_astra_vs_anthropic_fable_cost_transparency",
       "heat_score": 9.8,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "地缘政治与供应链制裁",
-      "category_tag_en": "Geopolitics & Supply Chain",
-      "title_zh": "英伟达芯片走私深陷间谍调查，前CEO黄仁勋面临国会听证",
-      "title_en": "Nvidia Chip Smuggling Scandal Leads to Spy Probe and Congressional Hearing",
-      "summary_zh": "美情报机构证实英伟达前CEO黄仁勋的绯闻对象爱丽丝·黄卷入通过复杂空壳网络向中国输送高端AI芯片的走私案。财长贝森特已介入，要求彻底核查英伟达对华合规销售责任，黄仁勋将于12月1日出席国会闭门听证会，涉及高端算力流向的违规链条正被全面起底。",
-      "summary_en": "Intelligence agencies confirmed that Alice Huang, associate of ex-CEO Jensen Huang, managed a smuggling network channeling Nvidia chips to China. Treasury Secretary Bessent has demanded a full audit of Nvidia's compliance, with Jensen Huang scheduled for a closed-door Congressional hearing on December 1st, exposing massive cracks in chip export controls.",
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "旗舰模型实测与推理成本",
+      "category_tag_en": "Frontier Models & Inference Economics",
+      "title_zh": "GPT-6.2 Astra对决Claude Fable 5.2：OpenAI秒级响应压倒Anthropic五倍成本暴击",
+      "title_en": "GPT-6.2 Astra vs Claude Fable 5.2: OpenAI's Latency Win vs Anthropic's 5x Cost Penalty",
+      "summary_zh": "实测显示，OpenAI旗下的GPT-6.2 Astra与Anthropic的Claude Fable 5.2在编程与会计等基准任务上并驾齐驱，但Fable消耗代币激增导致单次推理成本飙升5倍以上。同时Artificial Analysis测评指出，Astra通过极端精简响应长度实现秒回，却在透明度与置信度评估上大幅落后，引发工业界关于“低价黑盒极速”与“高价可解释长思考”的路线裂变。",
+      "summary_en": "Recent hands-on benchmarks reveal OpenAI's GPT-6.2 Astra and Anthropic's Claude Fable 5.2 deliver comparable scores in coding and accounting, yet Fable incurs over 5x higher token costs. While Astra achieves lightning-fast answers by trimming explanations, it compromises transparency and uncertainty calibration, igniting a fierce debate between cheap opaque speed and costly reasoned precision.",
       "perspective_pro": {
-        "role_zh": "🟢 强硬监管派",
-        "role_en": "🟢 Regulatory Hawks",
-        "speaker_zh": "美国财政部及情报委员会",
-        "speaker_en": "U.S. Treasury & Intelligence Committees",
-        "point_zh": "必须切断高端芯片对华流向，任何私下的商业利益输送均被视为危及国家核心安全，对违规行为的零容忍是维护芯片主导权的唯一手段。",
-        "point_en": "Cutting off high-end compute to China is a national security imperative; private profit channels cannot supersede state-level containment strategies to maintain technological supremacy."
+        "role_zh": "🟢 效率工程派 / 工业落地实战者",
+        "role_en": "🟢 Efficiency Engineering Camp",
+        "speaker_zh": "OpenAI 部署团队与企业级 API 开发者",
+        "speaker_en": "OpenAI Infra Team & Enterprise API Devs",
+        "point_zh": "企业落地核心是单次调用成本与低延迟，Astra摒弃繁复冗长的冗余链式思考，将推理经济学拉入工业化普惠区间，秒回直出才是规模化Agent调用的未来。",
+        "point_en": "Production AI demands strict latency and unit economics; Astra trims verbose overthinking to make high-frequency agentic deployment financially viable."
       },
       "perspective_con": {
-        "role_zh": "🔴 行业理性派",
-        "role_en": "🔴 Industrial Pragmatists",
-        "speaker_zh": "跨国芯片分销商与供应链专家",
-        "speaker_en": "Global semiconductor distributors",
-        "point_zh": "全球化贸易体系错综复杂，过度单一的制裁只会催生更多地下走私网络，导致合规成本激增，却无法改变算力市场供需严重不平衡的现实。",
-        "point_en": "The complex global trade architecture makes total isolation impossible; heavy-handed sanctions only push the industry into black-market shadows, ballooning compliance costs without solving the fundamental supply-demand mismatch."
+        "role_zh": "🔴 严谨对齐派 / 体系安全研究者",
+        "role_en": "🔴 Strict Alignment & Safety Researchers",
+        "speaker_zh": "Anthropic 架构师与系统审校工程师",
+        "speaker_en": "Anthropic System Architects & AI Auditors",
+        "point_zh": "Astra为了刷低时延盲目压缩思维链与透明度指标，直接斩断了高风险任务的不确定性预警，这种牺牲可解释性换取的虚假性价比是致命的架构倒退。",
+        "point_en": "Sacrificing transparent reasoning chains for raw speed strips critical uncertainty calibration, creating dangerous black-box illusions in mission-critical tasks."
       },
       "linked_news": [
         {
-          "id": "3454b2ba82b03e07",
-          "title_zh": "英伟达前CEO深陷间谍渗透调查",
-          "title_en": "U.S. Tracked Alice Huang’s Contacts With China Spy Agency During Nvidia Affair",
-          "source": "New York Times",
-          "url": "https://www.nytimes.com/2026/11/22/us/politics/alice-huang-china-spy-agency-nvidia.html?unlocked_article_code=1.SlE.mMaV._G76gCoFrg-4&smid=url-share",
-          "image_url": "https://ainewsradar.xyz/images/nyt_f69447d0a7603623.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-23T00:30:02+00:00"
+          "id": "1974ed2d3f80d354",
+          "title_zh": "GPT-6.2 Astra 与 Claude Fable 5.2 实践：几乎在三个自定义会计、编码和数据任务上平分秋色，但 Fable 使用了更多的代币，成本高出 5 倍以上（Jessica Wachtel/Th",
+          "title_en": "GPT-6.2 Astra vs. Claude Fable 5.2 hands-on: nearly tied on three custom accounting, coding, and data tasks, but Fable used far more tokens and cost 5x+ as much (Jessica Wachtel/The New Stack)",
+          "source": "The New Stack",
+          "url": "https://thenewstack.io/gpt-6-2-astra-vs-claude-fable-5-2/",
+          "image_url": null,
+          "hot_score": 4,
+          "published_at": "2026-11-23T01:45:00+00:00"
         },
         {
-          "id": "bc288e1e02fc8b2d",
-          "title_zh": "美财长要求彻查英伟达对华违规芯片销售",
-          "title_en": "Bessent Calls on Nvidia to Provide Answers on Chip Sales to China",
-          "source": "New York Times",
-          "url": "https://www.nytimes.com/2026/11/22/business/scott-bessent-jensen-huang-nvidia.html",
-          "image_url": "https://ainewsradar.xyz/images/nyt_23adfe5a80042f10.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-22T19:50:01+00:00"
-        },
-        {
-          "id": "4b9411cc12cb8e23",
-          "title_zh": "新加坡华裔李明涉嫌向中国违规出口英伟达芯片",
-          "title_en": "The Alice Huang Associate Accused of Funneling Nvidia Chips to China",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/li-ming-megaspeed-nvidia-chips-china-6260d836?st=HzXMZU",
-          "image_url": "https://ainewsradar.xyz/images/wsj_5096e23743ae409c.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-22T05:45:01+00:00"
+          "id": "215f6f625f6c6109",
+          "title_zh": "OpenAI新模型Astra与Sol侧重响应效率牺牲透明度",
+          "title_en": "GPT-6.2 Astra and Sol get to the point faster but score lower on transparency than Claude",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/gpt-6-2-astra-and-sol-get-to-the-point-faster-but-score-lower-on-transparency-than-claude/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_420d6516b8554737.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-22T09:41:37+00:00"
         }
       ],
-      "linked_tweets": [],
+      "linked_tweets": [
+        {
+          "id": "9a17e8fbdde9259c",
+          "author": "Yann LeCun",
+          "author_handle": "@ylecun",
+          "author_avatar": "https://unavatar.io/x/ylecun",
+          "content_zh": "@RajeswarSai LLM 后期培训非常昂贵，正是因为 RL 的样本效率太低了。\n\n在现实世界中，也就是我的蛋糕幻灯片的主题，强化学习只能发挥次要作用，正是因为它的样本效率低下。",
+          "content_en": "@RajeswarSai LLM post-training is so insanely expensive precisely because RL is so damn sample inefficient.\n\nIn the real world, which was the subject of my cake slide, RL can only play a minor role precisely because of its sample inefficiency.",
+          "url": "https://x.com/ylecun/status/2124716000289464562",
+          "platform": "x"
+        },
+        {
+          "id": "b7a46d016669bf56",
+          "author": "Mustafa Suleyman",
+          "author_handle": "@mustafasuleyman",
+          "author_avatar": "https://unavatar.io/x/mustafasuleyman",
+          "content_zh": "我们完全支持 OpenAI 的透明度倡议。感谢@merettm @markchen90 @gdb @sama 的带路。我们进入这个领域是为了构建真正造福于人类的安全通用人工智能。人工智能安全最困难的部分之一是协调，而这",
+          "content_en": "We fully support OpenAI's transparency initiative. Thanks to @merettm @markchen90 @gdb @sama for leading the way. We all got into this field to build safe AGI that is genuinely good for humanity. One of the hardest parts of AI safety is coordination, and this",
+          "url": "https://x.com/mustafasuleyman/status/2124663594449318173",
+          "platform": "x"
+        }
+      ],
       "linked_tool": {
         "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
         "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
         "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
       },
       "linked_counts": {
-        "news": 3,
-        "tweets": 0,
+        "news": 2,
+        "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_nvidia_espionage_probe",
+      "id": "topic_openai_astra_vs_anthropic_fable_cost_transparency",
       "stance_matrix": {
-        "pro_point_zh": "必须切断高端芯片对华流向，任何私下的商业利益输送均被视为危及国家核心安全，对违规行为的零容忍是维护芯片主导权的唯一手段。",
-        "pro_author": "美国财政部及情报委员会",
-        "con_point_zh": "全球化贸易体系错综复杂，过度单一的制裁只会催生更多地下走私网络，导致合规成本激增，却无法改变算力市场供需严重不平衡的现实。",
-        "con_author": "跨国芯片分销商与供应链专家",
+        "pro_point_zh": "企业落地核心是单次调用成本与低延迟，Astra摒弃繁复冗长的冗余链式思考，将推理经济学拉入工业化普惠区间，秒回直出才是规模化Agent调用的未来。",
+        "pro_author": "OpenAI 部署团队与企业级 API 开发者",
+        "con_point_zh": "Astra为了刷低时延盲目压缩思维链与透明度指标，直接斩断了高风险任务的不确定性预警，这种牺牲可解释性换取的虚假性价比是致命的架构倒退。",
+        "con_author": "Anthropic 架构师与系统审校工程师",
         "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "Cutting off high-end compute to China is a national security imperative; private profit channels cannot supersede state-level containment strategies to maintain technological supremacy.",
-        "con_point_en": "The complex global trade architecture makes total isolation impossible; heavy-handed sanctions only push the industry into black-market shadows, ballooning compliance costs without solving the fundamental supply-demand mismatch.",
+        "pro_point_en": "Production AI demands strict latency and unit economics; Astra trims verbose overthinking to make high-frequency agentic deployment financially viable.",
+        "con_point_en": "Sacrificing transparent reasoning chains for raw speed strips critical uncertainty calibration, creating dangerous black-box illusions in mission-critical tasks.",
         "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
       }
     },
     {
-      "topic_id": "topic_riemann_hypothesis_formal_proof",
-      "heat_score": 9.7,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "学术突破与形式验证",
-      "category_tag_en": "Frontier Focus",
-      "title_zh": "斯坦福数学家完成黎曼猜想形式化证明",
-      "title_en": "Stanford Mathematician Levent Alpöge Completes Formal Proof of Riemann Hypothesis",
-      "summary_zh": "斯坦福数学家勒文特·阿尔珀格通过1700万行Lean代码，完成了对数学皇冠明珠——黎曼猜想的证明，并获得Mathlib社区官方认证。此事件标志着数学证明进入了“形式化验证时代”，即通过AI辅助和计算机语言消除人类逻辑推演的漏洞。",
-      "summary_en": "Stanford mathematician Levent Alpöge has formally proven the Riemann Hypothesis using 17 million lines of Lean code, officially verified by the Mathlib community. This milestone signals the dawn of the 'formal verification era' in mathematics, leveraging machine-checked logic to eliminate human error.",
+      "topic_id": "topic_tesla_fsd_v15_generative_video_vs_simulator",
+      "heat_score": 9.6,
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "端到端自动驾驶与生成式世界模型",
+      "category_tag_en": "Autonomous Driving & Generative World Models",
+      "title_zh": "特斯拉推送FSD V15彻底抛弃游戏引擎：端到端AI视频生成能否通向无监督驾驶？",
+      "title_en": "Tesla FSD v15 Drops Game Engines for Real-Time AI Video: The Unsupervised Driving Bet",
+      "summary_zh": "特斯拉正式向车主推送FSD V15，核心突破在于彻底移除了基于游戏引擎的传统环境重建流水线，改为完全由实时生成式AI视频扩散模型直接渲染车辆周边全貌。马斯克宣称这是通向明年落地‘无监督FSD’的必经之路，但业界对其高帧率生成的物理保真度与突发极端Corner Case下的幻觉风险产生剧烈分歧。",
+      "summary_en": "Tesla rolled out FSD v15, abandoning legacy game-engine graphics to reconstruct surroundings via real-time generative AI video models. Elon Musk claimed this paradigm is vital for unsupervised autonomous transit, triggering profound skepticism regarding physical consistency and hallucinated artifacts in safety-critical edge scenarios.",
       "perspective_pro": {
-        "role_zh": "🟢 形式化验证推动派",
-        "role_en": "🟢 Formal Verification Proponents",
-        "speaker_zh": "Lean与Mathlib社区核心开发者",
-        "speaker_en": "Lean and Mathlib community developers",
-        "point_zh": "传统人类审稿机制已无法应对高度复杂的现代数学，Lean等机器证明语言能提供100%的逻辑可靠性，是科学发现的未来。",
-        "point_en": "Human-based peer review can no longer handle the complexity of modern math; languages like Lean provide 100% logical reliability, representing the definitive future of mathematical discovery."
+        "role_zh": "🟢 神经感知统一派 / 纯视觉信徒",
+        "role_en": "🟢 Neural End-to-End Evangelists",
+        "speaker_zh": "特斯拉自动驾驶架构组与端到端支持者",
+        "speaker_en": "Tesla Autopilot Core Team & E2E Believers",
+        "point_zh": "传统矢量渲染引擎割裂了物理世界与感知层，实时神经视频生成代表了真正自洽的端到端世界模型，让系统直接在光流与像素级隐空间完成因果推演与无缝决策。",
+        "point_en": "Synthetic game engines introduce artificial perception bottlenecks; pure generative neural simulation represents a unified world model reasoning directly in real-time continuous video space."
       },
       "perspective_con": {
-        "role_zh": "🔴 传统学派怀疑者",
-        "role_en": "🔴 Traditional Academic Skeptics",
-        "speaker_zh": "基础数学界资深理论家",
-        "speaker_en": "Theoretical mathematicians",
-        "point_zh": "过分依赖机器验证可能剥夺数学的直觉美感。如果证明本身无法被人类直观理解，那么这种逻辑符号的堆砌是否失去了数学研究的本质意义？",
-        "point_en": "Over-reliance on machine verification may strip math of its intuitive elegance; if a proof remains incomprehensible to human thought, the essence of mathematical exploration is compromised."
-      },
-      "linked_news": [
-        {
-          "id": "486ec56f1c65a3f9",
-          "title_zh": "斯坦福数学家完成黎曼猜想的形式化证明",
-          "title_en": "Lean and Mathlib community officially confirms Levent Alpöge's proof of the Riemann hypothesis is correct",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/lean-and-mathlib-community-officially-confirms-levent-alpoges-proof-of-the-riemann-hypothesis-is-correct/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_3686cba3f1311214.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-22T11:08:31+00:00"
-        },
-        {
-          "id": "c2d9fa550c13be18",
-          "title_zh": "数学界证实勒文·阿尔伯格完成黎曼猜想形式化证明",
-          "title_en": "A joint statement by the Lean and Mathlib communities says \"we have full confidence that Alpöge's proof of the Riemann Hypothesis is correct\" (Lean community blog)",
-          "source": "Lean community blog",
-          "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
-          "image_url": "https://leanprover-community.github.io/blog/meta-twitter.png",
-          "hot_score": 5,
-          "published_at": "2026-11-22T06:00:02+00:00"
-        }
-      ],
-      "linked_tweets": [],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
-      },
-      "linked_counts": {
-        "news": 2,
-        "tweets": 0,
-        "has_tool": true
-      },
-      "id": "topic_riemann_hypothesis_formal_proof",
-      "stance_matrix": {
-        "pro_point_zh": "传统人类审稿机制已无法应对高度复杂的现代数学，Lean等机器证明语言能提供100%的逻辑可靠性，是科学发现的未来。",
-        "pro_author": "Lean与Mathlib社区核心开发者",
-        "con_point_zh": "过分依赖机器验证可能剥夺数学的直觉美感。如果证明本身无法被人类直观理解，那么这种逻辑符号的堆砌是否失去了数学研究的本质意义？",
-        "con_author": "基础数学界资深理论家",
-        "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
-        "pro_point_en": "Human-based peer review can no longer handle the complexity of modern math; languages like Lean provide 100% logical reliability, representing the definitive future of mathematical discovery.",
-        "con_point_en": "Over-reliance on machine verification may strip math of its intuitive elegance; if a proof remains incomprehensible to human thought, the essence of mathematical exploration is compromised.",
-        "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
-      }
-    },
-    {
-      "topic_id": "topic_coding_agent_deployment_gap",
-      "heat_score": 9.5,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "AI编程与效能瓶颈",
-      "category_tag_en": "AI Engineering & Productivity",
-      "title_zh": "AI编程智能体实测任务成功率不足一成",
-      "title_en": "AI Coding Agents Show Less Than 10% Success Rate in Real-world Simulation",
-      "summary_zh": "最新研究显示，尽管AI编程智能体在SWE-bench测试中表现卓越，但在模拟真实工作环境的集成项目协作中，任务完成率却不足10%。与此同时，多家银行因合规与安全风险封禁第三方AI代理，揭示了实验室高分与生产环境低产的巨大落差。",
-      "summary_en": "Recent research reveals that while AI coding agents shine on benchmarks like SWE-bench, they complete fewer than 10% of tasks in integrated workplace simulations. Simultaneously, major banks are banning AI agents due to security risks, highlighting a massive gap between lab performance and production reliability.",
-      "perspective_pro": {
-        "role_zh": "🟢 技术迭代派",
-        "role_en": "🟢 Tech-Evo Optimists",
-        "speaker_zh": "Agent生态开发者",
-        "speaker_en": "AI Agent ecosystem builders",
-        "point_zh": "基准测试的失败仅意味着现有的Agent框架尚未处理好复杂上下文交互，随着上下文窗口的扩大和推理引擎的优化，突破瓶颈只是时间问题。",
-        "point_en": "Benchmark failures only indicate that current frameworks haven't mastered long-context collaboration yet; with better inference engines and window scaling, overcoming these bottlenecks is inevitable."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业理性派",
-        "role_en": "🔴 Industrial Rationalists",
-        "speaker_zh": "大型企业CTO与安全专家",
-        "speaker_en": "Enterprise CTOs & Security Experts",
-        "point_zh": "不仅是技术瓶颈，更是安全灾难。在无法解决密钥窃取和非确定性逻辑输出的前提下，部署AI代理等同于将企业的核心数字防御门户敞开。",
-        "point_en": "It’s not just a technical bottleneck, but a security catastrophe; without fixing key-theft vulnerabilities and non-deterministic logic, deploying agents is like leaving the corporate digital vault wide open."
+        "role_zh": "🔴 工业控制安全派 / 物理底线防守者",
+        "role_en": "🔴 Deterministic Robotics & Safety Skeptics",
+        "speaker_zh": "自动驾驶感知仿真专家与车规级验证工程师",
+        "speaker_en": "Autonomous Vehicle Safety Auditors & Simulation Experts",
+        "point_zh": "生成式AI在本质上无法摆脱概率幻觉，将几何确定的避障决策押注在没有严格因果约束的像素插值生成上，是在把生命安全置于高功耗渲染的随机抖动之中。",
+        "point_en": "Generative diffusion remains inherently probabilistic; relying on hallucination-prone pixel synthesis instead of deterministically verified geometric spatial bounds creates severe safety liabilities."
       },
       "linked_news": [
         {
@@ -208,14 +142,96 @@
           "published_at": "2026-11-22T15:15:48+00:00"
         },
         {
-          "id": "e14ce2313f20a4f3",
-          "title_zh": "AI推理平台安全漏洞致用户密钥遭大规模窃取",
-          "title_en": "Security researchers show how cheap AI inference providers steal keys and snoop on users",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/security-researchers-show-how-cheap-ai-inference-providers-steal-keys-and-snoop-on-users/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_be860ab51c62a686.jpg",
+          "id": "5870c79890243395",
+          "title_zh": "特斯拉推送FSD V15，引入实时AI视频渲染",
+          "title_en": "Tesla rolls out FSD v15, featuring a photorealistic rendering of car surroundings; Elon Musk says it is real-time AI video generation without using game engines (Mike Pearl/Gizmodo)",
+          "source": "Gizmodo",
+          "url": "https://gizmodo.com/its-like-gta-musk-touts-video-game-like-update-to-tesla-fsd-2000843584",
+          "image_url": null,
           "hot_score": 5,
-          "published_at": "2026-11-22T12:07:56+00:00"
+          "published_at": "2026-11-22T06:40:16+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "8d45cd2a96c71966",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
+          "content_zh": "@davidmarcus 希望能在明年年底上市。\n\n这对于无人监管的 FSD 非常重要，因此乘客可以在任何地方拥有高带宽来工作和娱乐。",
+          "content_en": "@davidmarcus Hopefully available towards the end of next year. \n\nThis will be important for unsupervised FSD, so passengers have high bandwidth everywhere for work and entertainment.",
+          "url": "https://x.com/elonmusk/status/2124673053246312848",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_deepseek_r1_ollama_local_sota",
+        "name": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
+        "title_zh": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
+        "title_en": "DeepSeek Local Deployment & GPU Memory Tuning via Ollama",
+        "desc_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek 系列推理模型时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+        "desc_en": "Optimized Ollama Modelfile for running DeepSeek reasoning models on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Ollama / OpenWebUI / vLLM",
+        "config_filename": "Modelfile.deepseek-opt"
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_tesla_fsd_v15_generative_video_vs_simulator",
+      "stance_matrix": {
+        "pro_point_zh": "传统矢量渲染引擎割裂了物理世界与感知层，实时神经视频生成代表了真正自洽的端到端世界模型，让系统直接在光流与像素级隐空间完成因果推演与无缝决策。",
+        "pro_author": "特斯拉自动驾驶架构组与端到端支持者",
+        "con_point_zh": "生成式AI在本质上无法摆脱概率幻觉，将几何确定的避障决策押注在没有严格因果约束的像素插值生成上，是在把生命安全置于高功耗渲染的随机抖动之中。",
+        "con_author": "自动驾驶感知仿真专家与车规级验证工程师",
+        "action_advice_zh": "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。",
+        "pro_point_en": "Synthetic game engines introduce artificial perception bottlenecks; pure generative neural simulation represents a unified world model reasoning directly in real-time continuous video space.",
+        "con_point_en": "Generative diffusion remains inherently probabilistic; relying on hallucination-prone pixel synthesis instead of deterministically verified geometric spatial bounds creates severe safety liabilities.",
+        "action_advice_en": "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
+      }
+    },
+    {
+      "topic_id": "topic_ai_agents_enterprise_failure_and_bank_crackdown",
+      "heat_score": 9.4,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "智能体实战破防与金融封杀",
+      "category_tag_en": "Agentic Failure Modes & Financial Ban",
+      "title_zh": "AI智能体真实协作完成率暴跌至10%：摩根大通领衔封杀第三方代理凭证访问",
+      "title_en": "AI Coding Agents Sub-10% Workplace Success Exposes Agent Gap as Major Banks Ban Credential Access",
+      "summary_zh": "最新行业研究显示，尽管AI编程与通用Agent在单项隔离测试中频频刷榜，但在模拟真实企业多模块协作环境中，任务成功率断崖式跌破10%。与此同时，摩根大通、富国银行等华尔街巨头集体更新合规协议，明令禁止第三方AI代理接管用户凭据自动登录操作，引发关于智能体协议（MCP/A2A）问责主体缺位与商业落地‘纸面繁荣’的尖锐交锋。",
+      "summary_en": "New workplace simulation benchmarks revealed AI coding agents complete fewer than 1 in 10 tasks in integrated project workflows despite soaring benchmark scores. Concurrently, banking giants like JPMorgan and Wells Fargo banned third-party AI agents from using customer credentials, highlighting a severe trust gap and liability void around agentic automation.",
+      "perspective_pro": {
+        "role_zh": "🟢 Agent生态推进派 / 协议标准化倡导者",
+        "role_en": "🟢 Agentic Infrastructure Developers",
+        "speaker_zh": "MCP/A2A协议开发者与自主智能体创投阵营",
+        "speaker_en": "Agentic Protocol Creators & Venture Builders",
+        "point_zh": "现有失败源于银行和企业系统仍停留在石器时代的封闭GUI接口，通过推广标准化MCP协议与沙盒鉴权，机器代理将彻底接管繁杂劳动力，银行的封锁不过是旧秩序的阻扎。",
+        "point_en": "Failures stem from brittle legacy interfaces; moving toward native protocols like MCP and audited programmatic permissions will inevitably unlock trillion-dollar autonomous enterprise workflows."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 金融合规风控派 / 工业生产防伪者",
+        "role_en": "🔴 Financial Risk Controllers & Enterprise Pragmatists",
+        "speaker_zh": "华尔街合规总监与企业IT安全委员会",
+        "speaker_en": "Wall Street Chief Compliance Officers & IT SecOps",
+        "point_zh": "不到10%的实际交付率证明Agent目前只是脆弱的玩具，一旦越权下单或引入致命坏账无人担责，在严密责任闭环与法定身份验证确立前，全面封禁是唯一的理性自保。",
+        "point_en": "A 10% operational success rate proves current agents are fragile liabilities; without clear contractual accountability and legal attribution for erratic actions, total access prohibition is necessary."
+      },
+      "linked_news": [
+        {
+          "id": "e3a7ac59fcc5ace0",
+          "title_zh": "AI编程智能体实测：模拟环境任务完成率不足一成",
+          "title_en": "AI coding agents ace isolated tests but complete fewer than one in ten tasks in a simulated workplace",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/ai-coding-agents-ace-isolated-tests-but-complete-fewer-than-one-in-ten-tasks-in-a-simulated-workplace/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_53f6ef00db8447c6.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-22T15:15:48+00:00"
         },
         {
           "id": "f9552b717296089d",
@@ -230,52 +246,54 @@
       ],
       "linked_tweets": [
         {
-          "id": "e3ddb691b5fc5c49",
-          "author": "Swyx (Shawn Wang)",
-          "author_handle": "@swyx",
-          "author_avatar": "https://unavatar.io/x/swyx",
-          "content_zh": "@maddiehfaulkner @leodev @ByJohnnyLee @boatdotdev @namespacelabs @20thr @gabe_guerra_ 我不喜欢运行我的 mac 应用程序和 ios 应用程序，我必须向支持人员发送电子邮件。似乎是 xplatform dev 的 v 标准需求",
-          "content_en": "@maddiehfaulkner @leodev @ByJohnnyLee @boatdotdev @namespacelabs @20thr @gabe_guerra_ i didnt love that to run my mac app and ios app i had to email support. seems like a v standard need for xplatform dev https://t.co/NKNgpZHKdy",
-          "url": "https://x.com/swyx/status/2124623464984461698",
+          "id": "9aa8a8425bc268a2",
+          "author": "@Kalshi",
+          "author_handle": "@Kalshi",
+          "author_avatar": "https://unavatar.io/x/Kalshi",
+          "content_zh": "突发新闻：苹果正在开发一款人工智能代理，可以浏览网页、使用应用程序和编写代码",
+          "content_en": "BREAKING: Apple is developing an AI agent that can browse the web, use apps, and write code",
+          "url": "https://x.com/Kalshi/status/2124670013466378241",
           "platform": "x"
         },
         {
-          "id": "f21a8f69157b863a",
-          "author": "Thibault Sottiaux (Tibo)",
-          "author_handle": "@thsottiaux",
-          "author_avatar": "https://unavatar.io/x/thsottiaux",
-          "content_zh": "RT @feedthejim：如果您在过去几天升级了 ChatGPT 应用程序，您可能已经注意到它明显更快了！\n\n我们基本上挑战自己在一周内获得尽可能多的胜利，结果非常有趣:)\n\n我想我应该分享一些我最喜欢的改变！",
-          "content_en": "RT @feedthejim: If you've upgraded your ChatGPT app in the past few days, you may have noticed that it is noticeably faster!\n\nWe basically challenged ourselves to land as many wins as possible in a week and it ended up being quite fun :)\n\nI figured I'd share some of my favorite changes!",
-          "url": "https://x.com/thsottiaux/status/2124614364535922870",
+          "id": "ba1f0a507c93f4ef",
+          "author": "@PineLabs",
+          "author_handle": "@PineLabs",
+          "author_avatar": "https://unavatar.io/x/PineLabs",
+          "content_zh": "如果人工智能代理买错了，谁来买单？ The Agentic Fine Print 第 1 版由 INSEAD 的 Ben Charoenwong 教授领导，汇集了首席产品官 Vijeth Pandit 和首席技术官 Sanjeev Kumar 的观点",
+          "content_en": "If an AI agent gets a purchase wrong, who picks up the tab? Edition 1 of The Agentic Fine Print, led by Prof. Ben Charoenwong, INSEAD, brings together perspectives from Vijeth Pandit, Chief Product Officer, and Sanjeev Kumar, Chief Technology Officer, both",
+          "url": "https://x.com/PineLabs/status/2124669269548101809",
           "platform": "x"
         }
       ],
       "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "id": "wf_claude_desktop_mcp_core4",
+        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
+        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Claude Desktop / Cline / Roo Code",
+        "config_filename": "claude_desktop_config.json"
       },
       "linked_counts": {
-        "news": 3,
+        "news": 2,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_coding_agent_deployment_gap",
+      "id": "topic_ai_agents_enterprise_failure_and_bank_crackdown",
       "stance_matrix": {
-        "pro_point_zh": "基准测试的失败仅意味着现有的Agent框架尚未处理好复杂上下文交互，随着上下文窗口的扩大和推理引擎的优化，突破瓶颈只是时间问题。",
-        "pro_author": "Agent生态开发者",
-        "con_point_zh": "不仅是技术瓶颈，更是安全灾难。在无法解决密钥窃取和非确定性逻辑输出的前提下，部署AI代理等同于将企业的核心数字防御门户敞开。",
-        "con_author": "大型企业CTO与安全专家",
+        "pro_point_zh": "现有失败源于银行和企业系统仍停留在石器时代的封闭GUI接口，通过推广标准化MCP协议与沙盒鉴权，机器代理将彻底接管繁杂劳动力，银行的封锁不过是旧秩序的阻扎。",
+        "pro_author": "MCP/A2A协议开发者与自主智能体创投阵营",
+        "con_point_zh": "不到10%的实际交付率证明Agent目前只是脆弱的玩具，一旦越权下单或引入致命坏账无人担责，在严密责任闭环与法定身份验证确立前，全面封禁是唯一的理性自保。",
+        "con_author": "华尔街合规总监与企业IT安全委员会",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Benchmark failures only indicate that current frameworks haven't mastered long-context collaboration yet; with better inference engines and window scaling, overcoming these bottlenecks is inevitable.",
-        "con_point_en": "It’s not just a technical bottleneck, but a security catastrophe; without fixing key-theft vulnerabilities and non-deterministic logic, deploying agents is like leaving the corporate digital vault wide open.",
+        "pro_point_en": "Failures stem from brittle legacy interfaces; moving toward native protocols like MCP and audited programmatic permissions will inevitably unlock trillion-dollar autonomous enterprise workflows.",
+        "con_point_en": "A 10% operational success rate proves current agents are fragile liabilities; without clear contractual accountability and legal attribution for erratic actions, total access prohibition is necessary.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
