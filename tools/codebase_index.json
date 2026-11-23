@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-23 10:05:45 UTC",
-  "total_files": 105,
-  "total_symbols": 1266,
+  "updated_at": "2026-11-23 12:18:22 UTC",
+  "total_files": 106,
+  "total_symbols": 1270,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -580,8 +580,8 @@
       ]
     },
     "content_publisher.py": {
-      "size": 273263,
-      "mtime": 1795368626.217141,
+      "size": 277020,
+      "mtime": 1795436087.4509633,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -647,14 +647,15 @@
         },
         "resolve_news_lead_image_url": {
           "line": 399,
-          "doc": "Resolve news lead image URL cleanly without wsrv.nl proxy for ainewsradar.xyz / local images.",
+          "doc": "Resolve news lead image URL cleanly using lightweight WebP thumbnails (~8-12 KB) for ainewsradar.xyz / local images.",
           "args": [
             "img",
-            "width"
+            "width",
+            "prefer_thumbnail"
           ]
         },
         "safe_text": {
-          "line": 420,
+          "line": 425,
           "doc": "",
           "args": [
             "text",
@@ -662,31 +663,31 @@
           ]
         },
         "parse_markdown_table": {
-          "line": 431,
+          "line": 436,
           "doc": "把 Markdown 表格转换为语义化、自适应的 HTML <table>",
           "args": [
             "table_lines"
           ]
         },
         "_markdown_to_clean_html": {
-          "line": 496,
+          "line": 501,
           "doc": "稳健地将深度文章 Markdown 转化为排版考究、语义合规的 HTML（支持表格、代码块与高亮引用）",
           "args": [
             "md_text"
           ]
         },
         "publish_deep_dive_articles": {
-          "line": 662,
+          "line": 667,
           "doc": "扫描 data/wechat_articles 目录，抽取高品质原创深度拆解文章，",
           "args": []
         },
         "backfill_historical_daily_briefings": {
-          "line": 1312,
+          "line": 1317,
           "doc": "调取 master_archive.json 与 latest_news.json 中的历史数据，",
           "args": []
         },
         "_render_single_daily_page": {
-          "line": 1658,
+          "line": 1663,
           "doc": "渲染单一日期的高清、合规每日简报页面 (支持 English 与 中文独立版)",
           "args": [
             "date_slug",
@@ -698,14 +699,14 @@
           ]
         },
         "get_english_article_title": {
-          "line": 2075,
+          "line": 2080,
           "doc": "",
           "args": [
             "zh_title"
           ]
         },
         "resolve_viral_tweet_tag": {
-          "line": 2094,
+          "line": 2099,
           "doc": "根据推文真实内容精确打标，杜绝混淆“突破”与“重置”：",
           "args": [
             "it",
@@ -713,21 +714,21 @@
           ]
         },
         "optimize_avatar_url": {
-          "line": 2165,
+          "line": 2170,
           "doc": "",
           "args": [
             "url"
           ]
         },
         "is_valid_tweet_image_url": {
-          "line": 2173,
+          "line": 2178,
           "doc": "",
           "args": [
             "url"
           ]
         },
         "format_tweet_publish_time": {
-          "line": 2187,
+          "line": 2192,
           "doc": "解析推文真实发布时间并返回 (full_time_display, relative_display)",
           "args": [
             "it",
@@ -735,7 +736,7 @@
           ]
         },
         "format_viral_page_card": {
-          "line": 2214,
+          "line": 2219,
           "doc": "",
           "args": [
             "it",
@@ -744,7 +745,7 @@
           ]
         },
         "format_tibo_pinned_card": {
-          "line": 2371,
+          "line": 2376,
           "doc": "",
           "args": [
             "it",
@@ -752,7 +753,7 @@
           ]
         },
         "format_lead_video_card": {
-          "line": 2483,
+          "line": 2488,
           "doc": "",
           "args": [
             "lead_media",
@@ -760,14 +761,14 @@
           ]
         },
         "build_pinned_slider_html": {
-          "line": 2617,
+          "line": 2622,
           "doc": "",
           "args": [
             "cards"
           ]
         },
         "format_hero_media_showcase": {
-          "line": 2635,
+          "line": 2640,
           "doc": "重构首页置顶专栏为高颜值、等高紧凑、彻底杜绝形变的三卡片并列布局：",
           "args": [
             "hero_showcase",
@@ -775,7 +776,7 @@
           ]
         },
         "prerender_homepage": {
-          "line": 2838,
+          "line": 2843,
           "doc": "双版本独立预渲染引擎：",
           "args": [
             "items",
@@ -787,7 +788,7 @@
           ]
         },
         "update_sitemap_with_all_pages": {
-          "line": 4119,
+          "line": 4177,
           "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页，",
           "args": [
             "daily_dates",
@@ -795,7 +796,7 @@
           ]
         },
         "run_full_content_publication": {
-          "line": 4337,
+          "line": 4395,
           "doc": "整套发布流水线入口",
           "args": [
             "items",
@@ -7495,6 +7496,26 @@
         "SOURCE_REGISTRY"
       ]
     },
+    "tools/generate_thumbnails.py": {
+      "size": 2061,
+      "mtime": 1795433490.5602412,
+      "classes": {},
+      "functions": {
+        "ensure_thumbnails": {
+          "line": 19,
+          "doc": "Incrementally generates WebP thumbnails for all images in public/images/.",
+          "args": [
+            "max_size",
+            "quality"
+          ]
+        }
+      },
+      "constants": [
+        "BASE_DIR",
+        "IMAGES_DIR",
+        "THUMBNAILS_DIR"
+      ]
+    },
     "tools/sync_forbes_data.py": {
       "size": 4417,
       "mtime": 1795158297.105496,
@@ -8340,8 +8361,8 @@
       ]
     },
     "public/js/app.js": {
-      "size": 774660,
-      "mtime": 1795421536.795963,
+      "size": 777362,
+      "mtime": 1795436120.7510421,
       "classes": {},
       "functions": {
         "flipPinnedSlide": {
@@ -8366,317 +8387,327 @@
           ]
         },
         "optimizeAvatarUrl": {
-          "line": 95,
+          "line": 104,
           "args": [
             "url",
             "size = 80"
           ]
         },
+        "buildFastIdIndex": {
+          "line": 157,
+          "args": [
+            "data"
+          ]
+        },
+        "addList": {
+          "line": 160,
+          "args": []
+        },
         "translateSpecTag": {
-          "line": 496,
+          "line": 532,
           "args": [
             "tag",
             "lang"
           ]
         },
         "formatSource": {
-          "line": 605,
+          "line": 641,
           "args": [
             "source",
             "lang"
           ]
         },
         "translateTag": {
-          "line": 649,
+          "line": 685,
           "args": [
             "tag",
             "lang"
           ]
         },
         "hasChineseText": {
-          "line": 702,
+          "line": 738,
           "args": [
             "str"
           ]
         },
         "formatVideoTitle": {
-          "line": 706,
+          "line": 742,
           "args": [
             "item",
             "lang"
           ]
         },
         "translateScenarioTag": {
-          "line": 742,
+          "line": 778,
           "args": [
             "scenario",
             "lang = 'en'"
           ]
         },
         "translateRuntimeBadge": {
-          "line": 778,
+          "line": 814,
           "args": [
             "badge",
             "lang = 'en'"
           ]
         },
         "translatePricingTag": {
-          "line": 808,
+          "line": 844,
           "args": [
             "pricing",
             "lang = 'en'"
           ]
         },
         "translateDifficultyTag": {
-          "line": 830,
+          "line": 866,
           "args": [
             "tag",
             "lang = 'en'"
           ]
         },
         "formatTime": {
-          "line": 852,
+          "line": 888,
           "args": [
             "rawTime",
             "lang = 'zh'"
           ]
         },
         "setTheme": {
-          "line": 894,
+          "line": 930,
           "args": [
             "mode"
           ]
         },
         "applyTheme": {
-          "line": 900,
+          "line": 936,
           "args": []
         },
         "ensureChineseConverter": {
-          "line": 927,
+          "line": 963,
           "args": [
             "cb"
           ]
         },
         "collectCachedMatches": {
-          "line": 954,
+          "line": 990,
           "args": [
             "buckets",
             "predicate"
           ]
         },
         "findCachedFirst": {
-          "line": 966,
+          "line": 1002,
           "args": [
             "buckets",
             "predicate"
           ]
         },
         "updateModalLangButtons": {
-          "line": 1077,
+          "line": 1113,
           "args": [
             "lang"
           ]
         },
         "openSiteLangPicker": {
-          "line": 1095,
+          "line": 1131,
           "args": []
         },
         "closeSiteLangPicker": {
-          "line": 1137,
+          "line": 1173,
           "args": []
         },
         "renderSiteLangList": {
-          "line": 1142,
+          "line": 1178,
           "args": [
             "query"
           ]
         },
         "selectSiteLanguage": {
-          "line": 1196,
+          "line": 1232,
           "args": [
             "langId"
           ]
         },
         "filterSiteLangList": {
-          "line": 1214,
+          "line": 1250,
           "args": []
         },
         "detectVisitorLanguage": {
-          "line": 1218,
+          "line": 1254,
           "args": []
         },
         "updateNavTabsLanguage": {
-          "line": 1261,
+          "line": 1297,
           "args": [
             "lang"
           ]
         },
         "initTranslateEngine": {
-          "line": 1273,
+          "line": 1309,
           "args": []
         },
         "getEquivalentLanguageUrl": {
-          "line": 1467,
+          "line": 1503,
           "args": [
             "targetLang"
           ]
         },
         "switchLanguageEdition": {
-          "line": 1522,
+          "line": 1558,
           "args": [
             "target"
           ]
         },
         "changeSiteLanguage": {
-          "line": 1534,
+          "line": 1570,
           "args": [
             "targetLang",
             "persist = true"
           ]
         },
         "loadAndExecuteTranslatePlugin": {
-          "line": 1633,
+          "line": 1669,
           "args": [
             "targetLang"
           ]
         },
         "exec": {
-          "line": 1634,
+          "line": 1670,
           "args": []
         },
         "applyCurrentTranslation": {
-          "line": 1708,
+          "line": 1744,
           "args": []
         },
         "triggerTranslate": {
-          "line": 1730,
+          "line": 1766,
           "args": []
         },
         "checkAndShowLangSuggestion": {
-          "line": 1909,
+          "line": 1945,
           "args": []
         },
         "dismissLangSuggestion": {
-          "line": 2032,
+          "line": 2068,
           "args": [
             "userDismissed = true"
           ]
         },
         "setLanguage": {
-          "line": 2056,
+          "line": 2092,
           "args": [
             "lang",
             "persist = true"
           ]
         },
         "getTabFromHash": {
-          "line": 2346,
+          "line": 2382,
           "args": []
         },
         "handleHashNavigation": {
-          "line": 2372,
+          "line": 2408,
           "args": []
         },
         "switchTab": {
-          "line": 2380,
+          "line": 2416,
           "args": [
             "tab",
             "updateHash = true"
           ]
         },
         "executeTabRender": {
-          "line": 2523,
+          "line": 2559,
           "args": []
         },
         "renderHotTags": {
-          "line": 2576,
+          "line": 2618,
           "args": []
         },
         "executeTagSearch": {
-          "line": 2592,
+          "line": 2636,
           "args": [
             "query"
           ]
         },
         "clearSearch": {
-          "line": 2608,
+          "line": 2658,
           "args": []
         },
         "updateClearButtonVisibility": {
-          "line": 2618,
+          "line": 2672,
           "args": []
         },
         "toggleHistoryArchive": {
-          "line": 2634,
+          "line": 2688,
           "args": [
             "sectionKey"
           ]
         },
         "toggleCatNewsArchive": {
-          "line": 2662,
+          "line": 2716,
           "args": []
         },
         "isWithin24Hours": {
-          "line": 2680,
+          "line": 2734,
           "args": [
             "rawTime"
           ]
         },
         "isTiboResetTweet": {
-          "line": 2694,
+          "line": 2748,
           "args": [
             "item"
           ]
         },
         "isMeaningfulTweet": {
-          "line": 2727,
+          "line": 2781,
           "args": [
             "it"
           ]
         },
         "handleSearch": {
-          "line": 2761,
+          "line": 2815,
           "args": [
             "val"
           ]
         },
         "isCompanyOrBrand": {
-          "line": 2798,
+          "line": 2855,
           "args": [
             "it"
           ]
         },
         "mergeArchiveIntoCachedData": {
-          "line": 2826,
+          "line": 2883,
           "args": [
             "archiveItems"
           ]
         },
         "getItemKey": {
-          "line": 2830,
+          "line": 2887,
           "args": []
         },
         "getCategoryTotalArchived": {
-          "line": 2921,
+          "line": 2978,
           "args": [
             "tab"
           ]
         },
         "loadCategoryMeta": {
-          "line": 2929,
+          "line": 2986,
           "args": [
             "tab"
           ]
         },
         "loadCategoryVolume": {
-          "line": 2959,
+          "line": 3016,
           "args": [
             "tab",
             "volNum"
           ]
         },
         "getVolumeSlice": {
-          "line": 2997,
+          "line": 3054,
           "args": [
             "tab",
             "startIndex",
@@ -8684,145 +8715,145 @@
           ]
         },
         "loadColumnArchive": {
-          "line": 3021,
+          "line": 3078,
           "args": [
             "tab"
           ]
         },
         "ensureArchiveLoaded": {
-          "line": 3026,
+          "line": 3083,
           "args": []
         },
         "loadCelebrityArchiveData": {
-          "line": 3033,
+          "line": 3090,
           "args": []
         },
         "loadArchiveData": {
-          "line": 3037,
+          "line": 3094,
           "args": []
         },
         "updateArchiveBadges": {
-          "line": 3044,
+          "line": 3101,
           "args": []
         },
         "setTxt": {
-          "line": 3055,
+          "line": 3112,
           "args": []
         },
         "filterArchiveCategory": {
-          "line": 3074,
+          "line": 3131,
           "args": [
             "cat"
           ]
         },
         "handleArchiveSearch": {
-          "line": 3092,
+          "line": 3149,
           "args": [
             "val"
           ]
         },
         "clearArchiveSearch": {
-          "line": 3100,
+          "line": 3157,
           "args": []
         },
         "renderArchiveCard": {
-          "line": 3110,
+          "line": 3167,
           "args": [
             "item"
           ]
         },
         "renderArchiveView": {
-          "line": 3124,
+          "line": 3181,
           "args": []
         },
         "renderArchivePagination": {
-          "line": 3199,
+          "line": 3256,
           "args": [
             "totalPages",
             "totalItems"
           ]
         },
         "changeArchivePage": {
-          "line": 3256,
+          "line": 3313,
           "args": [
             "p"
           ]
         },
         "setSidebarSocialFilter": {
-          "line": 3264,
+          "line": 3321,
           "args": [
             "platform"
           ]
         },
         "filterSocialPlatform": {
-          "line": 3270,
+          "line": 3327,
           "args": [
             "filterType"
           ]
         },
         "filterCelebrityTag": {
-          "line": 3296,
+          "line": 3353,
           "args": [
             "tag"
           ]
         },
         "updateCelebrityTagBadges": {
-          "line": 3325,
+          "line": 3382,
           "args": [
             "allCelebs"
           ]
         },
         "copyTweetPrompt": {
-          "line": 3339,
+          "line": 3396,
           "args": [
             "btn",
             "itemId"
           ]
         },
         "filterToolOrigin": {
-          "line": 3367,
+          "line": 3424,
           "args": [
             "origin"
           ]
         },
         "normalizeToolScenarioKey": {
-          "line": 3391,
+          "line": 3448,
           "args": [
             "raw"
           ]
         },
         "updateToolScenarioCounts": {
-          "line": 3409,
+          "line": 3466,
           "args": [
             "baseList"
           ]
         },
         "filterToolScenario": {
-          "line": 3454,
+          "line": 3511,
           "args": [
             "scenario"
           ]
         },
         "filterVideoPlatform": {
-          "line": 3489,
+          "line": 3546,
           "args": [
             "plat"
           ]
         },
         "toggleVideoCardMute": {
-          "line": 3521,
+          "line": 3578,
           "args": [
             "btnEl"
           ]
         },
         "filterVideoSub": {
-          "line": 3559,
+          "line": 3616,
           "args": [
             "sub"
           ]
         },
         "startVideoHoverPreview": {
-          "line": 3582,
+          "line": 3639,
           "args": [
             "cardEl",
             "videoId",
@@ -8830,13 +8861,13 @@
           ]
         },
         "stopVideoHoverPreview": {
-          "line": 3615,
+          "line": 3672,
           "args": [
             "cardEl"
           ]
         },
         "mountInPlaceVerticalVideo": {
-          "line": 3634,
+          "line": 3691,
           "args": [
             "cardEl",
             "embedUrl",
@@ -8844,70 +8875,70 @@
           ]
         },
         "unmountInPlaceVerticalVideo": {
-          "line": 3685,
+          "line": 3742,
           "args": [
             "cardEl"
           ]
         },
         "switchPromptSubmode": {
-          "line": 3712,
+          "line": 3769,
           "args": [
             "mode"
           ]
         },
         "switchPromptGeneration": {
-          "line": 3732,
+          "line": 3789,
           "args": [
             "gen"
           ]
         },
         "filterPromptCategory": {
-          "line": 3751,
+          "line": 3808,
           "args": [
             "cat"
           ]
         },
         "toggleSampleDrawer": {
-          "line": 3788,
+          "line": 3845,
           "args": [
             "id"
           ]
         },
         "copySampleCode": {
-          "line": 3805,
+          "line": 3862,
           "args": [
             "id"
           ]
         },
         "renderSampleOutputContent": {
-          "line": 3812,
+          "line": 3869,
           "args": [
             "id",
             "sample"
           ]
         },
         "resolveViralTweetTag": {
-          "line": 3875,
+          "line": 3932,
           "args": [
             "item",
             "isZh"
           ]
         },
         "isValidTweetImageUrl": {
-          "line": 3938,
+          "line": 3995,
           "args": [
             "url"
           ]
         },
         "formatTweetPublishTime": {
-          "line": 3946,
+          "line": 4003,
           "args": [
             "item",
             "isZh"
           ]
         },
         "renderViralTickerCard": {
-          "line": 3987,
+          "line": 4044,
           "args": [
             "item",
             "isZh",
@@ -8915,166 +8946,166 @@
           ]
         },
         "renderTiboPinnedCard": {
-          "line": 4132,
+          "line": 4189,
           "args": [
             "item",
             "isZh"
           ]
         },
         "renderLeadVideoCard": {
-          "line": 4221,
+          "line": 4278,
           "args": [
             "leadMedia",
             "isZh"
           ]
         },
         "playHeroLeadVideo": {
-          "line": 4317,
+          "line": 4374,
           "args": [
             "videoId",
             "fallbackUrl"
           ]
         },
         "openImageLightbox": {
-          "line": 4344,
+          "line": 4401,
           "args": [
             "imageUrl",
             "e"
           ]
         },
         "closeImageLightbox": {
-          "line": 4371,
+          "line": 4428,
           "args": []
         },
         "renderHeroMediaShowcase": {
-          "line": 4380,
+          "line": 4437,
           "args": [
             "heroShowcase"
           ]
         },
         "renderViralTicker": {
-          "line": 4388,
+          "line": 4445,
           "args": [
             "tweets",
             "leadMedia = null"
           ]
         },
         "fitViralTickerHeight": {
-          "line": 4593,
+          "line": 4650,
           "args": []
         },
         "updateTickerPageUI": {
-          "line": 4572,
+          "line": 4629,
           "args": [
             "currentPage",
             "totalPages"
           ]
         },
         "flipViralTicker": {
-          "line": 4579,
+          "line": 4636,
           "args": [
             "direction"
           ]
         },
         "toggleViralTickerPause": {
-          "line": 4601,
+          "line": 4658,
           "args": []
         },
         "initViralTickerAutoScroll": {
-          "line": 4610,
+          "line": 4667,
           "args": []
         },
         "switchTopicFocus": {
-          "line": 4644,
+          "line": 4701,
           "args": [
             "idx"
           ]
         },
         "toggleTopicFocusCollapse": {
-          "line": 4666,
+          "line": 4723,
           "args": []
         },
         "getTopicHighlights": {
-          "line": 4683,
+          "line": 4740,
           "args": [
             "t",
             "isZh"
           ]
         },
         "renderTopicFocus": {
-          "line": 4740,
+          "line": 4797,
           "args": [
             "topics"
           ]
         },
         "renderTopThree": {
-          "line": 5006,
+          "line": 5063,
           "args": [
             "topItems"
           ]
         },
         "getToolSvgIcon": {
-          "line": 5069,
+          "line": 5126,
           "args": [
             "iconType"
           ]
         },
         "handleNewsCardClick": {
-          "line": 5086,
+          "line": 5143,
           "args": [
             "newsId",
             "event"
           ]
         },
         "handleNewsTitleClick": {
-          "line": 5101,
+          "line": 5158,
           "args": [
             "newsId",
             "event"
           ]
         },
         "handleToolCardClick": {
-          "line": 5118,
+          "line": 5175,
           "args": [
             "toolId",
             "event"
           ]
         },
         "renderNewsCard": {
-          "line": 5136,
+          "line": 5193,
           "args": [
             "item",
             "cardIndex = -1"
           ]
         },
         "isFakeOrGenericCover": {
-          "line": 5150,
+          "line": 5207,
           "args": []
         },
         "isRealPlayableVideo": {
-          "line": 5180,
+          "line": 5237,
           "args": []
         },
         "isItemPinnedActive": {
-          "line": 5331,
+          "line": 5388,
           "args": [
             "item"
           ]
         },
         "formatTweetText": {
-          "line": 5347,
+          "line": 5404,
           "args": [
             "text"
           ]
         },
         "toggleTweetExpand": {
-          "line": 5376,
+          "line": 5433,
           "args": [
             "btn"
           ]
         },
         "renderCelebrityCard": {
-          "line": 5419,
+          "line": 5476,
           "args": [
             "item",
             "isTimeline = false",
@@ -9082,298 +9113,298 @@
           ]
         },
         "countLines": {
-          "line": 5531,
+          "line": 5588,
           "args": []
         },
         "nextCelebritySpotlightPage": {
-          "line": 5659,
+          "line": 5716,
           "args": []
         },
         "prevCelebritySpotlightPage": {
-          "line": 5668,
+          "line": 5725,
           "args": []
         },
         "goToCelebritySpotlightPage": {
-          "line": 5675,
+          "line": 5732,
           "args": [
             "pageIdx"
           ]
         },
         "getCelebritySpotlightCards": {
-          "line": 5680,
+          "line": 5737,
           "args": [
             "filter = socialPlatformFilter"
           ]
         },
         "leaderPriority": {
-          "line": 5694,
+          "line": 5751,
           "args": []
         },
         "loadCuratedColumnHighlights": {
-          "line": 5718,
+          "line": 5775,
           "args": [
             "isManual = false"
           ]
         },
         "_inFlightHighlights": {
-          "line": 5725,
+          "line": 5782,
           "args": []
         },
         "renderColumnSpotlightBanner": {
-          "line": 5744,
+          "line": 5801,
           "args": [
             "tab = 'celebrity'"
           ]
         },
         "switchActiveTitan": {
-          "line": 6264,
+          "line": 6321,
           "args": []
         },
         "switchActiveTool": {
-          "line": 6269,
+          "line": 6326,
           "args": []
         },
         "switchActiveNews": {
-          "line": 6274,
+          "line": 6331,
           "args": []
         },
         "renderCelebritySpotlightBanner": {
-          "line": 6280,
+          "line": 6337,
           "args": []
         },
         "renderCelebritySpotlightBannerFallback": {
-          "line": 6284,
+          "line": 6341,
           "args": []
         },
         "renderSpotlightCard": {
-          "line": 6374,
+          "line": 6431,
           "args": [
             "item"
           ]
         },
         "renderCelebrityTimeline": {
-          "line": 6505,
+          "line": 6562,
           "args": [
             "list"
           ]
         },
         "formatCleanToolUrl": {
-          "line": 6622,
+          "line": 6679,
           "args": [
             "rawUrl",
             "item"
           ]
         },
         "formatTransitGoUrl": {
-          "line": 6658,
+          "line": 6715,
           "args": [
             "rawUrl",
             "item"
           ]
         },
         "dedupToolItems": {
-          "line": 6675,
+          "line": 6732,
           "args": [
             "items"
           ]
         },
         "renderToolCard": {
-          "line": 6718,
+          "line": 6775,
           "args": [
             "item"
           ]
         },
         "escapeHtml": {
-          "line": 10762,
+          "line": 10823,
           "args": [
             "str"
           ]
         },
         "getAssembledPromptText": {
-          "line": 6978,
+          "line": 7035,
           "args": [
             "id"
           ]
         },
         "onPromptVarInput": {
-          "line": 6989,
+          "line": 7046,
           "args": [
             "id"
           ]
         },
         "switchPromptLang": {
-          "line": 7013,
+          "line": 7070,
           "args": [
             "id",
             "lang"
           ]
         },
         "copyCardPrompt": {
-          "line": 7036,
+          "line": 7093,
           "args": [
             "id"
           ]
         },
         "jumpToLLMWithPrompt": {
-          "line": 7044,
+          "line": 7101,
           "args": [
             "id",
             "platform"
           ]
         },
         "getVideoSubType": {
-          "line": 7063,
+          "line": 7120,
           "args": [
             "it"
           ]
         },
         "dedupVideoItems": {
-          "line": 7078,
+          "line": 7135,
           "args": [
             "list"
           ]
         },
         "renderCreatorsRail": {
-          "line": 7113,
+          "line": 7170,
           "args": []
         },
         "filterByCreator": {
-          "line": 7310,
+          "line": 7367,
           "args": [
             "authorName"
           ]
         },
         "renderHeroSpotlight": {
-          "line": 7321,
+          "line": 7378,
           "args": [
             "item"
           ]
         },
         "renderTrendingMiniCard": {
-          "line": 7385,
+          "line": 7442,
           "args": [
             "item",
             "rank"
           ]
         },
         "renderWorkflowCard": {
-          "line": 7416,
+          "line": 7473,
           "args": [
             "item"
           ]
         },
         "copyWorkflowCode": {
-          "line": 7496,
+          "line": 7553,
           "args": [
             "id"
           ]
         },
         "renderPromptCard": {
-          "line": 7517,
+          "line": 7574,
           "args": [
             "item"
           ]
         },
         "formatVideoTime": {
-          "line": 7684,
+          "line": 7741,
           "args": [
             "item",
             "lang = 'zh'"
           ]
         },
         "renderVerticalVideoCard": {
-          "line": 7714,
+          "line": 7771,
           "args": [
             "item"
           ]
         },
         "renderHorizontalVideoCard": {
-          "line": 7816,
+          "line": 7873,
           "args": [
             "item"
           ]
         },
         "renderVideoCard": {
-          "line": 7910,
+          "line": 7967,
           "args": [
             "item"
           ]
         },
         "renderVideoOrPromptCard": {
-          "line": 7918,
+          "line": 7975,
           "args": [
             "item"
           ]
         },
         "renderSiteWideSearchResults": {
-          "line": 7927,
+          "line": 7984,
           "args": [
             "data"
           ]
         },
         "switchHomeToolFilter": {
-          "line": 7984,
+          "line": 8041,
           "args": [
             "mode"
           ]
         },
         "renderHomeTools": {
-          "line": 8006,
+          "line": 8063,
           "args": [
             "data"
           ]
         },
         "getToolOrigin": {
-          "line": 8011,
+          "line": 8068,
           "args": []
         },
         "getToolTime": {
-          "line": 8026,
+          "line": 8083,
           "args": []
         },
         "switchHomePromptFilter": {
-          "line": 8095,
+          "line": 8152,
           "args": [
             "mode"
           ]
         },
         "renderHomePrompts": {
-          "line": 8114,
+          "line": 8171,
           "args": [
             "data"
           ]
         },
         "renderUI": {
-          "line": 8158,
+          "line": 8215,
           "args": [
             "data"
           ]
         },
         "syncThreeColumnsHeight": {
-          "line": 8530,
+          "line": 8587,
           "args": []
         },
         "filterList": {
-          "line": 8539,
+          "line": 8596,
           "args": [
             "list",
             "q = searchQuery"
           ]
         },
         "changeCategoryPage": {
-          "line": 8553,
+          "line": 8610,
           "args": [
             "p"
           ]
         },
         "changeCategoryPageSize": {
-          "line": 8599,
+          "line": 8656,
           "args": [
             "sz"
           ]
         },
         "renderCategoryPagination": {
-          "line": 8613,
+          "line": 8670,
           "args": [
             "totalPages",
             "totalItems",
@@ -9382,7 +9413,7 @@
           ]
         },
         "renderGridChunked": {
-          "line": 8692,
+          "line": 8749,
           "args": [
             "container",
             "items",
@@ -9391,53 +9422,53 @@
           ]
         },
         "appendNext": {
-          "line": 8703,
+          "line": 8760,
           "args": []
         },
         "renderCategoryView": {
-          "line": 8722,
+          "line": 8779,
           "args": [
             "tab"
           ]
         },
         "syncSsrBadgesAndTicker": {
-          "line": 9421,
+          "line": 9478,
           "args": [
             "data"
           ]
         },
         "loadNews": {
-          "line": 9460,
+          "line": 9517,
           "args": [
             "isManual = false"
           ]
         },
         "runner": {
-          "line": 9465,
+          "line": 9522,
           "args": []
         },
         "showCustomToast": {
-          "line": 9594,
+          "line": 9652,
           "args": [
             "msg",
             "duration = 2200"
           ]
         },
         "fallbackCopyText": {
-          "line": 9608,
+          "line": 9666,
           "args": [
             "text"
           ]
         },
         "copyToClipboard": {
-          "line": 9627,
+          "line": 9685,
           "args": [
             "text",
             "customMsg"
           ]
         },
         "openVideoModal": {
-          "line": 9643,
+          "line": 9701,
           "args": [
             "embedUrl",
             "title",
@@ -9446,11 +9477,11 @@
           ]
         },
         "closeVideoModal": {
-          "line": 9677,
+          "line": 9735,
           "args": []
         },
         "formatRichArticleContent": {
-          "line": 9687,
+          "line": 9745,
           "args": [
             "rawText",
             "isZh",
@@ -9461,69 +9492,69 @@
           ]
         },
         "renderPara": {
-          "line": 9739,
+          "line": 9797,
           "args": []
         },
         "mapSlot": {
-          "line": 9829,
+          "line": 9887,
           "args": []
         },
         "emitMediaForSlot": {
-          "line": 9867,
+          "line": 9925,
           "args": []
         },
         "openAiNewsModal": {
-          "line": 9942,
+          "line": 10000,
           "args": [
             "newsId"
           ]
         },
         "isGenericTemplate": {
-          "line": 10102,
+          "line": 10163,
           "args": []
         },
         "isAuthorAvatarImg": {
-          "line": 10158,
+          "line": 10219,
           "args": []
         },
         "isPaywalled": {
-          "line": 10313,
+          "line": 10374,
           "args": []
         },
         "renderArticleView": {
-          "line": 10324,
+          "line": 10385,
           "args": []
         },
         "closeAiNewsModal": {
-          "line": 10631,
+          "line": 10692,
           "args": []
         },
         "switchSocialViewMode": {
-          "line": 10672,
+          "line": 10733,
           "args": [
             "mode"
           ]
         },
         "filterViralPlatform": {
-          "line": 10740,
+          "line": 10801,
           "args": [
             "plat"
           ]
         },
         "formatSocialText": {
-          "line": 10771,
+          "line": 10832,
           "args": [
             "text"
           ]
         },
         "detectSocialMediaType": {
-          "line": 10783,
+          "line": 10844,
           "args": [
             "item"
           ]
         },
         "renderSocialMediaPreview": {
-          "line": 10798,
+          "line": 10859,
           "args": [
             "item",
             "mediaType",
@@ -9531,7 +9562,7 @@
           ]
         },
         "renderThreadAndComments": {
-          "line": 10905,
+          "line": 10966,
           "args": [
             "item",
             "cardKey",
@@ -9539,14 +9570,14 @@
           ]
         },
         "toggleThreadComments": {
-          "line": 11006,
+          "line": 11067,
           "args": [
             "cardKey",
             "itemId"
           ]
         },
         "handleCardClick": {
-          "line": 11025,
+          "line": 11086,
           "args": [
             "cardKey",
             "itemId",
@@ -9554,92 +9585,92 @@
           ]
         },
         "toggleCardLanguage": {
-          "line": 11032,
+          "line": 11093,
           "args": [
             "cardKey",
             "itemId"
           ]
         },
         "renderViralPostsSection": {
-          "line": 11074,
+          "line": 11135,
           "args": [
             "list"
           ]
         },
         "renderViralPostCard": {
-          "line": 11111,
+          "line": 11172,
           "args": [
             "item",
             "index"
           ]
         },
         "openSocialPostModal": {
-          "line": 11281,
+          "line": 11342,
           "args": [
             "postId"
           ]
         },
         "renderSocialModalData": {
-          "line": 11316,
+          "line": 11377,
           "args": []
         },
         "toggleSocialModalLanguage": {
-          "line": 11668,
+          "line": 11729,
           "args": []
         },
         "closeSocialPostModal": {
-          "line": 11673,
+          "line": 11734,
           "args": []
         },
         "openToolDetailModal": {
-          "line": 11689,
+          "line": 11750,
           "args": [
             "toolId"
           ]
         },
         "updateToolCarousel": {
-          "line": 11909,
+          "line": 11973,
           "args": []
         },
         "prevToolCarouselSlide": {
-          "line": 12014,
+          "line": 12078,
           "args": []
         },
         "nextToolCarouselSlide": {
-          "line": 12019,
+          "line": 12083,
           "args": []
         },
         "setToolCarouselSlide": {
-          "line": 12024,
+          "line": 12088,
           "args": [
             "idx"
           ]
         },
         "openToolImageLightbox": {
-          "line": 12029,
+          "line": 12093,
           "args": []
         },
         "closeToolDetailModal": {
-          "line": 12035,
+          "line": 12099,
           "args": []
         },
         "copyToolQuickstartCmd": {
-          "line": 12044,
+          "line": 12108,
           "args": []
         },
         "openShareModal": {
-          "line": 12058,
+          "line": 12122,
           "args": [
             "item",
             "type = 'news'"
           ]
         },
         "closeShareModal": {
-          "line": 12099,
+          "line": 12163,
           "args": []
         },
         "shareContent": {
-          "line": 12111,
+          "line": 12175,
           "args": [
             "event",
             "id",
@@ -9647,85 +9678,85 @@
           ]
         },
         "shareCurrentNewsModal": {
-          "line": 12165,
+          "line": 12229,
           "args": []
         },
         "shareCurrentToolModal": {
-          "line": 12193,
+          "line": 12257,
           "args": []
         },
         "executeShare": {
-          "line": 12220,
+          "line": 12284,
           "args": [
             "platform"
           ]
         },
         "shareNewsToXDirect": {
-          "line": 12309,
+          "line": 12373,
           "args": []
         },
         "shareNewsToThreadsDirect": {
-          "line": 12335,
+          "line": 12399,
           "args": []
         },
         "shareToolToXDirect": {
-          "line": 12362,
+          "line": 12426,
           "args": []
         },
         "shareToolToThreadsDirect": {
-          "line": 12391,
+          "line": 12455,
           "args": []
         },
         "openLegalModal": {
-          "line": 12565,
+          "line": 12629,
           "args": [
             "tab = 'privacy'"
           ]
         },
         "closeLegalModal": {
-          "line": 12571,
+          "line": 12635,
           "args": []
         },
         "switchLegalTab": {
-          "line": 12576,
+          "line": 12640,
           "args": [
             "tab"
           ]
         },
         "initAdsSafely": {
-          "line": 12625,
+          "line": 12689,
           "args": []
         },
         "triggerDeferredLoad": {
-          "line": 12694,
+          "line": 12759,
           "args": []
         },
         "scheduleIdleLoad": {
-          "line": 12699,
+          "line": 12764,
           "args": []
         },
         "initMobileBackToTop": {
-          "line": 12775,
+          "line": 12840,
           "args": []
         },
         "initTouchGestures": {
-          "line": 12792,
+          "line": 12857,
           "args": []
         },
         "runLangCheck": {
-          "line": 12846,
+          "line": 12911,
           "args": []
         },
         "onDomInteractiveOrLoaded": {
-          "line": 12853,
+          "line": 12918,
           "args": []
         }
       },
       "constants": []
     },
     "public/m/js/mobile.js": {
-      "size": 103545,
-      "mtime": 1795414297.7093143,
+      "size": 105360,
+      "mtime": 1795433629.024259,
       "classes": {},
       "functions": {
         "updateLanguageState": {
@@ -9769,227 +9800,234 @@
           ]
         },
         "getValidImages": {
-          "line": 382,
+          "line": 388,
           "args": [
             "item"
           ]
         },
         "isAuthorAvatarImg": {
-          "line": 388,
+          "line": 394,
           "args": []
         },
         "escapeHtml": {
-          "line": 430,
+          "line": 436,
           "args": [
             "str"
           ]
         },
         "cleanNewsTitle": {
-          "line": 441,
+          "line": 447,
           "args": [
             "rawTitle"
           ]
         },
+        "buildFastIndex": {
+          "line": 463,
+          "args": [
+            "data"
+          ]
+        },
         "findItemById": {
-          "line": 456,
+          "line": 483,
           "args": [
             "itemId"
           ]
         },
         "showToast": {
-          "line": 479,
+          "line": 504,
           "args": [
             "msg"
           ]
         },
         "loadData": {
-          "line": 500,
+          "line": 525,
           "args": [
             "forceRefresh = false"
           ]
         },
         "renderSubFilters": {
-          "line": 569,
+          "line": 596,
           "args": []
         },
         "renderCurrentView": {
-          "line": 623,
+          "line": 650,
           "args": []
         },
         "renderNewsCard": {
-          "line": 765,
+          "line": 793,
           "args": [
             "item",
-            "idx = 0"
+            "idx = 0",
+            "isEager = false"
           ]
         },
         "renderTopCard": {
-          "line": 856,
+          "line": 886,
           "args": [
             "item",
             "index"
           ]
         },
         "renderSocialCard": {
-          "line": 941,
+          "line": 970,
           "args": [
             "item",
             "idx = 0"
           ]
         },
         "renderVideoCard": {
-          "line": 1021,
+          "line": 1050,
           "args": [
             "item",
             "idx = 0"
           ]
         },
         "renderSkeleton": {
-          "line": 1078,
+          "line": 1107,
           "args": []
         },
         "openArticleModal": {
-          "line": 1090,
+          "line": 1119,
           "args": [
             "itemId"
           ]
         },
         "renderArticleParas": {
-          "line": 1388,
+          "line": 1417,
           "args": []
         },
         "switchArticleLang": {
-          "line": 1449,
+          "line": 1478,
           "args": [
             "lang"
           ]
         },
         "closeArticleModal": {
-          "line": 1489,
+          "line": 1518,
           "args": []
         },
         "openLightbox": {
-          "line": 1499,
+          "line": 1528,
           "args": [
             "imgUrl"
           ]
         },
         "closeLightbox": {
-          "line": 1525,
+          "line": 1554,
           "args": []
         },
         "toggleTweetLang": {
-          "line": 1535,
+          "line": 1564,
           "args": [
             "itemId"
           ]
         },
         "switchTab": {
-          "line": 1559,
+          "line": 1588,
           "args": [
             "newTab"
           ]
         },
         "setFilter": {
-          "line": 1600,
+          "line": 1631,
           "args": [
             "filterId"
           ]
         },
         "loadMore": {
-          "line": 1606,
+          "line": 1637,
           "args": []
         },
         "handleSearch": {
-          "line": 1611,
+          "line": 1643,
           "args": [
             "evt"
           ]
         },
         "clearSearch": {
-          "line": 1621,
+          "line": 1657,
           "args": []
         },
         "toggleSearchBox": {
-          "line": 1633,
+          "line": 1669,
           "args": []
         },
         "renderLanguagePickerList": {
-          "line": 1644,
+          "line": 1680,
           "args": [
             "query = ''"
           ]
         },
         "filterLanguageList": {
-          "line": 1714,
+          "line": 1750,
           "args": [
             "e"
           ]
         },
         "initDragScroll": {
-          "line": 1719,
+          "line": 1755,
           "args": [
             "el"
           ]
         },
         "openLangPicker": {
-          "line": 1761,
+          "line": 1797,
           "args": []
         },
         "closeLangPicker": {
-          "line": 1786,
+          "line": 1822,
           "args": []
         },
         "selectLanguage": {
-          "line": 1795,
+          "line": 1831,
           "args": [
             "targetLang"
           ]
         },
         "updateLangButtonLabel": {
-          "line": 1869,
+          "line": 1905,
           "args": [
             "lang"
           ]
         },
         "loadTranslatePlugin": {
-          "line": 1883,
+          "line": 1919,
           "args": [
             "targetLang"
           ]
         },
         "exec": {
-          "line": 1884,
+          "line": 1920,
           "args": []
         },
         "applyCurrentTranslation": {
-          "line": 1924,
+          "line": 1960,
           "args": []
         },
         "switchLanguage": {
-          "line": 1953,
+          "line": 1989,
           "args": []
         },
         "switchToDesktop": {
-          "line": 1958,
+          "line": 1994,
           "args": []
         },
         "shareArticle": {
-          "line": 1974,
+          "line": 2010,
           "args": [
             "itemId"
           ]
         },
         "initMobileBackToTop": {
-          "line": 2010,
+          "line": 2046,
           "args": []
         },
         "checkAndShowLangSuggestion": {
-          "line": 2028,
+          "line": 2064,
           "args": []
         },
         "dismissLangSuggest": {
-          "line": 2098,
+          "line": 2134,
           "args": []
         }
       },
@@ -10737,15 +10775,16 @@
         "type": "function",
         "args": [
           "img",
-          "width"
+          "width",
+          "prefer_thumbnail"
         ],
-        "doc": "Resolve news lead image URL cleanly without wsrv.nl proxy for ainewsradar.xyz / local images."
+        "doc": "Resolve news lead image URL cleanly using lightweight WebP thumbnails (~8-12 KB) for ainewsradar.xyz / local images."
       }
     ],
     "safe_text": [
       {
         "file": "content_publisher.py",
-        "line": 420,
+        "line": 425,
         "type": "function",
         "args": [
           "text",
@@ -10757,7 +10796,7 @@
     "parse_markdown_table": [
       {
         "file": "content_publisher.py",
-        "line": 431,
+        "line": 436,
         "type": "function",
         "args": [
           "table_lines"
@@ -10768,7 +10807,7 @@
     "_markdown_to_clean_html": [
       {
         "file": "content_publisher.py",
-        "line": 496,
+        "line": 501,
         "type": "function",
         "args": [
           "md_text"
@@ -10779,7 +10818,7 @@
     "publish_deep_dive_articles": [
       {
         "file": "content_publisher.py",
-        "line": 662,
+        "line": 667,
         "type": "function",
         "args": [],
         "doc": "扫描 data/wechat_articles 目录，抽取高品质原创深度拆解文章，"
@@ -10788,7 +10827,7 @@
     "backfill_historical_daily_briefings": [
       {
         "file": "content_publisher.py",
-        "line": 1312,
+        "line": 1317,
         "type": "function",
         "args": [],
         "doc": "调取 master_archive.json 与 latest_news.json 中的历史数据，"
@@ -10797,7 +10836,7 @@
     "_render_single_daily_page": [
       {
         "file": "content_publisher.py",
-        "line": 1658,
+        "line": 1663,
         "type": "function",
         "args": [
           "date_slug",
@@ -10813,7 +10852,7 @@
     "get_english_article_title": [
       {
         "file": "content_publisher.py",
-        "line": 2075,
+        "line": 2080,
         "type": "function",
         "args": [
           "zh_title"
@@ -10824,7 +10863,7 @@
     "resolve_viral_tweet_tag": [
       {
         "file": "content_publisher.py",
-        "line": 2094,
+        "line": 2099,
         "type": "function",
         "args": [
           "it",
@@ -10836,7 +10875,7 @@
     "optimize_avatar_url": [
       {
         "file": "content_publisher.py",
-        "line": 2165,
+        "line": 2170,
         "type": "function",
         "args": [
           "url"
@@ -10847,7 +10886,7 @@
     "is_valid_tweet_image_url": [
       {
         "file": "content_publisher.py",
-        "line": 2173,
+        "line": 2178,
         "type": "function",
         "args": [
           "url"
@@ -10867,7 +10906,7 @@
     "format_tweet_publish_time": [
       {
         "file": "content_publisher.py",
-        "line": 2187,
+        "line": 2192,
         "type": "function",
         "args": [
           "it",
@@ -10879,7 +10918,7 @@
     "format_viral_page_card": [
       {
         "file": "content_publisher.py",
-        "line": 2214,
+        "line": 2219,
         "type": "function",
         "args": [
           "it",
@@ -10892,7 +10931,7 @@
     "format_tibo_pinned_card": [
       {
         "file": "content_publisher.py",
-        "line": 2371,
+        "line": 2376,
         "type": "function",
         "args": [
           "it",
@@ -10904,7 +10943,7 @@
     "format_lead_video_card": [
       {
         "file": "content_publisher.py",
-        "line": 2483,
+        "line": 2488,
         "type": "function",
         "args": [
           "lead_media",
@@ -10916,7 +10955,7 @@
     "build_pinned_slider_html": [
       {
         "file": "content_publisher.py",
-        "line": 2617,
+        "line": 2622,
         "type": "function",
         "args": [
           "cards"
@@ -10927,7 +10966,7 @@
     "format_hero_media_showcase": [
       {
         "file": "content_publisher.py",
-        "line": 2635,
+        "line": 2640,
         "type": "function",
         "args": [
           "hero_showcase",
@@ -10939,7 +10978,7 @@
     "prerender_homepage": [
       {
         "file": "content_publisher.py",
-        "line": 2838,
+        "line": 2843,
         "type": "function",
         "args": [
           "items",
@@ -10955,7 +10994,7 @@
     "update_sitemap_with_all_pages": [
       {
         "file": "content_publisher.py",
-        "line": 4119,
+        "line": 4177,
         "type": "function",
         "args": [
           "daily_dates",
@@ -10967,7 +11006,7 @@
     "run_full_content_publication": [
       {
         "file": "content_publisher.py",
-        "line": 4337,
+        "line": 4395,
         "type": "function",
         "args": [
           "items",
@@ -20315,6 +20354,18 @@
         "doc": "Installs the git pre-commit hook to guarantee auto-sync on commit."
       }
     ],
+    "ensure_thumbnails": [
+      {
+        "file": "tools/generate_thumbnails.py",
+        "line": 19,
+        "type": "function",
+        "args": [
+          "max_size",
+          "quality"
+        ],
+        "doc": "Incrementally generates WebP thumbnails for all images in public/images/."
+      }
+    ],
     "patch_item": [
       {
         "file": "tools/sync_forbes_data.py",
@@ -21584,7 +21635,7 @@
     "optimizeAvatarUrl": [
       {
         "file": "public/js/app.js",
-        "line": 95,
+        "line": 104,
         "type": "function",
         "args": [
           "url",
@@ -21593,10 +21644,30 @@
         "doc": ""
       }
     ],
+    "buildFastIdIndex": [
+      {
+        "file": "public/js/app.js",
+        "line": 157,
+        "type": "function",
+        "args": [
+          "data"
+        ],
+        "doc": ""
+      }
+    ],
+    "addList": [
+      {
+        "file": "public/js/app.js",
+        "line": 160,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      }
+    ],
     "translateSpecTag": [
       {
         "file": "public/js/app.js",
-        "line": 496,
+        "line": 532,
         "type": "function",
         "args": [
           "tag",
@@ -21608,7 +21679,7 @@
     "formatSource": [
       {
         "file": "public/js/app.js",
-        "line": 605,
+        "line": 641,
         "type": "function",
         "args": [
           "source",
@@ -21620,7 +21691,7 @@
     "translateTag": [
       {
         "file": "public/js/app.js",
-        "line": 649,
+        "line": 685,
         "type": "function",
         "args": [
           "tag",
@@ -21632,7 +21703,7 @@
     "hasChineseText": [
       {
         "file": "public/js/app.js",
-        "line": 702,
+        "line": 738,
         "type": "function",
         "args": [
           "str"
@@ -21643,7 +21714,7 @@
     "formatVideoTitle": [
       {
         "file": "public/js/app.js",
-        "line": 706,
+        "line": 742,
         "type": "function",
         "args": [
           "item",
@@ -21655,7 +21726,7 @@
     "translateScenarioTag": [
       {
         "file": "public/js/app.js",
-        "line": 742,
+        "line": 778,
         "type": "function",
         "args": [
           "scenario",
@@ -21667,7 +21738,7 @@
     "translateRuntimeBadge": [
       {
         "file": "public/js/app.js",
-        "line": 778,
+        "line": 814,
         "type": "function",
         "args": [
           "badge",
@@ -21679,7 +21750,7 @@
     "translatePricingTag": [
       {
         "file": "public/js/app.js",
-        "line": 808,
+        "line": 844,
         "type": "function",
         "args": [
           "pricing",
@@ -21691,7 +21762,7 @@
     "translateDifficultyTag": [
       {
         "file": "public/js/app.js",
-        "line": 830,
+        "line": 866,
         "type": "function",
         "args": [
           "tag",
@@ -21703,7 +21774,7 @@
     "formatTime": [
       {
         "file": "public/js/app.js",
-        "line": 852,
+        "line": 888,
         "type": "function",
         "args": [
           "rawTime",
@@ -21715,7 +21786,7 @@
     "setTheme": [
       {
         "file": "public/js/app.js",
-        "line": 894,
+        "line": 930,
         "type": "function",
         "args": [
           "mode"
@@ -21726,7 +21797,7 @@
     "applyTheme": [
       {
         "file": "public/js/app.js",
-        "line": 900,
+        "line": 936,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21735,7 +21806,7 @@
     "ensureChineseConverter": [
       {
         "file": "public/js/app.js",
-        "line": 927,
+        "line": 963,
         "type": "function",
         "args": [
           "cb"
@@ -21755,7 +21826,7 @@
     "collectCachedMatches": [
       {
         "file": "public/js/app.js",
-        "line": 954,
+        "line": 990,
         "type": "function",
         "args": [
           "buckets",
@@ -21767,7 +21838,7 @@
     "findCachedFirst": [
       {
         "file": "public/js/app.js",
-        "line": 966,
+        "line": 1002,
         "type": "function",
         "args": [
           "buckets",
@@ -21779,7 +21850,7 @@
     "updateModalLangButtons": [
       {
         "file": "public/js/app.js",
-        "line": 1077,
+        "line": 1113,
         "type": "function",
         "args": [
           "lang"
@@ -21790,7 +21861,7 @@
     "openSiteLangPicker": [
       {
         "file": "public/js/app.js",
-        "line": 1095,
+        "line": 1131,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21799,7 +21870,7 @@
     "closeSiteLangPicker": [
       {
         "file": "public/js/app.js",
-        "line": 1137,
+        "line": 1173,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21808,7 +21879,7 @@
     "renderSiteLangList": [
       {
         "file": "public/js/app.js",
-        "line": 1142,
+        "line": 1178,
         "type": "function",
         "args": [
           "query"
@@ -21819,7 +21890,7 @@
     "selectSiteLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 1196,
+        "line": 1232,
         "type": "function",
         "args": [
           "langId"
@@ -21830,7 +21901,7 @@
     "filterSiteLangList": [
       {
         "file": "public/js/app.js",
-        "line": 1214,
+        "line": 1250,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21839,7 +21910,7 @@
     "detectVisitorLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 1218,
+        "line": 1254,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21848,7 +21919,7 @@
     "updateNavTabsLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 1261,
+        "line": 1297,
         "type": "function",
         "args": [
           "lang"
@@ -21859,7 +21930,7 @@
     "initTranslateEngine": [
       {
         "file": "public/js/app.js",
-        "line": 1273,
+        "line": 1309,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21868,7 +21939,7 @@
     "getEquivalentLanguageUrl": [
       {
         "file": "public/js/app.js",
-        "line": 1467,
+        "line": 1503,
         "type": "function",
         "args": [
           "targetLang"
@@ -21879,7 +21950,7 @@
     "switchLanguageEdition": [
       {
         "file": "public/js/app.js",
-        "line": 1522,
+        "line": 1558,
         "type": "function",
         "args": [
           "target"
@@ -21890,7 +21961,7 @@
     "changeSiteLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 1534,
+        "line": 1570,
         "type": "function",
         "args": [
           "targetLang",
@@ -21902,7 +21973,7 @@
     "loadAndExecuteTranslatePlugin": [
       {
         "file": "public/js/app.js",
-        "line": 1633,
+        "line": 1669,
         "type": "function",
         "args": [
           "targetLang"
@@ -21913,14 +21984,14 @@
     "exec": [
       {
         "file": "public/js/app.js",
-        "line": 1634,
+        "line": 1670,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1884,
+        "line": 1920,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21929,14 +22000,14 @@
     "applyCurrentTranslation": [
       {
         "file": "public/js/app.js",
-        "line": 1708,
+        "line": 1744,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1924,
+        "line": 1960,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21945,7 +22016,7 @@
     "triggerTranslate": [
       {
         "file": "public/js/app.js",
-        "line": 1730,
+        "line": 1766,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21954,14 +22025,14 @@
     "checkAndShowLangSuggestion": [
       {
         "file": "public/js/app.js",
-        "line": 1909,
+        "line": 1945,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 2028,
+        "line": 2064,
         "type": "function",
         "args": [],
         "doc": ""
@@ -21970,7 +22041,7 @@
     "dismissLangSuggestion": [
       {
         "file": "public/js/app.js",
-        "line": 2032,
+        "line": 2068,
         "type": "function",
         "args": [
           "userDismissed = true"
@@ -21981,7 +22052,7 @@
     "setLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 2056,
+        "line": 2092,
         "type": "function",
         "args": [
           "lang",
@@ -21993,7 +22064,7 @@
     "getTabFromHash": [
       {
         "file": "public/js/app.js",
-        "line": 2346,
+        "line": 2382,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22002,7 +22073,7 @@
     "handleHashNavigation": [
       {
         "file": "public/js/app.js",
-        "line": 2372,
+        "line": 2408,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22011,7 +22082,7 @@
     "switchTab": [
       {
         "file": "public/js/app.js",
-        "line": 2380,
+        "line": 2416,
         "type": "function",
         "args": [
           "tab",
@@ -22021,7 +22092,7 @@
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1559,
+        "line": 1588,
         "type": "function",
         "args": [
           "newTab"
@@ -22032,7 +22103,7 @@
     "executeTabRender": [
       {
         "file": "public/js/app.js",
-        "line": 2523,
+        "line": 2559,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22041,7 +22112,7 @@
     "renderHotTags": [
       {
         "file": "public/js/app.js",
-        "line": 2576,
+        "line": 2618,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22050,7 +22121,7 @@
     "executeTagSearch": [
       {
         "file": "public/js/app.js",
-        "line": 2592,
+        "line": 2636,
         "type": "function",
         "args": [
           "query"
@@ -22061,14 +22132,14 @@
     "clearSearch": [
       {
         "file": "public/js/app.js",
-        "line": 2608,
+        "line": 2658,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1621,
+        "line": 1657,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22077,7 +22148,7 @@
     "updateClearButtonVisibility": [
       {
         "file": "public/js/app.js",
-        "line": 2618,
+        "line": 2672,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22086,7 +22157,7 @@
     "toggleHistoryArchive": [
       {
         "file": "public/js/app.js",
-        "line": 2634,
+        "line": 2688,
         "type": "function",
         "args": [
           "sectionKey"
@@ -22097,7 +22168,7 @@
     "toggleCatNewsArchive": [
       {
         "file": "public/js/app.js",
-        "line": 2662,
+        "line": 2716,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22106,7 +22177,7 @@
     "isWithin24Hours": [
       {
         "file": "public/js/app.js",
-        "line": 2680,
+        "line": 2734,
         "type": "function",
         "args": [
           "rawTime"
@@ -22117,7 +22188,7 @@
     "isTiboResetTweet": [
       {
         "file": "public/js/app.js",
-        "line": 2694,
+        "line": 2748,
         "type": "function",
         "args": [
           "item"
@@ -22128,7 +22199,7 @@
     "isMeaningfulTweet": [
       {
         "file": "public/js/app.js",
-        "line": 2727,
+        "line": 2781,
         "type": "function",
         "args": [
           "it"
@@ -22139,7 +22210,7 @@
     "handleSearch": [
       {
         "file": "public/js/app.js",
-        "line": 2761,
+        "line": 2815,
         "type": "function",
         "args": [
           "val"
@@ -22148,7 +22219,7 @@
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1611,
+        "line": 1643,
         "type": "function",
         "args": [
           "evt"
@@ -22159,7 +22230,7 @@
     "isCompanyOrBrand": [
       {
         "file": "public/js/app.js",
-        "line": 2798,
+        "line": 2855,
         "type": "function",
         "args": [
           "it"
@@ -22170,7 +22241,7 @@
     "mergeArchiveIntoCachedData": [
       {
         "file": "public/js/app.js",
-        "line": 2826,
+        "line": 2883,
         "type": "function",
         "args": [
           "archiveItems"
@@ -22181,7 +22252,7 @@
     "getItemKey": [
       {
         "file": "public/js/app.js",
-        "line": 2830,
+        "line": 2887,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22190,7 +22261,7 @@
     "getCategoryTotalArchived": [
       {
         "file": "public/js/app.js",
-        "line": 2921,
+        "line": 2978,
         "type": "function",
         "args": [
           "tab"
@@ -22201,7 +22272,7 @@
     "loadCategoryMeta": [
       {
         "file": "public/js/app.js",
-        "line": 2929,
+        "line": 2986,
         "type": "function",
         "args": [
           "tab"
@@ -22212,7 +22283,7 @@
     "loadCategoryVolume": [
       {
         "file": "public/js/app.js",
-        "line": 2959,
+        "line": 3016,
         "type": "function",
         "args": [
           "tab",
@@ -22224,7 +22295,7 @@
     "getVolumeSlice": [
       {
         "file": "public/js/app.js",
-        "line": 2997,
+        "line": 3054,
         "type": "function",
         "args": [
           "tab",
@@ -22237,7 +22308,7 @@
     "loadColumnArchive": [
       {
         "file": "public/js/app.js",
-        "line": 3021,
+        "line": 3078,
         "type": "function",
         "args": [
           "tab"
@@ -22248,7 +22319,7 @@
     "ensureArchiveLoaded": [
       {
         "file": "public/js/app.js",
-        "line": 3026,
+        "line": 3083,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22257,7 +22328,7 @@
     "loadCelebrityArchiveData": [
       {
         "file": "public/js/app.js",
-        "line": 3033,
+        "line": 3090,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22266,7 +22337,7 @@
     "loadArchiveData": [
       {
         "file": "public/js/app.js",
-        "line": 3037,
+        "line": 3094,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22275,7 +22346,7 @@
     "updateArchiveBadges": [
       {
         "file": "public/js/app.js",
-        "line": 3044,
+        "line": 3101,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22284,7 +22355,7 @@
     "setTxt": [
       {
         "file": "public/js/app.js",
-        "line": 3055,
+        "line": 3112,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22293,7 +22364,7 @@
     "filterArchiveCategory": [
       {
         "file": "public/js/app.js",
-        "line": 3074,
+        "line": 3131,
         "type": "function",
         "args": [
           "cat"
@@ -22304,7 +22375,7 @@
     "handleArchiveSearch": [
       {
         "file": "public/js/app.js",
-        "line": 3092,
+        "line": 3149,
         "type": "function",
         "args": [
           "val"
@@ -22315,7 +22386,7 @@
     "clearArchiveSearch": [
       {
         "file": "public/js/app.js",
-        "line": 3100,
+        "line": 3157,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22324,7 +22395,7 @@
     "renderArchiveCard": [
       {
         "file": "public/js/app.js",
-        "line": 3110,
+        "line": 3167,
         "type": "function",
         "args": [
           "item"
@@ -22335,7 +22406,7 @@
     "renderArchiveView": [
       {
         "file": "public/js/app.js",
-        "line": 3124,
+        "line": 3181,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22344,7 +22415,7 @@
     "renderArchivePagination": [
       {
         "file": "public/js/app.js",
-        "line": 3199,
+        "line": 3256,
         "type": "function",
         "args": [
           "totalPages",
@@ -22356,7 +22427,7 @@
     "changeArchivePage": [
       {
         "file": "public/js/app.js",
-        "line": 3256,
+        "line": 3313,
         "type": "function",
         "args": [
           "p"
@@ -22367,7 +22438,7 @@
     "setSidebarSocialFilter": [
       {
         "file": "public/js/app.js",
-        "line": 3264,
+        "line": 3321,
         "type": "function",
         "args": [
           "platform"
@@ -22378,7 +22449,7 @@
     "filterSocialPlatform": [
       {
         "file": "public/js/app.js",
-        "line": 3270,
+        "line": 3327,
         "type": "function",
         "args": [
           "filterType"
@@ -22389,7 +22460,7 @@
     "filterCelebrityTag": [
       {
         "file": "public/js/app.js",
-        "line": 3296,
+        "line": 3353,
         "type": "function",
         "args": [
           "tag"
@@ -22400,7 +22471,7 @@
     "updateCelebrityTagBadges": [
       {
         "file": "public/js/app.js",
-        "line": 3325,
+        "line": 3382,
         "type": "function",
         "args": [
           "allCelebs"
@@ -22411,7 +22482,7 @@
     "copyTweetPrompt": [
       {
         "file": "public/js/app.js",
-        "line": 3339,
+        "line": 3396,
         "type": "function",
         "args": [
           "btn",
@@ -22423,7 +22494,7 @@
     "filterToolOrigin": [
       {
         "file": "public/js/app.js",
-        "line": 3367,
+        "line": 3424,
         "type": "function",
         "args": [
           "origin"
@@ -22434,7 +22505,7 @@
     "normalizeToolScenarioKey": [
       {
         "file": "public/js/app.js",
-        "line": 3391,
+        "line": 3448,
         "type": "function",
         "args": [
           "raw"
@@ -22445,7 +22516,7 @@
     "updateToolScenarioCounts": [
       {
         "file": "public/js/app.js",
-        "line": 3409,
+        "line": 3466,
         "type": "function",
         "args": [
           "baseList"
@@ -22456,7 +22527,7 @@
     "filterToolScenario": [
       {
         "file": "public/js/app.js",
-        "line": 3454,
+        "line": 3511,
         "type": "function",
         "args": [
           "scenario"
@@ -22467,7 +22538,7 @@
     "filterVideoPlatform": [
       {
         "file": "public/js/app.js",
-        "line": 3489,
+        "line": 3546,
         "type": "function",
         "args": [
           "plat"
@@ -22478,7 +22549,7 @@
     "toggleVideoCardMute": [
       {
         "file": "public/js/app.js",
-        "line": 3521,
+        "line": 3578,
         "type": "function",
         "args": [
           "btnEl"
@@ -22489,7 +22560,7 @@
     "filterVideoSub": [
       {
         "file": "public/js/app.js",
-        "line": 3559,
+        "line": 3616,
         "type": "function",
         "args": [
           "sub"
@@ -22500,7 +22571,7 @@
     "startVideoHoverPreview": [
       {
         "file": "public/js/app.js",
-        "line": 3582,
+        "line": 3639,
         "type": "function",
         "args": [
           "cardEl",
@@ -22513,7 +22584,7 @@
     "stopVideoHoverPreview": [
       {
         "file": "public/js/app.js",
-        "line": 3615,
+        "line": 3672,
         "type": "function",
         "args": [
           "cardEl"
@@ -22524,7 +22595,7 @@
     "mountInPlaceVerticalVideo": [
       {
         "file": "public/js/app.js",
-        "line": 3634,
+        "line": 3691,
         "type": "function",
         "args": [
           "cardEl",
@@ -22537,7 +22608,7 @@
     "unmountInPlaceVerticalVideo": [
       {
         "file": "public/js/app.js",
-        "line": 3685,
+        "line": 3742,
         "type": "function",
         "args": [
           "cardEl"
@@ -22548,7 +22619,7 @@
     "switchPromptSubmode": [
       {
         "file": "public/js/app.js",
-        "line": 3712,
+        "line": 3769,
         "type": "function",
         "args": [
           "mode"
@@ -22559,7 +22630,7 @@
     "switchPromptGeneration": [
       {
         "file": "public/js/app.js",
-        "line": 3732,
+        "line": 3789,
         "type": "function",
         "args": [
           "gen"
@@ -22570,7 +22641,7 @@
     "filterPromptCategory": [
       {
         "file": "public/js/app.js",
-        "line": 3751,
+        "line": 3808,
         "type": "function",
         "args": [
           "cat"
@@ -22581,7 +22652,7 @@
     "toggleSampleDrawer": [
       {
         "file": "public/js/app.js",
-        "line": 3788,
+        "line": 3845,
         "type": "function",
         "args": [
           "id"
@@ -22592,7 +22663,7 @@
     "copySampleCode": [
       {
         "file": "public/js/app.js",
-        "line": 3805,
+        "line": 3862,
         "type": "function",
         "args": [
           "id"
@@ -22603,7 +22674,7 @@
     "renderSampleOutputContent": [
       {
         "file": "public/js/app.js",
-        "line": 3812,
+        "line": 3869,
         "type": "function",
         "args": [
           "id",
@@ -22615,7 +22686,7 @@
     "resolveViralTweetTag": [
       {
         "file": "public/js/app.js",
-        "line": 3875,
+        "line": 3932,
         "type": "function",
         "args": [
           "item",
@@ -22627,7 +22698,7 @@
     "isValidTweetImageUrl": [
       {
         "file": "public/js/app.js",
-        "line": 3938,
+        "line": 3995,
         "type": "function",
         "args": [
           "url"
@@ -22638,7 +22709,7 @@
     "formatTweetPublishTime": [
       {
         "file": "public/js/app.js",
-        "line": 3946,
+        "line": 4003,
         "type": "function",
         "args": [
           "item",
@@ -22650,7 +22721,7 @@
     "renderViralTickerCard": [
       {
         "file": "public/js/app.js",
-        "line": 3987,
+        "line": 4044,
         "type": "function",
         "args": [
           "item",
@@ -22663,7 +22734,7 @@
     "renderTiboPinnedCard": [
       {
         "file": "public/js/app.js",
-        "line": 4132,
+        "line": 4189,
         "type": "function",
         "args": [
           "item",
@@ -22675,7 +22746,7 @@
     "renderLeadVideoCard": [
       {
         "file": "public/js/app.js",
-        "line": 4221,
+        "line": 4278,
         "type": "function",
         "args": [
           "leadMedia",
@@ -22687,7 +22758,7 @@
     "playHeroLeadVideo": [
       {
         "file": "public/js/app.js",
-        "line": 4317,
+        "line": 4374,
         "type": "function",
         "args": [
           "videoId",
@@ -22699,7 +22770,7 @@
     "openImageLightbox": [
       {
         "file": "public/js/app.js",
-        "line": 4344,
+        "line": 4401,
         "type": "function",
         "args": [
           "imageUrl",
@@ -22711,7 +22782,7 @@
     "closeImageLightbox": [
       {
         "file": "public/js/app.js",
-        "line": 4371,
+        "line": 4428,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22720,7 +22791,7 @@
     "renderHeroMediaShowcase": [
       {
         "file": "public/js/app.js",
-        "line": 4380,
+        "line": 4437,
         "type": "function",
         "args": [
           "heroShowcase"
@@ -22731,7 +22802,7 @@
     "renderViralTicker": [
       {
         "file": "public/js/app.js",
-        "line": 4388,
+        "line": 4445,
         "type": "function",
         "args": [
           "tweets",
@@ -22743,7 +22814,7 @@
     "fitViralTickerHeight": [
       {
         "file": "public/js/app.js",
-        "line": 4593,
+        "line": 4650,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22752,7 +22823,7 @@
     "updateTickerPageUI": [
       {
         "file": "public/js/app.js",
-        "line": 4572,
+        "line": 4629,
         "type": "function",
         "args": [
           "currentPage",
@@ -22764,7 +22835,7 @@
     "flipViralTicker": [
       {
         "file": "public/js/app.js",
-        "line": 4579,
+        "line": 4636,
         "type": "function",
         "args": [
           "direction"
@@ -22775,7 +22846,7 @@
     "toggleViralTickerPause": [
       {
         "file": "public/js/app.js",
-        "line": 4601,
+        "line": 4658,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22784,7 +22855,7 @@
     "initViralTickerAutoScroll": [
       {
         "file": "public/js/app.js",
-        "line": 4610,
+        "line": 4667,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22793,7 +22864,7 @@
     "switchTopicFocus": [
       {
         "file": "public/js/app.js",
-        "line": 4644,
+        "line": 4701,
         "type": "function",
         "args": [
           "idx"
@@ -22804,7 +22875,7 @@
     "toggleTopicFocusCollapse": [
       {
         "file": "public/js/app.js",
-        "line": 4666,
+        "line": 4723,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22813,7 +22884,7 @@
     "getTopicHighlights": [
       {
         "file": "public/js/app.js",
-        "line": 4683,
+        "line": 4740,
         "type": "function",
         "args": [
           "t",
@@ -22825,7 +22896,7 @@
     "renderTopicFocus": [
       {
         "file": "public/js/app.js",
-        "line": 4740,
+        "line": 4797,
         "type": "function",
         "args": [
           "topics"
@@ -22836,7 +22907,7 @@
     "renderTopThree": [
       {
         "file": "public/js/app.js",
-        "line": 5006,
+        "line": 5063,
         "type": "function",
         "args": [
           "topItems"
@@ -22847,7 +22918,7 @@
     "getToolSvgIcon": [
       {
         "file": "public/js/app.js",
-        "line": 5069,
+        "line": 5126,
         "type": "function",
         "args": [
           "iconType"
@@ -22858,7 +22929,7 @@
     "handleNewsCardClick": [
       {
         "file": "public/js/app.js",
-        "line": 5086,
+        "line": 5143,
         "type": "function",
         "args": [
           "newsId",
@@ -22870,7 +22941,7 @@
     "handleNewsTitleClick": [
       {
         "file": "public/js/app.js",
-        "line": 5101,
+        "line": 5158,
         "type": "function",
         "args": [
           "newsId",
@@ -22882,7 +22953,7 @@
     "handleToolCardClick": [
       {
         "file": "public/js/app.js",
-        "line": 5118,
+        "line": 5175,
         "type": "function",
         "args": [
           "toolId",
@@ -22894,7 +22965,7 @@
     "renderNewsCard": [
       {
         "file": "public/js/app.js",
-        "line": 5136,
+        "line": 5193,
         "type": "function",
         "args": [
           "item",
@@ -22904,11 +22975,12 @@
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 765,
+        "line": 793,
         "type": "function",
         "args": [
           "item",
-          "idx = 0"
+          "idx = 0",
+          "isEager = false"
         ],
         "doc": ""
       }
@@ -22916,7 +22988,7 @@
     "isFakeOrGenericCover": [
       {
         "file": "public/js/app.js",
-        "line": 5150,
+        "line": 5207,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22925,7 +22997,7 @@
     "isRealPlayableVideo": [
       {
         "file": "public/js/app.js",
-        "line": 5180,
+        "line": 5237,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22934,7 +23006,7 @@
     "isItemPinnedActive": [
       {
         "file": "public/js/app.js",
-        "line": 5331,
+        "line": 5388,
         "type": "function",
         "args": [
           "item"
@@ -22945,7 +23017,7 @@
     "formatTweetText": [
       {
         "file": "public/js/app.js",
-        "line": 5347,
+        "line": 5404,
         "type": "function",
         "args": [
           "text"
@@ -22956,7 +23028,7 @@
     "toggleTweetExpand": [
       {
         "file": "public/js/app.js",
-        "line": 5376,
+        "line": 5433,
         "type": "function",
         "args": [
           "btn"
@@ -22967,7 +23039,7 @@
     "renderCelebrityCard": [
       {
         "file": "public/js/app.js",
-        "line": 5419,
+        "line": 5476,
         "type": "function",
         "args": [
           "item",
@@ -22980,7 +23052,7 @@
     "countLines": [
       {
         "file": "public/js/app.js",
-        "line": 5531,
+        "line": 5588,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22989,7 +23061,7 @@
     "nextCelebritySpotlightPage": [
       {
         "file": "public/js/app.js",
-        "line": 5659,
+        "line": 5716,
         "type": "function",
         "args": [],
         "doc": ""
@@ -22998,7 +23070,7 @@
     "prevCelebritySpotlightPage": [
       {
         "file": "public/js/app.js",
-        "line": 5668,
+        "line": 5725,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23007,7 +23079,7 @@
     "goToCelebritySpotlightPage": [
       {
         "file": "public/js/app.js",
-        "line": 5675,
+        "line": 5732,
         "type": "function",
         "args": [
           "pageIdx"
@@ -23018,7 +23090,7 @@
     "getCelebritySpotlightCards": [
       {
         "file": "public/js/app.js",
-        "line": 5680,
+        "line": 5737,
         "type": "function",
         "args": [
           "filter = socialPlatformFilter"
@@ -23029,7 +23101,7 @@
     "leaderPriority": [
       {
         "file": "public/js/app.js",
-        "line": 5694,
+        "line": 5751,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23038,7 +23110,7 @@
     "loadCuratedColumnHighlights": [
       {
         "file": "public/js/app.js",
-        "line": 5718,
+        "line": 5775,
         "type": "function",
         "args": [
           "isManual = false"
@@ -23049,7 +23121,7 @@
     "_inFlightHighlights": [
       {
         "file": "public/js/app.js",
-        "line": 5725,
+        "line": 5782,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23058,7 +23130,7 @@
     "renderColumnSpotlightBanner": [
       {
         "file": "public/js/app.js",
-        "line": 5744,
+        "line": 5801,
         "type": "function",
         "args": [
           "tab = 'celebrity'"
@@ -23069,7 +23141,7 @@
     "switchActiveTitan": [
       {
         "file": "public/js/app.js",
-        "line": 6264,
+        "line": 6321,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23078,7 +23150,7 @@
     "switchActiveTool": [
       {
         "file": "public/js/app.js",
-        "line": 6269,
+        "line": 6326,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23087,7 +23159,7 @@
     "switchActiveNews": [
       {
         "file": "public/js/app.js",
-        "line": 6274,
+        "line": 6331,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23096,7 +23168,7 @@
     "renderCelebritySpotlightBanner": [
       {
         "file": "public/js/app.js",
-        "line": 6280,
+        "line": 6337,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23105,7 +23177,7 @@
     "renderCelebritySpotlightBannerFallback": [
       {
         "file": "public/js/app.js",
-        "line": 6284,
+        "line": 6341,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23114,7 +23186,7 @@
     "renderSpotlightCard": [
       {
         "file": "public/js/app.js",
-        "line": 6374,
+        "line": 6431,
         "type": "function",
         "args": [
           "item"
@@ -23125,7 +23197,7 @@
     "renderCelebrityTimeline": [
       {
         "file": "public/js/app.js",
-        "line": 6505,
+        "line": 6562,
         "type": "function",
         "args": [
           "list"
@@ -23136,7 +23208,7 @@
     "formatCleanToolUrl": [
       {
         "file": "public/js/app.js",
-        "line": 6622,
+        "line": 6679,
         "type": "function",
         "args": [
           "rawUrl",
@@ -23148,7 +23220,7 @@
     "formatTransitGoUrl": [
       {
         "file": "public/js/app.js",
-        "line": 6658,
+        "line": 6715,
         "type": "function",
         "args": [
           "rawUrl",
@@ -23160,7 +23232,7 @@
     "dedupToolItems": [
       {
         "file": "public/js/app.js",
-        "line": 6675,
+        "line": 6732,
         "type": "function",
         "args": [
           "items"
@@ -23171,7 +23243,7 @@
     "renderToolCard": [
       {
         "file": "public/js/app.js",
-        "line": 6718,
+        "line": 6775,
         "type": "function",
         "args": [
           "item"
@@ -23182,7 +23254,7 @@
     "escapeHtml": [
       {
         "file": "public/js/app.js",
-        "line": 10762,
+        "line": 10823,
         "type": "function",
         "args": [
           "str"
@@ -23191,7 +23263,7 @@
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 430,
+        "line": 436,
         "type": "function",
         "args": [
           "str"
@@ -23202,7 +23274,7 @@
     "getAssembledPromptText": [
       {
         "file": "public/js/app.js",
-        "line": 6978,
+        "line": 7035,
         "type": "function",
         "args": [
           "id"
@@ -23213,7 +23285,7 @@
     "onPromptVarInput": [
       {
         "file": "public/js/app.js",
-        "line": 6989,
+        "line": 7046,
         "type": "function",
         "args": [
           "id"
@@ -23224,7 +23296,7 @@
     "switchPromptLang": [
       {
         "file": "public/js/app.js",
-        "line": 7013,
+        "line": 7070,
         "type": "function",
         "args": [
           "id",
@@ -23236,7 +23308,7 @@
     "copyCardPrompt": [
       {
         "file": "public/js/app.js",
-        "line": 7036,
+        "line": 7093,
         "type": "function",
         "args": [
           "id"
@@ -23247,7 +23319,7 @@
     "jumpToLLMWithPrompt": [
       {
         "file": "public/js/app.js",
-        "line": 7044,
+        "line": 7101,
         "type": "function",
         "args": [
           "id",
@@ -23259,7 +23331,7 @@
     "getVideoSubType": [
       {
         "file": "public/js/app.js",
-        "line": 7063,
+        "line": 7120,
         "type": "function",
         "args": [
           "it"
@@ -23270,7 +23342,7 @@
     "dedupVideoItems": [
       {
         "file": "public/js/app.js",
-        "line": 7078,
+        "line": 7135,
         "type": "function",
         "args": [
           "list"
@@ -23281,7 +23353,7 @@
     "renderCreatorsRail": [
       {
         "file": "public/js/app.js",
-        "line": 7113,
+        "line": 7170,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23290,7 +23362,7 @@
     "filterByCreator": [
       {
         "file": "public/js/app.js",
-        "line": 7310,
+        "line": 7367,
         "type": "function",
         "args": [
           "authorName"
@@ -23301,7 +23373,7 @@
     "renderHeroSpotlight": [
       {
         "file": "public/js/app.js",
-        "line": 7321,
+        "line": 7378,
         "type": "function",
         "args": [
           "item"
@@ -23312,7 +23384,7 @@
     "renderTrendingMiniCard": [
       {
         "file": "public/js/app.js",
-        "line": 7385,
+        "line": 7442,
         "type": "function",
         "args": [
           "item",
@@ -23324,7 +23396,7 @@
     "renderWorkflowCard": [
       {
         "file": "public/js/app.js",
-        "line": 7416,
+        "line": 7473,
         "type": "function",
         "args": [
           "item"
@@ -23335,7 +23407,7 @@
     "copyWorkflowCode": [
       {
         "file": "public/js/app.js",
-        "line": 7496,
+        "line": 7553,
         "type": "function",
         "args": [
           "id"
@@ -23346,7 +23418,7 @@
     "renderPromptCard": [
       {
         "file": "public/js/app.js",
-        "line": 7517,
+        "line": 7574,
         "type": "function",
         "args": [
           "item"
@@ -23357,7 +23429,7 @@
     "formatVideoTime": [
       {
         "file": "public/js/app.js",
-        "line": 7684,
+        "line": 7741,
         "type": "function",
         "args": [
           "item",
@@ -23369,7 +23441,7 @@
     "renderVerticalVideoCard": [
       {
         "file": "public/js/app.js",
-        "line": 7714,
+        "line": 7771,
         "type": "function",
         "args": [
           "item"
@@ -23380,7 +23452,7 @@
     "renderHorizontalVideoCard": [
       {
         "file": "public/js/app.js",
-        "line": 7816,
+        "line": 7873,
         "type": "function",
         "args": [
           "item"
@@ -23391,7 +23463,7 @@
     "renderVideoCard": [
       {
         "file": "public/js/app.js",
-        "line": 7910,
+        "line": 7967,
         "type": "function",
         "args": [
           "item"
@@ -23400,7 +23472,7 @@
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 1021,
+        "line": 1050,
         "type": "function",
         "args": [
           "item",
@@ -23412,7 +23484,7 @@
     "renderVideoOrPromptCard": [
       {
         "file": "public/js/app.js",
-        "line": 7918,
+        "line": 7975,
         "type": "function",
         "args": [
           "item"
@@ -23423,7 +23495,7 @@
     "renderSiteWideSearchResults": [
       {
         "file": "public/js/app.js",
-        "line": 7927,
+        "line": 7984,
         "type": "function",
         "args": [
           "data"
@@ -23434,7 +23506,7 @@
     "switchHomeToolFilter": [
       {
         "file": "public/js/app.js",
-        "line": 7984,
+        "line": 8041,
         "type": "function",
         "args": [
           "mode"
@@ -23445,7 +23517,7 @@
     "renderHomeTools": [
       {
         "file": "public/js/app.js",
-        "line": 8006,
+        "line": 8063,
         "type": "function",
         "args": [
           "data"
@@ -23456,7 +23528,7 @@
     "getToolOrigin": [
       {
         "file": "public/js/app.js",
-        "line": 8011,
+        "line": 8068,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23465,7 +23537,7 @@
     "getToolTime": [
       {
         "file": "public/js/app.js",
-        "line": 8026,
+        "line": 8083,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23474,7 +23546,7 @@
     "switchHomePromptFilter": [
       {
         "file": "public/js/app.js",
-        "line": 8095,
+        "line": 8152,
         "type": "function",
         "args": [
           "mode"
@@ -23485,7 +23557,7 @@
     "renderHomePrompts": [
       {
         "file": "public/js/app.js",
-        "line": 8114,
+        "line": 8171,
         "type": "function",
         "args": [
           "data"
@@ -23496,7 +23568,7 @@
     "renderUI": [
       {
         "file": "public/js/app.js",
-        "line": 8158,
+        "line": 8215,
         "type": "function",
         "args": [
           "data"
@@ -23507,7 +23579,7 @@
     "syncThreeColumnsHeight": [
       {
         "file": "public/js/app.js",
-        "line": 8530,
+        "line": 8587,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23516,7 +23588,7 @@
     "filterList": [
       {
         "file": "public/js/app.js",
-        "line": 8539,
+        "line": 8596,
         "type": "function",
         "args": [
           "list",
@@ -23528,7 +23600,7 @@
     "changeCategoryPage": [
       {
         "file": "public/js/app.js",
-        "line": 8553,
+        "line": 8610,
         "type": "function",
         "args": [
           "p"
@@ -23539,7 +23611,7 @@
     "changeCategoryPageSize": [
       {
         "file": "public/js/app.js",
-        "line": 8599,
+        "line": 8656,
         "type": "function",
         "args": [
           "sz"
@@ -23550,7 +23622,7 @@
     "renderCategoryPagination": [
       {
         "file": "public/js/app.js",
-        "line": 8613,
+        "line": 8670,
         "type": "function",
         "args": [
           "totalPages",
@@ -23564,7 +23636,7 @@
     "renderGridChunked": [
       {
         "file": "public/js/app.js",
-        "line": 8692,
+        "line": 8749,
         "type": "function",
         "args": [
           "container",
@@ -23578,7 +23650,7 @@
     "appendNext": [
       {
         "file": "public/js/app.js",
-        "line": 8703,
+        "line": 8760,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23587,7 +23659,7 @@
     "renderCategoryView": [
       {
         "file": "public/js/app.js",
-        "line": 8722,
+        "line": 8779,
         "type": "function",
         "args": [
           "tab"
@@ -23598,7 +23670,7 @@
     "syncSsrBadgesAndTicker": [
       {
         "file": "public/js/app.js",
-        "line": 9421,
+        "line": 9478,
         "type": "function",
         "args": [
           "data"
@@ -23609,7 +23681,7 @@
     "loadNews": [
       {
         "file": "public/js/app.js",
-        "line": 9460,
+        "line": 9517,
         "type": "function",
         "args": [
           "isManual = false"
@@ -23620,7 +23692,7 @@
     "runner": [
       {
         "file": "public/js/app.js",
-        "line": 9465,
+        "line": 9522,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23629,7 +23701,7 @@
     "showCustomToast": [
       {
         "file": "public/js/app.js",
-        "line": 9594,
+        "line": 9652,
         "type": "function",
         "args": [
           "msg",
@@ -23641,7 +23713,7 @@
     "fallbackCopyText": [
       {
         "file": "public/js/app.js",
-        "line": 9608,
+        "line": 9666,
         "type": "function",
         "args": [
           "text"
@@ -23652,7 +23724,7 @@
     "copyToClipboard": [
       {
         "file": "public/js/app.js",
-        "line": 9627,
+        "line": 9685,
         "type": "function",
         "args": [
           "text",
@@ -23664,7 +23736,7 @@
     "openVideoModal": [
       {
         "file": "public/js/app.js",
-        "line": 9643,
+        "line": 9701,
         "type": "function",
         "args": [
           "embedUrl",
@@ -23678,7 +23750,7 @@
     "closeVideoModal": [
       {
         "file": "public/js/app.js",
-        "line": 9677,
+        "line": 9735,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23687,7 +23759,7 @@
     "formatRichArticleContent": [
       {
         "file": "public/js/app.js",
-        "line": 9687,
+        "line": 9745,
         "type": "function",
         "args": [
           "rawText",
@@ -23703,7 +23775,7 @@
     "renderPara": [
       {
         "file": "public/js/app.js",
-        "line": 9739,
+        "line": 9797,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23712,7 +23784,7 @@
     "mapSlot": [
       {
         "file": "public/js/app.js",
-        "line": 9829,
+        "line": 9887,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23721,7 +23793,7 @@
     "emitMediaForSlot": [
       {
         "file": "public/js/app.js",
-        "line": 9867,
+        "line": 9925,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23730,7 +23802,7 @@
     "openAiNewsModal": [
       {
         "file": "public/js/app.js",
-        "line": 9942,
+        "line": 10000,
         "type": "function",
         "args": [
           "newsId"
@@ -23741,7 +23813,7 @@
     "isGenericTemplate": [
       {
         "file": "public/js/app.js",
-        "line": 10102,
+        "line": 10163,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23750,14 +23822,14 @@
     "isAuthorAvatarImg": [
       {
         "file": "public/js/app.js",
-        "line": 10158,
+        "line": 10219,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 388,
+        "line": 394,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23766,7 +23838,7 @@
     "isPaywalled": [
       {
         "file": "public/js/app.js",
-        "line": 10313,
+        "line": 10374,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23775,7 +23847,7 @@
     "renderArticleView": [
       {
         "file": "public/js/app.js",
-        "line": 10324,
+        "line": 10385,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23784,7 +23856,7 @@
     "closeAiNewsModal": [
       {
         "file": "public/js/app.js",
-        "line": 10631,
+        "line": 10692,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23793,7 +23865,7 @@
     "switchSocialViewMode": [
       {
         "file": "public/js/app.js",
-        "line": 10672,
+        "line": 10733,
         "type": "function",
         "args": [
           "mode"
@@ -23804,7 +23876,7 @@
     "filterViralPlatform": [
       {
         "file": "public/js/app.js",
-        "line": 10740,
+        "line": 10801,
         "type": "function",
         "args": [
           "plat"
@@ -23815,7 +23887,7 @@
     "formatSocialText": [
       {
         "file": "public/js/app.js",
-        "line": 10771,
+        "line": 10832,
         "type": "function",
         "args": [
           "text"
@@ -23826,7 +23898,7 @@
     "detectSocialMediaType": [
       {
         "file": "public/js/app.js",
-        "line": 10783,
+        "line": 10844,
         "type": "function",
         "args": [
           "item"
@@ -23837,7 +23909,7 @@
     "renderSocialMediaPreview": [
       {
         "file": "public/js/app.js",
-        "line": 10798,
+        "line": 10859,
         "type": "function",
         "args": [
           "item",
@@ -23850,7 +23922,7 @@
     "renderThreadAndComments": [
       {
         "file": "public/js/app.js",
-        "line": 10905,
+        "line": 10966,
         "type": "function",
         "args": [
           "item",
@@ -23863,7 +23935,7 @@
     "toggleThreadComments": [
       {
         "file": "public/js/app.js",
-        "line": 11006,
+        "line": 11067,
         "type": "function",
         "args": [
           "cardKey",
@@ -23875,7 +23947,7 @@
     "handleCardClick": [
       {
         "file": "public/js/app.js",
-        "line": 11025,
+        "line": 11086,
         "type": "function",
         "args": [
           "cardKey",
@@ -23888,7 +23960,7 @@
     "toggleCardLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 11032,
+        "line": 11093,
         "type": "function",
         "args": [
           "cardKey",
@@ -23900,7 +23972,7 @@
     "renderViralPostsSection": [
       {
         "file": "public/js/app.js",
-        "line": 11074,
+        "line": 11135,
         "type": "function",
         "args": [
           "list"
@@ -23911,7 +23983,7 @@
     "renderViralPostCard": [
       {
         "file": "public/js/app.js",
-        "line": 11111,
+        "line": 11172,
         "type": "function",
         "args": [
           "item",
@@ -23923,7 +23995,7 @@
     "openSocialPostModal": [
       {
         "file": "public/js/app.js",
-        "line": 11281,
+        "line": 11342,
         "type": "function",
         "args": [
           "postId"
@@ -23934,7 +24006,7 @@
     "renderSocialModalData": [
       {
         "file": "public/js/app.js",
-        "line": 11316,
+        "line": 11377,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23943,7 +24015,7 @@
     "toggleSocialModalLanguage": [
       {
         "file": "public/js/app.js",
-        "line": 11668,
+        "line": 11729,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23952,7 +24024,7 @@
     "closeSocialPostModal": [
       {
         "file": "public/js/app.js",
-        "line": 11673,
+        "line": 11734,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23961,7 +24033,7 @@
     "openToolDetailModal": [
       {
         "file": "public/js/app.js",
-        "line": 11689,
+        "line": 11750,
         "type": "function",
         "args": [
           "toolId"
@@ -23972,7 +24044,7 @@
     "updateToolCarousel": [
       {
         "file": "public/js/app.js",
-        "line": 11909,
+        "line": 11973,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23981,7 +24053,7 @@
     "prevToolCarouselSlide": [
       {
         "file": "public/js/app.js",
-        "line": 12014,
+        "line": 12078,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23990,7 +24062,7 @@
     "nextToolCarouselSlide": [
       {
         "file": "public/js/app.js",
-        "line": 12019,
+        "line": 12083,
         "type": "function",
         "args": [],
         "doc": ""
@@ -23999,7 +24071,7 @@
     "setToolCarouselSlide": [
       {
         "file": "public/js/app.js",
-        "line": 12024,
+        "line": 12088,
         "type": "function",
         "args": [
           "idx"
@@ -24010,7 +24082,7 @@
     "openToolImageLightbox": [
       {
         "file": "public/js/app.js",
-        "line": 12029,
+        "line": 12093,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24019,7 +24091,7 @@
     "closeToolDetailModal": [
       {
         "file": "public/js/app.js",
-        "line": 12035,
+        "line": 12099,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24028,7 +24100,7 @@
     "copyToolQuickstartCmd": [
       {
         "file": "public/js/app.js",
-        "line": 12044,
+        "line": 12108,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24037,7 +24109,7 @@
     "openShareModal": [
       {
         "file": "public/js/app.js",
-        "line": 12058,
+        "line": 12122,
         "type": "function",
         "args": [
           "item",
@@ -24049,7 +24121,7 @@
     "closeShareModal": [
       {
         "file": "public/js/app.js",
-        "line": 12099,
+        "line": 12163,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24058,7 +24130,7 @@
     "shareContent": [
       {
         "file": "public/js/app.js",
-        "line": 12111,
+        "line": 12175,
         "type": "function",
         "args": [
           "event",
@@ -24071,7 +24143,7 @@
     "shareCurrentNewsModal": [
       {
         "file": "public/js/app.js",
-        "line": 12165,
+        "line": 12229,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24080,7 +24152,7 @@
     "shareCurrentToolModal": [
       {
         "file": "public/js/app.js",
-        "line": 12193,
+        "line": 12257,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24089,7 +24161,7 @@
     "executeShare": [
       {
         "file": "public/js/app.js",
-        "line": 12220,
+        "line": 12284,
         "type": "function",
         "args": [
           "platform"
@@ -24100,7 +24172,7 @@
     "shareNewsToXDirect": [
       {
         "file": "public/js/app.js",
-        "line": 12309,
+        "line": 12373,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24109,7 +24181,7 @@
     "shareNewsToThreadsDirect": [
       {
         "file": "public/js/app.js",
-        "line": 12335,
+        "line": 12399,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24118,7 +24190,7 @@
     "shareToolToXDirect": [
       {
         "file": "public/js/app.js",
-        "line": 12362,
+        "line": 12426,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24127,7 +24199,7 @@
     "shareToolToThreadsDirect": [
       {
         "file": "public/js/app.js",
-        "line": 12391,
+        "line": 12455,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24136,7 +24208,7 @@
     "openLegalModal": [
       {
         "file": "public/js/app.js",
-        "line": 12565,
+        "line": 12629,
         "type": "function",
         "args": [
           "tab = 'privacy'"
@@ -24147,7 +24219,7 @@
     "closeLegalModal": [
       {
         "file": "public/js/app.js",
-        "line": 12571,
+        "line": 12635,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24156,7 +24228,7 @@
     "switchLegalTab": [
       {
         "file": "public/js/app.js",
-        "line": 12576,
+        "line": 12640,
         "type": "function",
         "args": [
           "tab"
@@ -24167,7 +24239,7 @@
     "initAdsSafely": [
       {
         "file": "public/js/app.js",
-        "line": 12625,
+        "line": 12689,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24176,7 +24248,7 @@
     "triggerDeferredLoad": [
       {
         "file": "public/js/app.js",
-        "line": 12694,
+        "line": 12759,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24185,7 +24257,7 @@
     "scheduleIdleLoad": [
       {
         "file": "public/js/app.js",
-        "line": 12699,
+        "line": 12764,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24194,14 +24266,14 @@
     "initMobileBackToTop": [
       {
         "file": "public/js/app.js",
-        "line": 12775,
+        "line": 12840,
         "type": "function",
         "args": [],
         "doc": ""
       },
       {
         "file": "public/m/js/mobile.js",
-        "line": 2010,
+        "line": 2046,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24210,7 +24282,7 @@
     "initTouchGestures": [
       {
         "file": "public/js/app.js",
-        "line": 12792,
+        "line": 12857,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24219,7 +24291,7 @@
     "runLangCheck": [
       {
         "file": "public/js/app.js",
-        "line": 12846,
+        "line": 12911,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24228,7 +24300,7 @@
     "onDomInteractiveOrLoaded": [
       {
         "file": "public/js/app.js",
-        "line": 12853,
+        "line": 12918,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24289,7 +24361,7 @@
     "getValidImages": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 382,
+        "line": 388,
         "type": "function",
         "args": [
           "item"
@@ -24300,7 +24372,7 @@
     "cleanNewsTitle": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 441,
+        "line": 447,
         "type": "function",
         "args": [
           "rawTitle"
@@ -24308,10 +24380,21 @@
         "doc": ""
       }
     ],
+    "buildFastIndex": [
+      {
+        "file": "public/m/js/mobile.js",
+        "line": 463,
+        "type": "function",
+        "args": [
+          "data"
+        ],
+        "doc": ""
+      }
+    ],
     "findItemById": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 456,
+        "line": 483,
         "type": "function",
         "args": [
           "itemId"
@@ -24322,7 +24405,7 @@
     "showToast": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 479,
+        "line": 504,
         "type": "function",
         "args": [
           "msg"
@@ -24333,7 +24416,7 @@
     "loadData": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 500,
+        "line": 525,
         "type": "function",
         "args": [
           "forceRefresh = false"
@@ -24344,7 +24427,7 @@
     "renderSubFilters": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 569,
+        "line": 596,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24353,7 +24436,7 @@
     "renderCurrentView": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 623,
+        "line": 650,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24362,7 +24445,7 @@
     "renderTopCard": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 856,
+        "line": 886,
         "type": "function",
         "args": [
           "item",
@@ -24374,7 +24457,7 @@
     "renderSocialCard": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 941,
+        "line": 970,
         "type": "function",
         "args": [
           "item",
@@ -24386,7 +24469,7 @@
     "renderSkeleton": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1078,
+        "line": 1107,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24395,7 +24478,7 @@
     "openArticleModal": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1090,
+        "line": 1119,
         "type": "function",
         "args": [
           "itemId"
@@ -24406,7 +24489,7 @@
     "renderArticleParas": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1388,
+        "line": 1417,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24415,7 +24498,7 @@
     "switchArticleLang": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1449,
+        "line": 1478,
         "type": "function",
         "args": [
           "lang"
@@ -24426,7 +24509,7 @@
     "closeArticleModal": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1489,
+        "line": 1518,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24435,7 +24518,7 @@
     "openLightbox": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1499,
+        "line": 1528,
         "type": "function",
         "args": [
           "imgUrl"
@@ -24446,7 +24529,7 @@
     "closeLightbox": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1525,
+        "line": 1554,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24455,7 +24538,7 @@
     "toggleTweetLang": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1535,
+        "line": 1564,
         "type": "function",
         "args": [
           "itemId"
@@ -24466,7 +24549,7 @@
     "setFilter": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1600,
+        "line": 1631,
         "type": "function",
         "args": [
           "filterId"
@@ -24477,7 +24560,7 @@
     "loadMore": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1606,
+        "line": 1637,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24486,7 +24569,7 @@
     "toggleSearchBox": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1633,
+        "line": 1669,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24495,7 +24578,7 @@
     "renderLanguagePickerList": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1644,
+        "line": 1680,
         "type": "function",
         "args": [
           "query = ''"
@@ -24506,7 +24589,7 @@
     "filterLanguageList": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1714,
+        "line": 1750,
         "type": "function",
         "args": [
           "e"
@@ -24517,7 +24600,7 @@
     "initDragScroll": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1719,
+        "line": 1755,
         "type": "function",
         "args": [
           "el"
@@ -24528,7 +24611,7 @@
     "openLangPicker": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1761,
+        "line": 1797,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24537,7 +24620,7 @@
     "closeLangPicker": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1786,
+        "line": 1822,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24546,7 +24629,7 @@
     "selectLanguage": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1795,
+        "line": 1831,
         "type": "function",
         "args": [
           "targetLang"
@@ -24557,7 +24640,7 @@
     "updateLangButtonLabel": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1869,
+        "line": 1905,
         "type": "function",
         "args": [
           "lang"
@@ -24568,7 +24651,7 @@
     "loadTranslatePlugin": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1883,
+        "line": 1919,
         "type": "function",
         "args": [
           "targetLang"
@@ -24579,7 +24662,7 @@
     "switchLanguage": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1953,
+        "line": 1989,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24588,7 +24671,7 @@
     "switchToDesktop": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1958,
+        "line": 1994,
         "type": "function",
         "args": [],
         "doc": ""
@@ -24597,7 +24680,7 @@
     "shareArticle": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 1974,
+        "line": 2010,
         "type": "function",
         "args": [
           "itemId"
@@ -24608,7 +24691,7 @@
     "dismissLangSuggest": [
       {
         "file": "public/m/js/mobile.js",
-        "line": 2098,
+        "line": 2134,
         "type": "function",
         "args": [],
         "doc": ""

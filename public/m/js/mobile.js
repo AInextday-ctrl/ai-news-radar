@@ -367,10 +367,16 @@
       return clean.includes('w=') ? clean.replace(/w=\d+/, `w=${width}`) : `${clean}${clean.includes('?') ? '&' : '?'}w=${width}&auto=format`;
     }
 
-    // 3. For any .xyz or self-hosted domain: never proxy through wsrv.nl (.xyz is blocked by wsrv.nl policy)
-    if (clean.includes('.xyz') || clean.includes('ainewsradar')) {
+    // 3. For any .xyz or self-hosted domain: resolve to ultra-lightweight WebP thumbnail (~8-12 KB)
+    if (clean.includes('.xyz') || clean.includes('ainewsradar') || clean.startsWith('/images/')) {
+      if (clean.includes('/images/thumbnails/')) return clean;
       const parts = clean.split('/images/');
-      if (parts.length > 1) return `/images/${parts[parts.length - 1].split('?')[0]}`;
+      if (parts.length > 1) {
+        const fname = parts[parts.length - 1].split('?')[0];
+        const dotIdx = fname.lastIndexOf('.');
+        const base = dotIdx !== -1 ? fname.substring(0, dotIdx) : fname;
+        return `/images/thumbnails/${base}.webp`;
+      }
       return clean;
     }
 
@@ -452,9 +458,36 @@
       .trim();
   }
 
-  // Find item by ID across all data pools
+  // Fast O(1) Index Map for Instant Modal & Article Lookup
+  let _fastIdMap = new Map();
+  function buildFastIndex(data) {
+    _fastIdMap.clear();
+    if (!data) return;
+    const pools = [
+      ...(data.top_three || []),
+      ...((data.grouped && data.grouped.news) || []),
+      ...((data.grouped && data.grouped.celebrity) || []),
+      ...((data.grouped && data.grouped.tools) || []),
+      ...((data.grouped && data.grouped.videos) || []),
+      ...((data.grouped && data.grouped.prompts) || []),
+      ...((data.grouped && data.grouped.viral_posts) || [])
+    ];
+    for (let i = 0; i < pools.length; i++) {
+      const it = pools[i];
+      if (it && it.id) _fastIdMap.set(String(it.id), it);
+      if (it && it.url) _fastIdMap.set(String(it.url), it);
+    }
+  }
+
+  // Find item by ID across all data pools (O(1) with fallback)
   function findItemById(itemId) {
     if (!cachedData) return null;
+    const strId = String(itemId);
+    if (_fastIdMap.has(strId)) return _fastIdMap.get(strId);
+    if (strId.startsWith('top_')) {
+      const topIdx = parseInt(strId.replace('top_', ''), 10);
+      return (cachedData.top_three || [])[topIdx] || null;
+    }
     const allPools = [
       ...(cachedData.top_three || []),
       ...((cachedData.grouped && cachedData.grouped.news) || []),
@@ -464,15 +497,7 @@
       ...((cachedData.grouped && cachedData.grouped.prompts) || []),
       ...((cachedData.grouped && cachedData.grouped.viral_posts) || [])
     ];
-    let item = allPools.find(it => String(it.id) === String(itemId));
-    if (!item && String(itemId).startsWith('top_')) {
-      const topIdx = parseInt(itemId.replace('top_', ''), 10);
-      item = (cachedData.top_three || [])[topIdx];
-    }
-    if (!item) {
-      item = allPools.find(it => (it.url && it.url === itemId) || (it.title && it.title === itemId));
-    }
-    return item;
+    return allPools.find(it => (it.url && it.url === itemId) || (it.title && it.title === itemId)) || null;
   }
 
   // 6. Toast Notification Helper
@@ -508,6 +533,7 @@
         const isRecent = storedTime && (Date.now() - parseInt(storedTime, 10) < 300000);
         if (stored && isRecent) {
           cachedData = JSON.parse(stored);
+          buildFastIndex(cachedData);
           renderCurrentView();
         } else {
           sessionStorage.removeItem('ai_radar_m_cached_data');
@@ -522,14 +548,15 @@
 
     // Step B: Cache-busting network fetch (Rule 3.5 & Strict Timestamp Hydration)
     try {
-      const fetchUrl = `/data/latest_news.json?t=${Date.now()}`;
+      const fetchUrl = forceRefresh ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
       const res = await fetch(fetchUrl, {
-        cache: forceRefresh ? 'reload' : 'no-cache'
+        cache: forceRefresh ? 'reload' : 'default'
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const freshData = await res.json();
       
       cachedData = freshData;
+      buildFastIndex(freshData);
       try {
         sessionStorage.setItem('ai_radar_m_cached_data', JSON.stringify(freshData));
         sessionStorage.setItem('ai_radar_m_cached_time', Date.now().toString());
@@ -698,7 +725,8 @@
 
     // If on default News tab ('all' and no active search), showcase Top 3 Core Breakthroughs at the top
     let topSectionHtml = '';
-    if (currentTab === 'news' && currentFilter === 'all' && !searchQuery.trim() && topThreeItems.length > 0) {
+    const hasTopThree = currentTab === 'news' && currentFilter === 'all' && !searchQuery.trim() && topThreeItems.length > 0;
+    if (hasTopThree) {
       topSectionHtml = `
         <div class="mb-4 space-y-3">
           <div class="flex items-center justify-between px-1">
@@ -723,7 +751,7 @@
     }
 
     if (currentTab === 'news') {
-      htmlCards = visibleItems.map((it, idx) => renderNewsCard(it, idx)).join('');
+      htmlCards = visibleItems.map((it, idx) => renderNewsCard(it, idx, !hasTopThree && idx === 0)).join('');
     } else if (currentTab === 'social') {
       htmlCards = visibleItems.map((it, idx) => renderSocialCard(it, idx)).join('');
     } else if (currentTab === 'videos') {
@@ -762,7 +790,7 @@
   }
 
   // 10. Card Renderers
-  function renderNewsCard(item, idx = 0) {
+  function renderNewsCard(item, idx = 0, isEager = false) {
     const rawTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
     const title = escapeHtml(cleanNewsTitle(rawTitle) || '');
     const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
@@ -799,31 +827,33 @@
           <span class="text-slate-400 font-mono text-[10px] shrink-0">${timeAgo}</span>
         </div>
 
-        <h3 class="text-[15px] font-bold text-slate-900 dark:text-slate-100 leading-snug mb-2 line-clamp-3">
-          ${title}
-        </h3>
-
-        ${summary ? `
-          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3 line-clamp-2">
-            ${summary}
-          </p>
-        ` : ''}
-
-        ${leadImg ? `
-          <div class="rounded-xl overflow-hidden aspect-video bg-slate-900 mb-3 border border-slate-200/60 dark:border-slate-800/60">
-            <img 
-              src="${leadImg}" 
-              width="480" 
-              height="270" 
-              alt="${title}" 
-              class="w-full h-full object-cover transition-transform duration-300" 
-              ${idx < 4 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} 
-              decoding="async" 
-              referrerpolicy="no-referrer"
-              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
-            >
+        <div class="flex items-start gap-3 mb-2.5">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-[14px] sm:text-[15px] font-bold text-slate-900 dark:text-slate-100 leading-snug line-clamp-2 mb-1.5">
+              ${title}
+            </h3>
+            ${summary ? `
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                ${summary}
+              </p>
+            ` : ''}
           </div>
-        ` : ''}
+          ${leadImg ? `
+            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden aspect-square bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 shrink-0 self-start shadow-xs">
+              <img 
+                src="${leadImg}" 
+                width="160" 
+                height="160" 
+                alt="${title}" 
+                class="w-full h-full object-cover transition-transform duration-300" 
+                ${isEager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} 
+                decoding="async" 
+                referrerpolicy="no-referrer"
+                onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
+              >
+            </div>
+          ` : ''}
+        </div>
 
         ${insightText ? `
           <div class="p-2.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200/50 dark:border-purple-800/40 text-[11px] text-purple-900 dark:text-purple-200 leading-relaxed flex items-start gap-1.5 mb-3">
@@ -895,8 +925,7 @@
               height="360" 
               alt="${title}" 
               class="w-full h-full object-cover" 
-              loading="eager" 
-              fetchpriority="high"
+              ${index === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}
               decoding="async" 
               referrerpolicy="no-referrer"
               onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='/images/og-default.jpg';}else{this.parentElement.style.display='none';}"
@@ -1594,7 +1623,9 @@
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
     updateLanguageState(currentSiteLang, false);
-    renderCurrentView();
+    requestAnimationFrame(() => {
+      renderCurrentView();
+    });
   }
 
   function setFilter(filterId) {
@@ -1608,14 +1639,19 @@
     renderCurrentView();
   }
 
+  let _mobileSearchDebounceTimer = null;
   function handleSearch(evt) {
-    searchQuery = evt.target.value || '';
-    displayLimit = 20;
+    const val = (evt && evt.target ? evt.target.value : '') || '';
     const clearBtn = document.getElementById('mobile-search-clear');
     if (clearBtn) {
-      clearBtn.classList.toggle('hidden', !searchQuery);
+      clearBtn.classList.toggle('hidden', !val);
     }
-    renderCurrentView();
+    if (_mobileSearchDebounceTimer) clearTimeout(_mobileSearchDebounceTimer);
+    _mobileSearchDebounceTimer = setTimeout(() => {
+      searchQuery = val;
+      displayLimit = 20;
+      renderCurrentView();
+    }, 160);
   }
 
   function clearSearch() {

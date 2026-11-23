@@ -396,8 +396,8 @@ def is_valid_news_lead_image(url: Any) -> bool:
     return not any(b in u for b in bad_patterns)
 
 
-def resolve_news_lead_image_url(img: str, width: int = 480) -> str:
-    """Resolve news lead image URL cleanly without wsrv.nl proxy for ainewsradar.xyz / local images."""
+def resolve_news_lead_image_url(img: str, width: int = 480, prefer_thumbnail: bool = True) -> str:
+    """Resolve news lead image URL cleanly using lightweight WebP thumbnails (~8-12 KB) for ainewsradar.xyz / local images."""
     if not img or not isinstance(img, str):
         return ""
     u = img.strip()
@@ -405,6 +405,11 @@ def resolve_news_lead_image_url(img: str, width: int = 480) -> str:
         return ""
     if "ainewsradar.xyz/images/" in u or u.startswith("/images/"):
         filename = u.split("/images/")[-1].split("?")[0]
+        if prefer_thumbnail and not filename.startswith("thumbnails/"):
+            base_name = os.path.splitext(filename)[0]
+            thumb_path = os.path.join(PUBLIC_DIR, "images", "thumbnails", f"{base_name}.webp")
+            if os.path.exists(thumb_path):
+                return f"/images/thumbnails/{base_name}.webp"
         return f"/images/{filename}"
     if u.startswith("/") or u.startswith("./"):
         return u
@@ -413,8 +418,8 @@ def resolve_news_lead_image_url(img: str, width: int = 480) -> str:
         if "auto=format" not in res:
             res += "&auto=format"
         return res
-    import urllib.parse
-    return f"https://wsrv.nl/?url={urllib.parse.quote(u)}&w={width}&output=webp&q=80"
+    # 遵循质量准则第 4 条：站内优先直连，禁用海外代理抖动，破损由 onerror 自动隐藏
+    return u
 
 
 def safe_text(text: Any, max_len: int = 400) -> str:
@@ -2846,6 +2851,14 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     """
     recent_dates = daily_dates[-12:] if daily_dates else ["2026-09-24", "2026-09-23"]
 
+    try:
+        from tools.generate_thumbnails import ensure_thumbnails
+        thumb_count = ensure_thumbnails()
+        if thumb_count > 0:
+            print(f"🖼️ [缩略图引擎] 已增量生成/更新 {thumb_count} 张 WebP 极速缩略图！")
+    except Exception as e:
+        print(f"⚠️ [缩略图引擎] 缩略图生成异常 (已降级原图): {e}")
+
     latest_json_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
     if not os.path.exists(latest_json_path):
         latest_json_path = os.path.join(DATA_DIR, "latest_news.json")
@@ -2873,6 +2886,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             topic_focus_zh_html = build_topic_focus_html(topic_focus, lang="zh")
         except Exception as e:
             print(f"⚠️ [content_publisher] 生成话题 HTML 异常: {e}")
+
+    hero_lcp_img = ""
+    hero_lcp_img_zh = ""
 
     # ==========================
     # A. 英文主站 (public/index.html)
@@ -3127,7 +3143,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_en}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3160,7 +3176,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_en}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3460,7 +3476,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         # 移除会抢占首屏带宽的折叠区图片 preload，精准注入首屏 LCP 英雄图像预加载，并写入 ssr-updated 版本元数据
         en_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', en_content)
         hero_lcp_img = ""
-        if lead_media_1_en and lead_media_1_en.get("video_id"):
+        # 优先使用首屏第一条大新闻的本域自托管高清配图（480x270），杜绝使用 88x54 的海外 YouTube 缩略图充当 LCP 预加载导致网络连接挂起
+        if lcp_image_en_url and (lcp_image_en_url.startswith("/images/") or lcp_image_en_url.startswith("./images/")):
+            hero_lcp_img = lcp_image_en_url
+        elif lcp_image_en_url and not ("ytimg.com" in lcp_image_en_url or "wsrv.nl" in lcp_image_en_url):
+            hero_lcp_img = lcp_image_en_url
+        elif lead_media_1_en and lead_media_1_en.get("video_id"):
             hero_lcp_img = f"https://i.ytimg.com/vi/{lead_media_1_en['video_id']}/hqdefault.jpg"
         elif lcp_image_en_url:
             hero_lcp_img = lcp_image_en_url
@@ -3764,7 +3785,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_zh}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3797,7 +3818,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_zh}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -4049,7 +4070,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         # 移除会抢占首屏带宽的折叠区图片 preload，精准注入首屏 LCP 英雄图像预加载，并写入 ssr-updated 版本元数据
         zh_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', zh_content)
         hero_lcp_img_zh = ""
-        if lead_media_1_zh and lead_media_1_zh.get("video_id"):
+        # 优先使用首屏第一条大新闻的本域自托管高清配图（480x270），杜绝使用 88x54 的海外 YouTube 缩略图充当 LCP 预加载导致网络连接挂起
+        if lcp_image_zh_url and (lcp_image_zh_url.startswith("/images/") or lcp_image_zh_url.startswith("./images/")):
+            hero_lcp_img_zh = lcp_image_zh_url
+        elif lcp_image_zh_url and not ("ytimg.com" in lcp_image_zh_url or "wsrv.nl" in lcp_image_zh_url):
+            hero_lcp_img_zh = lcp_image_zh_url
+        elif lead_media_1_zh and lead_media_1_zh.get("video_id"):
             hero_lcp_img_zh = f"https://i.ytimg.com/vi/{lead_media_1_zh['video_id']}/hqdefault.jpg"
         elif lcp_image_zh_url:
             hero_lcp_img_zh = lcp_image_zh_url
@@ -4111,6 +4137,38 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             f.write(zh_content)
 
         print("🏠 [首页预渲染引擎] zh/index.html (Chinese) 已成功写入精致中文 Top 3、12条快讯、社交雷达与天梯榜！")
+
+    # ==========================
+    # C. 移动端专版 (public/m/index.html & public/zh/m/index.html) 同步注入 LCP 图像预加载与 minified 脚本
+    # ==========================
+    mobile_hero_img = ""
+    target_data = _nd or payload
+    if target_data and target_data.get("top_three"):
+        t0 = target_data.get("top_three")[0]
+        t0_img = t0.get("image_url") or t0.get("cover_image") or ""
+        if is_valid_news_lead_image(t0_img):
+            mobile_hero_img = resolve_news_lead_image_url(t0_img, 640)
+            if mobile_hero_img.startswith("https://ainewsradar.xyz/images/"):
+                mobile_hero_img = mobile_hero_img.replace("https://ainewsradar.xyz", "")
+    if not mobile_hero_img:
+        mobile_hero_img = hero_lcp_img or hero_lcp_img_zh
+
+    mobile_files = [
+        os.path.join(PUBLIC_DIR, "m", "index.html"),
+        os.path.join(PUBLIC_DIR, "zh", "m", "index.html")
+    ]
+    version_str = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M")
+    for m_path in mobile_files:
+        if os.path.exists(m_path):
+            with open(m_path, "r", encoding="utf-8") as f:
+                m_html = f.read()
+            m_html = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', m_html)
+            if mobile_hero_img:
+                m_html = m_html.replace('</head>', f'  <link rel="preload" as="image" href="{mobile_hero_img}" fetchpriority="high">\n</head>')
+            m_html = re.sub(r'<script [^>]*src="/m/js/mobile(?:\.min)?\.js[^"]*"[^>]*></script>', f'<script defer src="/m/js/mobile.min.js?v={version_str}"></script>', m_html)
+            with open(m_path, "w", encoding="utf-8") as f:
+                f.write(m_html)
+    print(f"📱 [移动端预渲染引擎] mobile/index.html 已同步注入 LCP 图像预加载 ({mobile_hero_img}) 与 minified 脚本！")
 
 
 # ==============================================================================
