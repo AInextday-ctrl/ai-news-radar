@@ -2,6 +2,12 @@
  * mobile.js - High-Performance Mobile Web App Controller
  * Dedicated lightweight engine for mobile screens (< 768px).
  * Focused on News (资讯), Social Signals (社交推文), and Videos (实战视频).
+ * Upgraded to 100% feature parity with latest Desktop Web App:
+ * - Direct CDN authentic editorial imagery & lightbox zoom
+ * - 5W1H Structured Fact Briefing
+ * - Full in-depth article coverage with dual-track paragraphs & async static recovery
+ * - Bilingual (ZH/EN) dynamic content toggle
+ * - Instant sessionStorage hydration & cache-busting network fetch
  */
 
 (function() {
@@ -80,8 +86,8 @@
       filterBreaking: '⚡ 突发快讯',
       filterDeep: '📰 深度报道',
       filterModel: '🚀 模型发布',
-      filterLeader: '👑 领袖观点',
-      filterOfficial: '🏢 官方旗舰',
+      filterLeader: '👤 领袖观点',
+      filterOfficial: '🏛️ 官方旗舰',
       filterViral: '🔥 24h飙升',
       filterTutorial: '🛠️ 实战教学',
       filterInsight: '💡 前沿评测',
@@ -89,8 +95,8 @@
       noMore: '已加载全部精彩内容',
       noMatch: '暂无符合条件的动态',
       readFull: '阅读全文 & 深度解析 →',
-      viewOriginal: '直达源站 ↗',
-      openOnX: '在 𝕏 查看原文 ↗',
+      viewOriginal: '直达源站 →',
+      openOnX: '在 𝕏 查看原文 →',
       modalTitle: '资讯深度解析',
       briefingTitle: '🎯 核心事实提炼 (5W1H)',
       insightTitle: '🤖 AI 智库犀利研判',
@@ -108,13 +114,19 @@
       copiedToast: '链接已复制到剪贴板！',
       shareTitle: '分享 AI 动态',
       aiTakePrefix: 'AI 研判',
-      sourceBtn: '源站 ↗',
+      sourceBtn: '源站 →',
       shareBtn: '分享',
       suggestTitle: '语言偏好提示',
       suggestEnDesc: '检测到您的系统语言为英文，是否切换至英文原版？',
       suggestZhDesc: '检测到您的系统语言为中文，是否切换至中文精翻版？',
       suggestSwitchBtn: '立即切换',
-      suggestDismissBtn: '保持现状'
+      suggestDismissBtn: '保持现状',
+      topBreakthroughsHeader: '🔥 今日三大核心突破',
+      topBreakthroughBadge: '今日核心突破',
+      tapToExpandImage: '点击放大原图',
+      videoBadgeText: '原文包含现场独家视频报道',
+      protectedPaywallNotice: '源站设立了版权或登录限制，雷达已为您提炼权威报道核心实录。完整报道可点击下方“直达源站”浏览。',
+      wireTitle: '⚡ 24小时突发快讯'
     },
     en: {
       appName: 'AI News Radar',
@@ -130,8 +142,8 @@
       filterBreaking: '⚡ Breaking',
       filterDeep: '📰 In-Depth',
       filterModel: '🚀 Models',
-      filterLeader: '👑 Tech Leaders',
-      filterOfficial: '🏢 Official Labs',
+      filterLeader: '👤 Tech Leaders',
+      filterOfficial: '🏛️ Official Labs',
       filterViral: '🔥 24h Viral',
       filterTutorial: '🛠️ Tutorials',
       filterInsight: '💡 Breakdowns',
@@ -139,8 +151,8 @@
       noMore: 'All caught up!',
       noMatch: 'No results match your criteria',
       readFull: 'Read Full Story & AI Take →',
-      viewOriginal: 'Original Source ↗',
-      openOnX: 'View on 𝕏 ↗',
+      viewOriginal: 'Original Source →',
+      openOnX: 'View on 𝕏 →',
       modalTitle: 'Intelligence Briefing',
       briefingTitle: '🎯 Core Fact Briefing (5W1H)',
       insightTitle: '🤖 AI Hot Take & Analysis',
@@ -158,13 +170,19 @@
       copiedToast: 'Link copied to clipboard!',
       shareTitle: 'Share AI Intel',
       aiTakePrefix: 'AI Hot Take',
-      sourceBtn: 'Source ↗',
+      sourceBtn: 'Source →',
       shareBtn: 'Share',
       suggestTitle: 'Language Preference',
       suggestEnDesc: 'Detected English system locale. Switch to English edition?',
       suggestZhDesc: 'Detected Chinese system locale. Switch to Chinese edition?',
       suggestSwitchBtn: 'Switch Now',
-      suggestDismissBtn: 'Keep Current'
+      suggestDismissBtn: 'Keep Current',
+      topBreakthroughsHeader: '🔥 Top 3 Core Breakthroughs',
+      topBreakthroughBadge: 'Core Breakthrough',
+      tapToExpandImage: 'Tap to expand image',
+      videoBadgeText: 'Original coverage includes live video report',
+      protectedPaywallNotice: 'Protected by source publisher; key intelligence record extracted above. Tap "Original Source" below for full piece.',
+      wireTitle: '⚡ 24h Live Breaking Wire'
     }
   };
 
@@ -178,6 +196,10 @@
   let displayLimit = 20;
   const PAGE_STEP = 20;
   const tweetLangState = {};
+
+  // Modal active article state
+  let currentModalItem = null;
+  let currentModalActiveLang = isZh ? 'zh' : 'en';
 
   // 3. Theme Init
   function initTheme() {
@@ -245,13 +267,77 @@
     }
   }
 
+  // Direct CDN URL Resolver (Compliance with Rule 4.1: Direct Firebase CDN, Zero overseas proxy jitter)
   function optimizeImageUrl(url, width = 480) {
     if (!url || typeof url !== 'string') return '';
     const clean = url.trim();
-    if (!clean || clean === 'null' || clean === 'none') return '';
+    if (!clean || clean === 'null' || clean === 'none' || clean === 'undefined') return '';
+    
+    // Direct Self-Hosted CDN conversion
+    if (clean.includes('ainewsradar.xyz/images/') || clean.startsWith('/images/')) {
+      const parts = clean.split('/images/');
+      return `/images/${parts[parts.length - 1].split('?')[0]}`;
+    }
     if (clean.startsWith('/') || clean.startsWith('./')) return clean;
     if (clean.includes('wsrv.nl')) return clean;
+    if (clean.includes('i.ytimg.com')) return clean; // Direct YouTube image
+    
+    // For Unsplash images, resize natively
+    if (clean.includes('images.unsplash.com')) {
+      return clean.includes('w=') ? clean.replace(/w=\d+/, `w=${width}`) : `${clean}${clean.includes('?') ? '&' : '?'}w=${width}&auto=format`;
+    }
+    
+    // Fallback external proxy with webp compression
     return `https://wsrv.nl/?url=${encodeURIComponent(clean)}&w=${width}&output=webp&q=80`;
+  }
+
+  // Authentic Image Extractor & Anti-Pollution Filter (Rule 1.3 & Rule 1.7)
+  function getValidImages(item) {
+    if (!item) return [];
+    const allImages = [];
+    const primaryImg = item.image_url || item.cover_image || (item.media_assets && item.media_assets.cover_image);
+    if (primaryImg && typeof primaryImg === 'string') allImages.push(primaryImg.trim());
+
+    const isAuthorAvatarImg = (entry) => {
+      const u = (typeof entry === 'string' ? entry : (entry && entry.url ? entry.url : '')).toLowerCase();
+      const cap = (typeof entry === 'object' && entry ? (entry.caption || entry.alt || '') : '').toLowerCase().trim();
+      const authLow = String(item.author || '').toLowerCase().trim();
+      if (!u) return true;
+      const avatarTokens = [
+        'blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 
+        'profile_image', 'profile-pic', '-portrait-', '-mug-', 'staff-', 'resize/312x208', 
+        'resize/330x220', 'resize/300x200', '375x375', '150x150', '200x200', 'w_40,h_40', 
+        'bloomberg-bna-brightspot', 'grey-placeholder', 'techcrunch-logo', 'tc-logo', 'tc-lockup', 
+        'lockup', 'wordmark', 'site-logo', 'brand-logo', 'ad-banner', '/ads/', 'doubleclick', 
+        'googlesyndication', 'taboola', 'outbrain', 'mgid', 'promo-banner', 'sponsored', 'default-share', '.svg'
+      ];
+      if (avatarTokens.some(tok => u.includes(tok))) return true;
+      if (authLow && authLow.length > 3 && (cap === authLow || cap === `by ${authLow}`)) return true;
+      return false;
+    };
+
+    const inlines = (item.inline_images || (item.media_assets && item.media_assets.inline_images) || []).filter(e => !isAuthorAvatarImg(e));
+    inlines.forEach(img => {
+      const u = typeof img === 'string' ? img.trim() : (img && img.url ? img.url.trim() : '');
+      if (u && !allImages.includes(u)) allImages.push(u);
+    });
+
+    return allImages.filter(img => 
+      img && typeof img === 'string' &&
+      img.trim().length > 12 &&
+      !img.includes('pml.png') &&
+      !img.includes('techmeme.com/img') &&
+      !img.includes('techmeme.com/pml') &&
+      !img.includes('techmeme_sq') &&
+      !img.includes('pixel') &&
+      !img.includes('spacer') &&
+      !img.includes('photo-1526374965328') &&
+      !img.includes('photo-1485827404703') &&
+      !img.includes('photo-1618005182384-a83a8bd57fbe') &&
+      !img.includes('photo-1620712943543') &&
+      !img.includes('photo-1558494949-ef010cbdcc31') &&
+      !img.includes('lh3.googleusercontent.com')
+    ).map(img => optimizeImageUrl(img, 640));
   }
 
   function escapeHtml(str) {
@@ -264,6 +350,44 @@
       .replace(/'/g, '&#39;');
   }
 
+  // Clean news title from aggregator noise
+  function cleanNewsTitle(rawTitle) {
+    if (!rawTitle) return '';
+    return String(rawTitle)
+      .replace(/^(?:消息来源|消息称|知情人士称|知情人士透露|知情人士|据知情人士称|据知情人士|据外媒|据报道|外媒称|外媒报道|传|报道称|Sources?|Report|Reports?|Exclusive|Analysis)[：:\s]+/i, '')
+      .replace(/消息来源[：:]\s*/g, '')
+      .replace(/^[A-Za-z\s.\'\-]+[：:]\s*/, '')
+      .replace(/[\(（][^()（）]*?(?:The Information|Forbes|Financial Times|Guardian|Bloomberg|TechCrunch|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|CNBC|Business Insider|金融时报|纽约时报|彭博|路透|福布斯|卫报)[^()（）]*?[\)）][。\s]*$/i, '')
+      .replace(/[\(（]@[A-Za-z0-9_]+[\)）][。\s]*$/i, '')
+      .replace(/[\(（][^()（）]*?\/[^()（）]*?[\)）][。\s]*$/, '')
+      .replace(/[\(（][^()（）]*?(?:译|文|图|编辑)[：\)）][。\s]*$/, '')
+      .replace(/([。！？；，、\s])\1+/g, '$1')
+      .trim();
+  }
+
+  // Find item by ID across all data pools
+  function findItemById(itemId) {
+    if (!cachedData) return null;
+    const allPools = [
+      ...(cachedData.top_three || []),
+      ...((cachedData.grouped && cachedData.grouped.news) || []),
+      ...((cachedData.grouped && cachedData.grouped.celebrity) || []),
+      ...((cachedData.grouped && cachedData.grouped.tools) || []),
+      ...((cachedData.grouped && cachedData.grouped.videos) || []),
+      ...((cachedData.grouped && cachedData.grouped.prompts) || []),
+      ...((cachedData.grouped && cachedData.grouped.viral_posts) || [])
+    ];
+    let item = allPools.find(it => String(it.id) === String(itemId));
+    if (!item && String(itemId).startsWith('top_')) {
+      const topIdx = parseInt(itemId.replace('top_', ''), 10);
+      item = (cachedData.top_three || [])[topIdx];
+    }
+    if (!item) {
+      item = allPools.find(it => (it.url && it.url === itemId) || (it.title && it.title === itemId));
+    }
+    return item;
+  }
+
   // 6. Toast Notification Helper
   function showToast(msg) {
     let toast = document.getElementById('mobile-toast');
@@ -274,7 +398,7 @@
     }
     toast.innerHTML = `
       <div class="px-4 py-2.5 rounded-2xl bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 text-xs font-bold shadow-2xl backdrop-blur-md flex items-center gap-2 border border-slate-700/50 dark:border-slate-200/50 notranslate">
-        <span>✨</span>
+        <span>✓</span>
         <span>${escapeHtml(msg)}</span>
       </div>
     `;
@@ -285,36 +409,58 @@
     }, 2400);
   }
 
-  // 7. Data Loading & Extraction
+  // 7. Data Loading & Extraction with Instant Cache & Cache-Busting Network Fetch
   async function loadData(forceRefresh = false) {
     const feedContainer = document.getElementById('mobile-feed');
-    if (!cachedData || forceRefresh) {
-      if (feedContainer) {
-        feedContainer.innerHTML = renderSkeleton();
-      }
+
+    // Step A: Instant 0ms hydration from sessionStorage if available
+    if (!cachedData && !forceRefresh) {
       try {
-        const url = forceRefresh ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        cachedData = await res.json();
-      } catch (err) {
-        console.error('Failed to load data:', err);
-        if (feedContainer) {
-          feedContainer.innerHTML = `
-            <div class="p-8 text-center text-slate-500">
-              <p class="text-3xl mb-2">⚠️</p>
-              <p class="text-sm font-medium mb-4">${isZh ? '数据加载异常，请点击刷新重试' : 'Failed to load updates. Please tap retry.'}</p>
-              <button type="button" onclick="window.MobileApp.refresh()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95">
-                ${t.refresh}
-              </button>
-            </div>
-          `;
+        const stored = sessionStorage.getItem('ai_radar_m_cached_data');
+        if (stored) {
+          cachedData = JSON.parse(stored);
+          renderCurrentView();
         }
+      } catch (e) {}
+    }
+
+    if (!cachedData && feedContainer) {
+      feedContainer.innerHTML = renderSkeleton();
+    }
+
+    // Step B: Cache-busting network fetch (Rule 3.5 & Strict Timestamp Hydration)
+    try {
+      const fetchUrl = `/data/latest_news.json?t=${Date.now()}`;
+      const res = await fetch(fetchUrl, {
+        cache: forceRefresh ? 'reload' : 'no-cache'
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const freshData = await res.json();
+      
+      const hasChanged = !cachedData || (freshData.updated_at && freshData.updated_at !== cachedData.updated_at);
+      cachedData = freshData;
+      try {
+        sessionStorage.setItem('ai_radar_m_cached_data', JSON.stringify(freshData));
+      } catch (e) {}
+
+      if (hasChanged || forceRefresh) {
+        renderCurrentView();
+      }
+    } catch (err) {
+      console.warn('Network sync notice:', err);
+      if (!cachedData && feedContainer) {
+        feedContainer.innerHTML = `
+          <div class="p-8 text-center text-slate-500">
+            <p class="text-3xl mb-2">⚠️</p>
+            <p class="text-sm font-medium mb-4">${isZh ? '数据加载异常，请点击刷新重试' : 'Failed to load updates. Please tap retry.'}</p>
+            <button type="button" onclick="window.MobileApp.refresh()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95">
+              ${t.refresh}
+            </button>
+          </div>
+        `;
         return;
       }
     }
-
-    renderCurrentView();
 
     // If Traditional Chinese was requested, convert DOM
     if (isZh && currentSiteLang === 'chinese_traditional') {
@@ -391,12 +537,26 @@
     renderSubFilters();
 
     let items = [];
+    let topThreeItems = (cachedData.top_three || []);
+
     if (currentTab === 'news') {
-      items = (cachedData.grouped && cachedData.grouped.news) || [];
+      items = [...((cachedData.grouped && cachedData.grouped.news) || [])];
+      
+      // Strict published_at descending sort (Rule 3.6 24h freshness)
+      items.sort((a, b) => {
+        const da = new Date(a.raw_published_at || a.published_at || a.created_at || 0).getTime();
+        const db = new Date(b.raw_published_at || b.published_at || b.created_at || 0).getTime();
+        return db - da;
+      });
+
       if (currentFilter === 'breaking') {
         items = items.filter(it => it.is_breaking || (it.tags && it.tags.some(tg => tg.includes('突发') || tg.includes('Breaking'))));
       } else if (currentFilter === 'deep') {
-        items = items.filter(it => (it.article_content || it.article_content_zh) && String(it.article_content || it.article_content_zh).length > 200);
+        items = items.filter(it => 
+          (Array.isArray(it.paragraphs) && it.paragraphs.length > 0) ||
+          (Array.isArray(it.paragraphs_zh) && it.paragraphs_zh.length > 0) ||
+          ((it.article_content || it.article_content_zh) && String(it.article_content || it.article_content_zh).length > 100)
+        );
       } else if (currentFilter === 'model') {
         items = items.filter(it => {
           const txt = `${it.title} ${it.title_zh || ''} ${it.title_en || ''}`.toLowerCase();
@@ -420,7 +580,7 @@
         items = items.filter(it => it.sub_type === 'insight' || (it.title || '').includes('评测') || (it.title || '').includes('架构') || (it.purpose_zh || '').includes('评测') || (it.purpose_zh || '').includes('剖析'));
       }
     } else if (currentTab === 'top') {
-      items = cachedData.top_three || [];
+      items = topThreeItems;
     }
 
     // Search filter
@@ -432,7 +592,7 @@
       });
     }
 
-    if (items.length === 0) {
+    if (items.length === 0 && (currentTab !== 'news' || currentFilter !== 'all')) {
       feedContainer.innerHTML = `
         <div class="py-16 text-center text-slate-400">
           <p class="text-3xl mb-2">🔍</p>
@@ -444,6 +604,32 @@
 
     const visibleItems = items.slice(0, displayLimit);
     let htmlCards = '';
+
+    // If on default News tab ('all' and no active search), showcase Top 3 Core Breakthroughs at the top
+    let topSectionHtml = '';
+    if (currentTab === 'news' && currentFilter === 'all' && !searchQuery.trim() && topThreeItems.length > 0) {
+      topSectionHtml = `
+        <div class="mb-4 space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <h2 class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+              <span>⚡</span>
+              <span>${t.topBreakthroughsHeader}</span>
+            </h2>
+            <span class="text-[10px] text-slate-400 font-mono">Editor's Choice</span>
+          </div>
+          <div class="space-y-3">
+            ${topThreeItems.map((topItem, topIdx) => renderTopCard(topItem, topIdx)).join('')}
+          </div>
+          <div class="pt-2 flex items-center justify-between px-1 border-t border-slate-200/60 dark:border-slate-800">
+            <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+              <span>📰</span>
+              <span>${t.wireTitle}</span>
+            </h2>
+            <span class="text-[10px] text-slate-400 font-mono">${items.length} Wire Items</span>
+          </div>
+        </div>
+      `;
+    }
 
     if (currentTab === 'news') {
       htmlCards = visibleItems.map((it, idx) => renderNewsCard(it, idx)).join('');
@@ -461,7 +647,7 @@
         <button 
           type="button"
           onclick="window.MobileApp.loadMore()" 
-          class="w-full py-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold rounded-2xl shadow-card active:scale-98 transition-all"
+          class="w-full py-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold rounded-2xl shadow-card active:scale-98 transition-all cursor-pointer"
         >
           ${t.loadMore} (${visibleItems.length}/${items.length})
         </button>
@@ -474,6 +660,7 @@
 
     feedContainer.innerHTML = `
       <div class="space-y-3 px-3 py-2">
+        ${topSectionHtml}
         ${htmlCards}
         ${loadMoreButton}
       </div>
@@ -489,12 +676,24 @@
 
   // 10. Card Renderers
   function renderNewsCard(item, idx = 0) {
-    const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
+    const rawTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+    const title = escapeHtml(cleanNewsTitle(rawTitle) || '');
     const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
     const source = escapeHtml(item.source || 'AI Radar');
     const timeAgo = formatTimeAgo(item.raw_published_at);
-    const imgUrl = item.image_url ? optimizeImageUrl(item.image_url, 480) : '';
-    const hasDeepArticle = Boolean((item.article_content || item.article_content_zh) && String(item.article_content || item.article_content_zh).length > 200);
+    
+    // Authentic imagery resolution (direct CDN, no wsrv.nl failure)
+    const validImages = getValidImages(item);
+    const leadImg = validImages.length > 0 ? validImages[0] : '';
+    
+    // In-depth article detection (dual-track paragraphs check)
+    const hasDeepArticle = Boolean(
+      (Array.isArray(item.paragraphs) && item.paragraphs.length > 0) ||
+      (Array.isArray(item.paragraphs_zh) && item.paragraphs_zh.length > 0) ||
+      ((item.article_content || item.article_content_zh) && String(item.article_content || item.article_content_zh).length > 100)
+    );
+
+    // AI Insight / Hot Take
     const insightText = item.ai_analysis && (isZh ? item.ai_analysis.insight_zh : item.ai_analysis.insight_en);
 
     return `
@@ -523,9 +722,18 @@
           </p>
         ` : ''}
 
-        ${imgUrl ? `
-          <div class="rounded-xl overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800 mb-3 border border-slate-100 dark:border-slate-800/60">
-            <img src="${imgUrl}" width="480" height="270" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.parentElement.style.display='none'">
+        ${leadImg ? `
+          <div class="rounded-xl overflow-hidden aspect-video bg-slate-900 mb-3 border border-slate-200/60 dark:border-slate-800/60">
+            <img 
+              src="${leadImg}" 
+              width="480" 
+              height="270" 
+              alt="${title}" 
+              class="w-full h-full object-cover transition-transform duration-300" 
+              ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} 
+              decoding="async" 
+              onerror="this.parentElement.style.display='none'"
+            >
           </div>
         ` : ''}
 
@@ -548,7 +756,90 @@
                 ${t.sourceBtn}
               </a>
             ` : ''}
-            <button type="button" onclick="window.MobileApp.shareArticle('${item.id}')" class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 text-[10px] font-semibold flex items-center gap-1" title="${t.shareBtn}">
+            <button type="button" onclick="window.MobileApp.shareArticle('${item.id}')" class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 text-[10px] font-semibold flex items-center gap-1 cursor-pointer" title="${t.shareBtn}">
+              🔗
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderTopCard(item, index) {
+    const rawTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+    const title = escapeHtml(cleanNewsTitle(rawTitle) || '');
+    const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
+    const insight = item.ai_analysis && (isZh ? item.ai_analysis.insight_zh : item.ai_analysis.insight_en);
+    const source = escapeHtml(item.source || 'AI Radar');
+    const timeAgo = formatTimeAgo(item.raw_published_at);
+    
+    const validImages = getValidImages(item);
+    const leadImg = validImages.length > 0 ? validImages[0] : '';
+
+    return `
+      <article 
+        class="bg-gradient-to-br from-indigo-50/70 via-purple-50/40 to-slate-50 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-indigo-200/70 dark:border-indigo-800/60 rounded-2xl p-4 shadow-card touch-card transition-all cursor-pointer"
+        onclick="window.MobileApp.openArticle('${item.id}')"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-rose-500 text-white text-xs font-black flex items-center justify-center shadow-xs">
+              #${index + 1}
+            </span>
+            <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300">${t.topBreakthroughBadge}</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
+            <span>${source}</span>
+            <span>·</span>
+            <span>${timeAgo}</span>
+          </div>
+        </div>
+
+        <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 leading-snug mb-2">
+          ${title}
+        </h3>
+
+        ${leadImg ? `
+          <div class="rounded-xl overflow-hidden aspect-video bg-slate-900 mb-3 border border-indigo-100 dark:border-indigo-900/60 shadow-xs">
+            <img 
+              src="${leadImg}" 
+              width="640" 
+              height="360" 
+              alt="${title}" 
+              class="w-full h-full object-cover" 
+              loading="lazy" 
+              decoding="async" 
+              onerror="this.parentElement.style.display='none'"
+            >
+          </div>
+        ` : ''}
+
+        ${summary ? `
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mb-3 line-clamp-3">
+            ${summary}
+          </p>
+        ` : ''}
+
+        ${insight ? `
+          <div class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-indigo-100 dark:border-indigo-900/60 text-xs text-indigo-950 dark:text-indigo-200 leading-relaxed flex items-start gap-1.5">
+            <span>💡</span>
+            <div class="font-medium">
+              <span class="font-bold mr-1">${t.aiTakePrefix}:</span>${escapeHtml(insight)}
+            </div>
+          </div>
+        ` : ''}
+
+        <div class="flex items-center justify-between pt-2.5 mt-2 border-t border-indigo-100/80 dark:border-indigo-900/40 text-[11px]">
+          <span class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-1">
+            <span>${t.readFull}</span>
+          </span>
+          <div class="flex items-center gap-2" onclick="event.stopPropagation()">
+            ${item.url ? `
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded-md bg-white/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-semibold flex items-center gap-0.5 shadow-xs">
+                ${t.sourceBtn}
+              </a>
+            ` : ''}
+            <button type="button" onclick="window.MobileApp.shareArticle('${item.id}')" class="px-2 py-0.5 rounded-md bg-white/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-semibold flex items-center gap-1 shadow-xs cursor-pointer" title="${t.shareBtn}">
               🔗
             </button>
           </div>
@@ -600,16 +891,16 @@
           ` : ''}
         </div>
 
-        <p class="text-[14px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-line mb-3 font-normal" id="tweet-text-${item.id}">
+        <div class="text-[13.5px] text-slate-800 dark:text-slate-200 leading-relaxed mb-3 whitespace-pre-line" id="tweet-text-${item.id}">
           ${displayText}
-        </p>
+        </div>
 
         ${hasBilingual ? `
           <div class="mb-3">
             <button 
               type="button"
               onclick="window.MobileApp.toggleTweetLang('${item.id}')"
-              class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 border border-slate-200/50 dark:border-slate-700/50 active:scale-95 transition-transform"
+              class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs font-semibold flex items-center gap-1 active:scale-95 transition-transform cursor-pointer"
             >
               <span>🌐</span>
               <span id="tweet-toggle-btn-${item.id}">${currentMode === 'zh' ? t.toggleLangEn : t.toggleLangZh}</span>
@@ -618,7 +909,7 @@
         ` : ''}
 
         ${mediaList.length > 0 ? `
-          <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800/60">
+          <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-900 border border-slate-100 dark:border-slate-800/60 cursor-pointer" onclick="window.MobileApp.openLightbox('${optimizeImageUrl(mediaList[0], 800)}')">
             <img src="${optimizeImageUrl(mediaList[0], 640)}" width="640" height="360" alt="Tweet media" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
           </div>
         ` : ''}
@@ -638,7 +929,8 @@
   }
 
   function renderVideoCard(item, idx = 0) {
-    const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
+    const rawTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+    const title = escapeHtml(cleanNewsTitle(rawTitle) || '');
     const author = escapeHtml(item.author || 'AI Creator');
     const timeAgo = formatTimeAgo(item.raw_published_at);
     const imgUrl = item.image_url ? optimizeImageUrl(item.image_url, 640) : '';
@@ -693,49 +985,6 @@
     `;
   }
 
-  function renderTopCard(item, index) {
-    const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
-    const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
-    const insight = item.ai_analysis && (isZh ? item.ai_analysis.insight_zh : item.ai_analysis.insight_en);
-    const source = escapeHtml(item.source || 'AI Radar');
-
-    return `
-      <article 
-        class="bg-gradient-to-br from-indigo-50/70 via-purple-50/40 to-slate-50 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-indigo-200/70 dark:border-indigo-800/60 rounded-2xl p-4 shadow-card touch-card transition-all cursor-pointer"
-        onclick="window.MobileApp.openArticle('${item.id}')"
-      >
-        <div class="flex items-center justify-between mb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-rose-500 text-white text-xs font-black flex items-center justify-center shadow-xs">
-              #${index + 1}
-            </span>
-            <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300">${isZh ? '今日核心突破' : 'Core Breakthrough'}</span>
-          </div>
-          <span class="text-[10px] font-mono text-slate-400">${source}</span>
-        </div>
-
-        <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 leading-snug mb-2">
-          ${title}
-        </h3>
-
-        ${summary ? `
-          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
-            ${summary}
-          </p>
-        ` : ''}
-
-        ${insight ? `
-          <div class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-indigo-100 dark:border-indigo-900/60 text-xs text-indigo-950 dark:text-indigo-200 leading-relaxed flex items-start gap-1.5">
-            <span>💡</span>
-            <div class="font-medium">
-              <span class="font-bold mr-1">${t.aiTakePrefix}:</span>${escapeHtml(insight)}
-            </div>
-          </div>
-        ` : ''}
-      </article>
-    `;
-  }
-
   function renderSkeleton() {
     return Array.from({ length: 4 }).map(() => `
       <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 space-y-3 shimmer-box shadow-card">
@@ -747,53 +996,59 @@
     `).join('');
   }
 
-  // 11. Article Detail Bottom Sheet Modal
+  // 11. Article Detail Bottom Sheet Modal (Full Parity with Desktop In-Depth Modal)
   function openArticleModal(itemId) {
-    if (!cachedData) return;
-    let found = null;
-    const allPools = [
-      ...((cachedData.grouped && cachedData.grouped.news) || []),
-      ...(cachedData.top_three || [])
-    ];
-    for (const it of allPools) {
-      if (String(it.id) === String(itemId)) {
-        found = it;
-        break;
-      }
-    }
+    const found = findItemById(itemId);
     if (!found) return;
+
+    currentModalItem = found;
+    currentModalActiveLang = isZh ? 'zh' : 'en';
 
     const modalOverlay = document.getElementById('article-modal-overlay');
     const modalContent = document.getElementById('article-modal-content');
     if (!modalOverlay || !modalContent) return;
 
-    const title = escapeHtml((isZh ? (found.title_zh || found.title) : (found.title_en || found.title)) || '');
+    const rawTitle = isZh ? (found.title_zh || found.title) : (found.title_en || found.title);
+    const title = escapeHtml(cleanNewsTitle(rawTitle) || '');
     const source = escapeHtml(found.source || 'AI Radar');
     const url = found.url || '#';
     const analysis = found.ai_analysis || {};
-    const briefing = escapeHtml(isZh ? (analysis.briefing_zh || found.summary_zh || found.content_snippet) : (analysis.briefing_en || found.summary_en || found.content_snippet));
-    const insight = escapeHtml(isZh ? analysis.insight_zh : analysis.insight_en);
 
-    // Full text with ad noise cleaning
-    let fullText = isZh ? (found.article_content_zh || found.article_content || '') : (found.article_content || found.article_content_zh || '');
-    fullText = String(fullText).trim();
+    // Authentic Imagery & Multi-Image Strip
+    const validImages = getValidImages(found);
+    const leadImg = validImages.length > 0 ? validImages[0] : '';
 
-    const adNoise = [
-      /want more .*? in your (?:news )?feed/i,
-      /add \w+ (?:in|to) google/i,
-      /想要在新闻源中看到更多/i,
-      /在\s*google\s*中添加/i,
-      /have a tip\??/i,
-      /contact this reporter/i,
-      /有小费吗/i,
-      /联系记者/i,
-      /安全共享信息/i,
-      /sharing information securely/i
-    ];
-
-    const paras = fullText
-      ? fullText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 20 && !adNoise.some(r => r.test(p)))
+    // 5W1H Structured Fact Briefing (Strict Anti-Promo Filter)
+    let rawBullets = isZh
+      ? (found.fact_bullets_zh || analysis.key_points_zh || analysis.fact_bullets_zh || [])
+      : (found.fact_bullets_en || analysis.key_points_en || analysis.fact_bullets_en || []);
+    
+    const promoBulletRe = /(?:pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|cancel or change your plan|free access via your university|try unlimited access|subscribe to unlock|want all of the times|already a subscriber|myft digest|unlock the editor['’]s digest|posts from this topic will be added to your daily email digest|delivered directly to your inbox|when you purchase through links in our articles|we may earn a (?:small )?commission|doesn['’]t affect our editorial independence|income earning auto affiliate links|subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|预付一年.*省|完整数字访问|基本数字访问|订阅以解锁|通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)/i;
+    let finalBullets = (Array.isArray(rawBullets) && rawBullets.length > 0)
+      ? rawBullets.filter(b => b && !promoBulletRe.test(String(b)))
       : [];
+
+    const fallbackSnippet = escapeHtml(isZh ? (found.summary_zh || found.content_snippet) : (found.summary_en || found.content_snippet));
+
+    // AI Hot Take / Insight (Filtered for generic clichés)
+    let insight = isZh
+      ? (analysis.insight_zh || analysis.takeaway_zh || found.ai_hot_take_zh || found.insight_zh || '')
+      : (analysis.insight_en || analysis.takeaway_en || found.ai_hot_take_en || found.insight_en || '');
+    insight = String(insight).replace(/^(?:【(?:AI\s*点评|AI点评|AI\s*Hot\s*Take|行业研判|深度洞察|专家点评)】|\[(?:AI\s*Hot\s*Take|AI\s*Commentary|AI\s*Takeaway)\])\s*/i, '').trim();
+
+    // Dual-Track Content Resolution (Compliance with Rule 3.3 Backend Source-of-Truth & Paragraph Arrays)
+    const origContentEn = String(found.article_content_en || found.article_content || (Array.isArray(found.paragraphs) ? found.paragraphs.join('\n\n') : '') || found.original_content || '').trim();
+    const origContentZh = String(found.article_content_zh || (Array.isArray(found.paragraphs_zh) ? found.paragraphs_zh.join('\n\n') : '') || '').trim();
+
+    const hasValidZh = Boolean(origContentZh && origContentZh.length >= 60 && (origContentZh.match(/[\u4e00-\u9fa5]/g) || []).length >= 40);
+    const hasValidEn = Boolean(origContentEn && origContentEn.length >= 100 && !/[\u4e00-\u9fa5]/.test(origContentEn));
+    const hasBilingual = hasValidZh && hasValidEn;
+
+    if (!hasValidZh && hasValidEn) {
+      currentModalActiveLang = 'en';
+    } else if (hasValidZh && !hasValidEn) {
+      currentModalActiveLang = 'zh';
+    }
 
     modalContent.innerHTML = `
       <!-- Pull handle -->
@@ -801,6 +1056,7 @@
         <div class="w-10 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
       </div>
 
+      <!-- Top Sticky Action Bar -->
       <div class="sticky top-0 z-10 flex items-center justify-between px-4 py-2.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
         <div class="flex items-center gap-2">
           <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono">
@@ -812,7 +1068,7 @@
           <button 
             type="button"
             onclick="window.MobileApp.shareArticle('${found.id}')"
-            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90"
+            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90 cursor-pointer"
             title="${t.shareBtn}"
           >
             🔗
@@ -820,71 +1076,292 @@
           <button 
             type="button"
             onclick="window.MobileApp.closeArticle()" 
-            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90"
+            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90 cursor-pointer"
           >
             ✕
           </button>
         </div>
       </div>
 
-      <div class="p-4 space-y-4 overflow-y-auto max-h-[78vh] pb-14 no-scrollbar">
+      <!-- Modal Body Content -->
+      <div class="p-4 space-y-4 overflow-y-auto max-h-[78vh] pb-16 no-scrollbar">
         <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">
           ${title}
         </h2>
 
-        ${briefing ? `
+        <!-- Authentic Cover Image with Lightbox Zoom Hint -->
+        ${leadImg ? `
+          <div class="space-y-2">
+            <div 
+              class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md cursor-pointer group"
+              onclick="window.MobileApp.openLightbox('${leadImg}')"
+            >
+              <img 
+                id="article-modal-cover-img"
+                src="${leadImg}" 
+                width="640" 
+                height="360" 
+                alt="${title}" 
+                class="w-full h-full object-cover group-active:scale-98 transition-transform"
+                decoding="async"
+              >
+              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-xs text-white text-[10px] font-bold flex items-center gap-1 shadow-sm">
+                <span>🔍</span>
+                <span>${t.tapToExpandImage}</span>
+              </div>
+            </div>
+
+            <!-- Multi-Image Thumbnails Strip -->
+            ${validImages.length > 1 ? `
+              <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                ${validImages.map((imgUrl, imgIdx) => `
+                  <button 
+                    type="button"
+                    onclick="document.getElementById('article-modal-cover-img').src='${imgUrl.replace(/'/g, "\\'")}'; window.MobileApp.openLightbox('${imgUrl.replace(/'/g, "\\'")}');"
+                    class="w-14 h-14 rounded-xl overflow-hidden border-2 ${imgIdx === 0 ? 'border-indigo-600' : 'border-slate-200 dark:border-slate-700 opacity-75'} shrink-0 bg-slate-900 transition-all cursor-pointer"
+                  >
+                    <img src="${imgUrl}" width="120" height="120" alt="Thumbnail ${imgIdx+1}" class="w-full h-full object-cover">
+                  </button>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
+
+        <!-- 5W1H Structured Fact Briefing -->
+        ${finalBullets.length > 0 ? `
           <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
             <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-              ${t.briefingTitle}
+              <span>🎯</span>
+              <span>${t.briefingTitle}</span>
             </h4>
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-              ${briefing}
-            </p>
-          </div>
-        ` : ''}
-
-        ${insight ? `
-          <div class="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/60 dark:border-purple-800/60 space-y-2">
-            <h4 class="text-xs font-bold text-purple-900 dark:text-purple-200 flex items-center gap-1.5">
-              ${t.insightTitle}
-            </h4>
-            <p class="text-xs text-purple-950 dark:text-purple-100 leading-relaxed font-medium">
-              ${insight}
-            </p>
-          </div>
-        ` : ''}
-
-        ${paras.length > 0 ? `
-          <div class="space-y-3 pt-2 border-t border-slate-200/60 dark:border-slate-800">
-            <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100">
-              ${t.coverageTitle}
-            </h4>
-            <div class="space-y-3 text-[13px] text-slate-700 dark:text-slate-300 leading-relaxed">
-              ${paras.map(p => `<p class="whitespace-pre-line">${escapeHtml(p)}</p>`).join('')}
+            <div class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              ${finalBullets.map(b => `
+                <div class="flex items-start gap-1.5">
+                  <span class="text-indigo-500 font-bold shrink-0 mt-0.5">•</span>
+                  <span>${escapeHtml(b)}</span>
+                </div>
+              `).join('')}
             </div>
           </div>
+        ` : (fallbackSnippet ? `
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 space-y-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+              <span>🎯</span>
+              <span>${t.briefingTitle}</span>
+            </h4>
+            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+              ${fallbackSnippet}
+            </p>
+          </div>
+        ` : '')}
+
+        <!-- AI Hot Take / Analysis -->
+        ${insight ? `
+          <div class="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/60 dark:border-purple-800/60 space-y-1.5">
+            <h4 class="text-xs font-bold text-purple-900 dark:text-purple-200 flex items-center gap-1.5">
+              <span>🤖</span>
+              <span>${t.insightTitle}</span>
+            </h4>
+            <p class="text-xs text-purple-950 dark:text-purple-100 leading-relaxed font-medium">
+              ${escapeHtml(insight)}
+            </p>
+          </div>
         ` : ''}
 
+        <!-- Live Video Report Badge -->
+        ${found.has_video || found.video_url ? `
+          <div class="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200/60 dark:border-rose-800/60 flex items-center justify-between text-xs text-rose-900 dark:text-rose-200">
+            <span class="flex items-center gap-1.5 font-bold">
+              <span>🎬</span>
+              <span>${t.videoBadgeText}</span>
+            </span>
+            <a href="${found.video_direct_url || found.video_url || found.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-bold text-[11px] shadow-xs">
+              ${isZh ? '原站观看 ↗' : 'Watch ↗'}
+            </a>
+          </div>
+        ` : ''}
+
+        <!-- Full In-Depth Coverage (深度报道原文实录) -->
+        <div class="space-y-3 pt-2 border-t border-slate-200/60 dark:border-slate-800">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+              <span>📰</span>
+              <span id="article-modal-coverage-title">${t.coverageTitle}</span>
+            </h4>
+            ${hasBilingual ? `
+              <div class="flex items-center rounded-lg bg-slate-100 dark:bg-slate-800 p-0.5 text-[10px] font-bold">
+                <button 
+                  type="button" 
+                  id="btn-modal-lang-zh" 
+                  onclick="window.MobileApp.switchArticleLang('zh')" 
+                  class="px-2 py-0.5 rounded-md ${currentModalActiveLang === 'zh' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs' : 'text-slate-500'} cursor-pointer"
+                >
+                  🇨🇳 中文
+                </button>
+                <button 
+                  type="button" 
+                  id="btn-modal-lang-en" 
+                  onclick="window.MobileApp.switchArticleLang('en')" 
+                  class="px-2 py-0.5 rounded-md ${currentModalActiveLang === 'en' ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs' : 'text-slate-500'} cursor-pointer"
+                >
+                  🇬🇧 EN
+                </button>
+              </div>
+            ` : ''}
+          </div>
+
+          <div id="article-modal-paras" class="space-y-3 text-[13px] text-slate-700 dark:text-slate-300 leading-relaxed">
+            <!-- Rendered by renderArticleParas -->
+          </div>
+        </div>
+
+        <!-- Outbound Source Button -->
         <div class="pt-4 border-t border-slate-200/80 dark:border-slate-800">
           <a 
             href="${url}" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="block w-full py-3 text-center bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md active:scale-98 transition-all"
+            class="block w-full py-3 text-center bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-md active:scale-98 transition-all flex items-center justify-center gap-1.5"
           >
-            ${t.viewOriginal}
+            <span>${t.viewOriginal}</span>
+            <span class="text-[10px] opacity-75 font-mono">(${source})</span>
           </a>
         </div>
       </div>
     `;
 
+    renderArticleParas();
+
+    // Core Self-Healing Mechanism (Asynchronously fetch static pre-rendered landing page for 100% full-text coverage)
+    const curId = found.id;
+    if (curId && !found._fetchingStatic) {
+      found._fetchingStatic = true;
+      const targetUrl = (currentModalActiveLang === 'zh' || isZh) ? `/zh/news/${curId}.html` : `/news/${curId}.html`;
+      fetch(targetUrl)
+        .then(res => res.ok ? res.text() : null)
+        .then(html => {
+          if (!html) return;
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const articleDiv = doc.querySelector('.article-body, [itemprop="articleBody"]');
+          if (articleDiv && articleDiv.innerHTML.length > 200 && currentModalItem && String(currentModalItem.id) === String(curId)) {
+            const isPureBullets = articleDiv.tagName === 'UL' || articleDiv.tagName === 'OL' || (articleDiv.querySelector('ul, ol') && !articleDiv.querySelector('p'));
+            if (!isPureBullets) {
+              const parasContainer = document.getElementById('article-modal-paras');
+              if (parasContainer) {
+                parasContainer.innerHTML = articleDiv.innerHTML;
+              }
+            }
+          }
+        })
+        .catch(() => {});
+    }
+
     modalOverlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
-    // Click outside to dismiss
     modalOverlay.onclick = (e) => {
       if (e.target === modalOverlay) closeArticleModal();
     };
+  }
+
+  function renderArticleParas() {
+    if (!currentModalItem) return;
+    const parasContainer = document.getElementById('article-modal-paras');
+    if (!parasContainer) return;
+
+    const adNoise = [
+      /want more .*? in your (?:news )?feed/i,
+      /add \w+ (?:in|to) google/i,
+      /想要在新闻源中看到更多/i,
+      /在\s*google\s*中添加/i,
+      /have a tip\??/i,
+      /got a tip\??/i,
+      /contact this reporter/i,
+      /有小费吗/i,
+      /有线索吗/i,
+      /联系本记者/i,
+      /联系记者/i,
+      /安全共享信息/i,
+      /sharing information securely/i,
+      /save saved listen to this story/i,
+      /listen to this story/i,
+      /收听这个故事/i,
+      /become an insider/i,
+      /available exclusively to .*? subscribers/i,
+      /仅供.*?订阅者/i
+    ];
+
+    const found = currentModalItem;
+    let fullText = '';
+
+    if (currentModalActiveLang === 'zh') {
+      fullText = found.article_content_zh || (Array.isArray(found.paragraphs_zh) ? found.paragraphs_zh.join('\n\n') : '') || '';
+      if (!fullText && Array.isArray(found.paragraphs)) {
+        fullText = found.paragraphs.join('\n\n');
+      }
+    } else {
+      fullText = found.article_content_en || found.article_content || (Array.isArray(found.paragraphs) ? found.paragraphs.join('\n\n') : '') || found.original_content || '';
+    }
+
+    fullText = String(fullText || '').trim();
+
+    const paras = fullText
+      ? fullText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 15 && !adNoise.some(r => r.test(p)))
+      : [];
+
+    if (paras.length > 0) {
+      parasContainer.innerHTML = paras.map(p => `<p class="whitespace-pre-line leading-relaxed mb-3">${escapeHtml(p)}</p>`).join('');
+    } else {
+      // Paywall or short excerpt fallback
+      const fallbackSnippet = escapeHtml(isZh ? (found.summary_zh || found.content_snippet) : (found.summary_en || found.content_snippet));
+      parasContainer.innerHTML = `
+        <p class="leading-relaxed whitespace-pre-line text-slate-700 dark:text-slate-300 mb-2">${fallbackSnippet}</p>
+        <div class="mt-2 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-xl border border-amber-200/60 dark:border-amber-800/60 flex items-center gap-2">
+          <span>🔒</span>
+          <span>${t.protectedPaywallNotice}</span>
+        </div>
+      `;
+    }
+  }
+
+  function switchArticleLang(lang) {
+    currentModalActiveLang = lang;
+    const btnZh = document.getElementById('btn-modal-lang-zh');
+    const btnEn = document.getElementById('btn-modal-lang-en');
+    if (btnZh && btnEn) {
+      if (lang === 'zh') {
+        btnZh.className = 'px-2 py-0.5 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs cursor-pointer';
+        btnEn.className = 'px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer';
+      } else {
+        btnEn.className = 'px-2 py-0.5 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs cursor-pointer';
+        btnZh.className = 'px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer';
+      }
+    }
+    renderArticleParas();
+
+    // Trigger async static page fetch for selected language
+    if (currentModalItem) {
+      const curId = currentModalItem.id;
+      const targetUrl = lang === 'zh' ? `/zh/news/${curId}.html` : `/news/${curId}.html`;
+      fetch(targetUrl)
+        .then(res => res.ok ? res.text() : null)
+        .then(html => {
+          if (!html) return;
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const articleDiv = doc.querySelector('.article-body, [itemprop="articleBody"]');
+          if (articleDiv && articleDiv.innerHTML.length > 200 && currentModalItem && String(currentModalItem.id) === String(curId) && currentModalActiveLang === lang) {
+            const isPureBullets = articleDiv.tagName === 'UL' || articleDiv.tagName === 'OL' || (articleDiv.querySelector('ul, ol') && !articleDiv.querySelector('p'));
+            if (!isPureBullets) {
+              const parasContainer = document.getElementById('article-modal-paras');
+              if (parasContainer) {
+                parasContainer.innerHTML = articleDiv.innerHTML;
+              }
+            }
+          }
+        })
+        .catch(() => {});
+    }
   }
 
   function closeArticleModal() {
@@ -893,9 +1370,46 @@
       modalOverlay.classList.add('hidden');
     }
     document.body.style.overflow = '';
+    currentModalItem = null;
   }
 
-  // 12. Tweet Language In-Place Toggle
+  // 12. Full-Screen Image Lightbox
+  function openLightbox(imgUrl) {
+    if (!imgUrl) return;
+    let lb = document.getElementById('image-lightbox-modal');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'image-lightbox-modal';
+      lb.className = 'fixed inset-0 z-70 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 animate-fade-in cursor-pointer';
+      lb.onclick = (e) => {
+        if (e.target.tagName !== 'IMG') closeLightbox();
+      };
+      lb.innerHTML = `
+        <button type="button" onclick="window.MobileApp.closeLightbox()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center text-lg font-bold backdrop-blur-sm active:scale-90 cursor-pointer">
+          ✕
+        </button>
+        <div class="max-w-full max-h-full flex items-center justify-center">
+          <img id="image-lightbox-img" src="" alt="Full preview" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl">
+        </div>
+      `;
+      document.body.appendChild(lb);
+    }
+    const imgEl = document.getElementById('image-lightbox-img');
+    if (imgEl) imgEl.src = imgUrl;
+    lb.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('image-lightbox-modal');
+    if (lb) lb.classList.add('hidden');
+    const modalOverlay = document.getElementById('article-modal-overlay');
+    if (!modalOverlay || modalOverlay.classList.contains('hidden')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  // 13. Tweet Language In-Place Toggle
   function toggleTweetLang(itemId) {
     if (!cachedData) return;
     const tweets = (cachedData.grouped && cachedData.grouped.celebrity) || (cachedData.celebrity) || [];
@@ -919,7 +1433,7 @@
     }
   }
 
-  // 13. Navigation Tab Switching & Hash Persistence
+  // 14. Navigation Tab Switching & Hash Persistence
   function switchTab(newTab) {
     if (currentTab === newTab && currentFilter === 'all') return;
     currentTab = newTab;
@@ -939,9 +1453,9 @@
     document.querySelectorAll('[data-tab-target]').forEach(el => {
       const isTarget = el.dataset.tabTarget === newTab;
       if (isTarget) {
-        el.className = 'flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all';
+        el.className = 'flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all cursor-pointer';
       } else {
-        el.className = 'flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all';
+        el.className = 'flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer';
       }
     });
 
@@ -1003,7 +1517,7 @@
     }
   }
 
-  // 14. Mobile Language Switcher Action Sheet (All 31 Languages Supported)
+  // 15. Mobile Language Switcher Action Sheet (All 31 Languages Supported)
   function renderLanguagePickerList(query = '') {
     const container = document.getElementById('lang-picker-list');
     if (!container) return;
@@ -1135,14 +1649,12 @@
 
       const list = document.getElementById('lang-picker-list');
       if (list) {
-        // Scroll forwarder: if wheel is outside list, forward it to list
         modal.onwheel = (e) => {
           if (!e.target.closest('#lang-picker-list')) {
             list.scrollTop += e.deltaY;
             e.preventDefault();
           }
         };
-        // Bind touch / mouse drag simulation
         initDragScroll(list);
       }
     }
@@ -1254,6 +1766,7 @@
           translate.ignore.class.push('notranslate');
           translate.ignore.id.push('lang-picker-modal');
           translate.ignore.id.push('article-modal-overlay');
+          translate.ignore.id.push('image-lightbox-modal');
           translate.execute();
           translate.changeLanguage(targetLang);
           updateLangButtonLabel(targetLang);
@@ -1296,13 +1809,9 @@
     window.location.href = (targetBase || '/') + '?' + searchParams.toString() + targetHash;
   }
 
-  // 15. Article Share Helper
+  // 16. Article Share Helper
   async function shareArticle(itemId) {
-    const allPools = [
-      ...((cachedData && cachedData.grouped && cachedData.grouped.news) || []),
-      ...((cachedData && cachedData.top_three) || [])
-    ];
-    const found = allPools.find(it => String(it.id) === String(itemId));
+    const found = findItemById(itemId);
     const title = found ? (isZh ? (found.title_zh || found.title) : (found.title_en || found.title)) : 'AI News Radar';
     const shareUrl = found && found.url ? found.url : window.location.href;
 
@@ -1336,7 +1845,7 @@
     }
   }
 
-  // 16. Floating Back to Top Button
+  // 17. Floating Back to Top Button
   function initMobileBackToTop() {
     const btn = document.getElementById('btn-back-to-top');
     if (!btn) return;
@@ -1354,7 +1863,7 @@
     });
   }
 
-  // 17. Smart Visitor Language Suggestion
+  // 18. Smart Visitor Language Suggestion
   function checkAndShowLangSuggestion() {
     try {
       if (sessionStorage.getItem('ai_radar_m_lang_dismissed')) return;
@@ -1433,7 +1942,7 @@
     } catch (e) {}
   }
 
-  // 18. Expose to Window
+  // 19. Expose to Window
   window.MobileApp = {
     init() {
       try {
@@ -1474,9 +1983,9 @@
       document.querySelectorAll('[data-tab-target]').forEach(el => {
         const isTarget = el.dataset.tabTarget === currentTab;
         if (isTarget) {
-          el.className = 'flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all';
+          el.className = 'flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all cursor-pointer';
         } else {
-          el.className = 'flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all';
+          el.className = 'flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer';
         }
       });
       document.querySelectorAll('[data-dock-target]').forEach(el => {
@@ -1489,7 +1998,7 @@
         if (dot) dot.classList.toggle('opacity-0', !isTarget);
       });
 
-      // Check URL query parameters for search
+      // Check URL query parameters for search or deep linking
       const q = new URLSearchParams(window.location.search).get('q');
       if (q) {
         searchQuery = q;
@@ -1499,14 +2008,24 @@
         if (searchBox) searchBox.classList.remove('hidden');
       }
 
-      loadData();
+      loadData().then(() => {
+        // Deep link modal opening: check #news?open={id} or ?open={id}
+        const openId = new URLSearchParams(window.location.search).get('open') || 
+                       (window.location.hash.includes('open=') ? window.location.hash.split('open=')[1].split('&')[0] : null);
+        if (openId) {
+          setTimeout(() => {
+            openArticleModal(openId);
+          }, 200);
+        }
+      });
+
       initMobileBackToTop();
       checkAndShowLangSuggestion();
     },
     refresh() {
       const refreshBtn = document.getElementById('refresh-btn-icon');
       if (refreshBtn) refreshBtn.classList.add('animate-spin');
-      loadData(true).finally(() => {
+      return loadData(true).finally(() => {
         setTimeout(() => {
           if (refreshBtn) refreshBtn.classList.remove('animate-spin');
         }, 500);
@@ -1520,6 +2039,9 @@
     toggleSearchBox,
     openArticle: openArticleModal,
     closeArticle: closeArticleModal,
+    switchArticleLang,
+    openLightbox,
+    closeLightbox,
     toggleTheme,
     openLangPicker,
     closeLangPicker,

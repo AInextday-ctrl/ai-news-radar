@@ -225,3 +225,38 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* Full-screen Image Lightbox Modal */
+#image-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+#image-lightbox-modal.hidden {
+  display: none !important;
+}
+#image-lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Article Body Paragraphs Formatting */
+#article-modal-paras p {
+  margin-bottom: 0.85rem;
+  line-height: 1.8;
+  font-size: 13.5px;
+  color: inherit;
+}
+#article-modal-paras p:last-child {
+  margin-bottom: 0;
+}
+
