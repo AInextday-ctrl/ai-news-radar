@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构与符号极速索引 (Codebase Fast Index)
 
-> **生成时间**: `2026-11-23 09:55:17 UTC` | **收录文件**: `105` 个 | **索引符号**: `1266` 个
+> **生成时间**: `2026-11-23 10:05:45 UTC` | **收录文件**: `105` 个 | **索引符号**: `1266` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，在每次代码修改、测试门禁校验与提交前自动增量同步刷新。
 
 ---
@@ -115,7 +115,7 @@
 - **`tests/test_wapo_crawler.py`** (6,028 bytes): `TestWashingtonCrawlers`
 - **`tests/test_wired_crawler.py`** (4,886 bytes): `TestWiredCrawler`
 - **`tests/test_wsj_crawler.py`** (4,809 bytes): `TestWsjCrawler`
-- **`tools/verify_code_integrity.py`** (4,897 bytes): `scan_anti_patterns, run_unit_tests, main`
+- **`tools/verify_code_integrity.py`** (5,014 bytes): `scan_anti_patterns, run_unit_tests, main`
 
 ### 底层数据存储仓 (Data Stores & Cache Registries)
 *公共数据仓（latest_news.json）、全量归档（master_archive.json）与信源独立持久化缓存。*

@@ -115,6 +115,9 @@
    - 严禁对 `data/` 目录下的海量归档 JSON 文件（如 `master_archive.json`、`archive_news.json` 等 50MB+ 文件）使用 PowerShell `Select-String` 或未加过滤的命令行全文搜索，杜绝单线程全局正则遍历导致进程长时挂起。
    - 数据定位必须优先编写轻量 Python 脚本，基于 `id` 或 `url` 进行内存哈希键值直查（$O(1)$ 秒级响应）。
    - 代码与文本检索必须优先使用多线程索引工具（如 `ripgrep / rg`），并显式排除 `data/*.json` 归档仓或增加 `--max-filesize 5M` 限制。
+6. **代码库极速索引与查询优先铁律 (Codebase Fast Index & Query-First Invariants)**：
+   - **检索优先原则**：在定位代码实现、函数定义、类结构、信源爬虫入口或前端交互逻辑前，Agent **必须优先使用 `python tools/fast_index.py` 系列指令**（`symbol <name>`、`source <domain>`、`search <kw>`、`data <id>`）或直接查阅 `tools/CODEBASE_INDEX.md` 获取精确行号与映射关系，严禁盲目发起单线程跨目录通配符大范围文本扫描。
+   - **自动同步与时效守卫**：索引由 `tools/fast_index.py` 驱动，任何对代码的增删改必须保留或触发其自动增量同步逻辑（通过 `tools/verify_code_integrity.py` 第 3 阶段或 git pre-commit 勾子校验），确保 `tools/codebase_index.json` 与 `tools/CODEBASE_INDEX.md` 永远保持与真实代码 100% 同步。
 
 ---
 
