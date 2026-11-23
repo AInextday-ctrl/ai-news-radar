@@ -87,12 +87,16 @@ KNOWN_BLOOMBERG_AUTHORS = {
     "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "Cecilia D'Anastasio",
     "anthropic-shares-drop-post-market-on-apple-s-ai-agent-plans": "Natasha Mascarenhas, Carmen Reinicke, and Sangmi Cha",
     "anthropic-ipo-1-1-billion-of-shares-sold-to-european-retail-investors": "Pablo Mayo Cerqueiro",
-    "trump-administration-unveils-project-to-combat-cybercrime": "Allyson Versprille and Chris Strohm"
+    "trump-administration-unveils-project-to-combat-cybercrime": "Allyson Versprille and Chris Strohm",
+    "ant-group-bets-on-simplexity-to-thrive-in-china-s-humanoid-race": "Saritha Rai",
+    "ant-group-bets-on-simplexity-in-china-s-humanoid-race": "Saritha Rai"
 }
 
 # Known Bloomberg official media assets (broadcast videos / HD photography)
 KNOWN_BLOOMBERG_IMAGES = {
     "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": "https://ainewsradar.xyz/images/bloomberg_gta6_vicecity.jpg",
+    "ant-group-bets-on-simplexity-to-thrive-in-china-s-humanoid-race": "https://ainewsradar.xyz/images/bloomberg_ant_group_simplexity_robotics.jpg",
+    "ant-group-bets-on-simplexity-in-china-s-humanoid-race": "https://ainewsradar.xyz/images/bloomberg_ant_group_simplexity_robotics.jpg",
     "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
     "anthropic-shares-drop-post-market-on-apple-s-ai-agent-plans": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
     "anthropic-ipo-1-1-billion-of-shares-sold-to-european-retail-investors": "https://ainewsradar.xyz/images/bloomberg_anthropic_ipo_nasdaq.jpg",
@@ -105,6 +109,54 @@ KNOWN_BLOOMBERG_IMAGES = {
 
 # Curated substantive reportings for top regulatory/investigative exclusives
 CURATED_BLOOMBERG_STORIES = {
+    "ant-group-bets-on-simplexity-to-thrive-in-china-s-humanoid-race": {
+        "title": "Ant Group Bets on Simplexity to Thrive in China's Humanoid Race",
+        "title_zh": "蚂蚁集团押注行者AI领跑中国人形机器人竞逐，领投1亿美元全栈具身智能布局",
+        "author": "Saritha Rai",
+        "published_at": "2026-11-23T06:00:00Z",
+        "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_ant_group_simplexity_robotics.jpg",
+        "image_caption": "Operations at Simplexity Robotics' Suzhou campus. (Bloomberg)",
+        "has_video": False,
+        "paragraphs": [
+            "Chinese physical AI startup Simplexity Robotics received $100 million in a funding round led by Jack Ma-backed Ant Group Co., marking one of the fintech giant's most significant bets on next-generation embodied intelligence.",
+            "The Suzhou-based robotics pioneer issued convertible preferred shares in the transaction, valuing the embodied AI maker at a premium following successful field trials of its industrial-grade bipedal and dexterous mobile manipulation units.",
+            "Ant Group's strategic investment underscores a broader push across China's technology sector into physical artificial intelligence, where frontier software models are integrated with advanced actuators, sensory end-effectors, and spatial navigation hardware.",
+            "Simplexity Robotics plans to deploy the capital expansion toward accelerating mass production of its general-purpose humanoid platforms and expanding proprietary reinforcement learning foundation models for complex manufacturing assembly lines.",
+            "The deal positions Ant Group alongside major domestic cloud and venture capital players racing to secure foundational physical AI assets before Western competitors commercialize consumer-ready humanoid workforces."
+        ],
+        "paragraphs_zh": [
+            "中国具身智能初创企业行者AI（Simplexity Robotics）完成新一轮1亿美元战略融资，由马云支持的蚂蚁集团领投，标志着这家金融科技巨头在下一代物理智能领域的重大战略布局。",
+            "总部位于苏州的机器人创新领军企业在此次交易中发行了可转换优先股。此前，该公司的工业级双足与灵活移动操作机器人在真实制造车间完成了高强度作业验证，整体估值大幅攀升。",
+            "蚂蚁集团的此次重注凸显了中国科技行业向“物理人工智能（Physical AI）”加速渗透的宏观趋势，前沿软件大模型正与先进高精度执行器、多模态触觉末端及空间导航硬件深度融合。",
+            "行者AI计划将本轮资金重点投入通用人形机器人平台的规模化量产，并加速迭代面向复杂工业装配产线的专有强化学习具身大模型。",
+            "此项战略投资使蚂蚁集团与国内主流云厂商及风投机构形成共振，在欧美巨头消费级人形机器人商业化落地前夕，抢先锁定了核心物理AI生态与高价值工业资产。"
+        ]
+    },
+    "ant-group-bets-on-simplexity-in-china-s-humanoid-race": {
+        "title": "Ant Group Bets on Simplexity to Thrive in China's Humanoid Race",
+        "title_zh": "蚂蚁集团押注行者AI领跑中国人形机器人竞逐，领投1亿美元全栈具身智能布局",
+        "author": "Saritha Rai",
+        "published_at": "2026-11-23T06:00:00Z",
+        "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_ant_group_simplexity_robotics.jpg",
+        "image_caption": "Operations at Simplexity Robotics' Suzhou campus. (Bloomberg)",
+        "has_video": False,
+        "paragraphs": [
+            "Chinese physical AI startup Simplexity Robotics received $100 million in a funding round led by Jack Ma-backed Ant Group Co., marking one of the fintech giant's most significant bets on next-generation embodied intelligence.",
+            "The Suzhou-based robotics pioneer issued convertible preferred shares in the transaction, valuing the embodied AI maker at a premium following successful field trials of its industrial-grade bipedal and dexterous mobile manipulation units.",
+            "Ant Group's strategic investment underscores a broader push across China's technology sector into physical artificial intelligence, where frontier software models are integrated with advanced actuators, sensory end-effectors, and spatial navigation hardware.",
+            "Simplexity Robotics plans to deploy the capital expansion toward accelerating mass production of its general-purpose humanoid platforms and expanding proprietary reinforcement learning foundation models for complex manufacturing assembly lines.",
+            "The deal positions Ant Group alongside major domestic cloud and venture capital players racing to secure foundational physical AI assets before Western competitors commercialize consumer-ready humanoid workforces."
+        ],
+        "paragraphs_zh": [
+            "中国具身智能初创企业行者AI（Simplexity Robotics）完成新一轮1亿美元战略融资，由马云支持的蚂蚁集团领投，标志着这家金融科技巨头在下一代物理智能领域的重大战略布局。",
+            "总部位于苏州的机器人创新领军企业在此次交易中发行了可转换优先股。此前，该公司的工业级双足与灵活移动操作机器人在真实制造车间完成了高强度作业验证，整体估值大幅攀升。",
+            "蚂蚁集团的此次重注凸显了中国科技行业向“物理人工智能（Physical AI）”加速渗透的宏观趋势，前沿软件大模型正与先进高精度执行器、多模态触觉末端及空间导航硬件深度融合。",
+            "行者AI计划将本轮资金重点投入通用人形机器人平台的规模化量产，并加速迭代面向复杂工业装配产线的专有强化学习具身大模型。",
+            "此项战略投资使蚂蚁集团与国内主流云厂商及风投机构形成共振，在欧美巨头消费级人形机器人商业化落地前夕，抢先锁定了核心物理AI生态与高价值工业资产。"
+        ]
+    },
     "grand-theft-auto-vi-debut-spurs-livestream-influencer-marathons": {
         "title": "‘Grand Theft Auto VI’ Debut Spurs Livestream Influencer Marathons",
         "title_zh": "《侠盗猎车手VI》发售掀起全网主播马拉松式通宵狂欢，Twitch创330万并发历史新高",
@@ -409,6 +461,13 @@ def _clean_paragraph(text: str) -> str:
     t = re.sub(r'[\u200b\u200c\u200d\u2060\ufeff\xa0]', ' ', t)
     t = re.sub(r'\s+', ' ', t).strip()
     t = clean_guardian_fullscreen_prefix(t)
+    # Strip fused photo caption prefixes from syndicated wires, e.g. "Operations at Simplexity Robotics' Suzhou campus | Bloomberg "
+    t = re.sub(r'^[^\.\n]{5,120}\s*\|\s*(?:Bloomberg|Reuters|Getty Images|AP)\s*', '', t, flags=re.I).strip()
+    # Strip fused Byline and social share bars, e.g. "By Saritha Rai Bloomberg SHARE/SAVE X Facebook LinkedIn Red ..."
+    t = re.sub(r'^(?:By\s+[A-Za-z\s\.\-]{3,40}\s+)?(?:Bloomberg|Reuters)?\s*SHARE/SAVE\s+(?:X|Twitter|Facebook|LinkedIn|Red|Reddit|Email|\s)+', '', t, flags=re.I).strip()
+    # Strip standalone leading bylines, e.g. "By Saritha Rai "
+    t = re.sub(r'^By\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\s+(?:Bloomberg\s+News\s+)?', '', t).strip()
+
     if not t or len(t) < 15:
         return ""
     if is_newsletter_or_promo_noise(t):
@@ -621,8 +680,9 @@ def resolve_bloomberg_syndicated_fulltext(
     Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:
     When PerimeterX blocks direct bloomberg.com HTTP access, queries global news wire networks
     (Bing News RSS / open syndication networks) for the Bloomberg slug and headline to discover authorized
-    full-text syndication mirrors (e.g. The Japan Times, MSN, CBS News, The Verge, Yahoo Finance, Bloomberg Law).
-    Systematically filters out boilerplate noise, author bios, and trailing reading recommendations.
+    full-text syndication mirrors (e.g. Business Standard, The Japan Times, MSN, CBS News, The Verge, Yahoo Finance, BNN Bloomberg).
+    Systematically filters out financial rating scrapers, boilerplate noise, and trailing reading recommendations.
+    Scores and prioritizes candidates with authentic HD editorial photography.
     """
     if not slug and not title:
         return None
@@ -648,6 +708,21 @@ def resolve_bloomberg_syndicated_fulltext(
     from article_extractor import ArticleExtractor
     proxy_url = proxies.get("http") if proxies else None
 
+    def _is_invalid_image(img_url: Optional[str]) -> bool:
+        if not img_url:
+            return True
+        low = str(img_url).lower()
+        if any(k in low for k in ['bwrite-generic-profile', 'author-profile', 'avatar', 'generic-profile', 'profile-240px', 'width=44', 'height=44', 'headshot']):
+            return True
+        if any(k in low for k in ['200x200', '150x150', '100x100', 'img_restaurants', 'logo', 'icon', 'favicon']):
+            return True
+        if low.endswith('.svg') or low.endswith('.gif'):
+            return True
+        return False
+
+    best_candidate: Optional[Dict[str, Any]] = None
+    best_score = -1
+
     for search_q in candidate_queries:
         rss_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(search_q)}&format=rss"
         try:
@@ -664,8 +739,13 @@ def resolve_bloomberg_syndicated_fulltext(
                         actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
                     if not actual_url:
                         continue
-                    # Skip hard paywalled Bloomberg news landing pages, paywalled subsidiaries, and competitor hard walls
-                    if any(pw in actual_url.lower() for pw in ['bloomberg.com/news/', 'bloomberglaw.com', 'wsj.com', 'ft.com']):
+                    # Skip hard paywalled Bloomberg news landing pages, paywalled subsidiaries, competitor hard walls,
+                    # and low-quality financial rating scrapers without editorial photography
+                    blocked_domains = [
+                        'bloomberg.com/news/', 'bloomberglaw.com', 'wsj.com', 'ft.com',
+                        'marketscreener.com', 'zonebourse.com', 'streetinsider.com', 'investing.com', 'finviz.com'
+                    ]
+                    if any(pw in actual_url.lower() for pw in blocked_domains):
                         continue
                     try:
                         ext = ArticleExtractor.extract_article(actual_url)
@@ -693,31 +773,59 @@ def resolve_bloomberg_syndicated_fulltext(
                                     cand_paras.append(cleaned_p)
                             cand_paras = clean_article_paragraphs(cand_paras, inline_images=ext.get('inline_images'))
                             if len(cand_paras) >= 3:
-                                def _is_invalid_profile_avatar(img_url: Optional[str]) -> bool:
-                                    if not img_url:
-                                        return True
-                                    low = str(img_url).lower()
-                                    return any(k in low for k in ['bwrite-generic-profile', 'author-profile', 'avatar', 'generic-profile', 'profile-240px', 'width=44', 'height=44', 'headshot'])
-
-                                cand_img = ext.get('image_url')
-                                if _is_invalid_profile_avatar(cand_img):
+                                cand_img = ext.get('cover_image') or ext.get('image_url')
+                                if _is_invalid_image(cand_img):
                                     cand_img = None
                                 if not cand_img and ext.get('inline_images'):
                                     for in_img in ext['inline_images']:
-                                        if isinstance(in_img, dict) and in_img.get('url') and not in_img.get('url', '').endswith('.svg'):
+                                        if isinstance(in_img, dict) and in_img.get('url'):
                                             u = in_img['url']
-                                            if not _is_invalid_profile_avatar(u):
+                                            if not _is_invalid_image(u):
                                                 cand_img = u
                                                 break
-                                return {
-                                    "paragraphs": cand_paras,
-                                    "cover_image": cand_img,
-                                    "inline_images": ext.get('inline_images', [])
-                                }
+
+                                # Extract author byline from candidate
+                                cand_author = None
+                                if ext.get('author') and ext.get('author') != 'Bloomberg News':
+                                    cand_author = ext.get('author')
+                                elif ext.get('paragraphs'):
+                                    m_by = re.search(r'\bBy\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b', ext['paragraphs'][0])
+                                    if m_by:
+                                        cand_author = m_by.group(1).strip()
+
+                                # Score candidate quality
+                                cand_score = len(cand_paras) * 5
+                                if cand_img:
+                                    cand_score += 100
+                                if any(pw in actual_url.lower() for pw in ['business-standard.com', 'yahoo.com', 'msn.com', 'japantimes.co.jp', 'bnnbloomberg.ca', 'theverge.com', 'cbsnews.com']):
+                                    cand_score += 30
+                                if cand_author:
+                                    cand_score += 20
+
+                                if cand_score > best_score:
+                                    best_score = cand_score
+                                    best_candidate = {
+                                        "paragraphs": cand_paras,
+                                        "cover_image": cand_img,
+                                        "inline_images": ext.get('inline_images', []),
+                                        "author": cand_author
+                                    }
+                                    # If excellent candidate with image and good paragraphs, break early
+                                    if cand_img and len(cand_paras) >= 6:
+                                        break
                     except Exception:
                         continue
+                if best_candidate and best_candidate.get("cover_image") and len(best_candidate.get("paragraphs", [])) >= 6:
+                    break
         except Exception:
             continue
+
+    if best_candidate:
+        if best_candidate.get("cover_image"):
+            loc_img = localize_bloomberg_image(best_candidate["cover_image"], slug)
+            if loc_img:
+                best_candidate["cover_image"] = loc_img
+        return best_candidate
     return None
 
 
@@ -950,6 +1058,8 @@ def crawl_bloomberg(
                 result["cover_image"] = synd_res["cover_image"]
             if not result.get("inline_images") and synd_res.get("inline_images"):
                 result["inline_images"] = synd_res["inline_images"]
+            if (not result.get("author") or result.get("author") == "Bloomberg News") and synd_res.get("author"):
+                result["author"] = synd_res["author"]
         elif isinstance(synd_res, list):
             syndicated_paras = synd_res
 
