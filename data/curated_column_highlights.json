@@ -1,40 +1,98 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-23 11:33:19 UTC",
+  "generated_at": "2026-11-23 11:50:35 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-23 11:33:20 UTC",
+      "updated_at": "2026-11-23 11:50:35 UTC",
       "headline_item": {
-        "id": "33854d7442ce2681",
+        "id": "eff74fc0cf98d57a",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "沃尔玛接入Meta Muse实现AI代理自主购物",
-        "title_en": "Meta Muse can now do your Black Friday shopping at Walmart",
-        "source": "The Verge AI",
-        "author": "Jess Weatherbed",
-        "cover_image": "https://ainewsradar.xyz/images/verge_c1061207c903927a.jpg",
-        "image_url": "https://ainewsradar.xyz/images/verge_c1061207c903927a.jpg",
-        "published_at": "2026-11-23T11:00:00+00:00",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1039874/walmart-agent-gateway-meta-muse-black-friday",
-        "event_summary_zh": "沃尔玛正式通过“代理网关”允许Meta的Muse AI在其平台执行商品搜索与下单，标志着AI代理商业化落地迈出关键一步",
-        "event_summary_en": "Walmart has integrated Meta’s Muse AI agent through its recently announced Agent Gateway. Customers can authorize Muse via 'Agent Profiles' to autonomously browse and purchase products, with built-in spending limits, manual approval requirements, and privacy protections to prevent purchase history leakage.",
+        "title_zh": "英伟达对华出口战略受挫与高管丑闻",
+        "title_en": "How Nvidia fought for years in Washington to sell its prized chips to China",
+        "source": "Washington Post",
+        "author": "Ian Duncan",
+        "cover_image": "https://ainewsradar.xyz/images/wapo_a4640e4dccd47b27.jpg",
+        "image_url": "https://ainewsradar.xyz/images/wapo_a4640e4dccd47b27.jpg",
+        "published_at": "2026-11-23T11:40:01+00:00",
+        "url": "https://www.washingtonpost.com/technology/2026/11/23/how-nvidia-fought-years-washington-sell-its-prized-chips-china/",
+        "event_summary_zh": "英伟达创始人黄仁勋因深陷间谍调查及试图绕开美方芯片出口限制的强硬游说策略，在华盛顿政界的影响力急剧滑落",
+        "event_summary_en": "Nvidia founder Jensen Huang's political influence has collapsed following revelations of his involvement with a woman suspected of espionage for China, whose firm is under investigation for illicit trade of Nvidia chips. Previously, Nvidia employed aggressive lobbying to circumvent export restrictions and resisted mandatory chip-tracking regulations by claiming compliance was technically impossible, causing severe backlash and deep distrust among U.S. lawmakers.",
         "core_facts_zh": [
-          "【核心事件】沃尔玛 (Walmart)、Meta (Meta Platforms Inc.)在沃尔玛官网与零售结算系统：接入Meta Muse AI代理实现自动化购物，并配套代理配置权限管理功能",
-          "【起因与机理】应对AI驱动的商业自动化趋势，构建差异化的零售电商服务生态",
-          "【核心事实细节】沃尔玛启用代理网关允许外部AI代理接入购物生态。",
-          "【各方立场与态度】零售巨头策略分化，通过规范化接口取代平台封禁机制。"
+          "【核心事件】黄仁勋（英伟达创始人）在美国华盛顿政界/国会：试图绕过出口管制并阻挠监管溯源，因间谍调查陷入危机",
+          "【起因与机理】利用商业游说对抗国家安全限制，引发严重的政商博弈失信",
+          "【调查与监管诉求】核心涉案：黄仁勋陷入针对其个人与涉嫌间谍关联公司的国家安全调查。",
+          "【行业影响与走向】行业影响：美国政府将加大高性能芯片出口合规审查力度，严防黑市走私。"
         ],
         "core_facts_en": [
-          "[Core Event] Walmart, Meta Platforms Inc.: Enabled Meta's Muse AI for autonomous shopping with user-controlled permission settings",
-          "[Root Cause & Mechanism] Capitalizing on the AI agent trend to offer a differentiated, frictionless retail experience",
-          "[Key Technical Spec] Walmart launches Agent Gateway to integrate third-party AI shoppers.",
-          "[Key Position & Outlook] Retailer strategy shifts from blocking AI to standardizing safe, permissioned agent access."
+          "[Core Event] Jensen Huang (Founder of Nvidia) (Washington D.C. / U.S. Congress): Attempted to bypass export controls and obstructed supply chain tracking, now embroiled in espionage investigations",
+          "[Root Cause & Mechanism] Aggressive lobbying to maintain market access to China backfired due to ethical and national security breaches",
+          "[Key Metrics] Huang told Wall Street analysts on an August 2025 earnings call that China represented a $50 billion-a-year opportunity.",
+          "[Key Position & Outlook] Industry outlook: Expect heightened scrutiny and mandatory traceability protocols for high-end AI chip exports."
         ],
-        "industry_impact_zh": "零售业正从单纯的流量入口转向“意图经济”，沃尔玛通过建立代理权限标准而非简单封锁，意在争夺AI时代的消费者入口控制权。此举通过软性治理规避了亚马逊等平台封禁AI爬虫的对立策略，旨在通过构建安全可控的代理接口生态，确立零售巨头在AI供应链中的中枢地位。",
-        "industry_impact_en": "Retail is shifting from a traffic-based model to an 'intent economy,' where Walmart’s proactive integration of AI agents aims to secure the consumer gateway. By establishing standardized agent permissions rather than imposing bans, Walmart seeks to dictate the terms of trade in the AI-agent ecosystem, securing its role as a central infrastructure provider."
+        "industry_impact_zh": "此事件标志着美国科技巨头通过游说干预国家安全政策的商业策略彻底触底。英伟达在芯片合规性上的“欺瞒式”游说与地缘政治风险的叠加，将导致后续监管机构对高性能计算硬件的流向审查进入严苛的“强制溯源”时代，供应链审计成本将大幅抬升。",
+        "industry_impact_en": "The situation signals the failure of aggressive corporate lobbying as a tool to override national security mandates. The convergence of misleading regulatory compliance and geopolitical espionage risks will force U.S. authorities to adopt mandatory, ironclad supply chain traceability for high-performance computing hardware, significantly increasing compliance overheads."
       },
       "headlines": [
+        {
+          "id": "eff74fc0cf98d57a",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英伟达对华出口战略受挫与高管丑闻",
+          "title_en": "How Nvidia fought for years in Washington to sell its prized chips to China",
+          "source": "Washington Post",
+          "author": "Ian Duncan",
+          "cover_image": "https://ainewsradar.xyz/images/wapo_a4640e4dccd47b27.jpg",
+          "image_url": "https://ainewsradar.xyz/images/wapo_a4640e4dccd47b27.jpg",
+          "published_at": "2026-11-23T11:40:01+00:00",
+          "url": "https://www.washingtonpost.com/technology/2026/11/23/how-nvidia-fought-years-washington-sell-its-prized-chips-china/",
+          "event_summary_zh": "英伟达创始人黄仁勋因深陷间谍调查及试图绕开美方芯片出口限制的强硬游说策略，在华盛顿政界的影响力急剧滑落",
+          "event_summary_en": "Nvidia founder Jensen Huang's political influence has collapsed following revelations of his involvement with a woman suspected of espionage for China, whose firm is under investigation for illicit trade of Nvidia chips. Previously, Nvidia employed aggressive lobbying to circumvent export restrictions and resisted mandatory chip-tracking regulations by claiming compliance was technically impossible, causing severe backlash and deep distrust among U.S. lawmakers.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（英伟达创始人）在美国华盛顿政界/国会：试图绕过出口管制并阻挠监管溯源，因间谍调查陷入危机",
+            "【起因与机理】利用商业游说对抗国家安全限制，引发严重的政商博弈失信",
+            "【调查与监管诉求】核心涉案：黄仁勋陷入针对其个人与涉嫌间谍关联公司的国家安全调查。",
+            "【行业影响与走向】行业影响：美国政府将加大高性能芯片出口合规审查力度，严防黑市走私。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (Founder of Nvidia) (Washington D.C. / U.S. Congress): Attempted to bypass export controls and obstructed supply chain tracking, now embroiled in espionage investigations",
+            "[Root Cause & Mechanism] Aggressive lobbying to maintain market access to China backfired due to ethical and national security breaches",
+            "[Key Metrics] Huang told Wall Street analysts on an August 2025 earnings call that China represented a $50 billion-a-year opportunity.",
+            "[Key Position & Outlook] Industry outlook: Expect heightened scrutiny and mandatory traceability protocols for high-end AI chip exports."
+          ],
+          "industry_impact_zh": "此事件标志着美国科技巨头通过游说干预国家安全政策的商业策略彻底触底。英伟达在芯片合规性上的“欺瞒式”游说与地缘政治风险的叠加，将导致后续监管机构对高性能计算硬件的流向审查进入严苛的“强制溯源”时代，供应链审计成本将大幅抬升。",
+          "industry_impact_en": "The situation signals the failure of aggressive corporate lobbying as a tool to override national security mandates. The convergence of misleading regulatory compliance and geopolitical espionage risks will force U.S. authorities to adopt mandatory, ironclad supply chain traceability for high-performance computing hardware, significantly increasing compliance overheads."
+        },
+        {
+          "id": "f3fe8507dc1a6220",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "美港口遭遇AI驱动的自动化网络袭击",
+          "title_en": "US ports face cyber attack onslaught as hackers target vital trade routes",
+          "source": "Financial Times",
+          "author": "Martha Muir and Ella Lee",
+          "cover_image": "https://ainewsradar.xyz/images/ft_2970bb53694b38ee.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_2970bb53694b38ee.jpg",
+          "published_at": "2026-11-23T11:25:02+00:00",
+          "url": "https://www.ft.com/content/c269cf3e-2275-4244-9a86-f412c8521b4f",
+          "event_summary_zh": "美国关键港口及油轮基础设施正面临日均数千次的自动化网络攻击，黑客通过AI工具侦测系统漏洞，威胁全球贸易安全",
+          "event_summary_en": "Kent Britton, CEO of the Port of Corpus Christi, reported that the port faces thousands of daily network intrusion attempts. The FBI has warned that malicious actors are increasingly deploying an AI tool dubbed 'Artex' to automate the exploitation of software vulnerabilities within ports and shipping infrastructure, shifting from password spraying to sophisticated executive phishing.",
+          "core_facts_zh": [
+            "【核心事件】肯特·布里顿（科珀斯克里斯蒂港CEO）、FBI在美国港口及贸易物流数字基础设施：面临基于AI自动化的网络探测与钓鱼攻击，频率达到每日千次级别",
+            "【起因与机理】基础设施数字化程度高但系统陈旧，且AI攻击工具降低了渗透技术门槛",
+            "【核心事实细节】核心挑战：关键基础设施面临AI自动化的网络袭击潮。",
+            "【行业影响与走向】行业影响：港口数字化运营安全成为国家安全重点，倒逼系统全面升级防护。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Kent Britton (CEO, Port of Corpus Christi), FBI (U.S. port and trade infrastructure): Daily mass automated cyber probes and phishing attacks enabled by AI tools",
+            "[Root Cause & Mechanism] Aging digital infrastructure combined with low-barrier AI hacking tools",
+            "[Key Fact Detail] Core challenge: Critical infrastructure facing a surge in AI-automated cyber assaults.",
+            "[Industry Impact & Outlook] Industry impact: Maritime infrastructure cybersecurity has become a national security priority, necessitating comprehensive defensive system upgrades."
+          ],
+          "industry_impact_zh": "物流基础设施的数字化升级与安全防护滞后形成了严重缺口。AI在网络攻防中的应用已进入实战阶段，预计未来港口及供应链管理系统将被迫引入基于零信任架构的自动防御体系，以对抗这种超低成本、高并发的系统瘫痪风险。",
+          "industry_impact_en": "The lag between digital modernization and cybersecurity hardening in logistics infrastructure creates a critical vulnerability. With AI-driven cyberattacks now operationalized, the sector will be forced to shift toward zero-trust automated defense architectures to counter high-concurrency, low-cost disruption threats."
+        },
         {
           "id": "33854d7442ce2681",
           "tag_zh": "📰 业界动态",
@@ -63,70 +121,12 @@
           ],
           "industry_impact_zh": "零售业正从单纯的流量入口转向“意图经济”，沃尔玛通过建立代理权限标准而非简单封锁，意在争夺AI时代的消费者入口控制权。此举通过软性治理规避了亚马逊等平台封禁AI爬虫的对立策略，旨在通过构建安全可控的代理接口生态，确立零售巨头在AI供应链中的中枢地位。",
           "industry_impact_en": "Retail is shifting from a traffic-based model to an 'intent economy,' where Walmart’s proactive integration of AI agents aims to secure the consumer gateway. By establishing standardized agent permissions rather than imposing bans, Walmart seeks to dictate the terms of trade in the AI-agent ecosystem, securing its role as a central infrastructure provider."
-        },
-        {
-          "id": "b1cc56d4fc9035d0",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "CrowdStrike以440亿美元换股收购Zscaler",
-          "title_en": "Crowdstrike Reaches 44 Billion Cybersecurity Deal For Zscaler",
-          "source": "Bloomberg",
-          "author": "Bloomberg",
-          "cover_image": "https://www.mcclatchy-wires.com/public/incoming/y41rxr/picture318209887/alternates/LANDSCAPE_1200/9ee062f4-b9db-434c-a77e-31308c0db892",
-          "image_url": "https://www.mcclatchy-wires.com/public/incoming/y41rxr/picture318209887/alternates/LANDSCAPE_1200/9ee062f4-b9db-434c-a77e-31308c0db892",
-          "published_at": "2026-11-23T10:55:03+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-23/crowdstrike-reaches-44-billion-cybersecurity-deal-for-zscaler",
-          "event_summary_zh": "CrowdStrike宣布以全股票交易收购Zscaler，旨在通过整合网络安全与零信任服务，打造全球最大纯网络安全供应商",
-          "event_summary_en": "CrowdStrike has entered an all-stock acquisition agreement to purchase Zscaler in a deal valued at approximately $43.9 billion. The merger combines CrowdStrike’s endpoint security with Zscaler’s zero-trust network offerings to meet enterprise demand for vendor consolidation, with Zscaler shareholders receiving 1.135 CrowdStrike shares per share, resulting in existing CrowdStrike shareholders owning 84.1% of the new entity.",
-          "core_facts_zh": [
-            "【核心事件】CrowdStrike, Zscaler在企业级网络安全市场：价值439亿美元的全股票并购交易",
-            "【起因与机理】通过产品矩阵全覆盖，降低客户供应商复杂性并实现收入协同增长",
-            "【关键数据与实测】交易价值约439亿美元，采用全股票交换方式。",
-            "【各方立场与态度】合并后年经常性收入预期超100亿美元，协同效应目标10亿美元。"
-          ],
-          "core_facts_en": [
-            "[Core Event] CrowdStrike, Zscaler (Enterprise Cybersecurity Market): $43.9 billion all-stock merger",
-            "[Root Cause & Mechanism] Consolidating security vendors to capture market share and drive annual recurring revenue (ARR) synergies",
-            "[Key Metrics] Deal valued at ~$43.9 billion, executed via all-stock exchange.",
-            "[Key Position & Outlook] Combined entity projects >$10B ARR with $1B in targeted synergies."
-          ],
-          "industry_impact_zh": "此项并购标志着网络安全行业进入“平台化整合”的终局博弈期。通过将端点防御与零信任接入层打通，CrowdStrike试图构建覆盖安全全链路的独家生态，以对抗垂直厂商的碎片化竞争，这将倒逼中小型安全厂商在巨头的“一站式”防御包夹下加速被吞并或边缘化。",
-          "industry_impact_en": "This acquisition signifies a shift toward the 'platformization' endgame in cybersecurity. By merging endpoint defense with zero-trust networking, CrowdStrike is building an end-to-end security stack to neutralize fragmented competition, forcing smaller vendors into rapid consolidation or market irrelevance."
-        },
-        {
-          "id": "5ab869676dd1a423",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "Z.ai发布GLM-5.4，750B参数媲美T级大模型",
-          "title_en": "Z.ai launches GLM-5.4, a 750B-parameter flagship model built on its Loop Transformer architecture, reaching intelligence levels comparable to 2T-3T models (Z.ai)",
-          "source": "Z.ai",
-          "author": "Z.ai",
-          "cover_image": "https://z-ai-bj.oss-cn-beijing.aliyuncs.com/prompts-rich-media-resources/5.4-blog/20261123-173242.jpeg?w=1280&h=720&fit=fill",
-          "image_url": "https://z-ai-bj.oss-cn-beijing.aliyuncs.com/prompts-rich-media-resources/5.4-blog/20261123-173242.jpeg?w=1280&h=720&fit=fill",
-          "published_at": "2026-11-23T10:50:12+00:00",
-          "url": "https://z.ai/blog/glm-5.4",
-          "event_summary_zh": "Z.ai推出基于Loop Transformer架构的GLM-5.4，通过创新循环深度扩展，以750B参数达成2T-3T规模模型的性能表现",
-          "event_summary_en": "Z.ai has launched its flagship model, GLM-5.4, utilizing the proprietary 'Loop Transformer' architecture. By scaling loop depth alongside total parameter size, the 750B-parameter model achieves performance benchmarks comparable to 2T-3T scale models, signaling a significant breakthrough in architectural efficiency.",
-          "core_facts_zh": [
-            "【核心事件】Z.ai (AI研发机构)在高性能AI模型研究与部署：发布GLM-5.4模型，基于Loop Transformer架构",
-            "【起因与机理】在算力资源受限的情况下通过架构创新实现更大规模模型的性能效率",
-            "【关键技术规格】核心架构：Loop Transformer。",
-            "【各方立场与态度】性能基准：对标2T-3T参数量级模型。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Z.ai: Launched GLM-5.4 based on Loop Transformer architecture",
-            "[Root Cause & Mechanism] To maximize performance-to-scale ratio via architectural innovation, bypassing traditional massive parameter scaling",
-            "[Key Metrics] Model Scale: 750B parameters.",
-            "[Key Position & Outlook] Performance: Equivalent to 2T-3T parameter models."
-          ],
-          "industry_impact_zh": "Loop Transformer架构的引入标志着大模型竞赛从单纯的“参数暴力美学”转向“计算密度效率”竞争。Z.ai通过循环深度优化，实质性地压缩了推理成本与训练功耗，在算力基建受地缘限制的背景下，此类架构创新是实现高性能模型低门槛普惠化的关键路径。",
-          "industry_impact_en": "The introduction of Loop Transformer architecture marks a shift from 'parameter scale-worship' to 'computational density efficiency.' By optimizing loop depth, Z.ai effectively reduces inference costs and power consumption, providing a critical path for high-performance AI deployment within constrained computing environments."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-23 11:33:20 UTC",
+      "updated_at": "2026-11-23 11:50:35 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-23 11:33:20 UTC",
+      "updated_at": "2026-11-23 11:50:35 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
