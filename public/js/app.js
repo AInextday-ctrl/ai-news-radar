@@ -9188,7 +9188,40 @@ AI资讯雷达=AI News Radar
             // 严禁将 16:9 横屏视频与 9:16 竖屏短视频混排在同一行 CSS Grid 中（彻底杜绝 300px+ 空白坑洞与高度塌陷）
             container.className = "space-y-8 w-full";
             const horizontalItems = pageItems.filter(it => !isVerticalItem(it));
-            const verticalItems = pageItems.filter(it => isVerticalItem(it));
+            let verticalItems = pageItems.filter(it => isVerticalItem(it));
+
+            // 防御性补齐：若当前切片中竖屏少于 4 条，且全量视频池中有竖屏，自动从全量竖屏列表中补齐至 4 条，彻底消除单张卡片孤独与栅格空白洞
+            if (verticalItems.length > 0 && verticalItems.length < 4) {
+              const allVertical = allRankedList.filter(it => isVerticalItem(it));
+              const seenIds = new Set(verticalItems.map(it => it.id));
+              for (const v of allVertical) {
+                if (!seenIds.has(v.id)) {
+                  verticalItems.push(v);
+                  seenIds.add(v.id);
+                  if (verticalItems.length >= 4) break;
+                }
+              }
+            } else if (verticalItems.length === 0 && allRankedList.some(isVerticalItem)) {
+              // 若当前页恰好没有竖屏（例如后翻页切片纯横屏），自动提取 4 条精选竖屏渲染展示，保持栏目结构一致
+              const allVertical = allRankedList.filter(it => isVerticalItem(it));
+              verticalItems = allVertical.slice(0, 4);
+            }
+
+            // 保持 4 列栅格整齐美观：若竖屏数量在 5~7 之间，尝试补齐到 8 条整洁展示两满行
+            if (verticalItems.length > 4 && verticalItems.length < 8) {
+              const allVertical = allRankedList.filter(it => isVerticalItem(it));
+              const seenIds = new Set(verticalItems.map(it => it.id));
+              for (const v of allVertical) {
+                if (!seenIds.has(v.id)) {
+                  verticalItems.push(v);
+                  seenIds.add(v.id);
+                  if (verticalItems.length >= 8) break;
+                }
+              }
+              if (verticalItems.length > 4 && verticalItems.length < 8) {
+                verticalItems = verticalItems.slice(0, 4);
+              }
+            }
 
             if (verticalItems.length === 0) {
               container.innerHTML = `

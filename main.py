@@ -4099,11 +4099,21 @@ def save_news(items: list):
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 生成面向前端的轻量化分发版 latest_news.json (完整保留 30 条核心新闻的深度结构化解构与长文实录)
-    category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}
+    category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 24, "prompts": 15, "viral_posts": 15}
     public_grouped = {}
     for cat_k, cat_items in latest_payload.get("grouped", {}).items():
         limit = category_caps.get(cat_k, 40)
-        public_grouped[cat_k] = [_clean_public_item(x, cat_k) for x in cat_items[:limit]]
+        if cat_k == "videos":
+            # 严格保障视频板块的横屏/竖屏均衡配比：保证至少包含 8 条 9:16 竖屏爆款，杜绝前台 4 列栅格空置
+            verts = [x for x in cat_items if x.get("aspect_ratio") == "9:16" or x.get("platform") in ("shorts", "tiktok")]
+            horizs = [x for x in cat_items if x not in verts]
+            selected_videos = horizs[:16] + verts[:8]
+            if len(selected_videos) < limit:
+                remaining = [x for x in cat_items if x not in selected_videos]
+                selected_videos.extend(remaining[:limit - len(selected_videos)])
+            public_grouped[cat_k] = [_clean_public_item(x, cat_k) for x in selected_videos[:limit]]
+        else:
+            public_grouped[cat_k] = [_clean_public_item(x, cat_k) for x in cat_items[:limit]]
 
     # 写入各专栏独立历史归档库 (news, celebrity, tools, videos, prompts)，供前端按需分页拉取
     categories_list = ['news', 'celebrity', 'tools', 'videos', 'prompts']
