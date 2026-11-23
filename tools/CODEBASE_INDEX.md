@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构与符号极速索引 (Codebase Fast Index)
 
-> **生成时间**: `2026-11-23 12:18:22 UTC` | **收录文件**: `106` 个 | **索引符号**: `1270` 个
+> **生成时间**: `2026-11-23 13:21:19 UTC` | **收录文件**: `106` 个 | **索引符号**: `1270` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，在每次代码修改、测试门禁校验与提交前自动增量同步刷新。
 
 ---
@@ -63,7 +63,7 @@
 ### 静态发布与 SEO/GEO 引擎 (Static Publishing & Distribution)
 *单篇静态落地页编译、首页 SSR 注入、分卷切片、Sitemap 生成与 IndexNow 秒级收录推送。*
 
-- **`content_publisher.py`** (277,020 bytes): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
+- **`content_publisher.py`** (277,072 bytes): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
 - **`tool_news_publisher.py`** (148,501 bytes): `parse_iso_date, sanitize_for_en, escape, get_thematic_fallback_image, get_optimized_og_image...`
 - **`build_flagship_articles.py`** (30,871 bytes): `generate_article_page, generate_articles_index, build_all_flagship_pages, main`
 - **`seo_geo_engine.py`** (41,421 bytes): `atomic_write_text, atomic_write_bytes, sanitize_for_en, xml_escape, parse_iso_or_rfc...`
@@ -78,7 +78,7 @@
 ### 前端客户端与单页交互 (Frontend SPA & Mobile App)
 *极速弹窗阅读、分卷动态加载、移动端自适应布局与多语言热切换交互。*
 
-- **`public/js/app.js`** (777,362 bytes): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
+- **`public/js/app.js`** (777,388 bytes): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
 - **`public/m/js/mobile.js`** (105,360 bytes): `updateLanguageState, initTheme, toggleTheme, updateThemeIcon, ensureChineseConverter...`
 - **`public/js/monetization.js`** (0 bytes): `No exported symbols`
 - **`public/js/chinese_converter.js`** (0 bytes): `No exported symbols`

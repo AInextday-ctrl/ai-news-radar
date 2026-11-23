@@ -3143,7 +3143,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_en}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3176,7 +3176,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_en}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3785,7 +3785,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_zh}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
@@ -3818,7 +3818,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 min-h-[148px] h-auto group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <meta itemprop="headline" content="{t_zh}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
