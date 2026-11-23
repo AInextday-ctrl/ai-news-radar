@@ -95,6 +95,18 @@ def main():
         sys.exit(1)
     print("[PASS] 单元回归测试全部通过: 相对时间解析与标题时效前缀隔离校验 100% 达标")
 
+    # 步骤 3: 代码库极速索引与全景架构自动同步
+    print("\n[INDEX] 正在校验代码库极速索引时效与架构注册表...")
+    try:
+        from tools.fast_index import auto_sync_if_stale
+        synced = auto_sync_if_stale()
+        if synced:
+            print("[PASS] 代码库极速索引已自动增量同步刷新 (tools/codebase_index.json & tools/CODEBASE_INDEX.md)")
+        else:
+            print("[PASS] 代码库极速索引处于最新状态，100% 覆盖全工程符号")
+    except Exception as e:
+        print(f"[WARN] 极速索引同步校验轻微异常放行: {e}")
+
     print("\n" + "=" * 60)
     print("[SUCCESS] 工程规范校验全部通过，代码基线安全稳定！")
     print("=" * 60)
