@@ -3816,7 +3816,14 @@ Business Recorder reported that Anthropic’s IPO, which took place on Thursday,
             <span id="ai-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 Live Radar</span>
           </div>
         </div>
-        <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
+        <div class="flex items-center gap-2 notranslate shrink-0">
+          <button id="ai-modal-lang-btn" type="button" onclick="if(window.openSiteLangPicker) window.openSiteLangPicker(); else if(window.PageLanguage) window.PageLanguage.openPicker();" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="Select Language (31 Languages)">
+            <span id="ai-modal-lang-flag">🌐</span>
+            <span id="ai-modal-lang-text">Language</span>
+            <span class="text-[10px] text-slate-400">▼</span>
+          </button>
+          <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
+        </div>
       </div>
 
       <!-- Briefing Body (Scrollable) -->
@@ -4135,6 +4142,12 @@ Business Recorder reported that Anthropic’s IPO, which took place on Thursday,
             <span id="tool-modal-visit-text">🚀 Visit Website</span>
             <span>↗</span>
           </a>
+          <!-- Language Picker -->
+          <button id="tool-modal-lang-btn" type="button" onclick="if(window.openSiteLangPicker) window.openSiteLangPicker(); else if(window.PageLanguage) window.PageLanguage.openPicker();" class="px-2.5 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="Select Language (31 Languages)">
+            <span id="tool-modal-lang-flag">🌐</span>
+            <span id="tool-modal-lang-text">Language</span>
+            <span class="text-[10px] text-slate-400">▼</span>
+          </button>
           <button type="button" onclick="closeToolDetailModal()" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-lg" title="Close">✕</button>
         </div>
       </div>

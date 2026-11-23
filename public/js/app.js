@@ -1021,23 +1021,198 @@
       'ro': 'romanian'
     };
 
+    const ALL_SITE_LANGUAGES = [
+      // 🌟 Popular Languages (常用热门语种)
+      { id: 'english', flag: '🇬🇧', code: 'EN', nameZh: '英语', nameEn: 'English (Global)', native: 'English', group: 'popular' },
+      { id: 'chinese_simplified', flag: '🇨🇳', code: '简', nameZh: '简体中文', nameEn: 'Chinese (Simplified)', native: '简体中文', group: 'popular' },
+      { id: 'chinese_traditional', flag: '🇭🇰', code: '繁', nameZh: '繁体中文', nameEn: 'Chinese (Traditional)', native: '繁體中文', group: 'popular' },
+      { id: 'japanese', flag: '🇯🇵', code: 'JA', nameZh: '日语', nameEn: 'Japanese', native: '日本語', group: 'popular' },
+      { id: 'korean', flag: '🇰🇷', code: 'KO', nameZh: '韩语', nameEn: 'Korean', native: '한국어', group: 'popular' },
+      { id: 'deutsch', flag: '🇩🇪', code: 'DE', nameZh: '德语', nameEn: 'German', native: 'Deutsch', group: 'popular' },
+      { id: 'french', flag: '🇫🇷', code: 'FR', nameZh: '法语', nameEn: 'French', native: 'Français', group: 'popular' },
+      { id: 'spanish', flag: '🇪🇸', code: 'ES', nameZh: '西班牙语', nameEn: 'Spanish', native: 'Español', group: 'popular' },
+      { id: 'russian', flag: '🇷🇺', code: 'RU', nameZh: '俄语', nameEn: 'Russian', native: 'Русский', group: 'popular' },
+      { id: 'arabic', flag: '🇸🇦', code: 'AR', nameZh: '阿拉伯语', nameEn: 'Arabic', native: 'العربية', group: 'popular' },
+
+      // 🌍 European Languages (欧洲主要语言)
+      { id: 'portuguese', flag: '🇵🇹', code: 'PT', nameZh: '葡萄牙语', nameEn: 'Portuguese', native: 'Português', group: 'european' },
+      { id: 'italian', flag: '🇮🇹', code: 'IT', nameZh: '意大利语', nameEn: 'Italian', native: 'Italiano', group: 'european' },
+      { id: 'dutch', flag: '🇳🇱', code: 'NL', nameZh: '荷兰语', nameEn: 'Dutch', native: 'Nederlands', group: 'european' },
+      { id: 'polish', flag: '🇵🇱', code: 'PL', nameZh: '波兰语', nameEn: 'Polish', native: 'Polski', group: 'european' },
+      { id: 'ukrainian', flag: '🇺🇦', code: 'UK', nameZh: '乌克兰语', nameEn: 'Ukrainian', native: 'Українська', group: 'european' },
+      { id: 'swedish', flag: '🇸🇪', code: 'SV', nameZh: '瑞典语', nameEn: 'Swedish', native: 'Svenska', group: 'european' },
+      { id: 'norwegian', flag: '🇳🇴', code: 'NO', nameZh: '挪威语', nameEn: 'Norwegian', native: 'Norsk', group: 'european' },
+      { id: 'danish', flag: '🇩🇰', code: 'DA', nameZh: '丹麦语', nameEn: 'Danish', native: 'Dansk', group: 'european' },
+      { id: 'finnish', flag: '🇫🇮', code: 'FI', nameZh: '芬兰语', nameEn: 'Finnish', native: 'Suomi', group: 'european' },
+      { id: 'czech', flag: '🇨🇿', code: 'CS', nameZh: '捷克语', nameEn: 'Czech', native: 'Čeština', group: 'european' },
+      { id: 'hungarian', flag: '🇭🇺', code: 'HU', nameZh: '匈牙利语', nameEn: 'Hungarian', native: 'Magyar', group: 'european' },
+      { id: 'romanian', flag: '🇷🇴', code: 'RO', nameZh: '罗马尼亚语', nameEn: 'Romanian', native: 'Română', group: 'european' },
+      { id: 'greek', flag: '🇬🇷', code: 'EL', nameZh: '希腊语', nameEn: 'Greek', native: 'Ελληνικά', group: 'european' },
+
+      // 🌏 Asia-Pacific & Others (亚太及全球语种)
+      { id: 'hindi', flag: '🇮🇳', code: 'HI', nameZh: '印地语', nameEn: 'Hindi', native: 'हिन्दी', group: 'apac' },
+      { id: 'vietnamese', flag: '🇻🇳', code: 'VI', nameZh: '越南语', nameEn: 'Vietnamese', native: 'Tiếng Việt', group: 'apac' },
+      { id: 'thai', flag: '🇹🇭', code: 'TH', nameZh: '泰语', nameEn: 'Thai', native: 'ภาษาไทย', group: 'apac' },
+      { id: 'indonesian', flag: '🇮🇩', code: 'ID', nameZh: '印尼语', nameEn: 'Indonesian', native: 'Bahasa Indonesia', group: 'apac' },
+      { id: 'malay', flag: '🇲🇾', code: 'MS', nameZh: '马来语', nameEn: 'Malay', native: 'Bahasa Melayu', group: 'apac' },
+      { id: 'filipino', flag: '🇵🇭', code: 'FIL', nameZh: '菲律宾语', nameEn: 'Filipino', native: 'Filipino', group: 'apac' },
+      { id: 'turkish', flag: '🇹🇷', code: 'TR', nameZh: '土耳其语', nameEn: 'Turkish', native: 'Türkçe', group: 'apac' },
+      { id: 'hebrew', flag: '🇮🇱', code: 'HE', nameZh: '希伯来语', nameEn: 'Hebrew', native: 'עברית', group: 'apac' }
+    ];
+
+    const LANG_GROUPS = {
+      popular: { en: '🌟 Popular Languages', zh: '🌟 常用热门语种' },
+      european: { en: '🌍 European Languages', zh: '🌍 欧洲主要语言' },
+      apac: { en: '🌏 Asia-Pacific & Global', zh: '🌏 亚太及全球语种' }
+    };
+
     let currentSiteLang = window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english';
     try {
       const savedSiteLang = localStorage.getItem('ai_radar_user_site_lang');
       if (savedSiteLang) {
-        if (window.location.pathname.startsWith('/zh')) {
-          if (savedSiteLang === 'chinese_traditional') {
-            currentSiteLang = 'chinese_traditional';
-          } else if (savedSiteLang !== 'english') {
-            currentSiteLang = savedSiteLang;
-          }
-        } else {
-          if (savedSiteLang !== 'chinese_simplified' && savedSiteLang !== 'chinese_traditional') {
-            currentSiteLang = savedSiteLang;
-          }
-        }
+        currentSiteLang = savedSiteLang;
       }
     } catch (e) {}
+
+    function updateModalLangButtons(lang) {
+      const activeLang = lang || currentSiteLang || localStorage.getItem('ai_radar_user_site_lang') || (currentLang === 'zh' ? 'chinese_simplified' : 'english');
+      const langObj = ALL_SITE_LANGUAGES.find(it => it.id === activeLang);
+      const isZhPage = currentLang === 'zh';
+      const flag = langObj ? langObj.flag : (isZhPage ? '🇨🇳' : '🇬🇧');
+      const text = langObj ? langObj.native : (isZhPage ? '简体中文' : 'English');
+
+      const newsFlagEl = document.getElementById('ai-modal-lang-flag');
+      const newsTextEl = document.getElementById('ai-modal-lang-text');
+      if (newsFlagEl) newsFlagEl.textContent = flag;
+      if (newsTextEl) newsTextEl.textContent = text;
+
+      const toolFlagEl = document.getElementById('tool-modal-lang-flag');
+      const toolTextEl = document.getElementById('tool-modal-lang-text');
+      if (toolFlagEl) toolFlagEl.textContent = flag;
+      if (toolTextEl) toolTextEl.textContent = text;
+    }
+
+    function openSiteLangPicker() {
+      let modal = document.getElementById('lang-picker-modal');
+      if (!modal) {
+        const isZhPage = currentLang === 'zh';
+        const modalHtml = `
+          <div id="lang-picker-modal" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-fade-in notranslate">
+            <div class="w-full sm:max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl p-4 sm:p-5 shadow-2xl animate-slide-up border border-slate-200/80 dark:border-slate-800 flex flex-col" style="height: 80vh; max-height: 80vh; overflow: hidden;">
+              <div class="pt-1 pb-2 flex justify-center cursor-pointer shrink-0" onclick="window.closeSiteLangPicker()">
+                <div class="w-10 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+              </div>
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100 dark:border-slate-800 shrink-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">🌐</span>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">\${isZhPage ? '选择全站语言版本 (31种)' : 'Select Language Edition (31 Languages)'}</h3>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400">\${isZhPage ? '整站资讯实录、5W1H与研报实时智能编译' : 'Real-time intelligence translation powered by Client Edge'}</p>
+                  </div>
+                </div>
+                <button type="button" onclick="window.closeSiteLangPicker()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-bold cursor-pointer">✕</button>
+              </div>
+              <div class="relative mb-2.5 shrink-0">
+                <input id="site-lang-search" type="search" placeholder="\${isZhPage ? '搜索 31 种全球语言 (英语/日语/法语/德语)...' : 'Search 31 languages (English, Japanese, French, Spanish)...'}" oninput="window.filterSiteLangList(event)" class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                <span class="absolute left-2.5 top-2 text-xs text-slate-400">🔍</span>
+              </div>
+              <div id="site-lang-list" class="flex-1 space-y-2 pr-1" style="flex: 1 1 0%; min-height: 0; overflow-y: auto;"></div>
+              <div class="pt-2 text-center border-t border-slate-100 dark:border-slate-800 shrink-0">
+                <span class="text-[10px] text-slate-400 font-medium tracking-tight">↕ \${isZhPage ? '滚动查看全部 31 种全球语言 · 支持即时无缝切换' : 'Scroll to explore all 31 languages · Instant on-the-fly translation'}</span>
+              </div>
+            </div>
+          </div>`;
+        const div = document.createElement('div');
+        div.innerHTML = modalHtml;
+        document.body.appendChild(div.firstElementChild);
+        modal = document.getElementById('lang-picker-modal');
+        modal.onclick = (e) => { if (e.target === modal) window.closeSiteLangPicker(); };
+      }
+      renderSiteLangList('');
+      const searchInput = document.getElementById('site-lang-search');
+      if (searchInput) searchInput.value = '';
+      modal.classList.remove('hidden');
+    }
+
+    function closeSiteLangPicker() {
+      const modal = document.getElementById('lang-picker-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function renderSiteLangList(query) {
+      const container = document.getElementById('site-lang-list');
+      if (!container) return;
+      const isZhPage = currentLang === 'zh';
+      const q = (query || '').trim().toLowerCase();
+      const filtered = q
+        ? ALL_SITE_LANGUAGES.filter(it =>
+            it.id.toLowerCase().includes(q) ||
+            it.native.toLowerCase().includes(q) ||
+            it.nameEn.toLowerCase().includes(q) ||
+            it.nameZh.includes(q) ||
+            it.code.toLowerCase().includes(q)
+          )
+        : ALL_SITE_LANGUAGES;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="py-8 text-center text-slate-400 text-xs">\${isZhPage ? '未找到相关语言' : 'No matching languages found'}</div>`;
+        return;
+      }
+
+      const groups = ['popular', 'european', 'apac'];
+      let html = '';
+      groups.forEach(grp => {
+        const groupItems = filtered.filter(it => it.group === grp);
+        if (groupItems.length === 0) return;
+        const groupTitle = isZhPage ? LANG_GROUPS[grp].zh : LANG_GROUPS[grp].en;
+        html += `<div class="pt-2 pb-1 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-1">\${groupTitle}</div>`;
+        html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">`;
+        groupItems.forEach(item => {
+          const isSelected = (currentSiteLang === item.id);
+          const activeStyle = isSelected
+            ? 'bg-indigo-50/90 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 font-bold'
+            : 'bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border-slate-200/80 dark:border-slate-700/80';
+          const subName = isZhPage ? item.nameZh : item.nameEn;
+          html += `
+            <button type="button" onclick="window.selectSiteLanguage('\${item.id}')" class="w-full p-2.5 rounded-xl flex items-center justify-between border touch-card cursor-pointer transition-colors text-left \${activeStyle}">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xl shrink-0">\${item.flag}</span>
+                <div>
+                  <div class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                    <span>\${item.native}</span>
+                    \${isSelected ? '<span class="px-1 py-0.2 rounded bg-indigo-600 text-white text-[9px] font-bold">Active</span>' : ''}
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">\${subName}</div>
+                </div>
+              </div>
+              \${isSelected ? '<span class="text-indigo-600 dark:text-indigo-400 font-bold text-sm">✓</span>' : '<span class="text-slate-300 dark:text-slate-600 text-xs">→</span>'}
+            </button>`;
+        });
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function selectSiteLanguage(langId) {
+      closeSiteLangPicker();
+      changeSiteLanguage(langId, true);
+      updateModalLangButtons(langId);
+
+      const newsModal = document.getElementById('ai-news-modal');
+      if (newsModal && !newsModal.classList.contains('hidden') && currentActiveNewsItem) {
+        openAiNewsModal(currentActiveNewsItem.id);
+      }
+      const toolModal = document.getElementById('tool-detail-modal');
+      if (toolModal && !toolModal.classList.contains('hidden') && currentToolModalItem) {
+        openToolDetailModal(currentToolModalItem.id);
+      }
+    }
+
+    window.openSiteLangPicker = openSiteLangPicker;
+    window.closeSiteLangPicker = closeSiteLangPicker;
+    window.selectSiteLanguage = selectSiteLanguage;
+    window.filterSiteLangList = (e) => renderSiteLangList(e && e.target ? e.target.value : '');
+    window.updateModalLangButtons = updateModalLangButtons;
 
     // 自动探测访客系统/浏览器语言 (仅用于智能提供切换建议，不主动替用户强制修改)
     function detectVisitorLanguage() {
@@ -1464,6 +1639,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
             if (translate.listener) {
               translate.listener.use = true;
+              if (!translate.listener.isStart && typeof translate.listener.addListener === 'function') {
+                try { translate.listener.addListener(); } catch (e) {}
+              }
+            }
+            if (translate.node && typeof translate.node.refresh === 'function') {
+              try { translate.node.refresh(); } catch (e) {}
             }
             translate.ignore.class.push('notranslate');
             translate.ignore.id.push('nav-tabs');
@@ -1535,6 +1716,9 @@ AI资讯雷达=AI News Radar
             setTimeout(() => {
               try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
             }, 250);
+            setTimeout(() => {
+              try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+            }, 600);
           }
         });
         return;
@@ -1542,24 +1726,42 @@ AI资讯雷达=AI News Radar
       if (lang === 'chinese_simplified' || lang === 'english') {
         return;
       }
+
+      const triggerTranslate = () => {
+        try {
+          if (typeof translate !== 'undefined') {
+            if (translate.listener) {
+              translate.listener.use = true;
+              if (!translate.listener.isStart && typeof translate.listener.addListener === 'function') {
+                try { translate.listener.addListener(); } catch (e) {}
+              }
+            }
+            if (translate.node && typeof translate.node.refresh === 'function') {
+              try { translate.node.refresh(); } catch (e) {}
+            }
+            if (translate.to !== lang && typeof translate.changeLanguage === 'function') {
+              try { translate.changeLanguage(lang); } catch (e) {}
+            }
+            if (translate.execute) {
+              try {
+                translate.execute();
+                const catGrid = document.getElementById('cat-grid-container');
+                if (catGrid) translate.execute(catGrid);
+                const newsModal = document.getElementById('ai-news-modal');
+                if (newsModal && !newsModal.classList.contains('hidden')) translate.execute(newsModal);
+                const toolModal = document.getElementById('tool-detail-modal');
+                if (toolModal && !toolModal.classList.contains('hidden')) translate.execute(toolModal);
+              } catch (e) {}
+            }
+          }
+        } catch (e) {}
+      };
+
       if (typeof translate !== 'undefined' && translate.execute) {
-        setTimeout(() => {
-          try {
-            if (translate.listener) translate.listener.use = true;
-            if (translate.changeLanguage && lang) {
-              translate.changeLanguage(lang);
-            }
-            translate.execute();
-          } catch (e) {}
-        }, 50);
-        setTimeout(() => {
-          try {
-            if (translate.changeLanguage && lang) {
-              translate.changeLanguage(lang);
-            }
-            translate.execute();
-          } catch (e) {}
-        }, 280);
+        setTimeout(triggerTranslate, 30);
+        setTimeout(triggerTranslate, 180);
+        setTimeout(triggerTranslate, 500);
+        setTimeout(triggerTranslate, 1000);
       } else {
         loadAndExecuteTranslatePlugin(lang);
       }
@@ -2298,14 +2500,16 @@ AI资讯雷达=AI News Radar
           creatorsRail.classList.toggle('hidden', tab !== 'videos');
         }
 
-        const t = I18N[currentLang];
+        const savedLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+        const isZhTab = currentLang === 'zh' || currentSiteLang === 'chinese_simplified' || currentSiteLang === 'chinese_traditional' || savedLang.startsWith('chinese');
+        const t = I18N[isZhTab ? 'zh' : 'en'] || I18N.zh;
         const titleEl = document.getElementById('cat-view-title');
         const catTitles = {
-          news: currentLang === 'zh' ? '⚡ 行业突发快讯专栏' : '⚡ Breaking AI News',
-          celebrity: currentLang === 'zh' ? '🐦 社交雷达 · 𝕏 与前沿社区动态' : '🐦 Social Radar · 𝕏 & Community Pulse',
-          tools: currentLang === 'zh' ? '🛠️ 场景落地·实用工具专栏' : '🛠️ Applied AI Tools Directory',
-          videos: currentLang === 'zh' ? '🎬 实战视频·深度演示专栏' : '🎬 Hands-on Video Tutorials',
-          prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战模版' : '💡 Prompt Bank · SOTA AI System Prompts'
+          news: isZhTab ? '⚡ 行业突发快讯专栏' : '⚡ Breaking AI News',
+          celebrity: isZhTab ? '🐦 社交雷达 · 𝕏 与前沿社区动态' : '🐦 Social Radar · 𝕏 & Community Pulse',
+          tools: isZhTab ? '🛠️ 场景落地·实用工具专栏' : '🛠️ Applied AI Tools Directory',
+          videos: isZhTab ? '🎬 实战视频·深度演示专栏' : '🎬 Hands-on Video Tutorials',
+          prompts: isZhTab ? '💡 提示词库·前沿模型实战模版' : '💡 Prompt Bank · SOTA AI System Prompts'
         };
         if (titleEl) titleEl.textContent = catTitles[tab] || t.tabs[tab] || tab;
         const catDesc = document.getElementById('cat-view-desc');
@@ -8657,6 +8861,7 @@ AI资讯雷达=AI News Radar
             container.className = "w-full";
             container.innerHTML = renderViralPostsSection(pageItems);
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+            applyCurrentTranslation();
           }
         } else if (socialViewMode === 'demos') {
           if (spotlightEl) {
@@ -8702,6 +8907,7 @@ AI资讯雷达=AI News Radar
             container.className = "w-full";
             container.innerHTML = renderCelebrityTimeline(pageItems);
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+            applyCurrentTranslation();
           }
         } else {
           if (catTitle) catTitle.textContent = t.tabs.celebrity;
@@ -8761,6 +8967,7 @@ AI资讯雷达=AI News Radar
             container.className = "w-full";
             container.innerHTML = renderCelebrityTimeline(pageItems);
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+            applyCurrentTranslation();
           }
         }
       } else if (tab === 'tools') {
@@ -9070,6 +9277,7 @@ AI资讯雷达=AI News Radar
           }
           window._hasRenderedVideosTab = true;
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          applyCurrentTranslation();
         }
       } else if (tab === 'prompts') {
         let rawList = cachedData.grouped?.prompts || cachedData.prompts || (cachedData.grouped?.videos || cachedData.videos || []).filter(it => it.is_prompt);
@@ -9699,7 +9907,8 @@ AI资讯雷达=AI News Radar
     // 资讯概要简报控制器 (News Briefing & Natural Synthesis)
     // ==========================================
     function openAiNewsModal(newsId) {
-      const isZh = currentLang === 'zh';
+      const savedLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+      const isZh = currentLang === 'zh' || currentSiteLang === 'chinese_simplified' || currentSiteLang === 'chinese_traditional' || savedLang.startsWith('chinese');
       if (!cachedData) {
         window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
         return false;
@@ -10381,6 +10590,7 @@ AI资讯雷达=AI News Radar
         document.body.style.overflow = 'hidden';
       }
 
+      updateModalLangButtons(currentSiteLang);
       // 如果当前使用了整站实时翻译引擎，主动调用一次动态翻译
       applyCurrentTranslation();
     }
@@ -11066,6 +11276,8 @@ AI资讯雷达=AI News Radar
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
+      updateModalLangButtons(currentSiteLang);
+      applyCurrentTranslation();
     }
 
     function renderSocialModalData() {
@@ -11442,7 +11654,8 @@ AI资讯雷达=AI News Radar
     let currentToolImageIndex = 0;
 
     function openToolDetailModal(toolId) {
-      const isZh = currentLang === 'zh';
+      const savedLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+      const isZh = currentLang === 'zh' || currentSiteLang === 'chinese_simplified' || currentSiteLang === 'chinese_traditional' || savedLang.startsWith('chinese');
       if (!cachedData) {
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
         return false;
@@ -11656,6 +11869,8 @@ AI资讯雷达=AI News Radar
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
+      updateModalLangButtons(currentSiteLang);
+      applyCurrentTranslation();
     }
 
     function updateToolCarousel() {
@@ -11844,6 +12059,8 @@ AI资讯雷达=AI News Radar
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
+      updateModalLangButtons(currentSiteLang);
+      applyCurrentTranslation();
     }
 
     function closeShareModal() {

@@ -290,7 +290,12 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
           <div style="font-size:11px;color:#94a3b8;">ainewsradar.xyz · Frontier Lab</div>
         </div>
       </a>
-      <nav style="display:flex;align-items:center;gap:16px;font-size:13px;font-weight:600;">
+      <nav style="display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;" class="notranslate">
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" style="padding:4px 10px;font-size:12px;font-weight:600;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;display:flex;align-items:center;gap:6px;" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
+          <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
+          <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
+          <span style="font-size:10px;color:#94a3b8;">▼</span>
+        </button>
         {switch_link}
         <a href="{home_link}" style="color:#64748b;text-decoration:none;">{home_text}</a>
         <a href="{articles_hub_link}" style="color:#4f46e5;text-decoration:none;font-weight:700;">{hub_text}</a>
@@ -509,7 +514,12 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
           <div style="font-size:11px;color:#94a3b8;">ainewsradar.xyz · Frontier Lab</div>
         </div>
       </a>
-      <nav style="display:flex;align-items:center;gap:16px;font-size:13px;font-weight:600;">
+      <nav style="display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;" class="notranslate">
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" style="padding:4px 10px;font-size:12px;font-weight:600;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;display:flex;align-items:center;gap:6px;" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
+          <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
+          <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
+          <span style="font-size:10px;color:#94a3b8;">▼</span>
+        </button>
         {switch_link}
         <a href="{home_link}" style="color:#64748b;text-decoration:none;">{home_text}</a>
         <a href="{hub_link}" style="color:#4f46e5;text-decoration:none;font-weight:700;">{hub_text}</a>
