@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-23 21:19:01 UTC",
+  "generated_at": "2026-11-23 21:34:35 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-23 21:19:01 UTC",
+      "updated_at": "2026-11-23 21:34:35 UTC",
       "headline_item": {
-        "id": "689da25e6d96c6be",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI发布GPT-6.2模型",
-        "title_en": "OpenAI updates ChatGPT to handle complex everyday questions, web searches, and images more reliably",
-        "source": "THE DECODER",
-        "author": "Matthias Bastian",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_aa85fea02650928a.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_aa85fea02650928a.jpg",
-        "published_at": "2026-11-23T20:39:18+00:00",
-        "url": "https://the-decoder.com/openai-updates-chatgpt-to-handle-complex-everyday-questions-web-searches-and-images-more-reliably/",
-        "event_summary_zh": "OpenAI推出GPT-6.2模型，在推理能力、多模态处理及安全性上实现全方位提升",
-        "event_summary_en": "OpenAI has officially rolled out the GPT-6.2 model to Plus, Pro, Enterprise, and Business users. This iteration delivers significant enhancements in multimodal understanding and instruction following, outperforming its predecessor in expert-level reasoning tasks while demonstrating marked improvements in safety policy compliance, particularly regarding youth protection.",
+        "id": "d9601ab21382ae29",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版",
+        "title_en": "Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)",
+        "source": "ZDNET",
+        "author": "ZDNET",
+        "cover_image": "https://www.zdnet.com/wp-content/uploads/sites/3/GettyImages-2271847888.jpg",
+        "image_url": "https://www.zdnet.com/wp-content/uploads/sites/3/GettyImages-2271847888.jpg",
+        "published_at": "2026-11-23T21:25:00+00:00",
+        "url": "https://www.zdnet.com/innovation/claude-ship-code-how-to-try/",
+        "event_summary_zh": "您会让一些克劳德代理为您审查并发送您的代码吗？开发人员已经在大量使用 Claude Code 和其他人工智能驱动的编码工具，例如 OpenAI 的 Codex，但有些人仍然希望在推送代码之前自行检查代码。 Anthropic 的一项新功能是依靠更具冒险精神、代理优先的编码人员",
+        "event_summary_en": "Would you let a few Claude agents review and ship your code for you?\n\nDevelopers are already using Claude Code and other AI-powered coding tools like OpenAI’s Codex in droves, but some still want to check code themselves before pushing it. A new feature from Anthropic is banking on more adventurous, agent-first coders being comfortable with handing even that last step off to AI.\n\nWith Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that",
         "core_facts_zh": [
-          "【核心事件】OpenAI在ChatGPT交互环境：发布GPT-6.2模型，提升多模态感知与推理安全性",
-          "【起因与机理】旨在通过模型迭代优化复杂查询响应能力与安全合规性",
-          "【关键数据与实测】多模态理解能力提升至71.7%，安全合规率提高约14个百分点。",
-          "【各方立场与态度】仅限ChatGPT交互模式，Work及Codex系列暂不变更。"
+          "【核心事件】OpenAI 官方团队在全球大模型开源社区与技术研发一线：Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版",
+          "【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
+          "【关键技术规格】OpenAI 官方团队在全球大模型开源社区与技术研发一线。",
+          "【各方立场与态度】Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI (ChatGPT ecosystem): Released GPT-6.2, enhancing multimodal sensing and reasoning safety",
-          "[Root Cause & Mechanism] To optimize response capabilities for complex queries and improve safety compliance",
-          "[Key Metrics] 71.7% accuracy in image understanding and ~14% increase in safety compliance.",
-          "[Key Position & Outlook] Applicable only to ChatGPT chat mode; Work and Codex models remain unchanged."
+          "[Core Event] Industry Leaders: Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)",
+          "[Context & Motivation] Would you let a few Claude agents review and ship your code for you.",
+          "[Key Metrics] Anthropic added that certain Enterprise organizations “can claim at least $10,000 in Claude Ship credits to use within 30 days of claiming” by Jan.",
+          "[Industry Analysis] With Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that."
         ],
-        "industry_impact_zh": "OpenAI通过提升小参数模型在推理与安全性上的边际收益，正试图构筑比单纯堆叠算力更具性价比的工程壁垒。此次更新在企业侧预留管理员控制权限，旨在降低大模型在企业级应用中的合规性心理门槛。",
-        "industry_impact_en": "OpenAI is building a cost-efficiency barrier by prioritizing incremental gains in reasoning and safety for smaller models rather than relying solely on compute scale. By introducing granular administrative controls, they are actively lowering the compliance threshold for enterprise-wide deployment."
+        "industry_impact_zh": "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
+        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
       },
       "headlines": [
+        {
+          "id": "d9601ab21382ae29",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版",
+          "title_en": "Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)",
+          "source": "ZDNET",
+          "author": "ZDNET",
+          "cover_image": "https://www.zdnet.com/wp-content/uploads/sites/3/GettyImages-2271847888.jpg",
+          "image_url": "https://www.zdnet.com/wp-content/uploads/sites/3/GettyImages-2271847888.jpg",
+          "published_at": "2026-11-23T21:25:00+00:00",
+          "url": "https://www.zdnet.com/innovation/claude-ship-code-how-to-try/",
+          "event_summary_zh": "您会让一些克劳德代理为您审查并发送您的代码吗？开发人员已经在大量使用 Claude Code 和其他人工智能驱动的编码工具，例如 OpenAI 的 Codex，但有些人仍然希望在推送代码之前自行检查代码。 Anthropic 的一项新功能是依靠更具冒险精神、代理优先的编码人员",
+          "event_summary_en": "Would you let a few Claude agents review and ship your code for you?\n\nDevelopers are already using Claude Code and other AI-powered coding tools like OpenAI’s Codex in droves, but some still want to check code themselves before pushing it. A new feature from Anthropic is banking on more adventurous, agent-first coders being comfortable with handing even that last step off to AI.\n\nWith Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that",
+          "core_facts_zh": [
+            "【核心事件】OpenAI 官方团队在全球大模型开源社区与技术研发一线：Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版",
+            "【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
+            "【关键技术规格】OpenAI 官方团队在全球大模型开源社区与技术研发一线。",
+            "【各方立场与态度】Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)",
+            "[Context & Motivation] Would you let a few Claude agents review and ship your code for you.",
+            "[Key Metrics] Anthropic added that certain Enterprise organizations “can claim at least $10,000 in Claude Ship credits to use within 30 days of claiming” by Jan.",
+            "[Industry Analysis] With Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that."
+          ],
+          "industry_impact_zh": "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        },
         {
           "id": "689da25e6d96c6be",
           "tag_zh": "📰 业界动态",
@@ -91,39 +120,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "ad72b4b352ed2ece",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "消息来源：在盟友认为黄仁勋对于美国经济来说“太大而不能倒”并且是“深层政府”操纵的受害者之后，特朗普敦促英伟达恢复黄仁勋的职位（Axios）",
-          "title_en": "Sources: Trump pushed Nvidia to reinstate Jensen Huang after allies argued he was \"too big to fail\" for the US economy and a victim of \"deep state\" maneuvering (Axios)",
-          "source": "Axios",
-          "author": "Axios",
-          "cover_image": "https://images.axios.com/VMXbi5VfQqHiAhbnkrK_PjgGp_c=/0x0:6000x3375/1366x768/2026/11/23/1795449765241.jpeg",
-          "image_url": "https://images.axios.com/VMXbi5VfQqHiAhbnkrK_PjgGp_c=/0x0:6000x3375/1366x768/2026/11/23/1795449765241.jpeg",
-          "published_at": "2026-11-23T20:01:33+00:00",
-          "url": "https://www.axios.com/2026/11/23/trump-vance-jensen-huang-nvidia-ceo-return",
-          "event_summary_zh": "熟悉讨论情况的消息人士告诉 Axios，特朗普总统敦促英伟达恢复黄仁勋 (Jensen Huang) 首席执行官职务，此前盟友认为黄仁勋对于美国经济来说“太大而不能倒”，并且是“深层政府”操纵的受害者。为何重要：特朗普将总统职位的权重置于一家私营公司的决定之上",
-          "event_summary_en": "President Trump pushed Nvidia to reinstate Jensen Huang as CEO after allies argued he was “too big to fail” …",
-          "core_facts_zh": [
-            "【核心事件】英伟达创始人兼CEO 黄仁勋 (Jensen Huang)：消息来源：在盟友认为黄仁勋对于美国经济来说“太大而不能倒”并且是“深层政府”操纵的受害者之后，特朗普敦促英伟达恢复黄仁勋的职位（Axios）",
-            "【核心事实细节】消息来源：在盟友认为黄仁勋对于美国经济来说“太大而不能倒”并且是“深层政府”操纵的受害者之后，特朗普敦促英伟达恢复黄仁勋的职位（Axios）。",
-            "【行业研判】为什么重要：特朗普将总统职位的权重放在私人公司决定由谁来管理、干预的决定之上。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Sources: Trump pushed Nvidia to reinstate Jensen Huang after allies argued he was \"too big to fail\" for the US economy and a victim of \"deep state\" maneuvering (Axios)",
-            "[Root Cause & Mechanism] President Trump pushed Nvidia to reinstate Jensen Huang as CEO after allies argued he was “too big to fail” ….",
-            "[Key Fact] President Trump pushed Nvidia to reinstate Jensen Huang as CEO after allies argued he was \"too big to fail\" for the U."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-23 21:19:01 UTC",
+      "updated_at": "2026-11-23 21:34:35 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -290,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-23 21:19:01 UTC",
+      "updated_at": "2026-11-23 21:34:35 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
