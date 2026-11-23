@@ -413,13 +413,18 @@
   async function loadData(forceRefresh = false) {
     const feedContainer = document.getElementById('mobile-feed');
 
-    // Step A: Instant 0ms hydration from sessionStorage if available
+    // Step A: Instant 0ms hydration from sessionStorage only if recent (<5 min) and not forceRefresh
     if (!cachedData && !forceRefresh) {
       try {
         const stored = sessionStorage.getItem('ai_radar_m_cached_data');
-        if (stored) {
+        const storedTime = sessionStorage.getItem('ai_radar_m_cached_time');
+        const isRecent = storedTime && (Date.now() - parseInt(storedTime, 10) < 300000);
+        if (stored && isRecent) {
           cachedData = JSON.parse(stored);
           renderCurrentView();
+        } else {
+          sessionStorage.removeItem('ai_radar_m_cached_data');
+          sessionStorage.removeItem('ai_radar_m_cached_time');
         }
       } catch (e) {}
     }
@@ -437,15 +442,14 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const freshData = await res.json();
       
-      const hasChanged = !cachedData || (freshData.updated_at && freshData.updated_at !== cachedData.updated_at);
       cachedData = freshData;
       try {
         sessionStorage.setItem('ai_radar_m_cached_data', JSON.stringify(freshData));
+        sessionStorage.setItem('ai_radar_m_cached_time', Date.now().toString());
       } catch (e) {}
 
-      if (hasChanged || forceRefresh) {
-        renderCurrentView();
-      }
+      // UNCONDITIONALLY render fresh network data to prevent forced residency and stale snapshots
+      renderCurrentView();
     } catch (err) {
       console.warn('Network sync notice:', err);
       if (!cachedData && feedContainer) {
@@ -2004,6 +2008,20 @@
       try {
         sessionStorage.removeItem('prefer_desktop');
       } catch (e) {}
+
+      // Defensive eviction of legacy Service Workers and CacheStorage to guarantee fresh content
+      try {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(regs => {
+            for (const r of regs) r.unregister();
+          }).catch(() => {});
+        }
+        if ('caches' in window) {
+          caches.keys().then(keys => {
+            for (const k of keys) caches.delete(k);
+          }).catch(() => {});
+        }
+      } catch (e) {}
       
       initTheme();
 
@@ -2079,6 +2097,10 @@
       checkAndShowLangSuggestion();
     },
     refresh() {
+      try {
+        sessionStorage.removeItem('ai_radar_m_cached_data');
+        sessionStorage.removeItem('ai_radar_m_cached_time');
+      } catch (e) {}
       const refreshBtn = document.getElementById('refresh-btn-icon');
       if (refreshBtn) refreshBtn.classList.add('animate-spin');
       return loadData(true).finally(() => {

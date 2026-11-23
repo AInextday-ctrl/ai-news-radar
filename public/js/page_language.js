@@ -402,19 +402,44 @@
     mountHeaderButton();
     mountModal();
 
-    // Check if user previously selected a language
+    // Safety retries in case DOM was still parsing or hydrating
+    setTimeout(mountHeaderButton, 80);
+    setTimeout(mountHeaderButton, 350);
+
+    // Auto-sync with user's site-wide language preference (Inherited from Home or previous choices)
     if (savedSiteLang) {
       currentSiteLang = savedSiteLang;
       updateButtonLabel(savedSiteLang);
 
-      if (savedSiteLang === 'chinese_traditional' && isZh) {
+      // If user chose Simplified Chinese but landed on an English page, seamlessly navigate to Chinese edition
+      if (savedSiteLang === 'chinese_simplified') {
+        if (!isZh) {
+          window.location.replace(getEquivalentPageUrl('chinese_simplified'));
+          return;
+        }
+      } else if (savedSiteLang === 'chinese_traditional') {
+        // If user chose Traditional Chinese but landed on an English page, navigate to Chinese edition and convert
+        if (!isZh) {
+          window.location.replace(getEquivalentPageUrl('chinese_traditional'));
+          return;
+        }
         ensureChineseConverter(function () {
           if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
             window.ChineseConverter.convertDomToTraditional();
+            setTimeout(function () {
+              try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+            }, 250);
           }
         });
-      } else if (savedSiteLang !== 'english' && savedSiteLang !== 'chinese_simplified' && savedSiteLang !== 'chinese_traditional') {
-        // Any of the 28 non-Chinese/non-English languages: immediately load & translate!
+      } else if (savedSiteLang === 'english') {
+        // If user chose English but landed on a Chinese page, seamlessly navigate to English edition
+        if (isZh) {
+          window.location.replace(getEquivalentPageUrl('english'));
+          return;
+        }
+      } else {
+        // Any of the other 28 global languages (e.g. Japanese, Korean, French, German, Spanish...):
+        // Immediately trigger Client Edge translation for full-page coverage!
         loadTranslateEngine(savedSiteLang);
       }
     } else {

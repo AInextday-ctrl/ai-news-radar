@@ -1530,10 +1530,11 @@ AI资讯雷达=AI News Radar
         ensureChineseConverter(() => {
           if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
             setTimeout(() => {
-              try {
-                window.ChineseConverter.convertDomToTraditional();
-              } catch (e) {}
+              try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
             }, 30);
+            setTimeout(() => {
+              try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+            }, 250);
           }
         });
         return;
@@ -1544,9 +1545,21 @@ AI资讯雷达=AI News Radar
       if (typeof translate !== 'undefined' && translate.execute) {
         setTimeout(() => {
           try {
+            if (translate.listener) translate.listener.use = true;
+            if (translate.changeLanguage && lang) {
+              translate.changeLanguage(lang);
+            }
             translate.execute();
           } catch (e) {}
         }, 50);
+        setTimeout(() => {
+          try {
+            if (translate.changeLanguage && lang) {
+              translate.changeLanguage(lang);
+            }
+            translate.execute();
+          } catch (e) {}
+        }, 280);
       } else {
         loadAndExecuteTranslatePlugin(lang);
       }
