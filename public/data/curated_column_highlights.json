@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 03:24:10 UTC",
+  "generated_at": "2026-11-24 03:34:29 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 03:24:10 UTC",
+      "updated_at": "2026-11-24 03:34:29 UTC",
       "headline_item": {
-        "id": "eb254772dbebc489",
+        "id": "6fa3061e7be1b2e2",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI前工程师涉嫌非法录制内部会议被诉",
-        "title_en": "OpenAI Engineer Secretly Recorded Dozens of Meetings, Prosecutors Say",
-        "source": "New York Times",
-        "author": "Emmy Martin",
-        "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
-        "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
-        "published_at": "2026-11-24T02:35:01+00:00",
-        "url": "https://www.nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html?unlocked_article_code=1.S1E.uEk0.4ODfUv_FRPyx&smid=url-share",
-        "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因在公司部署隐藏录音设备，截获数十场涉及客户与外国政府的敏感会议而被联邦检察官起诉",
-        "event_summary_en": "Federal prosecutors disclosed in court filings that former OpenAI engineer Abdulrahman Alfozan used OpenAI’s Codex AI tool to configure recording devices, capturing dozens of confidential meetings, including sensitive discussions with a foreign government. While data exfiltration remains under investigation, the act constitutes a significant breach of trade secrets and attorney-client privilege.",
+        "title_zh": "黄仁勋卸任引发市场震荡与白宫合规危机",
+        "title_en": "Jensen Huang Is a White House Scandal",
+        "source": "Wall Street Journal",
+        "author": "Amrith Ramkumar and Josh Dawsey and C. Ryan Barber and Robbie Whelan",
+        "cover_image": "https://ainewsradar.xyz/images/wsj_64e908efbcdc4de6.jpg",
+        "image_url": "https://ainewsradar.xyz/images/wsj_64e908efbcdc4de6.jpg",
+        "published_at": "2026-11-24T03:15:00+00:00",
+        "url": "https://www.wsj.com/business/nvidia-jensen-huang-white-house-9ad03961?st=HzeUyV",
+        "event_summary_zh": "英伟达CEO黄仁勋因私人行为指控辞职，特朗普政府正介入调查其合规性与国家安全关联以稳定AI市场",
+        "event_summary_en": "Nvidia CEO Jensen Huang resigned following revelations of affairs, including one with an alleged Chinese intelligence asset, triggering market instability. President Donald Trump has intervened, with Attorney General Todd Blanche confirming that Huang is not currently a target of DOJ investigations, aimed at stabilizing the AI supply chain and capital market sentiment.",
         "core_facts_zh": [
-          "【核心事件】被告Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI内部行政会议室：非法部署录音设备，截获含外国政府与商业机密的音频文件",
-          "【起因与机理】违反企业内部安全合规，涉嫌非法拦截通讯及窃取商业秘密",
-          "【关键技术规格】被告利用OpenAI内部Codex模型优化非法录音设备配置。",
-          "【行业影响与走向】检方正就数据的外泄风险进行深度调查并拒绝保释请求。"
+          "【核心事件】黄仁勋（英伟达前CEO）、唐纳德·特朗普（美国总统）、托德·布兰奇（美国司法部长）在美国资本市场与白宫行政权力中心：黄仁勋辞职引发英伟达股价动荡，白宫试图介入排除国家安全违规风险",
+          "【起因与机理】因私人关系涉及疑似间谍活动及公司治理丑闻，引发美国政府对关键芯片产业供应链安全的担忧",
+          "【关键数据与实测】Two days before the meeting, Trump's money managers bought between $1 million and $5 million in Nvidia stock.。",
+          "【行业影响与走向】特朗普政府担忧英伟达资产变动对AI产业链的系统性影响。"
         ],
         "core_facts_en": [
-          "[Core Event] Defendant Abdulrahman Alfozan (Former OpenAI Engineer): Illegally deployed recording devices to capture confidential meetings including foreign government briefings",
-          "[Root Cause & Mechanism] Violation of internal security compliance, suspected illegal interception of communications and potential trade secret theft",
-          "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
-          "[Scope & Next Steps] Prosecutors are investigating potential data dissemination while opposing pre-trial release."
+          "[Core Event] Jensen Huang (Former Nvidia CEO), Donald Trump (US President), Todd Blanche (US Attorney General): Huang's resignation destabilized Nvidia stock; the administration is intervening to decouple personal scandals from national security risks",
+          "[Root Cause & Mechanism] Allegations of connections to foreign intelligence and internal conduct violations threatened the stability of the US AI hardware backbone",
+          "[Key Metrics] And by the end of last year, Nvidia had become one of Trump's three largest individual stock holdings, worth between $12.",
+          "[Industry Impact & Outlook] White House monitoring Nvidia's systemic impact on AI supply chain."
         ],
-        "industry_impact_zh": "此事件凸显了顶级大模型企业在极端高压研发环境下，内部安全防护与工具滥用治理的巨大鸿沟。利用内部AI工具配置攻击设备，反映出AI基础设施安全边界正在发生偏移，企业急需建立针对AI辅助内部威胁的实时行为检测架构。",
-        "industry_impact_en": "This incident highlights a critical gap in security governance and internal threat mitigation within high-stakes AI labs. The use of internal AI tools for malicious configuration signals a shifting threat landscape where AI infrastructure must implement automated behavioral anomaly detection to secure intellectual property from insiders."
+        "industry_impact_zh": "此事件标志着AI产业核心战略资产的掌舵人风险已溢出为国家安全层面的监管重塑，英伟达作为美国AI基础设施的唯一支柱，其高管治理结构将成为后续地缘政策审查的焦点。短期内资本市场对英伟达的估值逻辑将从单纯的技术增长转向“合规性溢价”与“治理可控性”的重新评估。",
+        "industry_impact_en": "The incident marks a transition where leadership risk in the AI sector becomes a national security concern. As the primary backbone of US AI infrastructure, Nvidia’s governance structure will now be subject to heightened regulatory scrutiny, shifting market valuation from pure technical growth to compliance-based risk assessment."
       },
       "headlines": [
+        {
+          "id": "6fa3061e7be1b2e2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄仁勋卸任引发市场震荡与白宫合规危机",
+          "title_en": "Jensen Huang Is a White House Scandal",
+          "source": "Wall Street Journal",
+          "author": "Amrith Ramkumar and Josh Dawsey and C. Ryan Barber and Robbie Whelan",
+          "cover_image": "https://ainewsradar.xyz/images/wsj_64e908efbcdc4de6.jpg",
+          "image_url": "https://ainewsradar.xyz/images/wsj_64e908efbcdc4de6.jpg",
+          "published_at": "2026-11-24T03:15:00+00:00",
+          "url": "https://www.wsj.com/business/nvidia-jensen-huang-white-house-9ad03961?st=HzeUyV",
+          "event_summary_zh": "英伟达CEO黄仁勋因私人行为指控辞职，特朗普政府正介入调查其合规性与国家安全关联以稳定AI市场",
+          "event_summary_en": "Nvidia CEO Jensen Huang resigned following revelations of affairs, including one with an alleged Chinese intelligence asset, triggering market instability. President Donald Trump has intervened, with Attorney General Todd Blanche confirming that Huang is not currently a target of DOJ investigations, aimed at stabilizing the AI supply chain and capital market sentiment.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（英伟达前CEO）、唐纳德·特朗普（美国总统）、托德·布兰奇（美国司法部长）在美国资本市场与白宫行政权力中心：黄仁勋辞职引发英伟达股价动荡，白宫试图介入排除国家安全违规风险",
+            "【起因与机理】因私人关系涉及疑似间谍活动及公司治理丑闻，引发美国政府对关键芯片产业供应链安全的担忧",
+            "【关键数据与实测】Two days before the meeting, Trump's money managers bought between $1 million and $5 million in Nvidia stock.。",
+            "【行业影响与走向】特朗普政府担忧英伟达资产变动对AI产业链的系统性影响。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (Former Nvidia CEO), Donald Trump (US President), Todd Blanche (US Attorney General): Huang's resignation destabilized Nvidia stock; the administration is intervening to decouple personal scandals from national security risks",
+            "[Root Cause & Mechanism] Allegations of connections to foreign intelligence and internal conduct violations threatened the stability of the US AI hardware backbone",
+            "[Key Metrics] And by the end of last year, Nvidia had become one of Trump's three largest individual stock holdings, worth between $12.",
+            "[Industry Impact & Outlook] White House monitoring Nvidia's systemic impact on AI supply chain."
+          ],
+          "industry_impact_zh": "此事件标志着AI产业核心战略资产的掌舵人风险已溢出为国家安全层面的监管重塑，英伟达作为美国AI基础设施的唯一支柱，其高管治理结构将成为后续地缘政策审查的焦点。短期内资本市场对英伟达的估值逻辑将从单纯的技术增长转向“合规性溢价”与“治理可控性”的重新评估。",
+          "industry_impact_en": "The incident marks a transition where leadership risk in the AI sector becomes a national security concern. As the primary backbone of US AI infrastructure, Nvidia’s governance structure will now be subject to heightened regulatory scrutiny, shifting market valuation from pure technical growth to compliance-based risk assessment."
+        },
         {
           "id": "eb254772dbebc489",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "此案暴露出头部AI实验室在内部工程实践与开发环境审计间的严峻脱节，特别是Codex等强力辅助工具被滥用为内控绕行手段。对于高度敏感的AI研发机构，核心数据的物理与逻辑隔离策略必须升级至“零信任”架构，以防范“内部威胁”对地缘政治敏感信息的潜在污染。",
           "industry_impact_en": "This incident highlights a critical vulnerability in AI research labs where powerful internal tooling like Codex can be weaponized to bypass security perimeters. Companies must transition to a 'zero-trust' hardware and software audit architecture to prevent internal actors from compromising sensitive sovereign interactions and proprietary IP."
-        },
-        {
-          "id": "a5b5d919389f91d5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "法美指控伊朗网攻欧洲超市冷链系统",
-          "title_en": "France, U.S. Suspect Iran Was Behind Cyberattack on European Fridges",
-          "source": "Wall Street Journal",
-          "author": "Wall Street Journal",
-          "cover_image": "https://ainewsradar.xyz/images/wsj_c0c8aa89695bbe7e.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wsj_c0c8aa89695bbe7e.jpg",
-          "published_at": "2026-11-24T01:40:00+00:00",
-          "url": "https://www.wsj.com/politics/national-security/iran-us-cyberattack-suspect-fed78942",
-          "event_summary_zh": "法国外交部长指控伊朗伊斯兰革命卫队旗下SHAHID KAVEH组织针对欧洲700家超市冷链设施实施蓄意破坏攻击",
-          "event_summary_en": "French Foreign Minister Jean-Noël Barrot officially attributed the cyberattack on over 700 European supermarket refrigeration controllers to Iran's 'SHAHID KAVEH' cyber unit during a G7 meeting. The attack, occurring between October 11-12, caused widespread equipment failures, fires, and tens of millions of euros in food losses, marking a transition from espionage to physical infrastructure sabotage.",
-          "core_facts_zh": [
-            "【核心事件】法国外交部长让-诺埃尔·巴罗（Jean-Noël Barrot）、伊朗伊斯兰革命卫队SHAHID KAVEH网络单位在G7外长会议、欧洲700家大型超市：对冷链控制系统发动破坏性网络攻击，导致重大经济损失",
-            "【起因与机理】针对关键基础设施的蓄意破坏行为，违反国际法及联合国网络空间规范",
-            "【核心事实细节】法方正式确认袭击主体为伊朗伊斯兰革命卫队下属的SHAHID KAVEH网络作战中心。",
-            "【各方立场与态度】此系针对欧洲关键民生基础设施的首例大规模蓄意 sabotage 网络行动。"
-          ],
-          "core_facts_en": [
-            "[Core Event] French Foreign Minister Jean-Noël Barrot, Iranian IRGC-affiliated SHAHID KAVEH unit: Coordinated sabotage of refrigeration control systems causing systemic failure",
-            "[Root Cause & Mechanism] Systematic targeting of critical civilian infrastructure violating international norms",
-            "[Key Fact Detail] Attribution to the Iranian IRGC-affiliated SHAHID KAVEH unit.",
-            "[Key Position & Outlook] First large-scale cyber-sabotage campaign targeting civilian infrastructure in Europe."
-          ],
-          "industry_impact_zh": "此次事件标志着网络攻击已从单纯的数据窃取或金融勒索，完全进化为针对物理资产的战术破坏（Cyber-Physical Sabotage）。各国关键基础设施联网化后的脆弱性被进一步放大，将倒逼工业控制系统（ICS）加速向零信任架构迁移，并预示着西方对“国家级”网络攻击的制裁逻辑将从针对个人向切断特定作战单元及供应链配套进行升级。",
-          "industry_impact_en": "This incident marks the evolution of cyber warfare from data theft to direct kinetic-level physical sabotage. The incident underscores the critical vulnerability of interconnected industrial control systems (ICS) and signals an inevitable shift toward zero-trust security frameworks; it also forces a pivot in Western sanctions logic from individual targeting toward dismantling entire state-affiliated cyber-offensive supply chains."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 03:24:10 UTC",
+      "updated_at": "2026-11-24 03:34:29 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 03:24:10 UTC",
+      "updated_at": "2026-11-24 03:34:29 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,7 +446,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "19.9k",
+          "stars": "20k",
           "growth_badge_zh": "本周暴增 +12,335 ★",
           "growth_badge_en": "+12,335 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
