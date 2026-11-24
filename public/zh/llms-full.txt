@@ -1,12 +1,32 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-24 11:22:03Z
+生成时间: 2026-11-24 11:37:33Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### Anthropic推出Claude Ship自动化AI代码治理工具
+- 落地页链接: https://ainewsradar.xyz/zh/news/7eeb0a33c3843da6
+- 原始信源: THE DECODER (https://the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own/)
+- 核心摘要: Anthropic发布Claude Ship工具套件，支持AI自主审查、修正并按策略自动化合并代码提交
+- 核验事实清单:
+  * 【核心事件】Anthropic在企业级DevOps工作流：推出Claude Ship，利用AI代理实现代码审查与合并的自动化闭环
+  * 【起因与机理】旨在提升研发效能，通过策略化治理替代人工审核繁琐流程
+  * 【关键技术规格】通过PR Steward与Claude Approvals代理实现代码变更全生命周期自动化。
+  * 【各方立场与态度】仅对Team与Enterprise计划付费用户开放，按Token用量计费。
+
+### OpenAI与Anthropic员工警示模型失控风险
+- 落地页链接: https://ainewsradar.xyz/zh/news/081bfca31e05bfd3
+- 原始信源: Axios (https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks)
+- 核心摘要: 多名核心员工披露内部前沿模型推理能力跃升，担忧其安全性已超越人类控制极限
+- 核验事实清单:
+  * 【核心事件】OpenAI与Anthropic员工在AI前沿实验室：警示内部模型推理能力已达失控阈值，担忧安全管控失效
+  * 【起因与机理】模型推理能力的飞跃使现有安全防护措施（如思维链监视）难以抵御潜在的欺骗行为
+  * 【关键技术规格】内部模型推理能力提升引发关于‘欺骗人类’的严重安全担忧。
+  * 【各方立场与态度】透明化思维链监视在更先进模型前渐失效用，安全审计面临重构。
 
 ### 美将阿里巴巴新加坡子公司列入实体清单
 - 落地页链接: https://ainewsradar.xyz/zh/news/2985d054d1a8ca9c
@@ -27,6 +47,16 @@
   * 【起因与机理】利用行政权力干预私营部门以换取短期股市回升，无视国家安全合规评估
   * 【核心事实细节】核心涉案：英伟达CEO黄仁勋因涉嫌中国间谍资产关联被罢免后复职。
   * 【涉及范围与推进】监管后续：国会两党议员已承诺启动针对英伟达合规性的深度调查。
+
+### 数据中心扩建自有燃气发电厂以避开电网瓶颈
+- 落地页链接: https://ainewsradar.xyz/zh/news/b7666e2ffd758e1b
+- 原始信源: MIT Tech Review (https://www.technologyreview.com/2026/11/24/1149622/data-centers-natural-gas/)
+- 核心摘要: AI数据中心为追求上架速度，纷纷转向建设表后燃气电厂，以绕过漫长的电网连接审批周期
+- 核验事实清单:
+  * 【核心事件】数据中心开发者（如xAI等）在美国数据中心产业界：通过建设自有天然气发电厂实现离网供电，绕过电网连接审批流程
+  * 【起因与机理】现有电力基础设施无法承载AI激增的能耗，且电网升级审批过程极其缓慢
+  * 【核心事实细节】电力接入审批长达十年，迫使开发者选择自建能源供应。
+  * 【各方立场与态度】该模式具备高成本与高合规博弈特征，旨在换取极速算力部署时间。
 
 ### SpaceX与特斯拉拟议3.5万亿美元并购
 - 落地页链接: https://ainewsradar.xyz/zh/news/78beaf7bc9ce7b75
@@ -269,37 +299,6 @@
   * 【核心事实细节】黄氏令人震惊的回归推动美股上涨，华尔街重振雄风。
   * 【行业研判】在黄仁勋（Jensen Huang）意外回归之后，英伟达在华尔街引领了一场雷鸣般的涨势。
 
-### Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版
-- 落地页链接: https://ainewsradar.xyz/zh/news/d9601ab21382ae29
-- 原始信源: ZDNET (https://www.zdnet.com/innovation/claude-ship-code-how-to-try/)
-- 核心摘要: 您会让一些克劳德代理为您审查并发送您的代码吗？开发人员已经在大量使用 Claude Code 和其他人工智能驱动的编码工具，例如 OpenAI 的 Codex，但有些人仍然希望在推送代码之前自行检查代码。 Anthropic 的一项新功能是依靠更具冒险精神、代理优先的编码人员
-- 核验事实清单:
-  * 【核心事件】OpenAI 官方团队在全球大模型开源社区与技术研发一线：Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版
-  * 【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。
-  * 【关键技术规格】OpenAI 官方团队在全球大模型开源社区与技术研发一线。
-  * 【各方立场与态度】Anthropic 推出 Claude Ship，让 Claude 根据团队策略审核、修复和批准 GitHub 拉取请求，这是 Claude 团队和企业层的测试版。
-
-### OpenAI and Cisco introduce Shirudo
-- 落地页链接: https://ainewsradar.xyz/zh/news/b6ff5d3d9405ebfa
-- 原始信源: OpenAI 官方动态 (https://openai.com/index/introducing-shirudo)
-- 核心摘要: 开源运行时，可帮助操作员保护正在运行的 Linux 系统，无需等待补丁或重新启动
-
-OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助团队在推出补丁时保护 Linux 系统。在受控测试中，Codex 生成的防护罩阻止了 Java4Sh
-- 核验事实清单:
-  * 【核心事件】美国证券交易委员会 (SEC)：OpenAI 和 Cisco 推出 Shirudo
-  * 【核心事实细节】OpenAI 和 Cisco 推出 Shirudo。
-  * 【行业研判】在受控测试中，Codex 生成的防护罩阻止了针对 Java4Shell 的攻击尝试。
-
-### 人工智能数据中心再次扰乱混乱的联合国气候谈判
-- 落地页链接: https://ainewsradar.xyz/zh/news/c7498933d3eb70d5
-- 原始信源: The Verge AI (https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit)
-- 核心摘要: 清洁能源革命取决于整个全球经济的电气化，正如耗电的数据中心正在激增一样。这是来自世界各地的代表在联合国气候变化大会（COP31）期间必须应对的挑战，该会议在土耳其安塔利亚以混乱且令人不满意的方式结束
-- 核验事实清单:
-  * 【核心事件】苹果公司 (Apple Inc.)在算力芯片供应链与云端基础设施：人工智能数据中心再次扰乱混乱的联合国气候谈判
-  * 【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。
-  * 【关键技术规格】苹果公司 (Apple Inc.)在算力芯片供应链与云端基础设施。
-  * 【各方立场与态度】人工智能数据中心再次扰乱混乱的联合国气候谈判。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -308,8 +307,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,737 Stars，总计 53,703 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,737 Stars (总星标 53,703)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,737 Stars，总计 53,705 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,737 Stars (总星标 53,705)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -317,8 +316,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0831ca93321eceea
 - 官方/开源地址: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - 一句话亮点: 用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式
-- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +12,335 Stars，总计 20,547 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +12,335 Stars (总星标 20,547)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +12,335 Stars，总计 20,567 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +12,335 Stars (总星标 20,567)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -335,8 +334,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f689ccec41c0119a
 - 官方/开源地址: https://github.com/dream-num/univer?ref=ainewsradar
 - 一句话亮点: 使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔
-- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,324 Stars，总计 31,611 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,324 Stars (总星标 31,611)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,324 Stars，总计 31,615 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,324 Stars (总星标 31,615)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/dream-num/univer.git`
 
@@ -344,8 +343,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,165 Stars，总计 32,726 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,165 Stars (总星标 32,726)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,165 Stars，总计 32,730 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,165 Stars (总星标 32,730)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
@@ -353,8 +352,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
 - 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
-- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,966 Stars，总计 21,472 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,966 Stars (总星标 21,472)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,966 Stars，总计 21,476 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,966 Stars (总星标 21,476)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -362,8 +361,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/1c5edee7c934959a
 - 官方/开源地址: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - 一句话亮点: 用于编码代理的 Chrome DevTools
-- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,581 Stars，总计 59,123 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,581 Stars (总星标 59,123)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,581 Stars，总计 59,126 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,581 Stars (总星标 59,126)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -371,8 +370,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5b083f806d24b3ce
 - 官方/开源地址: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - 一句话亮点: AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要
-- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,448 Stars，总计 73,774 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,448 Stars (总星标 73,774)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,448 Stars，总计 73,779 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,448 Stars (总星标 73,779)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -380,8 +379,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/3924c8f295303f30
 - 官方/开源地址: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - 一句话亮点: 安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释
-- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,015 Stars，总计 55,916 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,015 Stars (总星标 55,916)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,015 Stars，总计 55,922 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,015 Stars (总星标 55,922)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -389,8 +388,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,694 Stars，总计 10,683 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,694 Stars (总星标 10,683)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,694 Stars，总计 10,689 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,694 Stars (总星标 10,689)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -398,8 +397,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/6eabee8f4881846c
 - 官方/开源地址: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - 一句话亮点: 保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席
-- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,395 Stars，总计 14,790 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,395 Stars (总星标 14,790)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,395 Stars，总计 14,792 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,395 Stars (总星标 14,792)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -407,8 +406,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/60ff2010aa4a95f7
 - 官方/开源地址: https://hermes-agent.nousresearch.com?ref=ainewsradar
 - 一句话亮点: 与您共同成长的代理商
-- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,540 Stars，总计 265,766 Stars）。与您共同成长的代理商，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,540 Stars (总星标 265,766)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,538 Stars，总计 265,764 Stars）。与您共同成长的代理商，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,538 Stars (总星标 265,764)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/hermes-agent.git`
 
@@ -416,8 +415,8 @@ OpenAI 和 Cisco 正在推出 Shirudo，这是一个开源运行时，可帮助�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5a0ec8eced4523f3
 - 官方/开源地址: https://www.soduwork.ai?ref=ainewsradar
 - 一句话亮点: 适用于团队及其代理的人工智能原生引擎。多线束、多代理、自托管。
-- 核心概览: SoduWork 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,029 Stars，总计 7,506 Stars）。适用于团队及其代理的人工智能原生引擎。多线束、多代理、自托管。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,029 Stars (总星标 7,506)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 核心概览: SoduWork 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,028 Stars，总计 7,511 Stars）。适用于团队及其代理的人工智能原生引擎。多线束、多代理、自托管。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,028 Stars (总星标 7,511)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/SoduWork.git`
 

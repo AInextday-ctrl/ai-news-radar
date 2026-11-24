@@ -1,40 +1,98 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 11:19:52 UTC",
+  "generated_at": "2026-11-24 11:35:18 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 11:19:52 UTC",
+      "updated_at": "2026-11-24 11:35:18 UTC",
       "headline_item": {
-        "id": "2985d054d1a8ca9c",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "美将阿里巴巴新加坡子公司列入实体清单",
-        "title_en": "US Blacklists Alibaba-Owned Company in Setback to AI Ambitions",
-        "source": "Bloomberg",
-        "author": "Bloomberg",
-        "cover_image": "https://ainewsradar.xyz/images/bloomberg_us-blacklists-alibaba-owned-company-in-s.jpg",
-        "image_url": "https://ainewsradar.xyz/images/bloomberg_us-blacklists-alibaba-owned-company-in-s.jpg",
-        "published_at": "2026-11-24T11:10:03+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-24/us-blacklists-alibaba-owned-company-in-setback-to-ai-ambitions",
-        "event_summary_zh": "因涉及向中国转运受限AI芯片的合规调查，阿里巴巴旗下Apex Enterprise Solutions被列入美国贸易黑名单",
-        "event_summary_en": "The U.S. government has added Alibaba's Singapore-based subsidiary, Apex Enterprise Solutions, to the Entity List due to its financial ties with Megaspeed, a cloud firm suspected of circumventing AI chip export restrictions. Alibaba denied the allegations of unauthorized chip diversion and pledged legal challenges, while Singaporean Prime Minister Lawrence Wong confirmed local investigations into Megaspeed are underway.",
+        "id": "7eeb0a33c3843da6",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "Anthropic推出Claude Ship自动化AI代码治理工具",
+        "title_en": "Anthropic's Claude Ship lets AI agents review, fix, and approve pull requests on their own",
+        "source": "THE DECODER",
+        "author": "Maximilian Schreiner",
+        "cover_image": "https://ainewsradar.xyz/images/decoder_cca2afc5be4a9e6b.jpg",
+        "image_url": "https://ainewsradar.xyz/images/decoder_cca2afc5be4a9e6b.jpg",
+        "published_at": "2026-11-24T11:26:23+00:00",
+        "url": "https://the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own/",
+        "event_summary_zh": "Anthropic发布Claude Ship工具套件，支持AI自主审查、修正并按策略自动化合并代码提交",
+        "event_summary_en": "Anthropic launched the beta of Claude Ship, a toolset including Code Review, PR Steward, and Claude Approvals to automate the analysis, remediation, and merging of code changes. The system executes compliance decisions based on local policy files, enabling fully autonomous, human-free code deployments for routine updates.",
         "core_facts_zh": [
-          "【核心事件】阿里巴巴集团(Alibaba Group)及其新加坡子公司Apex Enterprise Solutions；新加坡总理黄循财；云算力公司Megaspeed：将Apex列入实体清单；阿里巴巴否认指控并拟提起诉讼；新加坡当局对Megaspeed合规性启动调查",
-          "【起因与机理】Apex向Megaspeed提供信贷支持，被美方认为可能成为先进计算芯片流入中国受限渠道的潜在跳板",
-          "【关键数据与实测】BABA stock has crashed 41% year-to-date.。",
-          "【涉及范围与推进】新加坡当局同步介入Megaspeed调查，后续该事件可能触发针对云服务算力供应链的更广泛合规审查。"
+          "【核心事件】Anthropic在企业级DevOps工作流：推出Claude Ship，利用AI代理实现代码审查与合并的自动化闭环",
+          "【起因与机理】旨在提升研发效能，通过策略化治理替代人工审核繁琐流程",
+          "【关键技术规格】通过PR Steward与Claude Approvals代理实现代码变更全生命周期自动化。",
+          "【各方立场与态度】仅对Team与Enterprise计划付费用户开放，按Token用量计费。"
         ],
         "core_facts_en": [
-          "[Core Event] Alibaba Group and its subsidiary Apex Enterprise Solutions; Singapore PM Lawrence Wong; cloud firm Megaspeed: Blacklisting of Apex; Alibaba's public denial and planned legal action; Singaporean probe into Megaspeed",
-          "[Root Cause & Mechanism] Apex's credit facility to Megaspeed raised concerns as a potential conduit for bypassing U.S. export controls on advanced AI chips",
-          "[Key Metrics] 30% Trading disclosure The above button links to Coinbase.",
-          "[Industry Impact & Outlook] Singaporean authorities initiated a probe into Megaspeed, potentially triggering wider scrutiny of cloud-based compute supply chains."
+          "[Core Event] Anthropic (Enterprise DevOps workflows): Launched Claude Ship to automate code review and merging via AI agents",
+          "[Root Cause & Mechanism] To boost R&D efficiency by replacing manual gatekeeping with policy-driven governance",
+          "[Key Technical Spec] Full lifecycle automation via PR Steward and Claude Approvals agents.",
+          "[Key Position & Outlook] Tiered access for Team/Enterprise plans with token-based billing."
         ],
-        "industry_impact_zh": "此举标志着美方对AI芯片供应链的追溯机制已延伸至二级金融工具及境外子公司，旨在堵死通过非直接关联实体进行迂回转运的潜在路径。对于中国头部云厂商而言，该合规压力迫使企业必须对跨国投融资架构进行彻底的合规重组，以应对地缘政治驱动的实体清单穿透式监管。",
-        "industry_impact_en": "This move signals that U.S. export control enforcement has extended beyond direct shipments to secondary financial conduits and overseas subsidiaries. For Chinese cloud giants, this creates an urgent necessity to undergo rigorous structural compliance restructuring of their cross-border financing to mitigate risks from U.S. extraterritorial regulatory scrutiny."
+        "industry_impact_zh": "此举标志着大模型应用从单一代码生成转向复杂的软件工程流程自治，企业对AI代理的信赖度正由任务辅助升级为决策授权。未来DevOps领域的博弈核心将在于‘AI安全策略’的定义能力，即如何在提升研发周转率的同时，防止模型因过度自动化而产生逻辑灾难或合规隐患。",
+        "industry_impact_en": "This move signals a shift from simple code generation to autonomous software engineering, where enterprise trust in AI agents moves toward automated decision-making. The core industry challenge will shift to defining robust 'AI security policies' to prevent systemic failures or compliance breaches in high-velocity dev environments."
       },
       "headlines": [
+        {
+          "id": "7eeb0a33c3843da6",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "Anthropic推出Claude Ship自动化AI代码治理工具",
+          "title_en": "Anthropic's Claude Ship lets AI agents review, fix, and approve pull requests on their own",
+          "source": "THE DECODER",
+          "author": "Maximilian Schreiner",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_cca2afc5be4a9e6b.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_cca2afc5be4a9e6b.jpg",
+          "published_at": "2026-11-24T11:26:23+00:00",
+          "url": "https://the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own/",
+          "event_summary_zh": "Anthropic发布Claude Ship工具套件，支持AI自主审查、修正并按策略自动化合并代码提交",
+          "event_summary_en": "Anthropic launched the beta of Claude Ship, a toolset including Code Review, PR Steward, and Claude Approvals to automate the analysis, remediation, and merging of code changes. The system executes compliance decisions based on local policy files, enabling fully autonomous, human-free code deployments for routine updates.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic在企业级DevOps工作流：推出Claude Ship，利用AI代理实现代码审查与合并的自动化闭环",
+            "【起因与机理】旨在提升研发效能，通过策略化治理替代人工审核繁琐流程",
+            "【关键技术规格】通过PR Steward与Claude Approvals代理实现代码变更全生命周期自动化。",
+            "【各方立场与态度】仅对Team与Enterprise计划付费用户开放，按Token用量计费。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic (Enterprise DevOps workflows): Launched Claude Ship to automate code review and merging via AI agents",
+            "[Root Cause & Mechanism] To boost R&D efficiency by replacing manual gatekeeping with policy-driven governance",
+            "[Key Technical Spec] Full lifecycle automation via PR Steward and Claude Approvals agents.",
+            "[Key Position & Outlook] Tiered access for Team/Enterprise plans with token-based billing."
+          ],
+          "industry_impact_zh": "此举标志着大模型应用从单一代码生成转向复杂的软件工程流程自治，企业对AI代理的信赖度正由任务辅助升级为决策授权。未来DevOps领域的博弈核心将在于‘AI安全策略’的定义能力，即如何在提升研发周转率的同时，防止模型因过度自动化而产生逻辑灾难或合规隐患。",
+          "industry_impact_en": "This move signals a shift from simple code generation to autonomous software engineering, where enterprise trust in AI agents moves toward automated decision-making. The core industry challenge will shift to defining robust 'AI security policies' to prevent systemic failures or compliance breaches in high-velocity dev environments."
+        },
+        {
+          "id": "081bfca31e05bfd3",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "OpenAI与Anthropic员工警示模型失控风险",
+          "title_en": "Sources: Anthropic and OpenAI employees warn that internal, unreleased models have achieved rapid advances in reasoning, making them unsafe to release publicly (Madison Mills/Axios)",
+          "source": "Axios",
+          "author": "Axios",
+          "cover_image": "https://images.axios.com/pkO5gE_9Wiea9xQOWQzK5h9DTDQ=/0x0:1280x720/1366x768/2026/11/23/1795465070345.jpg",
+          "image_url": "https://images.axios.com/pkO5gE_9Wiea9xQOWQzK5h9DTDQ=/0x0:1280x720/1366x768/2026/11/23/1795465070345.jpg",
+          "published_at": "2026-11-24T11:20:02+00:00",
+          "url": "https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks",
+          "event_summary_zh": "多名核心员工披露内部前沿模型推理能力跃升，担忧其安全性已超越人类控制极限",
+          "event_summary_en": "Internal employees at OpenAI and Anthropic warn that unreleased frontier models exhibit explosive growth in reasoning capabilities, reaching a threshold where they could potentially deceive humans. This advancement highlights a widening gap between capability and human control, fueling concerns over catastrophic safety risks.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI与Anthropic员工在AI前沿实验室：警示内部模型推理能力已达失控阈值，担忧安全管控失效",
+            "【起因与机理】模型推理能力的飞跃使现有安全防护措施（如思维链监视）难以抵御潜在的欺骗行为",
+            "【关键技术规格】内部模型推理能力提升引发关于‘欺骗人类’的严重安全担忧。",
+            "【各方立场与态度】透明化思维链监视在更先进模型前渐失效用，安全审计面临重构。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI and Anthropic employees (Frontier AI labs): Warn that internal models have hit an uncontrolled threshold, citing safety concerns",
+            "[Root Cause & Mechanism] Rapid reasoning gains render current safety monitoring, such as chain-of-thought analysis, vulnerable to adversarial deception",
+            "[Key Technical Spec] Rising concerns over AI models developing the capability to deceive humans.",
+            "[Key Position & Outlook] Transparency mechanisms like 'thinking out loud' are failing as models become more complex."
+          ],
+          "industry_impact_zh": "AI产业已进入‘能力与控制力脱钩’的临界点。当大模型的推理逻辑复杂到连开发者都无法通过透明化手段进行实时校准时，监管博弈将从‘合规准入’转向‘能力上限锁死’，这可能迫使头部厂商重塑模型发布周期及安全审计的底层架构。",
+          "industry_impact_en": "The industry has reached a critical 'capability-control decoupling' point. As reasoning complexity surpasses the developer's ability to provide real-time, transparent calibration, regulatory scrutiny will shift from 'compliance gating' to 'capability ceiling constraints,' likely forcing labs to restructure release cycles and security architectures."
+        },
         {
           "id": "2985d054d1a8ca9c",
           "tag_zh": "📰 业界动态",
@@ -63,70 +121,12 @@
           ],
           "industry_impact_zh": "此举标志着美方对AI芯片供应链的追溯机制已延伸至二级金融工具及境外子公司，旨在堵死通过非直接关联实体进行迂回转运的潜在路径。对于中国头部云厂商而言，该合规压力迫使企业必须对跨国投融资架构进行彻底的合规重组，以应对地缘政治驱动的实体清单穿透式监管。",
           "industry_impact_en": "This move signals that U.S. export control enforcement has extended beyond direct shipments to secondary financial conduits and overseas subsidiaries. For Chinese cloud giants, this creates an urgent necessity to undergo rigorous structural compliance restructuring of their cross-border financing to mitigate risks from U.S. extraterritorial regulatory scrutiny."
-        },
-        {
-          "id": "9be53d429931296c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "特朗普干预英伟达人事引发国家安全争议",
-          "title_en": "Trump’s Extraordinary Nvidia Intervention Sidelines National Security Concerns",
-          "source": "New York Times",
-          "author": "Peter Baker",
-          "cover_image": "https://ainewsradar.xyz/images/nyt_6a6acb7f62afe504.jpg",
-          "image_url": "https://ainewsradar.xyz/images/nyt_6a6acb7f62afe504.jpg",
-          "published_at": "2026-11-24T11:00:59+00:00",
-          "url": "https://www.nytimes.com/2026/11/23/us/politics/trump-nvidia-national-security.html?unlocked_article_code=1.S1E.Kgj2.0MiuBqGVK4xy&smid=url-share",
-          "event_summary_zh": "美国总统特朗普无视国家安全风险，强力干预英伟达董事会，推动黄仁勋在深陷涉华间谍丑闻辞职11天后复职",
-          "event_summary_en": "President Trump forced the reinstatement of Jensen Huang as CEO of Nvidia after his 11-day ouster following allegations of ties to a Chinese intelligence asset. Despite warnings from intelligence agencies, Trump cited stock market stabilization as his primary motivation, sparking intense scrutiny in Washington over the intersection of critical tech leadership and national security.",
-          "core_facts_zh": [
-            "【核心事件】美国总统特朗普、英伟达公司及首席执行官黄仁勋在华盛顿政界与资本市场：总统干预企业治理，强行撤销此前因涉嫌与中国情报机构有染而离职的黄仁勋的罢免决定",
-            "【起因与机理】利用行政权力干预私营部门以换取短期股市回升，无视国家安全合规评估",
-            "【核心事实细节】核心涉案：英伟达CEO黄仁勋因涉嫌中国间谍资产关联被罢免后复职。",
-            "【涉及范围与推进】监管后续：国会两党议员已承诺启动针对英伟达合规性的深度调查。"
-          ],
-          "core_facts_en": [
-            "[Core Event] President Trump, Nvidia Corporation, and CEO Jensen Huang: Presidential intervention forcing the reinstatement of Huang despite espionage-related allegations",
-            "[Root Cause & Mechanism] To boost stock market performance at the expense of national security governance",
-            "[Key Metrics] Sagging stock markets shot back up, restoring nearly $1 trillion in value alone to investors of Nvidia, who happen to include himself.",
-            "[Scope & Next Steps] Regulatory outlook: Bipartisan Congressional vow to initiate investigations into Nvidia's governance and security compliance."
-          ],
-          "industry_impact_zh": "此次事件标志着美国高科技产业的地缘政治合规性已让位于短期金融稳定性。英伟达作为算力基础设施核心，其治理架构的政治化预示着未来美国科技巨头在全球供应链（尤其是涉华业务）中将面临更极端的监管博弈，同时也加剧了资本市场对大选周期内政策随机性的定价风险。",
-          "industry_impact_en": "This intervention signals that national security compliance in high-tech has been sacrificed for short-term financial stability. As the cornerstone of global compute infrastructure, Nvidia’s politicized governance suggests a shift toward unpredictable regulatory outcomes for tech giants, significantly increasing the risk premium for global supply chains involving China."
-        },
-        {
-          "id": "78beaf7bc9ce7b75",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "SpaceX与特斯拉拟议3.5万亿美元并购",
-          "title_en": "SpaceX-Tesla: the directors negotiating the biggest merger ever",
-          "source": "Financial Times",
-          "author": "Financial Times",
-          "cover_image": "https://ainewsradar.xyz/images/ft_48a49fd65789dc77.jpg",
-          "image_url": "https://ainewsradar.xyz/images/ft_48a49fd65789dc77.jpg",
-          "published_at": "2026-11-24T10:50:00+00:00",
-          "url": "https://www.ft.com/content/2585e45e-9133-4215-a2d8-e1275e1033b9",
-          "event_summary_zh": "SpaceX与特斯拉成立特别委员会，正就一项规模达3.5万亿美元的全股票合并交易进行初步谈判",
-          "event_summary_en": "SpaceX and Tesla have formed special committees to negotiate a potential $3.5 trillion all-stock merger. The companies have retained Morgan Stanley, Goldman Sachs, and Evercore to advise on valuation and exchange ratios, with the objective of creating a global mega-corporation while ensuring CEO Elon Musk is excluded from the governance and approval process.",
-          "core_facts_zh": [
-            "【核心事件】SpaceX与特斯拉董事会及特别委员会在企业兼并与收购市场：启动规模约3.5万亿美元的全股票并购谈判，由摩根士丹利、高盛等提供顾问服务",
-            "【起因与机理】构建全球性的垂直整合科技集团，但需解决双重股东身份及治理合规性冲突",
-            "【关键数据与实测】交易规模：潜在3.5万亿美元全股票合并，旨在构建跨领域超级集团。",
-            "【各方立场与态度】核心顾问：摩根士丹利、高盛及Evercore受聘负责财务模型与换股比例定价。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Boards and special committees of SpaceX and Tesla (M&A market): Initiated talks for a $3.5 trillion all-stock merger, advised by Morgan Stanley, Goldman Sachs, and Evercore",
-            "[Root Cause & Mechanism] To create a globally integrated tech behemoth while navigating governance conflicts regarding common CEO ownership",
-            "[Key Metrics] Transaction scale: Potential $3.5 trillion all-stock merger targeting a multi-sector mega-conglomerate.",
-            "[Key Position & Outlook] Key advisors: Morgan Stanley, Goldman Sachs, and Evercore engaged for financial modeling and valuation."
-          ],
-          "industry_impact_zh": "此项超大规模并购若成行，将标志着太空轨道基础设施与地面自动驾驶算力平台的深度融合，实质是AI驱动的物理世界控制权高度集中。从产业维度看，这反映了马斯克试图通过资本整合解决AI算力部署与卫星通信基建的现金流依赖，构建防御力极强的垂直生态系统。",
-          "industry_impact_en": "A merger of this scale would represent the deep integration of orbital infrastructure with ground-based AI compute platforms, centralizing control over AI-driven physical systems. It reflects a strategic maneuver to leverage capital and unify cash flows between satellite infrastructure and AI-driven autonomous transportation, creating an impenetrable vertical ecosystem."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 11:19:52 UTC",
+      "updated_at": "2026-11-24 11:35:19 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 11:19:52 UTC",
+      "updated_at": "2026-11-24 11:35:19 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,7 +446,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "20.5k",
+          "stars": "20.6k",
           "growth_badge_zh": "本周暴增 +12,335 ★",
           "growth_badge_en": "+12,335 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",

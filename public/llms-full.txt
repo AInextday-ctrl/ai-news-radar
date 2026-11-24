@@ -1,12 +1,32 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-24 11:22:03Z
+Generated: 2026-11-24 11:37:33Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### Anthropic's Claude Ship lets AI agents review, fix, and approve pull requests on their own
+- Canonical URL: https://ainewsradar.xyz/news/7eeb0a33c3843da6
+- Primary Source: THE DECODER (https://the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own/)
+- Executive Summary: Anthropic launched the beta of Claude Ship, a toolset including Code Review, PR Steward, and Claude Approvals to automate the analysis, remediation, and merging of code changes. The system executes compliance decisions based on local policy files, enabling fully autonomous, human-free code deployments for routine updates.
+- Key Verified Facts:
+* [Core Event] Anthropic (Enterprise DevOps workflows): Launched Claude Ship to automate code review and merging via AI agents
+* [Root Cause & Mechanism] To boost R&D efficiency by replacing manual gatekeeping with policy-driven governance
+* [Key Technical Spec] Full lifecycle automation via PR Steward and Claude Approvals agents.
+* [Key Position & Outlook] Tiered access for Team/Enterprise plans with token-based billing.
+
+### Sources: Anthropic and OpenAI employees warn that internal, unreleased models have achieved rapid advances in reasoning, making them unsafe to release publicly (Madison Mills/Axios)
+- Canonical URL: https://ainewsradar.xyz/news/081bfca31e05bfd3
+- Primary Source: Axios (https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks)
+- Executive Summary: Internal employees at OpenAI and Anthropic warn that unreleased frontier models exhibit explosive growth in reasoning capabilities, reaching a threshold where they could potentially deceive humans. This advancement highlights a widening gap between capability and human control, fueling concerns over catastrophic safety risks.
+- Key Verified Facts:
+* [Core Event] OpenAI and Anthropic employees (Frontier AI labs): Warn that internal models have hit an uncontrolled threshold, citing safety concerns
+* [Root Cause & Mechanism] Rapid reasoning gains render current safety monitoring, such as chain-of-thought analysis, vulnerable to adversarial deception
+* [Key Technical Spec] Rising concerns over AI models developing the capability to deceive humans.
+* [Key Position & Outlook] Transparency mechanisms like 'thinking out loud' are failing as models become more complex.
 
 ### US Blacklists Alibaba-Owned Company in Setback to AI Ambitions
 - Canonical URL: https://ainewsradar.xyz/news/2985d054d1a8ca9c
@@ -27,6 +47,16 @@ Canonical: https://ainewsradar.xyz
 * [Root Cause & Mechanism] To boost stock market performance at the expense of national security governance
 * [Key Metrics] Sagging stock markets shot back up, restoring nearly $1 trillion in value alone to investors of Nvidia, who happen to include himself.
 * [Scope & Next Steps] Regulatory outlook: Bipartisan Congressional vow to initiate investigations into Nvidia's governance and security compliance.
+
+### Data centers are getting their own natural gas power plants
+- Canonical URL: https://ainewsradar.xyz/news/b7666e2ffd758e1b
+- Primary Source: MIT Tech Review (https://www.technologyreview.com/2026/11/24/1149622/data-centers-natural-gas/)
+- Executive Summary: Facing energy grid bottlenecks and years-long connection delays, data center developers are increasingly building on-site 'behind-the-meter' natural gas plants. Since 2025, announced projects have reached over 115 gigawatts of capacity, underscoring the urgent priority AI firms place on deployment speed over grid integration.
+- Key Verified Facts:
+* [Core Event] Data center developers (e.g., xAI) (US data center industry): Building proprietary natural gas plants to operate off-grid, bypassing grid connection delays
+* [Root Cause & Mechanism] Existing energy infrastructure cannot handle AI demand, and traditional grid upgrade processes are bottlenecked
+* [Key Metrics] Today, the US grid is still reliant on fossil fuels, but nuclear and renewables together make up about 40% of electricity generation.
+* [Industry Impact & Outlook] Strategy prioritized for rapid deployment at the expense of higher costs and regulatory risk.
 
 ### SpaceX-Tesla: the directors negotiating the biggest merger ever
 - Canonical URL: https://ainewsradar.xyz/news/78beaf7bc9ce7b75
@@ -278,36 +308,6 @@ Canonical: https://ainewsradar.xyz
 * [Market & Financial Detail] Wall Street Roars Back as Huang’s Shock Return Propels US Stocks.
 * [Industry Analysis] US stocks recovered just over half their brutal loss from last week, which was one of their worst s.
 
-### Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)
-- Canonical URL: https://ainewsradar.xyz/news/d9601ab21382ae29
-- Primary Source: ZDNET (https://www.zdnet.com/innovation/claude-ship-code-how-to-try/)
-- Executive Summary: Would you let a few Claude agents review and ship your code for you? Developers are already using Claude Code and other AI-powered coding tools like OpenAI’s Codex in droves, but some still want to check code themselves before pushing it. A new feature from Anthropic is banking on more adventurous, agent-first coders being comfortable with handing even that last step off to AI. With Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that
-- Key Verified Facts:
-* [Core Event] Industry Leaders: Anthropic unveils Claude Ship, letting Claude review, fix, and approve GitHub pull requests based on team policies, in beta for Claude Team and Enterprise tiers (Radhika Rajkumar/ZDNET)
-* [Context & Motivation] Would you let a few Claude agents review and ship your code for you.
-* [Key Metrics] Anthropic added that certain Enterprise organizations “can claim at least $10,000 in Claude Ship credits to use within 30 days of claiming” by Jan.
-* [Industry Analysis] With Claude Ship, announced in beta Monday, “Claude can now review pull requests, fix them, and approve the ones that.
-
-### OpenAI and Cisco introduce Shirudo
-- Canonical URL: https://ainewsradar.xyz/news/b6ff5d3d9405ebfa
-- Primary Source: OpenAI (https://openai.com/index/introducing-shirudo)
-- Executive Summary: An open-source runtime that helps operators protect running Linux systems without needing to wait for the patch or restarts OpenAI and Cisco are launching Shirudo, an open-source runtime that helps teams protect Linux systems while they roll out patches. In a controlled test, a Codex-generated shield blocked a Java4Shell exploit attempt against a running Elasticsearch service without requiring a restart. We’re inviting developers, security researchers, and infrastructure operators across the i
-- Key Verified Facts:
-* [Core Event] OpenAI and Cisco introduce Shirudo
-* [Context & Motivation] An open-source runtime that helps operators protect running Linux systems without needing to wait for the patch or restarts OpenAI and Cisco are launching Shirudo, an open-source runtime that helps teams protect Linux systems while they roll out patches.
-* [Key Technical Spec] In a controlled test, a Codex-generated shield blocked a Java4Shell exploit attempt against a running Elasticsearch service without requiring a restart.
-* [Industry Analysis] We’re inviting developers, security researchers, and infrastructure operators across the i.
-
-### AI data centers throw another wrench into chaotic UN climate talks
-- Canonical URL: https://ainewsradar.xyz/news/c7498933d3eb70d5
-- Primary Source: The Verge AI (https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit)
-- Executive Summary: The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging. It’s a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday. Each year, attendees try to make good on the commitment to stop climate change as part of the 2015 Paris climate accord. Preventing extreme weather from growing more t
-- Key Verified Facts:
-* [Core Event] Justine Calma: AI data centers throw another wrench into chaotic UN climate talks
-* [Root Cause & Mechanism] The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging.
-* [Key Fact Detail] It’s a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday.
-* [Industry Analysis] Preventing extreme weather from growing more t.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -316,8 +316,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,737 stars this week, 53,703 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +1,737 stars this week (53,703 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,737 stars this week, 53,705 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +1,737 stars this week (53,705 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -325,8 +325,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/0831ca93321eceea
 - Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - Headline: A Claude Code skill bundle for bug hunting and external red-team work - 84 skill
-- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+12,335 stars this week, 20,547 total). A Claude Code skill bundle for bug hunting and external red-team work - 84 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
-- Features: ['📈 Exponential community momentum: +12,335 stars this week (20,547 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+12,335 stars this week, 20,567 total). A Claude Code skill bundle for bug hunting and external red-team work - 84 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
+- Features: ['📈 Exponential community momentum: +12,335 stars this week (20,567 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -343,8 +343,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,324 stars this week, 31,611 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +4,324 stars this week (31,611 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,324 stars this week, 31,615 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +4,324 stars this week (31,615 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -352,8 +352,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,165 stars this week, 32,726 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +3,165 stars this week (32,726 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,165 stars this week, 32,730 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +3,165 stars this week (32,730 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -361,8 +361,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,966 stars this week, 21,472 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +2,966 stars this week (21,472 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,966 stars this week, 21,476 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +2,966 stars this week (21,476 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -370,8 +370,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/1c5edee7c934959a
 - Official Source: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - Headline: Chrome DevTools for coding agents
-- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,581 stars this week, 59,123 total). Chrome DevTools for coding agents.
-- Features: ['📈 Exponential community momentum: +1,581 stars this week (59,123 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,581 stars this week, 59,126 total). Chrome DevTools for coding agents.
+- Features: ['📈 Exponential community momentum: +1,581 stars this week (59,126 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -379,8 +379,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
 - Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,448 stars this week, 73,774 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +5,448 stars this week (73,774 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,448 stars this week, 73,779 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +5,448 stars this week (73,779 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -388,8 +388,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+3,015 stars this week, 55,916 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +3,015 stars this week (55,916 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+3,015 stars this week, 55,922 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +3,015 stars this week (55,922 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -397,8 +397,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,694 stars this week, 10,683 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +2,694 stars this week (10,683 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,694 stars this week, 10,689 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +2,694 stars this week (10,689 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -406,8 +406,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,395 stars this week, 14,790 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +2,395 stars this week (14,790 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,395 stars this week, 14,792 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +2,395 stars this week (14,792 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -415,8 +415,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
 - Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
 - Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,540 stars this week, 265,766 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +5,540 stars this week (265,766 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,538 stars this week, 265,764 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +5,538 stars this week (265,764 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/hermes-agent.git`
 
@@ -424,8 +424,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5a0ec8eced4523f3
 - Official Source: https://www.soduwork.ai?ref=ainewsradar
 - Headline: The AI-native engine for teams and their agents. Multi-harness, multi-agent, sel
-- Overview: SoduWork is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,029 stars this week, 7,506 total). The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted..
-- Features: ['📈 Exponential community momentum: +4,029 stars this week (7,506 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Overview: SoduWork is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,028 stars this week, 7,511 total). The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted..
+- Features: ['📈 Exponential community momentum: +4,028 stars this week (7,511 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/SoduWork.git`
 
