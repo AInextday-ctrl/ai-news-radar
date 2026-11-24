@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 04:08:19 UTC",
+  "generated_at": "2026-11-24 04:18:51 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 04:08:19 UTC",
+      "updated_at": "2026-11-24 04:18:51 UTC",
       "headline_item": {
-        "id": "8da6cbe1dead64f9",
+        "id": "6e09bfc0943aff4c",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI发布GPT-6.2 Sol并淘汰两款旧模型",
-        "title_en": "ChatGPT expands GPT-6.2 Sol as OpenAI sets retirement date for two models",
-        "source": "9to5Mac",
-        "author": "Zac Hall",
-        "cover_image": "https://ainewsradar.xyz/images/n95m_f78b1e54d7a8fce7.jpg",
-        "image_url": "https://ainewsradar.xyz/images/n95m_f78b1e54d7a8fce7.jpg",
-        "published_at": "2026-11-24T03:45:01+00:00",
-        "url": "https://9to5mac.com/2026/11/23/chatgpt-expands-gpt-6-2-sol-as-openai-sets-retirement-date-for-two-models/",
-        "event_summary_zh": "OpenAI向全线付费用户推出GPT-6.2 Sol模型，强化视觉与网页搜索能力，并定于12月23日下架GPT-5.6 Sol与Terra模型",
-        "event_summary_en": "OpenAI has deployed the GPT-6.2 Sol model across all subscription tiers, featuring enhanced multimodal recognition and cross-application task execution. Simultaneously, the company scheduled the retirement of GPT-5.6 Sol and GPT-5.6 Terra for December 23, aiming to accelerate the streamlining of its model ecosystem.",
+        "title_zh": "思科与OpenAI启动开源基础设施防护计划",
+        "title_en": "Cisco and OpenAI launch Shirudo open-source infrastructure shield to prevent AI-driven cyberattacks",
+        "source": "SiliconANGLE",
+        "author": "Mike Wheatley",
+        "cover_image": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
+        "image_url": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
+        "published_at": "2026-11-24T04:15:00+00:00",
+        "url": "https://siliconangle.com/2026/11/23/cisco-and-openai-launch-shirudo-an-open-source-infrastructure-shield-to-protect-against-ai-driven-cyberattacks/",
+        "event_summary_zh": "思科与OpenAI联手发布安全基础设施项目及Shirudo工具，旨在应对AI加速带来的“零日”自动化网络攻击",
+        "event_summary_en": "Cisco's VP of Engineering and Security CTO Thomas Graf has partnered with OpenAI to launch the 'Secure Infrastructure Project,' featuring an open-source tool called Shirudo that utilizes immutable architecture and reinforcement learning for proactive defense. This initiative addresses the critical threat where AI-driven vulnerability exploitation precedes public disclosure, shifting security from reactive patching to resilient, design-based protection.",
         "core_facts_zh": [
-          "【核心事件】OpenAI：发布GPT-6.2 Sol模型并计划于12月23日淘汰GPT-5.6系列旧模型",
-          "【起因与机理】通过提升多模态感知与任务执行能力，优化用户交互体验并整合产品算力资源",
-          "【关键技术规格】全面升级至GPT-6.2 Sol模型，提升网页交互及视觉细节分析能力。",
-          "【涉及范围与推进】覆盖全线订阅用户，推动模型性能标准化与算力整合。"
+          "【核心事件】思科系统工程副总裁兼安全CTO Thomas Graf、OpenAI集团在企业级安全基础设施构建领域：发布安全基础设施项目，并推出Shirudo开源防御工具",
+          "【起因与机理】应对AI驱动的网络攻击导致漏洞修复周期失效的现实风险",
+          "【关键技术规格】核心动因：应对AI驱动的自动化漏洞挖掘与负向防御时间窗口。",
+          "【行业影响与走向】后续影响：推动行业从补丁式安全向设计即安全（Secure-by-Design）转型。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI: Released GPT-6.2 Sol and announced the retirement of GPT-5.6 series models by Dec 23",
-          "[Root Cause & Mechanism] To improve multimodal perception and task execution, thereby optimizing UX and consolidating compute resources",
-          "[Key Technical Spec] Deployment of GPT-6.2 Sol with improved visual and search capabilities.",
-          "[Key Position & Outlook] Global rollout across all ChatGPT premium tiers for unified performance."
+          "[Core Event] Thomas Graf (VP of Engineering and Security CTO at Cisco Systems), OpenAI Group PBC: Launch of the Secure Infrastructure Project and the Shirudo open-source tool",
+          "[Root Cause & Mechanism] To counter the threat of AI-driven cyberattacks that outpace traditional manual patching",
+          "[Key Fact Detail] Core driver: Addressing the negative time window for vulnerability exploitation caused by AI-driven automation.",
+          "[Industry Impact & Outlook] Future impact: Shifting the industry toward a 'Secure-by-Design' paradigm instead of reactive patching."
         ],
-        "industry_impact_zh": "OpenAI此举标志着模型迭代周期的进一步压缩，旨在通过强制迁移减少长尾模型的维护成本与算力分摊。这种高频率的“以新换旧”策略不仅是功能升级，更是通过控制模型版本收敛，确立其在Agent交互领域的技术统治标准。",
-        "industry_impact_en": "OpenAI's strategy signals a compression of model iteration cycles, leveraging forced migration to reduce maintenance overhead and compute fragmentation. By tightly controlling version convergence, OpenAI is effectively setting industry standards for agentic interaction performance."
+        "industry_impact_zh": "安全防御逻辑正从“漏洞修补”向“架构免疫”范式转移，此合作标志着传统网络巨头开始通过集成AI原生的防御模型来重塑云原生算力边界。Shirudo通过强化学习实现的自我防御机制，将显著提高算力平台的防御韧性，这可能迫使云服务提供商重构其底层TPM（可信平台模块）信任链以满足合规审计要求。",
+        "industry_impact_en": "Security paradigms are shifting from reactive patching to architecture-based immunity, with this collaboration marking the integration of AI-native defense models into legacy network infrastructure. By leveraging reinforcement learning for self-defense, Shirudo forces a re-evaluation of TPM-based trust chains, likely setting a new standard for cloud-native infrastructure security."
       },
       "headlines": [
+        {
+          "id": "6e09bfc0943aff4c",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "思科与OpenAI启动开源基础设施防护计划",
+          "title_en": "Cisco and OpenAI launch Shirudo open-source infrastructure shield to prevent AI-driven cyberattacks",
+          "source": "SiliconANGLE",
+          "author": "Mike Wheatley",
+          "cover_image": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
+          "image_url": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
+          "published_at": "2026-11-24T04:15:00+00:00",
+          "url": "https://siliconangle.com/2026/11/23/cisco-and-openai-launch-shirudo-an-open-source-infrastructure-shield-to-protect-against-ai-driven-cyberattacks/",
+          "event_summary_zh": "思科与OpenAI联手发布安全基础设施项目及Shirudo工具，旨在应对AI加速带来的“零日”自动化网络攻击",
+          "event_summary_en": "Cisco's VP of Engineering and Security CTO Thomas Graf has partnered with OpenAI to launch the 'Secure Infrastructure Project,' featuring an open-source tool called Shirudo that utilizes immutable architecture and reinforcement learning for proactive defense. This initiative addresses the critical threat where AI-driven vulnerability exploitation precedes public disclosure, shifting security from reactive patching to resilient, design-based protection.",
+          "core_facts_zh": [
+            "【核心事件】思科系统工程副总裁兼安全CTO Thomas Graf、OpenAI集团在企业级安全基础设施构建领域：发布安全基础设施项目，并推出Shirudo开源防御工具",
+            "【起因与机理】应对AI驱动的网络攻击导致漏洞修复周期失效的现实风险",
+            "【关键技术规格】核心动因：应对AI驱动的自动化漏洞挖掘与负向防御时间窗口。",
+            "【行业影响与走向】后续影响：推动行业从补丁式安全向设计即安全（Secure-by-Design）转型。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Thomas Graf (VP of Engineering and Security CTO at Cisco Systems), OpenAI Group PBC: Launch of the Secure Infrastructure Project and the Shirudo open-source tool",
+            "[Root Cause & Mechanism] To counter the threat of AI-driven cyberattacks that outpace traditional manual patching",
+            "[Key Fact Detail] Core driver: Addressing the negative time window for vulnerability exploitation caused by AI-driven automation.",
+            "[Industry Impact & Outlook] Future impact: Shifting the industry toward a 'Secure-by-Design' paradigm instead of reactive patching."
+          ],
+          "industry_impact_zh": "安全防御逻辑正从“漏洞修补”向“架构免疫”范式转移，此合作标志着传统网络巨头开始通过集成AI原生的防御模型来重塑云原生算力边界。Shirudo通过强化学习实现的自我防御机制，将显著提高算力平台的防御韧性，这可能迫使云服务提供商重构其底层TPM（可信平台模块）信任链以满足合规审计要求。",
+          "industry_impact_en": "Security paradigms are shifting from reactive patching to architecture-based immunity, with this collaboration marking the integration of AI-native defense models into legacy network infrastructure. By leveraging reinforcement learning for self-defense, Shirudo forces a re-evaluation of TPM-based trust chains, likely setting a new standard for cloud-native infrastructure security."
+        },
         {
           "id": "8da6cbe1dead64f9",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "此事件标志着AI产业核心战略资产的掌舵人风险已溢出为国家安全层面的监管重塑，英伟达作为美国AI基础设施的唯一支柱，其高管治理结构将成为后续地缘政策审查的焦点。短期内资本市场对英伟达的估值逻辑将从单纯的技术增长转向“合规性溢价”与“治理可控性”的重新评估。",
           "industry_impact_en": "The incident marks a transition where leadership risk in the AI sector becomes a national security concern. As the primary backbone of US AI infrastructure, Nvidia’s governance structure will now be subject to heightened regulatory scrutiny, shifting market valuation from pure technical growth to compliance-based risk assessment."
-        },
-        {
-          "id": "eb254772dbebc489",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI前工程师涉嫌非法录制内部会议被诉",
-          "title_en": "OpenAI Engineer Secretly Recorded Dozens of Meetings, Prosecutors Say",
-          "source": "New York Times",
-          "author": "Emmy Martin",
-          "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
-          "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
-          "published_at": "2026-11-24T02:35:01+00:00",
-          "url": "https://www.nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html?unlocked_article_code=1.S1E.uEk0.4ODfUv_FRPyx&smid=url-share",
-          "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因在公司部署隐藏录音设备，截获数十场涉及客户与外国政府的敏感会议而被联邦检察官起诉",
-          "event_summary_en": "Federal prosecutors disclosed in court filings that former OpenAI engineer Abdulrahman Alfozan used OpenAI’s Codex AI tool to configure recording devices, capturing dozens of confidential meetings, including sensitive discussions with a foreign government. While data exfiltration remains under investigation, the act constitutes a significant breach of trade secrets and attorney-client privilege.",
-          "core_facts_zh": [
-            "【核心事件】被告Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI内部行政会议室：非法部署录音设备，截获含外国政府与商业机密的音频文件",
-            "【起因与机理】违反企业内部安全合规，涉嫌非法拦截通讯及窃取商业秘密",
-            "【关键技术规格】被告利用OpenAI内部Codex模型优化非法录音设备配置。",
-            "【行业影响与走向】检方正就数据的外泄风险进行深度调查并拒绝保释请求。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Defendant Abdulrahman Alfozan (Former OpenAI Engineer): Illegally deployed recording devices to capture confidential meetings including foreign government briefings",
-            "[Root Cause & Mechanism] Violation of internal security compliance, suspected illegal interception of communications and potential trade secret theft",
-            "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
-            "[Scope & Next Steps] Prosecutors are investigating potential data dissemination while opposing pre-trial release."
-          ],
-          "industry_impact_zh": "此事件凸显了顶级大模型企业在极端高压研发环境下，内部安全防护与工具滥用治理的巨大鸿沟。利用内部AI工具配置攻击设备，反映出AI基础设施安全边界正在发生偏移，企业急需建立针对AI辅助内部威胁的实时行为检测架构。",
-          "industry_impact_en": "This incident highlights a critical gap in security governance and internal threat mitigation within high-stakes AI labs. The use of internal AI tools for malicious configuration signals a shifting threat landscape where AI infrastructure must implement automated behavioral anomaly detection to secure intellectual property from insiders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 04:08:19 UTC",
+      "updated_at": "2026-11-24 04:18:51 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 04:08:19 UTC",
+      "updated_at": "2026-11-24 04:18:51 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
