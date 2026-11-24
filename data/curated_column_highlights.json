@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 02:34:07 UTC",
+  "generated_at": "2026-11-24 02:49:53 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 02:34:07 UTC",
+      "updated_at": "2026-11-24 02:49:53 UTC",
       "headline_item": {
-        "id": "e730d27942037a6d",
+        "id": "eb254772dbebc489",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI前工程师涉嫌窃取内部会议录音",
-        "title_en": "OpenAI Staffer Likely Captured Secrets on Hidden Bug, US Says",
-        "source": "Bloomberg",
+        "title_zh": "OpenAI前工程师涉嫌非法录制内部会议被诉",
+        "title_en": "OpenAI Engineer Secretly Recorded Dozens of Meetings, Prosecutors Say",
+        "source": "New York Times",
         "author": "Emmy Martin",
         "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
         "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
-        "published_at": "2026-11-24T02:10:02+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-23/openai-staffer-likely-captured-secrets-on-hidden-bug-us-says",
-        "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因私设录音设备，被控窃取包含外方政府会议在内的多项公司机密",
-        "event_summary_en": "Former OpenAI engineer Abdulrahman Alfozan is accused of planting recording devices in executive conference rooms, capturing hundreds of audio files including sovereign government briefings and confidential customer data. Prosecutors allege he utilized OpenAI’s internal tool, Codex, to configure the devices for voice-activated recording and automated exfiltration, with judicial proceedings now underway.",
+        "published_at": "2026-11-24T02:35:01+00:00",
+        "url": "https://www.nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html?unlocked_article_code=1.S1E.uEk0.4ODfUv_FRPyx&smid=url-share",
+        "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因在公司部署隐藏录音设备，截获数十场涉及客户与外国政府的敏感会议而被联邦检察官起诉",
+        "event_summary_en": "Federal prosecutors disclosed in court filings that former OpenAI engineer Abdulrahman Alfozan used OpenAI’s Codex AI tool to configure recording devices, capturing dozens of confidential meetings, including sensitive discussions with a foreign government. While data exfiltration remains under investigation, the act constitutes a significant breach of trade secrets and attorney-client privilege.",
         "core_facts_zh": [
-          "【核心事件】Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI办公行政区域：非法植入录音设备窃取商业机密及政府间会谈录音",
-          "【起因与机理】利用内部工具绕过安全审计，意图获取敏感商业信息",
-          "【核心事实细节】核心涉案：Abdulrahman Alfozan利用内部工具Codex配置录音设备截获机密。",
-          "【涉及范围与推进】后续节点：被告已否认指控，目前正处于关于审前释放的司法听证阶段。"
+          "【核心事件】被告Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI内部行政会议室：非法部署录音设备，截获含外国政府与商业机密的音频文件",
+          "【起因与机理】违反企业内部安全合规，涉嫌非法拦截通讯及窃取商业秘密",
+          "【关键技术规格】被告利用OpenAI内部Codex模型优化非法录音设备配置。",
+          "【行业影响与走向】检方正就数据的外泄风险进行深度调查并拒绝保释请求。"
         ],
         "core_facts_en": [
-          "[Core Event] Abdulrahman Alfozan, former OpenAI engineer: Illicitly intercepted internal meetings and sovereign government communications",
-          "[Root Cause & Mechanism] Exploited internal development tools for unauthorized data exfiltration",
+          "[Core Event] Defendant Abdulrahman Alfozan (Former OpenAI Engineer): Illegally deployed recording devices to capture confidential meetings including foreign government briefings",
+          "[Root Cause & Mechanism] Violation of internal security compliance, suspected illegal interception of communications and potential trade secret theft",
           "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
-          "[Scope & Next Steps] Outlook: Defendant has pleaded not guilty; pretrial release hearing scheduled."
+          "[Scope & Next Steps] Prosecutors are investigating potential data dissemination while opposing pre-trial release."
         ],
-        "industry_impact_zh": "此案暴露出头部AI实验室在内部工程实践与开发环境审计间的严峻脱节，特别是Codex等强力辅助工具被滥用为内控绕行手段。对于高度敏感的AI研发机构，核心数据的物理与逻辑隔离策略必须升级至“零信任”架构，以防范“内部威胁”对地缘政治敏感信息的潜在污染。",
-        "industry_impact_en": "This incident highlights a critical vulnerability in AI research labs where powerful internal tooling like Codex can be weaponized to bypass security perimeters. Companies must transition to a 'zero-trust' hardware and software audit architecture to prevent internal actors from compromising sensitive sovereign interactions and proprietary IP."
+        "industry_impact_zh": "此事件凸显了顶级大模型企业在极端高压研发环境下，内部安全防护与工具滥用治理的巨大鸿沟。利用内部AI工具配置攻击设备，反映出AI基础设施安全边界正在发生偏移，企业急需建立针对AI辅助内部威胁的实时行为检测架构。",
+        "industry_impact_en": "This incident highlights a critical gap in security governance and internal threat mitigation within high-stakes AI labs. The use of internal AI tools for malicious configuration signals a shifting threat landscape where AI infrastructure must implement automated behavioral anomaly detection to secure intellectual property from insiders."
       },
       "headlines": [
+        {
+          "id": "eb254772dbebc489",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenAI前工程师涉嫌非法录制内部会议被诉",
+          "title_en": "OpenAI Engineer Secretly Recorded Dozens of Meetings, Prosecutors Say",
+          "source": "New York Times",
+          "author": "Emmy Martin",
+          "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+          "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+          "published_at": "2026-11-24T02:35:01+00:00",
+          "url": "https://www.nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html?unlocked_article_code=1.S1E.uEk0.4ODfUv_FRPyx&smid=url-share",
+          "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因在公司部署隐藏录音设备，截获数十场涉及客户与外国政府的敏感会议而被联邦检察官起诉",
+          "event_summary_en": "Federal prosecutors disclosed in court filings that former OpenAI engineer Abdulrahman Alfozan used OpenAI’s Codex AI tool to configure recording devices, capturing dozens of confidential meetings, including sensitive discussions with a foreign government. While data exfiltration remains under investigation, the act constitutes a significant breach of trade secrets and attorney-client privilege.",
+          "core_facts_zh": [
+            "【核心事件】被告Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI内部行政会议室：非法部署录音设备，截获含外国政府与商业机密的音频文件",
+            "【起因与机理】违反企业内部安全合规，涉嫌非法拦截通讯及窃取商业秘密",
+            "【关键技术规格】被告利用OpenAI内部Codex模型优化非法录音设备配置。",
+            "【行业影响与走向】检方正就数据的外泄风险进行深度调查并拒绝保释请求。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Defendant Abdulrahman Alfozan (Former OpenAI Engineer): Illegally deployed recording devices to capture confidential meetings including foreign government briefings",
+            "[Root Cause & Mechanism] Violation of internal security compliance, suspected illegal interception of communications and potential trade secret theft",
+            "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
+            "[Scope & Next Steps] Prosecutors are investigating potential data dissemination while opposing pre-trial release."
+          ],
+          "industry_impact_zh": "此事件凸显了顶级大模型企业在极端高压研发环境下，内部安全防护与工具滥用治理的巨大鸿沟。利用内部AI工具配置攻击设备，反映出AI基础设施安全边界正在发生偏移，企业急需建立针对AI辅助内部威胁的实时行为检测架构。",
+          "industry_impact_en": "This incident highlights a critical gap in security governance and internal threat mitigation within high-stakes AI labs. The use of internal AI tools for malicious configuration signals a shifting threat landscape where AI infrastructure must implement automated behavioral anomaly detection to secure intellectual property from insiders."
+        },
         {
           "id": "e730d27942037a6d",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "此次事件标志着网络攻击已从单纯的数据窃取或金融勒索，完全进化为针对物理资产的战术破坏（Cyber-Physical Sabotage）。各国关键基础设施联网化后的脆弱性被进一步放大，将倒逼工业控制系统（ICS）加速向零信任架构迁移，并预示着西方对“国家级”网络攻击的制裁逻辑将从针对个人向切断特定作战单元及供应链配套进行升级。",
           "industry_impact_en": "This incident marks the evolution of cyber warfare from data theft to direct kinetic-level physical sabotage. The incident underscores the critical vulnerability of interconnected industrial control systems (ICS) and signals an inevitable shift toward zero-trust security frameworks; it also forces a pivot in Western sanctions logic from individual targeting toward dismantling entire state-affiliated cyber-offensive supply chains."
-        },
-        {
-          "id": "f1c9db76dab5c34f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "澳物联网初创企业Myriota完成4000万美元C轮融资",
-          "title_en": "Australian IoT Startup Aims to Help Bridge the Gap Between AI and the Real World",
-          "source": "Wall Street Journal",
-          "author": "Wall Street Journal",
-          "cover_image": "",
-          "image_url": "",
-          "published_at": "2026-11-23T23:25:01+00:00",
-          "url": "https://www.wsj.com/pro/venture-capital/australian-iot-startup-aims-to-help-bridge-the-gap-between-ai-and-the-real-world-83864d54",
-          "event_summary_zh": "澳大利亚物联网服务商Myriota完成C轮融资首关，获约4000万美元注资用于扩充团队及部署卫星星座",
-          "event_summary_en": "Australian satellite IoT provider Myriota has secured approximately $40 million in the first close of its Series C funding round to scale its proprietary satellite constellation and expand its workforce. The company specializes in low-power, wide-area connectivity for industrial data collection in remote environments.",
-          "core_facts_zh": [
-            "【核心事件】Myriota（澳大利亚卫星物联网公司）在C轮融资市场：筹集4000万美元用于卫星星座扩容与团队扩张",
-            "【起因与机理】强化物联网边缘连接能力并加速商业化应用布局",
-            "【关键数据与实测】Myriota获4000万美元C轮首关融资。",
-            "【各方立场与态度】强化远程工业环境数据回传的物联网连接能力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Myriota (Australian satellite IoT firm) (Series C funding market): Raised ~$40M for constellation expansion and hiring",
-            "[Root Cause & Mechanism] Strengthening IoT edge connectivity and scaling commercial operations",
-            "[Key Metrics] Myriota secured $40M in Series C first close.",
-            "[Key Position & Outlook] Focus on remote industrial IoT data connectivity."
-          ],
-          "industry_impact_zh": "低轨卫星物联网正从早期的概念验证走向规模化数据底座构建，旨在解决地面通信盲区的AI数据回传问题。此类融资表明资本正在向能够实现地表边缘感知、数据闭环且具有极低运营成本的卫星基础设施端汇聚。",
-          "industry_impact_en": "LEO satellite IoT is transitioning from proof-of-concept to foundational infrastructure for AI data backhauling in dead zones. This capital infusion indicates a pivot toward firms capable of establishing cost-effective, end-to-end edge connectivity in remote industrial settings."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 02:34:08 UTC",
+      "updated_at": "2026-11-24 02:49:53 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -178,32 +178,32 @@
           "url": "https://x.com/ylecun/status/2125050590799487166"
         },
         {
-          "id": "e82cc629ce15cdc3",
+          "id": "b2df3e70389c885d",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/AravSrinivas",
-          "topic_zh": "Aravind Srinivas",
-          "topic_en": "Aravind Srinivas on ",
-          "event_context_zh": "已经超过 20%，并且增长最快！",
-          "event_context_en": "A cool benchmarking effort by @ValsAI to let various decision models run a RollerCoaster Theme Park. Perplexity Decider ",
-          "quote_zh": "@ValsAI 的一项很酷的基准测试工作，旨在让各种决策模型运行过山车主题公园。 Perplexity Decider v1.3 获胜。您可以在@OpenRouter 中免费使用Decider。 Perplexity 在决策模型中所占的份额已经超过 20%，并且增长最快！",
-          "quote_en": "A cool benchmarking effort by @ValsAI to let various decision models run a RollerCoaster Theme Park. Perplexity Decider v1.3 wins. You can use Decider for free in @OpenRouter. Perplexity’s share of volume on decision models has already crossed 20% and is fastest growing!",
-          "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "Scaling 路线与算力",
+          "topic_en": "Scaling Laws & Compute",
+          "event_context_zh": "D，已经领先于昨天所有 24 小时计算机交易量，还剩 7 小时。",
+          "event_context_en": "Neon usage in Perplexity is accelerating further. Today, through 5pm PT (17-hour matched basis), Gemini 4 Neon is furthe",
+          "quote_zh": "霓虹灯在 Perplexity 中的使用正在进一步加速。今天，截至太平洋时间下午 5 点（17 小时匹配基础），Gemini 4 Neon 在 Ask 中进一步上涨了 +18.8% DoD，在 Computer 中上涨了 +45.4% DoD，已经领先于昨天所有 24 小时计算机交易量，还剩 7 小时。",
+          "quote_en": "Neon usage in Perplexity is accelerating further. Today, through 5pm PT (17-hour matched basis), Gemini 4 Neon is further up +18.8% DoD in Ask and +45.4% DoD in Computer, already ahead of all of yesterday’s 24h Computer volume with 7 hours left.",
+          "thesis_zh": "深入探讨Scaling 路线与算力的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Scaling Laws & Compute, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "5.2k",
-            "likes": "27",
-            "comments": "9",
-            "retweets": "1",
+            "views": "1.1k",
+            "likes": "2",
+            "comments": "1",
+            "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-23T23:39:43+00:00",
-          "url": "https://x.com/AravSrinivas/status/2125011444358131842"
+          "published_at": "2026-11-24T02:30:59+00:00",
+          "url": "https://x.com/AravSrinivas/status/2125054545445441691"
         },
         {
           "id": "48874beffc3c847e",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 02:34:08 UTC",
+      "updated_at": "2026-11-24 02:49:53 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
