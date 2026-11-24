@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 02:04:35 UTC",
+  "generated_at": "2026-11-24 02:20:56 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 02:04:36 UTC",
+      "updated_at": "2026-11-24 02:20:56 UTC",
       "headline_item": {
-        "id": "a5b5d919389f91d5",
+        "id": "e730d27942037a6d",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "法美指控伊朗网攻欧洲超市冷链系统",
-        "title_en": "France, U.S. Suspect Iran Was Behind Cyberattack on European Fridges",
-        "source": "Wall Street Journal",
-        "author": "Wall Street Journal",
-        "cover_image": "https://ainewsradar.xyz/images/wsj_c0c8aa89695bbe7e.jpg",
-        "image_url": "https://ainewsradar.xyz/images/wsj_c0c8aa89695bbe7e.jpg",
-        "published_at": "2026-11-24T01:40:00+00:00",
-        "url": "https://www.wsj.com/politics/national-security/iran-us-cyberattack-suspect-fed78942",
-        "event_summary_zh": "法国外交部长指控伊朗伊斯兰革命卫队旗下SHAHID KAVEH组织针对欧洲700家超市冷链设施实施蓄意破坏攻击",
-        "event_summary_en": "French Foreign Minister Jean-Noël Barrot officially attributed the cyberattack on over 700 European supermarket refrigeration controllers to Iran's 'SHAHID KAVEH' cyber unit during a G7 meeting. The attack, occurring between October 11-12, caused widespread equipment failures, fires, and tens of millions of euros in food losses, marking a transition from espionage to physical infrastructure sabotage.",
+        "title_zh": "OpenAI前工程师涉嫌窃取内部会议录音",
+        "title_en": "OpenAI Staffer Likely Captured Secrets on Hidden Bug, US Says",
+        "source": "Bloomberg",
+        "author": "Emmy Martin",
+        "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+        "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+        "published_at": "2026-11-24T02:10:02+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-23/openai-staffer-likely-captured-secrets-on-hidden-bug-us-says",
+        "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因私设录音设备，被控窃取包含外方政府会议在内的多项公司机密",
+        "event_summary_en": "Former OpenAI engineer Abdulrahman Alfozan is accused of planting recording devices in executive conference rooms, capturing hundreds of audio files including sovereign government briefings and confidential customer data. Prosecutors allege he utilized OpenAI’s internal tool, Codex, to configure the devices for voice-activated recording and automated exfiltration, with judicial proceedings now underway.",
         "core_facts_zh": [
-          "【核心事件】法国外交部长让-诺埃尔·巴罗（Jean-Noël Barrot）、伊朗伊斯兰革命卫队SHAHID KAVEH网络单位在G7外长会议、欧洲700家大型超市：对冷链控制系统发动破坏性网络攻击，导致重大经济损失",
-          "【起因与机理】针对关键基础设施的蓄意破坏行为，违反国际法及联合国网络空间规范",
-          "【核心事实细节】法方正式确认袭击主体为伊朗伊斯兰革命卫队下属的SHAHID KAVEH网络作战中心。",
-          "【各方立场与态度】此系针对欧洲关键民生基础设施的首例大规模蓄意 sabotage 网络行动。"
+          "【核心事件】Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI办公行政区域：非法植入录音设备窃取商业机密及政府间会谈录音",
+          "【起因与机理】利用内部工具绕过安全审计，意图获取敏感商业信息",
+          "【核心事实细节】核心涉案：Abdulrahman Alfozan利用内部工具Codex配置录音设备截获机密。",
+          "【涉及范围与推进】后续节点：被告已否认指控，目前正处于关于审前释放的司法听证阶段。"
         ],
         "core_facts_en": [
-          "[Core Event] French Foreign Minister Jean-Noël Barrot, Iranian IRGC-affiliated SHAHID KAVEH unit: Coordinated sabotage of refrigeration control systems causing systemic failure",
-          "[Root Cause & Mechanism] Systematic targeting of critical civilian infrastructure violating international norms",
-          "[Key Fact Detail] Attribution to the Iranian IRGC-affiliated SHAHID KAVEH unit.",
-          "[Key Position & Outlook] First large-scale cyber-sabotage campaign targeting civilian infrastructure in Europe."
+          "[Core Event] Abdulrahman Alfozan, former OpenAI engineer: Illicitly intercepted internal meetings and sovereign government communications",
+          "[Root Cause & Mechanism] Exploited internal development tools for unauthorized data exfiltration",
+          "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
+          "[Scope & Next Steps] Outlook: Defendant has pleaded not guilty; pretrial release hearing scheduled."
         ],
-        "industry_impact_zh": "此次事件标志着网络攻击已从单纯的数据窃取或金融勒索，完全进化为针对物理资产的战术破坏（Cyber-Physical Sabotage）。各国关键基础设施联网化后的脆弱性被进一步放大，将倒逼工业控制系统（ICS）加速向零信任架构迁移，并预示着西方对“国家级”网络攻击的制裁逻辑将从针对个人向切断特定作战单元及供应链配套进行升级。",
-        "industry_impact_en": "This incident marks the evolution of cyber warfare from data theft to direct kinetic-level physical sabotage. The incident underscores the critical vulnerability of interconnected industrial control systems (ICS) and signals an inevitable shift toward zero-trust security frameworks; it also forces a pivot in Western sanctions logic from individual targeting toward dismantling entire state-affiliated cyber-offensive supply chains."
+        "industry_impact_zh": "此案暴露出头部AI实验室在内部工程实践与开发环境审计间的严峻脱节，特别是Codex等强力辅助工具被滥用为内控绕行手段。对于高度敏感的AI研发机构，核心数据的物理与逻辑隔离策略必须升级至“零信任”架构，以防范“内部威胁”对地缘政治敏感信息的潜在污染。",
+        "industry_impact_en": "This incident highlights a critical vulnerability in AI research labs where powerful internal tooling like Codex can be weaponized to bypass security perimeters. Companies must transition to a 'zero-trust' hardware and software audit architecture to prevent internal actors from compromising sensitive sovereign interactions and proprietary IP."
       },
       "headlines": [
+        {
+          "id": "e730d27942037a6d",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenAI前工程师涉嫌窃取内部会议录音",
+          "title_en": "OpenAI Staffer Likely Captured Secrets on Hidden Bug, US Says",
+          "source": "Bloomberg",
+          "author": "Emmy Martin",
+          "cover_image": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+          "image_url": "https://ainewsradar.xyz/images/nyt_0dcb256ebc0ed6d2.jpg",
+          "published_at": "2026-11-24T02:10:02+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-23/openai-staffer-likely-captured-secrets-on-hidden-bug-us-says",
+          "event_summary_zh": "OpenAI前工程师Abdulrahman Alfozan因私设录音设备，被控窃取包含外方政府会议在内的多项公司机密",
+          "event_summary_en": "Former OpenAI engineer Abdulrahman Alfozan is accused of planting recording devices in executive conference rooms, capturing hundreds of audio files including sovereign government briefings and confidential customer data. Prosecutors allege he utilized OpenAI’s internal tool, Codex, to configure the devices for voice-activated recording and automated exfiltration, with judicial proceedings now underway.",
+          "core_facts_zh": [
+            "【核心事件】Abdulrahman Alfozan（OpenAI前工程师）在美国联邦法院及OpenAI办公行政区域：非法植入录音设备窃取商业机密及政府间会谈录音",
+            "【起因与机理】利用内部工具绕过安全审计，意图获取敏感商业信息",
+            "【核心事实细节】核心涉案：Abdulrahman Alfozan利用内部工具Codex配置录音设备截获机密。",
+            "【涉及范围与推进】后续节点：被告已否认指控，目前正处于关于审前释放的司法听证阶段。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Abdulrahman Alfozan, former OpenAI engineer: Illicitly intercepted internal meetings and sovereign government communications",
+            "[Root Cause & Mechanism] Exploited internal development tools for unauthorized data exfiltration",
+            "[Key Metrics] Alfozan has offered a $1 million bond, secured in part by $500,000 of his own money and backed by friends from college.",
+            "[Scope & Next Steps] Outlook: Defendant has pleaded not guilty; pretrial release hearing scheduled."
+          ],
+          "industry_impact_zh": "此案暴露出头部AI实验室在内部工程实践与开发环境审计间的严峻脱节，特别是Codex等强力辅助工具被滥用为内控绕行手段。对于高度敏感的AI研发机构，核心数据的物理与逻辑隔离策略必须升级至“零信任”架构，以防范“内部威胁”对地缘政治敏感信息的潜在污染。",
+          "industry_impact_en": "This incident highlights a critical vulnerability in AI research labs where powerful internal tooling like Codex can be weaponized to bypass security perimeters. Companies must transition to a 'zero-trust' hardware and software audit architecture to prevent internal actors from compromising sensitive sovereign interactions and proprietary IP."
+        },
         {
           "id": "a5b5d919389f91d5",
           "tag_zh": "📰 业界动态",
@@ -65,83 +94,55 @@
           "industry_impact_en": "This incident marks the evolution of cyber warfare from data theft to direct kinetic-level physical sabotage. The incident underscores the critical vulnerability of interconnected industrial control systems (ICS) and signals an inevitable shift toward zero-trust security frameworks; it also forces a pivot in Western sanctions logic from individual targeting toward dismantling entire state-affiliated cyber-offensive supply chains."
         },
         {
-          "id": "c63e3dc61537625a",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "慧与科技Q4营收超预期但指引谨慎",
-          "title_en": "HPE Gives Outlook That Falls Short of Optimistic Estimates",
-          "source": "Bloomberg",
-          "author": "Bloomberg",
-          "cover_image": "https://ainewsradar.xyz/images/bloomberg_hpe-gives-forecast-that-falls-short-of-m.jpg",
-          "image_url": "https://ainewsradar.xyz/images/bloomberg_hpe-gives-forecast-that-falls-short-of-m.jpg",
-          "published_at": "2026-11-23T23:05:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-23/hpe-gives-forecast-that-falls-short-of-most-optimistic-estimates",
-          "event_summary_zh": "慧与科技Q4营收同比增长50%至145亿美元，但首季营收指引未达分析师最高预期，导致盘后股价跌逾6%",
-          "event_summary_en": "Hewlett Packard Enterprise (HPE) reported fiscal Q4 revenue of $14.5 billion, a 50% year-over-year increase, beating analyst estimates of $14.3 billion. Despite the strong headline figures, the company's Q1 revenue guidance fell short of the most optimistic analyst expectations, triggering a 6%+ decline in after-hours trading due to concerns over the sustainability of high-growth AI server demand.",
-          "core_facts_zh": [
-            "【核心事件】慧与科技（Hewlett Packard Enterprise Co.）在美国资本市场及财报发布会：发布Q4财报，营收145亿美元，首季指引不及市场高位预期",
-            "【起因与机理】AI服务器业务增长预期与资本市场高期望值产生背离",
-            "【关键数据与实测】营收同比增长50%至145亿美元。",
-            "【各方立场与态度】首季营收指引未达分析师最高预期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Hewlett Packard Enterprise Co.: Q4 revenue $14.5B; Q1 revenue guidance missed top-tier analyst expectations",
-            "[Root Cause & Mechanism] Divergence between AI server growth trajectories and peak market expectations",
-            "[Key Metrics] Revenue grew 50% YoY to $14.5 billion.",
-            "[Key Position & Outlook] After-hours stock price dropped by over 6%."
-          ],
-          "industry_impact_zh": "HPE作为AI基础设施的关键供应商，其业绩指引的保守倾向反映了AI硬件市场正在经历从单纯规模扩张向盈利落地实效的理性回归。市场对AI基础设施供应商的估值容错率已显著降低，任何未能达到极限预期的指引均会触发资本流动性的剧烈回调。",
-          "industry_impact_en": "As a critical AI infrastructure vendor, HPE's conservative guidance reflects a market shift from pure scale expansion to a demand for tangible ROI in AI hardware deployments. The declining margin of error for valuation suggests that even minor deviations from peak growth forecasts will trigger immediate, significant capital repricing."
-        },
-        {
-          "id": "9b00e4342c50c1c8",
+          "id": "f1c9db76dab5c34f",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "彭博加拿大",
-          "title_en": "Bloomberg Canada",
-          "source": "Bloomberg",
-          "author": "Bloomberg",
-          "cover_image": "https://s.yimg.com/lo/mysterio/api/c6d2a2c895000f4a9cc4889af6e918ee961c3cafbb1efbed90a0e7d858f19ede/lightyear_networkapi/resizefill_h100%3Bquality_100%3Bformat_webp/https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2021-02%2F16277460-6faa-11eb-bfa3-d0bf7896402a",
-          "image_url": "https://s.yimg.com/lo/mysterio/api/c6d2a2c895000f4a9cc4889af6e918ee961c3cafbb1efbed90a0e7d858f19ede/lightyear_networkapi/resizefill_h100%3Bquality_100%3Bformat_webp/https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2021-02%2F16277460-6faa-11eb-bfa3-d0bf7896402a",
-          "published_at": "2026-11-23T22:50:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-23/zoom-projects-revenue-that-misses-estimates-on-stagnant-growth",
-          "event_summary_zh": "Investing.com——据彭博社报道，欧盟和加拿大正准备制定一个广泛的战略联盟，旨在深化经济、国防和贸易关系。这一努力反映出中等强国有意推动对抗以美国为首的大国政治日益增长的主导地位",
-          "event_summary_en": "Zoom Communications Inc. gave a revenue forecast for the current quarter that at the midpoint fell just short of analysts' estimates …",
+          "title_zh": "澳物联网初创企业Myriota完成4000万美元C轮融资",
+          "title_en": "Australian IoT Startup Aims to Help Bridge the Gap Between AI and the Real World",
+          "source": "Wall Street Journal",
+          "author": "Wall Street Journal",
+          "cover_image": "",
+          "image_url": "",
+          "published_at": "2026-11-23T23:25:01+00:00",
+          "url": "https://www.wsj.com/pro/venture-capital/australian-iot-startup-aims-to-help-bridge-the-gap-between-ai-and-the-real-world-83864d54",
+          "event_summary_zh": "澳大利亚物联网服务商Myriota完成C轮融资首关，获约4000万美元注资用于扩充团队及部署卫星星座",
+          "event_summary_en": "Australian satellite IoT provider Myriota has secured approximately $40 million in the first close of its Series C funding round to scale its proprietary satellite constellation and expand its workforce. The company specializes in low-power, wide-area connectivity for industrial data collection in remote environments.",
           "core_facts_zh": [
-            "【核心事件】彭博加拿大",
-            "【核心事实细节】Investing.com——据彭博社报道，欧盟和加拿大正准备制定一个广泛的战略联盟，旨在深化经济、国防和贸易关系。",
-            "【行业研判】这一努力反映出中等强国有意推动对抗以美国和中国为首的大国政治日益增长的主导地位。"
+            "【核心事件】Myriota（澳大利亚卫星物联网公司）在C轮融资市场：筹集4000万美元用于卫星星座扩容与团队扩张",
+            "【起因与机理】强化物联网边缘连接能力并加速商业化应用布局",
+            "【关键数据与实测】Myriota获4000万美元C轮首关融资。",
+            "【各方立场与态度】强化远程工业环境数据回传的物联网连接能力。"
           ],
           "core_facts_en": [
-            "[Core Event] Industry Leaders: Bloomberg Canada",
-            "[Context & Motivation] gave a revenue forecast for the current quarter that at the midpoint fell just short of analysts' estimates ….",
-            "[Key Fact Detail] Bloomberg Canada.",
-            "[Key Position & Outlook] Bloomberg Canada."
+            "[Core Event] Myriota (Australian satellite IoT firm) (Series C funding market): Raised ~$40M for constellation expansion and hiring",
+            "[Root Cause & Mechanism] Strengthening IoT edge connectivity and scaling commercial operations",
+            "[Key Metrics] Myriota secured $40M in Series C first close.",
+            "[Key Position & Outlook] Focus on remote industrial IoT data connectivity."
           ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+          "industry_impact_zh": "低轨卫星物联网正从早期的概念验证走向规模化数据底座构建，旨在解决地面通信盲区的AI数据回传问题。此类融资表明资本正在向能够实现地表边缘感知、数据闭环且具有极低运营成本的卫星基础设施端汇聚。",
+          "industry_impact_en": "LEO satellite IoT is transitioning from proof-of-concept to foundational infrastructure for AI data backhauling in dead zones. This capital infusion indicates a pivot toward firms capable of establishing cost-effective, end-to-end edge connectivity in remote industrial settings."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 02:04:36 UTC",
+      "updated_at": "2026-11-24 02:20:56 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/ylecun",
-      "url": "https://x.com/ylecun/status/2125009660490948667",
-      "published_at": "2026-11-23T23:32:38+00:00",
-      "quote_zh": "@peter_godman @john__allard 之间有区别\n- 法国首都是杜塞尔多夫 <eos>\n- 法国的首都是杜塞尔多夫，哦等等我说错了，是巴黎 <eos>\n第一个是不可挽回的错误。\n第二个是正确的。\n以 <eos> 结尾的序列树是......一棵树。\n错误是不可恢复的。",
-      "quote_en": "@peter_godman @john__allard There is a difference between\n- the capital of France is Düsseldorf <eos>\n- the capital of France is Düsseldorf, oh wait I misspoke, it's Paris <eos>\nThe first one is an unrecoverable mistake.\nThe second one is correct.\nThe tree of <eos>-terminated sequences is .... a tree.\nErrors are unrecoverable.",
-      "thesis_zh": "深入探讨Yann LeCun 行业前沿观的关键演进，直指核心工程落地与技术范式转移。",
-      "thesis_en": "Dissecting crucial inflection points in Yann LeCun on AI, highlighting system trade-offs and engineering shifts.",
+      "url": "https://x.com/ylecun/status/2125050590799487166",
+      "published_at": "2026-11-24T02:15:17+00:00",
+      "quote_zh": "@FutureJurvetson @elonmusk @kimmonismus 背景：\n“在过去 20 年的大部分时间里，我一直在尝试训练模型进行视频预测，但在前 15 年基本上失败了。直到我意识到必须放弃生成模型并使用联合嵌入预测架构 (JEPA)”\n\n“过去几年，JEPA 和世界模型开始发挥作用。主要应用是物理世界、机器人和工业过程控制。Meta 对这些东西不是特别感兴趣”\n\n但我的项目始终得到扎克、博兹、施雷普和克里斯·考克斯的支持。\n\n确实，作为首席人工智能科学家，我虽然是高级副总裁级别，但却是一名 IC。公司最好的工作！\n\n我从未攻读过法学硕士，这也是事实。我非常支持 FAIR 的 LLM 项目（例如后来成为 Llama 的项目），并在说服 Mark 围绕 Llama 创建人工智能优先产品部门方面发挥了作用，并推动开源 Llama-2。但我从来没有参与过技术层面的工作。",
+      "quote_en": "@FutureJurvetson @elonmusk @kimmonismus Context:\n\"I've tried to train models to do video prediction for the better part of the last 20 years, and largely failing for the first 15. Until I realized you had to abandon generative models and use joint embedding predictive architectures (JEPA)\" \n\n\"Things started to work in the last few years with JEPA and world models. The main applications are in the physical world, robotics, and industrial process control. Things that Meta is not particularly interested in\" \n\nBut my project always had the support of Zuck, Boz, Schrep, and Chris Cox. \n\nIt's true that, as Chief AI Scientist, I was at senior VP level but was an IC. Best job in the company! \n\nAlso true that I never worked on LLMs. I was very supportive of LLM projects at FAIR (e.g. the project that became Llama), and played a role on convincing Mark to create an AI-first product division around Llama, and pushed to open source Llama-2. But I was never involved at the technical level.",
+      "thesis_zh": "深入探讨世界模型与自监督的关键演进，直指核心工程落地与技术范式转移。",
+      "thesis_en": "Dissecting crucial inflection points in World Models & SSL, highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "236",
-        "likes": "2",
+        "views": "81",
+        "likes": "0",
         "comments": "0",
         "retweets": "0",
         "platform": "x",
@@ -149,32 +150,32 @@
       },
       "titans": [
         {
-          "id": "25025c69ded55483",
+          "id": "364df76123f40efc",
           "name": "Yann LeCun",
           "handle": "@ylecun",
           "role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/ylecun",
-          "topic_zh": "Yann LeCun 行业前沿观",
-          "topic_en": "Yann LeCun on AI",
-          "event_context_zh": "树是......一棵树。\n错误是不可恢复的。",
-          "event_context_en": "@peter_godman @john__allard There is a difference between\n- the capital of France is Düsseldorf <eos>\n- the capital of F",
-          "quote_zh": "@peter_godman @john__allard 之间有区别\n- 法国首都是杜塞尔多夫 <eos>\n- 法国的首都是杜塞尔多夫，哦等等我说错了，是巴黎 <eos>\n第一个是不可挽回的错误。\n第二个是正确的。\n以 <eos> 结尾的序列树是......一棵树。\n错误是不可恢复的。",
-          "quote_en": "@peter_godman @john__allard There is a difference between\n- the capital of France is Düsseldorf <eos>\n- the capital of France is Düsseldorf, oh wait I misspoke, it's Paris <eos>\nThe first one is an unrecoverable mistake.\nThe second one is correct.\nThe tree of <eos>-terminated sequences is .... a tree.\nErrors are unrecoverable.",
-          "thesis_zh": "深入探讨Yann LeCun 行业前沿观的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Yann LeCun on AI, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "世界模型与自监督",
+          "topic_en": "World Models & SSL",
+          "event_context_zh": "JEPA)”\n\n“过去几年，JEPA 和世界模型开始发挥作用。主要应用是物理世界、机器人和工业过程控制。Meta 对这些东西不是特别感兴趣”\n\n但我的项目始终得到扎克、博兹、施雷普和克里斯·考克斯的支持。\n\n确实，作为首席人工智能科学家，我虽然是高级副总裁级别，但却是一名 IC。公司最好的工作！\n\n我从未攻读过法学硕士，这也是事实。我非常支持 FAIR 的 LLM 项目（例如后来成为 Llama 的项目），并在说服 Mark 围绕 Llama 创建人工智能优先产品部门方面发挥了作用，并推动开源 Llama-2。但我从来没有参与过技术层面的工作。",
+          "event_context_en": "@FutureJurvetson @elonmusk @kimmonismus Context:\n\"I've tried to train models to do video prediction for the better part ",
+          "quote_zh": "@FutureJurvetson @elonmusk @kimmonismus 背景：\n“在过去 20 年的大部分时间里，我一直在尝试训练模型进行视频预测，但在前 15 年基本上失败了。直到我意识到必须放弃生成模型并使用联合嵌入预测架构 (JEPA)”\n\n“过去几年，JEPA 和世界模型开始发挥作用。主要应用是物理世界、机器人和工业过程控制。Meta 对这些东西不是特别感兴趣”\n\n但我的项目始终得到扎克、博兹、施雷普和克里斯·考克斯的支持。\n\n确实，作为首席人工智能科学家，我虽然是高级副总裁级别，但却是一名 IC。公司最好的工作！\n\n我从未攻读过法学硕士，这也是事实。我非常支持 FAIR 的 LLM 项目（例如后来成为 Llama 的项目），并在说服 Mark 围绕 Llama 创建人工智能优先产品部门方面发挥了作用，并推动开源 Llama-2。但我从来没有参与过技术层面的工作。",
+          "quote_en": "@FutureJurvetson @elonmusk @kimmonismus Context:\n\"I've tried to train models to do video prediction for the better part of the last 20 years, and largely failing for the first 15. Until I realized you had to abandon generative models and use joint embedding predictive architectures (JEPA)\" \n\n\"Things started to work in the last few years with JEPA and world models. The main applications are in the physical world, robotics, and industrial process control. Things that Meta is not particularly interested in\" \n\nBut my project always had the support of Zuck, Boz, Schrep, and Chris Cox. \n\nIt's true that, as Chief AI Scientist, I was at senior VP level but was an IC. Best job in the company! \n\nAlso true that I never worked on LLMs. I was very supportive of LLM projects at FAIR (e.g. the project that became Llama), and played a role on convincing Mark to create an AI-first product division around Llama, and pushed to open source Llama-2. But I was never involved at the technical level.",
+          "thesis_zh": "深入探讨世界模型与自监督的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in World Models & SSL, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "236",
-            "likes": "2",
+            "views": "81",
+            "likes": "0",
             "comments": "0",
             "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-23T23:32:38+00:00",
-          "url": "https://x.com/ylecun/status/2125009660490948667"
+          "published_at": "2026-11-24T02:15:17+00:00",
+          "url": "https://x.com/ylecun/status/2125050590799487166"
         },
         {
           "id": "e82cc629ce15cdc3",
@@ -292,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 02:04:36 UTC",
+      "updated_at": "2026-11-24 02:20:56 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
