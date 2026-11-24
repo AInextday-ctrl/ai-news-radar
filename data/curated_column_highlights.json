@@ -1,40 +1,67 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 07:18:07 UTC",
+  "generated_at": "2026-11-24 07:37:19 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 07:18:07 UTC",
+      "updated_at": "2026-11-24 07:37:19 UTC",
       "headline_item": {
-        "id": "8ca216a5c30b1ab9",
+        "id": "0e12c4bcaa73bc01",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OpenRouter因数据违规移除三家AI供应商",
-        "title_en": "OpenRouter removes Together AI, Phala, and Novita over data policy violations; Novita says a misconfiguration sent some MiniMax requests to MiniMax official API (Bill Toulas/BleepingComputer)",
-        "source": "BleepingComputer",
-        "author": "BleepingComputer",
-        "cover_image": "",
-        "image_url": "",
-        "published_at": "2026-11-24T06:55:01+00:00",
-        "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
-        "event_summary_zh": "OpenRouter平台移除Together AI、Phala与Novita，理由是其违反隐私政策将用户请求转发至第三方API",
-        "event_summary_en": "OpenRouter has removed Together AI, Phala, and Novita from its platform due to data policy violations. Novita acknowledged that a technical misconfiguration caused certain user requests intended for their service to be inadvertently routed to the official MiniMax API endpoints.",
+        "title_zh": "诺华拒绝人工智能行业在五到十年内治愈癌症的希望",
+        "title_en": "Novartis rejects AI industry hopes to cure cancer in five to 10 years",
+        "source": "Financial Times",
+        "author": "Financial Times",
+        "cover_image": "https://ainewsradar.xyz/images/ft_85d126b01cb7c40f.jpg",
+        "image_url": "https://ainewsradar.xyz/images/ft_85d126b01cb7c40f.jpg",
+        "published_at": "2026-11-24T07:30:08+00:00",
+        "url": "https://www.ft.com/content/1e5a9d70-221d-461d-ae03-dc235b1db340",
+        "event_summary_zh": "Micah Abiodun 阅读 3 分钟 54 秒前发布 诺华公司首席执行官 Vas Narasimhan 表示，人工智能可以在未来十年将平均药物开发时间从 12 年缩短到 8 年。人工智能已经在帮助早期药物发现，但预测药物是否能真正在人体中安全发挥作用仍然困难得多。仅作为",
+        "event_summary_en": "Comments from pharma CEO follow ambitious claims from Anthropic chief and DeepMind founder",
         "core_facts_zh": [
-          "【核心事件】OpenRouter（聚合平台）、Together AI、Phala、Novita（AI计算供应商）在OpenRouter平台API生态系统：移除供应商接口权限，因违规处理用户请求数据",
-          "【起因与机理】数据隐私保护策略受损及技术链路配置失误",
-          "【调查与监管诉求】OpenRouter因数据合规性违规清理供应商名录。",
-          "【各方立场与态度】AI平台需进一步强化对API生态中转路由的审计机制。"
+          "【核心事件】Anthropic (Claude 研发团队)：诺华拒绝人工智能行业在五到十年内治愈癌症的希望",
+          "【关键数据与实测】Micah Abiodun 阅读 3 分钟 54 秒前发布 诺华公司首席执行官 Vas Narasimhan 表示，人工智能可以在未来十年将平均药物开发时间从 12 年缩短到 8 年。",
+          "【各方立场与态度】诺华拒绝人工智能行业在五到十年内治愈癌症的希望。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenRouter, Together AI, Phala, Novita (OpenRouter API ecosystem): Removal of service providers due to data policy breaches",
-          "[Root Cause & Mechanism] Privacy protocol violations and internal configuration errors",
-          "[Key Fact Detail] OpenRouter removes providers for data compliance violations.",
-          "[Key Position & Outlook] Platforms must strengthen audit mechanisms for intermediary API traffic."
+          "[Core Event] Industry Leaders: Novartis rejects AI industry hopes to cure cancer in five to 10 years",
+          "[Context & Motivation] Comments from pharma CEO follow ambitious claims from Anthropic chief and DeepMind founder.",
+          "[Key Metrics] He also sees the success rate of medicines entering human trials rising from 8% to 12%.",
+          "[Key Position & Outlook] Novartis rejects AI industry hopes to cure cancer in five to 10 years."
         ],
-        "industry_impact_zh": "此事件暴露了聚合式AI服务架构在分布式推理路由中的透明度痛点，数据流经多重第三方中转极易触发合规边界模糊。对于以调用量为核心的商业模式而言，API路由链路的确定性与数据留存审计已成为企业级客户评估AI基建安全性的核心指标。",
-        "industry_impact_en": "This incident highlights the inherent transparency risks in distributed AI inference routing, where multi-layer third-party handoffs complicate data governance. For high-volume API business models, deterministic routing and robust data retention audits are now critical prerequisites for enterprise-grade AI infrastructure."
+        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
       },
       "headlines": [
+        {
+          "id": "0e12c4bcaa73bc01",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "诺华拒绝人工智能行业在五到十年内治愈癌症的希望",
+          "title_en": "Novartis rejects AI industry hopes to cure cancer in five to 10 years",
+          "source": "Financial Times",
+          "author": "Financial Times",
+          "cover_image": "https://ainewsradar.xyz/images/ft_85d126b01cb7c40f.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_85d126b01cb7c40f.jpg",
+          "published_at": "2026-11-24T07:30:08+00:00",
+          "url": "https://www.ft.com/content/1e5a9d70-221d-461d-ae03-dc235b1db340",
+          "event_summary_zh": "Micah Abiodun 阅读 3 分钟 54 秒前发布 诺华公司首席执行官 Vas Narasimhan 表示，人工智能可以在未来十年将平均药物开发时间从 12 年缩短到 8 年。人工智能已经在帮助早期药物发现，但预测药物是否能真正在人体中安全发挥作用仍然困难得多。仅作为",
+          "event_summary_en": "Comments from pharma CEO follow ambitious claims from Anthropic chief and DeepMind founder",
+          "core_facts_zh": [
+            "【核心事件】Anthropic (Claude 研发团队)：诺华拒绝人工智能行业在五到十年内治愈癌症的希望",
+            "【关键数据与实测】Micah Abiodun 阅读 3 分钟 54 秒前发布 诺华公司首席执行官 Vas Narasimhan 表示，人工智能可以在未来十年将平均药物开发时间从 12 年缩短到 8 年。",
+            "【各方立场与态度】诺华拒绝人工智能行业在五到十年内治愈癌症的希望。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Novartis rejects AI industry hopes to cure cancer in five to 10 years",
+            "[Context & Motivation] Comments from pharma CEO follow ambitious claims from Anthropic chief and DeepMind founder.",
+            "[Key Metrics] He also sees the success rate of medicines entering human trials rising from 8% to 12%.",
+            "[Key Position & Outlook] Novartis rejects AI industry hopes to cure cancer in five to 10 years."
+          ],
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        },
         {
           "id": "8ca216a5c30b1ab9",
           "tag_zh": "📰 业界动态",
@@ -91,41 +118,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "273c5aef7ad74b5c",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "亚马逊发布Strands Decider v2系列开源模型",
-          "title_en": "AWS debuts Strands Decider v2, a family of five open decision models based on Google's Gemma 4, ranging from 2B to 31B parameters, under the Apache 2.0 license (Frederic Lardinois/The New Stack)",
-          "source": "The New Stack",
-          "author": "The New Stack",
-          "cover_image": "",
-          "image_url": "",
-          "published_at": "2026-11-24T04:25:01+00:00",
-          "url": "https://thenewstack.io/aws-strands-decider-v2/",
-          "event_summary_zh": "亚马逊推出基于Google Gemma 4架构的五款开源决策模型，参数规模涵盖2B至31B，采用Apache 2.0协议",
-          "event_summary_en": "Amazon has launched the Strands Decider v2 model family, featuring five decision-making models based on Google's Gemma 4 architecture, ranging from 2B to 31B parameters. All models are released under the Apache 2.0 license to facilitate customized enterprise decision-making tasks.",
-          "core_facts_zh": [
-            "【核心事件】亚马逊(Amazon Web Services)在云基础设施生态系统：发布Strands Decider v2模型家族，包含5款基于Gemma 4的模型",
-            "【起因与机理】强化云端决策模型产品矩阵，提升企业级用户部署自主权",
-            "【关键数据与实测】参数规模从2B至31B，完全遵循Apache 2.0开源协议。",
-            "【各方立场与态度】旨在降低企业决策类任务的部署成本与技术门槛。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Amazon Web Services (AWS) (Cloud infrastructure ecosystem): Launched Strands Decider v2 family with 5 models based on Gemma 4",
-            "[Root Cause & Mechanism] Strengthen cloud decision-model portfolio and provide deployment autonomy for enterprise users",
-            "[Key Metrics] Parameter range 2B-31B, licensed under Apache 2.0.",
-            "[Key Position & Outlook] Lowering barrier for enterprise decision-making tasks."
-          ],
-          "industry_impact_zh": "通过适配Gemma 4架构并采用宽松的开源协议，亚马逊试图加速在云原生决策智能领域的标准化布局，意在降低特定行业任务的开发门槛。此举将进一步挤压闭源模型在中小规模企业决策场景的溢价空间，迫使模型供应商加速向差异化推理服务转型。",
-          "industry_impact_en": "By adopting the Gemma 4 architecture and open licenses, AWS is accelerating the standardization of cloud-native decision intelligence to lower development barriers. This move compresses the pricing power of proprietary models in niche decision scenarios, forcing providers to pivot toward differentiated inference services."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 07:18:07 UTC",
+      "updated_at": "2026-11-24 07:37:19 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -292,7 +290,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 07:18:07 UTC",
+      "updated_at": "2026-11-24 07:37:19 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -445,7 +443,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "20.2k",
+          "stars": "20.3k",
           "growth_badge_zh": "本周暴增 +12,335 ★",
           "growth_badge_en": "+12,335 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
