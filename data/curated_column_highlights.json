@@ -1,39 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-24 06:49:59 UTC",
+  "generated_at": "2026-11-24 07:05:17 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-24 06:49:59 UTC",
+      "updated_at": "2026-11-24 07:05:17 UTC",
       "headline_item": {
-        "id": "e31e00a3a1967929",
+        "id": "8ca216a5c30b1ab9",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "彭博亚洲",
-        "title_en": "Bloomberg Asia",
-        "source": "Bloomberg",
-        "author": "Bloomberg",
-        "cover_image": "https://ainewsradar.xyz/images/bloomberg_singapore-won-t-be-conduit-to-skirt-us-c.jpg",
-        "image_url": "https://ainewsradar.xyz/images/bloomberg_singapore-won-t-be-conduit-to-skirt-us-c.jpg",
-        "published_at": "2026-11-24T05:05:01+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-24/singapore-won-t-be-conduit-to-skirt-us-chip-curbs-wong-says",
-        "event_summary_zh": "字节跳动联合创始人张一鸣现在是亚洲首富，估计财富超过 1050 亿美元，领先于印度实业家高塔姆·阿达尼 (Gautam Adani)。该排名来自彭博亿万富翁指数，43岁的张此前从未占据过榜首。下图是一个估计",
-        "event_summary_en": "ByteDance co-founder Zhang Yiming is now Asia’s richest person, with an estimated fortune of more than $105bn, putting him ahead of Indian industrialist Gautam Adani, according to Bloomberg. The ranking comes from the Bloomberg Billionaires Index, and Zhang, 43, has never held the top spot before.\n\nThe figure is an estimate, and other trackers disagree. Forbes’ real-time list put Zhang’s net worth at $84bn on Wednesday. The gap comes largely from how each list values ByteDance, a private company",
+        "title_zh": "OpenRouter因数据违规移除三家AI供应商",
+        "title_en": "OpenRouter removes Together AI, Phala, and Novita over data policy violations; Novita says a misconfiguration sent some MiniMax requests to MiniMax official API (Bill Toulas/BleepingComputer)",
+        "source": "BleepingComputer",
+        "author": "BleepingComputer",
+        "cover_image": "",
+        "image_url": "",
+        "published_at": "2026-11-24T06:55:01+00:00",
+        "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
+        "event_summary_zh": "OpenRouter平台移除Together AI、Phala与Novita，理由是其违反隐私政策将用户请求转发至第三方API",
+        "event_summary_en": "OpenRouter has removed Together AI, Phala, and Novita from its platform due to data policy violations. Novita acknowledged that a technical misconfiguration caused certain user requests intended for their service to be inadvertently routed to the official MiniMax API endpoints.",
         "core_facts_zh": [
-          "【核心事件】彭博亚洲",
-          "【关键数据与实测】字节跳动联合创始人张一鸣现在是亚洲首富，估计财富超过 1050 亿美元，领先于印度实业家高塔姆·阿达尼 (Gautam Adani)。",
-          "【行业研判】该数字是估计值，其他追踪器不支持。"
+          "【核心事件】OpenRouter（聚合平台）、Together AI、Phala、Novita（AI计算供应商）在OpenRouter平台API生态系统：移除供应商接口权限，因违规处理用户请求数据",
+          "【起因与机理】数据隐私保护策略受损及技术链路配置失误",
+          "【调查与监管诉求】OpenRouter因数据合规性违规清理供应商名录。",
+          "【各方立场与态度】AI平台需进一步强化对API生态中转路由的审计机制。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Bloomberg Asia",
-          "[Root Cause & Mechanism] The ranking comes from the Bloomberg Billionaires Index, and Zhang, 43, has never held the top spot before.",
-          "[Key Metrics] ByteDance co-founder Zhang Yiming is now Asia’s richest person, with an estimated fortune of more than $105bn, putting him ahead of Indian industrialist Gautam Adani, according to Bloomberg.",
-          "[Industry Analysis] The gap comes largely from how each list values ByteDance, a private company."
+          "[Core Event] OpenRouter, Together AI, Phala, Novita (OpenRouter API ecosystem): Removal of service providers due to data policy breaches",
+          "[Root Cause & Mechanism] Privacy protocol violations and internal configuration errors",
+          "[Key Fact Detail] OpenRouter removes providers for data compliance violations.",
+          "[Key Position & Outlook] Platforms must strengthen audit mechanisms for intermediary API traffic."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "此事件暴露了聚合式AI服务架构在分布式推理路由中的透明度痛点，数据流经多重第三方中转极易触发合规边界模糊。对于以调用量为核心的商业模式而言，API路由链路的确定性与数据留存审计已成为企业级客户评估AI基建安全性的核心指标。",
+        "industry_impact_en": "This incident highlights the inherent transparency risks in distributed AI inference routing, where multi-layer third-party handoffs complicate data governance. For high-volume API business models, deterministic routing and robust data retention audits are now critical prerequisites for enterprise-grade AI infrastructure."
       },
       "headlines": [
+        {
+          "id": "8ca216a5c30b1ab9",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenRouter因数据违规移除三家AI供应商",
+          "title_en": "OpenRouter removes Together AI, Phala, and Novita over data policy violations; Novita says a misconfiguration sent some MiniMax requests to MiniMax official API (Bill Toulas/BleepingComputer)",
+          "source": "BleepingComputer",
+          "author": "BleepingComputer",
+          "cover_image": "",
+          "image_url": "",
+          "published_at": "2026-11-24T06:55:01+00:00",
+          "url": "https://www.bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets/",
+          "event_summary_zh": "OpenRouter平台移除Together AI、Phala与Novita，理由是其违反隐私政策将用户请求转发至第三方API",
+          "event_summary_en": "OpenRouter has removed Together AI, Phala, and Novita from its platform due to data policy violations. Novita acknowledged that a technical misconfiguration caused certain user requests intended for their service to be inadvertently routed to the official MiniMax API endpoints.",
+          "core_facts_zh": [
+            "【核心事件】OpenRouter（聚合平台）、Together AI、Phala、Novita（AI计算供应商）在OpenRouter平台API生态系统：移除供应商接口权限，因违规处理用户请求数据",
+            "【起因与机理】数据隐私保护策略受损及技术链路配置失误",
+            "【调查与监管诉求】OpenRouter因数据合规性违规清理供应商名录。",
+            "【各方立场与态度】AI平台需进一步强化对API生态中转路由的审计机制。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenRouter, Together AI, Phala, Novita (OpenRouter API ecosystem): Removal of service providers due to data policy breaches",
+            "[Root Cause & Mechanism] Privacy protocol violations and internal configuration errors",
+            "[Key Fact Detail] OpenRouter removes providers for data compliance violations.",
+            "[Key Position & Outlook] Platforms must strengthen audit mechanisms for intermediary API traffic."
+          ],
+          "industry_impact_zh": "此事件暴露了聚合式AI服务架构在分布式推理路由中的透明度痛点，数据流经多重第三方中转极易触发合规边界模糊。对于以调用量为核心的商业模式而言，API路由链路的确定性与数据留存审计已成为企业级客户评估AI基建安全性的核心指标。",
+          "industry_impact_en": "This incident highlights the inherent transparency risks in distributed AI inference routing, where multi-layer third-party handoffs complicate data governance. For high-volume API business models, deterministic routing and robust data retention audits are now critical prerequisites for enterprise-grade AI infrastructure."
+        },
         {
           "id": "e31e00a3a1967929",
           "tag_zh": "📰 业界动态",
@@ -90,41 +120,12 @@
           ],
           "industry_impact_zh": "通过适配Gemma 4架构并采用宽松的开源协议，亚马逊试图加速在云原生决策智能领域的标准化布局，意在降低特定行业任务的开发门槛。此举将进一步挤压闭源模型在中小规模企业决策场景的溢价空间，迫使模型供应商加速向差异化推理服务转型。",
           "industry_impact_en": "By adopting the Gemma 4 architecture and open licenses, AWS is accelerating the standardization of cloud-native decision intelligence to lower development barriers. This move compresses the pricing power of proprietary models in niche decision scenarios, forcing providers to pivot toward differentiated inference services."
-        },
-        {
-          "id": "6e09bfc0943aff4c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "思科与OpenAI启动开源基础设施防护计划",
-          "title_en": "Cisco and OpenAI launch Shirudo open-source infrastructure shield to prevent AI-driven cyberattacks",
-          "source": "SiliconANGLE",
-          "author": "Mike Wheatley",
-          "cover_image": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
-          "image_url": "https://ainewsradar.xyz/images/sa_c16e07399fed6dde.jpg",
-          "published_at": "2026-11-24T04:15:00+00:00",
-          "url": "https://siliconangle.com/2026/11/23/cisco-and-openai-launch-shirudo-an-open-source-infrastructure-shield-to-protect-against-ai-driven-cyberattacks/",
-          "event_summary_zh": "思科与OpenAI联手发布安全基础设施项目及Shirudo工具，旨在应对AI加速带来的“零日”自动化网络攻击",
-          "event_summary_en": "Cisco's VP of Engineering and Security CTO Thomas Graf has partnered with OpenAI to launch the 'Secure Infrastructure Project,' featuring an open-source tool called Shirudo that utilizes immutable architecture and reinforcement learning for proactive defense. This initiative addresses the critical threat where AI-driven vulnerability exploitation precedes public disclosure, shifting security from reactive patching to resilient, design-based protection.",
-          "core_facts_zh": [
-            "【核心事件】思科系统工程副总裁兼安全CTO Thomas Graf、OpenAI集团在企业级安全基础设施构建领域：发布安全基础设施项目，并推出Shirudo开源防御工具",
-            "【起因与机理】应对AI驱动的网络攻击导致漏洞修复周期失效的现实风险",
-            "【关键技术规格】核心动因：应对AI驱动的自动化漏洞挖掘与负向防御时间窗口。",
-            "【行业影响与走向】后续影响：推动行业从补丁式安全向设计即安全（Secure-by-Design）转型。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Thomas Graf (VP of Engineering and Security CTO at Cisco Systems), OpenAI Group PBC: Launch of the Secure Infrastructure Project and the Shirudo open-source tool",
-            "[Root Cause & Mechanism] To counter the threat of AI-driven cyberattacks that outpace traditional manual patching",
-            "[Key Fact Detail] Core driver: Addressing the negative time window for vulnerability exploitation caused by AI-driven automation.",
-            "[Industry Impact & Outlook] Future impact: Shifting the industry toward a 'Secure-by-Design' paradigm instead of reactive patching."
-          ],
-          "industry_impact_zh": "安全防御逻辑正从“漏洞修补”向“架构免疫”范式转移，此合作标志着传统网络巨头开始通过集成AI原生的防御模型来重塑云原生算力边界。Shirudo通过强化学习实现的自我防御机制，将显著提高算力平台的防御韧性，这可能迫使云服务提供商重构其底层TPM（可信平台模块）信任链以满足合规审计要求。",
-          "industry_impact_en": "Security paradigms are shifting from reactive patching to architecture-based immunity, with this collaboration marking the integration of AI-native defense models into legacy network infrastructure. By leveraging reinforcement learning for self-defense, Shirudo forces a re-evaluation of TPM-based trust chains, likely setting a new standard for cloud-native infrastructure security."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-24 06:50:00 UTC",
+      "updated_at": "2026-11-24 07:05:17 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -291,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-24 06:50:00 UTC",
+      "updated_at": "2026-11-24 07:05:17 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
