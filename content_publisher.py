@@ -379,12 +379,36 @@ ADSENSE_SLOT = ""
 
 
 def is_valid_news_lead_image(url: Any) -> bool:
-    """Return True only if url is an authentic lead image and not generic/dummy."""
+    """Return True only if url is an authentic lead image and not generic/dummy or broken."""
     if not url or not isinstance(url, str):
         return False
-    u = url.lower().strip()
-    if not (u.startswith("http") or u.startswith("/images/")) or u in ("null", "undefined", "none"):
+    u = url.strip()
+    if not u or u.lower() in ("null", "undefined", "none"):
         return False
+
+    # 1. 本地配图强校验：必须真实存在于 public/images/ 或 thumbnails 中
+    if "ainewsradar.xyz/images/" in u or u.startswith("/images/"):
+        filename = u.split("/images/")[-1].split("?")[0]
+        img_path = os.path.join(PUBLIC_DIR, "images", filename)
+        base_name = os.path.splitext(filename)[0]
+        thumb_path = os.path.join(PUBLIC_DIR, "images", "thumbnails", f"{base_name}.webp")
+        return os.path.exists(img_path) or os.path.exists(thumb_path)
+
+    u_lower = u.lower()
+    if not u_lower.startswith("http"):
+        return False
+
+    # 2. 拦截客户端高发 403 / 防盗链阻断的外域图片（若未本地化，坚决不渲染外框）
+    hotlink_blocked = [
+        "bwbx.io", "assets.bwbx.io", "bloomberglaw.com", "bloomberg.com/news",
+        "wsj.net", "wsj.com", "ft.com", "ftchinese.com", "theinformation.com",
+        "cnbc.com", "reuters.com", "mcclatchy-wires.com", "yahoo.com", "yimg.com",
+        "nytimes.com", "washingtonpost.com"
+    ]
+    if any(d in u_lower for d in hotlink_blocked):
+        return False
+
+    # 3. 严格拦截占位图、库存图与追踪像素
     bad_patterns = [
         "googleusercontent.com/j6_cofbog", "techmeme.com/img", "techmeme.com/pml",
         "techmeme_sq", "pml.png", "pixel", "spacer", "tracking", "icon.", "avatar.",
@@ -393,7 +417,7 @@ def is_valid_news_lead_image(url: Any) -> bool:
         "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg",
         "s.yimg.com", "bloomberglaw.com", "bwrite-generic-profile", "scorecardresearch.com"
     ]
-    return not any(b in u for b in bad_patterns)
+    return not any(b in u_lower for b in bad_patterns)
 
 
 def resolve_news_lead_image_url(img: str, width: int = 480, prefer_thumbnail: bool = True) -> str:
@@ -423,10 +447,75 @@ def resolve_news_lead_image_url(img: str, width: int = 480, prefer_thumbnail: bo
 
 
 def safe_text(text: Any, max_len: int = 400) -> str:
+    """Safe text escaping: slice cleanly BEFORE entity escaping to prevent broken &quo artifacts."""
     if not text:
         return ""
-    s = str(text).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    return s[:max_len]
+    s = str(text).strip()
+    if len(s) > max_len:
+        sliced = s[:max_len].rsplit(' ', 1)
+        s = sliced[0] if len(sliced) > 1 and len(sliced[0]) > max_len * 0.7 else s[:max_len]
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def get_clean_news_summary(it: dict, is_zh: bool = False, max_len: int = 240) -> str:
+    """Extract a complete, grammatical, non-dangling summary for news cards without sentence truncation."""
+    if is_zh:
+        cand = it.get("summary_zh") or ""
+        if not cand or cand.endswith("...") or cand.endswith("…"):
+            p_zh = it.get("paragraphs_zh") or []
+            if p_zh and isinstance(p_zh, list) and len(p_zh) > 0 and len(p_zh[0]) > 20:
+                cand = p_zh[0]
+        if not cand:
+            cand = it.get("summary") or it.get("title_zh") or ""
+    else:
+        cand = it.get("summary_en") or ""
+        if re.search(r'[\u4e00-\u9fff]', cand):
+            cand = ""
+        if not cand or re.search(r'(\.\.\.|…|\b(such as|including|and other|also told|the|of|and|for|to|in|at)\s*)$', cand.strip(), re.I):
+            p_en = it.get("paragraphs_en") or []
+            if p_en and isinstance(p_en, list) and len(p_en) > 0 and len(p_en[0]) > 20:
+                cand = p_en[0]
+        if not cand:
+            cand = it.get("title_en") or it.get("title") or ""
+
+    cand = re.sub(r'<[^>]+>', ' ', str(cand))
+    cand = re.sub(r'\s+', ' ', cand).strip()
+    cand = re.sub(r'^(?:By\s+[^-\n]+[-–—]\s*|[A-Z\s]{2,15}\s*\([^)]+\)\s*[-–—]\s*)', '', cand)
+    cand = re.sub(r'[\s\.\…]+$', '', cand)
+
+    dangling_pat = r'\b(such as|including|and other|also told|told|the|a|an|of|and|or|that|with|for|to|in|at|by|from|about|into|through|during|before|after|above|below|from|up|down|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|s|t|can|will|just|should|now)\s*$'
+
+    if len(cand) > max_len:
+        punct_split = re.split(r'(?<=[.!?。])\s+', cand)
+        accum = ""
+        for s in punct_split:
+            s_clean = s.strip()
+            if not s_clean:
+                continue
+            if not accum:
+                if len(s_clean) <= max_len:
+                    accum = s_clean
+                else:
+                    words = s_clean[:max_len].rsplit(' ', 1)
+                    accum = words[0] if len(words) > 1 else s_clean[:max_len]
+            elif len(accum) + len(s_clean) + 1 <= max_len:
+                accum += " " + s_clean
+            else:
+                break
+        cand = accum or cand[:max_len].rsplit(' ', 1)[0]
+
+    for _ in range(3):
+        cand = re.sub(r'[\s\.\…\,\:\;\-\–\—\(\[\{]+$', '', cand).strip()
+        cand = re.sub(dangling_pat, '', cand, flags=re.I).strip()
+
+    if not cand:
+        cand = it.get("title_zh" if is_zh else "title_en") or it.get("title") or ""
+        cand = str(cand).strip()
+
+    if cand and not cand.endswith(('.', '!', '?', '。', '"', "'", '”', '’')):
+        cand += '。' if is_zh else '.'
+
+    return safe_text(cand, max_len + 30)
 
 
 # ==============================================================================
@@ -3092,7 +3181,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             </div>
           </article>"""
 
-        # 2. News Stream English (18条快讯填满桌面端双列自适应布局，与天梯榜等高对齐)
+        # 2. News Stream English (精选 12 条快讯严格适配 1280px 双列栅格高度，杜绝卡片横向腰斩)
         news_items = []
         backend_latest_path = os.path.join(BASE_DIR, "data", "latest_news.json")
         public_latest_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
@@ -3104,13 +3193,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     news_candidates = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])
                     # 严格按 24h 最新发布时效倒序排列，优先展示1~6小时内最热快讯
                     news_candidates.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
-                    news_items = news_candidates[:18]
+                    news_items = news_candidates[:12]
             except Exception:
                 news_items = []
         if not news_items:
             news_items = [i for i in items if i.get("category") == "news"]
             news_items.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
-            news_items = news_items[:18]
+            news_items = news_items[:12]
 
         news_cards_en_html = ""
         lcp_image_en_url = ""
@@ -3121,10 +3210,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 raw_t = re.sub(r'[\u4e00-\u9fff]+', '', raw_t).strip() or "Frontier AI Breakthrough"
             t_en = safe_text(raw_t, 120)
 
-            raw_s = it.get("summary_en") or it.get("title_en") or ""
-            if re.search(r'[\u4e00-\u9fff]', raw_s):
-                raw_s = re.sub(r'[\u4e00-\u9fff]+', '', raw_s).strip() or "Comprehensive coverage of frontier intelligence developments."
-            s_en = safe_text(raw_s, 250)
+            s_en = get_clean_news_summary(it, is_zh=False, max_len=180)
 
             raw_src = it.get("source_en") or it.get("source", "")
             if not raw_src or "AI 资讯雷达" in raw_src or re.search(r'[\u4e00-\u9fff]', raw_src):
@@ -3140,7 +3226,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_en_html else 'loading="lazy"'
-                img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
+                img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="news-img-box w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'.news-img-box\')||this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3148,8 +3234,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
                 {img_slot}
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 h-full">
+                  <div class="space-y-1 mb-2">
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
@@ -3159,11 +3245,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                         {t_en}
                       </a>
                     </h3>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                       {s_en}
                     </p>
                   </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <div class="flex items-center justify-between pt-2.5 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
@@ -3180,7 +3266,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 <meta itemprop="headline" content="{t_en}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
-                <div>
+                <div class="space-y-1.5 mb-2">
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
@@ -3193,7 +3279,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       {t_en}
                     </a>
                   </h3>
-                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-normal">
                     {s_en}
                   </p>
                 </div>
@@ -3495,6 +3581,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 en_content = en_content.replace('</head>', f'  {ssr_meta_tag}\n</head>')
 
+        # [Monetization Invariant Guard] 确保 Monetag 广告与站长验证永久存在，绝对不被模板冲刷或云端流水线覆盖
+        monetag_push_tag = '<meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">\n  <script>(function(s){s.dataset.zone=\'12339176\',s.src=\'https://nap5k.com/tag.min.js\'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement(\'script\')))</script>'
+        if '12339176' not in en_content:
+            en_content = en_content.replace('</head>', f'  {monetag_push_tag}\n</head>')
+
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
             c_news = len(_nd.get("grouped", {}).get("news") or _nd.get("news") or [])
@@ -3758,20 +3849,20 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     news_candidates = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])
                     # 严格按 24h 最新发布时效倒序排列，优先展示1~6小时内最热快讯
                     news_candidates.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
-                    news_items_zh = news_candidates[:18]
+                    news_items_zh = news_candidates[:12]
             except Exception:
                 news_items_zh = []
         if not news_items_zh:
             news_items_zh = [i for i in items if i.get("category") == "news"]
             news_items_zh.sort(key=lambda x: str(x.get("raw_published_at") or x.get("published_at") or x.get("created_at") or ""), reverse=True)
-            news_items_zh = news_items_zh[:18]
+            news_items_zh = news_items_zh[:12]
         news_items = news_items_zh
 
         news_cards_zh_html = ""
         lcp_image_zh_url = ""
         for it in news_items:
             t_zh = safe_text(it.get("title_zh") or it.get("title", ""), 120)
-            s_zh = safe_text(it.get("summary_zh") or it.get("title_zh") or "", 250)
+            s_zh = get_clean_news_summary(it, is_zh=True, max_len=240)
             src = safe_text(it.get("source", ""), 40)
             u = it.get("url", "#")
             img = it.get("image_url", "")
@@ -3782,7 +3873,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_zh_html else 'loading="lazy"'
-                img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
+                img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="news-img-box w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; var p=this.closest(\'.news-img-box\')||this.closest(\'a\')||this.parentElement; if(p) p.style.display=\'none\';"></a>'
 
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-auto group" style="min-height: 156px;" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3790,8 +3881,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
                 {img_slot}
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 h-full">
+                  <div class="space-y-1 mb-2">
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
                       <span class="text-[10px] text-slate-400 font-mono">快讯</span>
@@ -3801,11 +3892,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                         {t_zh}
                       </a>
                     </h3>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                       {s_zh}
                     </p>
                   </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <div class="flex items-center justify-between pt-2.5 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>资讯概要</span>
@@ -3822,7 +3913,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 <meta itemprop="headline" content="{t_zh}">
                 <meta itemprop="datePublished" content="{pub_iso}">
                 <meta itemprop="dateModified" content="{pub_iso}">
-                <div>
+                <div class="space-y-1.5 mb-2">
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
@@ -3835,7 +3926,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       {t_zh}
                     </a>
                   </h3>
-                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed font-normal">
                     {s_zh}
                   </p>
                 </div>
@@ -4089,6 +4180,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 zh_content = zh_content.replace('</head>', f'  {ssr_meta_tag_zh}\n</head>')
 
+        # [Monetization Invariant Guard] 确保中文版 Monetag 广告与站长验证永久存在
+        if '12339176' not in zh_content:
+            zh_content = zh_content.replace('</head>', f'  {monetag_push_tag}\n</head>')
+
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
             c_news = len(_nd.get("grouped", {}).get("news") or _nd.get("news") or [])
@@ -4165,6 +4260,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             m_html = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', m_html)
             if mobile_hero_img:
                 m_html = m_html.replace('</head>', f'  <link rel="preload" as="image" href="{mobile_hero_img}" fetchpriority="high">\n</head>')
+            # [Monetization Invariant Guard] 确保移动端 Monetag 广告与站长验证永久存在
+            monetag_push_tag = '<meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">\n  <script>(function(s){s.dataset.zone=\'12339176\',s.src=\'https://nap5k.com/tag.min.js\'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement(\'script\')))</script>'
+            if '12339176' not in m_html:
+                m_html = m_html.replace('</head>', f'  {monetag_push_tag}\n</head>')
             m_html = re.sub(r'<script [^>]*src="/m/js/mobile(?:\.min)?\.js[^"]*"[^>]*></script>', f'<script defer src="/m/js/mobile.min.js?v={version_str}"></script>', m_html)
             with open(m_path, "w", encoding="utf-8") as f:
                 f.write(m_html)
@@ -4176,217 +4275,22 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 # ==============================================================================
 def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Dict[str, Any]]):
     """
-    汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页，
-    生成收录 35+ 个高质量页面的权威 sitemap.xml！
+    汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页、工具落地页与全量快讯落地页，
+    委托 seo_geo_engine 生成收录 5,000+ 个高质量页面的权威双语 sitemap.xml！
     """
-    now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    entries = []
-
-    # 1. 核心制度页与双版本主页
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
-  </url>""")
-
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.95</priority>
-  </url>""")
-
-    trust_pages = ["about", "editorial-policy", "contact", "privacy", "terms"]
-    for tp in trust_pages:
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/{tp}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/{tp}"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>""")
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/{tp}</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/{tp}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/{tp}"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>""")
-
-    # 1b. 每日简报归档大厅与所有历史日报（英文版 + 中文独立版双向关联）
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/daily</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>""")
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/daily</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>""")
-
-    for d in daily_dates:
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/daily/{d}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily/{d}"/>
-    <lastmod>{d}</lastmod>
-    <changefreq>never</changefreq>
-    <priority>0.75</priority>
-  </url>""")
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/daily/{d}</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily/{d}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily/{d}"/>
-    <lastmod>{d}</lastmod>
-    <changefreq>never</changefreq>
-    <priority>0.75</priority>
-  </url>""")
-
-    # 1c. 专栏大厅与深度专栏页面
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/articles</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/articles</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-
-    for art in articles_meta:
-        slug = art.get('slug') or art.get('id')
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/articles/{slug}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles/{slug}"/>
-    <lastmod>{art['date']}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/articles/{slug}</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles/{slug}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles/{slug}"/>
-    <lastmod>{art['date']}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-
-    # 1d. 实用工具与前沿资讯二级落地页收录 (public/tools & public/news)
+    from seo_geo_engine import update_complete_sitemap
     pub_data_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+    tools_list = []
+    news_list = []
     if os.path.exists(pub_data_path):
         try:
             with open(pub_data_path, "r", encoding="utf-8") as f_meta:
                 m_payload = json.load(f_meta)
-                tools_data = m_payload.get("grouped", {}).get("tools", [])
-                news_data = m_payload.get("grouped", {}).get("news", [])
-                for t in tools_data:
-                    tid = t.get("id")
-                    if tid:
-                        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/tools/{tid}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/tools/{tid}"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>""")
-                        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/tools/{tid}</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/tools/{tid}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/tools/{tid}"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>""")
-                for n in news_data:
-                    nid = n.get("id")
-                    if nid:
-                        n_date = n.get("date") or n.get("published_at")
-                        n_date = str(n_date)[:10] if n_date else now_date
-                        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/news/{nid}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/{nid}"/>
-    <lastmod>{n_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>""")
-                        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/zh/news/{nid}</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/{nid}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/{nid}"/>
-    <lastmod>{n_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.80</priority>
-  </url>""")
-        except Exception as e:
-            print(f"⚠️ [Sitemap Engine] 追加工具与资讯落地页异常: {e}")
-
-    xml_body = "\n".join(entries)
-    full_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-{xml_body}
-</urlset>
-"""
-    with open(SITEMAP_FILE, "wb") as f:
-        f.write(full_xml.strip().encode("utf-8") + b"\n")
-
-    print(f"🗺️ [Sitemap引擎] 站点地图已全面更新: 共收录 {len(entries)} 个高权重公开 URL！")
+                tools_list = m_payload.get("grouped", {}).get("tools", [])
+                news_list = m_payload.get("grouped", {}).get("news", [])
+        except Exception:
+            pass
+    update_complete_sitemap(daily_dates, articles_meta, tools=tools_list, news_items=news_list)
 
 
 # ==============================================================================

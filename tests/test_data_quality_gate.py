@@ -553,6 +553,25 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(caption_noise_violations) == 0, f"断言 21 失败：检测到 {len(caption_noise_violations)} 处图片注释或邮件推广杂质泄漏进正文: {caption_noise_violations[:3]}"
     print(f"✅ 断言 21 通过: 正文纯净度与零图片注释/摄影署名/邮件推广残留达标 (全站 {len(news)} 篇资讯零注释杂质污染)")
 
+    # ----------------------------------------------------
+    # 断言 22: Monetag 广告与站长验证全端常驻门禁 (防止意外回滚与广告标签丢失)
+    # ----------------------------------------------------
+    monetag_core_pages = [
+        os.path.join(WORKSPACE_DIR, "public", "index.html"),
+        os.path.join(WORKSPACE_DIR, "public", "zh", "index.html"),
+        os.path.join(WORKSPACE_DIR, "public", "m", "index.html"),
+        os.path.join(WORKSPACE_DIR, "public", "zh", "m", "index.html"),
+    ]
+    missing_monetag_pages = []
+    for p_path in monetag_core_pages:
+        if os.path.exists(p_path):
+            with open(p_path, "r", encoding="utf-8") as f:
+                c_html = f.read()
+            if "12339176" not in c_html or "6e550244fff9a24bba4ed95e34c42f6e" not in c_html:
+                missing_monetag_pages.append(os.path.relpath(p_path, WORKSPACE_DIR))
+    assert len(missing_monetag_pages) == 0, f"断言 22 失败：检测到核心页面丢失 Monetag 广告标签或验证元数据: {missing_monetag_pages}"
+    print(f"✅ 断言 22 通过: Monetag 广告标签与站长验证元数据 100% 全端常驻达标 (共核验 {len(monetag_core_pages)} 个核心页面)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")

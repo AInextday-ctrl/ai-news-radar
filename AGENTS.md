@@ -92,7 +92,7 @@
 
 ## 5. 质量门禁一票否决制 (CI Quality Gate Hard Enforcement)
 
-- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 21 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
+- 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 22 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
 
 ---
 
@@ -224,5 +224,30 @@
 3. **多品类聚合与防机器人拒审准则 (Anti-Bot Rejection & Multi-Product Aggregation)**：
    - 严禁孤立单打独斗推销单一小众产品，优先依托聚合联盟（如 PartnerStack 内部大市场）或全自动展示轮播网（如 Adsterra Native）实现产品矩阵覆盖；
    - 严禁向用户推荐对新站、独立站或 `.xyz` 域名存在黑盒机器秒拒风控的平台（如 Impact 等），避免浪费用户审核时间与信任成本。
+
+---
+
+## 14. 云端定时流水线防回退与免锁极速同步守则 (Continuous Deployment Anti-Regression & Safe Sync Invariants)
+
+1. **构建器底层自愈固锁 (Idempotent Generator Invariant Guard)**：
+   - 核心静态页面生成脚本（`content_publisher.py`、`tool_news_publisher.py`）必须具备底层自愈防御卫语句。
+   - 无论是本地手动编译还是云端 GitHub Actions 定时机器人自动触发，脚本在向任何 HTML 输出 `<head>` 前，**必须强制校验 Monetag 广告标签（`zone=12339176`）与站长所有权验证元数据（`meta name="monetag"`）**。
+   - 若检测到缺失，构建器必须自动强行注入，绝对杜绝因旧模板编译导致关键变现标签被冲刷回滚。
+
+2. **本地改动原子置顶与免锁同步 (Atomic Local-Precedence & Stale Lock Elimination)**：
+   - 本地与云端主分支同步严禁依赖容易死锁的手动命令，必须统一由 `python tools/safe_sync.py` 调度执行：
+     1. **锁文件彻底免疫**：同步前自动强制清除 `.git/*.lock`、`shallow.lock` 与 `maintenance.lock` 僵尸锁；
+     2. **本地代理强绑定**：强制路由至 `127.0.0.1:7890`，杜绝因直连 GitHub 丢包挂起；
+     3. **本地改动绝对置顶**：拉取云端提交时必须采用 `git pull --rebase -X ours origin main`，永远以本地人工改动的模板与代码为最高优先级，杜绝被云端机器人的新闻更新代码冲散。
+
+3. **云端定时流水线零冲刷门禁 (Zero-Regression CI Quality Gate Hard Lock)**：
+   - `tests/test_data_quality_gate.py` 必须常驻 **断言 22（Monetag 全端常驻门禁）**，覆盖核验 PC 英文、PC 中文、移动端英文、移动端中文等所有核心入口。
+   - 任何构建产物若丢失变现标签或验证元数据，CI 必须一票否决并强行中断发布，阻断残次版本流入生产 CDN。
+
+4. **双端时效对齐与现场抓包复核 (Live Endpoint Grounding & Zero Blind Trust)**：
+   - 严禁“本地终端打印部署成功即宣布完成”。
+   - 所有涉及广告验证、第三方审核（如 Monetag、Google AdSense）或关键栏目布局变更，完成部署后 Agent **必须通过 Python 发起真实生产域名请求（`https://ainewsradar.xyz` 与 `https://ai-radar-news.web.app`）现场抓包**。
+   - 必须确认返回 HTTP 200 且 100% 包含目标特征字符串后，方可向用户交付完成。
+
 
 

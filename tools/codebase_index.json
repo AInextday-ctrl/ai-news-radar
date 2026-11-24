@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-23 13:21:19 UTC",
-  "total_files": 106,
-  "total_symbols": 1270,
+  "updated_at": "2026-11-24 13:31:26 UTC",
+  "total_files": 107,
+  "total_symbols": 1274,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -580,8 +580,8 @@
       ]
     },
     "content_publisher.py": {
-      "size": 277072,
-      "mtime": 1795439871.65132,
+      "size": 272282,
+      "mtime": 1795526822.2066605,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -640,13 +640,13 @@
         },
         "is_valid_news_lead_image": {
           "line": 381,
-          "doc": "Return True only if url is an authentic lead image and not generic/dummy.",
+          "doc": "Return True only if url is an authentic lead image and not generic/dummy or broken.",
           "args": [
             "url"
           ]
         },
         "resolve_news_lead_image_url": {
-          "line": 399,
+          "line": 423,
           "doc": "Resolve news lead image URL cleanly using lightweight WebP thumbnails (~8-12 KB) for ainewsradar.xyz / local images.",
           "args": [
             "img",
@@ -655,39 +655,48 @@
           ]
         },
         "safe_text": {
-          "line": 425,
-          "doc": "",
+          "line": 449,
+          "doc": "Safe text escaping: slice cleanly BEFORE entity escaping to prevent broken &quo artifacts.",
           "args": [
             "text",
             "max_len"
           ]
         },
+        "get_clean_news_summary": {
+          "line": 460,
+          "doc": "Extract a complete, grammatical, non-dangling summary for news cards without sentence truncation.",
+          "args": [
+            "it",
+            "is_zh",
+            "max_len"
+          ]
+        },
         "parse_markdown_table": {
-          "line": 436,
+          "line": 525,
           "doc": "把 Markdown 表格转换为语义化、自适应的 HTML <table>",
           "args": [
             "table_lines"
           ]
         },
         "_markdown_to_clean_html": {
-          "line": 501,
+          "line": 590,
           "doc": "稳健地将深度文章 Markdown 转化为排版考究、语义合规的 HTML（支持表格、代码块与高亮引用）",
           "args": [
             "md_text"
           ]
         },
         "publish_deep_dive_articles": {
-          "line": 667,
+          "line": 756,
           "doc": "扫描 data/wechat_articles 目录，抽取高品质原创深度拆解文章，",
           "args": []
         },
         "backfill_historical_daily_briefings": {
-          "line": 1317,
+          "line": 1406,
           "doc": "调取 master_archive.json 与 latest_news.json 中的历史数据，",
           "args": []
         },
         "_render_single_daily_page": {
-          "line": 1663,
+          "line": 1752,
           "doc": "渲染单一日期的高清、合规每日简报页面 (支持 English 与 中文独立版)",
           "args": [
             "date_slug",
@@ -699,14 +708,14 @@
           ]
         },
         "get_english_article_title": {
-          "line": 2080,
+          "line": 2169,
           "doc": "",
           "args": [
             "zh_title"
           ]
         },
         "resolve_viral_tweet_tag": {
-          "line": 2099,
+          "line": 2188,
           "doc": "根据推文真实内容精确打标，杜绝混淆“突破”与“重置”：",
           "args": [
             "it",
@@ -714,21 +723,21 @@
           ]
         },
         "optimize_avatar_url": {
-          "line": 2170,
+          "line": 2259,
           "doc": "",
           "args": [
             "url"
           ]
         },
         "is_valid_tweet_image_url": {
-          "line": 2178,
+          "line": 2267,
           "doc": "",
           "args": [
             "url"
           ]
         },
         "format_tweet_publish_time": {
-          "line": 2192,
+          "line": 2281,
           "doc": "解析推文真实发布时间并返回 (full_time_display, relative_display)",
           "args": [
             "it",
@@ -736,7 +745,7 @@
           ]
         },
         "format_viral_page_card": {
-          "line": 2219,
+          "line": 2308,
           "doc": "",
           "args": [
             "it",
@@ -745,7 +754,7 @@
           ]
         },
         "format_tibo_pinned_card": {
-          "line": 2376,
+          "line": 2465,
           "doc": "",
           "args": [
             "it",
@@ -753,7 +762,7 @@
           ]
         },
         "format_lead_video_card": {
-          "line": 2488,
+          "line": 2577,
           "doc": "",
           "args": [
             "lead_media",
@@ -761,14 +770,14 @@
           ]
         },
         "build_pinned_slider_html": {
-          "line": 2622,
+          "line": 2711,
           "doc": "",
           "args": [
             "cards"
           ]
         },
         "format_hero_media_showcase": {
-          "line": 2640,
+          "line": 2729,
           "doc": "重构首页置顶专栏为高颜值、等高紧凑、彻底杜绝形变的三卡片并列布局：",
           "args": [
             "hero_showcase",
@@ -776,7 +785,7 @@
           ]
         },
         "prerender_homepage": {
-          "line": 2843,
+          "line": 2932,
           "doc": "双版本独立预渲染引擎：",
           "args": [
             "items",
@@ -788,15 +797,15 @@
           ]
         },
         "update_sitemap_with_all_pages": {
-          "line": 4177,
-          "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页，",
+          "line": 4276,
+          "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页、工具落地页与全量快讯落地页，",
           "args": [
             "daily_dates",
             "articles_meta"
           ]
         },
         "run_full_content_publication": {
-          "line": 4395,
+          "line": 4299,
           "doc": "整套发布流水线入口",
           "args": [
             "items",
@@ -6144,7 +6153,7 @@
     },
     "seo_geo_engine.py": {
       "size": 41421,
-      "mtime": 1795363201.5245376,
+      "mtime": 1795526812.1955638,
       "classes": {},
       "functions": {
         "atomic_write_text": {
@@ -6488,8 +6497,8 @@
       ]
     },
     "tests/test_data_quality_gate.py": {
-      "size": 47803,
-      "mtime": 1795363201.525591,
+      "size": 49039,
+      "mtime": 1795526822.220892,
       "classes": {},
       "functions": {
         "run_quality_gate_assertions": {
@@ -6500,7 +6509,7 @@
           ]
         },
         "auto_heal_dataset": {
-          "line": 562,
+          "line": 581,
           "doc": "当门禁断言遇到动态抓取数据轻微毛刺时，执行智能自愈清洗与智能回填：",
           "args": [
             "data",
@@ -7236,8 +7245,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 148501,
-      "mtime": 1795398113.428071,
+      "size": 150174,
+      "mtime": 1795526822.2235246,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7307,7 +7316,7 @@
           ]
         },
         "extract_ai_analysis_text": {
-          "line": 714,
+          "line": 718,
           "doc": "Safely extracts clean human-readable analysis text, strictly avoiding raw dict dumps.",
           "args": [
             "analysis_data",
@@ -7315,7 +7324,7 @@
           ]
         },
         "_render_inline_video_figure": {
-          "line": 757,
+          "line": 761,
           "doc": "",
           "args": [
             "vid",
@@ -7325,7 +7334,7 @@
           ]
         },
         "format_editorial_paragraphs": {
-          "line": 842,
+          "line": 846,
           "doc": "Magazine-Grade Professional Typography & Inline Media Injector:",
           "args": [
             "paras",
@@ -7338,7 +7347,7 @@
           ]
         },
         "build_news_html": {
-          "line": 1016,
+          "line": 1026,
           "doc": "",
           "args": [
             "item",
@@ -7347,7 +7356,7 @@
           ]
         },
         "build_news_hub_html": {
-          "line": 1904,
+          "line": 1917,
           "doc": "",
           "args": [
             "news_items",
@@ -7355,7 +7364,7 @@
           ]
         },
         "build_tools_hub_html": {
-          "line": 2069,
+          "line": 2084,
           "doc": "",
           "args": [
             "tool_items",
@@ -7363,7 +7372,7 @@
           ]
         },
         "generate_all_landing_pages": {
-          "line": 2229,
+          "line": 2246,
           "doc": "",
           "args": []
         }
@@ -7514,6 +7523,31 @@
         "BASE_DIR",
         "IMAGES_DIR",
         "THUMBNAILS_DIR"
+      ]
+    },
+    "tools/safe_sync.py": {
+      "size": 3807,
+      "mtime": 1795526822.225679,
+      "classes": {},
+      "functions": {
+        "clean_git_locks": {
+          "line": 16,
+          "doc": "",
+          "args": []
+        },
+        "setup_proxy": {
+          "line": 34,
+          "doc": "",
+          "args": []
+        },
+        "run_sync": {
+          "line": 45,
+          "doc": "",
+          "args": []
+        }
+      },
+      "constants": [
+        "WORKSPACE_DIR"
       ]
     },
     "tools/sync_forbes_data.py": {
@@ -8362,7 +8396,7 @@
     },
     "public/js/app.js": {
       "size": 777388,
-      "mtime": 1795439891.6565607,
+      "mtime": 1795526806.1339285,
       "classes": {},
       "functions": {
         "flipPinnedSlide": {
@@ -10765,13 +10799,13 @@
         "args": [
           "url"
         ],
-        "doc": "Return True only if url is an authentic lead image and not generic/dummy."
+        "doc": "Return True only if url is an authentic lead image and not generic/dummy or broken."
       }
     ],
     "resolve_news_lead_image_url": [
       {
         "file": "content_publisher.py",
-        "line": 399,
+        "line": 423,
         "type": "function",
         "args": [
           "img",
@@ -10784,19 +10818,32 @@
     "safe_text": [
       {
         "file": "content_publisher.py",
-        "line": 425,
+        "line": 449,
         "type": "function",
         "args": [
           "text",
           "max_len"
         ],
-        "doc": ""
+        "doc": "Safe text escaping: slice cleanly BEFORE entity escaping to prevent broken &quo artifacts."
+      }
+    ],
+    "get_clean_news_summary": [
+      {
+        "file": "content_publisher.py",
+        "line": 460,
+        "type": "function",
+        "args": [
+          "it",
+          "is_zh",
+          "max_len"
+        ],
+        "doc": "Extract a complete, grammatical, non-dangling summary for news cards without sentence truncation."
       }
     ],
     "parse_markdown_table": [
       {
         "file": "content_publisher.py",
-        "line": 436,
+        "line": 525,
         "type": "function",
         "args": [
           "table_lines"
@@ -10807,7 +10854,7 @@
     "_markdown_to_clean_html": [
       {
         "file": "content_publisher.py",
-        "line": 501,
+        "line": 590,
         "type": "function",
         "args": [
           "md_text"
@@ -10818,7 +10865,7 @@
     "publish_deep_dive_articles": [
       {
         "file": "content_publisher.py",
-        "line": 667,
+        "line": 756,
         "type": "function",
         "args": [],
         "doc": "扫描 data/wechat_articles 目录，抽取高品质原创深度拆解文章，"
@@ -10827,7 +10874,7 @@
     "backfill_historical_daily_briefings": [
       {
         "file": "content_publisher.py",
-        "line": 1317,
+        "line": 1406,
         "type": "function",
         "args": [],
         "doc": "调取 master_archive.json 与 latest_news.json 中的历史数据，"
@@ -10836,7 +10883,7 @@
     "_render_single_daily_page": [
       {
         "file": "content_publisher.py",
-        "line": 1663,
+        "line": 1752,
         "type": "function",
         "args": [
           "date_slug",
@@ -10852,7 +10899,7 @@
     "get_english_article_title": [
       {
         "file": "content_publisher.py",
-        "line": 2080,
+        "line": 2169,
         "type": "function",
         "args": [
           "zh_title"
@@ -10863,7 +10910,7 @@
     "resolve_viral_tweet_tag": [
       {
         "file": "content_publisher.py",
-        "line": 2099,
+        "line": 2188,
         "type": "function",
         "args": [
           "it",
@@ -10875,7 +10922,7 @@
     "optimize_avatar_url": [
       {
         "file": "content_publisher.py",
-        "line": 2170,
+        "line": 2259,
         "type": "function",
         "args": [
           "url"
@@ -10886,7 +10933,7 @@
     "is_valid_tweet_image_url": [
       {
         "file": "content_publisher.py",
-        "line": 2178,
+        "line": 2267,
         "type": "function",
         "args": [
           "url"
@@ -10906,7 +10953,7 @@
     "format_tweet_publish_time": [
       {
         "file": "content_publisher.py",
-        "line": 2192,
+        "line": 2281,
         "type": "function",
         "args": [
           "it",
@@ -10918,7 +10965,7 @@
     "format_viral_page_card": [
       {
         "file": "content_publisher.py",
-        "line": 2219,
+        "line": 2308,
         "type": "function",
         "args": [
           "it",
@@ -10931,7 +10978,7 @@
     "format_tibo_pinned_card": [
       {
         "file": "content_publisher.py",
-        "line": 2376,
+        "line": 2465,
         "type": "function",
         "args": [
           "it",
@@ -10943,7 +10990,7 @@
     "format_lead_video_card": [
       {
         "file": "content_publisher.py",
-        "line": 2488,
+        "line": 2577,
         "type": "function",
         "args": [
           "lead_media",
@@ -10955,7 +11002,7 @@
     "build_pinned_slider_html": [
       {
         "file": "content_publisher.py",
-        "line": 2622,
+        "line": 2711,
         "type": "function",
         "args": [
           "cards"
@@ -10966,7 +11013,7 @@
     "format_hero_media_showcase": [
       {
         "file": "content_publisher.py",
-        "line": 2640,
+        "line": 2729,
         "type": "function",
         "args": [
           "hero_showcase",
@@ -10978,7 +11025,7 @@
     "prerender_homepage": [
       {
         "file": "content_publisher.py",
-        "line": 2843,
+        "line": 2932,
         "type": "function",
         "args": [
           "items",
@@ -10994,19 +11041,19 @@
     "update_sitemap_with_all_pages": [
       {
         "file": "content_publisher.py",
-        "line": 4177,
+        "line": 4276,
         "type": "function",
         "args": [
           "daily_dates",
           "articles_meta"
         ],
-        "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页，"
+        "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页、工具落地页与全量快讯落地页，"
       }
     ],
     "run_full_content_publication": [
       {
         "file": "content_publisher.py",
-        "line": 4395,
+        "line": 4299,
         "type": "function",
         "args": [
           "items",
@@ -18723,7 +18770,7 @@
     "auto_heal_dataset": [
       {
         "file": "tests/test_data_quality_gate.py",
-        "line": 562,
+        "line": 581,
         "type": "function",
         "args": [
           "data",
@@ -20126,7 +20173,7 @@
     "extract_ai_analysis_text": [
       {
         "file": "tool_news_publisher.py",
-        "line": 714,
+        "line": 718,
         "type": "function",
         "args": [
           "analysis_data",
@@ -20138,7 +20185,7 @@
     "_render_inline_video_figure": [
       {
         "file": "tool_news_publisher.py",
-        "line": 757,
+        "line": 761,
         "type": "function",
         "args": [
           "vid",
@@ -20152,7 +20199,7 @@
     "format_editorial_paragraphs": [
       {
         "file": "tool_news_publisher.py",
-        "line": 842,
+        "line": 846,
         "type": "function",
         "args": [
           "paras",
@@ -20169,7 +20216,7 @@
     "build_news_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1016,
+        "line": 1026,
         "type": "function",
         "args": [
           "item",
@@ -20182,7 +20229,7 @@
     "build_news_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1904,
+        "line": 1917,
         "type": "function",
         "args": [
           "news_items",
@@ -20194,7 +20241,7 @@
     "build_tools_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2069,
+        "line": 2084,
         "type": "function",
         "args": [
           "tool_items",
@@ -20206,7 +20253,7 @@
     "generate_all_landing_pages": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2229,
+        "line": 2246,
         "type": "function",
         "args": [],
         "doc": ""
@@ -20364,6 +20411,33 @@
           "quality"
         ],
         "doc": "Incrementally generates WebP thumbnails for all images in public/images/."
+      }
+    ],
+    "clean_git_locks": [
+      {
+        "file": "tools/safe_sync.py",
+        "line": 16,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      }
+    ],
+    "setup_proxy": [
+      {
+        "file": "tools/safe_sync.py",
+        "line": 34,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      }
+    ],
+    "run_sync": [
+      {
+        "file": "tools/safe_sync.py",
+        "line": 45,
+        "type": "function",
+        "args": [],
+        "doc": ""
       }
     ],
     "patch_item": [
