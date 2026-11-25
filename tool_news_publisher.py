@@ -1047,7 +1047,7 @@ def format_editorial_paragraphs(
         # In-Content Native Slot: In substantive long-form reading (total >= 4), inject once after paragraph 2
         if total >= 4 and i == 1:
             rendered_elements.append(
-                '<aside aria-label="Partner Spotlight" data-ad-slot="article-native" class="my-9 min-h-[220px]"></aside>'
+                '<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>'
             )
 
     return "\n\n".join(rendered_elements)

@@ -9519,6 +9519,14 @@
   var usedIds = window.__AINR_USED_REC_IDS || {};
   window.__AINR_USED_REC_IDS = usedIds;
 
+  var WEAK_GENERIC_TAGS = {
+    amazon: 1, google: 1, apple: 1, samsung: 1, meta: 1, microsoft: 1,
+    ai: 1, tech: 1, news: 1, digital: 1, smart: 1, pro: 1, video: 1,
+    audio: 1, mobile: 1, voice: 1, desk: 1, travel: 1, creator: 1,
+    gaming: 1, hardware: 1, office: 1, studio: 1, wireless: 1, usb: 1,
+    '智能': 1, '数码': 1, '科技': 1, '办公': 1, 'ai硬件': 1
+  };
+
   function hashPath(str) {
     var h = 0;
     for (var i = 0; i < str.length; i++) {
@@ -9546,7 +9554,8 @@
 
   function containsTag(haystack, tag) {
     if (!haystack || !tag) return false;
-    if (/[\u4e00-\u9fff]/.test(tag) || tag.indexOf(' ') !== -1 || tag.length >= 5) {
+    // Direct substring only for CJK tokens; strict word boundary for all ASCII tokens
+    if (/[\u4e00-\u9fff]/.test(tag)) {
       return haystack.indexOf(tag) !== -1;
     }
     var re = new RegExp('(^|[^a-z0-9])' + tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])');
@@ -9557,11 +9566,12 @@
     var score = 0;
     var tags = prod.tags || [];
     for (var i = 0; i < tags.length; i++) {
-      var t = tags[i];
-      if (containsTag(signals.tags, t)) score += 12;
-      if (containsTag(signals.title, t)) score += 9;
-      if (containsTag(signals.desc, t)) score += 4;
-      if (containsTag(signals.body, t)) score += 2;
+      var t = String(tags[i] || '').toLowerCase();
+      var w = WEAK_GENERIC_TAGS[t] ? 0.25 : 1.0;
+      if (containsTag(signals.tags, t)) score += 12 * w;
+      if (containsTag(signals.title, t)) score += 9 * w;
+      if (containsTag(signals.desc, t)) score += 4 * w;
+      if (containsTag(signals.body, t)) score += 2 * w;
     }
     var tie = (hashPath(prod.id + ':' + seed) % 100) / 1000.0;
     return score + tie;
@@ -9578,10 +9588,9 @@
       if (usedIds[prod.id]) continue;
       if (!prod.image) continue;
       if (opts.filterCategory && prod.category !== opts.filterCategory) continue;
-      scored.push({
-        item: prod,
-        score: scoreProduct(prod, signals, seed)
-      });
+      var sc = scoreProduct(prod, signals, seed);
+      if (opts.minScore && sc < opts.minScore) continue;
+      scored.push({ item: prod, score: sc });
     }
 
     scored.sort(function (a, b) { return b.score - a.score; });
@@ -9612,7 +9621,7 @@
   }
 
   // =========================================================================
-  // 4. PHOTO-FIRST VISUAL GALLERY STYLES & RENDERERS
+  // 4. PHOTO-FIRST VISUAL GALLERY & IN-ARTICLE SPOTLIGHT RENDERERS
   // =========================================================================
   function injectStylesOnce() {
     if (document.getElementById('ainr-monetization-css')) return;
@@ -9624,20 +9633,15 @@
       '.ainr-theme-light .ainr-showcase{background:linear-gradient(180deg,rgba(248,250,252,0.92),rgba(241,245,249,0.58));border:1px solid rgba(203,213,225,0.72);}',
       '.ainr-theme-dark .ainr-showcase{background:linear-gradient(180deg,rgba(15,23,42,0.68),rgba(15,23,42,0.42));border:1px solid rgba(51,65,85,0.65);backdrop-filter:blur(10px);}',
 
-      '.ainr-meta-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:13px;}',
-      '.ainr-heading{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.01em;}',
+      '.ainr-meta-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;}',
+      '.ainr-heading{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;letter-spacing:.01em;}',
       '.ainr-theme-light .ainr-heading{color:#334155;}',
       '.ainr-theme-dark .ainr-heading{color:#e2e8f0;}',
       '.ainr-dot{width:6px;height:6px;border-radius:999px;background:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.16);flex-shrink:0;}',
-      '.ainr-meta-right{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:10.5px;}',
-      '.ainr-theme-light .ainr-meta-right{color:#64748b;}',
-      '.ainr-theme-dark .ainr-meta-right{color:#94a3b8;}',
-      '.ainr-sponsor-link{color:inherit;text-decoration:none;font-weight:600;opacity:0.82;transition:opacity .15s ease,color .15s ease;}',
-      '.ainr-sponsor-link:hover{opacity:1;color:#6366f1;}',
 
+      // Bottom & Home Multi-Card Photo Grid
       '.ainr-grid-6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;}',
       '.ainr-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}',
-      '.ainr-grid-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}',
       '.ainr-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}',
 
       '.ainr-pcard{position:relative;display:flex;flex-direction:column;padding:10px;border-radius:14px;text-decoration:none;min-width:0;transition:transform .22s cubic-bezier(0.16,1,0.3,1),border-color .22s ease,box-shadow .22s ease;}',
@@ -9648,27 +9652,48 @@
       '.ainr-theme-dark .ainr-pcard:hover{border-color:rgba(129,140,248,0.6);box-shadow:0 12px 26px -10px rgba(99,102,241,0.28);}',
 
       '.ainr-photo-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;background:#ffffff;border:1px solid rgba(15,23,42,0.05);display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;box-sizing:border-box;}',
-      '.ainr-grid-strip .ainr-photo-wrap{aspect-ratio:16/11;padding:8px;}',
       '.ainr-photo{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;transition:transform .32s cubic-bezier(0.16,1,0.3,1);}',
-      '.ainr-pcard:hover .ainr-photo{transform:scale(1.06);}',
+      '.ainr-pcard:hover .ainr-photo,.ainr-spot:hover .ainr-photo{transform:scale(1.06);}',
 
       '.ainr-pname{margin:9px 2px 0;font-size:12.5px;font-weight:600;line-height:1.38;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.76em;letter-spacing:-0.005em;}',
       '.ainr-pfoot{margin-top:8px;padding:7px 2px 1px;border-top:1px solid rgba(148,163,184,0.16);display:flex;align-items:center;justify-content:space-between;gap:6px;}',
-      '.ainr-store{font-size:10.5px;font-weight:600;opacity:0.55;letter-spacing:.01em;}',
+      '.ainr-store{font-size:10.5px;font-weight:600;opacity:0.52;letter-spacing:.01em;}',
       '.ainr-go{font-size:11px;font-weight:650;white-space:nowrap;transition:transform .18s ease;}',
       '.ainr-theme-light .ainr-go{color:#4f46e5;}',
       '.ainr-theme-dark .ainr-go{color:#818cf8;}',
       '.ainr-pcard:hover .ainr-go{transform:translateX(2px);}',
 
+      // In-Article Distinct Editorial Horizontal Spotlight Card (Single Highly-Matched Product)
+      '.ainr-spot{display:flex;align-items:center;gap:18px;padding:14px 18px;border-radius:16px;text-decoration:none;transition:transform .22s cubic-bezier(0.16,1,0.3,1),border-color .22s ease,box-shadow .22s ease;}',
+      '.ainr-spot:hover{transform:translateY(-1.5px);}',
+      '.ainr-theme-light .ainr-spot{background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);border:1px solid rgba(203,213,225,0.85);border-left:3px solid #6366f1;color:#0f172a;box-shadow:0 6px 20px -10px rgba(15,23,42,0.1);}',
+      '.ainr-theme-light .ainr-spot:hover{border-color:rgba(99,102,241,0.55);border-left-color:#4f46e5;box-shadow:0 12px 26px -12px rgba(79,70,229,0.22);}',
+      '.ainr-theme-dark .ainr-spot{background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(30,41,59,0.65));border:1px solid rgba(51,65,85,0.85);border-left:3px solid #818cf8;color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.5);}',
+      '.ainr-theme-dark .ainr-spot:hover{border-color:rgba(129,140,248,0.6);box-shadow:0 12px 28px -10px rgba(99,102,241,0.3);}',
+
+      '.ainr-spot-imgwrap{width:136px;height:98px;flex-shrink:0;border-radius:12px;background:#ffffff;border:1px solid rgba(15,23,42,0.06);padding:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;}',
+      '.ainr-spot-body{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;}',
+      '.ainr-spot-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.02em;opacity:0.72;}',
+      '.ainr-spot-title{margin:4px 0 0;font-size:15px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}',
+      '.ainr-spot-foot{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;}',
+      '.ainr-spot-pill{display:inline-flex;align-items:center;gap:4px;padding:5px 13px;border-radius:999px;font-size:11.5px;font-weight:650;white-space:nowrap;transition:background .18s ease,color .18s ease;}',
+      '.ainr-theme-light .ainr-spot-pill{background:rgba(79,70,229,0.08);color:#4f46e5;}',
+      '.ainr-theme-light .ainr-spot:hover .ainr-spot-pill{background:#4f46e5;color:#ffffff;}',
+      '.ainr-theme-dark .ainr-spot-pill{background:rgba(129,140,248,0.16);color:#a5b4fc;}',
+      '.ainr-theme-dark .ainr-spot:hover .ainr-spot-pill{background:#6366f1;color:#ffffff;}',
+
       '@media (max-width:1279px){.ainr-grid-6{grid-template-columns:repeat(3,minmax(0,1fr));}}',
       '@media (max-width:639px){',
         '.ainr-showcase{padding:13px 12px;border-radius:14px;}',
         '.ainr-grid-6,.ainr-grid-3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}',
-        '.ainr-grid-strip{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(156px,46vw);overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:4px;-webkit-overflow-scrolling:touch;}',
-        '.ainr-grid-strip .ainr-pcard{scroll-snap-align:start;}',
         '.ainr-pcard{padding:8px;border-radius:12px;}',
         '.ainr-photo-wrap{padding:8px;}',
         '.ainr-pname{font-size:12px;}',
+        '.ainr-spot{gap:12px;padding:12px;border-radius:14px;}',
+        '.ainr-spot-imgwrap{width:96px;height:82px;padding:6px;border-radius:10px;}',
+        '.ainr-spot-title{font-size:13.5px;}',
+        '.ainr-spot-foot{margin-top:7px;}',
+        '.ainr-spot-pill{padding:4px 10px;font-size:11px;}',
       '}'
     ].join('');
     document.head.appendChild(style);
@@ -9703,7 +9728,6 @@
 
   function renderPhotoCard(raw, lang) {
     var p = localizeItem(raw, lang);
-    var storeLabel = 'Amazon';
     var goLabel = lang === 'zh' ? '去看看 →' : 'View →';
     var imgSrc = p.image || ('/images/products/' + p.id + '.webp');
     return (
@@ -9713,28 +9737,40 @@
         '</div>' +
         '<h4 class="ainr-pname">' + esc(p.name) + '</h4>' +
         '<div class="ainr-pfoot">' +
-          '<span class="ainr-store">' + storeLabel + '</span>' +
+          '<span class="ainr-store">Amazon</span>' +
           '<span class="ainr-go">' + goLabel + '</span>' +
         '</div>' +
       '</a>'
     );
   }
 
-  function renderMetaBar(lang, labelEn, labelZh, showSponsorLink) {
+  function renderSpotlightCard(raw, lang) {
+    var p = localizeItem(raw, lang);
+    var eyebrow = lang === 'zh' ? '亚马逊好物精选' : 'Amazon Pick';
+    var ctaLabel = lang === 'zh' ? '前往亚马逊查看 →' : 'View on Amazon →';
+    var imgSrc = p.image || ('/images/products/' + p.id + '.webp');
+    return (
+      '<a class="ainr-spot" ' + linkAttrs(p) + ' title="' + esc(p.name) + '">' +
+        '<div class="ainr-spot-imgwrap">' +
+          '<img class="ainr-photo" src="' + esc(imgSrc) + '" alt="' + esc(p.name) + '" decoding="async" onerror="this.style.opacity=\'0.25\'">' +
+        '</div>' +
+        '<div class="ainr-spot-body">' +
+          '<span class="ainr-spot-eyebrow"><span class="ainr-dot"></span><span>' + esc(eyebrow) + '</span></span>' +
+          '<h4 class="ainr-spot-title">' + esc(p.name) + '</h4>' +
+          '<div class="ainr-spot-foot">' +
+            '<span class="ainr-store">Amazon</span>' +
+            '<span class="ainr-spot-pill">' + ctaLabel + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
+  function renderMetaBar(lang, labelEn, labelZh) {
     var leftText = lang === 'zh' ? labelZh : labelEn;
-    var disclosureText = lang === 'zh'
-      ? '亚马逊联盟推荐 · 符合条件的购买可能会带来佣金'
-      : 'As an Amazon Associate I earn from qualifying purchases';
-    var sponsorHtml = '';
-    if (showSponsorLink) {
-      var sp = SPONSOR_CARD[lang] || SPONSOR_CARD.en;
-      var spText = lang === 'zh' ? '商务合作 ↗' : 'Partner ↗';
-      sponsorHtml = ' · <a class="ainr-sponsor-link" href="' + esc(sp.url) + '">' + spText + '</a>';
-    }
     return (
       '<div class="ainr-meta-bar">' +
         '<span class="ainr-heading"><span class="ainr-dot"></span><span>' + esc(leftText) + '</span></span>' +
-        '<span class="ainr-meta-right"><span>' + esc(disclosureText) + '</span>' + sponsorHtml + '</span>' +
       '</div>'
     );
   }
@@ -9756,7 +9792,7 @@
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, 'CURATED AI HARDWARE, GADGETS & BOOKS', '精选 AI 智能硬件 · 潮流数码与技术书单', false) +
+            renderMetaBar(lang, 'AMAZON PICKS', '亚马逊好物精选') +
             '<div class="ainr-grid-6">' +
               items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
             '</div>' +
@@ -9771,7 +9807,7 @@
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, 'RECOMMENDED AI DEVICES, COMPUTE & READING', '热门 AI 数码装备 · 算力硬件与精选读物', true) +
+            renderMetaBar(lang, 'FEATURED AMAZON PICKS', '亚马逊热门精选') +
             '<div class="ainr-grid-6">' +
               items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
             '</div>' +
@@ -9783,16 +9819,10 @@
     if (slotType === 'article-bottom' || slotType === 'tool-native') {
       items = pickRelevantProducts(6, { diverseCategories: true });
       if (!items.length) return;
-      var headingEn = slotType === 'tool-native'
-        ? 'RECOMMENDED AI HARDWARE, GADGETS & READS'
-        : 'RELATED AI HARDWARE, DIGITAL GEAR & BOOKS';
-      var headingZh = slotType === 'tool-native'
-        ? '适配该工具的 AI 硬件、数码与进阶书单'
-        : '延伸精选 · 相关 AI 数码硬件与技术书单';
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, headingEn, headingZh, false) +
+            renderMetaBar(lang, 'AMAZON PICKS', '亚马逊好物精选') +
             '<div class="ainr-grid-3">' +
               items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
             '</div>' +
@@ -9807,7 +9837,7 @@
       el.innerHTML =
         '<div class="ainr-slot ' + (slotType === 'gateway-card' ? 'ainr-theme-dark' : getThemeClass(el)) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, 'FEATURED AI GEAR', '精选 AI 数码装备', false) +
+            renderMetaBar(lang, 'AMAZON PICKS', '亚马逊好物精选') +
             '<div class="ainr-grid-2">' +
               items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
             '</div>' +
@@ -9816,17 +9846,16 @@
       return;
     }
 
-    // Default: article-native / daily-native (3 photo-first contextual picks, 0 duplicates with article-bottom)
-    items = pickRelevantProducts(3, { diverseCategories: true });
-    if (!items.length) return;
+    // Default: article-native / daily-native -> 1 single horizontal editorial spotlight, strictly high-relevance only
+    items = pickRelevantProducts(1, { minScore: 14 });
+    if (!items.length) {
+      el.style.display = 'none';
+      el.style.minHeight = '0';
+      return;
+    }
     el.innerHTML =
       '<div class="ainr-slot ' + getThemeClass(el) + '">' +
-        '<div class="ainr-showcase">' +
-          renderMetaBar(lang, 'RELATED AI HARDWARE & PICKS', '结合本文主题精选 · AI 硬件与好物', false) +
-          '<div class="ainr-grid-strip">' +
-            items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
-          '</div>' +
-        '</div>' +
+        renderSpotlightCard(items[0], lang) +
       '</div>';
   }
 
