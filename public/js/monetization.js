@@ -1,14 +1,13 @@
 /**
- * AI News Radar - Photo-First Context-Aware Amazon Associates Engine (v4.0)
+ * AI News Radar - Photo-First Context-Aware Amazon Associates & Partner Engine (v4.1)
  *
  * Features:
  *   - 289+ curated real AI hardware, digital gadgets, audio/wearables, GPUs,
  *     memory/storage, Macs/PCs, robotics kits, and AI engineering books
- *   - Self-hosted WebP product photography (/images/products/<id>.webp)
- *   - Clean photo-first gallery layout (3-col mid-article, 6-col showcase shelves)
- *     with minimal typography (2-line title + airy store link, zero text clutter)
+ *   - Self-hosted WebP product photography (/images/products/<id>.webp) + Partner SVG artwork
+ *   - Differentiated homepage layouts: 6-col photo gallery shelf (mid) +
+ *     3-col rich editorial showcase (bottom: ElevenLabs Voice AI + non-overlapping Amazon picks)
  *   - Real-time article tag & keyword relevance scoring (EN + ZH) + page-wide 0 duplicates
- *   - Clear Amazon Associates (purrpulse-20) disclosure & translation-plugin friendly markup
  */
 (function () {
   'use strict';
@@ -9460,6 +9459,31 @@
     }
   ];
 
+  var ELEVENLABS_PARTNER = {
+    id: 'elevenlabs-voice',
+    category: 'partner',
+    isPartnerBanner: true,
+    accent: 'indigo',
+    url: 'https://try.elevenlabs.io/bwnugci42q5y',
+    image: '/images/partners/elevenlabs_banner.svg',
+    en: {
+      badge: 'VOICE AGENT API',
+      source: 'Official Partner',
+      name: 'ElevenLabs Frontier Voice AI',
+      tagline: 'Industry-leading real-time voice streaming, voice cloning, and multilingual speech synthesis.',
+      cta: 'Try Voice AI Free',
+      hint: 'Free 10,000 Credits/mo'
+    },
+    zh: {
+      badge: '语音合成 & 声音克隆',
+      source: '官方合作伙伴',
+      name: 'ElevenLabs 全球领先 AI 语音与合成',
+      tagline: '好莱坞级超逼真声音克隆、多语言实时语音合成与流式开发接口，注册送 10,000 免费额度。',
+      cta: '免费体验语音 AI',
+      hint: '每月免费领 10,000 额度'
+    }
+  };
+
   var SPONSOR_CARD = {
     en: {
       id: 'sponsor-direct-en',
@@ -9653,24 +9677,64 @@
       '.ainr-theme-dark .ainr-pcard:hover{border-color:rgba(129,140,248,0.55);box-shadow:0 14px 28px -8px rgba(0,0,0,0.68),0 0 22px -6px rgba(99,102,241,0.24);}',
 
       '.ainr-photo-wrap{position:relative;width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:12px 14px;overflow:hidden;box-sizing:border-box;transition:background .25s ease;}',
-      '.ainr-theme-light .ainr-photo-wrap,.ainr-theme-light .ainr-spot-imgwrap{background:radial-gradient(circle at 50% 42%,#f8fafc 0%,#eef2f6 76%,#e4eaf2 100%);box-shadow:inset 0 -8px 14px -10px rgba(15,23,42,0.12);}',
-      '.ainr-theme-dark .ainr-photo-wrap,.ainr-theme-dark .ainr-spot-imgwrap{background:radial-gradient(circle at 50% 42%,#c5d0de 0%,#aebbd0 70%,#99a8be 100%);box-shadow:inset 0 -14px 20px -12px rgba(13,19,34,0.38),inset 0 0 18px rgba(13,19,34,0.14);}',
+      '.ainr-theme-light .ainr-photo-wrap,.ainr-theme-light .ainr-spot-imgwrap,.ainr-theme-light .ainr-bhero-stage{background:radial-gradient(circle at 50% 42%,#f8fafc 0%,#eef2f6 76%,#e4eaf2 100%);box-shadow:inset 0 -8px 14px -10px rgba(15,23,42,0.12);}',
+      '.ainr-theme-dark .ainr-photo-wrap,.ainr-theme-dark .ainr-spot-imgwrap,.ainr-theme-dark .ainr-bhero-stage{background:radial-gradient(circle at 50% 42%,#c5d0de 0%,#aebbd0 70%,#99a8be 100%);box-shadow:inset 0 -14px 20px -12px rgba(13,19,34,0.38),inset 0 0 18px rgba(13,19,34,0.14);}',
 
       '.ainr-photo{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:5px;mix-blend-mode:multiply;transition:transform .32s cubic-bezier(0.16,1,0.3,1);}',
       '.ainr-photo-book{mix-blend-mode:normal;border-radius:4px;box-shadow:0 8px 18px rgba(15,23,42,0.32);}',
       '.ainr-theme-dark .ainr-photo-book{filter:brightness(0.93) contrast(1.03);}',
-      '.ainr-pcard:hover .ainr-photo,.ainr-spot:hover .ainr-photo{transform:scale(1.06);}',
+      '.ainr-pcard:hover .ainr-photo,.ainr-spot:hover .ainr-photo,.ainr-bcard:hover .ainr-photo{transform:scale(1.06);}',
 
       '.ainr-pbody{display:flex;flex-direction:column;flex:1;padding:10px 12px 11px;}',
       '.ainr-pname{margin:0;font-size:12.5px;font-weight:600;line-height:1.38;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.76em;letter-spacing:-0.005em;}',
       '.ainr-pfoot{margin-top:8px;padding:7px 0 0;display:flex;align-items:center;justify-content:space-between;gap:6px;}',
-      '.ainr-theme-light .ainr-pfoot{border-top:1px solid rgba(148,163,184,0.18);}',
-      '.ainr-theme-dark .ainr-pfoot{border-top:1px solid hsla(0,0%,100%,0.07);}',
+      '.ainr-theme-light .ainr-pfoot,.ainr-theme-light .ainr-bfoot{border-top:1px solid rgba(148,163,184,0.18);}',
+      '.ainr-theme-dark .ainr-pfoot,.ainr-theme-dark .ainr-bfoot{border-top:1px solid hsla(0,0%,100%,0.07);}',
       '.ainr-store{font-size:10.5px;font-weight:600;opacity:0.55;letter-spacing:.01em;}',
       '.ainr-go{font-size:11px;font-weight:650;white-space:nowrap;transition:transform .18s ease;}',
       '.ainr-theme-light .ainr-go{color:#4f46e5;}',
       '.ainr-theme-dark .ainr-go{color:#818cf8;}',
       '.ainr-pcard:hover .ainr-go{transform:translateX(2px);}',
+
+      // Homepage Bottom 3-Column Rich Editorial Showcase (Unified ElevenLabs + Amazon Gear Cards)
+      '.ainr-bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}',
+      '.ainr-bcard{position:relative;display:flex;flex-direction:column;padding:0;border-radius:16px;text-decoration:none;min-width:0;overflow:hidden;transition:transform .22s cubic-bezier(0.16,1,0.3,1),border-color .22s ease,box-shadow .22s ease,background .22s ease;}',
+      '.ainr-bcard:hover{transform:translateY(-2.5px);}',
+      '.ainr-theme-light .ainr-bcard{background:#ffffff;border:1px solid rgba(203,213,225,0.9);color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.06);}',
+      '.ainr-theme-light .ainr-bcard:hover{border-color:#6366f1;box-shadow:0 16px 32px -12px rgba(79,70,229,0.2),0 4px 10px -2px rgba(0,0,0,0.04);}',
+      '.ainr-theme-dark .ainr-bcard{background:linear-gradient(180deg,rgba(15,23,42,0.95) 0%,rgba(11,17,31,0.98) 100%);border:1px solid hsla(0,0%,100%,0.09);color:#f1f5f9;box-shadow:0 10px 26px -10px rgba(0,0,0,0.58);}',
+      '.ainr-theme-dark .ainr-bcard:hover{border-color:rgba(129,140,248,0.55);box-shadow:0 18px 36px -10px rgba(0,0,0,0.72),0 0 24px -6px rgba(99,102,241,0.26);}',
+      '.ainr-bhero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;box-sizing:border-box;display:flex;align-items:center;justify-content:center;transition:background .25s ease;}',
+      '.ainr-bhero-partner{padding:0;background:#0b0f19;}',
+      '.ainr-theme-light .ainr-bhero-partner{border-bottom:1px solid rgba(15,23,42,0.08);}',
+      '.ainr-bhero-partner img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .36s cubic-bezier(0.16,1,0.3,1);}',
+      '.ainr-bcard:hover .ainr-bhero-partner img{transform:scale(1.04);}',
+      '.ainr-bhero-stage{padding:16px 22px;}',
+      '.ainr-bbody{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px;}',
+      '.ainr-bpill-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;}',
+      '.ainr-bpill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;padding:2px 8.5px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%;}',
+      '.ainr-theme-light .ainr-bpill-indigo{background:rgba(79,70,229,0.09);color:#4338ca;border:1px solid rgba(79,70,229,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-indigo{background:rgba(99,102,241,0.18);color:#a5b4fc;border:1px solid rgba(129,140,248,0.32);}',
+      '.ainr-theme-light .ainr-bpill-sky{background:rgba(2,132,199,0.09);color:#0369a1;border:1px solid rgba(2,132,199,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-sky{background:rgba(14,165,233,0.16);color:#7dd3fc;border:1px solid rgba(56,189,248,0.3);}',
+      '.ainr-theme-light .ainr-bpill-emerald{background:rgba(5,150,105,0.09);color:#047857;border:1px solid rgba(5,150,105,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-emerald{background:rgba(16,185,129,0.16);color:#6ee7b7;border:1px solid rgba(52,211,153,0.3);}',
+      '.ainr-theme-light .ainr-bpill-violet{background:rgba(124,58,237,0.09);color:#6d28d9;border:1px solid rgba(124,58,237,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-violet{background:rgba(139,92,246,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.32);}',
+      '.ainr-theme-light .ainr-bpill-amber{background:rgba(217,119,6,0.09);color:#b45309;border:1px solid rgba(217,119,6,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-amber{background:rgba(245,158,11,0.16);color:#fcd34d;border:1px solid rgba(251,191,36,0.3);}',
+      '.ainr-theme-light .ainr-bpill-rose{background:rgba(225,29,72,0.09);color:#be123c;border:1px solid rgba(225,29,72,0.22);}',
+      '.ainr-theme-dark .ainr-bpill-rose{background:rgba(244,63,94,0.16);color:#fda4af;border:1px solid rgba(251,113,133,0.3);}',
+      '.ainr-bsrc{font-size:11px;font-weight:650;opacity:0.6;white-space:nowrap;flex-shrink:0;}',
+      '.ainr-btitle{margin:0;font-size:15px;font-weight:750;line-height:1.38;letter-spacing:-0.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.76em;}',
+      '.ainr-bdesc{margin:6px 0 0;font-size:12.5px;line-height:1.5;opacity:0.78;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1;min-height:3em;}',
+      '.ainr-bfoot{margin-top:12px;padding-top:11px;display:flex;align-items:center;justify-content:space-between;gap:10px;}',
+      '.ainr-bhint{font-size:11px;font-weight:600;opacity:0.66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}',
+      '.ainr-bcta{display:inline-flex;align-items:center;gap:4px;padding:6px 13px;border-radius:9px;font-size:11.5px;font-weight:700;white-space:nowrap;flex-shrink:0;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;}',
+      '.ainr-theme-light .ainr-bcta{background:#4f46e5;color:#ffffff;box-shadow:0 2px 8px rgba(79,70,229,0.22);}',
+      '.ainr-theme-light .ainr-bcard:hover .ainr-bcta{background:#4338ca;}',
+      '.ainr-theme-dark .ainr-bcta{background:rgba(99,102,241,0.22);color:#e0e7ff;border:1px solid rgba(129,140,248,0.4);}',
+      '.ainr-theme-dark .ainr-bcard:hover .ainr-bcta{background:#6366f1;color:#ffffff;border-color:#818cf8;}',
 
       // In-Article Distinct Editorial Horizontal Spotlight Card (Edge-to-Edge Studio Split)
       '.ainr-spot{display:flex;align-items:stretch;padding:0;border-radius:16px;text-decoration:none;overflow:hidden;transition:transform .22s cubic-bezier(0.16,1,0.3,1),border-color .22s ease,box-shadow .22s ease,background .22s ease;}',
@@ -9692,6 +9756,7 @@
       '.ainr-theme-dark .ainr-spot:hover .ainr-spot-pill{background:#6366f1;color:#ffffff;}',
 
       '@media (max-width:1279px){.ainr-grid-6{grid-template-columns:repeat(3,minmax(0,1fr));}}',
+      '@media (max-width:1023px){.ainr-bgrid{grid-template-columns:1fr;gap:14px;}}',
       '@media (max-width:639px){',
         '.ainr-showcase{padding:13px 12px;border-radius:14px;}',
         '.ainr-grid-6,.ainr-grid-3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}',
@@ -9699,6 +9764,10 @@
         '.ainr-photo-wrap{padding:10px;}',
         '.ainr-pbody{padding:8px 10px 9px;}',
         '.ainr-pname{font-size:12px;}',
+        '.ainr-bcard{border-radius:14px;}',
+        '.ainr-bbody{padding:12px 13px 13px;}',
+        '.ainr-btitle{font-size:14px;}',
+        '.ainr-bdesc{font-size:12px;}',
         '.ainr-spot{border-radius:14px;}',
         '.ainr-spot-imgwrap{width:108px;min-height:92px;padding:8px;}',
         '.ainr-spot-body{padding:11px 12px;}',
@@ -9789,6 +9858,61 @@
     );
   }
 
+  function localizeRichItem(raw, lang) {
+    var copy = (raw.en && raw.zh) ? (lang === 'zh' ? raw.zh : raw.en) : raw;
+    return {
+      id: raw.id,
+      category: raw.category,
+      accent: raw.accent || 'indigo',
+      isPartnerBanner: !!raw.isPartnerBanner,
+      image: raw.image,
+      internal: raw.internal,
+      url: raw.url,
+      badge: copy.badge || '',
+      source: copy.source || 'Amazon',
+      name: copy.name || '',
+      tagline: copy.tagline || '',
+      cta: copy.cta || (lang === 'zh' ? '去看看' : 'View'),
+      hint: copy.hint || (lang === 'zh' ? '查看实时报价' : 'Check Live Price')
+    };
+  }
+
+  function renderRichBottomCard(raw, lang) {
+    var p = localizeRichItem(raw, lang);
+    var accentCls = 'ainr-bpill-' + (p.accent || 'indigo');
+    var heroHtml;
+    if (p.isPartnerBanner) {
+      heroHtml =
+        '<div class="ainr-bhero ainr-bhero-partner">' +
+          '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async">' +
+        '</div>';
+    } else {
+      var imgSrc = photoUrl(p);
+      var imgCls = p.category === 'book' ? 'ainr-photo ainr-photo-book' : 'ainr-photo';
+      heroHtml =
+        '<div class="ainr-bhero ainr-bhero-stage">' +
+          '<img class="' + imgCls + '" src="' + esc(imgSrc) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async" onerror="this.style.opacity=\'0.25\'">' +
+        '</div>';
+    }
+    return (
+      '<a class="ainr-bcard" ' + linkAttrs(p) + ' title="' + esc(p.name) + '">' +
+        heroHtml +
+        '<div class="ainr-bbody">' +
+          '<div class="ainr-bpill-row">' +
+            '<span class="ainr-bpill ' + accentCls + '">✦ ' + esc(p.badge) + '</span>' +
+            '<span class="ainr-bsrc">' + esc(p.source) + '</span>' +
+          '</div>' +
+          '<h4 class="ainr-btitle">' + esc(p.name) + '</h4>' +
+          '<p class="ainr-bdesc">' + esc(p.tagline) + '</p>' +
+          '<div class="ainr-bfoot">' +
+            '<span class="ainr-bhint">' + esc(p.hint) + '</span>' +
+            '<span class="ainr-bcta">' + esc(p.cta) + ' →</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>'
+    );
+  }
+
   function renderMetaBar(lang, labelEn, labelZh) {
     var leftText = lang === 'zh' ? labelZh : labelEn;
     return (
@@ -9825,14 +9949,14 @@
     }
 
     if (slotType === 'home-bottom-native') {
-      items = pickRelevantProducts(6, { diverseCategories: true });
-      if (!items.length) return;
+      items = pickRelevantProducts(2, { diverseCategories: true });
+      var showcaseCards = [ELEVENLABS_PARTNER].concat(items);
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, 'FEATURED AMAZON PICKS', '亚马逊热门精选') +
-            '<div class="ainr-grid-6">' +
-              items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+            renderMetaBar(lang, 'FEATURED AI ECOSYSTEM & GEAR PICKS', '精选 AI 生态伙伴与硬件好物') +
+            '<div class="ainr-bgrid">' +
+              showcaseCards.map(function (it) { return renderRichBottomCard(it, lang); }).join('') +
             '</div>' +
           '</div>' +
         '</div>';
