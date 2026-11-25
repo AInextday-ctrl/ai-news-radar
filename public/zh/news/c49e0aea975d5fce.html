@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AWS 首席执行官马特·加曼 (Matt Garman) 表示，人工智能安全不能依赖于“紧急制动”，数十年安全… | AI 资讯雷达</title>
+  <title>AWS 首席执行官马特·加曼 (Matt Garman) 表示，人工智能安全不能依赖于“紧急制动”，数十年安全 | AI 资讯雷达</title>
   <meta name="description" content="亚马逊负责任的人工智能方法的基础可以在我们的核心领导原则之一中找到：成功和规模带来广泛的责任。数千个自主 AI 代理在 AWS Emulator 中编写了每一行代码，AWS 模拟器是一个新的 AWS 本地模拟器，现已可供下载。第15届re:Invent年度回归">
   <meta name="ainr-tags" content="📰 Industry News, news, About Amazon, AWS CEO Matt Garman says AI safety can&#x27;t rely on an &quot;emergency brake&quot; and that the same engineering discipline behind decades of secure systems applies to AI (Matt Garman/About Amazon), 📰 业界动态, AWS 首席执行官马特·加曼 (Matt Garman) 表示，人工智能安全不能依赖于“紧急制动”，数十年安全系统背后的相同工程原理也适用于人工智能, 今日要闻">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -61,6 +61,17 @@
   <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
@@ -200,6 +211,7 @@
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
           <span id="page-lang-flag">🇨🇳</span>
           <span id="page-lang-text">简体中文</span>

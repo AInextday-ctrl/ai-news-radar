@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10 月 14 日，土耳其警方拘留了 Hex 和 PulseChain 创始人 Richard Heart，没… | AI 资讯雷达</title>
+  <title>10 月 14 日，土耳其警方拘留了 Hex 和 PulseChain 创始人 Richard Heart，没 | AI 资讯雷达</title>
   <meta name="description" content="土耳其警方突袭拘捕Hex创始人理查德·哈特并没收数百万资产，代币价格闻讯腰斩暴跌近50% — 来自 The Block 的第一现场报道：10 月 14 日，土耳其警方拘留了 Hex 和 PulseChain 创始人 Richard Heart，没收了 700 万美元以上现金和 6 个冷钱包；初步报告">
   <meta name="ainr-tags" content="📰 Industry News, news, The Block, Turkish police detained Hex and PulseChain founder Richard Heart on Oct. 14, seizing $7M+ in cash and six cold wallets; HEX fell nearly 50% on initial reports (Zack Abrams/The Block), 📰 业界动态, 10 月 14 日，土耳其警方拘留了 Hex 和 PulseChain 创始人 Richard Heart，没收了 700 万美元以上现金和 6 个冷钱包；初步报告显示，HEX 下跌近 5">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -61,6 +61,17 @@
   <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
@@ -193,6 +204,7 @@
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
           <span id="page-lang-flag">🇨🇳</span>
           <span id="page-lang-text">简体中文</span>

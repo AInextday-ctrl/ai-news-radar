@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>看看风投支持的时尚杂志《Colossus》，其中对扎克伯格和其他科技巨头的精彩简介赢得了业界的赞誉，而卡拉·斯… | AI 资讯雷达</title>
+  <title>看看风投支持的时尚杂志《Colossus》，其中对扎克伯格和其他科技巨头的精彩简介赢得了业界的赞誉，而卡拉·斯 | AI 资讯雷达</title>
   <meta name="description" content="一家风险投资家的光鲜季刊希望成为科技亿万富翁的《纽约客》。许多媒体资深人士怀疑这些资料能否实现他们的主题的公共关系目标。 “对于科技行业媒体泡沫来说，拥有自己的机上杂志固然很好，但观众并不傻，”尼莱·帕特尔 (Nilay Patel) 编辑">
   <meta name="ainr-tags" content="🔬 Frontier Tech, news, The San Francisco Standard, A look at VC-backed glossy magazine Colossus, whose glowing profiles of Zuckerberg and other tech titans win industry praise, while Kara Swisher says it is PR (Andrew Fedorov/The San Francisco Standard), 🔬 前沿技术, 看看风投支持的时尚杂志《Colossus》，其中对扎克伯格和其他科技巨头的精彩简介赢得了业界的赞誉，而卡拉·斯威舍">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -61,6 +61,17 @@
   <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
@@ -193,6 +204,7 @@
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
           <span id="page-lang-flag">🇨🇳</span>
           <span id="page-lang-text">简体中文</span>

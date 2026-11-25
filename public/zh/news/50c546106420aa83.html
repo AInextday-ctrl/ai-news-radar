@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMD 报告称，第三季度收入同比增长 45% 至 $13.38B，预期为 $13.09B；数据中心收入增长 9… | AI 资讯雷达</title>
+  <title>AMD 报告称，第三季度收入同比增长 45% 至 $13.38B，预期为 $13.09B；数据中心收入增长 9 | AI 资讯雷达</title>
   <meta name="description" content="Advanced Micro Devices 周二公布的第三季度财报超出了华尔街的预期，收入增长 45%，数据中心销售额同比增长近一倍。该股在盘后交易中上涨了 7%。 AMD 在一份声明中表示，营收较上年同期的 92.5 亿美元有所增长">
   <meta name="ainr-tags" content="📰 Industry News, news, CNBC, AMD reports Q3 revenue up 45% YoY to $13.38B, vs. $13.09B est., Data Center revenue up 97% to $8.5B, forecasts Q4 revenue above est.; AMD jumps 7%+ after hours (Katie Tarasov/CNBC), 📰 业界动态, AMD 报告称，第三季度收入同比增长 45% 至 $13.38B，预期为 $13.09B；数据中心收入增长 97% 至 $8.5B，预计第四季度收入高于预期； AMD 盘后股价上涨 7% 以上, 今日要">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -61,6 +61,17 @@
   <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
@@ -200,6 +211,7 @@
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
           <span id="page-lang-flag">🇨🇳</span>
           <span id="page-lang-text">简体中文</span>

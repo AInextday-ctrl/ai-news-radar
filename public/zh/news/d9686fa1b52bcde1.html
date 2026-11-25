@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tolan 是一款专注于不懂技术的用户的人工智能助手，从 USV、Khosla Ventures 和 Home… | AI 资讯雷达</title>
+  <title>Tolan 是一款专注于不懂技术的用户的人工智能助手，从 USV、Khosla Ventures 和 Home | AI 资讯雷达</title>
   <meta name="description" content="隐私公司Redact在WhatsApp约80个帮助网页的代码中，发现了Meta大语言模型的隐藏指令与防监管提示 — 来自 Upstarts Media 的第一现场报道：Tolan 是一款专注于不懂技术的用户的人工智能助手，从 USV、Khosla Ventures 和 Homebrew 筹集了 30">
   <meta name="ainr-tags" content="📰 Industry News, news, Upstarts Media, Tolan, an AI assistant focused on users that are not tech-savvy, raised $30M from USV, Khosla Ventures, and Homebrew, and says 70% of its users are women (Alex Konrad/Upstarts Media), 📰 业界动态, Tolan 是一款专注于不懂技术的用户的人工智能助手，从 USV、Khosla Ventures 和 Homebrew 筹集了 3000 万美元，并表示其 70% 的用户是女性,">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -61,6 +61,17 @@
   <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
@@ -200,6 +211,7 @@
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
           <span id="page-lang-flag">🇨🇳</span>
           <span id="page-lang-text">简体中文</span>
