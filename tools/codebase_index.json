@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 08:08:33 UTC",
-  "total_files": 107,
-  "total_symbols": 1281,
+  "updated_at": "2026-11-25 08:30:14 UTC",
+  "total_files": 108,
+  "total_symbols": 1283,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -7287,7 +7287,7 @@
     },
     "tool_news_publisher.py": {
       "size": 152895,
-      "mtime": 1795594085.593444,
+      "mtime": 1795594426.544225,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7446,6 +7446,32 @@
         }
       },
       "constants": []
+    },
+    "tools/build_affiliate_catalog.py": {
+      "size": 3328,
+      "mtime": 1795595226.927382,
+      "classes": {},
+      "functions": {
+        "validate_catalog": {
+          "line": 23,
+          "doc": "",
+          "args": [
+            "items"
+          ]
+        },
+        "sync_into_monetization_js": {
+          "line": 57,
+          "doc": "",
+          "args": [
+            "items"
+          ]
+        }
+      },
+      "constants": [
+        "WORKSPACE_DIR",
+        "CATALOG_PATH",
+        "MONETIZATION_JS_PATH"
+      ]
     },
     "tools/check_seo_descriptions.py": {
       "size": 2693,
@@ -20406,6 +20432,28 @@
         "line": 13,
         "type": "function",
         "args": [],
+        "doc": ""
+      }
+    ],
+    "validate_catalog": [
+      {
+        "file": "tools/build_affiliate_catalog.py",
+        "line": 23,
+        "type": "function",
+        "args": [
+          "items"
+        ],
+        "doc": ""
+      }
+    ],
+    "sync_into_monetization_js": [
+      {
+        "file": "tools/build_affiliate_catalog.py",
+        "line": 57,
+        "type": "function",
+        "args": [
+          "items"
+        ],
         "doc": ""
       }
     ],
