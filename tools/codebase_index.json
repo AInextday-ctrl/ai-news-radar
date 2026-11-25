@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 07:45:45 UTC",
+  "updated_at": "2026-11-25 08:08:33 UTC",
   "total_files": 107,
-  "total_symbols": 1280,
+  "total_symbols": 1281,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -1257,7 +1257,7 @@
     },
     "crawlers/bloomberg_crawler.py": {
       "size": 91521,
-      "mtime": 1795592532.1820166,
+      "mtime": 1795593046.3255997,
       "classes": {},
       "functions": {
         "_slug_tokens": {
@@ -1853,7 +1853,7 @@
     },
     "crawlers/content_filters.py": {
       "size": 15376,
-      "mtime": 1795592109.7668984,
+      "mtime": 1795593046.3276649,
       "classes": {},
       "functions": {
         "detect_low_value_roundup_or_promo": {
@@ -5214,7 +5214,7 @@
     },
     "fetcher.py": {
       "size": 196858,
-      "mtime": 1795592312.027403,
+      "mtime": 1795593046.3477898,
       "classes": {},
       "functions": {
         "extract_tech_specs": {
@@ -5851,7 +5851,7 @@
     },
     "main.py": {
       "size": 258343,
-      "mtime": 1795592350.3750768,
+      "mtime": 1795593046.3499577,
       "classes": {},
       "functions": {
         "generate_sitemap": {
@@ -5986,7 +5986,7 @@
     },
     "processor.py": {
       "size": 122048,
-      "mtime": 1795592381.3730998,
+      "mtime": 1795593046.3499577,
       "classes": {},
       "functions": {
         "has_chinglish_seams": {
@@ -6404,7 +6404,7 @@
     },
     "tests/test_bloomberg_crawler.py": {
       "size": 9302,
-      "mtime": 1795592495.6610308,
+      "mtime": 1795593046.431775,
       "classes": {
         "TestBloombergCrawler": {
           "line": 11,
@@ -7286,8 +7286,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 151745,
-      "mtime": 1795592354.1685367,
+      "size": 152895,
+      "mtime": 1795594085.593444,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7312,8 +7312,16 @@
             "val"
           ]
         },
+        "build_ainr_tags_meta": {
+          "line": 71,
+          "doc": "Builds comma-separated contextual tags for monetization & semantic matching.",
+          "args": [
+            "item",
+            "is_zh"
+          ]
+        },
         "get_thematic_fallback_image": {
-          "line": 82,
+          "line": 107,
           "doc": "",
           "args": [
             "title",
@@ -7321,7 +7329,7 @@
           ]
         },
         "get_optimized_og_image": {
-          "line": 102,
+          "line": 127,
           "doc": "",
           "args": [
             "raw_url",
@@ -7331,14 +7339,14 @@
           ]
         },
         "extract_entities_for_jsonld": {
-          "line": 179,
+          "line": 204,
           "doc": "Extracts 'about' entity and 'mentions' entities based on keyword presence.",
           "args": [
             "text"
           ]
         },
         "build_robust_meta_description": {
-          "line": 210,
+          "line": 235,
           "doc": "",
           "args": [
             "raw_desc",
@@ -7349,7 +7357,7 @@
           ]
         },
         "build_tool_html": {
-          "line": 245,
+          "line": 270,
           "doc": "",
           "args": [
             "tool",
@@ -7358,7 +7366,7 @@
           ]
         },
         "extract_ai_analysis_text": {
-          "line": 722,
+          "line": 748,
           "doc": "Safely extracts clean human-readable analysis text, strictly avoiding raw dict dumps.",
           "args": [
             "analysis_data",
@@ -7366,7 +7374,7 @@
           ]
         },
         "_render_inline_video_figure": {
-          "line": 765,
+          "line": 791,
           "doc": "",
           "args": [
             "vid",
@@ -7376,7 +7384,7 @@
           ]
         },
         "format_editorial_paragraphs": {
-          "line": 850,
+          "line": 876,
           "doc": "Magazine-Grade Professional Typography & Inline Media Injector:",
           "args": [
             "paras",
@@ -7389,7 +7397,7 @@
           ]
         },
         "build_news_html": {
-          "line": 1030,
+          "line": 1056,
           "doc": "",
           "args": [
             "item",
@@ -7398,7 +7406,7 @@
           ]
         },
         "build_news_hub_html": {
-          "line": 1919,
+          "line": 1946,
           "doc": "",
           "args": [
             "news_items",
@@ -7406,7 +7414,7 @@
           ]
         },
         "build_tools_hub_html": {
-          "line": 2084,
+          "line": 2111,
           "doc": "",
           "args": [
             "tool_items",
@@ -7414,7 +7422,7 @@
           ]
         },
         "generate_all_landing_pages": {
-          "line": 2244,
+          "line": 2271,
           "doc": "",
           "args": []
         }
@@ -20226,10 +20234,22 @@
         "doc": ""
       }
     ],
+    "build_ainr_tags_meta": [
+      {
+        "file": "tool_news_publisher.py",
+        "line": 71,
+        "type": "function",
+        "args": [
+          "item",
+          "is_zh"
+        ],
+        "doc": "Builds comma-separated contextual tags for monetization & semantic matching."
+      }
+    ],
     "get_thematic_fallback_image": [
       {
         "file": "tool_news_publisher.py",
-        "line": 82,
+        "line": 107,
         "type": "function",
         "args": [
           "title",
@@ -20241,7 +20261,7 @@
     "get_optimized_og_image": [
       {
         "file": "tool_news_publisher.py",
-        "line": 102,
+        "line": 127,
         "type": "function",
         "args": [
           "raw_url",
@@ -20255,7 +20275,7 @@
     "extract_entities_for_jsonld": [
       {
         "file": "tool_news_publisher.py",
-        "line": 179,
+        "line": 204,
         "type": "function",
         "args": [
           "text"
@@ -20266,7 +20286,7 @@
     "build_robust_meta_description": [
       {
         "file": "tool_news_publisher.py",
-        "line": 210,
+        "line": 235,
         "type": "function",
         "args": [
           "raw_desc",
@@ -20281,7 +20301,7 @@
     "build_tool_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 245,
+        "line": 270,
         "type": "function",
         "args": [
           "tool",
@@ -20294,7 +20314,7 @@
     "extract_ai_analysis_text": [
       {
         "file": "tool_news_publisher.py",
-        "line": 722,
+        "line": 748,
         "type": "function",
         "args": [
           "analysis_data",
@@ -20306,7 +20326,7 @@
     "_render_inline_video_figure": [
       {
         "file": "tool_news_publisher.py",
-        "line": 765,
+        "line": 791,
         "type": "function",
         "args": [
           "vid",
@@ -20320,7 +20340,7 @@
     "format_editorial_paragraphs": [
       {
         "file": "tool_news_publisher.py",
-        "line": 850,
+        "line": 876,
         "type": "function",
         "args": [
           "paras",
@@ -20337,7 +20357,7 @@
     "build_news_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1030,
+        "line": 1056,
         "type": "function",
         "args": [
           "item",
@@ -20350,7 +20370,7 @@
     "build_news_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1919,
+        "line": 1946,
         "type": "function",
         "args": [
           "news_items",
@@ -20362,7 +20382,7 @@
     "build_tools_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2084,
+        "line": 2111,
         "type": "function",
         "args": [
           "tool_items",
@@ -20374,7 +20394,7 @@
     "generate_all_landing_pages": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2244,
+        "line": 2271,
         "type": "function",
         "args": [],
         "doc": ""

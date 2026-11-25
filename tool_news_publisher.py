@@ -67,6 +67,31 @@ def sanitize_for_en(text: str, preserve_newlines: bool = False) -> str:
 def escape(val: Any) -> str:
     return html.escape(str(val or ""))
 
+
+def build_ainr_tags_meta(item: Dict[str, Any], is_zh: bool = False) -> str:
+    """Builds comma-separated contextual tags for monetization & semantic matching."""
+    parts = []
+    for key in ("primary_tag_en", "category", "source", "scenario_en", "title_en", "title"):
+        v = item.get(key)
+        if v and isinstance(v, str):
+            parts.append(v.strip())
+    if is_zh:
+        for key in ("primary_tag_zh", "scenario_zh", "title_zh"):
+            v = item.get(key)
+            if v and isinstance(v, str):
+                parts.append(v.strip())
+    for list_key in ("spec_tags_en", "spec_tags", "tags", "best_for_en"):
+        arr = item.get(list_key)
+        if isinstance(arr, list):
+            for el in arr:
+                s = str(el or "").strip()
+                if s:
+                    parts.append(s)
+    joined = ", ".join(dict.fromkeys(parts))
+    if not is_zh:
+        joined = sanitize_for_en(joined)
+    return escape(joined[:320])
+
 THEMATIC_FALLBACK_IMAGES = {
     'cinema': 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&h=630&fit=crop&fm=jpg&q=85',
     'silicon': 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&h=630&fit=crop&fm=jpg&q=85',
@@ -426,6 +451,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{escape(meta_title)}</title>
   <meta name="description" content="{clean_meta_desc}">
+  <meta name="ainr-tags" content="{build_ainr_tags_meta(tool, is_zh=is_zh)}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="{canonical_url}">
@@ -1683,6 +1709,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{escape(meta_title)}</title>
   <meta name="description" content="{clean_meta_desc}">
+  <meta name="ainr-tags" content="{build_ainr_tags_meta(item, is_zh=is_zh)}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="{canonical_url}">
