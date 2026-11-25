@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 09:22:49 UTC",
-  "total_files": 109,
-  "total_symbols": 1290,
+  "updated_at": "2026-11-25 09:34:49 UTC",
+  "total_files": 110,
+  "total_symbols": 1293,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -7287,7 +7287,7 @@
     },
     "tool_news_publisher.py": {
       "size": 154855,
-      "mtime": 1795598463.6124086,
+      "mtime": 1795598630.265249,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7493,6 +7493,44 @@
         }
       },
       "constants": []
+    },
+    "tools/clean_product_backgrounds.py": {
+      "size": 5904,
+      "mtime": 1795599053.784792,
+      "classes": {},
+      "functions": {
+        "_is_studio_white": {
+          "line": 30,
+          "doc": "",
+          "args": [
+            "r",
+            "g",
+            "b",
+            "lum_min",
+            "chroma_max"
+          ]
+        },
+        "_strip_studio_bg": {
+          "line": 34,
+          "doc": "",
+          "args": [
+            "im",
+            "category",
+            "icon_type"
+          ]
+        },
+        "main": {
+          "line": 129,
+          "doc": "",
+          "args": []
+        }
+      },
+      "constants": [
+        "WORKSPACE_DIR",
+        "CATALOG_PATH",
+        "PRODUCTS_DIR",
+        "HOLLOW_ICON_TYPES"
+      ]
     },
     "tools/fast_index.py": {
       "size": 28041,
@@ -10805,6 +10843,13 @@
       {
         "file": "generate_bilingual_compliance.py",
         "line": 693,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      },
+      {
+        "file": "tools/clean_product_backgrounds.py",
+        "line": 129,
         "type": "function",
         "args": [],
         "doc": ""
@@ -20546,6 +20591,34 @@
         "line": 5,
         "type": "function",
         "args": [],
+        "doc": ""
+      }
+    ],
+    "_is_studio_white": [
+      {
+        "file": "tools/clean_product_backgrounds.py",
+        "line": 30,
+        "type": "function",
+        "args": [
+          "r",
+          "g",
+          "b",
+          "lum_min",
+          "chroma_max"
+        ],
+        "doc": ""
+      }
+    ],
+    "_strip_studio_bg": [
+      {
+        "file": "tools/clean_product_backgrounds.py",
+        "line": 34,
+        "type": "function",
+        "args": [
+          "im",
+          "category",
+          "icon_type"
+        ],
         "doc": ""
       }
     ],
