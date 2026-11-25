@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hands-on with the &quot;Install as app&quot; feature for… | AI News Radar</title>
+  <meta name="description" content="Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.">
+  <meta name="ainr-tags" content="📰 Industry News, news, MacStories, Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories),">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/4b62e0888678e3df">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/4b62e0888678e3df">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Hands-on with the &quot;Install as app&quot; feature for… | AI News Radar">
+  <meta property="og:description" content="Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.">
+  <meta property="og:image" content="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png">
+  <meta property="og:image:secure_url" content="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)">
+  <meta property="og:url" content="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <meta name="twitter:title" content="Hands-on with the &quot;Install as app&quot; feature for… | AI News Radar">
+  <meta name="twitter:description" content="Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.">
+  <meta name="twitter:image" content="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png">
+  <meta property="twitter:image" content="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png">
+  <meta name="twitter:image:alt" content="Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)">
+  <meta name="citation_publication_date" content="2026-11-25">
+  <meta name="citation_author" content="MacStories">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/news/4b62e0888678e3df">
+  <meta name="citation_abstract" content="Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar (Chinese Edition RSS)" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js?v=2"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
+  <script defer src="/js/page_language.js"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "AI News Radar",
+"item": "https://ainewsradar.xyz/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "Breaking AI News",
+"item": "https://ainewsradar.xyz#news"
+},
+{
+"@type": "ListItem",
+"position": 3,
+"name": "Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
+"item": "https://ainewsradar.xyz/news/4b62e0888678e3df"
+}
+]
+},
+{
+"@type": "NewsArticle",
+"headline": "Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
+"description": "Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.",
+"image": [
+"https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png"
+],
+"url": "https://ainewsradar.xyz/news/4b62e0888678e3df",
+"datePublished": "2026-11-25T23:20:01+00:00",
+"dateModified": "2026-11-25T23:20:01+00:00",
+"inLanguage": "en",
+"mainEntityOfPage": "https://ainewsradar.xyz/news/4b62e0888678e3df",
+"articleSection": "Artificial Intelligence",
+"articleBody": "Yesterday, Anthropic announced a major new feature for artifacts, now available in beta for Mac and Windows: the ability for users to turn artifacts into “apps” they can install on their computers. From the company’s blog:\n\nStarting today, you can use Claude artifacts to create, run, and share desktop apps. The “Install as app” feature is rolling out in beta in Claude for Mac and Windows.\n\nWhen an artifact is installed as a Mac or Windows app, it gets its own icon and opens in its own window instead of inside Claude. You can share it with others, and it needs your permission before it can interact with your computer. You choose how much to allow.\n\nEach app can use Claude and your connectors, and it updates automatically when the underlying artifact is edited. This simplifies the process for building and maintaining apps for both knowledge workers and developers. Requests the app makes to Claude count toward your plan’s usage limits.\n\nIf you’re an AppStories listener, you know that I’ve long thought it was only a matter of time until one of the big labs figured out how to turn their models’ frontier coding capabilities into a means to disrupt the App Store. This move feels like Anthropic’s first step in that direction.\n\nBefore I get into the technical details, let me say this upfront: if I were Apple, I’d be very concerned that Anthropic is now shipping a nicely packaged system for users to make whatever app they want and turn Apple’s ecosystem into Claude’s ecosystem of tools and mods on their computers.\n\nNow, the way Anthropic made this happen can be debated, but I think the system is based on some clever engineering and savvy lock-in strategy. First, for these apps to work, you need the main Claude app to be installed and logged in with your account. These apps require the main Claude process to be running because every action they perform is actually handled by the Claude app behind the scenes, including permissions such as Full Disk Access. All apps made with Claude (either the ones you make, or the ones shared with you by other people) get installed at ~/Applications/Claude Apps, so they’re indexed by Spotlight and can be pinned to the macOS Dock. In fact, when you first create an app inside a Claude conversation (which can be a regular Claude session – you do not need to use Claude Code for these), there is a cute animation and install flow that puts an app directly in your Dock. It’s not too dissimilar from how the Shortcuts app can add individual shortcuts to your Mac’s Dock.\n\nCrucially, these are not native apps created with Swift or SwiftUI: they’re HTML apps, wrapped inside an Electron shim, which is entirely managed by Claude’s Chromium process for Electron. It’s somewhat reminiscent of Raycast’s Glaze product, which uses Vite/React web apps, rendered inside Apple’s WKWebView, wrapped in a custom Swift shell. (Glaze also added the ability to integrate native Swift modules into their apps; I expect Anthropic to add this too.)\n\nTo test out this Claude feature, I wanted to create a disk analyzer utility with a menu bar companion for my Mac. The initial prompt was pure vibe coding:\n\nA few minutes later, Opus 5.5 made something that worked and installed it in my Dock, but it wasn’t great. So, I kept tweaking it. As Claude was working, I noticed that it kept editing a single index.html file:\n\nWhen the app was done, I asked Claude Code to explain how the other Claude built the app. Here is the Claude Code explanation of it all:\n\nStorage Lens isn’t a traditional Mac app. Its 900 KB bundle holds no web code at all, just three pieces:\n\nWhat looks like a standalone app with its own Dock icon is really a Claude process in disguise.\n\nThe app itself is a single HTML file, written by hand with no third-party frameworks: no React, no Tailwind, no D3. It’s plain JavaScript, with one state object and render() functions that rebuild the page. Everything visual is hand-made:\n\nThe interesting part is how a web page gets to touch the file system. Storage Lens calls window.claude.use('desktop'), an API that closely mirrors Electron’s own: childProcess.spawn, fs.readdir, shell.trashItem, Menu.setApplicationMenu, app.dock.setBadge. With that, it runs the same command-line tools a power user would:\n\nIt reads their output line by line as they run and caches the results in localStorage. Nothing leaves the Mac.\n\nThat pretty much says it all. Liquid Glass is faked with CSS (incredible), everything is designed in HTML (not a surprise, given how much Claude loves pretty HTML artifacts), and all code routes through Electron via the main Claude app.\n\nAnyway, back to my Storage Lens app. In a follow-up prompt, I asked:\n\nmenu bar works, segmented control still does not, and these overlapping elements are ugly. do better. follow Apple HIG.\n\nI’ve been using the app on my Mac mini this morning to free up some storage. Since I’d already granted Full Disk Access to Claude, I didn’t have to go through a similar flow with the app again: after all, it’s just an HTML page asking Claude to run some shell commands in the background! I also took one of Anthropic’s official demos for a spin – Vitals, their menu bar take on a simplified macOS Activity Monitor.\n\nApps made by other people can be shared with a traditional artifact landing page; when you install an app made by someone else, you get a warning about potential risks:\n\nI chuckled at the fake Full Disk Access prompt. Once again, Claude already had Full Disk Access, so clicking the ‘Allow’ button doesn’t actually change anything in macOS:\n\nThe app, of course, works as expected, too. It breaks Apple’s UI conventions in several ways, but it does perform its primary function reasonably well.\n\nAnthropic has also published a support document that goes into more detail about what these apps can do, how permissions are handled, and what happens to an app you installed from someone else if the original creator stops sharing it. I found this part amusing:\n\nIf you lose access to an app, for example because its owner stops sharing it with you, the programs it started stop too. This can take up to about 20 minutes. It can take longer while Claude can’t check, such as when it’s offline, signed out, or using another organization.\n\nSo, unless you’re making your own apps, I wouldn’t build a serious workflow on top of an “app” created by somebody else, because they could stop sharing it at any moment and you’d lose access to it.\n\nBut then again: why be concerned if you can just prompt your way into a copy of it?\n\nMany longtime macOS and native app purists will grimace at the mere thought of installing vibe-coded “apps” that are Electron wrappers bridging their commands to another app, and I get it. What Anthropic devised here is a hodgepodge of web technologies, disk permissions, and HTML UI that is the opposite of what native Apple app development should – at least in theory – still represent today.\n\nAt the same time, if I were Apple, I’d be concerned. Effectively, Anthropic shipped an app creation playground that only requires basic prompts to put together something that works. They did so by entirely bypassing the App Store or Apple’s notarization system for apps distributed outside the App Store, and by creating their own lock-in system around Claude’s identity and capabilities instead.\n\nWith Anthropic’s new artifacts-driven system, you’re making apps for your Mac, but, really, you’re making Claude apps for your Mac – which require your Claude account, can use your Claude connectors, and draw usage from your Claude account. Those apps just happen to live in your Dock and menu bar. But if they do what the user asked, who cares? And that’s what I think Apple should be concerned about: the evaporation of “care” for actual apps in the face of something that, ultimately, satisfies the user and doesn’t cost them anything extra.\n\nYou may argue: but surely these apps must be so limited, right?\n\nNot quite. I haven’t pushed the limits of this system yet, but since Claude is just running shell commands and AppleScript under the hood, pretty much anything on macOS seems up for grabs.\n\nCase in point: I had Claude reverse-engineer the Shortcuts database on the Mac to make a menu bar launcher for my shortcuts that displays their icons and organizes them by folder.\n\nMy idea was simple: since shortcuts can be run in the background on the Mac thanks to Apple’s shortcuts CLI, I figured Claude could make a nice menu bar launcher for them that also supported passing input from the clipboard. My prompt was:\n\nmake me an artifact that lets me run shortcuts from specific folders of the Shortcuts app from the menu bar. reverse engineer the Shortcuts database on this Mac so you can find its folders, shortcuts, and official shortcut icons and colors. make it beautiful and compliant with latest Apple HIG for Golden Gate. I want to select which folder I want to quickly access from settings, then the menu bar shows shortcuts from that folder. I click one, and it runs. There is an optional mode to run a shortcut with the contents of system clipboard as input. You can use the native shortcuts CLI for this.\n\nInstead, Claude used MacRemote – my upcoming tool to connect a Mac’s tools and filesystem to any AI agent, soon to be open sourced – to ping my Mac Studio and figure out the Shortcuts.sqlite database there. A few minutes later, I had a working version of the app that let me pick a folder for quick access and run my shortcuts from the menu bar. Through a mix of osascript and Full Disk Access, Claude put together a wrapper that looks nice and took just a few messages in a chat.\n\nThat alone was a good example of how far you can push Claude’s apps on the Mac, but I wanted more. Since I know my way around the Shortcuts database thanks to my previous work on Shortcuts Playground, I also wanted the app to display the actual icons of my shortcuts folders. I prompted:\n\nany way you can reverse engineer official folder icons? I believe they’re using SF Symbols in the Shortcuts database\n\nFairly open-ended question, right? Opus 5.5, of course, figured it out with an approach that is both remarkable and terrifying:\n\nHow it gets them. Shortcuts’ scripting interface gives folders only a name and an ID, and the database sits in SIP-protected storage that nothing else can read. So you were right that they’re SF Symbols, but nothing outside Shortcuts can read that from the database. The app reads them another way:\n\nTested on your library. On the Mac Studio, 27 of your 28 folders came back with a symbol, and each one matches your screenshot. For example, Core Shortcuts is gear, Weekly Prep is calendar, Factory is gearshape.2, Star is star and the plain ones are folder. Iris uses a custom image with no label, so it gets the standard folder icon.\n\nWhat about Finder integration? I asked Claude to build me something I always wanted to have: a smart “document redirect” utility that opens small Markdown files in TextEdit, but longer ones in a dedicated Markdown processor like Cogito. The prompt was:\n\nI hate that whenever I click a Markdown file .md on my Mac, Xcode opens. make me a simple Mac app that gives me a settings menu where I can choose where to redirect Markdown documents, with a twist: if they’re short, they need to open in TextEdit, if they’re longer, they need to open in something else. so let me choose apps based on a word count I set. call it Markdown Redirect.\n\nClaude worked for a few minutes on it, and it created exactly what I wanted, which I’m using on my Mac right now.\n\nHow did it do it? Let’s ask Claude:\n\nHow it works: an app built inside Claude can’t be what Finder opens a file with. So the artifact installs a small background helper, Markdown Redirect Helper, in the Applications folder inside your home folder. When you double-click a .md file, the helper counts its words. Files at or under your limit open in the short app, longer ones in the long app. The artifact is where you change the settings, and it lists recent redirects so you can see what went where.\n\nYou may be wondering what that Helper actually is. Get ready: it’s an AppleScript file, wrapped inside an application bundle, which calls a shell script that launches the apps.\n\nA hodgepodge, indeed. But unless you go look for this stuff like I did, you never see any of its underlying complexity; ironically, “it just works”.\n\nNow, I can’t share these artifacts with the public because Anthropic currently prohibits apps that require Full Disk Access from being distributed by regular users. (Only Anthropic employees can, it seems?) And, yes, as we have seen, these “apps” are really Claude extensions wrapped up in windows and menu bar apps that give them the appearance of native apps, even though they’re anything but. Two things make them possible: Claude’s coding abilities, and the open nature of macOS itself.\n\nIf we were to speculate, I think we all know what’s going to happen here. When Anthropic inevitably figures out how to distribute installable artifacts in a similar fashion on iOS (imagine Bitrig Remote, but for Claude), when they set up a “creator program” for other people to share apps in a pseudo App Store environment, and when OpenAI eventually copies this at scale with ChatGPT…what becomes of traditional apps then?\n\nAnd how long until Apple’s upcoming Siri Agent lets you create your own personal apps for iPhone, iPad, and Mac?\n\nFounded in 2015, Club MacStories has delivered exclusive content every week for nearly a decade.\n\nLearn more here and from our Club FAQs.\n\nClub MacStories+: Everything that Club MacStories offers, plus an active Discord community, advanced search and custom RSS features for exploring the Club’s entire back catalog, bonus columns, and dozens of app discounts;\n\nClub Premier: All of the above and AppStories+, an extended version of our flagship podcast that’s delivered early, ad-free, and in high-bitrate audio.",
+"wordCount": 2406,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, MacStories, Anthropic",
+"isBasedOn": "https://www.macstories.net/stories/a-closer-look-at-claudes-mac-apps/?ref=ainewsradar",
+"about": [
+{
+"@type": "Organization",
+"name": "Anthropic",
+"sameAs": "https://en.wikipedia.org/wiki/Anthropic"
+}
+],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
+"speakable": {
+"@type": "SpeakableSpecification",
+"cssSelector": [
+".executive-summary",
+"h1",
+".article-body",
+".fact-card"
+]
+},
+"author": {
+"@type": "Organization",
+"name": "AI News Radar Editorial Team",
+"url": "https://ainewsradar.xyz/about"
+},
+"publisher": {
+"@type": "NewsMediaOrganization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz",
+"logo": {
+"@type": "ImageObject",
+"url": "https://ainewsradar.xyz/favicon.ico"
+}
+},
+"mentions": [
+{
+"@type": "Thing",
+"name": "Artificial Intelligence",
+"sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+}
+]
+},
+{
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "What are the key facts regarding Hands-on with the \"Install as app\" feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Anthropic: Enables packaging Artifacts as standalone desktop applications using Electron, leveraging integrated Claude model and connector capabilities. To lower the barrier for deploying AI-generated code and bypass traditional distribution bottlenecks. Artifacts convertibility into standalone desktop apps with native icons/windows. Strategic shift toward AI-native software distribution platforms."
+}
+},
+{
+"@type": "Question",
+"name": "What is the strategic AI industry analysis of this event?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "This move signals a strategic shift from chat-based interfaces to OS-level platform integration, positioning the AI model as the underlying engine for software distribution. By binding local app lifecycles to Claude user accounts, Anthropic is constructing an AI-native ecosystem that implicitly challenges the dominance of traditional app stores in software interaction and delivery."
+}
+}
+]
+}
+]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← Back to AI News Radar
+        </a>
+      </div>
+      <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="Theme switcher"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="Light Mode" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="Dark Mode" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="Follow System" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="Switch between 31 language editions">
+          <span id="page-lang-flag">🇬🇧</span>
+          <span id="page-lang-text">English</span>
+          <span class="text-[10px] text-slate-400">▼</span>
+        </button>
+        <a href="https://ainewsradar.xyz/zh/news/4b62e0888678e3df" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🇨🇳 Chinese Edition
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png" alt="Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            Primary Source: MacStories
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>By MacStories</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications. Based on an Electron shim, these apps require the main Claude process to handle model interactions and system permissions, with files localized and indexed for OS-native integration.
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="Executive Summary & Key Facts" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>Executive Summary & Key Facts</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Anthropic: Enables packaging Artifacts as standalone desktop applications using Electron, leveraging integrated Claude model and connector capabilities.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Root Cause &amp; Mechanism]</strong> To lower the barrier for deploying AI-generated code and bypass traditional distribution bottlenecks.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Fact Detail]</strong> Artifacts convertibility into standalone desktop apps with native icons/windows.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Position &amp; Outlook]</strong> Strategic shift toward AI-native software distribution platforms.</li>
+          </ul>
+        </section>
+        
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">MacStories Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Yesterday, Anthropic announced a major new feature for artifacts, now available in beta for Mac and Windows: the ability for users to turn artifacts into “apps” they can install on their computers. From the company’s blog:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Starting today, you can use Claude artifacts to create, run, and share desktop apps. The “Install as app” feature is rolling out in beta in Claude for Mac and Windows.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When an artifact is installed as a Mac or Windows app, it gets its own icon and opens in its own window instead of inside Claude. You can share it with others, and it needs your permission before it can interact with your computer. You choose how much to allow.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Each app can use Claude and your connectors, and it updates automatically when the underlying artifact is edited. This simplifies the process for building and maintaining apps for both knowledge workers and developers. Requests the app makes to Claude count toward your plan’s usage limits.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">If you’re an AppStories listener, you know that I’ve long thought it was only a matter of time until one of the big labs figured out how to turn their models’ frontier coding capabilities into a means to disrupt the App Store. This move feels like Anthropic’s first step in that direction.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Before I get into the technical details, let me say this upfront: if I were Apple, I’d be very concerned that Anthropic is now shipping a nicely packaged system for users to make whatever app they want and turn Apple’s ecosystem into Claude’s ecosystem of tools and mods on their computers.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Now, the way Anthropic made this happen can be debated, but I think the system is based on some clever engineering and savvy lock-in strategy. First, for these apps to work, you need the main Claude app to be installed and logged in with your account. These apps require the main Claude process to be running because every action they perform is actually handled by the Claude app behind the scenes, including permissions such as Full Disk Access. All apps made with Claude (either the ones you make, or the ones shared with you by other people) get installed at ~/Applications/Claude Apps, so they’re indexed by Spotlight and can be pinned to the macOS Dock. In fact, when you first create an app inside a Claude conversation (which can be a regular Claude session – you do not need to use Claude Code for these), there is a cute animation and install flow that puts an app directly in your Dock. It’s not too dissimilar from how the Shortcuts app can add individual shortcuts to your Mac’s Dock.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Crucially, these are not native apps created with Swift or SwiftUI: they’re HTML apps, wrapped inside an Electron shim, which is entirely managed by Claude’s Chromium process for Electron. It’s somewhat reminiscent of Raycast’s Glaze product, which uses Vite/React web apps, rendered inside Apple’s WKWebView, wrapped in a custom Swift shell. (Glaze also added the ability to integrate native Swift modules into their apps; I expect Anthropic to add this too.)</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To test out this Claude feature, I wanted to create a disk analyzer utility with a menu bar companion for my Mac. The initial prompt was pure vibe coding:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A few minutes later, Opus 5.5 made something that worked and installed it in my Dock, but it wasn’t great. So, I kept tweaking it. As Claude was working, I noticed that it kept editing a single index.html file:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When the app was done, I asked Claude Code to explain how the other Claude built the app. Here is the Claude Code explanation of it all:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Storage Lens isn’t a traditional Mac app. Its 900 KB bundle holds no web code at all, just three pieces:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">What looks like a standalone app with its own Dock icon is really a Claude process in disguise.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The app itself is a single HTML file, written by hand with no third-party frameworks: no React, no Tailwind, no D3. It’s plain JavaScript, with one state object and render() functions that rebuild the page. Everything visual is hand-made:</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625680054-00b3b6bbfa.png" alt="You can preview and install apps from Claude." class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 You can preview and install apps from Claude.
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The interesting part is how a web page gets to touch the file system. Storage Lens calls window.claude.use(&#x27;desktop&#x27;), an API that closely mirrors Electron’s own: childProcess.spawn, fs.readdir, shell.trashItem, Menu.setApplicationMenu, app.dock.setBadge. With that, it runs the same command-line tools a power user would:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">It reads their output line by line as they run and caches the results in localStorage. Nothing leaves the Mac.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">That pretty much says it all. Liquid Glass is faked with CSS (incredible), everything is designed in HTML (not a surprise, given how much Claude loves pretty HTML artifacts), and all code routes through Electron via the main Claude app.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anyway, back to my Storage Lens app. In a follow-up prompt, I asked:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">menu bar works, segmented control still does not, and these overlapping elements are ugly. do better. follow Apple HIG.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I’ve been using the app on my Mac mini this morning to free up some storage. Since I’d already granted Full Disk Access to Claude, I didn’t have to go through a similar flow with the app again: after all, it’s just an HTML page asking Claude to run some shell commands in the background! I also took one of Anthropic’s official demos for a spin – Vitals, their menu bar take on a simplified macOS Activity Monitor.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Apps made by other people can be shared with a traditional artifact landing page; when you install an app made by someone else, you get a warning about potential risks:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I chuckled at the fake Full Disk Access prompt. Once again, Claude already had Full Disk Access, so clicking the ‘Allow’ button doesn’t actually change anything in macOS:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The app, of course, works as expected, too. It breaks Apple’s UI conventions in several ways, but it does perform its primary function reasonably well.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic has also published a support document that goes into more detail about what these apps can do, how permissions are handled, and what happens to an app you installed from someone else if the original creator stops sharing it. I found this part amusing:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">If you lose access to an app, for example because its owner stops sharing it with you, the programs it started stop too. This can take up to about 20 minutes. It can take longer while Claude can’t check, such as when it’s offline, signed out, or using another organization.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">So, unless you’re making your own apps, I wouldn’t build a serious workflow on top of an “app” created by somebody else, because they could stop sharing it at any moment and you’d lose access to it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">But then again: why be concerned if you can just prompt your way into a copy of it?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Many longtime macOS and native app purists will grimace at the mere thought of installing vibe-coded “apps” that are Electron wrappers bridging their commands to another app, and I get it. What Anthropic devised here is a hodgepodge of web technologies, disk permissions, and HTML UI that is the opposite of what native Apple app development should – at least in theory – still represent today.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://cdn.macstories.net/images/uploads/2026/11/25/cleanshot-2026-11-25-at-115517-am-1795607152164-fd18e0baec.png" alt="How Claude makes “apps”." class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 How Claude makes “apps”.
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At the same time, if I were Apple, I’d be concerned. Effectively, Anthropic shipped an app creation playground that only requires basic prompts to put together something that works. They did so by entirely bypassing the App Store or Apple’s notarization system for apps distributed outside the App Store, and by creating their own lock-in system around Claude’s identity and capabilities instead.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">With Anthropic’s new artifacts-driven system, you’re making apps for your Mac, but, really, you’re making Claude apps for your Mac – which require your Claude account, can use your Claude connectors, and draw usage from your Claude account. Those apps just happen to live in your Dock and menu bar. But if they do what the user asked, who cares? And that’s what I think Apple should be concerned about: the evaporation of “care” for actual apps in the face of something that, ultimately, satisfies the user and doesn’t cost them anything extra.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">You may argue: but surely these apps must be so limited, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Not quite. I haven’t pushed the limits of this system yet, but since Claude is just running shell commands and AppleScript under the hood, pretty much anything on macOS seems up for grabs.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Case in point: I had Claude reverse-engineer the Shortcuts database on the Mac to make a menu bar launcher for my shortcuts that displays their icons and organizes them by folder.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">My idea was simple: since shortcuts can be run in the background on the Mac thanks to Apple’s shortcuts CLI, I figured Claude could make a nice menu bar launcher for them that also supported passing input from the clipboard. My prompt was:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">make me an artifact that lets me run shortcuts from specific folders of the Shortcuts app from the menu bar. reverse engineer the Shortcuts database on this Mac so you can find its folders, shortcuts, and official shortcut icons and colors. make it beautiful and compliant with latest Apple HIG for Golden Gate. I want to select which folder I want to quickly access from settings, then the menu bar shows shortcuts from that folder. I click one, and it runs. There is an optional mode to run a shortcut with the contents of system clipboard as input. You can use the native shortcuts CLI for this.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Instead, Claude used MacRemote – my upcoming tool to connect a Mac’s tools and filesystem to any AI agent, soon to be open sourced – to ping my Mac Studio and figure out the Shortcuts.sqlite database there. A few minutes later, I had a working version of the app that let me pick a folder for quick access and run my shortcuts from the menu bar. Through a mix of osascript and Full Disk Access, Claude put together a wrapper that looks nice and took just a few messages in a chat.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">That alone was a good example of how far you can push Claude’s apps on the Mac, but I wanted more. Since I know my way around the Shortcuts database thanks to my previous work on Shortcuts Playground, I also wanted the app to display the actual icons of my shortcuts folders. I prompted:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">any way you can reverse engineer official folder icons? I believe they’re using SF Symbols in the Shortcuts database</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Fairly open-ended question, right? Opus 5.5, of course, figured it out with an approach that is both remarkable and terrifying:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">How it gets them. Shortcuts’ scripting interface gives folders only a name and an ID, and the database sits in SIP-protected storage that nothing else can read. So you were right that they’re SF Symbols, but nothing outside Shortcuts can read that from the database. The app reads them another way:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Tested on your library. On the Mac Studio, 27 of your 28 folders came back with a symbol, and each one matches your screenshot. For example, Core Shortcuts is gear, Weekly Prep is calendar, Factory is gearshape.2, Star is star and the plain ones are folder. Iris uses a custom image with no label, so it gets the standard folder icon.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://cdn.macstories.net/images/uploads/2026/11/25/cleanshot-2026-11-25-at-122915-pm-1795606353941-187e4eb4ba.png" alt="Behind the scenes, this app asks Claude to run some Terminal commands to list my files and delete th" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 Behind the scenes, this app asks Claude to run some Terminal commands to list my files and delete th
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">What about Finder integration? I asked Claude to build me something I always wanted to have: a smart “document redirect” utility that opens small Markdown files in TextEdit, but longer ones in a dedicated Markdown processor like Cogito. The prompt was:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I hate that whenever I click a Markdown file .md on my Mac, Xcode opens. make me a simple Mac app that gives me a settings menu where I can choose where to redirect Markdown documents, with a twist: if they’re short, they need to open in TextEdit, if they’re longer, they need to open in something else. so let me choose apps based on a word count I set. call it Markdown Redirect.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Claude worked for a few minutes on it, and it created exactly what I wanted, which I’m using on my Mac right now.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">How did it do it? Let’s ask Claude:</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">How it works: an app built inside Claude can’t be what Finder opens a file with. So the artifact installs a small background helper, Markdown Redirect Helper, in the Applications folder inside your home folder. When you double-click a .md file, the helper counts its words. Files at or under your limit open in the short app, longer ones in the long app. The artifact is where you change the settings, and it lists recent redirects so you can see what went where.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">You may be wondering what that Helper actually is. Get ready: it’s an AppleScript file, wrapped inside an application bundle, which calls a shell script that launches the apps.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A hodgepodge, indeed. But unless you go look for this stuff like I did, you never see any of its underlying complexity; ironically, “it just works”.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Now, I can’t share these artifacts with the public because Anthropic currently prohibits apps that require Full Disk Access from being distributed by regular users. (Only Anthropic employees can, it seems?) And, yes, as we have seen, these “apps” are really Claude extensions wrapped up in windows and menu bar apps that give them the appearance of native apps, even though they’re anything but. Two things make them possible: Claude’s coding abilities, and the open nature of macOS itself.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">If we were to speculate, I think we all know what’s going to happen here. When Anthropic inevitably figures out how to distribute installable artifacts in a similar fashion on iOS (imagine Bitrig Remote, but for Claude), when they set up a “creator program” for other people to share apps in a pseudo App Store environment, and when OpenAI eventually copies this at scale with ChatGPT…what becomes of traditional apps then?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">And how long until Apple’s upcoming Siri Agent lets you create your own personal apps for iPhone, iPad, and Mac?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Founded in 2015, Club MacStories has delivered exclusive content every week for nearly a decade.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Learn more here and from our Club FAQs.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Club MacStories+: Everything that Club MacStories offers, plus an active Discord community, advanced search and custom RSS features for exploring the Club’s entire back catalog, bonus columns, and dozens of app discounts;</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Club Premier: All of the above and AppStories+, an extended version of our flagship podcast that’s delivered early, ad-free, and in high-bitrate audio.</p>
+          </div>
+          
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>AI Radar Technical Deep-Dive</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">This move signals a strategic shift from chat-based interfaces to OS-level platform integration, positioning the AI model as the underlying engine for software distribution. By binding local app lifecycles to Claude user accounts, Anthropic is constructing an AI-native ecosystem that implicitly challenges the dominance of traditional app stores in software interaction and delivery.</p>
+        </div>
+        
+
+      </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>Share</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>Copy Link</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://www.macstories.net/stories/a-closer-look-at-claudes-mac-apps/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 Read Original Source Report ↗</span>
+        </a>
+
+      </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="Source Attribution and Copyright Notice" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">Source Attribution &amp; Disclaimer:</strong> Curated by AI News Radar for independent industry monitoring, commentary, and research reference only (not legal, financial, or investment advice). All third-party headlines, reporting, trademarks, images, and embedded media remain the sole intellectual property of <strong class="text-slate-600 dark:text-slate-300">MacStories</strong> and the credited author(s). Readers are encouraged to subscribe to and support original journalism via the official link above. Rights holders or publishers requesting immediate takedown, summary-only display, or domain opt-out may contact <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a> per our <a href="/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DMCA &amp; Copyright Policy</a> (24–48h SLA).</p>
+      </aside>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/news/426751942b8f186f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/wapo_358a20a24ed4e7c3.jpg" alt="Hegseth, Pentagon officials floated using wartime law to reappoint Nvidia CEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Washington Post</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Hegseth, Pentagon officials floated using wartime law to reappoint Nvidia CEO</h4>
+            </a>
+            
+            <a href="/news/aa02e4fe624e4cc4" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg" alt="Billions in Data Center Deals Grind to Halt After AI Chip Curbs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Billions in Data Center Deals Grind to Halt After AI Chip Curbs</h4>
+            </a>
+            
+            <a href="/news/dea16470e533c2f4" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/verge_6d162717023fa73f.png" alt="Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future</h4>
+            </a>
+            
+            <a href="/news/fc7a8ad031846119" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-03/260323-ai-toys-mn-1045-1417a0.jpg" alt="NY Gov. Kathy Hochul signs a bill banning AI chatbot toys for five years, starting in February; California Gov. Gavin Newsom signed a four-year ban in September (NBC News)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">NBC News</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">NY Gov. Kathy Hochul signs a bill banning AI chatbot toys for five years, starting in February; California Gov. Gavin Newsom signed a four-year ban in September (NBC News)</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a><a href="/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Editorial Policy</a><a href="/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">DMCA &amp; Copyright</a><a href="/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms</a><a href="/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a><a href="/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; All third-party reporting copyrights belong to their respective publishers and authors</p>
+    </div>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "4b62e0888678e3df",
+      type: "news",
+      title: "Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
+      snippet: "Anthropic has launched the &#x27;Install as app&#x27; beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications.",
+      url: window.location.href,
+      image_url: "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Hands-on with the &quot;Install as app&quot; feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Share link copied to clipboard! 🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
