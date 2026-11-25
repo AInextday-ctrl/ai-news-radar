@@ -428,8 +428,6 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
-  <meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">
-  <script>(function(s){{s.dataset.zone='12339176',s.src='https://nap5k.com/tag.min.js'}})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -1688,8 +1686,6 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
   <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
-  <meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">
-  <script>(function(s){{s.dataset.zone='12339176',s.src='https://nap5k.com/tag.min.js'}})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   
   <!-- OpenGraph Metadata -->
   <meta property="og:site_name" content="AI News Radar">
@@ -2025,8 +2021,6 @@ def build_news_hub_html(news_items: List[Dict[str, Any]], is_zh: bool = False) -
   <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
-  <meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">
-  <script>(function(s){{s.dataset.zone='12339176',s.src='https://nap5k.com/tag.min.js'}})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   
   <meta property="og:site_name" content="AI News Radar">
   <meta property="og:title" content="{escape(title)}">
@@ -2187,8 +2181,6 @@ def build_tools_hub_html(tool_items: List[Dict[str, Any]], is_zh: bool = False) 
   <link rel="alternate" hreflang="zh" href="{alt_zh_url}">
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh_url}">
   <link rel="alternate" hreflang="x-default" href="{alt_en_url}">
-  <meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">
-  <script>(function(s){{s.dataset.zone='12339176',s.src='https://nap5k.com/tag.min.js'}})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   
   <meta property="og:site_name" content="AI News Radar">
   <meta property="og:title" content="{escape(title)}">

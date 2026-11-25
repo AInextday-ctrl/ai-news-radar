@@ -3581,10 +3581,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 en_content = en_content.replace('</head>', f'  {ssr_meta_tag}\n</head>')
 
-        # [Monetization Invariant Guard] 确保 Monetag 广告与站长验证永久存在，绝对不被模板冲刷或云端流水线覆盖
-        monetag_push_tag = '<meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">\n  <script>(function(s){s.dataset.zone=\'12339176\',s.src=\'https://nap5k.com/tag.min.js\'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement(\'script\')))</script>'
-        if '12339176' not in en_content:
-            en_content = en_content.replace('</head>', f'  {monetag_push_tag}\n</head>')
+        # [Anti-Monetag Clean Guard] 确保彻底移除任何 Monetag 广告与验证标签
+        en_content = re.sub(r'\s*<meta name="monetag"[^>]*>', '', en_content)
+        en_content = re.sub(r'\s*<script>[^<]*12339176[^<]*</script>', '', en_content)
+        en_content = re.sub(r'\s*<script>[^<]*nap5k\.com[^<]*</script>', '', en_content)
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -4180,9 +4180,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             else:
                 zh_content = zh_content.replace('</head>', f'  {ssr_meta_tag_zh}\n</head>')
 
-        # [Monetization Invariant Guard] 确保中文版 Monetag 广告与站长验证永久存在
-        if '12339176' not in zh_content:
-            zh_content = zh_content.replace('</head>', f'  {monetag_push_tag}\n</head>')
+        # [Anti-Monetag Clean Guard] 确保彻底移除任何 Monetag 广告与验证标签
+        zh_content = re.sub(r'\s*<meta name="monetag"[^>]*>', '', zh_content)
+        zh_content = re.sub(r'\s*<script>[^<]*12339176[^<]*</script>', '', zh_content)
+        zh_content = re.sub(r'\s*<script>[^<]*nap5k\.com[^<]*</script>', '', zh_content)
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -4260,10 +4261,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             m_html = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', m_html)
             if mobile_hero_img:
                 m_html = m_html.replace('</head>', f'  <link rel="preload" as="image" href="{mobile_hero_img}" fetchpriority="high">\n</head>')
-            # [Monetization Invariant Guard] 确保移动端 Monetag 广告与站长验证永久存在
-            monetag_push_tag = '<meta name="monetag" content="6e550244fff9a24bba4ed95e34c42f6e">\n  <script>(function(s){s.dataset.zone=\'12339176\',s.src=\'https://nap5k.com/tag.min.js\'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement(\'script\')))</script>'
-            if '12339176' not in m_html:
-                m_html = m_html.replace('</head>', f'  {monetag_push_tag}\n</head>')
+            # [Anti-Monetag Clean Guard] 确保移动端彻底移除任何 Monetag 广告与验证标签
+            m_html = re.sub(r'\s*<meta name="monetag"[^>]*>', '', m_html)
+            m_html = re.sub(r'\s*<script>[^<]*12339176[^<]*</script>', '', m_html)
+            m_html = re.sub(r'\s*<script>[^<]*nap5k\.com[^<]*</script>', '', m_html)
             m_html = re.sub(r'<script [^>]*src="/m/js/mobile(?:\.min)?\.js[^"]*"[^>]*></script>', f'<script defer src="/m/js/mobile.min.js?v={version_str}"></script>', m_html)
             with open(m_path, "w", encoding="utf-8") as f:
                 f.write(m_html)

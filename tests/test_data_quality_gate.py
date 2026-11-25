@@ -554,23 +554,34 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     print(f"✅ 断言 21 通过: 正文纯净度与零图片注释/摄影署名/邮件推广残留达标 (全站 {len(news)} 篇资讯零注释杂质污染)")
 
     # ----------------------------------------------------
-    # 断言 22: Monetag 广告与站长验证全端常驻门禁 (防止意外回滚与广告标签丢失)
+    # 断言 22: 核心静态资产完整性与零 Monetag 污染硬性门禁
     # ----------------------------------------------------
-    monetag_core_pages = [
+    # 1. 核心 CSS 与 JS 静态资产存在性与非空校验（彻底杜绝裸 HTML 样式丢失白屏）
+    critical_assets = [
+        os.path.join(WORKSPACE_DIR, "public", "css", "style-v735.min.css"),
+        os.path.join(WORKSPACE_DIR, "public", "js", "app-v746.min.js"),
+    ]
+    missing_assets = [os.path.relpath(p, WORKSPACE_DIR) for p in critical_assets if not os.path.exists(p) or os.path.getsize(p) < 1000]
+    assert len(missing_assets) == 0, f"断言 22 失败：检测到核心样式或脚本资产丢失/为空: {missing_assets}"
+
+    # 2. 彻底杜绝 Monetag 第三方广告与弹窗代码污染
+    core_pages = [
         os.path.join(WORKSPACE_DIR, "public", "index.html"),
         os.path.join(WORKSPACE_DIR, "public", "zh", "index.html"),
         os.path.join(WORKSPACE_DIR, "public", "m", "index.html"),
         os.path.join(WORKSPACE_DIR, "public", "zh", "m", "index.html"),
+        os.path.join(WORKSPACE_DIR, "public", "about.html"),
+        os.path.join(WORKSPACE_DIR, "public", "zh", "about.html"),
     ]
-    missing_monetag_pages = []
-    for p_path in monetag_core_pages:
+    monetag_polluted_pages = []
+    for p_path in core_pages:
         if os.path.exists(p_path):
             with open(p_path, "r", encoding="utf-8") as f:
                 c_html = f.read()
-            if "12339176" not in c_html or "6e550244fff9a24bba4ed95e34c42f6e" not in c_html:
-                missing_monetag_pages.append(os.path.relpath(p_path, WORKSPACE_DIR))
-    assert len(missing_monetag_pages) == 0, f"断言 22 失败：检测到核心页面丢失 Monetag 广告标签或验证元数据: {missing_monetag_pages}"
-    print(f"✅ 断言 22 通过: Monetag 广告标签与站长验证元数据 100% 全端常驻达标 (共核验 {len(monetag_core_pages)} 个核心页面)")
+            if any(k in c_html for k in ["12339176", "nap5k.com", "6e550244fff9a24bba4ed95e34c42f6e"]):
+                monetag_polluted_pages.append(os.path.relpath(p_path, WORKSPACE_DIR))
+    assert len(monetag_polluted_pages) == 0, f"断言 22 失败：检测到核心页面存在 Monetag 广告或验证代码残留: {monetag_polluted_pages}"
+    print(f"✅ 断言 22 通过: 核心静态资产完备且零 Monetag 污染 (核验 {len(critical_assets)} 核心资产与 {len(core_pages)} 核心页面)")
 
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")

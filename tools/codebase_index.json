@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-24 13:31:26 UTC",
+  "updated_at": "2026-11-25 01:03:21 UTC",
   "total_files": 107,
   "total_symbols": 1274,
   "source_registry": {
@@ -580,8 +580,8 @@
       ]
     },
     "content_publisher.py": {
-      "size": 272282,
-      "mtime": 1795526822.2066605,
+      "size": 271971,
+      "mtime": 1795568314.6542034,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -797,7 +797,7 @@
           ]
         },
         "update_sitemap_with_all_pages": {
-          "line": 4276,
+          "line": 4277,
           "doc": "汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页、工具落地页与全量快讯落地页，",
           "args": [
             "daily_dates",
@@ -805,7 +805,7 @@
           ]
         },
         "run_full_content_publication": {
-          "line": 4299,
+          "line": 4300,
           "doc": "整套发布流水线入口",
           "args": [
             "items",
@@ -6153,7 +6153,7 @@
     },
     "seo_geo_engine.py": {
       "size": 41421,
-      "mtime": 1795526812.1955638,
+      "mtime": 1795527210.8744483,
       "classes": {},
       "functions": {
         "atomic_write_text": {
@@ -6497,8 +6497,8 @@
       ]
     },
     "tests/test_data_quality_gate.py": {
-      "size": 49039,
-      "mtime": 1795526822.220892,
+      "size": 49765,
+      "mtime": 1795568404.1275945,
       "classes": {},
       "functions": {
         "run_quality_gate_assertions": {
@@ -6509,7 +6509,7 @@
           ]
         },
         "auto_heal_dataset": {
-          "line": 581,
+          "line": 592,
           "doc": "当门禁断言遇到动态抓取数据轻微毛刺时，执行智能自愈清洗与智能回填：",
           "args": [
             "data",
@@ -7245,8 +7245,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 150174,
-      "mtime": 1795526822.2235246,
+      "size": 149058,
+      "mtime": 1795568366.7040553,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7316,7 +7316,7 @@
           ]
         },
         "extract_ai_analysis_text": {
-          "line": 718,
+          "line": 716,
           "doc": "Safely extracts clean human-readable analysis text, strictly avoiding raw dict dumps.",
           "args": [
             "analysis_data",
@@ -7324,7 +7324,7 @@
           ]
         },
         "_render_inline_video_figure": {
-          "line": 761,
+          "line": 759,
           "doc": "",
           "args": [
             "vid",
@@ -7334,7 +7334,7 @@
           ]
         },
         "format_editorial_paragraphs": {
-          "line": 846,
+          "line": 844,
           "doc": "Magazine-Grade Professional Typography & Inline Media Injector:",
           "args": [
             "paras",
@@ -7347,7 +7347,7 @@
           ]
         },
         "build_news_html": {
-          "line": 1026,
+          "line": 1024,
           "doc": "",
           "args": [
             "item",
@@ -7356,7 +7356,7 @@
           ]
         },
         "build_news_hub_html": {
-          "line": 1917,
+          "line": 1913,
           "doc": "",
           "args": [
             "news_items",
@@ -7364,7 +7364,7 @@
           ]
         },
         "build_tools_hub_html": {
-          "line": 2084,
+          "line": 2078,
           "doc": "",
           "args": [
             "tool_items",
@@ -7372,7 +7372,7 @@
           ]
         },
         "generate_all_landing_pages": {
-          "line": 2246,
+          "line": 2238,
           "doc": "",
           "args": []
         }
@@ -7527,7 +7527,7 @@
     },
     "tools/safe_sync.py": {
       "size": 3807,
-      "mtime": 1795526822.225679,
+      "mtime": 1795527153.8101447,
       "classes": {},
       "functions": {
         "clean_git_locks": {
@@ -8396,7 +8396,7 @@
     },
     "public/js/app.js": {
       "size": 777388,
-      "mtime": 1795526806.1339285,
+      "mtime": 1795527202.910753,
       "classes": {},
       "functions": {
         "flipPinnedSlide": {
@@ -11041,7 +11041,7 @@
     "update_sitemap_with_all_pages": [
       {
         "file": "content_publisher.py",
-        "line": 4276,
+        "line": 4277,
         "type": "function",
         "args": [
           "daily_dates",
@@ -11053,7 +11053,7 @@
     "run_full_content_publication": [
       {
         "file": "content_publisher.py",
-        "line": 4299,
+        "line": 4300,
         "type": "function",
         "args": [
           "items",
@@ -18770,7 +18770,7 @@
     "auto_heal_dataset": [
       {
         "file": "tests/test_data_quality_gate.py",
-        "line": 581,
+        "line": 592,
         "type": "function",
         "args": [
           "data",
@@ -20173,7 +20173,7 @@
     "extract_ai_analysis_text": [
       {
         "file": "tool_news_publisher.py",
-        "line": 718,
+        "line": 716,
         "type": "function",
         "args": [
           "analysis_data",
@@ -20185,7 +20185,7 @@
     "_render_inline_video_figure": [
       {
         "file": "tool_news_publisher.py",
-        "line": 761,
+        "line": 759,
         "type": "function",
         "args": [
           "vid",
@@ -20199,7 +20199,7 @@
     "format_editorial_paragraphs": [
       {
         "file": "tool_news_publisher.py",
-        "line": 846,
+        "line": 844,
         "type": "function",
         "args": [
           "paras",
@@ -20216,7 +20216,7 @@
     "build_news_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1026,
+        "line": 1024,
         "type": "function",
         "args": [
           "item",
@@ -20229,7 +20229,7 @@
     "build_news_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1917,
+        "line": 1913,
         "type": "function",
         "args": [
           "news_items",
@@ -20241,7 +20241,7 @@
     "build_tools_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2084,
+        "line": 2078,
         "type": "function",
         "args": [
           "tool_items",
@@ -20253,7 +20253,7 @@
     "generate_all_landing_pages": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2246,
+        "line": 2238,
         "type": "function",
         "args": [],
         "doc": ""
