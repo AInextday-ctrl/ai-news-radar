@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 10:19:03 UTC",
-  "total_files": 109,
-  "total_symbols": 1290,
+  "updated_at": "2026-11-25 12:48:39 UTC",
+  "total_files": 110,
+  "total_symbols": 1295,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -581,7 +581,7 @@
     },
     "content_publisher.py": {
       "size": 271976,
-      "mtime": 1795601881.3067636,
+      "mtime": 1795601997.8140206,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -7287,7 +7287,7 @@
     },
     "tool_news_publisher.py": {
       "size": 154869,
-      "mtime": 1795601883.0977151,
+      "mtime": 1795601998.2489367,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7664,6 +7664,53 @@
         "BASE_DIR",
         "IMAGES_DIR",
         "THUMBNAILS_DIR"
+      ]
+    },
+    "tools/prune_firebase_versions.py": {
+      "size": 4317,
+      "mtime": 1795610599.2399027,
+      "classes": {},
+      "functions": {
+        "_get_access_token": {
+          "line": 31,
+          "doc": "",
+          "args": []
+        },
+        "_headers": {
+          "line": 40,
+          "doc": "",
+          "args": [
+            "token"
+          ]
+        },
+        "_get_live_version_name": {
+          "line": 47,
+          "doc": "",
+          "args": [
+            "hdrs"
+          ]
+        },
+        "_delete_one": {
+          "line": 54,
+          "doc": "",
+          "args": [
+            "vname",
+            "hdrs"
+          ]
+        },
+        "prune_old_versions": {
+          "line": 64,
+          "doc": "",
+          "args": [
+            "keep",
+            "max_pages"
+          ]
+        }
+      },
+      "constants": [
+        "PROJECT_ID",
+        "SITE_ID",
+        "BASE_URL"
       ]
     },
     "tools/safe_sync.py": {
@@ -20742,6 +20789,61 @@
           "quality"
         ],
         "doc": "Incrementally generates WebP thumbnails for all images in public/images/."
+      }
+    ],
+    "_get_access_token": [
+      {
+        "file": "tools/prune_firebase_versions.py",
+        "line": 31,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      }
+    ],
+    "_headers": [
+      {
+        "file": "tools/prune_firebase_versions.py",
+        "line": 40,
+        "type": "function",
+        "args": [
+          "token"
+        ],
+        "doc": ""
+      }
+    ],
+    "_get_live_version_name": [
+      {
+        "file": "tools/prune_firebase_versions.py",
+        "line": 47,
+        "type": "function",
+        "args": [
+          "hdrs"
+        ],
+        "doc": ""
+      }
+    ],
+    "_delete_one": [
+      {
+        "file": "tools/prune_firebase_versions.py",
+        "line": 54,
+        "type": "function",
+        "args": [
+          "vname",
+          "hdrs"
+        ],
+        "doc": ""
+      }
+    ],
+    "prune_old_versions": [
+      {
+        "file": "tools/prune_firebase_versions.py",
+        "line": 64,
+        "type": "function",
+        "args": [
+          "keep",
+          "max_pages"
+        ],
+        "doc": ""
       }
     ],
     "clean_git_locks": [

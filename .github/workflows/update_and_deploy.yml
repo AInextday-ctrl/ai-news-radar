@@ -111,11 +111,15 @@ jobs:
             KEY_FILE="$RUNNER_TEMP/firebase-sa-key.json"
             echo "$SA_KEY" > "$KEY_FILE"
             export GOOGLE_APPLICATION_CREDENTIALS="$KEY_FILE"
+            if command -v gcloud >/dev/null 2>&1; then
+              gcloud auth activate-service-account --key-file="$KEY_FILE" --quiet || true
+              GCP_ACCESS_TOKEN="$(gcloud auth print-access-token 2>/dev/null || true)" python tools/prune_firebase_versions.py 2 || echo "⚠️ 旧版本自动清理跳过，继续部署"
+            fi
 
             npx --yes firebase-tools deploy --only hosting --non-interactive || \
-            (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
+            (echo "⚠️ 首次部署异常，尝试清理旧版本并在 5 秒后重试 (1/2)..." && (GCP_ACCESS_TOKEN="$(gcloud auth print-access-token 2>/dev/null || true)" python tools/prune_firebase_versions.py 1 || true) && sleep 5 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
             (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
-            (echo "❌ Firebase Service Account 部署失败，请检查 Service Account 权限是否包含 'Firebase Hosting Admin'。")
+            (echo "❌ Firebase Service Account 部署失败，请检查 Service Account 权限或 Hosting 配额。" && exit 1)
 
           elif [ -n "$FIREBASE_TOKEN" ]; then
             echo "🚀 [Deploy] 检测到 FIREBASE_TOKEN，正在执行部署..."
