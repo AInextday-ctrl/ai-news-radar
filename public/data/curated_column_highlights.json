@@ -1,39 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-25 13:21:36 UTC",
+  "generated_at": "2026-11-25 13:36:59 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-25 13:21:36 UTC",
+      "updated_at": "2026-11-25 13:36:59 UTC",
       "headline_item": {
-        "id": "80af66c8fd7f57d5",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "人类研究表明，在工作中采用人工智能最困难的部分与学习工具无关",
-        "title_en": "Anthropic study shows the hardest part of adopting AI at work has little to do with learning the tools",
-        "source": "THE DECODER",
-        "author": "Matthias Bastian",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_282d5df2a1fb1c98.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_282d5df2a1fb1c98.jpg",
-        "published_at": "2026-11-25T13:14:27+00:00",
-        "url": "https://the-decoder.com/anthropic-study-shows-the-hardest-part-of-adopting-ai-at-work-has-little-to-do-with-learning-the-tools/",
-        "event_summary_zh": "一份新的 Anthropic 报告发现，人工智能模型不断变得更好，但将它们投入使用大多会产生摩擦。审查瓶颈、员工抵制、安全风险和过时的自定义工具正在拖累许多企业项目。 Anthropic 的研究人员对 58 家美国公司进行了 66 次面对面访谈",
-        "event_summary_en": "AI models keep getting better, but putting them to work mostly creates friction, a new Anthropic report finds. Review bottlenecks, employee pushback, security risks, and outdated custom tools are dragging down many enterprise projects.\n\nAnthropic's researchers conducted 66 in-person interviews at 58 US companies for the qualitative study, from AI startups to established firms in law, construction, finance, medicine, and manufacturing. The authors note that the sample isn't representative because",
+        "id": "ddd1a3bcc7e6595f",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "OpenAI发表论文证明矩阵乘法指数精确为9/4",
+        "title_en": "OpenAI publishes a preprint that claims to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (alphaXiv)",
+        "source": "alphaXiv",
+        "author": "alphaXiv",
+        "cover_image": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
+        "image_url": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
+        "published_at": "2026-11-25T13:23:06+00:00",
+        "url": "https://www.alphaxiv.org/abs/2611.matrix-multiplication-exponent-lower-bound",
+        "event_summary_zh": "OpenAI发布预印本论文，从理论层面证明了矩阵乘法指数的下界为9/4，解决了数学界长期悬而未决的复杂性问题",
+        "event_summary_en": "OpenAI published a preprint proving that the square matrix multiplication exponent is exactly 9/4 over any field. Utilizing formal arithmetic circuits and proof by contradiction, the research bridges matrix multiplication efficiency with lower bounds on network compression costs, filling a critical gap in asymptotic rank and unrestricted circuit complexity.",
         "core_facts_zh": [
-          "【核心事件】美国证券交易委员会 (SEC)：人类研究表明，在工作中采用人工智能最困难的部分与学习工具无关",
-          "【核心事实细节】人类研究表明，在工作中采用人工智能最困难的部分与学习工具无关。",
-          "【行业研判】Anthropic 的研究人员对 58 家美国公司进行了 66 次面对面访谈，以进行定性研究。"
+          "【核心事件】OpenAI 研究团队在数学理论与计算复杂性研究：证明矩阵乘法指数(ω)下界为9/4",
+          "【起因与机理】解决矩阵计算渐近优化的理论上限问题",
+          "【关键数据与实测】矩阵乘法指数(ω)下界确立为9/4。",
+          "【各方立场与态度】通过反证法与网络压缩代价证明。"
         ],
         "core_facts_en": [
-          "[Core Event] Matthias Bastian: Anthropic study shows the hardest part of adopting AI at work has little to do with learning the tools",
-          "[Root Cause & Mechanism] The authors note that the sample isn't representative because.",
-          "[Key Technical Spec] AI models keep getting better, but putting them to work mostly creates friction, a new Anthropic report finds.",
-          "[Industry Analysis] Anthropic's researchers conducted 66 in-person interviews at 58 US companies for the qualitative study, from AI startups to established firms in law, construction, finance, medicine, and manufacturing."
+          "[Core Event] OpenAI Research Team: Proved the lower bound of the matrix multiplication exponent (ω) is exactly 9/4.",
+          "[Root Cause & Mechanism] To resolve long-standing theoretical limits on asymptotic matrix calculation optimization.",
+          "[Key Metrics] Matrix multiplication exponent (ω) established at 9/4.",
+          "[Key Position & Outlook] Proven via contradiction and network compression cost analysis."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "该证明不仅是纯数学领域的里程碑，更对底层计算架构设计具有深远启示。若矩阵乘法计算效率存在明确的渐近下界，意味着通过算法优化降低AI训练与推理功耗存在物理极限，这将迫使计算架构设计从依赖“软优化”向追求“硬件直通”的范式转移。",
+        "industry_impact_en": "This proof is more than a mathematical milestone; it implies profound constraints for underlying computing architecture. Establishing an asymptotic lower bound on matrix multiplication suggests a physical limit to energy reduction via algorithmic optimization alone, compelling hardware architecture to shift from software-dependent optimization toward direct, hardware-level acceleration."
       },
       "headlines": [
+        {
+          "id": "ddd1a3bcc7e6595f",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "OpenAI发表论文证明矩阵乘法指数精确为9/4",
+          "title_en": "OpenAI publishes a preprint that claims to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (alphaXiv)",
+          "source": "alphaXiv",
+          "author": "alphaXiv",
+          "cover_image": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
+          "image_url": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
+          "published_at": "2026-11-25T13:23:06+00:00",
+          "url": "https://www.alphaxiv.org/abs/2611.matrix-multiplication-exponent-lower-bound",
+          "event_summary_zh": "OpenAI发布预印本论文，从理论层面证明了矩阵乘法指数的下界为9/4，解决了数学界长期悬而未决的复杂性问题",
+          "event_summary_en": "OpenAI published a preprint proving that the square matrix multiplication exponent is exactly 9/4 over any field. Utilizing formal arithmetic circuits and proof by contradiction, the research bridges matrix multiplication efficiency with lower bounds on network compression costs, filling a critical gap in asymptotic rank and unrestricted circuit complexity.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI 研究团队在数学理论与计算复杂性研究：证明矩阵乘法指数(ω)下界为9/4",
+            "【起因与机理】解决矩阵计算渐近优化的理论上限问题",
+            "【关键数据与实测】矩阵乘法指数(ω)下界确立为9/4。",
+            "【各方立场与态度】通过反证法与网络压缩代价证明。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI Research Team: Proved the lower bound of the matrix multiplication exponent (ω) is exactly 9/4.",
+            "[Root Cause & Mechanism] To resolve long-standing theoretical limits on asymptotic matrix calculation optimization.",
+            "[Key Metrics] Matrix multiplication exponent (ω) established at 9/4.",
+            "[Key Position & Outlook] Proven via contradiction and network compression cost analysis."
+          ],
+          "industry_impact_zh": "该证明不仅是纯数学领域的里程碑，更对底层计算架构设计具有深远启示。若矩阵乘法计算效率存在明确的渐近下界，意味着通过算法优化降低AI训练与推理功耗存在物理极限，这将迫使计算架构设计从依赖“软优化”向追求“硬件直通”的范式转移。",
+          "industry_impact_en": "This proof is more than a mathematical milestone; it implies profound constraints for underlying computing architecture. Establishing an asymptotic lower bound on matrix multiplication suggests a physical limit to energy reduction via algorithmic optimization alone, compelling hardware architecture to shift from software-dependent optimization toward direct, hardware-level acceleration."
+        },
         {
           "id": "80af66c8fd7f57d5",
           "tag_zh": "⚡ 职场提效",
@@ -63,67 +93,39 @@
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         },
         {
-          "id": "66fc6092194295e0",
+          "id": "b3320d19b0b5eea6",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "尽管美国禁令，英伟达顶级芯片仍在中国销售",
-          "title_en": "Top Nvidia chips still for sale in China, despite U.S. ban",
-          "source": "Washington Post",
-          "author": "Joshua Yang",
-          "cover_image": "https://ainewsradar.xyz/images/wapo_a12621bc199bbfe8.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wapo_a12621bc199bbfe8.jpg",
-          "published_at": "2026-11-25T13:00:57+00:00",
-          "url": "https://www.washingtonpost.com/world/2026/11/25/top-nvidia-chips-are-still-offer-china-despite-us-ban/?pwapi_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZWFzb24iOiJnaWZ0IiwibmJmIjoxNzk1NTgyODAwLCJpc3MiOiJzdWJzY3JpcHRpb25zIiwiZXhwIjoxNzk2OTY1MTk5LCJpYXQiOjE3OTU1ODI4MDAsImp0aSI6ImRjN2IwMDllLWFkMzEtNDViZC1hNDBlLTdiZTZkY2QyYjgyOSIsInVybCI6Imh0dHBzOi8vd3d3Lndhc2hpbmd0b25wb3N0LmNvbS93b3JsZC8yMDI2LzExLzI1L3RvcC1udmlkaWEtY2hpcHMtYXJlLXN0aWxsLW9mZmVyLWNoaW5hLWRlc3BpdGUtdXMtYmFuLyJ9.jF3hc_e28ZcCrJ5Y8OmlgXSYteCO7jDAMSZ9yQp6kJg&itid=gfta",
-          "event_summary_zh": "中国深圳——华强北市场上的卖家，这是一个庞大的电子市场，售卖的是 hawk 智能手表、消费级无人机、主板——以及据说被美国商务部禁止进入中国的尖端英伟达芯片。这是对美国的公然挑衅",
-          "event_summary_en": "SHENZHEN, China — Sellers at Huaqiangbei market, a sprawling electronics bazaar, hawk smartwatches, consumer drones, motherboards — and cutting-edge Nvidia chips supposedly barred from China by the U.S. Commerce Department.\n\nThis open defiance of U.S. export controls is in evidence in the southern Chinese city of Shenzhen, just a few miles from the state villa where President Donald Trump met Chinese leader Xi Jinping last week and hailed him as a “friend.”\n\nDuring a recent visit, one vendor in",
+          "title_zh": "在一系列联邦黑客攻击和服务中断之后，美国金融调查人员和间谍机构接连发生网络事件",
+          "title_en": "Back-to-back cyber incidents at US financial investigators and spy agencies follow a string of federal hacks and outages",
+          "source": "THE DECODER",
+          "author": "Maximilian Schreiner",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_b4b615d364cc59d1.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_b4b615d364cc59d1.jpg",
+          "published_at": "2026-11-25T13:07:44+00:00",
+          "url": "https://the-decoder.com/back-to-back-cyber-incidents-at-us-financial-investigators-and-spy-agencies-follow-a-string-of-federal-hacks-and-outages/",
+          "event_summary_zh": "美国财政部的金融犯罪执法网络 (FinCEN) 在发生未经授权的访问后将系统关闭以作为预防措施。几个小时前，有报道称中央情报局和其他美国情报机构发生了一起可能涉及人工智能工具的数据泄露事件。 FinCEN 正在调查一起网络安全事件",
+          "event_summary_en": "The US Treasury's Financial Crimes Enforcement Network (FinCEN) took systems offline as a precaution after unauthorized access. Hours earlier, reports emerged of a separate breach at the CIA and other US intelligence agencies that may have involved an AI tool.\n\nFinCEN is investigating a cybersecurity incident. The Verge reported that the agency announced on Tuesday that a limited portion of its systems had been accessed without authorization.\n\nWhile FinCEN didn't disclose the scope or cause of t",
           "core_facts_zh": [
-            "【核心事件】美国总统 特朗普 (Donald Trump)在算力芯片供应链与云端基础设施：尽管美国禁令，英伟达顶级芯片仍在中国销售",
-            "【核心事实细节】尽管美国禁令，英伟达顶级芯片仍在中国销售。",
-            "【行业研判】这种对美国出口管制的公然蔑视在中国南方城市深圳就很明显，距离深圳仅几英里。"
+            "【核心事件】美国证券交易委员会 (SEC)：在一系列联邦黑客攻击和服务中断之后，美国金融调查人员和间谍机构接连发生网络事件",
+            "【起因与机理】网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。",
+            "【调查与监管诉求】美国证券交易委员会 (SEC)在全球产业与技术前沿一线。",
+            "【行业研判】The Verge 报道称，该机构。"
           ],
           "core_facts_en": [
-            "[Core Event] Joshua Yang: Top Nvidia chips still for sale in China, despite U.S. ban",
-            "[Root Cause & Mechanism] export controls is in evidence in the southern Chinese city of Shenzhen, just a few miles from the state villa where President Donald Trump met Chinese leader Xi Jinping last week and hailed him as a “friend.”\n\nDuring a recent visit, one vendor in.",
-            "[Key Metrics] Vendors across multiple buildings of Huaqiangbei market quoted prices of $3 million to $3.",
-            "[Industry Analysis] This open defiance of U.S."
+            "[Core Event] Maximilian Schreiner: Back-to-back cyber incidents at US financial investigators and spy agencies follow a string of federal hacks and outages",
+            "[Root Cause & Mechanism] The US Treasury's Financial Crimes Enforcement Network (FinCEN) took systems offline as a precaution after unauthorized access.",
+            "[Regulatory & Investigation Focus] Hours earlier, reports emerged of a separate breach at the CIA and other US intelligence agencies that may have involved an AI tool.",
+            "[Industry Analysis] While FinCEN didn't disclose the scope or cause of t."
           ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "3724e949f98ad574",
-          "tag_zh": "💡 实战技巧",
-          "tag_en": "💡 Practical Skills",
-          "title_zh": "Vivi 编码是否已使开源成为合成器的新常态？",
-          "title_en": "Has vibe coding made open source the new normal for synths?",
-          "source": "The Verge AI",
-          "author": "Terrence O'Brien",
-          "cover_image": "https://ainewsradar.xyz/images/verge_62d538fd46658027.jpg",
-          "image_url": "https://ainewsradar.xyz/images/verge_62d538fd46658027.jpg",
-          "published_at": "2026-11-25T13:00:00+00:00",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1040081/vibe-coding-open-source-music-firmware",
-          "event_summary_zh": "强大的振动编码代理和逆向工程等工具的出现在音乐装备世界中造成了混乱，使公司忙于找出应对方法。虽然像罗兰这样的一些人目前保持沉默，但其他人已经拥抱了模组社区。在过去的几周里，正如",
-          "event_summary_en": "The emergence of powerful vibe-coding agents and tools like Reverse Engineer Anything has caused chaos in the music gear world, leaving companies scrambling to figure out how to respond. While some, like Roland, have remained silent for now, others have embraced the modding community. In the last several weeks, as it’s become clear that no piece of music gear is safe from Claude and a subreddit full of curious tinkerers, companies have begun making more and more of their devices open source.\n\nTh",
-          "core_facts_zh": [
-            "【核心事件】泰伦斯·奥布莱恩在全球大模型开源社区与技术研发一线：Vivi 编码是否已使开源成为合成器的新常态？",
-            "【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
-            "【关键技术规格】Terrence O'Brien在全球大模型开源社区与技术研发一线。",
-            "【各方立场与态度】Vivi 编码是否已使开源成为合成器的新常态？。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Terrence O'Brien: Has vibe coding made open source the new normal for synths?",
-            "[Root Cause & Mechanism] The emergence of powerful vibe-coding agents and tools like Reverse Engineer Anything has caused chaos in the music gear world, leaving companies scrambling to figure out how to respond.",
-            "[Key Fact Detail] Has vibe coding made open source the new normal for synths?.",
-            "[Industry Analysis] In the last several weeks, as it’s become clear that no piece of music gear is safe from Claude and a subreddit full of curious tinkerers, companies have begun making more and more of their devices open source."
-          ],
-          "industry_impact_zh": "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
+          "industry_impact_zh": "网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-25 13:21:36 UTC",
+      "updated_at": "2026-11-25 13:36:59 UTC",
       "author": "AnthropicAI",
       "author_handle": "@AnthropicAI",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -290,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-25 13:21:36 UTC",
+      "updated_at": "2026-11-25 13:37:00 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
