@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-25 13:36:59 UTC",
+  "generated_at": "2026-11-25 13:50:00 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-25 13:36:59 UTC",
+      "updated_at": "2026-11-25 13:50:00 UTC",
       "headline_item": {
-        "id": "ddd1a3bcc7e6595f",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "OpenAI发表论文证明矩阵乘法指数精确为9/4",
-        "title_en": "OpenAI publishes a preprint that claims to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (alphaXiv)",
-        "source": "alphaXiv",
-        "author": "alphaXiv",
-        "cover_image": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
-        "image_url": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
-        "published_at": "2026-11-25T13:23:06+00:00",
-        "url": "https://www.alphaxiv.org/abs/2611.matrix-multiplication-exponent-lower-bound",
-        "event_summary_zh": "OpenAI发布预印本论文，从理论层面证明了矩阵乘法指数的下界为9/4，解决了数学界长期悬而未决的复杂性问题",
-        "event_summary_en": "OpenAI published a preprint proving that the square matrix multiplication exponent is exactly 9/4 over any field. Utilizing formal arithmetic circuits and proof by contradiction, the research bridges matrix multiplication efficiency with lower bounds on network compression costs, filling a critical gap in asymptotic rank and unrestricted circuit complexity.",
+        "id": "575c9312b90de35e",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "稳定币巨头联手阻断币安被盗资产",
+        "title_en": "Behind Binance Hack, a Reckoning Over Who Controls Crypto",
+        "source": "Bloomberg",
+        "author": "Bloomberg",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_behind-binance-hack-a-reckoning-over-who.jpg",
+        "image_url": "https://ainewsradar.xyz/images/bloomberg_behind-binance-hack-a-reckoning-over-who.jpg",
+        "published_at": "2026-11-25T13:35:02+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-24/behind-binance-hack-a-reckoning-over-who-controls-crypto?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NTUzMzQ1NCwiZXhwIjoxNzk2MTM4MjU0LCJhcnRpY2xlSWQiOiJUT1BYOERUOTZPU0owMCIsImJjb25uZWN0SWQiOiJGMTA3Nzk5MEIyMkE0MTk5OEQ5RUU0ODRCMzMwNEZFMyJ9.tz4g_aYbWfjxhHDgRp9QQ7oEYon1Y5imVMtlrkIo_m0",
+        "event_summary_zh": "在币安价值63亿美元的黑客攻击事件中，Tether与Circle通过快速冻结手段挽回约26亿美元损失，凸显稳定币发行商对区块链资产的中心化控制力",
+        "event_summary_en": "During the $6.3 billion hack of Binance, stablecoin issuers Tether and Circle froze $1.5 billion in USDT and $1.1 billion in USDC within 30 minutes, respectively. This action marks a significant shift as the two issuers utilized centralized control over their smart contracts to execute immediate asset blocks upon requests from government authorities and the affected exchange.",
         "core_facts_zh": [
-          "【核心事件】OpenAI 研究团队在数学理论与计算复杂性研究：证明矩阵乘法指数(ω)下界为9/4",
-          "【起因与机理】解决矩阵计算渐近优化的理论上限问题",
-          "【关键数据与实测】矩阵乘法指数(ω)下界确立为9/4。",
-          "【各方立场与态度】通过反证法与网络压缩代价证明。"
+          "【核心事件】Tether（稳定币发行商）、Circle（稳定币发行商）、币安（Binance，受害加密货币交易所）在加密货币二级市场与区块链生态系统：通过控制代币智能合约的冻结权限，紧急拦截并封锁黑客地址中价值26亿美元的资产",
+          "【起因与机理】应对史上规模最大的加密货币被盗事件，且稳定币发行商正通过强化合规流程提升行业响应能力",
+          "【关键数据与实测】Tether与Circle共计冻结26亿美元，系应对币安黑客事件的紧急合规举措。",
+          "【各方立场与态度】稳定币发行商合规边界从‘法庭指令’向‘监管协同响应’升级。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI Research Team: Proved the lower bound of the matrix multiplication exponent (ω) is exactly 9/4.",
-          "[Root Cause & Mechanism] To resolve long-standing theoretical limits on asymptotic matrix calculation optimization.",
-          "[Key Metrics] Matrix multiplication exponent (ω) established at 9/4.",
-          "[Key Position & Outlook] Proven via contradiction and network compression cost analysis."
+          "[Core Event] Tether, Circle, Binance (Global crypto ecosystem): Emergency freezing of $2.6 billion in stolen assets via centralized smart contract controls",
+          "[Root Cause & Mechanism] Response to the $6.3B Binance hack; evolution of stablecoin issuers' role in financial security",
+          "[Key Metrics] Tether and Circle freeze $2.6B in combined stolen assets following the Binance hack.",
+          "[Official Stance & Demand] Regulatory compliance shifts from judicial orders to rapid government-coordinated responses."
         ],
-        "industry_impact_zh": "该证明不仅是纯数学领域的里程碑，更对底层计算架构设计具有深远启示。若矩阵乘法计算效率存在明确的渐近下界，意味着通过算法优化降低AI训练与推理功耗存在物理极限，这将迫使计算架构设计从依赖“软优化”向追求“硬件直通”的范式转移。",
-        "industry_impact_en": "This proof is more than a mathematical milestone; it implies profound constraints for underlying computing architecture. Establishing an asymptotic lower bound on matrix multiplication suggests a physical limit to energy reduction via algorithmic optimization alone, compelling hardware architecture to shift from software-dependent optimization toward direct, hardware-level acceleration."
+        "industry_impact_zh": "此事件证实稳定币已从去中心化理想主义转变为受中心化实体高度干预的准金融机构，其对代币的强制冻结能力本质上是对链上资产的司法管辖权实践。这意味着未来大型加密货币盗窃案的风险溢价将高度依赖于稳定币发行商的合规协议与政治立场，稳定币市场份额的集中化正形成一种非正式但极具实效的全球数字金融执法机制。",
+        "industry_impact_en": "This incident confirms stablecoins have evolved from decentralized ideals to quasi-financial instruments subject to heavy centralized intervention, where asset-freezing capabilities represent effective extraterritorial jurisdiction. Future risk premiums for crypto-thefts will rely heavily on the compliance frameworks of these issuers, cementing stablecoin dominance as a de facto global digital finance enforcement mechanism."
       },
       "headlines": [
+        {
+          "id": "575c9312b90de35e",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "稳定币巨头联手阻断币安被盗资产",
+          "title_en": "Behind Binance Hack, a Reckoning Over Who Controls Crypto",
+          "source": "Bloomberg",
+          "author": "Bloomberg",
+          "cover_image": "https://ainewsradar.xyz/images/bloomberg_behind-binance-hack-a-reckoning-over-who.jpg",
+          "image_url": "https://ainewsradar.xyz/images/bloomberg_behind-binance-hack-a-reckoning-over-who.jpg",
+          "published_at": "2026-11-25T13:35:02+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-24/behind-binance-hack-a-reckoning-over-who-controls-crypto?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NTUzMzQ1NCwiZXhwIjoxNzk2MTM4MjU0LCJhcnRpY2xlSWQiOiJUT1BYOERUOTZPU0owMCIsImJjb25uZWN0SWQiOiJGMTA3Nzk5MEIyMkE0MTk5OEQ5RUU0ODRCMzMwNEZFMyJ9.tz4g_aYbWfjxhHDgRp9QQ7oEYon1Y5imVMtlrkIo_m0",
+          "event_summary_zh": "在币安价值63亿美元的黑客攻击事件中，Tether与Circle通过快速冻结手段挽回约26亿美元损失，凸显稳定币发行商对区块链资产的中心化控制力",
+          "event_summary_en": "During the $6.3 billion hack of Binance, stablecoin issuers Tether and Circle froze $1.5 billion in USDT and $1.1 billion in USDC within 30 minutes, respectively. This action marks a significant shift as the two issuers utilized centralized control over their smart contracts to execute immediate asset blocks upon requests from government authorities and the affected exchange.",
+          "core_facts_zh": [
+            "【核心事件】Tether（稳定币发行商）、Circle（稳定币发行商）、币安（Binance，受害加密货币交易所）在加密货币二级市场与区块链生态系统：通过控制代币智能合约的冻结权限，紧急拦截并封锁黑客地址中价值26亿美元的资产",
+            "【起因与机理】应对史上规模最大的加密货币被盗事件，且稳定币发行商正通过强化合规流程提升行业响应能力",
+            "【关键数据与实测】Tether与Circle共计冻结26亿美元，系应对币安黑客事件的紧急合规举措。",
+            "【各方立场与态度】稳定币发行商合规边界从‘法庭指令’向‘监管协同响应’升级。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Tether, Circle, Binance (Global crypto ecosystem): Emergency freezing of $2.6 billion in stolen assets via centralized smart contract controls",
+            "[Root Cause & Mechanism] Response to the $6.3B Binance hack; evolution of stablecoin issuers' role in financial security",
+            "[Key Metrics] Tether and Circle freeze $2.6B in combined stolen assets following the Binance hack.",
+            "[Official Stance & Demand] Regulatory compliance shifts from judicial orders to rapid government-coordinated responses."
+          ],
+          "industry_impact_zh": "此事件证实稳定币已从去中心化理想主义转变为受中心化实体高度干预的准金融机构，其对代币的强制冻结能力本质上是对链上资产的司法管辖权实践。这意味着未来大型加密货币盗窃案的风险溢价将高度依赖于稳定币发行商的合规协议与政治立场，稳定币市场份额的集中化正形成一种非正式但极具实效的全球数字金融执法机制。",
+          "industry_impact_en": "This incident confirms stablecoins have evolved from decentralized ideals to quasi-financial instruments subject to heavy centralized intervention, where asset-freezing capabilities represent effective extraterritorial jurisdiction. Future risk premiums for crypto-thefts will rely heavily on the compliance frameworks of these issuers, cementing stablecoin dominance as a de facto global digital finance enforcement mechanism."
+        },
         {
           "id": "ddd1a3bcc7e6595f",
           "tag_zh": "🔬 前沿技术",
@@ -91,41 +120,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "b3320d19b0b5eea6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "在一系列联邦黑客攻击和服务中断之后，美国金融调查人员和间谍机构接连发生网络事件",
-          "title_en": "Back-to-back cyber incidents at US financial investigators and spy agencies follow a string of federal hacks and outages",
-          "source": "THE DECODER",
-          "author": "Maximilian Schreiner",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_b4b615d364cc59d1.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_b4b615d364cc59d1.jpg",
-          "published_at": "2026-11-25T13:07:44+00:00",
-          "url": "https://the-decoder.com/back-to-back-cyber-incidents-at-us-financial-investigators-and-spy-agencies-follow-a-string-of-federal-hacks-and-outages/",
-          "event_summary_zh": "美国财政部的金融犯罪执法网络 (FinCEN) 在发生未经授权的访问后将系统关闭以作为预防措施。几个小时前，有报道称中央情报局和其他美国情报机构发生了一起可能涉及人工智能工具的数据泄露事件。 FinCEN 正在调查一起网络安全事件",
-          "event_summary_en": "The US Treasury's Financial Crimes Enforcement Network (FinCEN) took systems offline as a precaution after unauthorized access. Hours earlier, reports emerged of a separate breach at the CIA and other US intelligence agencies that may have involved an AI tool.\n\nFinCEN is investigating a cybersecurity incident. The Verge reported that the agency announced on Tuesday that a limited portion of its systems had been accessed without authorization.\n\nWhile FinCEN didn't disclose the scope or cause of t",
-          "core_facts_zh": [
-            "【核心事件】美国证券交易委员会 (SEC)：在一系列联邦黑客攻击和服务中断之后，美国金融调查人员和间谍机构接连发生网络事件",
-            "【起因与机理】网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。",
-            "【调查与监管诉求】美国证券交易委员会 (SEC)在全球产业与技术前沿一线。",
-            "【行业研判】The Verge 报道称，该机构。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Maximilian Schreiner: Back-to-back cyber incidents at US financial investigators and spy agencies follow a string of federal hacks and outages",
-            "[Root Cause & Mechanism] The US Treasury's Financial Crimes Enforcement Network (FinCEN) took systems offline as a precaution after unauthorized access.",
-            "[Regulatory & Investigation Focus] Hours earlier, reports emerged of a separate breach at the CIA and other US intelligence agencies that may have involved an AI tool.",
-            "[Industry Analysis] While FinCEN didn't disclose the scope or cause of t."
-          ],
-          "industry_impact_zh": "网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-25 13:36:59 UTC",
+      "updated_at": "2026-11-25 13:50:01 UTC",
       "author": "AnthropicAI",
       "author_handle": "@AnthropicAI",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -292,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-25 13:37:00 UTC",
+      "updated_at": "2026-11-25 13:50:01 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -445,7 +445,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "22.3k",
+          "stars": "22.4k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
