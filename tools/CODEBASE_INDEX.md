@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构与符号极速索引 (Codebase Fast Index)
 
-> **生成时间**: `2026-11-25 08:30:14 UTC` | **收录文件**: `108` 个 | **索引符号**: `1283` 个
+> **生成时间**: `2026-11-25 08:47:46 UTC` | **收录文件**: `109` 个 | **索引符号**: `1289` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，在每次代码修改、测试门禁校验与提交前自动增量同步刷新。
 
 ---
@@ -64,7 +64,7 @@
 *单篇静态落地页编译、首页 SSR 注入、分卷切片、Sitemap 生成与 IndexNow 秒级收录推送。*
 
 - **`content_publisher.py`** (271,971 bytes): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
-- **`tool_news_publisher.py`** (152,895 bytes): `parse_iso_date, sanitize_for_en, escape, build_ainr_tags_meta, get_thematic_fallback_image...`
+- **`tool_news_publisher.py`** (152,898 bytes): `parse_iso_date, sanitize_for_en, escape, build_ainr_tags_meta, get_thematic_fallback_image...`
 - **`build_flagship_articles.py`** (30,871 bytes): `generate_article_page, generate_articles_index, build_all_flagship_pages, main`
 - **`seo_geo_engine.py`** (41,421 bytes): `atomic_write_text, atomic_write_bytes, sanitize_for_en, xml_escape, parse_iso_or_rfc...`
 - **`indexnow_submitter.py`** (6,599 bytes): `load_sitemap_urls, load_ledger, save_ledger, submit_urls_to_indexnow, auto_submit_recent_or_all`

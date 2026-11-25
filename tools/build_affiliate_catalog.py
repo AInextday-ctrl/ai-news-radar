@@ -40,6 +40,15 @@ def validate_catalog(items: List[Dict[str, Any]]) -> None:
         assert url not in seen_urls, f"Duplicate affiliate URL for {pid}: {url}"
         seen_urls.add(url)
 
+        img = it.get("image", "")
+        assert img.startswith("/images/products/") and img.endswith(".webp"), (
+            f"Missing or invalid product photo path on {pid}: {img}"
+        )
+        img_disk = os.path.join(WORKSPACE_DIR, "public", img.lstrip("/").replace("/", os.sep))
+        assert os.path.exists(img_disk) and os.path.getsize(img_disk) > 1024, (
+            f"Product photo missing or too small on disk for {pid}: {img_disk}"
+        )
+
         tags = it.get("tags", [])
         assert isinstance(tags, list) and len(tags) >= 4, f"Too few tags on {pid}"
 

@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 08:30:14 UTC",
-  "total_files": 108,
-  "total_symbols": 1283,
+  "updated_at": "2026-11-25 08:47:46 UTC",
+  "total_files": 109,
+  "total_symbols": 1289,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -7286,8 +7286,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 152895,
-      "mtime": 1795594426.544225,
+      "size": 152898,
+      "mtime": 1795596377.6277373,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7448,8 +7448,8 @@
       "constants": []
     },
     "tools/build_affiliate_catalog.py": {
-      "size": 3328,
-      "mtime": 1795595226.927382,
+      "size": 3876,
+      "mtime": 1795596217.0898826,
       "classes": {},
       "functions": {
         "validate_catalog": {
@@ -7460,7 +7460,7 @@
           ]
         },
         "sync_into_monetization_js": {
-          "line": 57,
+          "line": 66,
           "doc": "",
           "args": [
             "items"
@@ -7579,6 +7579,63 @@
         "INDEX_MD_PATH",
         "TIER_MAPPING",
         "SOURCE_REGISTRY"
+      ]
+    },
+    "tools/fetch_affiliate_images.py": {
+      "size": 8112,
+      "mtime": 1795595989.2491865,
+      "classes": {},
+      "functions": {
+        "_tokenize": {
+          "line": 44,
+          "doc": "",
+          "args": [
+            "text"
+          ]
+        },
+        "_score_candidate": {
+          "line": 51,
+          "doc": "",
+          "args": [
+            "product_name",
+            "alt"
+          ]
+        },
+        "_extract_amz_candidates": {
+          "line": 65,
+          "doc": "",
+          "args": [
+            "html_text",
+            "url",
+            "product_name"
+          ]
+        },
+        "_download_and_optimize_image": {
+          "line": 103,
+          "doc": "",
+          "args": [
+            "img_url",
+            "dest_path"
+          ]
+        },
+        "_fetch_one": {
+          "line": 133,
+          "doc": "",
+          "args": [
+            "item"
+          ]
+        },
+        "main": {
+          "line": 177,
+          "doc": "",
+          "args": []
+        }
+      },
+      "constants": [
+        "WORKSPACE_DIR",
+        "CATALOG_PATH",
+        "OUT_DIR",
+        "ACCESSORY_PENALTY_WORDS"
       ]
     },
     "tools/generate_thumbnails.py": {
@@ -10747,6 +10804,13 @@
       {
         "file": "tools/fast_index.py",
         "line": 561,
+        "type": "function",
+        "args": [],
+        "doc": ""
+      },
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 177,
         "type": "function",
         "args": [],
         "doc": ""
@@ -20449,7 +20513,7 @@
     "sync_into_monetization_js": [
       {
         "file": "tools/build_affiliate_catalog.py",
-        "line": 57,
+        "line": 66,
         "type": "function",
         "args": [
           "items"
@@ -20588,6 +20652,65 @@
         "type": "function",
         "args": [],
         "doc": "Installs the git pre-commit hook to guarantee auto-sync on commit."
+      }
+    ],
+    "_tokenize": [
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 44,
+        "type": "function",
+        "args": [
+          "text"
+        ],
+        "doc": ""
+      }
+    ],
+    "_score_candidate": [
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 51,
+        "type": "function",
+        "args": [
+          "product_name",
+          "alt"
+        ],
+        "doc": ""
+      }
+    ],
+    "_extract_amz_candidates": [
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 65,
+        "type": "function",
+        "args": [
+          "html_text",
+          "url",
+          "product_name"
+        ],
+        "doc": ""
+      }
+    ],
+    "_download_and_optimize_image": [
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 103,
+        "type": "function",
+        "args": [
+          "img_url",
+          "dest_path"
+        ],
+        "doc": ""
+      }
+    ],
+    "_fetch_one": [
+      {
+        "file": "tools/fetch_affiliate_images.py",
+        "line": 133,
+        "type": "function",
+        "args": [
+          "item"
+        ],
+        "doc": ""
       }
     ],
     "ensure_thumbnails": [

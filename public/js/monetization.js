@@ -1,14 +1,14 @@
 /**
- * AI News Radar - Context-Aware Amazon Associates & Native Partner Engine (v3.0)
+ * AI News Radar - Photo-First Context-Aware Amazon Associates Engine (v4.0)
  *
  * Features:
- *   - Curated AI Product Pool (GPUs, DDR5 Memory, NVMe SSDs, Local-LLM Macs/PCs,
- *     Edge Robotics Kits, AI Engineering Books, Developer Gear) with Amazon tag=purrpulse-20
- *   - Real-time article tag & keyword relevance scoring (EN + ZH)
- *   - Page-wide strict zero-duplicate guarantee across in-article and bottom slots
- *   - 100% Amazon Associates compliant: no hardcoded prices, no scraped product images,
- *     crisp theme-adaptive SVG device/book visuals, and clear Associate disclosure
- *   - Translation-plugin friendly semantic HTML & zero CLS (min-height reserved)
+ *   - 289+ curated real AI hardware, digital gadgets, audio/wearables, GPUs,
+ *     memory/storage, Macs/PCs, robotics kits, and AI engineering books
+ *   - Self-hosted WebP product photography (/images/products/<id>.webp)
+ *   - Clean photo-first gallery layout (3-col mid-article, 6-col showcase shelves)
+ *     with minimal typography (2-line title + airy store link, zero text clutter)
+ *   - Real-time article tag & keyword relevance scoring (EN + ZH) + page-wide 0 duplicates
+ *   - Clear Amazon Associates (purrpulse-20) disclosure & translation-plugin friendly markup
  */
 (function () {
   'use strict';
@@ -59,7 +59,8 @@
         "tagline": "支持空间音频与 Zigbee/Matter 智能家居中枢的旗舰 AI 语音音箱，随时响应多轮自然语言交互。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-studio.webp"
     },
     {
       "id": "ai-echo-show-15",
@@ -92,7 +93,8 @@
         "tagline": "15.6 英寸桌面/壁挂式智慧中控屏，融合环境感知语音助手、家庭日程看板与 Matter 协议控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-show-15.webp"
     },
     {
       "id": "ai-echo-show-8",
@@ -123,7 +125,8 @@
         "tagline": "8 英寸桌面智能带屏音箱，支持空间声场、自适应信息流与快速语音 AI 问答。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-show-8.webp"
     },
     {
       "id": "ai-echo-hub",
@@ -156,7 +159,8 @@
         "tagline": "专为全屋智能自动化打造的中控终端，兼容 Matter/Thread/Zigbee 并支持语音联动场景。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-hub.webp"
     },
     {
       "id": "ai-homepod-2",
@@ -189,7 +193,8 @@
         "tagline": "搭载实时计算声学与空间感知算法，深度整合 Siri 语音生态与 HomeKit/Thread 中枢。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-homepod-2.webp"
     },
     {
       "id": "ai-homepod-mini",
@@ -219,7 +224,8 @@
         "tagline": "小巧桌面级 Siri 智能音箱，支持多房间音频同步、UWB 接力与智能家居语音控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-homepod-mini.webp"
     },
     {
       "id": "ai-sonos-era-300",
@@ -250,7 +256,8 @@
         "tagline": "六单元全景声智能音箱，支持 Trueplay 房间声学 AI 调音与双语音助手唤醒。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-sonos-era-300.webp"
     },
     {
       "id": "ai-sonos-era-100",
@@ -281,7 +288,8 @@
         "tagline": "搭载远场拾音阵列与房间声学校准技术，兼顾高解析蓝牙/Wi-Fi 播放与语音操控。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-sonos-era-100.webp"
     },
     {
       "id": "ai-timekettle-w4pro",
@@ -317,7 +325,8 @@
         "tagline": "支持 40+ 语种双向实时同声传译、远程通话翻译与 AI 会议纪要整理的商务级 AI 耳机。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-timekettle-w4pro.webp"
     },
     {
       "id": "ai-timekettle-wt2",
@@ -349,7 +358,8 @@
         "tagline": "双耳共享同传模式，提供低延迟面对面实时 AI 翻译与离线语音包支持。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-timekettle-wt2.webp"
     },
     {
       "id": "ai-timekettle-t1",
@@ -379,7 +389,8 @@
         "tagline": "支持离线互译、拍照 OCR 识别翻译与全球内置流量的便携独立 AI 翻译终端。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-timekettle-t1.webp"
     },
     {
       "id": "ai-airpods-pro-2",
@@ -414,7 +425,8 @@
         "tagline": "内置 H2 芯片驱动自适应通透、对话感知降噪与 Siri 头部动作免提交互。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-airpods-pro-2.webp"
     },
     {
       "id": "ai-airpods-max",
@@ -445,7 +457,8 @@
         "tagline": "双 H1 芯片驱动计算音频与空间声场，为深度编程、模型调试与语音交互提供静谧环境。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-airpods-max.webp"
     },
     {
       "id": "ai-sony-wf1000xm5",
@@ -476,7 +489,8 @@
         "tagline": "采用深度神经网络（DNN）算法与骨传导传感器精准剥离环境噪音，保障清晰语音交互。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-sony-wf1000xm5.webp"
     },
     {
       "id": "ai-sony-wh1000xm5",
@@ -507,7 +521,8 @@
         "tagline": "8 麦克风阵列配合 AI 自动降噪优化器实时识别场景，打造沉浸式研发与语音通话体验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-sony-wh1000xm5.webp"
     },
     {
       "id": "ai-bose-qc-ultra",
@@ -537,7 +552,8 @@
         "tagline": "搭载 CustomTune 智能耳道声场校准技术，适合差旅与高压研发办公。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-bose-qc-ultra.webp"
     },
     {
       "id": "ai-soundcore-liberty4pro",
@@ -567,7 +583,8 @@
         "tagline": "7 传感器毫秒级自适应降噪与 6 麦克风 AI 通话增强，性价比极高的日常音频伴侣。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-soundcore-liberty4pro.webp"
     },
     {
       "id": "ai-shokz-openrun-pro2",
@@ -596,7 +613,8 @@
         "tagline": "双引擎声学配合 AI 抗风噪麦克风，全天候佩戴无压迫，兼顾环境感知与语音交互。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-shokz-openrun-pro2.webp"
     },
     {
       "id": "ai-plaud-note",
@@ -631,7 +649,8 @@
         "tagline": "超薄 MagSafe 贴合手机机身，一键录制通话与线下会议，自动生成逐字稿、摘要与思维导图。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-plaud-note.webp"
     },
     {
       "id": "ai-plaud-notepin",
@@ -666,7 +685,8 @@
         "tagline": "仅 17 克重，支持领夹、挂绳或腕带佩戴，全天候捕捉灵感与对话并自动提炼待办事项。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-plaud-notepin.webp"
     },
     {
       "id": "ai-soundcore-work",
@@ -697,7 +717,8 @@
         "tagline": "支持 5 米远场拾音与多说话人分离标注，会议结束后秒级输出结构化中文/英文纪要。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-soundcore-work.webp"
     },
     {
       "id": "ai-kindle-scribe",
@@ -732,7 +753,8 @@
         "tagline": "10.2 英寸 300ppi 护眼墨水屏，适合精读 arXiv 论文与技术书籍，支持 AI 一键整理手写笔记。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-kindle-scribe.webp"
     },
     {
       "id": "ai-boox-note-air4c",
@@ -766,7 +788,8 @@
         "tagline": "Kaleido 3 彩屏搭配开放 Android 系统，完美呈现论文彩色图表并支持 AI 划词翻译与批注。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-boox-note-air4c.webp"
     },
     {
       "id": "ai-boox-palma-2",
@@ -797,7 +820,8 @@
         "tagline": "手机形态零蓝光墨水屏，通勤随时沉浸阅读长篇深度报道与大模型技术博客。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-boox-palma-2.webp"
     },
     {
       "id": "ai-remarkable-pro",
@@ -828,7 +852,8 @@
         "tagline": "零弹窗干扰的极简书写体验，支持手写公式与架构草图一键转可编辑文本。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-remarkable-pro.webp"
     },
     {
       "id": "ai-rocketbook-core",
@@ -858,7 +883,8 @@
         "tagline": "配合手机端 OCR 扫描自动归档手写内容至 Notion、Slack 或个人 AI 知识库，环保可重复书写。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-rocketbook-core.webp"
     },
     {
       "id": "ai-rayban-meta-wayfarer",
@@ -894,7 +920,8 @@
         "tagline": "搭载 1200 万像素第一视角镜头与 5 麦开放音频，支持实时视觉 AI 问答、拍照识物与现场翻译。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-rayban-meta-wayfarer.webp"
     },
     {
       "id": "ai-rayban-meta-skyler",
@@ -925,7 +952,8 @@
         "tagline": "轻便时尚镜框集成第一视角直播、视觉识别与免提语音助手，随时调用多模态 AI。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-rayban-meta-skyler.webp"
     },
     {
       "id": "ai-amazon-bee-wearable",
@@ -957,7 +985,8 @@
         "tagline": "亚马逊生态轻量化 AI 穿戴配件，全天无感记录对话脉络并自动生成个人记忆提醒。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-amazon-bee-wearable.webp"
     },
     {
       "id": "ai-xreal-one",
@@ -990,7 +1019,8 @@
         "tagline": "内置自研 X1 空间计算芯片，随时随地为笔记本或主机投射稳固的随身 3DoF 编程巨幕。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-xreal-one.webp"
     },
     {
       "id": "ai-viture-pro-xr",
@@ -1021,7 +1051,8 @@
         "tagline": "120Hz 高刷新率与电致变色遮光镜片，出差移动办公随时拥有私密高清开发屏幕。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-viture-pro-xr.webp"
     },
     {
       "id": "ai-meta-quest-3",
@@ -1057,7 +1088,8 @@
         "tagline": "全彩透视混合现实平台，广泛用于空间 AI 开发、机器人遥操作采集与 3D 世界模型仿真。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-meta-quest-3.webp"
     },
     {
       "id": "ai-meta-quest-3s",
@@ -1088,7 +1120,8 @@
         "tagline": "搭载同代骁龙 XR2 Gen 2 芯片，低门槛体验混合现实开发与沉浸式 3D 交互应用。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-meta-quest-3s.webp"
     },
     {
       "id": "ai-oura-ring-4",
@@ -1121,7 +1154,8 @@
         "tagline": "全钛金属机身内置多模态生物传感器，依托 AI 算法深度解析睡眠、心率变异性与精力状态。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-oura-ring-4.webp"
     },
     {
       "id": "ai-insta360-link2",
@@ -1154,7 +1188,8 @@
         "tagline": "1/2 英寸大底 4K 云台镜头，支持 AI 人像自动追焦、手势控制、白板增强与智能降噪收音。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-insta360-link2.webp"
     },
     {
       "id": "ai-obsbot-tiny2",
@@ -1185,7 +1220,8 @@
         "tagline": "全像素对焦配合双轴云台 AI 跟随，支持免提语音指令切换机位与桌面特写。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-obsbot-tiny2.webp"
     },
     {
       "id": "ai-obsbot-tail-air",
@@ -1217,7 +1253,8 @@
         "tagline": "支持 NDI 与多机位 AI 自动构图追踪，为技术演示、播客录像与发布会直播省去专职摄像。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-obsbot-tail-air.webp"
     },
     {
       "id": "ai-insta360-flow2pro",
@@ -1249,7 +1286,8 @@
         "tagline": "支持 Deep Track 4.0 与 Apple DockKit 原生追踪，单人拍摄 AI 产品评测与 Vlog 利器。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-insta360-flow2pro.webp"
     },
     {
       "id": "ai-dji-osmo-mobile-7p",
@@ -1280,7 +1318,8 @@
         "tagline": "搭载 ActiveTrack 智能跟随模块与三轴防抖，户外拍摄科技探展流畅稳定。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-dji-osmo-mobile-7p.webp"
     },
     {
       "id": "ai-insta360-x4",
@@ -1312,7 +1351,8 @@
         "tagline": "8K 超清全景拍摄结合 AI 自动取景剪辑，亦可采集 3D 空间视觉与高斯泼溅训练素材。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-insta360-x4.webp"
     },
     {
       "id": "ai-dji-pocket-3",
@@ -1344,7 +1384,8 @@
         "tagline": "1 英寸大底搭配人脸自动追焦与无线麦克风直连，科技博主与 AI 视频创作者口袋主力。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-dji-pocket-3.webp"
     },
     {
       "id": "ai-elgato-facecam-pro",
@@ -1375,7 +1416,8 @@
         "tagline": "索尼 STARVIS 大光圈传感器提供无压缩 4K60 画面，专为 AI 技术教程与直播打造。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-elgato-facecam-pro.webp"
     },
     {
       "id": "ai-shure-mv7plus",
@@ -1411,7 +1453,8 @@
         "tagline": "内置实时 DSP 降噪与防喷处理，适合采集高纯净度声音克隆样本与技术播客录制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-shure-mv7plus.webp"
     },
     {
       "id": "ai-rode-podmic-usb",
@@ -1442,7 +1485,8 @@
         "tagline": "兼具 XLR 与 USB-C 双接口与板载 APHEX 声效处理，开箱即享浑厚清晰的 AI 配音与讲解音质。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-rode-podmic-usb.webp"
     },
     {
       "id": "ai-dji-mic-2",
@@ -1473,7 +1517,8 @@
         "tagline": "支持 32-bit 浮点内录防爆音与智能环境降噪，街头采访与大模型实测录音必备。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-dji-mic-2.webp"
     },
     {
       "id": "ai-elgato-stream-deck-plus",
@@ -1505,7 +1550,8 @@
         "tagline": "自定义实体 LCD 按键与旋钮，一键触发常用 AI 提示词、终端脚本、API 调试与直播切屏。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-elgato-stream-deck-plus.webp"
     },
     {
       "id": "hw-rtx-5090",
@@ -1541,7 +1587,8 @@
         "tagline": "Blackwell 架构配 32GB GDDR7 显存与 FP4 算力，桌面端本地跑大模型微调与视频生成的天花板。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-rtx-5090.webp"
     },
     {
       "id": "hw-rtx-5080",
@@ -1573,7 +1620,8 @@
         "tagline": "高带宽 GDDR7 显存结合第五代 Tensor Core，兼顾高速本地 Token 生成与 4K 神经渲染。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-rtx-5080.webp"
     },
     {
       "id": "hw-rtx-5070ti",
@@ -1606,7 +1654,8 @@
         "tagline": "高性价比 16GB 大显存甜点级选择，流畅跑 14B-32B 量化开源模型与本地图像工作流。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-rtx-5070ti.webp"
     },
     {
       "id": "hw-rtx-4090-4080s",
@@ -1638,7 +1687,8 @@
         "tagline": "PyTorch 与 vLLM 生态适配最成熟的 24GB 桌面主力卡，适合本地 LoRA 微调与科研实验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-rtx-4090-4080s.webp"
     },
     {
       "id": "hw-amd-7900xtx",
@@ -1670,7 +1720,8 @@
         "tagline": "以更具吸引力的价格提供 24GB 大显存，Linux 下配合 ROCm 与 llama.cpp 跑本地大模型极香。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-amd-7900xtx.webp"
     },
     {
       "id": "hw-amd-9950x",
@@ -1702,7 +1753,8 @@
         "tagline": "原生支持完整 AVX-512 指令集，胜任本地代码编译、数据清洗与多 GPU 主机调度。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-amd-9950x.webp"
     },
     {
       "id": "hw-intel-285k",
@@ -1733,7 +1785,8 @@
         "tagline": "集成专用 NPU 与高速 PCIe 5.0 通道，低功耗胜任日常本地推理与创作剪辑。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-intel-285k.webp"
     },
     {
       "id": "hw-asus-proart-x870e",
@@ -1765,7 +1818,8 @@
         "tagline": "支持双 PCIe 5.0 显卡拆分、万兆网口与双 USB4，为多卡算力主机与高速 NAS 互联打造。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-proart-x870e.webp"
     },
     {
       "id": "hw-corsair-psu-1200",
@@ -1799,7 +1853,8 @@
         "tagline": "原生 12V-2x6 供电接口与白金级能效，保障旗舰显卡 7×24 小时满载训练稳定输出。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-corsair-psu-1200.webp"
     },
     {
       "id": "hw-seasonic-psu-1200",
@@ -1830,7 +1885,8 @@
         "tagline": "极低电压纹波与 12 年质保，面向高密度本地算力主机与多硬盘工作站的可靠底座。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-seasonic-psu-1200.webp"
     },
     {
       "id": "hw-noctua-nhd15-g2",
@@ -1861,7 +1917,8 @@
         "tagline": "零漏液风险且极度静音的双塔风冷，守护家用 7×24 小时 AI 推理主机稳定运行。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-noctua-nhd15-g2.webp"
     },
     {
       "id": "hw-arctic-lf3-360",
@@ -1891,7 +1948,8 @@
         "tagline": "38mm 加厚冷排搭配供电散热风扇，轻松压制 16/24 核处理器长期满载温度。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-arctic-lf3-360.webp"
     },
     {
       "id": "hw-crucial-ddr5-64",
@@ -1928,7 +1986,8 @@
         "tagline": "美光原厂颗粒打造的高稳定性 64GB 大容量内存，显著缓解本地模型加载与多容器内存压力。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-ddr5-64.webp"
     },
     {
       "id": "hw-corsair-ddr5-96",
@@ -1960,7 +2019,8 @@
         "tagline": "双槽即可实现 96GB 超大容量，轻松支撑 70B 级模型混合推理与大型知识图谱常驻。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-corsair-ddr5-96.webp"
     },
     {
       "id": "hw-gskill-ddr5-64",
@@ -1992,7 +2052,8 @@
         "tagline": "精选低时序海力士颗粒，为 CPU 侧模型推理吞吐量提供更高的内存带宽利用率。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-gskill-ddr5-64.webp"
     },
     {
       "id": "hw-crucial-sodimm-64",
@@ -2025,7 +2086,8 @@
         "tagline": "直接扩容 Windows 开发本与 AI 迷你主机至 64GB，告别多开虚拟机与本地模型爆内存。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-sodimm-64.webp"
     },
     {
       "id": "hw-samsung-990pro-4tb",
@@ -2062,7 +2124,8 @@
         "tagline": "7,450 MB/s 极速顺序读取与 4TB 大容量，轻松存放数十款开源大模型权重与多版本训练集。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-990pro-4tb.webp"
     },
     {
       "id": "hw-crucial-t705-gen5",
@@ -2096,7 +2159,8 @@
         "tagline": "高达 14.5 GB/s 吞吐的 232 层 3D NAND 闪存，大幅压缩百亿级 safetensors 权重冷启动时间。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-t705-gen5.webp"
     },
     {
       "id": "hw-wd-sn850x-4tb",
@@ -2128,7 +2192,8 @@
         "tagline": "高耐久大容量 Gen4 固态硬盘，兼顾本地 RAG 向量库存储与大型 3A 游戏高速加载。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-wd-sn850x-4tb.webp"
     },
     {
       "id": "hw-samsung-t9-4tb",
@@ -2159,7 +2224,8 @@
         "tagline": "2,000 MB/s 传输速率，跨 Mac 与工作站随身携带大体积 GGUF 模型包与 4K 媒体素材。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-t9-4tb.webp"
     },
     {
       "id": "hw-sandisk-extreme-pro-4tb",
@@ -2190,7 +2256,8 @@
         "tagline": "IP65 防护全铝散热外壳，适合户外无人机/机器人传感器日志直录与高速素材备份。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sandisk-extreme-pro-4tb.webp"
     },
     {
       "id": "hw-synology-ds923",
@@ -2223,7 +2290,8 @@
         "tagline": "支持 Docker 容器、双 NVMe 缓存与万兆扩展，构建团队私有知识库与本地数据集安全底座。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-synology-ds923.webp"
     },
     {
       "id": "hw-ugreen-nasync-4800",
@@ -2256,7 +2324,8 @@
         "tagline": "原生标配 10GbE 万兆网口与双 M.2 插槽，支持本地 AI 智能相册识别与高速容器部署。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ugreen-nasync-4800.webp"
     },
     {
       "id": "hw-seagate-ironwolf-20tb",
@@ -2288,7 +2357,8 @@
         "tagline": "CMR 垂直磁记录与每年 550TB 高负载评级，为海量多模态训练原片与模型归档提供冷存储。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-seagate-ironwolf-20tb.webp"
     },
     {
       "id": "hw-mac-mini-m4pro",
@@ -2324,7 +2394,8 @@
         "tagline": "静音低功耗桌面主机，凭借高带宽统一内存架构成为本地运行 MLX 与开源大模型的热门方案。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-mac-mini-m4pro.webp"
     },
     {
       "id": "hw-mac-studio",
@@ -2358,7 +2429,8 @@
         "tagline": "超大统一内存与数百 GB/s 带宽，无需多卡机箱噪声即可在桌面端跑通超大参数开源模型。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-mac-studio.webp"
     },
     {
       "id": "hw-macbook-pro-m4",
@@ -2393,7 +2465,8 @@
         "tagline": "兼顾极致续航与高带宽内存的开发者主力本，离线也可流畅跑本地编程助手与端侧模型。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-macbook-pro-m4.webp"
     },
     {
       "id": "hw-macbook-air-m4",
@@ -2424,7 +2497,8 @@
         "tagline": "极轻薄静音机身配备神经网络引擎，高效胜任云端 AI 编程、文档撰写与轻量端侧推理。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-macbook-air-m4.webp"
     },
     {
       "id": "hw-minisforum-aix1",
@@ -2456,7 +2530,8 @@
         "tagline": "自带原生 OCuLink 高速通道，平时静音低功耗、需要时直连外置桌面 RTX 显卡跑推理。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-minisforum-aix1.webp"
     },
     {
       "id": "hw-beelink-ser9",
@@ -2488,7 +2563,8 @@
         "tagline": "整机 AI 算力高达 80 TOPS 並内置降噪阵列麦，小体积胜任本地知识库与语音 Agent 节点。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-beelink-ser9.webp"
     },
     {
       "id": "hw-asus-zephyrus-g16",
@@ -2522,7 +2598,8 @@
         "tagline": "轻薄全金属机身内置独立 RTX 显卡与高刷 OLED 屏，移动开发 CUDA、本地绘图与游戏全能。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-zephyrus-g16.webp"
     },
     {
       "id": "hw-lenovo-thinkpad-x1",
@@ -2555,7 +2632,8 @@
         "tagline": "碳纤维超轻机身搭配 Core Ultra NPU 与经典键盘手感，企业高管与 Linux 开发者首选。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-lenovo-thinkpad-x1.webp"
     },
     {
       "id": "hw-hp-omnibook-ultra",
@@ -2588,7 +2666,8 @@
         "tagline": "搭载高带宽板载内存与 55 TOPS 专用 NPU 加速单元，专为企业级端侧 AI 办公与分析打造。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-hp-omnibook-ultra.webp"
     },
     {
       "id": "hw-dell-xps-16",
@@ -2619,7 +2698,8 @@
         "tagline": "全面屏 4K OLED 视觉体验结合独立 RTX Tensor 算力，轻松驾驭本地模型与工程仿真。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-dell-xps-16.webp"
     },
     {
       "id": "edge-jetson-orin-nano",
@@ -2656,7 +2736,8 @@
         "tagline": "67 TOPS 边缘算力支持 ROS 2、视觉语言动作模型（VLA）与端侧小模型，机器人研发首选平台。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-jetson-orin-nano.webp"
     },
     {
       "id": "edge-rpi5-aikit",
@@ -2689,7 +2770,8 @@
         "tagline": "搭载 Hailo NPU 加速卡，低功耗实现实时目标检测、姿态识别与极客边缘自动化节点。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-rpi5-aikit.webp"
     },
     {
       "id": "edge-rpi-ai-camera",
@@ -2720,7 +2802,8 @@
         "tagline": "传感器片上直接运行视觉神经网络，极大降低主控算力占用与传输带宽。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-rpi-ai-camera.webp"
     },
     {
       "id": "edge-arduino-uno-r4",
@@ -2751,7 +2834,8 @@
         "tagline": "内置 Wi-Fi/蓝牙与 32 位主控，适合嵌入式 TinyML 传感唤醒与机器人机械臂底层控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-arduino-uno-r4.webp"
     },
     {
       "id": "edge-dji-neo",
@@ -2782,7 +2866,8 @@
         "tagline": "仅 135 克，无需遥控器即可从掌心起飞，依托机载 AI 视觉实现全自动人物跟随拍摄。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-dji-neo.webp"
     },
     {
       "id": "edge-dji-mini-4-pro",
@@ -2814,7 +2899,8 @@
         "tagline": "249 克以下免注册机身配备全向视觉避障与 ActiveTrack 360° 全向智能跟随。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-dji-mini-4-pro.webp"
     },
     {
       "id": "edge-roborock-saros-s8",
@@ -2847,7 +2933,8 @@
         "tagline": "搭载 Reactive AI 视觉避障、激光雷达建图与自清洁基站，最成熟落地的消费级具身智能。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-roborock-saros-s8.webp"
     },
     {
       "id": "edge-dreame-x40",
@@ -2878,7 +2965,8 @@
         "tagline": "RGB 视觉+3D 结构光 AI 污渍识别配合仿生机械臂边角外扩，展示精密机电与视觉联动。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-dreame-x40.webp"
     },
     {
       "id": "edge-bambu-x1c",
@@ -2910,7 +2998,8 @@
         "tagline": "支持微米级激光雷达首层扫描与 AI 炒面故障监测，机器人外壳与机械结构件快速打样神器。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-bambu-x1c.webp"
     },
     {
       "id": "edge-switchbot-hub2",
@@ -2942,7 +3031,8 @@
         "tagline": "将传统红外家电与机械臂开关接入 Matter 与语音助手，零布线打造全屋自动化。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/edge-switchbot-hub2.webp"
     },
     {
       "id": "desk-dell-ultrasharp-4k",
@@ -2975,7 +3065,8 @@
         "tagline": "IPS Black 高对比度与内置 KVM 切换器，一根 Type-C 线同时完成供电、千兆网口与多屏扩展。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-dell-ultrasharp-4k.webp"
     },
     {
       "id": "desk-lg-dualup",
@@ -3007,7 +3098,8 @@
         "tagline": "纵向等效两块 21.5 英寸屏幕，上方浏览代码与论文、下方并行挂终端与 AI 智能体对话。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-lg-dualup.webp"
     },
     {
       "id": "desk-asus-proart-oled",
@@ -3039,7 +3131,8 @@
         "tagline": "出厂校色与 99% DCI-P3 广色域，精准校验 AI 视频生成、多模态出图与界面视觉细节。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-asus-proart-oled.webp"
     },
     {
       "id": "desk-keychron-q-pro",
@@ -3072,7 +3165,8 @@
         "tagline": "支持 QMK/VIA 开源改键，无缝切换 Mac/Linux 键位并一键映射 Claude/Cursor 快捷宏。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-keychron-q-pro.webp"
     },
     {
       "id": "desk-hhkb-hybrid",
@@ -3104,7 +3198,8 @@
         "tagline": "经典 Topre 静电容手感与 Unix 布局 Control 键位，终端 CLI 与 Vim 高频编码者至爱。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-hhkb-hybrid.webp"
     },
     {
       "id": "desk-mx-master-3s",
@@ -3136,7 +3231,8 @@
         "tagline": "电磁疾速滚轮搭配三设备秒切，同时控制 MacBook 与 Linux 训练主机事半功倍。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-mx-master-3s.webp"
     },
     {
       "id": "desk-caldigit-ts4",
@@ -3167,7 +3263,8 @@
         "tagline": "提供 98W 供电、2.5G 网口与 18 个高速接口，单线连接 MacBook 与全套研发外设。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-caldigit-ts4.webp"
     },
     {
       "id": "desk-unifi-wifi7",
@@ -3199,7 +3296,8 @@
         "tagline": "支持 6GHz Wi-Fi 7 与 VLAN 隔离，保障本地大模型局域网分发、XR 串流与 HomeLab 低延迟互联。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-unifi-wifi7.webp"
     },
     {
       "id": "desk-tplink-be85",
@@ -3230,7 +3328,8 @@
         "tagline": "双 10G 万兆网口与超高速无线回程，稳定承载全屋 AI 智能家居设备与大文件局域网同步。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-tplink-be85.webp"
     },
     {
       "id": "desk-apc-ups-1500",
@@ -3262,7 +3361,8 @@
         "tagline": "在电网波动或突然停电时保护本地显卡主机、NAS 阵列与正在保存的模型训练权重。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-apc-ups-1500.webp"
     },
     {
       "id": "desk-yubikey-5c",
@@ -3297,7 +3397,8 @@
         "tagline": "物理级 FIDO2/SSH 硬件认证，强效守护 GitHub 代码库、云算力控制台与大模型 API 密钥。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-yubikey-5c.webp"
     },
     {
       "id": "desk-anker-prime-250w",
@@ -3329,7 +3430,8 @@
         "tagline": "支持双笔记本 PD 3.1 快充与实时功率数显，一站式喂饱 MacBook、AI 眼镜与录音笔。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/desk-anker-prime-250w.webp"
     },
     {
       "id": "book-ai-engineering",
@@ -3367,7 +3469,8 @@
         "tagline": "Chip Huyen 著（O'Reilly）：系统拆解 RAG、Agent 智能体、自动化评测体系与生产级工程落地。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 权威出版"
-      }
+      },
+      "image": "/images/products/book-ai-engineering.webp"
     },
     {
       "id": "book-designing-ml-systems",
@@ -3402,7 +3505,8 @@
         "tagline": "深入解析生产级 AI 数据流、模型部署、线上漂移监控与可持续迭代架构，工程团队案头经典。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 经典著作"
-      }
+      },
+      "image": "/images/products/book-designing-ml-systems.webp"
     },
     {
       "id": "book-build-llm-scratch",
@@ -3437,7 +3541,8 @@
         "tagline": "Sebastian Raschka 著：从零用 PyTorch 编写注意力机制、预训练与指令微调，吃透底层原理。",
         "cta": "前往亚马逊查看原版",
         "hint": "Manning 权威教程"
-      }
+      },
+      "image": "/images/products/book-build-llm-scratch.webp"
     },
     {
       "id": "book-hands-on-llm",
@@ -3471,7 +3576,8 @@
         "tagline": "Jay Alammar 联袂力作：以直观全彩图解掌握词嵌入、语义检索、RAG 与模型微调实战。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 畅销经典"
-      }
+      },
+      "image": "/images/products/book-hands-on-llm.webp"
     },
     {
       "id": "book-llm-engineers-handbook",
@@ -3506,7 +3612,8 @@
         "tagline": "覆盖数据采集、微调训练、量化部署与 RAG 智能体生产化的端到端工程参考手册。",
         "cta": "前往亚马逊查看原版",
         "hint": "Maxime Labonne 合著"
-      }
+      },
+      "image": "/images/products/book-llm-engineers-handbook.webp"
     },
     {
       "id": "book-prompt-engineering-llms",
@@ -3538,7 +3645,8 @@
         "tagline": "GitHub Copilot 初创核心团队成员撰写，系统讲解上下文编排与生产级智能体交互模式。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 出版"
-      }
+      },
+      "image": "/images/products/book-prompt-engineering-llms.webp"
     },
     {
       "id": "book-building-llm-apps",
@@ -3569,7 +3677,8 @@
         "tagline": "紧贴实战拆解大模型记忆模块、工具调用链路与多步智能体应用构建模式。",
         "cta": "前往亚马逊查看原版",
         "hint": "Packt 实战书单"
-      }
+      },
+      "image": "/images/products/book-building-llm-apps.webp"
     },
     {
       "id": "book-hands-on-ml-3e",
@@ -3600,7 +3709,8 @@
         "tagline": "口碑常青的机器学习实践宝典，完整覆盖传统算法、深度神经网络与 Transformer 实战。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 畅销书"
-      }
+      },
+      "image": "/images/products/book-hands-on-ml-3e.webp"
     },
     {
       "id": "book-nlp-transformers",
@@ -3631,7 +3741,8 @@
         "tagline": "Hugging Face 核心团队撰写，深入讲解 Transformer 微调、模型蒸馏与高效推理部署。",
         "cta": "前往亚马逊查看原版",
         "hint": "O'Reilly 权威出版"
-      }
+      },
+      "image": "/images/products/book-nlp-transformers.webp"
     },
     {
       "id": "book-deep-learning-goodfellow",
@@ -3664,7 +3775,8 @@
         "tagline": "MIT 出版社殿堂级教材，AI 研究人员夯实数学底座、优化理论与表示学习的必藏典籍。",
         "cta": "前往亚马逊查看原版",
         "hint": "MIT Press 典藏"
-      }
+      },
+      "image": "/images/products/book-deep-learning-goodfellow.webp"
     },
     {
       "id": "book-prml-bishop",
@@ -3695,7 +3807,8 @@
         "tagline": "Christopher Bishop 经典著作，系统阐释贝叶斯推断、概率图模型与统计机器学习数学框架。",
         "cta": "前往亚马逊查看原版",
         "hint": "Springer 经典"
-      }
+      },
+      "image": "/images/products/book-prml-bishop.webp"
     },
     {
       "id": "book-rl-sutton-barto",
@@ -3727,7 +3840,8 @@
         "tagline": "理解当前推理大模型 RL 训练、RLHF 对齐与具身智能控制策略的核心理论基石。",
         "cta": "前往亚马逊查看原版",
         "hint": "MIT Press 出版"
-      }
+      },
+      "image": "/images/products/book-rl-sutton-barto.webp"
     },
     {
       "id": "book-co-intelligence",
@@ -3760,7 +3874,8 @@
         "tagline": "沃顿商学院教授力作，深度探讨人工智能如何重塑组织协作、研发效率与商业竞争力。",
         "cta": "前往亚马逊查看原版",
         "hint": "纽约时报畅销榜"
-      }
+      },
+      "image": "/images/products/book-co-intelligence.webp"
     },
     {
       "id": "book-chip-war",
@@ -3797,7 +3912,8 @@
         "tagline": "全景复盘台积电、ASML、英伟达与全球算力供应链博弈史，读懂芯片管制新闻的最佳背景书。",
         "cta": "前往亚马逊查看原版",
         "hint": "FT 年度商业图书"
-      }
+      },
+      "image": "/images/products/book-chip-war.webp"
     },
     {
       "id": "book-alignment-problem",
@@ -3830,7 +3946,8 @@
         "tagline": "深度剖析大模型价值对齐、奖励黑客、可解释性与前沿 AI 安全治理的核心脉络。",
         "cta": "前往亚马逊查看原版",
         "hint": "安全治理经典"
-      }
+      },
+      "image": "/images/products/book-alignment-problem.webp"
     },
     {
       "id": "book-superintelligence",
@@ -3861,7 +3978,8 @@
         "tagline": "牛津大学 Nick Bostrom 经典之作，探讨通用人工智能奇点演进路径与长期控制策略。",
         "cta": "前往亚马逊查看原版",
         "hint": "牛津大学出版社"
-      }
+      },
+      "image": "/images/products/book-superintelligence.webp"
     },
     {
       "id": "book-coming-wave",
@@ -3894,7 +4012,8 @@
         "tagline": "DeepMind 联合创始人 Mustafa Suleyman 剖析 AI 与合成生物学浪潮下的国家治理与遏制命题。",
         "cta": "前往亚马逊查看原版",
         "hint": "DeepMind 创始人著"
-      }
+      },
+      "image": "/images/products/book-coming-wave.webp"
     },
     {
       "id": "book-ai-2041",
@@ -3927,7 +4046,8 @@
         "tagline": "以硬核技术解析搭配未来故事，推演自动驾驶、XR、量化金融与机器人普及后的世界。",
         "cta": "前往亚马逊查看原版",
         "hint": "畅销双语背景"
-      }
+      },
+      "image": "/images/products/book-ai-2041.webp"
     },
     {
       "id": "book-genesis-ai",
@@ -3961,7 +4081,8 @@
         "tagline": "基辛格与前谷歌 CEO 施密特合著，深度探讨人工智能时代的大国博弈、安全规范与人类主体性。",
         "cta": "前往亚马逊查看原版",
         "hint": "战略决策必读"
-      }
+      },
+      "image": "/images/products/book-genesis-ai.webp"
     },
     {
       "id": "ai-echo-dot-5",
@@ -3991,7 +4112,8 @@
         "tagline": "入门即享语音唤醒与温度感知联动，适合卧室、书房及桌面快速语音查讯与播报。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-dot-5.webp"
     },
     {
       "id": "ai-echo-pop",
@@ -4020,7 +4142,8 @@
         "tagline": "体积小巧不占桌面空间，兼顾蓝牙播放与快速语音日程提醒。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-echo-pop.webp"
     },
     {
       "id": "ai-bose-smart-ultra",
@@ -4051,7 +4174,8 @@
         "tagline": "内置 AI 对话模式实时提取并增强人声频段，看发布会、听科技播客清晰通透。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-bose-smart-ultra.webp"
     },
     {
       "id": "ai-jbl-authentics-300",
@@ -4080,7 +4204,8 @@
         "tagline": "同时原生支持 Google Assistant 与 Alexa 双语音助手，复古外观配内置锂电自由移动。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-jbl-authentics-300.webp"
     },
     {
       "id": "ai-beats-studio-pro",
@@ -4110,7 +4235,8 @@
         "tagline": "支持 USB-C 无损直连与空间音频，同时无缝兼容 iOS 与 Android 开发者双机环境。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-beats-studio-pro.webp"
     },
     {
       "id": "ai-jabra-evolve2-65flex",
@@ -4142,7 +4268,8 @@
         "tagline": "折叠便携设计结合 ClearVoice AI 降噪麦杆，Zoom/Teams 远程协作与语音助手拾音清晰纯净。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-jabra-evolve2-65flex.webp"
     },
     {
       "id": "ai-sennheiser-momentum4",
@@ -4171,7 +4298,8 @@
         "tagline": "60 小时超长续航配合自适应降噪与高保真声学素质，长时间深度学习与编程不频繁充电。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-sennheiser-momentum4.webp"
     },
     {
       "id": "ai-google-pixel-buds-pro2",
@@ -4203,7 +4331,8 @@
         "tagline": "首发搭载 Tensor A1 音频芯片，原生支持 Gemini Live 连续自然对话与超强主动降噪。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-google-pixel-buds-pro2.webp"
     },
     {
       "id": "ai-galaxy-buds3-pro",
@@ -4235,7 +4364,8 @@
         "tagline": "集成 Galaxy AI 实时同传监听模式与智能自适应降噪，适配安卓旗舰语音生态。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-galaxy-buds3-pro.webp"
     },
     {
       "id": "ai-nothing-ear-chatgpt",
@@ -4266,7 +4396,8 @@
         "tagline": "标志性透明工业设计，支持捏合耳机直接唤醒 ChatGPT 语音对话。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-nothing-ear-chatgpt.webp"
     },
     {
       "id": "ai-pocketalk-s",
@@ -4295,7 +4426,8 @@
         "tagline": "内置全球多国通信流量与云端神经网络翻译引擎，海外差旅、展会交流极速沟通。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-pocketalk-s.webp"
     },
     {
       "id": "ai-apple-watch-ultra2",
@@ -4326,7 +4458,8 @@
         "tagline": "4 核神经网络引擎驱动双指互点识别与本地化 Siri 语音响应，全天候健康与效率腕上终端。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-apple-watch-ultra2.webp"
     },
     {
       "id": "ai-garmin-fenix-8",
@@ -4357,7 +4490,8 @@
         "tagline": "数周续航搭配离线语音指令、麦克风通话与专业体能恢复算法。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-garmin-fenix-8.webp"
     },
     {
       "id": "ai-even-g1-glasses",
@@ -4387,7 +4521,8 @@
         "tagline": "轻量日常镜框支持眼前实时投射外语字幕、演讲提词与 AI 会议要点提示。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-even-g1-glasses.webp"
     },
     {
       "id": "ai-creator-focusrite-2i2",
@@ -4418,7 +4553,8 @@
         "tagline": "支持智能 Auto Gain 自动增益与防破音保护，XLR 麦克风录制的音频工程标准底座。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-creator-focusrite-2i2.webp"
     },
     {
       "id": "ai-creator-sony-zve10-2",
@@ -4449,7 +4585,8 @@
         "tagline": "实时 AI 人眼对焦与产品展示秒切焦点，支持 4K60 与 USB 一线直播。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-creator-sony-zve10-2.webp"
     },
     {
       "id": "ai-creator-elgato-keylight",
@@ -4480,7 +4617,8 @@
         "tagline": "手机与电脑无线控光色温，显著提升 AI 摄像头画面纯净度与视频演示专业感。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-creator-elgato-keylight.webp"
     },
     {
       "id": "ai-creator-loupedeck-live",
@@ -4511,7 +4649,8 @@
         "tagline": "实体旋钮加 LCD 快捷键矩阵，为图像生成后期、视频剪辑与开发自动化提速。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/ai-creator-loupedeck-live.webp"
     },
     {
       "id": "hw-framework-16",
@@ -4543,7 +4682,8 @@
         "tagline": "支持自由升级内存与双硬盘位，原生兼容 Ubuntu/Fedora，适合开源大模型极客。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-framework-16.webp"
     },
     {
       "id": "hw-geekom-a8",
@@ -4573,7 +4713,8 @@
         "tagline": "巴掌大小即可 24 小时部署 n8n 工作流、MCP 服务与个人私有智能体节点。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-geekom-a8.webp"
     },
     {
       "id": "hw-surface-laptop-copilot",
@@ -4605,7 +4746,8 @@
         "tagline": "骁龙 X Elite 45 TOPS NPU 加持，兼顾超长续航与 Windows 原生端侧 AI 特性。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-surface-laptop-copilot.webp"
     },
     {
       "id": "hw-ipad-pro-m4",
@@ -4637,7 +4779,8 @@
         "tagline": "38 TOPS 神经网络引擎配合 Apple Pencil Pro，随时批注论文、绘图及运行端侧 CoreML 应用。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ipad-pro-m4.webp"
     },
     {
       "id": "hw-coral-usb-tpu",
@@ -4670,7 +4813,8 @@
         "tagline": "即插即用的 4 TOPS TensorFlow Lite 协处理器，Home Assistant + Frigate 本地监控识别标配。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-coral-usb-tpu.webp"
     },
     {
       "id": "hw-flipper-zero",
@@ -4702,7 +4846,8 @@
         "tagline": "开源硬件安全研究与物联网 RFID/Sub-GHz/GPIO 协议调试的极客随身利器。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-flipper-zero.webp"
     },
     {
       "id": "hw-glinet-travel-router",
@@ -4734,7 +4879,8 @@
         "tagline": "硬件级 WireGuard 加密与自定义 OpenWrt 系统，保障海外出差远程 SSH 与研发网络隐私。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-glinet-travel-router.webp"
     },
     {
       "id": "hw-anker-prime-powerbank",
@@ -4766,7 +4912,8 @@
         "tagline": "可上飞机容量上限，支持双笔记本同时 PD 3.1 满速快充，户外调试与长途飞行不断电。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-prime-powerbank.webp"
     },
     {
       "id": "hw-standing-desk-frame",
@@ -4797,7 +4944,8 @@
         "tagline": "高承重双电机稳定升降，稳妥承载多显示器支架与重型本地 AI 算力主机。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-standing-desk-frame.webp"
     },
     {
       "id": "hw-ergo-chair-herman",
@@ -4828,7 +4976,8 @@
         "tagline": "透气高弹网布搭配多向扶手与自适应腰托，缓解长周期编码与论文研读的脊柱疲劳。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ergo-chair-herman.webp"
     },
     {
       "id": "hw-samsung-9100pro-gen5",
@@ -4860,7 +5009,8 @@
         "tagline": "突破 14GB/s 读写带宽的新一代闪存阵列，专为大模型多模态训练缓存与本地高速加载优化。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-9100pro-gen5.webp"
     },
     {
       "id": "hw-sabrent-nvme-enclosure",
@@ -4891,7 +5041,8 @@
         "tagline": "把闲置 NVMe 固态变成 3,800 MB/s 外接高速盘，低成本扩容 Mac mini 本地模型仓库。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sabrent-nvme-enclosure.webp"
     },
     {
       "id": "hw-asus-10g-nic",
@@ -4922,7 +5073,8 @@
         "tagline": "将本地主机升级至万兆内网，实现与私有云 NAS 之间的模型权重秒级高速同步。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-10g-nic.webp"
     },
     {
       "id": "hw-sonnet-egpu-dock",
@@ -4953,7 +5105,8 @@
         "tagline": "单线为轻薄本或迷你主机外接桌面级 CUDA 独立显卡，兼顾便携移动与重型本地推理。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sonnet-egpu-dock.webp"
     },
     {
       "id": "hw-apple-studio-display",
@@ -4985,7 +5138,8 @@
         "tagline": "218 PPI 视网膜文字锐利度搭配人物居中 AI 镜头，Mac mini 与 MacBook Pro 的理想搭档。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-apple-studio-display.webp"
     },
     {
       "id": "hw-logitech-brio-4k",
@@ -5016,7 +5170,8 @@
         "tagline": "AI 自动曝光面容优化与桌面俯拍模式，线上演示硬件开发板与技术分享更清晰。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-logitech-brio-4k.webp"
     },
     {
       "id": "hw-wooting-keyboard",
@@ -5047,7 +5202,8 @@
         "tagline": "支持毫米级自定义触发行程与 Rapid Trigger，兼顾极客高频输入与顶级游戏响应。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-wooting-keyboard.webp"
     },
     {
       "id": "hw-sony-a7c2",
@@ -5078,7 +5234,8 @@
         "tagline": "搭载独立 AI 智能处理芯片实现骨骼姿态与物体毫秒级识别追焦，紧凑机身专业画质。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-a7c2.webp"
     },
     {
       "id": "hw-anker-soundcore-space-one",
@@ -5108,7 +5265,8 @@
         "tagline": "四重自适应主动降噪与折叠便携结构，高性价比陪伴差旅与咖啡馆移动开发。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-soundcore-space-one.webp"
     },
     {
       "id": "hw-samsung-odyssey-g9",
@@ -5139,7 +5297,8 @@
         "tagline": "32:9 超宽双 QHD 屏无边框替代双 27 寸显示器，并排平铺代码、监控面板与沉浸式娱乐。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-odyssey-g9.webp"
     },
     {
       "id": "hw-philips-hue-matter",
@@ -5170,7 +5329,8 @@
         "tagline": "接入 Matter 与 Home Assistant，依据工作状态或语音指令自动切换办公与护眼色温。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-philips-hue-matter.webp"
     },
     {
       "id": "hw-ecoflow-delta-3",
@@ -5202,7 +5362,8 @@
         "tagline": "1800W+ 纯正弦波输出与毫秒级断电切换，兼顾桌面算力备电与户外机器人/无人机快充。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ecoflow-delta-3.webp"
     },
     {
       "id": "hw-ecobee-smart-thermostat",
@@ -5233,7 +5394,8 @@
         "tagline": "内置雷达空间占用感知、空气质量监测与语音助手，智能优化家庭与工作室能耗。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ecobee-smart-thermostat.webp"
     },
     {
       "id": "hw-sonoff-zigbee-dongle",
@@ -5265,7 +5427,8 @@
         "tagline": "彻底摆脱云端依赖，直插树莓派或迷你主机将全屋传感器本地接入 Home Assistant。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sonoff-zigbee-dongle.webp"
     },
     {
       "id": "hw-reolink-ai-poe",
@@ -5297,7 +5460,8 @@
         "tagline": "机身本地实现人/车/宠物识别且支持 RTSP 视频流接入，无需云端订阅费。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-reolink-ai-poe.webp"
     },
     {
       "id": "hw-eufy-s380-homebase",
@@ -5328,7 +5492,8 @@
         "tagline": "支持扩展本地硬盘并运行自学习人脸与家庭成员识别算法，数据全程不出本地。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-eufy-s380-homebase.webp"
     },
     {
       "id": "hw-aqara-fp2-presence",
@@ -5360,7 +5525,8 @@
         "tagline": "支持多区域分区定位与静坐呼吸感知，比传统红外更精准地触发书房自动化。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-aqara-fp2-presence.webp"
     },
     {
       "id": "hw-yahboom-ros2-robot",
@@ -5392,7 +5558,8 @@
         "tagline": "集成 360° 激光雷达与深度相机，快速验证 SLAM 建图、自主避障与视觉导航算法。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-yahboom-ros2-robot.webp"
     },
     {
       "id": "hw-elegoo-robot-arm",
@@ -5423,7 +5590,8 @@
         "tagline": "支持 Python 与视觉引导抓取实验，低成本入门具身智能操作与逆运动学控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-elegoo-robot-arm.webp"
     },
     {
       "id": "hw-nvidia-shield-tv-pro",
@@ -5454,7 +5622,8 @@
         "tagline": "依托内置神经网络实时将 1080p 视频超分锐化为 4K 画面，极客客厅影音与串流常青树。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nvidia-shield-tv-pro.webp"
     },
     {
       "id": "hw-steam-deck-oled",
@@ -5486,7 +5655,8 @@
         "tagline": "高对比度 HDR OLED 屏配合完整 Arch Linux 桌面模式，既可畅玩大作又能随时折腾终端。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-steam-deck-oled.webp"
     },
     {
       "id": "hw-asus-rog-ally-x",
@@ -5518,7 +5688,8 @@
         "tagline": "24GB 高频内存配 80Wh 大电池与 USB4 接口，兼顾掌上大作与轻量端侧本地推理。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-rog-ally-x.webp"
     },
     {
       "id": "hw-amd-threadripper-7960x",
@@ -5549,7 +5720,8 @@
         "tagline": "四通道 DDR5 与海量 PCIe 通道，为本地 3-4 卡并行训练工作站消除总线瓶颈。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-amd-threadripper-7960x.webp"
     },
     {
       "id": "hw-crucial-ecc-ddr5",
@@ -5581,7 +5753,8 @@
         "tagline": "硬件级 ECC 内存纠错保护，杜绝连续多日模型微调与大内存计算期间的数据静默位翻转。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-ecc-ddr5.webp"
     },
     {
       "id": "hw-nvidia-nvlink-cable",
@@ -5611,7 +5784,8 @@
         "tagline": "一线打通 40Gbps 高速固态读写、5K 视频输出与最高 240W 笔记本供电。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nvidia-nvlink-cable.webp"
     },
     {
       "id": "hw-owc-thunderbolt-hub",
@@ -5641,7 +5815,8 @@
         "tagline": "将单口扩展为三个独立 40Gbps 满速雷电口，串联多块高速固态硬盘与双屏无压力。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-owc-thunderbolt-hub.webp"
     },
     {
       "id": "hw-terramaster-d6-320",
@@ -5672,7 +5847,8 @@
         "tagline": "直连工作站最高可扩展 132TB 存储空间，高性价比存放大规模图像/视频多模态数据集。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-terramaster-d6-320.webp"
     },
     {
       "id": "hw-sony-mdr-7506",
@@ -5703,7 +5879,8 @@
         "tagline": "平直无染色的行业参考级监听，精准排查 AI 语音合成齿音、底噪与播客母带细节。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-mdr-7506.webp"
     },
     {
       "id": "hw-elgato-wave-3",
@@ -5734,7 +5911,8 @@
         "tagline": "内置 Clipguard 硬件防爆音技术与多通道混音软件，技术播客与 AI 语音录制的极简方案。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-elgato-wave-3.webp"
     },
     {
       "id": "hw-logitech-mx-keys-s",
@@ -5765,7 +5943,8 @@
         "tagline": "近距离感应智能背光与三设备无缝切换，配合 Smart Actions 一键自动执行常用提示词流。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-logitech-mx-keys-s.webp"
     },
     {
       "id": "hw-nuphy-air75-v2",
@@ -5797,7 +5976,8 @@
         "tagline": "超薄机身支持直接放在 MacBook 原装键盘上使用，完整支持 QMK/VIA 开源改键。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nuphy-air75-v2.webp"
     },
     {
       "id": "hw-benq-rd280u",
@@ -5829,7 +6009,8 @@
         "tagline": "3:2 纵向多显示更多代码行，抗眩光防反光屏配合暗色主题编程模式护眼清晰。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-benq-rd280u.webp"
     },
     {
       "id": "hw-asus-rog-rapture-be98",
@@ -5860,7 +6041,8 @@
         "tagline": "双 10G 万兆网口与四频高并发吞吐，满足高密度智能终端、VR 串流与云端代码同步。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-rog-rapture-be98.webp"
     },
     {
       "id": "hw-kensington-expert-trackball",
@@ -5890,7 +6072,8 @@
         "tagline": "极简旋转滚球操作大幅减少腕部移动，适合长时间编写代码与 3D 建模的开发者。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-kensington-expert-trackball.webp"
     },
     {
       "id": "hw-ugreen-nexode-300w",
@@ -5921,7 +6104,8 @@
         "tagline": "单口最高 140W 输出，可同时为三台高性能笔记本与随身 AI 设备提供稳定供电。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ugreen-nexode-300w.webp"
     },
     {
       "id": "hw-tobi-eye-tracker",
@@ -5952,7 +6136,8 @@
         "tagline": "用于人机交互（HCI）研究、无障碍辅助控制与空间模拟视点渲染的红外追踪硬件。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-tobi-eye-tracker.webp"
     },
     {
       "id": "hw-leap-motion-ultraleap",
@@ -5983,7 +6168,8 @@
         "tagline": "亚毫米级手指关节识别精度，广泛应用于灵巧手具身遥操作与空间手势交互。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-leap-motion-ultraleap.webp"
     },
     {
       "id": "hw-intel-realsense-d435i",
@@ -6015,7 +6201,8 @@
         "tagline": "人形机器人与移动机械臂最常见的 RGB-D+IMU 深度视觉模组，开箱适配 ROS 2。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-intel-realsense-d435i.webp"
     },
     {
       "id": "hw-oak-d-luxonis",
@@ -6047,7 +6234,8 @@
         "tagline": "将双目深度测距与 4 TOPS 神经推理集成于一体，OpenCV 开发者免主控高负载即可做 3D 检测。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-oak-d-luxonis.webp"
     },
     {
       "id": "hw-rplidar-slam",
@@ -6078,7 +6266,8 @@
         "tagline": "ROS/ROS 2 生态即插即用的室内 SLAM 建图与自主导航激光雷达模组。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-rplidar-slam.webp"
     },
     {
       "id": "hw-unitree-go2-quadruped",
@@ -6109,7 +6298,8 @@
         "tagline": "配备 4D 激光雷达与语音交互模块，支持 Python/ROS 二次开发的具身智能载体。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-unitree-go2-quadruped.webp"
     },
     {
       "id": "hw-esp32-s3-ai",
@@ -6141,7 +6331,8 @@
         "tagline": "极客圈热门低成本芯片，快速自制实时对话 AI 桌面摆件与端侧唤醒节点。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-esp32-s3-ai.webp"
     },
     {
       "id": "hw-m5stack-ai",
@@ -6172,7 +6363,8 @@
         "tagline": "自带屏幕、镜头与双麦克风的模块化外壳主机，分钟级搭建语音交互硬件原型。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-m5stack-ai.webp"
     },
     {
       "id": "hw-sonos-move-2",
@@ -6202,7 +6394,8 @@
         "tagline": "24 小时续航与 IP56 防护，兼具语音助手响应与自动声场环境自适应校准。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sonos-move-2.webp"
     },
     {
       "id": "hw-google-nest-hub-2",
@@ -6233,7 +6426,8 @@
         "tagline": "内置谷歌 Soli 低功耗毫米波雷达与 Matter 网关，支持隔空手势切歌与无感睡眠监测。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-google-nest-hub-2.webp"
     },
     {
       "id": "hw-bose-soundlink-flex2",
@@ -6262,7 +6456,8 @@
         "tagline": "PositionIQ 技术根据摆放姿态自动校准声学 EQ，随身收听科技播客清晰饱满。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-bose-soundlink-flex2.webp"
     },
     {
       "id": "hw-sennheiser-mtw4",
@@ -6292,7 +6487,8 @@
         "tagline": "支持 aptX Lossless 无损音频与 Auracast 广播，搭配 6 麦自适应降噪通话清晰。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sennheiser-mtw4.webp"
     },
     {
       "id": "hw-bose-qc-ultra-earbuds",
@@ -6321,7 +6517,8 @@
         "tagline": "开放式办公区屏蔽人声干扰的顶配降噪方案，支持空间沉浸声场。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-bose-qc-ultra-earbuds.webp"
     },
     {
       "id": "hw-meta-rayban-clear",
@@ -6352,7 +6549,8 @@
         "tagline": "室内透明适配全天候办公调用视觉 AI 问答，户外自动变深墨镜无感记录第一视角。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-meta-rayban-clear.webp"
     },
     {
       "id": "hw-switchbot-lock-ultra",
@@ -6382,7 +6580,8 @@
         "tagline": "支持 Apple Watch/iPhone 碰一碰 Home Key 开锁及 Thread 低功耗全屋联动。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-switchbot-lock-ultra.webp"
     },
     {
       "id": "hw-nvidia-rtx-5070",
@@ -6414,7 +6613,8 @@
         "tagline": "搭载 GDDR7 显存与 FP4 AI 推理加速，兼顾 2K 高刷游戏与轻量级本地大模型体验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nvidia-rtx-5070.webp"
     },
     {
       "id": "hw-amd-rx9070xt",
@@ -6446,7 +6646,8 @@
         "tagline": "全新 RDNA 4 AI 矩阵单元配合 16GB 显存，对 Linux 开源驱动与本地推理非常友好。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-amd-rx9070xt.webp"
     },
     {
       "id": "hw-intel-arc-b580",
@@ -6478,7 +6679,8 @@
         "tagline": "极低预算即可拥有 12GB 显存与 XMX 矩阵引擎，完美适配 IPEX-LLM 与 AV1 硬件编解码。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-intel-arc-b580.webp"
     },
     {
       "id": "hw-corsair-4000d-airflow",
@@ -6508,7 +6710,8 @@
         "tagline": "大面积网格进风结构，确保 450W 级旗舰显卡在长时间模型跑批中不降频。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-corsair-4000d-airflow.webp"
     },
     {
       "id": "hw-fractal-north-xl",
@@ -6538,7 +6741,8 @@
         "tagline": "胡桃木格栅极简外观下容纳 420mm 冷排与超长旗舰显卡，融入现代工作室桌面。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-fractal-north-xl.webp"
     },
     {
       "id": "hw-samsung-990evo-plus",
@@ -6569,7 +6773,8 @@
         "tagline": "单面颗粒低功耗设计，专为轻薄 AI 笔记本与空间紧凑的迷你主机安全扩容 4TB。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-990evo-plus.webp"
     },
     {
       "id": "hw-lexar-nm790-4tb",
@@ -6600,7 +6805,8 @@
         "tagline": "7,400 MB/s 满速 Gen4 读写配合优秀温控，大容量存放多版本开源模型权重性价比出众。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-lexar-nm790-4tb.webp"
     },
     {
       "id": "hw-kingston-fury-ddr5-64",
@@ -6631,7 +6837,8 @@
         "tagline": "同时通过 Intel XMP 与 AMD EXPO 认证，高负载本地编译与推理稳如磐石。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-kingston-fury-ddr5-64.webp"
     },
     {
       "id": "hw-owc-express-1m2",
@@ -6660,7 +6867,8 @@
         "tagline": "全铝鳍片被动散热，持续跑满 3,150 MB/s 不掉速，Mac 本地视频与大模型仓库搭档。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-owc-express-1m2.webp"
     },
     {
       "id": "hw-netgear-ms108up-10g",
@@ -6690,7 +6898,8 @@
         "tagline": "将 Mac Studio、显卡节点与 NAS 组成万兆局域网，支持分布式推理集群高速互联。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-netgear-ms108up-10g.webp"
     },
     {
       "id": "hw-pikvm-v4",
@@ -6722,7 +6931,8 @@
         "tagline": "浏览器远程进入本地训练机 BIOS、挂载系统镜像并控制电源重启，无头服务器救星。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-pikvm-v4.webp"
     },
     {
       "id": "hw-sandisk-microsd-1tb",
@@ -6753,7 +6963,8 @@
         "tagline": "A2 高随机读写性能，适配树莓派系统盘、Jetson 镜像烧录与大疆 4K 航拍录制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sandisk-microsd-1tb.webp"
     },
     {
       "id": "hw-sony-alpha-zv-e1",
@@ -6784,7 +6995,8 @@
         "tagline": "全画幅暗光画质结合专有 AI 自动取景裁切，固定机位即可拍出跟拍运镜效果。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-alpha-zv-e1.webp"
     },
     {
       "id": "hw-insta360-ace-pro2",
@@ -6814,7 +7026,8 @@
         "tagline": "搭载 5nm AI 降噪芯片与 Leica 镜头，暗光 PureVideo 夜景降噪与手势抓拍表现惊艳。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-insta360-ace-pro2.webp"
     },
     {
       "id": "hw-dji-air-3s",
@@ -6845,7 +7058,8 @@
         "tagline": "首次将前向激光雷达引入消费级双摄无人机，暗光夜间也能精准感知障碍物与自动返航。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-dji-air-3s.webp"
     },
     {
       "id": "hw-lenovo-legion-pro7i",
@@ -6877,7 +7091,8 @@
         "tagline": "强力散热释放满功耗移动 RTX 算力，适合宿舍或差旅期间跑本地训练与大型渲染。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-lenovo-legion-pro7i.webp"
     },
     {
       "id": "hw-asus-proart-p16",
@@ -6909,7 +7124,8 @@
         "tagline": "集 64GB 大内存、50 TOPS NPU 与 RTX 独显于一身，兼顾视频剪辑、渲染与本地模型调试。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-proart-p16.webp"
     },
     {
       "id": "hw-msi-titan-workstation",
@@ -6939,7 +7155,8 @@
         "tagline": "支持大内存与多盘位扩展，将桌面级 PyTorch 调试环境轻松装进双肩包。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-msi-titan-workstation.webp"
     },
     {
       "id": "hw-nvidia-dgx-spark-cable",
@@ -6970,7 +7187,8 @@
         "tagline": "高达 100-275 TOPS 端侧算力，胜任多路高清视觉分析与高阶自主机器人机载大脑。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nvidia-dgx-spark-cable.webp"
     },
     {
       "id": "hw-anker-solix-c1000",
@@ -7000,7 +7218,8 @@
         "tagline": "58 分钟极速充满 1 度电并提供 1800W 交流输出，户外机器人实测与停电应急利器。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-solix-c1000.webp"
     },
     {
       "id": "hw-plugable-ud-ultc4k",
@@ -7030,7 +7249,8 @@
         "tagline": "绕过基础款笔记本外接屏幕数限制，单线驱动三块 4K 显示器并支持 100W 反向供电。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-plugable-ud-ultc4k.webp"
     },
     {
       "id": "hw-san-disk-desk-drive-8tb",
@@ -7061,7 +7281,8 @@
         "tagline": "8TB 全闪存零机械噪音，比传统机械盘快 4 倍，适合整机镜像备份与本地数据集仓库。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-san-disk-desk-drive-8tb.webp"
     },
     {
       "id": "hw-crucial-x10-pro-4tb",
@@ -7091,7 +7312,8 @@
         "tagline": "名片大小兼具 2,100 MB/s 读写与 IP55 防护，美光原厂 TLC 颗粒可靠性出众。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-x10-pro-4tb.webp"
     },
     {
       "id": "hw-eero-max-7",
@@ -7123,7 +7345,8 @@
         "tagline": "双 10G 网口内置 Thread/Matter/Zigbee 网关，兼顾全屋高速无线回程与智能家居控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-eero-max-7.webp"
     },
     {
       "id": "hw-keychron-b1-pro",
@@ -7154,7 +7377,8 @@
         "tagline": "支持网页端 ZMK 开源改键且续航长达数月，出差塞入电脑包轻若无物。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-keychron-b1-pro.webp"
     },
     {
       "id": "hw-sony-linkbuds-open",
@@ -7184,7 +7408,8 @@
         "tagline": "独特中空环形单元兼顾无感佩戴与环境对话感知，随时听取语音播报不隔绝同事交流。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-linkbuds-open.webp"
     },
     {
       "id": "hw-razer-basilisk-v3-pro",
@@ -7214,7 +7439,8 @@
         "tagline": "11 个可编程按键与无极阻尼滚轮，适合 3D 引擎视角操控与高强度游戏测试。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-razer-basilisk-v3-pro.webp"
     },
     {
       "id": "hw-elgato-prompter",
@@ -7245,7 +7471,8 @@
         "tagline": "自带 9 英寸显示器直接投射讲稿或 AI 实时提示词，录视频与线上汇报始终保持眼神直视镜头。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-elgato-prompter.webp"
     },
     {
       "id": "hw-dji-rs4-mini",
@@ -7276,7 +7503,8 @@
         "tagline": "支持自动轴锁与智能追踪模块，单人操控微单即可拍出稳定平滑的 AI 硬件评测镜头。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-dji-rs4-mini.webp"
     },
     {
       "id": "hw-benq-screenbar-halo",
@@ -7307,7 +7535,8 @@
         "tagline": "前光照明桌面、后光平衡环境对比度，屏幕零反光守护深夜编码视力。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-benq-screenbar-halo.webp"
     },
     {
       "id": "hw-apple-magic-trackpad",
@@ -7338,7 +7567,8 @@
         "tagline": "Mac mini 与 Mac Studio 桌面端必配，丝滑调用 macOS 全手势与多桌面工作区切换。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-apple-magic-trackpad.webp"
     },
     {
       "id": "hw-logitech-c920x-webcam",
@@ -7369,7 +7599,8 @@
         "tagline": "支持 RightSight AI 自动居中构图与双麦降噪，自带物理隐私盖，远程站会省心之选。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-logitech-c920x-webcam.webp"
     },
     {
       "id": "hw-sony-a6700-ai",
@@ -7400,7 +7631,8 @@
         "tagline": "专有 AI 识别芯片精准锁定人眼、飞行器与高速运动机器人，4K120 规格兼顾轻量便携。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-a6700-ai.webp"
     },
     {
       "id": "hw-dji-flip-drone",
@@ -7431,7 +7663,8 @@
         "tagline": "249 克以下全包围折叠桨叶保护，支持掌上起飞与 AI 智能跟随拍摄。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-dji-flip-drone.webp"
     },
     {
       "id": "hw-samsung-990pro-2tb",
@@ -7462,7 +7695,8 @@
         "tagline": "带独立缓存的高性能主盘，Ubuntu/Windows 双系统与海量 Python 虚拟环境秒开不卡顿。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-samsung-990pro-2tb.webp"
     },
     {
       "id": "hw-crucial-ddr5-32gb",
@@ -7494,7 +7728,8 @@
         "tagline": "美光原厂品质保证，轻松提升日常开发机多开浏览器、IDE 与轻量容器的流畅度。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-ddr5-32gb.webp"
     },
     {
       "id": "hw-wd-red-pro-16tb",
@@ -7526,7 +7761,8 @@
         "tagline": "CMR 垂直磁记录与 7200 转高稳定性，专用于多盘位 RAID 阵列与本地数据集冷备份。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-wd-red-pro-16tb.webp"
     },
     {
       "id": "hw-asustor-flashstor-6",
@@ -7557,7 +7793,8 @@
         "tagline": "纯 M.2 固态槽位零机械噪音，为内网共享向量检索库与容器集群提供极高随机读写 IOPS。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asustor-flashstor-6.webp"
     },
     {
       "id": "hw-logitech-brio-4k-stream",
@@ -7587,7 +7824,8 @@
         "tagline": "索尼传感器支持 AI 人脸追踪框选与双麦降噪，适合日常技术分享与远程面试。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-logitech-brio-4k-stream.webp"
     },
     {
       "id": "hw-twelve-south-bookarc",
@@ -7617,7 +7855,8 @@
         "tagline": "合盖立式摆放 MacBook 与开发主力本，释放外接 4K 显示器桌面空间并辅助散热。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-twelve-south-bookarc.webp"
     },
     {
       "id": "hw-ergotron-lx-arm",
@@ -7647,7 +7886,8 @@
         "tagline": "顺滑悬停并支持一键横竖屏旋转看长代码，彻底释放桌面下方键鼠活动区。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ergotron-lx-arm.webp"
     },
     {
       "id": "hw-elgato-wave-dx",
@@ -7677,7 +7917,8 @@
         "tagline": "精准隔离机械键盘敲击声与工作站显卡风扇声，保留纯粹的人声近讲质感。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-elgato-wave-dx.webp"
     },
     {
       "id": "hw-meta-quest-link-cable",
@@ -7708,7 +7949,8 @@
         "tagline": "稳定直连桌面 RTX 显卡，支持 Isaac Sim 仿真渲染与具身机器人高清低延迟遥操作。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-meta-quest-link-cable.webp"
     },
     {
       "id": "hw-apple-airtag-4pack",
@@ -7739,7 +7981,8 @@
         "tagline": "UWB 超宽带精准查找，守护装有开发笔记本、测试样机与摄影设备的差旅背包。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-apple-airtag-4pack.webp"
     },
     {
       "id": "hw-anker-soundcore-q45",
@@ -7769,7 +8012,8 @@
         "tagline": "50 小时续航搭配 LDAC 高清编码与 AI 降噪通话，学生与独立开发者高性价比选择。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-soundcore-q45.webp"
     },
     {
       "id": "hw-amazfit-t-rex-3",
@@ -7801,7 +8045,8 @@
         "tagline": "原生内置基于大模型的 Zepp Flow 自然语言语音操作系统与 27 天超长续航。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-amazfit-t-rex-3.webp"
     },
     {
       "id": "hw-garmin-vivoactive-5",
@@ -7831,7 +8076,8 @@
         "tagline": "14 天长续航兼具健康精力算法与扬声器麦克风，腕上直呼手机语音助手。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-garmin-vivoactive-5.webp"
     },
     {
       "id": "hw-apple-mac-mini-m4",
@@ -7863,7 +8109,8 @@
         "tagline": "仅手掌占地面积，16GB 统一内存起步，成为海外极客全天候运行个人 AI 智能体节点的爆款主机。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-apple-mac-mini-m4.webp"
     },
     {
       "id": "hw-asus-nuc-14-pro-ai",
@@ -7895,7 +8142,8 @@
         "tagline": "搭载二代酷睿 Ultra（整机 120 TOPS 算力）并集成内置麦与 Copilot+ 语音按键。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-nuc-14-pro-ai.webp"
     },
     {
       "id": "hw-anker-soundcore-motion-x600",
@@ -7925,7 +8173,8 @@
         "tagline": "五单元上扬声场配合 LDAC 高解析无线传输，高性价比升级工作室桌面听音体验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-soundcore-motion-x600.webp"
     },
     {
       "id": "hw-logitech-g-pro-x2",
@@ -7955,7 +8204,8 @@
         "tagline": "50mm 石墨烯振膜与超低延迟无线传输，兼顾 3D 游戏开发监听与 AAA 大作沉浸体验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-logitech-g-pro-x2.webp"
     },
     {
       "id": "hw-bambu-a1-mini",
@@ -7986,7 +8236,8 @@
         "tagline": "全自动流量校准与主动减振，新手也能一键打印树莓派外壳、摄像头云台与传感器支架。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-bambu-a1-mini.webp"
     },
     {
       "id": "hw-switchbot-s10-robot",
@@ -8016,7 +8267,8 @@
         "tagline": "分体式自动上下水基站并原生支持 Matter 协议，实现真正全无人值守的家居地面清洁。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-switchbot-s10-robot.webp"
     },
     {
       "id": "hw-govee-ai-sync-box",
@@ -8047,7 +8299,8 @@
         "tagline": "内嵌 Cogniglow AI 视觉算法实时解析游戏与电影画面，驱动零延迟桌面环境联动光效。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-govee-ai-sync-box.webp"
     },
     {
       "id": "hw-nvidia-rtx-5060ti-16",
@@ -8079,7 +8332,8 @@
         "tagline": "极低门槛拥有 16GB GDDR7 大显存与低整机功耗，老主机升级跑本地开源模型优选。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-nvidia-rtx-5060ti-16.webp"
     },
     {
       "id": "hw-seagate-exos-24tb",
@@ -8111,7 +8365,8 @@
         "tagline": "面向超大规模数据中心级别的 24TB 氦气 CMR 硬盘，高密度存储训练数据集湖。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-seagate-exos-24tb.webp"
     },
     {
       "id": "hw-pironman-5-case",
@@ -8142,7 +8397,8 @@
         "tagline": "为树莓派 5 加上 M.2 固态槽位、OLED 状态小屏与主动塔式散热，化身精致边缘小钢炮。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-pironman-5-case.webp"
     },
     {
       "id": "hw-anker-soundcore-sleep-a20",
@@ -8171,7 +8427,8 @@
         "tagline": "侧睡无感超薄设计搭配睡眠周期记录与自适应白噪音遮蔽，保障高强度工作后的深度休息。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-soundcore-sleep-a20.webp"
     },
     {
       "id": "hw-keychron-q11-split",
@@ -8202,7 +8459,8 @@
         "tagline": "左右可分离设计自然打开肩宽，双金属旋钮加 QMK 宏编程有效预防程序员肩颈劳损。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-keychron-q11-split.webp"
     },
     {
       "id": "hw-elgato-camlink-4k",
@@ -8233,7 +8491,8 @@
         "tagline": "将微单相机或 Jetson/树莓派开发板 HDMI 画面零延迟接入电脑 OBS 与视频会议。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-elgato-camlink-4k.webp"
     },
     {
       "id": "hw-glinet-comet-kvm",
@@ -8264,7 +8523,8 @@
         "tagline": "原生集成 Tailscale 异地组网，出门在外也能从系统底层远程接管家里显卡主机。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-glinet-comet-kvm.webp"
     },
     {
       "id": "hw-corsair-mp700-pro-4tb",
@@ -8295,7 +8555,8 @@
         "tagline": "4TB 超大容量配 PCIe 5.0 满血通道，大幅缩短大型仿真环境与模型文件读写耗时。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-corsair-mp700-pro-4tb.webp"
     },
     {
       "id": "hw-apple-macbook-pro-14",
@@ -8327,7 +8588,8 @@
         "tagline": "14 寸黄金便携尺寸配合大统一内存，在飞机与高铁上也能离线流畅运行中等参数大模型。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-apple-macbook-pro-14.webp"
     },
     {
       "id": "hw-sony-wh-ch720n",
@@ -8356,7 +8618,8 @@
         "tagline": "仅 192 克重搭载与旗舰同源的 V1 降噪芯片，长时间佩戴无压感且性价比突出。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sony-wh-ch720n.webp"
     },
     {
       "id": "hw-xreal-beam-pro",
@@ -8386,7 +8649,8 @@
         "tagline": "自带双 5000 万像素 3D 空间相机，随手拍摄空间影像并驱动 AR 眼镜开启多窗空间桌面。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-xreal-beam-pro.webp"
     },
     {
       "id": "hw-asus-rog-swift-4k-oled",
@@ -8418,7 +8682,8 @@
         "tagline": "白天享 4K 锐利代码字体与 90W USB-C 供电，夜晚畅享 240Hz 顶级次世代游戏体验。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-rog-swift-4k-oled.webp"
     },
     {
       "id": "hw-anker-maggo-qi2-station",
@@ -8449,7 +8714,8 @@
         "tagline": "一根线同时无线充手机、AI 耳机与智能手表，保持研发桌面极致整洁。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-maggo-qi2-station.webp"
     },
     {
       "id": "hw-shure-sm7db",
@@ -8480,7 +8746,8 @@
         "tagline": "内置 +28dB 干净前级放大，顶级科技播客主理人与高保真声纹采集的行业标杆。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-shure-sm7db.webp"
     },
     {
       "id": "hw-bose-quietcomfort-sc",
@@ -8509,7 +8776,8 @@
         "tagline": "超柔软蛋白皮耳罩与低夹头力设计，连续戴 8 小时专注研发依然轻松舒适。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-bose-quietcomfort-sc.webp"
     },
     {
       "id": "hw-ecoflow-river-3-ups",
@@ -8539,7 +8807,8 @@
         "tagline": "毫秒级断电切换并支持 USB 通信自动关机，静音守护路由器、NAS 与 Mac mini 不断网。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ecoflow-river-3-ups.webp"
     },
     {
       "id": "hw-asus-zenbook-s16",
@@ -8570,7 +8839,8 @@
         "tagline": "1.1cm 超薄高科技陶瓷铝机身内置 50 TOPS NPU，大屏轻薄兼得。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-asus-zenbook-s16.webp"
     },
     {
       "id": "hw-anker-soundcore-boom2",
@@ -8599,7 +8869,8 @@
         "tagline": "支持 SmartTune 姿态感应调音与 LDAC 高清传输，巴掌大小适合差旅随行。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-anker-soundcore-boom2.webp"
     },
     {
       "id": "hw-kensington-sd5780t",
@@ -8628,7 +8899,8 @@
         "tagline": "单线输出双 4K@60Hz 显示与 2.5G 有线网络，稳定兼容 Mac 与 Windows 企业开发本。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-kensington-sd5780t.webp"
     },
     {
       "id": "hw-crucial-p310-2230",
@@ -8659,7 +8931,8 @@
         "tagline": "7,100 MB/s 极速短卡规格，专为 Steam Deck、Surface 与迷你嵌入式主机扩容。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-crucial-p310-2230.webp"
     },
     {
       "id": "hw-sonos-arc-ultra",
@@ -8688,7 +8961,8 @@
         "tagline": "全新 Sound Motion 单元与多档 AI 对话人声增强，兼具客厅语音交互控制。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-sonos-arc-ultra.webp"
     },
     {
       "id": "hw-roborock-qrevo-curv",
@@ -8718,7 +8992,8 @@
         "tagline": "支持底盘自动抬升越障、AI 避障识别与离线“Hello Rocky”语音指令调用。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-roborock-qrevo-curv.webp"
     },
     {
       "id": "hw-ecovacs-deebot-x8",
@@ -8747,7 +9022,8 @@
         "tagline": "集成 AIVI 3D 空间避障与 YIKO-GPT 自然语言语音控制，真正听得懂复杂指令的家用机器人。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-ecovacs-deebot-x8.webp"
     },
     {
       "id": "hw-yubikey-5-nano",
@@ -8778,7 +9054,8 @@
         "tagline": "可长期插在笔记本 C 口不拔出，轻轻一触即可完成 Git GPG 签名与 SSH 硬件鉴权。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/hw-yubikey-5-nano.webp"
     },
     {
       "id": "digital-pixel-9-pro",
@@ -8812,7 +9089,8 @@
         "tagline": "原生集成端侧 Gemini Nano 多模态大模型、AI 通话纪要与魔法修图，谷歌 AI 软件生态首发载体。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-pixel-9-pro.webp"
     },
     {
       "id": "digital-galaxy-s25-ultra",
@@ -8846,7 +9124,8 @@
         "tagline": "搭载旗舰 NPU 算力，支持实时双语通话翻译、跨应用 AI Agent 协同、即圈即搜与笔记智能排版。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-galaxy-s25-ultra.webp"
     },
     {
       "id": "digital-iphone-16-pro",
@@ -8879,7 +9158,8 @@
         "tagline": "专为 Apple Intelligence 打造，支持视觉智能识物、全局写作辅助、本地语音转写与私有云计算。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-iphone-16-pro.webp"
     },
     {
       "id": "digital-galaxy-tab-s10-ultra",
@@ -8911,7 +9191,8 @@
         "tagline": "配备独立 AI 快捷键与低延迟 S Pen，支持涂鸦生图、PDF 原位翻译与会议录音自动摘要。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-galaxy-tab-s10-ultra.webp"
     },
     {
       "id": "digital-gopro-hero13-black",
@@ -8943,7 +9224,8 @@
         "tagline": "支持 HB 系列镜头自动识别、HyperSmooth 超级防抖及 Quik AI 高光时刻自动剪辑。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-gopro-hero13-black.webp"
     },
     {
       "id": "digital-dji-osmo-action-5",
@@ -8975,7 +9257,8 @@
         "tagline": "内置 4nm AI 处理器，支持人物居中智能追踪、超级夜景降噪及直连 DJI Mic 2 无线收音。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-dji-osmo-action-5.webp"
     },
     {
       "id": "digital-kindle-colorsoft",
@@ -9007,7 +9290,8 @@
         "tagline": "7 英寸无眩光彩色墨水屏，适合高亮精读 AI 技术专著、论文图表与深度长文资料。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-kindle-colorsoft.webp"
     },
     {
       "id": "digital-apple-watch-s10",
@@ -9039,7 +9323,8 @@
         "tagline": "支持端侧离线 Siri 响应、机器学习手势识别、智能通话降噪与睡眠健康 AI 监测。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-apple-watch-s10.webp"
     },
     {
       "id": "digital-galaxy-ring",
@@ -9071,7 +9356,8 @@
         "tagline": "内置三传感器全天候采集睡眠与心率数据，由 Galaxy AI 生成能量评分，无需额外订阅费。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-galaxy-ring.webp"
     },
     {
       "id": "digital-rayneo-air-3s",
@@ -9103,7 +9389,8 @@
         "tagline": "USB-C 一线直连电脑或手机，随时投射 201 英寸随身巨幕，满足移动写代码与多屏阅读。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-rayneo-air-3s.webp"
     },
     {
       "id": "digital-reolink-argus-4-pro",
@@ -9135,7 +9422,8 @@
         "tagline": "双目拼接 180° 广角全彩夜视，本地离线运行人形/车辆/宠物 AI 识别，无需强绑云端付费。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-reolink-argus-4-pro.webp"
     },
     {
       "id": "digital-sony-wf-c710n",
@@ -9167,7 +9455,8 @@
         "tagline": "搭载基于数亿样本训练的 AI 语音拾音降噪算法，清晰人声且支持多设备蓝牙无缝切换。",
         "cta": "前往亚马逊查看",
         "hint": "查看实时报价"
-      }
+      },
+      "image": "/images/products/digital-sony-wf-c710n.webp"
     }
   ];
 
@@ -9203,7 +9492,7 @@
   };
 
   // =========================================================================
-  // 2. THEME, LANGUAGE & COMPLIANCE-SAFE SVG ARTWORK
+  // 2. THEME, LANGUAGE & SAFE ESCAPING
   // =========================================================================
   function isZhPage() {
     var path = (window.location && window.location.pathname) || '';
@@ -9222,58 +9511,6 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
-  }
-
-  function getSvgArt(iconType, accent) {
-    var palettes = {
-      indigo: ['#312e81', '#6366f1'],
-      sky: ['#0c4a6e', '#0ea5e9'],
-      emerald: ['#064e3b', '#10b981'],
-      amber: ['#78350f', '#f59e0b'],
-      violet: ['#4c1d95', '#8b5cf6']
-    };
-    var pal = palettes[accent] || palettes.indigo;
-    var glyphs = {
-      gpu: '<rect x="14" y="20" width="36" height="24" rx="4" stroke="white" stroke-width="2.2" fill="none"/><circle cx="26" cy="32" r="5" stroke="white" stroke-width="2" fill="none"/><circle cx="38" cy="32" r="5" stroke="white" stroke-width="2" fill="none"/><path d="M18 44v4M24 44v4M30 44v4M14 26h-4M14 38h-4" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      memory: '<rect x="12" y="22" width="40" height="20" rx="3" stroke="white" stroke-width="2.2" fill="none"/><rect x="17" y="27" width="6" height="10" rx="1" fill="white" opacity="0.9"/><rect x="26" y="27" width="6" height="10" rx="1" fill="white" opacity="0.9"/><rect x="35" y="27" width="6" height="10" rx="1" fill="white" opacity="0.9"/><path d="M18 42v4M26 42v4M34 42v4M42 42v4" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      ssd: '<rect x="14" y="20" width="36" height="24" rx="3" stroke="white" stroke-width="2.2" fill="none"/><rect x="20" y="26" width="12" height="12" rx="1.5" fill="white" opacity="0.85"/><path d="M36 28h8M36 33h8M36 38h6" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      mac: '<rect x="15" y="18" width="34" height="24" rx="4" stroke="white" stroke-width="2.2" fill="none"/><path d="M22 46h20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="30" r="4.5" stroke="white" stroke-width="2" fill="none"/>',
-      laptop: '<rect x="16" y="18" width="32" height="21" rx="2.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M11 43h42l-3 4H14l-3-4z" fill="white" opacity="0.9"/>',
-      edge: '<rect x="18" y="18" width="28" height="28" rx="4" stroke="white" stroke-width="2.2" fill="none"/><rect x="25" y="25" width="14" height="14" rx="2" fill="white" opacity="0.9"/><path d="M24 14v4M32 14v4M40 14v4M24 46v4M32 46v4M40 46v4M14 24h4M14 32h4M14 40h4M46 24h4M46 32h4M46 40h4" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      book: '<path d="M16 17h14a3 3 0 0 1 3 3v27a2 2 0 0 0-2-2H16V17zM48 17H34a3 3 0 0 0-3 3v27a2 2 0 0 1 2-2h15V17z" stroke="white" stroke-width="2.2" fill="none" stroke-linejoin="round"/>',
-      keyboard: '<rect x="12" y="21" width="40" height="22" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M18 28h4M26 28h4M34 28h4M42 28h4M18 35h4M26 35h12M42 35h4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      monitor: '<rect x="13" y="17" width="38" height="24" rx="3" stroke="white" stroke-width="2.2" fill="none"/><path d="M32 41v6M23 47h18" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      mic: '<rect x="26" y="16" width="12" height="19" rx="6" stroke="white" stroke-width="2.2" fill="none"/><path d="M20 31a12 12 0 0 0 24 0M32 43v5M25 48h14" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      xr: '<path d="M13 26a5 5 0 0 1 5-5h28a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5h-8l-4-4h-4l-4 4h-8a5 5 0 0 1-5-5V26z" stroke="white" stroke-width="2.2" fill="none"/><circle cx="23" cy="31" r="3" fill="white" opacity="0.9"/><circle cx="41" cy="31" r="3" fill="white" opacity="0.9"/>',
-      psu: '<rect x="14" y="19" width="36" height="26" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M34 23l-6 9h6l-3 9 7-10h-6l2-8z" fill="white" opacity="0.95"/>',
-      speaker: '<rect x="20" y="13" width="24" height="38" rx="7" stroke="white" stroke-width="2.2" fill="none"/><circle cx="32" cy="36" r="6" stroke="white" stroke-width="2"/><circle cx="32" cy="22" r="2.2" fill="white"/>',
-      earbuds: '<path d="M21 20a5 5 0 0 1 10 0v10a4 4 0 0 1-4 4h-2v11M43 20a5 5 0 0 0-10 0v10a4 4 0 0 0 4 4h2v11" stroke="white" stroke-width="2.2" stroke-linecap="round" fill="none"/>',
-      recorder: '<rect x="19" y="13" width="26" height="38" rx="4" stroke="white" stroke-width="2.2" fill="none"/><circle cx="32" cy="27" r="4" stroke="white" stroke-width="2"/><path d="M25 38h14M25 43h10" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      glasses: '<rect x="13" y="25" width="16" height="12" rx="4" stroke="white" stroke-width="2.2" fill="none"/><rect x="35" y="25" width="16" height="12" rx="4" stroke="white" stroke-width="2.2" fill="none"/><path d="M29 30h6M13 28l-2-4M51 28l2-4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      webcam: '<circle cx="32" cy="26" r="10" stroke="white" stroke-width="2.2" fill="none"/><circle cx="32" cy="26" r="4" fill="white"/><path d="M24 44h16M32 36v8" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      nas: '<rect x="15" y="17" width="34" height="30" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M23 17v30M32 17v30M41 17v30" stroke="white" stroke-width="1.8"/><circle cx="19" cy="41" r="1.4" fill="white"/><circle cx="27.5" cy="41" r="1.4" fill="white"/><circle cx="36.5" cy="41" r="1.4" fill="white"/><circle cx="45" cy="41" r="1.4" fill="white"/>',
-      minipc: '<rect x="14" y="20" width="36" height="24" rx="4" stroke="white" stroke-width="2.2" fill="none"/><circle cx="24" cy="32" r="2.2" fill="white"/><path d="M32 29h11M32 35h7" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      drone: '<circle cx="19" cy="20" r="5" stroke="white" stroke-width="2" fill="none"/><circle cx="45" cy="20" r="5" stroke="white" stroke-width="2" fill="none"/><circle cx="19" cy="44" r="5" stroke="white" stroke-width="2" fill="none"/><circle cx="45" cy="44" r="5" stroke="white" stroke-width="2" fill="none"/><path d="M23 24l18 16M41 24L23 40" stroke="white" stroke-width="2" stroke-linecap="round"/><rect x="27" y="27" width="10" height="10" rx="2" fill="white"/>',
-      robot: '<rect x="18" y="21" width="28" height="24" rx="5" stroke="white" stroke-width="2.2" fill="none"/><path d="M32 14v7M14 31h4M46 31h4" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="26" cy="31" r="2.3" fill="white"/><circle cx="38" cy="31" r="2.3" fill="white"/><path d="M27 38h10" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      dock: '<rect x="12" y="26" width="40" height="13" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M19 32h4M27 32h4M35 32h4M43 32h4" stroke="white" stroke-width="2.2" stroke-linecap="round"/>',
-      router: '<rect x="14" y="34" width="36" height="12" rx="3" stroke="white" stroke-width="2.2" fill="none"/><path d="M21 34V18M32 34V15M43 34V18" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="22" cy="40" r="1.5" fill="white"/><circle cx="28" cy="40" r="1.5" fill="white"/>',
-      ups: '<rect x="21" y="13" width="22" height="38" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><path d="M33 21l-5 8h5l-2 8 6-9h-5l1-7z" fill="white"/>',
-      security: '<path d="M32 14l15 6v11c0 9.5-6.4 17.6-15 20-8.6-2.4-15-10.5-15-20V20l15-6z" stroke="white" stroke-width="2.2" fill="none"/><circle cx="32" cy="31" r="4" stroke="white" stroke-width="2" fill="none"/>',
-      phone: '<rect x="21" y="12" width="22" height="40" rx="4" stroke="white" stroke-width="2.2" fill="none"/><path d="M29 17h6M30 46h4" stroke="white" stroke-width="2" stroke-linecap="round"/>',
-      tablet: '<rect x="14" y="16" width="36" height="32" rx="3.5" stroke="white" stroke-width="2.2" fill="none"/><circle cx="46" cy="32" r="1.5" fill="white"/>',
-      camera: '<rect x="14" y="21" width="36" height="24" rx="4" stroke="white" stroke-width="2.2" fill="none"/><circle cx="32" cy="33" r="7" stroke="white" stroke-width="2.2" fill="none"/><path d="M24 21l2.5-4h11L40 21" stroke="white" stroke-width="2" stroke-linejoin="round"/>',
-      spark: '<path d="M32 14l4 12 12 4-12 4-4 12-4-12-12-4 12-4 4-12z" stroke="white" stroke-width="2" fill="white" fill-opacity="0.2" stroke-linejoin="round"/>'
-    };
-    var svg =
-      '<svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-        '<defs><linearGradient id="g-' + esc(iconType + '-' + accent) + '" x1="0" y1="0" x2="1" y2="1">' +
-          '<stop offset="0%" stop-color="' + pal[0] + '"/>' +
-          '<stop offset="100%" stop-color="' + pal[1] + '"/>' +
-        '</linearGradient></defs>' +
-        '<rect width="64" height="64" rx="12" fill="url(#g-' + esc(iconType + '-' + accent) + ')"/>' +
-        (glyphs[iconType] || glyphs.spark) +
-      '</svg>';
-    return svg;
   }
 
   // =========================================================================
@@ -9309,7 +9546,6 @@
 
   function containsTag(haystack, tag) {
     if (!haystack || !tag) return false;
-    // Direct match for CJK or multi-word tokens; word-boundary-safe check for short ASCII tokens
     if (/[\u4e00-\u9fff]/.test(tag) || tag.indexOf(' ') !== -1 || tag.length >= 5) {
       return haystack.indexOf(tag) !== -1;
     }
@@ -9327,7 +9563,6 @@
       if (containsTag(signals.desc, t)) score += 4;
       if (containsTag(signals.body, t)) score += 2;
     }
-    // Slight deterministic tie-breaker per URL path so un-tagged pages rotate naturally
     var tie = (hashPath(prod.id + ':' + seed) % 100) / 1000.0;
     return score + tie;
   }
@@ -9341,6 +9576,7 @@
     for (var i = 0; i < PRODUCT_POOL.length; i++) {
       var prod = PRODUCT_POOL[i];
       if (usedIds[prod.id]) continue;
+      if (!prod.image) continue;
       if (opts.filterCategory && prod.category !== opts.filterCategory) continue;
       scored.push({
         item: prod,
@@ -9353,7 +9589,6 @@
     var picked = [];
     var usedCategories = {};
 
-    // First pass: prefer distinct categories when selecting multiple items for better variety
     if (opts.diverseCategories) {
       for (var j = 0; j < scored.length && picked.length < count; j++) {
         var cand = scored[j].item;
@@ -9365,7 +9600,6 @@
       }
     }
 
-    // Second pass: fill remaining slots with highest-scoring unused items
     for (var k = 0; k < scored.length && picked.length < count; k++) {
       var c2 = scored[k].item;
       if (!usedIds[c2.id]) {
@@ -9378,7 +9612,7 @@
   }
 
   // =========================================================================
-  // 4. STYLES & COMPLIANCE-SAFE RENDERERS
+  // 4. PHOTO-FIRST VISUAL GALLERY STYLES & RENDERERS
   // =========================================================================
   function injectStylesOnce() {
     if (document.getElementById('ainr-monetization-css')) return;
@@ -9386,65 +9620,56 @@
     style.id = 'ainr-monetization-css';
     style.textContent = [
       '.ainr-slot{box-sizing:border-box;width:100%;font-family:Inter,system-ui,-apple-system,sans-serif;}',
-      '.ainr-card{position:relative;display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;text-decoration:none;transition:transform .18s cubic-bezier(0.16,1,0.3,1),border-color .18s ease,box-shadow .18s ease;overflow:hidden;}',
-      '.ainr-card:hover{transform:translateY(-1.5px);}',
-      '.ainr-theme-light .ainr-card{background:linear-gradient(135deg,#ffffff,#f8fafc);border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.08);}',
-      '.ainr-theme-light .ainr-card:hover{border-color:#818cf8;box-shadow:0 10px 24px -10px rgba(99,102,241,0.22);}',
-      '.ainr-theme-dark .ainr-card{background:linear-gradient(135deg,rgba(15,23,42,0.92),rgba(15,23,42,0.72));border:1px solid rgba(51,65,85,0.85);color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.55);backdrop-filter:blur(12px);}',
-      '.ainr-theme-dark .ainr-card:hover{border-color:rgba(129,140,248,0.65);box-shadow:0 12px 28px -10px rgba(99,102,241,0.3);}',
+      '.ainr-showcase{border-radius:18px;padding:16px 18px;transition:background .2s ease,border-color .2s ease;}',
+      '.ainr-theme-light .ainr-showcase{background:linear-gradient(180deg,rgba(248,250,252,0.92),rgba(241,245,249,0.58));border:1px solid rgba(203,213,225,0.72);}',
+      '.ainr-theme-dark .ainr-showcase{background:linear-gradient(180deg,rgba(15,23,42,0.68),rgba(15,23,42,0.42));border:1px solid rgba(51,65,85,0.65);backdrop-filter:blur(10px);}',
 
-      '.ainr-icon-box{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;}',
-      '.ainr-icon-box svg{width:100%;height:100%;display:block;}',
+      '.ainr-meta-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:13px;}',
+      '.ainr-heading{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.01em;}',
+      '.ainr-theme-light .ainr-heading{color:#334155;}',
+      '.ainr-theme-dark .ainr-heading{color:#e2e8f0;}',
+      '.ainr-dot{width:6px;height:6px;border-radius:999px;background:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.16);flex-shrink:0;}',
+      '.ainr-meta-right{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:10.5px;}',
+      '.ainr-theme-light .ainr-meta-right{color:#64748b;}',
+      '.ainr-theme-dark .ainr-meta-right{color:#94a3b8;}',
+      '.ainr-sponsor-link{color:inherit;text-decoration:none;font-weight:600;opacity:0.82;transition:opacity .15s ease,color .15s ease;}',
+      '.ainr-sponsor-link:hover{opacity:1;color:#6366f1;}',
 
-      '.ainr-body{min-width:0;flex:1;}',
-      '.ainr-pill-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;}',
-      '.ainr-pill{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:800;padding:1.5px 7px;border-radius:999px;letter-spacing:.04em;text-transform:uppercase;line-height:1.3;}',
-      '.ainr-pill-indigo{background:rgba(99,102,241,0.15);color:#6366f1;border:1px solid rgba(99,102,241,0.3);}',
-      '.ainr-theme-dark .ainr-pill-indigo{color:#818cf8;}',
-      '.ainr-pill-emerald{background:rgba(16,185,129,0.15);color:#059669;border:1px solid rgba(16,185,129,0.3);}',
-      '.ainr-theme-dark .ainr-pill-emerald{color:#34d399;}',
-      '.ainr-pill-sky{background:rgba(14,165,233,0.15);color:#0284c7;border:1px solid rgba(14,165,233,0.3);}',
-      '.ainr-theme-dark .ainr-pill-sky{color:#38bdf8;}',
-      '.ainr-pill-amber{background:rgba(245,158,11,0.15);color:#d97706;border:1px solid rgba(245,158,11,0.3);}',
-      '.ainr-theme-dark .ainr-pill-amber{color:#fbbf24;}',
-      '.ainr-pill-violet{background:rgba(139,92,246,0.15);color:#7c3aed;border:1px solid rgba(139,92,246,0.3);}',
-      '.ainr-theme-dark .ainr-pill-violet{color:#a78bfa;}',
-      '.ainr-verified{font-size:9.5px;font-weight:700;color:#10b981;letter-spacing:.02em;}',
-
-      '.ainr-title{font-size:13.5px;font-weight:800;line-height:1.35;margin:0;letter-spacing:-0.01em;}',
-      '.ainr-desc{font-size:11.5px;line-height:1.45;margin:3px 0 0;opacity:0.82;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}',
-
-      '.ainr-action-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}',
-      '.ainr-cta{display:inline-flex;align-items:center;gap:4px;padding:6.5px 13px;border-radius:9px;font-size:11.5px;font-weight:700;white-space:nowrap;transition:background .15s ease,transform .15s ease;}',
-      '.ainr-theme-light .ainr-cta{background:#4f46e5;color:#ffffff;box-shadow:0 2px 8px rgba(79,70,229,0.22);}',
-      '.ainr-theme-light .ainr-card:hover .ainr-cta{background:#4338ca;}',
-      '.ainr-theme-dark .ainr-cta{background:rgba(99,102,241,0.25);color:#e0e7ff;border:1px solid rgba(129,140,248,0.4);}',
-      '.ainr-theme-dark .ainr-card:hover .ainr-cta{background:#4f46e5;color:#ffffff;border-color:#6366f1;}',
-      '.ainr-sub-hint{font-size:10px;font-weight:600;opacity:0.65;letter-spacing:.02em;}',
-
-      '.ainr-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}',
+      '.ainr-grid-6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;}',
+      '.ainr-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}',
+      '.ainr-grid-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}',
       '.ainr-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}',
-      '.ainr-grid-card{position:relative;display:flex;flex-direction:column;padding:14px 16px;border-radius:14px;text-decoration:none;transition:transform .2s cubic-bezier(0.16,1,0.3,1),border-color .2s ease,box-shadow .2s ease;}',
-      '.ainr-grid-card:hover{transform:translateY(-2px);}',
-      '.ainr-theme-light .ainr-grid-card{background:#ffffff;border:1px solid #cbd5e1;color:#0f172a;box-shadow:0 4px 16px -6px rgba(15,23,42,0.08);}',
-      '.ainr-theme-light .ainr-grid-card:hover{border-color:#818cf8;box-shadow:0 12px 28px -10px rgba(99,102,241,0.2);}',
-      '.ainr-theme-dark .ainr-grid-card{background:linear-gradient(135deg,rgba(15,23,42,0.92),rgba(15,23,42,0.72));border:1px solid rgba(51,65,85,0.85);color:#f1f5f9;box-shadow:0 8px 24px -12px rgba(0,0,0,0.55);}',
-      '.ainr-theme-dark .ainr-grid-card:hover{border-color:rgba(129,140,248,0.65);box-shadow:0 14px 32px -10px rgba(99,102,241,0.32);}',
 
-      '.ainr-grid-top{display:flex;align-items:center;gap:12px;margin-bottom:8px;}',
-      '.ainr-grid-top .ainr-icon-box{width:46px;height:46px;border-radius:10px;}',
-      '.ainr-grid-card .ainr-title{font-size:13.5px;margin:2px 0 0;}',
-      '.ainr-grid-card .ainr-desc{font-size:11.5px;margin:4px 0 12px;flex:1;}',
-      '.ainr-grid-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(148,163,184,0.18);}',
+      '.ainr-pcard{position:relative;display:flex;flex-direction:column;padding:10px;border-radius:14px;text-decoration:none;min-width:0;transition:transform .22s cubic-bezier(0.16,1,0.3,1),border-color .22s ease,box-shadow .22s ease;}',
+      '.ainr-pcard:hover{transform:translateY(-2px);}',
+      '.ainr-theme-light .ainr-pcard{background:#ffffff;border:1px solid rgba(226,232,240,0.95);color:#0f172a;box-shadow:0 2px 10px -4px rgba(15,23,42,0.06);}',
+      '.ainr-theme-light .ainr-pcard:hover{border-color:rgba(99,102,241,0.55);box-shadow:0 12px 24px -10px rgba(79,70,229,0.18);}',
+      '.ainr-theme-dark .ainr-pcard{background:rgba(15,23,42,0.88);border:1px solid rgba(51,65,85,0.82);color:#f1f5f9;box-shadow:0 4px 14px -6px rgba(0,0,0,0.45);}',
+      '.ainr-theme-dark .ainr-pcard:hover{border-color:rgba(129,140,248,0.6);box-shadow:0 12px 26px -10px rgba(99,102,241,0.28);}',
 
-      '.ainr-meta-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;letter-spacing:.02em;}',
-      '.ainr-theme-light .ainr-meta-bar{color:#64748b;}',
-      '.ainr-theme-dark .ainr-meta-bar{color:#94a3b8;}',
-      '.ainr-disclosure{font-size:10.5px;opacity:0.78;}',
+      '.ainr-photo-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;background:#ffffff;border:1px solid rgba(15,23,42,0.05);display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;box-sizing:border-box;}',
+      '.ainr-grid-strip .ainr-photo-wrap{aspect-ratio:16/11;padding:8px;}',
+      '.ainr-photo{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;transition:transform .32s cubic-bezier(0.16,1,0.3,1);}',
+      '.ainr-pcard:hover .ainr-photo{transform:scale(1.06);}',
 
-      '@media (max-width:1024px){.ainr-grid-3{grid-template-columns:1fr;}}',
-      '@media (max-width:768px){.ainr-grid-2{grid-template-columns:1fr;}}',
-      '@media (max-width:640px){.ainr-card{flex-direction:column;align-items:flex-start;}.ainr-action-wrap{width:100%;flex-direction:row;justify-content:space-between;align-items:center;margin-top:8px;}}'
+      '.ainr-pname{margin:9px 2px 0;font-size:12.5px;font-weight:600;line-height:1.38;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.76em;letter-spacing:-0.005em;}',
+      '.ainr-pfoot{margin-top:8px;padding:7px 2px 1px;border-top:1px solid rgba(148,163,184,0.16);display:flex;align-items:center;justify-content:space-between;gap:6px;}',
+      '.ainr-store{font-size:10.5px;font-weight:600;opacity:0.55;letter-spacing:.01em;}',
+      '.ainr-go{font-size:11px;font-weight:650;white-space:nowrap;transition:transform .18s ease;}',
+      '.ainr-theme-light .ainr-go{color:#4f46e5;}',
+      '.ainr-theme-dark .ainr-go{color:#818cf8;}',
+      '.ainr-pcard:hover .ainr-go{transform:translateX(2px);}',
+
+      '@media (max-width:1279px){.ainr-grid-6{grid-template-columns:repeat(3,minmax(0,1fr));}}',
+      '@media (max-width:639px){',
+        '.ainr-showcase{padding:13px 12px;border-radius:14px;}',
+        '.ainr-grid-6,.ainr-grid-3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}',
+        '.ainr-grid-strip{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(156px,46vw);overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:4px;-webkit-overflow-scrolling:touch;}',
+        '.ainr-grid-strip .ainr-pcard{scroll-snap-align:start;}',
+        '.ainr-pcard{padding:8px;border-radius:12px;}',
+        '.ainr-photo-wrap{padding:8px;}',
+        '.ainr-pname{font-size:12px;}',
+      '}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -9467,80 +9692,49 @@
       var copy = lang === 'zh' ? raw.zh : raw.en;
       return {
         id: raw.id,
-        iconType: raw.iconType,
-        accent: raw.accent,
-        isAmazon: raw.isAmazon,
+        image: raw.image,
         internal: raw.internal,
         url: raw.url,
-        badge: copy.badge,
-        name: copy.name,
-        tagline: copy.tagline,
-        cta: copy.cta,
-        hint: copy.hint
+        name: copy.name
       };
     }
     return raw;
   }
 
-  function renderHorizontalCard(raw, lang, compact) {
+  function renderPhotoCard(raw, lang) {
     var p = localizeItem(raw, lang);
-    var pillClass = 'ainr-pill-' + (p.accent || 'indigo');
-    var sourceBadge = p.isAmazon ? 'Amazon' : (lang === 'zh' ? '官方合作' : 'Official');
+    var storeLabel = 'Amazon';
+    var goLabel = lang === 'zh' ? '去看看 →' : 'View →';
+    var imgSrc = p.image || ('/images/products/' + p.id + '.webp');
     return (
-      '<a class="ainr-card" ' + linkAttrs(p) + '>' +
-        '<div class="ainr-icon-box">' + getSvgArt(p.iconType, p.accent) + '</div>' +
-        '<div class="ainr-body">' +
-          '<div class="ainr-pill-row">' +
-            '<span class="ainr-pill ' + pillClass + '">✦ ' + esc(p.badge) + '</span>' +
-            '<span class="ainr-verified">✓ ' + esc(sourceBadge) + '</span>' +
-          '</div>' +
-          '<h4 class="ainr-title">' + esc(p.name) + '</h4>' +
-          (compact ? '' : '<p class="ainr-desc">' + esc(p.tagline) + '</p>') +
+      '<a class="ainr-pcard" ' + linkAttrs(p) + ' title="' + esc(p.name) + '">' +
+        '<div class="ainr-photo-wrap">' +
+          '<img class="ainr-photo" src="' + esc(imgSrc) + '" alt="' + esc(p.name) + '" decoding="async" onerror="this.style.opacity=\'0.25\'">' +
         '</div>' +
-        '<div class="ainr-action-wrap">' +
-          '<span class="ainr-cta">' + esc(p.cta) + ' ↗</span>' +
-          '<span class="ainr-sub-hint">' + esc(p.hint || '') + '</span>' +
+        '<h4 class="ainr-pname">' + esc(p.name) + '</h4>' +
+        '<div class="ainr-pfoot">' +
+          '<span class="ainr-store">' + storeLabel + '</span>' +
+          '<span class="ainr-go">' + goLabel + '</span>' +
         '</div>' +
       '</a>'
     );
   }
 
-  function renderGridCard(raw, lang) {
-    var p = localizeItem(raw, lang);
-    var pillClass = 'ainr-pill-' + (p.accent || 'indigo');
-    var sourceBadge = p.isAmazon ? 'Amazon' : (lang === 'zh' ? '官方合作' : 'Official');
-    return (
-      '<a class="ainr-grid-card" ' + linkAttrs(p) + '>' +
-        '<div class="ainr-grid-top">' +
-          '<div class="ainr-icon-box">' + getSvgArt(p.iconType, p.accent) + '</div>' +
-          '<div class="ainr-body">' +
-            '<div class="ainr-pill-row">' +
-              '<span class="ainr-pill ' + pillClass + '">✦ ' + esc(p.badge) + '</span>' +
-              '<span class="ainr-verified">✓ ' + esc(sourceBadge) + '</span>' +
-            '</div>' +
-            '<h4 class="ainr-title">' + esc(p.name) + '</h4>' +
-          '</div>' +
-        '</div>' +
-        '<p class="ainr-desc">' + esc(p.tagline) + '</p>' +
-        '<div class="ainr-grid-footer">' +
-          '<span class="ainr-sub-hint">' + esc(p.hint || '') + '</span>' +
-          '<span class="ainr-cta">' + esc(p.cta) + ' ↗</span>' +
-        '</div>' +
-      '</a>'
-    );
-  }
-
-  function renderMetaBar(lang, labelEn, labelZh, hasAmazon) {
+  function renderMetaBar(lang, labelEn, labelZh, showSponsorLink) {
     var leftText = lang === 'zh' ? labelZh : labelEn;
-    var disclosureText = hasAmazon
-      ? (lang === 'zh'
-          ? '作为亚马逊合作伙伴，符合条件的购买可能会带来推广佣金'
-          : 'As an Amazon Associate I earn from qualifying purchases')
-      : '';
+    var disclosureText = lang === 'zh'
+      ? '亚马逊联盟推荐 · 符合条件的购买可能会带来佣金'
+      : 'As an Amazon Associate I earn from qualifying purchases';
+    var sponsorHtml = '';
+    if (showSponsorLink) {
+      var sp = SPONSOR_CARD[lang] || SPONSOR_CARD.en;
+      var spText = lang === 'zh' ? '商务合作 ↗' : 'Partner ↗';
+      sponsorHtml = ' · <a class="ainr-sponsor-link" href="' + esc(sp.url) + '">' + spText + '</a>';
+    }
     return (
       '<div class="ainr-meta-bar">' +
-        '<span>✦ ' + esc(leftText) + '</span>' +
-        (disclosureText ? '<span class="ainr-disclosure">' + esc(disclosureText) + '</span>' : '') +
+        '<span class="ainr-heading"><span class="ainr-dot"></span><span>' + esc(leftText) + '</span></span>' +
+        '<span class="ainr-meta-right"><span>' + esc(disclosureText) + '</span>' + sponsorHtml + '</span>' +
       '</div>'
     );
   }
@@ -9557,69 +9751,82 @@
     var items;
 
     if (slotType === 'home-mid-leaderboard') {
-      items = pickRelevantProducts(2, { diverseCategories: true });
+      items = pickRelevantProducts(6, { diverseCategories: true });
       if (!items.length) return;
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
-          renderMetaBar(lang, 'CURATED AI HARDWARE & BOOKS', 'AI 算力硬件与技术书单精选', true) +
-          '<div class="ainr-grid-2">' +
-            items.map(function (it) { return renderHorizontalCard(it, lang, false); }).join('') +
+          '<div class="ainr-showcase">' +
+            renderMetaBar(lang, 'CURATED AI HARDWARE, GADGETS & BOOKS', '精选 AI 智能硬件 · 潮流数码与技术书单', false) +
+            '<div class="ainr-grid-6">' +
+              items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+            '</div>' +
           '</div>' +
         '</div>';
       return;
     }
 
     if (slotType === 'home-bottom-native') {
-      items = pickRelevantProducts(2, { diverseCategories: true });
-      var sponsor = SPONSOR_CARD[lang] || SPONSOR_CARD.en;
-      items.push(sponsor);
+      items = pickRelevantProducts(6, { diverseCategories: true });
+      if (!items.length) return;
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
-          renderMetaBar(lang, 'RECOMMENDED AI INFRASTRUCTURE, BOOKS & PARTNERS', '精选 AI 硬件装备、必读书籍与生态合作', true) +
-          '<div class="ainr-grid-3">' +
-            items.map(function (it) { return renderGridCard(it, lang); }).join('') +
+          '<div class="ainr-showcase">' +
+            renderMetaBar(lang, 'RECOMMENDED AI DEVICES, COMPUTE & READING', '热门 AI 数码装备 · 算力硬件与精选读物', true) +
+            '<div class="ainr-grid-6">' +
+              items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+            '</div>' +
           '</div>' +
         '</div>';
       return;
     }
 
     if (slotType === 'article-bottom' || slotType === 'tool-native') {
-      items = pickRelevantProducts(2, { diverseCategories: true });
+      items = pickRelevantProducts(6, { diverseCategories: true });
       if (!items.length) return;
       var headingEn = slotType === 'tool-native'
-        ? 'RECOMMENDED AI GEAR & ENGINEERING READS'
-        : 'RELATED AI HARDWARE & FURTHER READING';
+        ? 'RECOMMENDED AI HARDWARE, GADGETS & READS'
+        : 'RELATED AI HARDWARE, DIGITAL GEAR & BOOKS';
       var headingZh = slotType === 'tool-native'
-        ? '适配该工具的硬件与进阶书单推荐'
-        : '延伸推荐 · 相关 AI 硬件与技术书单';
+        ? '适配该工具的 AI 硬件、数码与进阶书单'
+        : '延伸精选 · 相关 AI 数码硬件与技术书单';
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
-          renderMetaBar(lang, headingEn, headingZh, true) +
-          '<div class="ainr-grid-2">' +
-            items.map(function (it) { return renderGridCard(it, lang); }).join('') +
+          '<div class="ainr-showcase">' +
+            renderMetaBar(lang, headingEn, headingZh, false) +
+            '<div class="ainr-grid-3">' +
+              items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+            '</div>' +
           '</div>' +
         '</div>';
       return;
     }
 
     if (slotType === 'gateway-card' || slotType === 'mobile-feed-native') {
-      items = pickRelevantProducts(1, {});
+      items = pickRelevantProducts(2, { diverseCategories: true });
       if (!items.length) return;
       el.innerHTML =
         '<div class="ainr-slot ' + (slotType === 'gateway-card' ? 'ainr-theme-dark' : getThemeClass(el)) + '">' +
-          renderMetaBar(lang, 'FEATURED AI PICK', '精选 AI 装备推荐', true) +
-          renderHorizontalCard(items[0], lang, slotType === 'mobile-feed-native') +
+          '<div class="ainr-showcase">' +
+            renderMetaBar(lang, 'FEATURED AI GEAR', '精选 AI 数码装备', false) +
+            '<div class="ainr-grid-2">' +
+              items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+            '</div>' +
+          '</div>' +
         '</div>';
       return;
     }
 
-    // Default: article-native / daily-native (single contextual match, never repeated in article-bottom)
-    items = pickRelevantProducts(1, {});
+    // Default: article-native / daily-native (3 photo-first contextual picks, 0 duplicates with article-bottom)
+    items = pickRelevantProducts(3, { diverseCategories: true });
     if (!items.length) return;
     el.innerHTML =
       '<div class="ainr-slot ' + getThemeClass(el) + '">' +
-        renderMetaBar(lang, 'CONTEXTUAL AI GEAR & BOOK PICK', '结合本文主题精选 · 硬件与技术读物', true) +
-        renderHorizontalCard(items[0], lang, false) +
+        '<div class="ainr-showcase">' +
+          renderMetaBar(lang, 'RELATED AI HARDWARE & PICKS', '结合本文主题精选 · AI 硬件与好物', false) +
+          '<div class="ainr-grid-strip">' +
+            items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
+          '</div>' +
+        '</div>' +
       '</div>';
   }
 
@@ -9639,7 +9846,6 @@
   }
 
   function init() {
-    // Auto-mount Page Language Engine on static article detail pages (/news/..., /tools/..., /articles/...)
     if (typeof window !== 'undefined' && !window.PageLanguage && !document.getElementById('site-lang-container') && !document.getElementById('mobile-feed')) {
       if (!document.querySelector('script[src*="page_language.js"]')) {
         var plScript = document.createElement('script');

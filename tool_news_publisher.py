@@ -697,7 +697,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
       </div>
     </article>
 
-    <aside aria-label="Partner Spotlight" data-ad-slot="tool-native" class="mt-8 mb-4 min-h-[90px]"></aside>
+    <aside aria-label="Partner Spotlight" data-ad-slot="tool-native" class="mt-9 mb-5 min-h-[380px]"></aside>
 
     {related_html}
 
@@ -1047,7 +1047,7 @@ def format_editorial_paragraphs(
         # In-Content Native Slot: In substantive long-form reading (total >= 4), inject once after paragraph 2
         if total >= 4 and i == 1:
             rendered_elements.append(
-                '<aside aria-label="Partner Spotlight" data-ad-slot="article-native" class="my-8 min-h-[90px]"></aside>'
+                '<aside aria-label="Partner Spotlight" data-ad-slot="article-native" class="my-9 min-h-[220px]"></aside>'
             )
 
     return "\n\n".join(rendered_elements)
@@ -1502,7 +1502,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             {p_html}
           </div>
           {excerpt_notice_html}
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-4 min-h-[90px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
         </section>
         """
 
