@@ -1,40 +1,98 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-25 22:03:21 UTC",
+  "generated_at": "2026-11-25 22:19:33 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-25 22:03:21 UTC",
+      "updated_at": "2026-11-25 22:19:33 UTC",
       "headline_item": {
-        "id": "fc7a8ad031846119",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "美多州立法封禁AI聊天机器人玩具",
-        "title_en": "NY Gov. Kathy Hochul signs a bill banning AI chatbot toys for five years, starting in February; California Gov. Gavin Newsom signed a four-year ban in September (NBC News)",
-        "source": "NBC News",
-        "author": "NBC News",
-        "cover_image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-03/260323-ai-toys-mn-1045-1417a0.jpg",
-        "image_url": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2026-03/260323-ai-toys-mn-1045-1417a0.jpg",
-        "published_at": "2026-11-25T21:30:02+00:00",
-        "url": "https://www.nbcnews.com/tech/tech-news/new-york-governor-kathy-hochul-sign-ai-toy-ban-law-rcna610962",
-        "event_summary_zh": "纽约州州长凯西·霍楚尔签署法案，禁止制造与销售AI聊天机器人玩具，为期五年，生效日期为明年二月",
-        "event_summary_en": "New York Governor Kathy Hochul signed a five-year ban on the manufacturing and sale of toys powered by generative AI chatbots, effective this coming February. This move follows California, further expanding state-level regulatory restrictions on AI-integrated consumer products for children.",
+        "id": "aa02e4fe624e4cc4",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "美国出口限制收紧，AI数据中心融资受阻",
+        "title_en": "Billions in Data Center Deals Grind to Halt After AI Chip Curbs",
+        "source": "Bloomberg",
+        "author": "Megawati Wijaya",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
+        "image_url": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
+        "published_at": "2026-11-25T22:05:01+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-25/billions-in-data-center-deals-grind-to-halt-after-ai-chip-curbs",
+        "event_summary_zh": "美国针对东南亚及全球数据中心的AI芯片出口新规，导致多项大型算力项目融资搁置",
+        "event_summary_en": "Recent US export restrictions requiring licenses for advanced AI chips shipped to Southeast Asia and Brazil have halted multi-billion dollar data center financing deals. Lenders are reassessing exposure to facilities serving Chinese firms, including Bridge Data Centres, Digital Halo, and Aolani, due to heightened regulatory uncertainty.",
         "core_facts_zh": [
-          "【核心事件】纽约州州长凯西·霍楚尔（Kathy Hochul）在美国纽约州：签署法案禁止AI聊天机器人玩具的制造与销售，为期五年。",
-          "【起因与机理】针对AI玩具可能存在的隐私泄露、心理操纵及儿童交互安全性担忧。",
-          "【调查与监管诉求】法案禁止五年内AI玩具制造与销售。",
-          "【各方立场与态度】继加州后全美主要消费市场对AI交互玩具的严管趋势。"
+          "【核心事件】贝恩资本（Bain Capital）、Bridge Data Centres、Digital Halo、Aolani、美国商务部在东南亚地区（马来西亚、新加坡等）数据中心融资市场：出口限制导致针对中资客户的算力基建贷款出现违约风险，多家银行暂停融资审核",
+          "【起因与机理】美国防范中资企业绕道海外远程获取算力，将出口管制触角延伸至第三方国家的算力基础设施",
+          "【关键数据与实测】数据中心需在90天内获得独立许可，以维持对中资客户的算力租用服务。",
+          "【涉及范围与推进】贝恩资本等机构涉及中资算力租赁的数据中心融资被迫叫停或重新评估。"
         ],
         "core_facts_en": [
-          "[Core Event] Governor of New York, Kathy Hochul (New York State, USA): Signed a bill banning the manufacture and sale of AI chatbot toys for five years.",
-          "[Root Cause & Mechanism] Concerns regarding data privacy, psychological manipulation, and safety of AI-child interactions.",
-          "[Key Fact Detail] Five-year ban on manufacture and sales of AI toys.",
-          "[Official Stance & Demand] Expansion of restrictive state-level policy following California."
+          "[Core Event] Bain Capital, Bridge Data Centres, Digital Halo, Aolani, US Department of Commerce: Export restrictions caused funding halts for projects serving Chinese clients, forcing lenders to reassess credit risk.",
+          "[Root Cause & Mechanism] US move to curb Chinese companies from accessing remote compute power via third-party offshore data centers.",
+          "[Key Metrics] Some lenders have delayed moving forward as they do more due diligence on an upsized $6.",
+          "[Key Position & Outlook] Data centers have a 90-day grace period to obtain licenses for existing services to Chinese entities."
         ],
-        "industry_impact_zh": "该监管动向标志着AI产品合规重心已从通用模型算法治理转向特定场景的终端准入，将显著增加消费类硬件厂商的合规成本。厂商若无法构建严苛的端侧数据脱敏与对话审核机制，恐将在北美市场面临大范围的市场准入阻碍。",
-        "industry_impact_en": "This regulatory trend signals a shift from broad model governance to scenario-specific hardware entry barriers, significantly raising compliance costs for consumer electronics vendors. Firms failing to implement rigorous edge-side data sanitization and dialogue content filtering will face severe market access challenges in North America."
+        "industry_impact_zh": "此举标志着美方对AI硬件的管控逻辑已从单一“卖方限制”转向针对“算力租用生态”的全方位围堵，将离岸数据中心变为监管高压区。未来中资AI企业在海外部署算力集群的合规成本将呈指数级增长，供应链金融机构将因地缘政治风险溢价而大幅收缩对东南亚算力基建的授信规模。",
+        "industry_impact_en": "The shift from hardware export bans to monitoring remote compute access marks a strategic expansion of US surveillance into the offshore data center ecosystem. Expect capital flight from Southeast Asian compute projects as financial institutions factor in uncontrollable regulatory risks, significantly raising the barriers for Chinese firms building offshore AI infrastructure."
       },
       "headlines": [
+        {
+          "id": "aa02e4fe624e4cc4",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "美国出口限制收紧，AI数据中心融资受阻",
+          "title_en": "Billions in Data Center Deals Grind to Halt After AI Chip Curbs",
+          "source": "Bloomberg",
+          "author": "Megawati Wijaya",
+          "cover_image": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
+          "image_url": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
+          "published_at": "2026-11-25T22:05:01+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-25/billions-in-data-center-deals-grind-to-halt-after-ai-chip-curbs",
+          "event_summary_zh": "美国针对东南亚及全球数据中心的AI芯片出口新规，导致多项大型算力项目融资搁置",
+          "event_summary_en": "Recent US export restrictions requiring licenses for advanced AI chips shipped to Southeast Asia and Brazil have halted multi-billion dollar data center financing deals. Lenders are reassessing exposure to facilities serving Chinese firms, including Bridge Data Centres, Digital Halo, and Aolani, due to heightened regulatory uncertainty.",
+          "core_facts_zh": [
+            "【核心事件】贝恩资本（Bain Capital）、Bridge Data Centres、Digital Halo、Aolani、美国商务部在东南亚地区（马来西亚、新加坡等）数据中心融资市场：出口限制导致针对中资客户的算力基建贷款出现违约风险，多家银行暂停融资审核",
+            "【起因与机理】美国防范中资企业绕道海外远程获取算力，将出口管制触角延伸至第三方国家的算力基础设施",
+            "【关键数据与实测】数据中心需在90天内获得独立许可，以维持对中资客户的算力租用服务。",
+            "【涉及范围与推进】贝恩资本等机构涉及中资算力租赁的数据中心融资被迫叫停或重新评估。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Bain Capital, Bridge Data Centres, Digital Halo, Aolani, US Department of Commerce: Export restrictions caused funding halts for projects serving Chinese clients, forcing lenders to reassess credit risk.",
+            "[Root Cause & Mechanism] US move to curb Chinese companies from accessing remote compute power via third-party offshore data centers.",
+            "[Key Metrics] Some lenders have delayed moving forward as they do more due diligence on an upsized $6.",
+            "[Key Position & Outlook] Data centers have a 90-day grace period to obtain licenses for existing services to Chinese entities."
+          ],
+          "industry_impact_zh": "此举标志着美方对AI硬件的管控逻辑已从单一“卖方限制”转向针对“算力租用生态”的全方位围堵，将离岸数据中心变为监管高压区。未来中资AI企业在海外部署算力集群的合规成本将呈指数级增长，供应链金融机构将因地缘政治风险溢价而大幅收缩对东南亚算力基建的授信规模。",
+          "industry_impact_en": "The shift from hardware export bans to monitoring remote compute access marks a strategic expansion of US surveillance into the offshore data center ecosystem. Expect capital flight from Southeast Asian compute projects as financial institutions factor in uncontrollable regulatory risks, significantly raising the barriers for Chinese firms building offshore AI infrastructure."
+        },
+        {
+          "id": "dea16470e533c2f4",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "谷歌专利揭示AI实时生成个性化视频野心",
+          "title_en": "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future",
+          "source": "The Verge AI",
+          "author": "Charles Pulliam-Moore",
+          "cover_image": "https://ainewsradar.xyz/images/verge_6d162717023fa73f.png",
+          "image_url": "https://ainewsradar.xyz/images/verge_6d162717023fa73f.png",
+          "published_at": "2026-11-25T21:51:26+00:00",
+          "url": "https://www.theverge.com/entertainment/1042221/google-my-channel-ai-video-patent",
+          "event_summary_zh": "谷歌申请的“My Channel”专利拟利用用户数据实时生成AI定制化视频流",
+          "event_summary_en": "Google's 'My Channel' patent details a system that utilizes user demographic, geolocation, and viewing history to generate personalized AI-driven video feeds. The technology includes concepts for creating digital avatars of users to feature them as protagonists in AI-generated narrative content.",
+          "core_facts_zh": [
+            "【核心事件】谷歌（Alphabet Inc.）在专利公开与技术研发领域：申请涉及基于用户多维度行为数据实时生成AI定制内容及用户数字替身的专利",
+            "【起因与机理】旨在通过深度定制化的AI驱动娱乐内容，提升用户留存与广告精准投放效率",
+            "【核心事实细节】利用用户年龄、位置、历史数据实时生成定制化内容。",
+            "【各方立场与态度】旨在深度整合流媒体数据，强化AI广告投放的精准性。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Google: Filed a patent for real-time AI video generation based on user behavior and the creation of personalized digital avatars.",
+            "[Root Cause & Mechanism] To increase user engagement and advertising precision through highly customized AI-generated entertainment.",
+            "[Key Fact Detail] Uses demographic, geolocation, and history data to generate personalized video content in real-time.",
+            "[Key Position & Outlook] Aims to integrate streaming data to enhance AI-driven advertisement precision."
+          ],
+          "industry_impact_zh": "此项专利展示了流媒体平台向“生成式个人剧场”转型的极进策略，通过将用户数据彻底转化为生产力要素，本质上是试图通过垄断消费端的审美习惯来重塑内容版权逻辑。虽然技术落地面临巨大的版权合规与用户隐私道德压力，但其“以人为本”的个性化生成模式将直接冲击传统影视内容分发的垄断地位。",
+          "industry_impact_en": "The patent signals an aggressive transition toward 'generative personalized theaters,' where user data becomes the primary feedstock for content production. By monopolizing aesthetic consumption habits, Google is attempting to rewrite content distribution economics, though the model faces significant ethical, privacy, and copyright headwinds."
+        },
         {
           "id": "fc7a8ad031846119",
           "tag_zh": "📰 业界动态",
@@ -63,70 +121,12 @@
           ],
           "industry_impact_zh": "该监管动向标志着AI产品合规重心已从通用模型算法治理转向特定场景的终端准入，将显著增加消费类硬件厂商的合规成本。厂商若无法构建严苛的端侧数据脱敏与对话审核机制，恐将在北美市场面临大范围的市场准入阻碍。",
           "industry_impact_en": "This regulatory trend signals a shift from broad model governance to scenario-specific hardware entry barriers, significantly raising compliance costs for consumer electronics vendors. Firms failing to implement rigorous edge-side data sanitization and dialogue content filtering will face severe market access challenges in North America."
-        },
-        {
-          "id": "dec9d4e18353ca87",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达支付2.9亿美元和解加密货币销售诉讼",
-          "title_en": "Nvidia Agrees to Pay $290M to Settle Investor Lawsuit Over Crypto Mining Sales",
-          "source": "Reuters",
-          "author": "Reuters",
-          "cover_image": "https://ainewsradar.xyz/images/reuters_85d07dbb40b982ce.jpg",
-          "image_url": "https://ainewsradar.xyz/images/reuters_85d07dbb40b982ce.jpg",
-          "published_at": "2026-11-25T21:15:01+00:00",
-          "url": "https://www.reuters.com/legal/government/nvidia-agrees-settle-2018-us-investor-class-action-for-290-million-2026-11-25/",
-          "event_summary_zh": "英伟达同意支付2.9亿美元，以和解关于其在2017-2018年期间误导股东隐瞒加密货币挖矿对GPU营收贡献的集体诉讼",
-          "event_summary_en": "Nvidia has agreed to a $290 million settlement to resolve a class-action lawsuit filed by investors, who alleged the company misled shareholders regarding the proportion of gaming GPU revenue driven by crypto mining during the 2017 boom. The case, which survived multiple legal challenges including Supreme Court dismissal of Nvidia's appeal, awaits preliminary court approval.",
-          "core_facts_zh": [
-            "【核心事件】英伟达(Nvidia)、投资者集体诉讼代表(E. Ohman J:or Fonder AB)在美国联邦地区法院：支付2.9亿美元达成和解，解决关于显卡销售构成披露违规的诉讼",
-            "【起因与机理】2017年加密市场繁荣期英伟达掩盖了挖矿业务对游戏产品线的营收推动",
-            "【关键数据与实测】英伟达与投资者达成2.9亿美元和解协议，针对2018年起诉讼，指控该公司在2017年加密货币繁荣期内，未明确披露GeForce游戏显卡营收中矿工采购占比。",
-            "【行业影响与走向】行业影响：确立了硬件商针对高波动性需求类别的财报披露合规标准。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Nvidia, E. Ohman J:or Fonder AB (lead plaintiff) (US Federal District Court): $290 million settlement to resolve disclosure-related litigation",
-            "[Root Cause & Mechanism] Alleged failure to disclose crypto-mining-driven sales within gaming revenue during the 2017 crypto boom",
-            "[Key Metrics] Nvidia has agreed to a $290 million settlement to resolve a class-action lawsuit filed by investors, who alleged the company misled shareholders regarding the proportion of gaming GPU revenue driven by crypto mining during the 2017 boom.",
-            "[Official Stance & Demand] Industry outlook: Sets a strict disclosure precedent for hardware revenue reporting amidst volatile demand."
-          ],
-          "industry_impact_zh": "该判例凸显了硬件厂商在跨周期需求波动时的信息披露合规红线，即严禁将波动极大的投机性需求混淆为稳健的消费级产品增长。此举将迫使英伟达及同类AI计算平台在财务报告中对不同应用场景下的产能归属进行更严苛的审计与拆分。",
-          "industry_impact_en": "This case underscores a critical compliance boundary for hardware manufacturers: conflating volatile speculative demand with steady consumer growth is a legal liability. It forces AI compute providers to implement more granular, auditable revenue segmentation between distinct compute-use categories to satisfy market transparency requirements."
-        },
-        {
-          "id": "de691b40864898f1",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "黄仁勋重掌英伟达，美司法部排除其国家安全风险",
-          "title_en": "How the Trump administration determined Jensen Huang is not a national security threat",
-          "source": "Reuters",
-          "author": "Dan Rosenzweig-Ziff, Erin Banco, Jonathan Landay and Andrew Goudsward",
-          "cover_image": "https://ainewsradar.xyz/images/reuters_f419e48bc11447ec.jpg",
-          "image_url": "https://ainewsradar.xyz/images/reuters_f419e48bc11447ec.jpg",
-          "published_at": "2026-11-25T21:01:00+00:00",
-          "url": "https://www.reuters.com/business/us-justice-department-did-not-open-probe-into-jensen-huang-before-reinstatement-2026-11-25/",
-          "event_summary_zh": "美司法部长Todd Blanche认定英伟达CEO黄仁勋无违反国家安全法律，以此推动其职务恢复，但面临国会关于审查程序的持续质疑",
-          "event_summary_en": "US Attorney General Todd Blanche concluded that Nvidia CEO Jensen Huang poses no national security risk without conducting a formal investigation, relying on findings from probe into clients like Super Micro and Megaspeed. This decision facilitated Huang's reinstatement by the Trump administration, despite bipartisan Congressional pushback demanding more rigorous scrutiny ahead of his scheduled testimony.",
-          "core_facts_zh": [
-            "【核心事件】美国司法部长Todd Blanche、英伟达CEO黄仁勋在美国司法部（DOJ）与国会听证会：排除黄仁勋的国家安全威胁定性，通过程序合规背书促其复职",
-            "【起因与机理】受特朗普行政干预，需平衡地缘政治压力与芯片行业领导权",
-            "【调查与监管诉求】美司法部基于客户合规调查结论，排除黄仁勋个人违规嫌疑。",
-            "【行业影响与走向】下周国会听证会将成为评估黄仁勋与英伟达风险敞口的关键节点。"
-          ],
-          "core_facts_en": [
-            "[Core Event] AG Todd Blanche, CEO Jensen Huang: Cleared Huang of national security risks to expedite reinstatement",
-            "[Root Cause & Mechanism] Presidential mandate amidst ongoing client-side export investigations",
-            "[Regulatory & Investigation Focus] DOJ clears CEO based on client export compliance review.",
-            "[Industry Impact & Outlook] Upcoming testimony serves as critical scrutiny point for risk exposure."
-          ],
-          "industry_impact_zh": "此事件显示美国监管机构在高端芯片产业链中采用了一种‘剥离式审查’逻辑：即将CEO个人合规与企业出口违规行为物理切割，以保障英伟达作为美国技术霸权的战略地位。然而，这种行政化的快速背书将导致后续出口管制体系中‘灰度地带’的政治博弈加剧，芯片巨头或将被迫承担更重的供应链溯源监控责任。",
-          "industry_impact_en": "This incident highlights a 'decoupling' regulatory logic where individual executive compliance is separated from corporate export violations to protect Nvidia's strategic importance. This politicized oversight will likely increase the burden of supply chain traceability for tech giants while fueling further legislative pressure on export control enforcement."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-25 22:03:21 UTC",
+      "updated_at": "2026-11-25 22:19:33 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-25 22:03:21 UTC",
+      "updated_at": "2026-11-25 22:19:33 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,7 +446,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "22.8k",
+          "stars": "22.9k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
