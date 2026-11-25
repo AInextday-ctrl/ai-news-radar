@@ -316,12 +316,116 @@ CURATED_BLOOMBERG_STORIES = {
 }
 
 
+_BLOOMBERG_STOPWORDS: Set[str] = {
+    "the", "and", "for", "with", "from", "into", "over", "that", "this", "after",
+    "what", "will", "have", "more", "about", "been", "says", "said", "amid", "than",
+    "their", "they", "when", "where", "how", "why", "who", "its", "are", "was",
+    "were", "has", "had", "not", "but", "all", "out", "can", "could", "would",
+    "should", "may", "might", "also", "other", "new", "won", "can", "t", "s",
+    "bloomberg", "report", "exclusive", "update"
+}
+
+_GENERIC_BLOOMBERG_TITLES: Set[str] = {
+    "bloomberg", "bloomberg.com", "bloomberg news", "bloomberg asia",
+    "bloomberg canada", "bloomberg europe", "bloomberg uk", "bloomberg us",
+    "bloomberg technology", "bloomberg tech", "bloomberg markets",
+    "bloomberg businessweek", "bloomberg business", "bloomberg opinion",
+    "bloomberg law", "rates & bonds", "german rates & bonds", "us stocks",
+    "launch bloomberg links", "trending news", "latest updates",
+}
+
+
+def _slug_tokens(slug: str) -> List[str]:
+    """Extracts meaningful lowercase tokens from a Bloomberg URL slug."""
+    if not slug:
+        return []
+    return [
+        w for w in re.findall(r'[a-z0-9]+', slug.lower())
+        if len(w) > 1 and w not in _BLOOMBERG_STOPWORDS
+    ]
+
+
+def _is_generic_bloomberg_title(title: Optional[str]) -> bool:
+    """Returns True if the title is a generic hub/section name or raw URL rather than an article headline."""
+    if not title or not isinstance(title, str):
+        return True
+    t = re.sub(r'\s+', ' ', html.unescape(title)).strip()
+    if len(t) < 12:
+        return True
+    low = t.lower()
+    if low.startswith("http://") or low.startswith("https://") or "sitemaps/news" in low:
+        return True
+    if low in _GENERIC_BLOOMBERG_TITLES:
+        return True
+    if re.match(r'^bloomberg\s+(?:asia|canada|europe|markets|technology|tech|businessweek|opinion|law|uk|us)\b', low):
+        return True
+    if "trending news, latest updates" in low:
+        return True
+    return False
+
+
+def _has_reuters_contamination(paragraphs: List[str]) -> bool:
+    """Returns True if paragraphs contain Reuters wire datelines or attribution (Rule 1.1)."""
+    if not paragraphs:
+        return False
+    for idx, p in enumerate(paragraphs[:3]):
+        low = str(p or "").lower()
+        if "(reuters)" in low or re.search(r'\breuters\s*[-—–]\s*', low):
+            return True
+        if idx == 0 and re.match(r'^(?:[a-z\s,]+,\s*)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,2}\s*\(reuters\)', low):
+            return True
+    return False
+
+
+def _is_invalid_bloomberg_image(img_url: Optional[str]) -> bool:
+    """Rejects generic Yahoo logos, tiny avatars/thumbnails, Zonebourse icons, and stock placeholders."""
+    if not img_url or not isinstance(img_url, str):
+        return True
+    low = img_url.strip().lower()
+    if not (low.startswith("http://") or low.startswith("https://")):
+        return True
+    bad_tokens = [
+        "bwrite-generic-profile", "author-profile", "avatar", "generic-profile",
+        "profile-240px", "width=44", "height=44", "w=60", "h=60", "headshot",
+        "200x200", "150x150", "100x100", "resizefill_h100", "resize=100",
+        "img_restaurants", "logo", "icon", "favicon", "347aaaafea52bb4acdd65",
+        "zonebourse.com/static", "g.ibtimes.co.uk/img/home/", "shutterstock",
+        "unsplash.com", "pml.png", "techmeme.com/img", "og-default",
+        "bloomberg-bna-brightspot", "grey-placeholder", "scorecardresearch",
+    ]
+    if any(tok in low for tok in bad_tokens):
+        return True
+    if low.endswith(".svg") or low.endswith(".gif"):
+        return True
+    return False
+
+
+def _upgrade_image_url(img_url: str) -> str:
+    """Upgrades known thumbnail CDN query params (e.g. SPH Digital w=240 -> w=1200) to full resolution."""
+    if not img_url:
+        return ""
+    u = img_url.strip()
+    if "cassette.sphdigital.com.sg" in u.lower():
+        u = re.sub(r'([?&])w=\d+', r'\g<1>w=1200', u)
+        u = re.sub(r'([?&])f=webp', r'\g<1>f=jpg', u)
+    return u
+
+
 def _get_from_disk_cache(url: str) -> Optional[Dict[str, Any]]:
     if os.path.exists(_DISK_CACHE_FILE):
         try:
             with open(_DISK_CACHE_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                return data.get(url)
+                if url in data:
+                    return data[url]
+                canon = url.split("?")[0].rstrip("/")
+                if canon in data:
+                    return data[canon]
+                target_slug = extract_bloomberg_slug(url)
+                if target_slug:
+                    for k, v in data.items():
+                        if extract_bloomberg_slug(k) == target_slug:
+                            return v
         except Exception:
             pass
     return None
@@ -335,6 +439,9 @@ def _save_to_disk_cache(url: str, data: Dict[str, Any]) -> None:
             with open(_DISK_CACHE_FILE, "r", encoding="utf-8") as f:
                 current = json.load(f)
         current[url] = data
+        canon = url.split("?")[0].rstrip("/")
+        if canon and canon != url:
+            current[canon] = data
         with open(_DISK_CACHE_FILE, "w", encoding="utf-8") as f:
             json.dump(current, f, ensure_ascii=False, indent=2)
     except Exception:
@@ -465,8 +572,20 @@ def _clean_paragraph(text: str) -> str:
     t = re.sub(r'^[^\.\n]{5,120}\s*\|\s*(?:Bloomberg|Reuters|Getty Images|AP)\s*', '', t, flags=re.I).strip()
     # Strip fused Byline and social share bars, e.g. "By Saritha Rai Bloomberg SHARE/SAVE X Facebook LinkedIn Red ..."
     t = re.sub(r'^(?:By\s+[A-Za-z\s\.\-]{3,40}\s+)?(?:Bloomberg|Reuters)?\s*SHARE/SAVE\s+(?:X|Twitter|Facebook|LinkedIn|Red|Reddit|Email|\s)+', '', t, flags=re.I).strip()
+    # Strip Yahoo Finance / syndication header noise (e.g. "Title Bloomberg News Tue, 24 November 2026 at 2:35 am GMT-7 2 min read 1810.HK -3.2% ...")
+    t = re.sub(
+        r'^.{5,180}?(?:Bloomberg\s+News|[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*),?\s+\d{4}(?:\s+at\s+\d{1,2}:\d{2}\s*(?:AM|PM)?\s*(?:GMT[+-]?\d+|PST|PDT|EST|EDT|UTC|SGT|HKT)?)?(?:\s+\d+\s+min\s+read)?(?:\s+[A-Z0-9\.\-]+\s+[+-]?\d+\.\d+%)*\s*',
+        '',
+        t,
+        flags=re.I
+    ).strip()
+    # Strip "Key Points ... View more" Yahoo Finance summary widget prefix
+    t = re.sub(r'^Key\s+Points\s+.*?(?:…|\.{3})\s*View\s+more\s*', '', t, flags=re.I).strip()
     # Strip standalone leading bylines, e.g. "By Saritha Rai "
     t = re.sub(r'^By\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\s+(?:Bloomberg\s+News\s+)?', '', t).strip()
+    # Strip wire dateline prefixes (never allow Reuters wire attribution in Bloomberg per Rule 1.1)
+    if re.search(r'\(Reuters\)\s*[-—–]?|\bREUTERS\s*[-—–]', t):
+        return ""
 
     if not t or len(t) < 15:
         return ""
@@ -491,7 +610,11 @@ def _clean_paragraph(text: str) -> str:
         'subscribe to bloomberg',
         'live tv markets finance economics',
         'all rights reserved',
-        'copyright bloomberg'
+        'copyright bloomberg',
+        'you have reached your maximum number of saved items',
+        'for more articles like this, please visit us at bloomberg.com',
+        'most read from bloomberg',
+        'more stories like this are available on bloomberg.com',
     ]
     if any(np in low for np in noise_phrases):
         return ""
@@ -540,16 +663,22 @@ def resolve_bloomberg_broadcast_media(
     return None
 
 
-def localize_bloomberg_image(img_url: str, slug: str) -> str:
+def localize_bloomberg_image(
+    img_url: str,
+    slug: str,
+    proxies: Optional[Dict[str, str]] = None
+) -> str:
     """
-    Downloads authentic Bloomberg assets.bwbx.io images and caches them in public/images/
+    Downloads authentic Bloomberg/syndication editorial images and caches them in public/images/
     to deliver via self-hosted CDN (https://ainewsradar.xyz/images/...), adhering to Rule 4.1.
+    Returns "" if the image is invalid or on a hotlink-blocked domain that could not be downloaded.
     """
-    if not img_url:
+    if not img_url or _is_invalid_bloomberg_image(img_url):
         return ""
     if "ainewsradar.xyz" in img_url:
         return img_url
 
+    dl_url = _upgrade_image_url(img_url)
     clean_slug = re.sub(r'[^a-zA-Z0-9_-]', '_', slug)[:40].strip('_')
     local_name = f"bloomberg_{clean_slug}.jpg"
     public_img_dir = os.path.join(
@@ -563,19 +692,56 @@ def localize_bloomberg_image(img_url: str, slug: str) -> str:
     if os.path.exists(local_path) and os.path.getsize(local_path) > 5000:
         return f"https://ainewsradar.xyz/images/{local_name}"
 
-    try:
-        import urllib.request
-        req = urllib.request.Request(img_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            if resp.status == 200:
-                data = resp.read()
-                if len(data) > 5000:
-                    with open(local_path, "wb") as f:
-                        f.write(data)
-                    return f"https://ainewsradar.xyz/images/{local_name}"
-    except Exception:
-        pass
-    return img_url
+    if proxies is None:
+        proxies = _get_proxies()
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "image/jpeg,image/png,image/webp,*/*;q=0.8",
+    }
+
+    data = None
+    if HAS_CURL_CFFI and cffi_requests is not None:
+        try:
+            r = cffi_requests.get(dl_url, impersonate="chrome120", headers=headers, proxies=proxies, timeout=10)
+            ctype = (r.headers.get("content-type") or "").lower()
+            if r.status_code == 200 and len(r.content) > 5000 and ("image/" in ctype or not ctype):
+                data = r.content
+        except Exception:
+            pass
+
+    if not data and HAS_REQUESTS and requests is not None:
+        try:
+            r = requests.get(dl_url, headers=headers, proxies=proxies, timeout=10)
+            ctype = (r.headers.get("content-type") or "").lower()
+            if r.status_code == 200 and len(r.content) > 5000 and ("image/" in ctype or not ctype):
+                data = r.content
+        except Exception:
+            pass
+
+    if not data:
+        try:
+            opener = urllib.request.build_opener(urllib.request.ProxyHandler(proxies)) if proxies else urllib.request.build_opener()
+            req = urllib.request.Request(dl_url, headers=headers)
+            with opener.open(req, timeout=10) as resp:
+                ctype = (resp.headers.get("Content-Type") or "").lower()
+                if resp.status == 200 and ("image/" in ctype or not ctype):
+                    raw = resp.read()
+                    if len(raw) > 5000:
+                        data = raw
+        except Exception:
+            pass
+
+    if data:
+        with open(local_path, "wb") as f:
+            f.write(data)
+        return f"https://ainewsradar.xyz/images/{local_name}"
+
+    # Do not leak hotlink-blocked external CDN URLs if local caching failed
+    hotlink_blocked = ("bwbx.io", "yimg.com", "yahoo.com", "mcclatchy-wires.com", "bloomberglaw.com")
+    if any(hb in dl_url.lower() for hb in hotlink_blocked):
+        return ""
+    return dl_url
 
 
 def resolve_bloomberg_image_from_syndication(
@@ -618,8 +784,8 @@ def resolve_bloomberg_image_from_syndication(
                                 og_img = re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']', p_resp.text, re.I)
                                 if og_img:
                                     cand = og_img.group(1).strip()
-                                    if "bwbx.io" in cand or "bloomberg" in cand:
-                                        localized = localize_bloomberg_image(cand, slug)
+                                    if ("bwbx.io" in cand or "bloomberg" in cand) and not _is_invalid_bloomberg_image(cand):
+                                        localized = localize_bloomberg_image(cand, slug, proxies=proxies)
                                         return localized or cand
         except Exception:
             pass
@@ -634,7 +800,8 @@ def resolve_authentic_bloomberg_headline(
 ) -> tuple[Optional[str], Optional[str]]:
     """
     Resolves the exact authentic Bloomberg editorial headline and publication date
-    by querying Google News RSS for the Bloomberg article.
+    by querying Google News RSS with both exact slug and concise entity tokens,
+    rejecting generic section/hub titles and enforcing slug token alignment.
     """
     if not slug:
         return None, None
@@ -644,31 +811,57 @@ def resolve_authentic_bloomberg_headline(
         cur = CURATED_BLOOMBERG_STORIES[slug]
         return cur.get("title"), cur.get("published_at")
 
-    search_query = f'site:bloomberg.com "{slug}"'
-    rss_url = f"https://news.google.com/rss/search?q={urllib.parse.quote(search_query)}&hl=en-US&gl=US&ceid=US:en"
+    slug_toks = _slug_tokens(slug)
+    short_phrase = " ".join(slug_toks[:5]) if slug_toks else slug.replace("-", " ")
+    queries = [f'site:bloomberg.com "{slug}"']
+    if short_phrase:
+        queries.append(f"site:bloomberg.com {short_phrase}")
+        queries.append(f"{short_phrase} bloomberg")
+
+    min_overlap = max(2, min(3, len(slug_toks) // 2)) if slug_toks else 1
+    best_title: Optional[str] = None
+    best_date: Optional[str] = None
+    best_score = 0
 
     try:
         import httpx
         proxy_url = proxies.get("http") if proxies else None
-        with httpx.Client(proxy=proxy_url, follow_redirects=True, timeout=5) as client:
-            resp = client.get(rss_url)
-            if resp.status_code == 200:
-                root = ET.fromstring(resp.content)
-                items = root.findall('.//item')
-                for it in items:
-                    s = (it.findtext('source') or '').lower()
-                    t = it.findtext('title') or ''
-                    d = it.findtext('pubDate') or ''
-                    if 'bloomberg' in s or 'bloomberg' in t.lower():
-                        clean_t = re.sub(r'\s*-\s*Bloomberg(?:\.com)?\s*$', '', t, flags=re.I).strip()
-                        if clean_t:
-                            return clean_t, d
-    except Exception:
-        pass
+        with httpx.Client(proxy=proxy_url, follow_redirects=True, timeout=6) as client:
+            for q in queries:
+                rss_url = f"https://news.google.com/rss/search?q={urllib.parse.quote(q)}&hl=en-US&gl=US&ceid=US:en"
+                try:
+                    resp = client.get(rss_url)
+                    if resp.status_code != 200:
+                        continue
+                    root = ET.fromstring(resp.content)
+                    for it in root.findall('.//item'):
+                        s = (it.findtext('source') or '').lower()
+                        t = it.findtext('title') or ''
+                        d = it.findtext('pubDate') or ''
+                        if 'bloomberg law' in s or 'bloomberg law' in t.lower():
+                            continue
+                        if 'bloomberg' not in s and 'bloomberg' not in t.lower():
+                            continue
+                        clean_t = re.sub(r'\s*[-|]\s*Bloomberg(?:\.com)?\s*$', '', t, flags=re.I).strip()
+                        clean_t = re.sub(r'^(?:Exclusive|Opinion|Corrected)\s*[|:\-]\s*', '', clean_t, flags=re.I).strip()
+                        if _is_generic_bloomberg_title(clean_t):
+                            continue
+                        t_words = set(re.findall(r'[a-z0-9]+', clean_t.lower()))
+                        overlap = sum(1 for tok in slug_toks if tok in t_words)
+                        if slug_toks and overlap < min_overlap:
+                            continue
+                        if overlap > best_score:
+                            best_score = overlap
+                            best_title = clean_t
+                            best_date = d
+                    if best_title and best_score >= max(3, len(slug_toks) // 2):
+                        break
+                except Exception:
+                    continue
     except Exception:
         pass
 
-    return None, None
+    return best_title, best_date
 
 
 def resolve_bloomberg_syndicated_fulltext(
@@ -677,154 +870,262 @@ def resolve_bloomberg_syndicated_fulltext(
     proxies: Optional[Dict[str, str]] = None
 ) -> Optional[Dict[str, Any]]:
     """
-    Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:
-    When PerimeterX blocks direct bloomberg.com HTTP access, queries global news wire networks
-    (Bing News RSS / open syndication networks) for the Bloomberg slug and headline to discover authorized
-    full-text syndication mirrors (e.g. Business Standard, The Japan Times, MSN, CBS News, The Verge, Yahoo Finance, BNN Bloomberg).
-    Systematically filters out financial rating scrapers, boilerplate noise, and trailing reading recommendations.
-    Scores and prioritizes candidates with authentic HD editorial photography.
+    Tier-3 Automated Multi-Channel Syndication Wire Penetration for Bloomberg articles:
+    When PerimeterX blocks direct bloomberg.com HTTP access, queries both Google News RSS
+    (with googlenewsdecoder) and Bing News RSS using concise entity queries derived from
+    the slug and verified headline to discover authorized full-text syndication mirrors
+    (e.g. The Business Times, Yahoo Finance, BNN Bloomberg, Business Standard, The Japan Times,
+    The Straits Times, AFR, The Economic Times, MSN, CBS News).
+    Enforces strict topic alignment, zero Reuters wire contamination, zero paywall/login noise,
+    and authentic HD editorial photography localization.
     """
     if not slug and not title:
         return None
 
-    query_keywords = title or slug.replace('-', ' ')
-    clean_q = re.sub(r'^(?:US|Report|Scoop|Exclusive)[:\s]+', '', query_keywords, flags=re.I).strip()
+    slug_toks = _slug_tokens(slug)
+    valid_title = "" if _is_generic_bloomberg_title(title) else title
+    clean_q = re.sub(r'^(?:US|Report|Scoop|Exclusive)[:\s]+', '', valid_title, flags=re.I).strip()
     clean_q_unquoted = re.sub(r'[\'\"‘’“”]', '', clean_q).strip()
+    title_toks = [
+        w for w in re.findall(r'[a-z0-9]+', clean_q_unquoted.lower())
+        if len(w) > 1 and w not in _BLOOMBERG_STOPWORDS
+    ]
 
-    # Generate cascade candidate search queries
+    # Reference token set prioritizes slug tokens + verified non-generic title tokens
+    ref_tokens = list(dict.fromkeys(slug_toks + title_toks))
+
+    # Generate concise cascade search queries (short entity queries avoid RSS zero-result walls)
     candidate_queries = []
+    if len(title_toks) >= 3:
+        candidate_queries.append(" ".join(title_toks[:5]))
+    if len(slug_toks) >= 3:
+        candidate_queries.append(" ".join(slug_toks[:5]))
     if clean_q_unquoted:
         words = clean_q_unquoted.split()
-        if len(words) > 7:
-            candidate_queries.append(" ".join(words[:7]))
-        candidate_queries.append(clean_q_unquoted[:60])
-    if slug:
-        candidate_queries.append(slug.replace('-', ' ')[:60])
+        if len(words) > 6:
+            candidate_queries.append(" ".join(words[:6]))
+        elif len(words) >= 3:
+            candidate_queries.append(clean_q_unquoted[:60])
 
-    seen_queries = set()
+    seen_queries: Set[str] = set()
     candidate_queries = [q for q in candidate_queries if q and q not in seen_queries and not seen_queries.add(q)]
+    if not candidate_queries and slug:
+        candidate_queries = [slug.replace('-', ' ')[:60]]
 
     import httpx
     from article_extractor import ArticleExtractor
     proxy_url = proxies.get("http") if proxies else None
 
-    def _is_invalid_image(img_url: Optional[str]) -> bool:
-        if not img_url:
-            return True
-        low = str(img_url).lower()
-        if any(k in low for k in ['bwrite-generic-profile', 'author-profile', 'avatar', 'generic-profile', 'profile-240px', 'width=44', 'height=44', 'headshot']):
-            return True
-        if any(k in low for k in ['200x200', '150x150', '100x100', 'img_restaurants', 'logo', 'icon', 'favicon']):
-            return True
-        if low.endswith('.svg') or low.endswith('.gif'):
-            return True
-        return False
+    BLOCKED_DOMAINS = (
+        'bloomberg.com', 'bloomberg.net', 'bloomberglaw.com', 'reuters.com',
+        'reutersagency.com', 'wsj.com', 'ft.com', 'barrons.com', 'nytimes.com',
+        'washingtonpost.com', 'economist.com', 'theinformation.com',
+        'marketscreener.com', 'zonebourse.com', 'streetinsider.com',
+        'investing.com', 'finviz.com', 'seekingalpha.com', 'benzinga.com',
+        '247wallst.com', 'fool.com', 'substack.com'
+    )
+    BLOCKED_SOURCES = (
+        'bloomberg.com', 'bloomberg law', 'reuters', 'wsj', 'wall street journal',
+        'financial times', 'barron', 'new york times', 'washington post',
+        'the economist', 'the information', 'marketscreener', 'zonebourse',
+        'streetinsider', 'investing.com', 'finviz', 'seeking alpha', 'benzinga',
+        '24/7 wall st', 'motley fool', 'substack', 'prnewswire', 'business wire'
+    )
+    TRUSTED_SYND_SCORES = {
+        'business times': 45, 'businesstimes': 45, 'straitstimes': 40, 'straits times': 40,
+        'bnn bloomberg': 40, 'bnnbloomberg': 40, 'business standard': 35, 'business-standard': 35,
+        'japan times': 35, 'japantimes': 35, 'yahoo': 35, 'msn': 30,
+        'the edge': 25, 'economic times': 25, 'economictimes': 25, 'afr': 25,
+        'cbs news': 20, 'cbsnews': 20, 'the verge': 20, 'theverge': 20,
+        'techcrunch': 20, 'aol': 15, 'digg': 15, 'grafa': 10, 'bol news': 10
+    }
+
+    min_title_overlap = max(2, min(4, len(ref_tokens) // 2)) if ref_tokens else 1
+    rss_candidates: List[Tuple[int, str, str, str]] = []
+    seen_rss_links: Set[str] = set()
+
+    def _collect_rss_candidates(rss_url: str, is_gnews: bool) -> None:
+        try:
+            with httpx.Client(proxy=proxy_url, timeout=8, follow_redirects=True) as client:
+                resp = client.get(rss_url, headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                })
+                if resp.status_code != 200:
+                    return
+                root = ET.fromstring(resp.content)
+                for it in root.findall('.//item')[:15]:
+                    it_title = (it.findtext('title') or '').strip()
+                    it_src = (it.findtext('source') or '').strip()
+                    raw_link = (it.findtext('link') or '').strip()
+                    if not raw_link:
+                        continue
+                    actual_url = raw_link
+                    if not is_gnews and 'url=' in raw_link:
+                        actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
+                    low_src = it_src.lower()
+                    low_url = actual_url.lower()
+                    if any(bs in low_src for bs in BLOCKED_SOURCES):
+                        continue
+                    if not is_gnews and any(bd in low_url for bd in BLOCKED_DOMAINS):
+                        continue
+                    t_toks = set(re.findall(r'[a-z0-9]+', it_title.lower()))
+                    overlap = sum(1 for tok in ref_tokens if tok in t_toks)
+                    if ref_tokens and overlap < min_title_overlap:
+                        continue
+                    if actual_url in seen_rss_links:
+                        continue
+                    seen_rss_links.add(actual_url)
+                    src_bonus = 0
+                    for sk, sc in TRUSTED_SYND_SCORES.items():
+                        if sk in low_src or sk in low_url:
+                            src_bonus = max(src_bonus, sc)
+                    rss_candidates.append((overlap * 25 + src_bonus, actual_url, it_title, it_src))
+        except Exception:
+            pass
+
+    # Query Google News RSS first (highest syndication hit rate), then Bing News RSS
+    for q in candidate_queries[:2]:
+        g_url = f"https://news.google.com/rss/search?q={urllib.parse.quote(q)}&hl=en-US&gl=US&ceid=US:en"
+        _collect_rss_candidates(g_url, is_gnews=True)
+        if len(rss_candidates) >= 6:
+            break
+
+    if len(rss_candidates) < 3:
+        for q in candidate_queries[:2]:
+            b_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(q)}&format=rss"
+            _collect_rss_candidates(b_url, is_gnews=False)
+            if len(rss_candidates) >= 6:
+                break
+
+    rss_candidates.sort(key=lambda x: x[0], reverse=True)
 
     best_candidate: Optional[Dict[str, Any]] = None
     best_score = -1
+    tested = 0
 
-    for search_q in candidate_queries:
-        rss_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(search_q)}&format=rss"
+    for _, raw_cand_url, rss_title, rss_src in rss_candidates:
+        if tested >= 6:
+            break
+        actual_url = raw_cand_url
+        if "news.google.com/" in actual_url:
+            if not HAS_GNEWS_DECODER or googlenewsdecoder is None:
+                continue
+            try:
+                dec = googlenewsdecoder.gnewsdecoder(actual_url)
+                actual_url = dec.get("decoded_url") if isinstance(dec, dict) else dec
+            except Exception:
+                continue
+        if not actual_url or any(bd in actual_url.lower() for bd in BLOCKED_DOMAINS):
+            continue
+
+        tested += 1
         try:
-            with httpx.Client(proxy=proxy_url, timeout=10, follow_redirects=True) as client:
-                resp = client.get(rss_url)
-                if resp.status_code != 200:
+            cand_html = None
+            fetch_headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Referer": "https://www.google.com/",
+            }
+            if HAS_CURL_CFFI and cffi_requests is not None:
+                try:
+                    r_cf = cffi_requests.get(actual_url, impersonate="chrome120", headers=fetch_headers, proxies=proxies, timeout=7)
+                    if r_cf.status_code == 200 and len(r_cf.text) > 1500:
+                        cand_html = r_cf.text
+                except Exception:
+                    pass
+            if not cand_html and HAS_REQUESTS and requests is not None:
+                try:
+                    r_rq = requests.get(actual_url, headers=fetch_headers, proxies=proxies, timeout=7)
+                    if r_rq.status_code == 200 and len(r_rq.text) > 1500:
+                        cand_html = r_rq.text
+                except Exception:
+                    pass
+
+            if not cand_html:
+                continue
+
+            ext = ArticleExtractor.extract_article(actual_url, html_text=cand_html)
+            if ext.get('status') != 'success' or len(ext.get('paragraphs', [])) < 3:
+                continue
+
+            from crawlers.content_filters import has_paywall_or_truncation_noise, clean_article_paragraphs
+            if has_paywall_or_truncation_noise(ext['paragraphs']):
+                continue
+            if _has_reuters_contamination(ext['paragraphs']):
+                continue
+
+            cand_title = ext.get('title') or rss_title or ''
+            cand_sample = (cand_title + " " + " ".join(ext.get('paragraphs', [])[:2])).lower()
+            if ref_tokens:
+                matched_tokens = sum(1 for tok in ref_tokens if tok in cand_sample)
+                if matched_tokens < max(2, int(len(ref_tokens) * 0.35)):
                     continue
-                root = ET.fromstring(resp.content)
-                items = root.findall('.//item')
-                for it in items[:10]:
-                    raw_link = it.findtext('link') or ''
-                    actual_url = raw_link
-                    if 'url=' in raw_link:
-                        actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
-                    if not actual_url:
-                        continue
-                    # Skip hard paywalled Bloomberg news landing pages, paywalled subsidiaries, competitor hard walls,
-                    # and low-quality financial rating scrapers without editorial photography
-                    blocked_domains = [
-                        'bloomberg.com/news/', 'bloomberglaw.com', 'wsj.com', 'ft.com',
-                        'marketscreener.com', 'zonebourse.com', 'streetinsider.com', 'investing.com', 'finviz.com'
-                    ]
-                    if any(pw in actual_url.lower() for pw in blocked_domains):
-                        continue
-                    try:
-                        ext = ArticleExtractor.extract_article(actual_url)
-                        if ext.get('status') == 'success' and len(ext.get('paragraphs', [])) >= 3:
-                            # Pre-check: if raw paragraphs exhibit paywall noise or cut-off ellipses, reject this candidate
-                            from crawlers.content_filters import has_paywall_or_truncation_noise, clean_article_paragraphs
-                            if has_paywall_or_truncation_noise(ext['paragraphs']):
-                                continue
 
-                            # Semantic relevance check: ensure candidate article actually covers the target Bloomberg topic
-                            cand_title = ext.get('title') or it.findtext('title') or ''
-                            cand_sample = (cand_title + " " + " ".join(ext.get('paragraphs', [])[:2])).lower()
-                            q_tokens = set(re.findall(r'[a-z0-9]{3,}', clean_q_unquoted.lower()))
-                            stopwords = {"the", "and", "for", "with", "from", "that", "this", "after", "into", "over", "what", "will", "have", "more", "about", "been"}
-                            sig_tokens = q_tokens - stopwords
-                            if sig_tokens:
-                                matched_tokens = sum(1 for tok in sig_tokens if tok in cand_sample)
-                                if matched_tokens < max(2, int(len(sig_tokens) * 0.35)):
-                                    continue
+            cand_paras = []
+            for p in ext['paragraphs']:
+                cleaned_p = _clean_paragraph(p)
+                if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
+                    cand_paras.append(cleaned_p)
+            cand_paras = clean_article_paragraphs(cand_paras, inline_images=ext.get('inline_images'))
+            if len(cand_paras) < 3 or _has_reuters_contamination(cand_paras):
+                continue
 
-                            cand_paras = []
-                            for p in ext['paragraphs']:
-                                cleaned_p = _clean_paragraph(p)
-                                if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
-                                    cand_paras.append(cleaned_p)
-                            cand_paras = clean_article_paragraphs(cand_paras, inline_images=ext.get('inline_images'))
-                            if len(cand_paras) >= 3:
-                                cand_img = ext.get('cover_image') or ext.get('image_url')
-                                if _is_invalid_image(cand_img):
-                                    cand_img = None
-                                if not cand_img and ext.get('inline_images'):
-                                    for in_img in ext['inline_images']:
-                                        if isinstance(in_img, dict) and in_img.get('url'):
-                                            u = in_img['url']
-                                            if not _is_invalid_image(u):
-                                                cand_img = u
-                                                break
+            cand_img = ext.get('cover_image') or ext.get('image_url')
+            if cand_img and cand_img.startswith('/'):
+                cand_img = urllib.parse.urljoin(actual_url, cand_img)
+            if _is_invalid_bloomberg_image(cand_img):
+                cand_img = None
+            if not cand_img and ext.get('inline_images'):
+                for in_img in ext['inline_images']:
+                    if isinstance(in_img, dict) and in_img.get('url'):
+                        u_in = urllib.parse.urljoin(actual_url, str(in_img['url']))
+                        if not _is_invalid_bloomberg_image(u_in):
+                            cand_img = u_in
+                            break
 
-                                # Extract author byline from candidate
-                                cand_author = None
-                                if ext.get('author') and ext.get('author') != 'Bloomberg News':
-                                    cand_author = ext.get('author')
-                                elif ext.get('paragraphs'):
-                                    m_by = re.search(r'\bBy\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b', ext['paragraphs'][0])
-                                    if m_by:
-                                        cand_author = m_by.group(1).strip()
+            cand_author = None
+            if ext.get('author') and ext.get('author') != 'Bloomberg News':
+                cand_author = ext.get('author')
+            elif ext.get('paragraphs'):
+                m_by = re.search(r'\bBy\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)\b', ext['paragraphs'][0])
+                if m_by:
+                    cand_author = m_by.group(1).strip()
+                else:
+                    m_yf_auth = re.search(
+                        r'\b([A-Z][a-z]+\s+[A-Z][a-z]+)\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|\d{1,2})',
+                        ext['paragraphs'][0]
+                    )
+                    if m_yf_auth and m_yf_auth.group(1) not in ('Bloomberg News', 'Business Wire', 'Yahoo Finance'):
+                        cand_author = m_yf_auth.group(1).strip()
 
-                                # Score candidate quality
-                                cand_score = len(cand_paras) * 5
-                                if cand_img:
-                                    cand_score += 100
-                                if any(pw in actual_url.lower() for pw in ['business-standard.com', 'yahoo.com', 'msn.com', 'japantimes.co.jp', 'bnnbloomberg.ca', 'theverge.com', 'cbsnews.com']):
-                                    cand_score += 30
-                                if cand_author:
-                                    cand_score += 20
+            cand_score = len(cand_paras) * 5
+            if cand_img:
+                cand_score += 100
+            for sk, sc in TRUSTED_SYND_SCORES.items():
+                if sk in actual_url.lower() or sk in rss_src.lower():
+                    cand_score += sc
+                    break
+            if cand_author:
+                cand_score += 20
 
-                                if cand_score > best_score:
-                                    best_score = cand_score
-                                    best_candidate = {
-                                        "paragraphs": cand_paras,
-                                        "cover_image": cand_img,
-                                        "inline_images": ext.get('inline_images', []),
-                                        "author": cand_author
-                                    }
-                                    # If excellent candidate with image and good paragraphs, break early
-                                    if cand_img and len(cand_paras) >= 6:
-                                        break
-                    except Exception:
-                        continue
-                if best_candidate and best_candidate.get("cover_image") and len(best_candidate.get("paragraphs", [])) >= 6:
+            if cand_score > best_score:
+                best_score = cand_score
+                best_candidate = {
+                    "paragraphs": cand_paras,
+                    "cover_image": cand_img,
+                    "inline_images": ext.get('inline_images', []),
+                    "author": cand_author
+                }
+                if cand_img and len(cand_paras) >= 6:
                     break
         except Exception:
             continue
 
     if best_candidate:
         if best_candidate.get("cover_image"):
-            loc_img = localize_bloomberg_image(best_candidate["cover_image"], slug)
-            if loc_img:
-                best_candidate["cover_image"] = loc_img
+            loc_img = localize_bloomberg_image(best_candidate["cover_image"], slug, proxies=proxies)
+            best_candidate["cover_image"] = loc_img or None
         return best_candidate
     return None
 
@@ -897,20 +1198,37 @@ def crawl_bloomberg(
         return result
 
     # 2. Check memory & disk cache with strict anti-pollution validation
-    from crawlers.content_filters import has_paywall_or_truncation_noise
+    from crawlers.content_filters import has_paywall_or_truncation_noise, clean_article_paragraphs
+
+    def _is_valid_cached_bloomberg(entry: Optional[Dict[str, Any]]) -> bool:
+        if not entry or entry.get("status") != "success" or not entry.get("is_substantive"):
+            return False
+        if _is_generic_bloomberg_title(entry.get("title", "")):
+            return False
+        e_paras = entry.get("paragraphs", [])
+        if len(e_paras) < 3 or has_paywall_or_truncation_noise(e_paras) or _has_reuters_contamination(e_paras):
+            return False
+        return True
+
+    def _sanitize_cached_image(entry: Dict[str, Any]) -> Dict[str, Any]:
+        out = dict(entry)
+        if _is_invalid_bloomberg_image(out.get("cover_image")):
+            out["cover_image"] = None
+            out["image_url"] = None
+        else:
+            out["image_url"] = out.get("cover_image")
+        return out
+
+    canon_url = clean_url.split("?")[0].rstrip("/")
     if not html_text:
-        if clean_url in _BLOOMBERG_CACHE:
-            cached = _BLOOMBERG_CACHE[clean_url]
-            if cached.get("status") == "success" and cached.get("is_substantive"):
-                c_paras = cached.get("paragraphs", [])
-                if not has_paywall_or_truncation_noise(c_paras):
-                    return dict(cached)
+        for cache_key in (clean_url, canon_url):
+            if cache_key in _BLOOMBERG_CACHE and _is_valid_cached_bloomberg(_BLOOMBERG_CACHE[cache_key]):
+                return _sanitize_cached_image(_BLOOMBERG_CACHE[cache_key])
         disk_cached = _get_from_disk_cache(clean_url)
-        if disk_cached and disk_cached.get("status") == "success" and disk_cached.get("is_substantive"):
-            dc_paras = disk_cached.get("paragraphs", [])
-            if not has_paywall_or_truncation_noise(dc_paras):
-                _BLOOMBERG_CACHE[clean_url] = dict(disk_cached)
-                return dict(disk_cached)
+        if _is_valid_cached_bloomberg(disk_cached):
+            sanitized = _sanitize_cached_image(disk_cached)
+            _BLOOMBERG_CACHE[clean_url] = dict(sanitized)
+            return sanitized
 
     proxies = _get_proxies()
 
@@ -926,8 +1244,26 @@ def crawl_bloomberg(
 
     # 3. Resolve authentic Bloomberg headline & published date
     real_title, real_date = resolve_authentic_bloomberg_headline(clean_url, slug, proxies=proxies)
-    if real_title:
+    if real_title and not _is_generic_bloomberg_title(real_title):
         result["title"] = real_title
+    elif html_text:
+        m_og_t = re.search(r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
+        raw_ht = html.unescape(m_og_t.group(1)).strip() if m_og_t else ""
+        if not raw_ht:
+            m_t = re.search(r'<title[^>]*>(.*?)</title>', html_text, re.S | re.I)
+            raw_ht = html.unescape(m_t.group(1)).strip() if m_t else ""
+        raw_ht = re.sub(r'\s*[-|]\s*Bloomberg(?:\.com)?\s*$', '', raw_ht, flags=re.I).strip()
+        if raw_ht and not _is_generic_bloomberg_title(raw_ht):
+            result["title"] = raw_ht
+        elif slug:
+            result["title"] = clean_title_to_slug_title(slug)
+    elif title:
+        cleaned_passed = re.sub(r'\s*\([^)]*Bloomberg[^)]*\)\s*$', '', title, flags=re.I).strip()
+        cleaned_passed = re.sub(r'\s*[-|]\s*Bloomberg(?:\.com)?\s*$', '', cleaned_passed, flags=re.I).strip()
+        if cleaned_passed and not _is_generic_bloomberg_title(cleaned_passed):
+            result["title"] = cleaned_passed
+        elif slug:
+            result["title"] = clean_title_to_slug_title(slug)
     elif slug:
         result["title"] = clean_title_to_slug_title(slug)
 
@@ -958,12 +1294,13 @@ def crawl_bloomberg(
         m_img = re.search(r'<meta[^>]+property=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
         if m_img:
             cand = html.unescape(m_img.group(1)).strip()
-            if "bwbx.io" in cand or "bloomberg" in cand:
-                result["cover_image"] = cand
+            if ("bwbx.io" in cand or "bloomberg" in cand) and not _is_invalid_bloomberg_image(cand):
+                loc = localize_bloomberg_image(cand, slug, proxies=proxies)
+                result["cover_image"] = loc or cand
 
     if not result.get("cover_image"):
         synd_img = resolve_bloomberg_image_from_syndication(slug, proxies=proxies)
-        if synd_img:
+        if synd_img and not _is_invalid_bloomberg_image(synd_img):
             result["cover_image"] = synd_img
 
     # 6. Resolve substantive paragraphs
@@ -990,6 +1327,8 @@ def crawl_bloomberg(
         result["paras_count"] = len(paras)
         result["full_text"] = "\n\n".join(paras)
         result["lead_paragraph"] = paras[0] if paras else ""
+        if result.get("cover_image"):
+            result["image_url"] = result["cover_image"]
         result["is_substantive"] = True
         result["is_paywalled"] = False
         result["status"] = "success"
@@ -997,28 +1336,38 @@ def crawl_bloomberg(
         _save_to_disk_cache(clean_url, dict(result))
         return result
 
-    # Second: If direct HTML is supplied or accessible with subscriber tokens
-    if html_text and "robot" not in html_text.lower():
-        paras = []
-        raw_paras = re.findall(r'<p[^>]*>(.*?)</p>', html_text, re.DOTALL | re.I)
+    def _extract_valid_direct_paras(raw_html: str) -> List[str]:
+        if not raw_html or "robot" in raw_html.lower():
+            return []
+        paras: List[str] = []
+        raw_paras = re.findall(r'<p[^>]*>(.*?)</p>', raw_html, re.DOTALL | re.I)
         for rp in raw_paras:
             cp = _clean_paragraph(rp)
             if cp and len(cp) >= 30 and cp not in paras:
                 paras.append(cp)
-        if len(paras) >= 3:
-            result["paragraphs"] = paras
-            result["paras_count"] = len(paras)
-            result["full_text"] = "\n\n".join(paras)
-            result["lead_paragraph"] = paras[0]
-            result["is_substantive"] = True
-            result["is_paywalled"] = False
-            result["status"] = "success"
-            _BLOOMBERG_CACHE[clean_url] = dict(result)
-            _save_to_disk_cache(clean_url, dict(result))
-            return result
+        paras = clean_article_paragraphs(paras, cover_caption=result.get("image_caption"))
+        if len(paras) < 3 or has_paywall_or_truncation_noise(paras) or _has_reuters_contamination(paras):
+            return []
+        return paras
+
+    # Second: If direct HTML is supplied or accessible with subscriber tokens
+    direct_paras = _extract_valid_direct_paras(html_text or "")
+    if direct_paras:
+        result["paragraphs"] = direct_paras
+        result["paras_count"] = len(direct_paras)
+        result["full_text"] = "\n\n".join(direct_paras)
+        result["lead_paragraph"] = direct_paras[0]
+        if result.get("cover_image"):
+            result["image_url"] = result["cover_image"]
+        result["is_substantive"] = True
+        result["is_paywalled"] = False
+        result["status"] = "success"
+        _BLOOMBERG_CACHE[clean_url] = dict(result)
+        _save_to_disk_cache(clean_url, dict(result))
+        return result
 
     # Third: If direct fetch works via cffi_requests with subscriber tokens
-    if "accessToken" in clean_url and HAS_CURL_CFFI:
+    if "accessToken" in clean_url and HAS_CURL_CFFI and cffi_requests is not None:
         try:
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -1026,18 +1375,15 @@ def crawl_bloomberg(
                 "Accept-Language": "en-US,en;q=0.9",
             }
             resp = cffi_requests.get(clean_url, impersonate="chrome120", headers=headers, proxies=proxies, timeout=10)
-            if resp.status_code == 200 and "robot" not in resp.text.lower():
-                paras = []
-                raw_paras = re.findall(r'<p[^>]*>(.*?)</p>', resp.text, re.DOTALL | re.I)
-                for rp in raw_paras:
-                    cp = _clean_paragraph(rp)
-                    if cp and len(cp) >= 30 and cp not in paras:
-                        paras.append(cp)
-                if len(paras) >= 3:
-                    result["paragraphs"] = paras
-                    result["paras_count"] = len(paras)
-                    result["full_text"] = "\n\n".join(paras)
-                    result["lead_paragraph"] = paras[0]
+            if resp.status_code == 200:
+                token_paras = _extract_valid_direct_paras(resp.text)
+                if token_paras:
+                    result["paragraphs"] = token_paras
+                    result["paras_count"] = len(token_paras)
+                    result["full_text"] = "\n\n".join(token_paras)
+                    result["lead_paragraph"] = token_paras[0]
+                    if result.get("cover_image"):
+                        result["image_url"] = result["cover_image"]
                     result["is_substantive"] = True
                     result["is_paywalled"] = False
                     result["status"] = "success"
@@ -1048,7 +1394,7 @@ def crawl_bloomberg(
             pass
 
     # Fourth: Automated Generic Syndication Wire Penetration (Tier-3)
-    # Queries open syndication networks (BNN, Yahoo Finance, MSN, The Japan Times, etc.)
+    # Queries Google News RSS & Bing News RSS for authorized full-text syndication mirrors
     if not result.get("paragraphs"):
         synd_res = resolve_bloomberg_syndicated_fulltext(slug, title=result.get("title", ""), proxies=proxies)
         syndicated_paras = []
@@ -1064,28 +1410,34 @@ def crawl_bloomberg(
             syndicated_paras = synd_res
 
         if syndicated_paras and len(syndicated_paras) >= 3:
-            from crawlers.content_filters import clean_article_paragraphs
             syndicated_paras = clean_article_paragraphs(
                 syndicated_paras,
                 inline_images=result.get("inline_images"),
                 cover_caption=result.get("image_caption")
             )
-            result["paragraphs"] = syndicated_paras
-            result["paras_count"] = len(syndicated_paras)
-            result["full_text"] = "\n\n".join(syndicated_paras)
-            result["lead_paragraph"] = syndicated_paras[0]
-            if not result.get("cover_image"):
-                synd_img = resolve_bloomberg_image_from_syndication(slug, proxies=proxies)
-                if synd_img:
-                    result["cover_image"] = synd_img
-            result["is_substantive"] = True
-            result["is_paywalled"] = False
-            result["status"] = "success"
-            _BLOOMBERG_CACHE[clean_url] = dict(result)
-            _save_to_disk_cache(clean_url, dict(result))
-            return result
+            if len(syndicated_paras) >= 3 and not has_paywall_or_truncation_noise(syndicated_paras) and not _has_reuters_contamination(syndicated_paras):
+                result["paragraphs"] = syndicated_paras
+                result["paras_count"] = len(syndicated_paras)
+                result["full_text"] = "\n\n".join(syndicated_paras)
+                result["lead_paragraph"] = syndicated_paras[0]
+                if not result.get("cover_image"):
+                    synd_img = resolve_bloomberg_image_from_syndication(slug, proxies=proxies)
+                    if synd_img and not _is_invalid_bloomberg_image(synd_img):
+                        result["cover_image"] = synd_img
+                if result.get("cover_image"):
+                    result["image_url"] = result["cover_image"]
+                result["is_substantive"] = True
+                result["is_paywalled"] = False
+                result["status"] = "success"
+                _BLOOMBERG_CACHE[clean_url] = dict(result)
+                _save_to_disk_cache(clean_url, dict(result))
+                return result
 
     # If title was successfully resolved, mark as success only when substantive full text is present
+    if result.get("cover_image") and _is_invalid_bloomberg_image(result.get("cover_image")):
+        result["cover_image"] = None
+    if result.get("cover_image"):
+        result["image_url"] = result["cover_image"]
     if result["title"]:
         result["is_substantive"] = bool(result["paragraphs"])
         result["status"] = "success" if result["is_substantive"] else "partial"

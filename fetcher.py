@@ -181,6 +181,10 @@ def get_smart_cover_url(title: str, category: str = "news", source: str = "") ->
     # 严格限制：仅允许 news 分类使用主题配图，推文 (celebrity) 坚决不使用任何 Unsplash 假图
     if category != "news":
         return None
+    # 遵循质量准则 1.3：权威媒体与通讯社（Bloomberg/Reuters/WSJ/FT/Forbes 等）严禁被打上无关 Unsplash 库存图
+    src_low = str(source or "").lower()
+    if any(auth in src_low for auth in ("bloomberg", "reuters", "wsj", "wall street journal", "financial times", "forbes", "tech.eu", "deepmind", "nytimes", "new york times", "washington post")):
+        return None
     full = f"{title} {source}".lower()
     if any(k in full for k in ["misalignment", "misbehavior", "cheating", "concerning", "令人担忧", "作弊", "openai"]):
         return TOPIC_HD_COVERS["openai_safety"]

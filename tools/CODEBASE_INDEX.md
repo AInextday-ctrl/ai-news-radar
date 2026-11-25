@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构与符号极速索引 (Codebase Fast Index)
 
-> **生成时间**: `2026-11-25 01:03:21 UTC` | **收录文件**: `107` 个 | **索引符号**: `1274` 个
+> **生成时间**: `2026-11-25 07:45:45 UTC` | **收录文件**: `107` 个 | **索引符号**: `1280` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，在每次代码修改、测试门禁校验与提交前自动增量同步刷新。
 
 ---
@@ -13,7 +13,7 @@
 - **`crawlers/anthropic_crawler.py`** (28,812 bytes): `is_anthropic_url, _canonical_anthropic_key, _get_proxies, _clean_text, _clean_anthropic_title...`
 - **`crawlers/arstechnica_crawler.py`** (31,708 bytes): `is_arstechnica_url, _canonical_ars_key, _get_proxies, _clean_text, _clean_ars_title...`
 - **`crawlers/bbc_crawler.py`** (30,352 bytes): `is_bbc_url, _canonical_bbc_key, _get_proxies, _clean_text, _clean_bbc_title...`
-- **`crawlers/bloomberg_crawler.py`** (75,171 bytes): `_get_from_disk_cache, _save_to_disk_cache, is_bloomberg_url, _get_proxies, extract_bloomberg_slug...`
+- **`crawlers/bloomberg_crawler.py`** (91,521 bytes): `_slug_tokens, _is_generic_bloomberg_title, _has_reuters_contamination, _is_invalid_bloomberg_image, _upgrade_image_url...`
 - **`crawlers/cbsnews_crawler.py`** (31,821 bytes): `is_cbsnews_url, _canonical_cbs_key, _get_proxies, _clean_text, _clean_cbs_title...`
 - **`crawlers/cnbc_crawler.py`** (28,533 bytes): `is_cnbc_url, _canonical_cnbc_key, _get_proxies, _clean_text, _clean_cnbc_title...`
 - **`crawlers/coindesk_crawler.py`** (33,262 bytes): `is_coindesk_url, _canonical_coindesk_key, _get_proxies, _clean_text, _clean_coindesk_title...`
@@ -45,9 +45,9 @@
 ### 流水线核心调度层 (Core Pipeline & Orchestration)
 *系统中央调度、信源分发、多模态事实提取与去重清洗管道。*
 
-- **`main.py`** (254,526 bytes): `generate_sitemap, inject_seo_static_content, generate_daily_briefing, parse_time_for_sort, is_tibo_reset_tweet...`
-- **`processor.py`** (121,546 bytes): `has_chinglish_seams, strip_chinglish_to_english, normalize_ai_terminology_zh, _translate_single_chunk_zh, free_translate_zh...`
-- **`fetcher.py`** (196,461 bytes): `extract_tech_specs, make_id, is_primarily_english, parse_to_iso, get_smart_cover_url...`
+- **`main.py`** (258,343 bytes): `generate_sitemap, inject_seo_static_content, generate_daily_briefing, parse_time_for_sort, is_tibo_reset_tweet...`
+- **`processor.py`** (122,048 bytes): `has_chinglish_seams, strip_chinglish_to_english, normalize_ai_terminology_zh, _translate_single_chunk_zh, free_translate_zh...`
+- **`fetcher.py`** (196,858 bytes): `extract_tech_specs, make_id, is_primarily_english, parse_to_iso, get_smart_cover_url...`
 - **`article_extractor.py`** (57,762 bytes): `ArticleExtractor, extract_article_substantive`
 - **`config.py`** (112,496 bytes): `No exported symbols`
 - **`knowledge_base.py`** (20,556 bytes): `DynamicKnowledgeStore`
@@ -64,7 +64,7 @@
 *单篇静态落地页编译、首页 SSR 注入、分卷切片、Sitemap 生成与 IndexNow 秒级收录推送。*
 
 - **`content_publisher.py`** (271,971 bytes): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
-- **`tool_news_publisher.py`** (149,058 bytes): `parse_iso_date, sanitize_for_en, escape, get_thematic_fallback_image, get_optimized_og_image...`
+- **`tool_news_publisher.py`** (151,745 bytes): `parse_iso_date, sanitize_for_en, escape, get_thematic_fallback_image, get_optimized_og_image...`
 - **`build_flagship_articles.py`** (30,871 bytes): `generate_article_page, generate_articles_index, build_all_flagship_pages, main`
 - **`seo_geo_engine.py`** (41,421 bytes): `atomic_write_text, atomic_write_bytes, sanitize_for_en, xml_escape, parse_iso_or_rfc...`
 - **`indexnow_submitter.py`** (6,599 bytes): `load_sitemap_urls, load_ledger, save_ledger, submit_urls_to_indexnow, auto_submit_recent_or_all`
@@ -89,7 +89,7 @@
 - **`tests/test_anthropic_crawler.py`** (5,314 bytes): `TestAnthropicCrawler`
 - **`tests/test_arstechnica_crawler.py`** (4,171 bytes): `TestArsTechnicaCrawler`
 - **`tests/test_bbc_crawler.py`** (4,260 bytes): `TestBBCCrawler`
-- **`tests/test_bloomberg_crawler.py`** (7,339 bytes): `TestBloombergCrawler`
+- **`tests/test_bloomberg_crawler.py`** (9,302 bytes): `TestBloombergCrawler`
 - **`tests/test_cbsnews_crawler.py`** (4,481 bytes): `TestCBSNewsCrawler`
 - **`tests/test_cnbc_crawler.py`** (4,370 bytes): `TestCnbcCrawler`
 - **`tests/test_coindesk_crawler.py`** (5,404 bytes): `TestCoinDeskCrawler`

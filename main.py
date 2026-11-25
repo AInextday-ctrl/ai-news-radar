@@ -1157,7 +1157,7 @@ def load_existing_items() -> list:
     }
     x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
     now_ts_load = time.time()
-    bloomberg_live_budget = 3
+    bloomberg_live_budget = 10
     reuters_live_budget = 3
     fortune_live_budget = 3
     wsj_live_budget = 3
@@ -1293,8 +1293,8 @@ def load_existing_items() -> list:
                     if real_s:
                         it["source"] = real_s
                         it["author"] = real_s
-                    # 若解析还原为 Bloomberg 彭博社，立即同步获取其源站真实官方标题与记者署名
-                    if "bloomberg.com" in real_u.lower():
+                    # 若解析还原为 Bloomberg 彭博社，立即同步获取其源站真实官方标题、记者署名、官方高清原图与全文
+                    if "bloomberg.com" in real_u.lower() or "bloomberg.net" in real_u.lower():
                         try:
                             from crawlers.bloomberg_crawler import crawl_bloomberg
                             b_data = crawl_bloomberg(real_u, title=it.get("title", ""))
@@ -1303,8 +1303,21 @@ def load_existing_items() -> list:
                                 it["title_en"] = b_data["title"]
                             if b_data.get("author") and b_data["author"] != "Bloomberg News":
                                 it["author"] = b_data["author"]
-                            if b_data.get("cover_image"):
+                            if b_data.get("cover_image") and str(b_data["cover_image"]).startswith("http"):
                                 it["image_url"] = b_data["cover_image"]
+                                it["cover_image"] = b_data["cover_image"]
+                            elif "unsplash.com" in str(it.get("image_url") or ""):
+                                it["image_url"] = None
+                                it["cover_image"] = None
+                            if b_data.get("is_substantive") and b_data.get("full_text"):
+                                it["paragraphs"] = b_data.get("paragraphs", [])
+                                it["article_content"] = b_data["full_text"]
+                                it["article_content_en"] = b_data["full_text"]
+                                if b_data.get("paragraphs_zh"):
+                                    it["paragraphs_zh"] = b_data["paragraphs_zh"]
+                                    it["article_content_zh"] = "\n\n".join(b_data["paragraphs_zh"])
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
                         except Exception:
                             pass
                     # 若解析还原为 Reuters 路透社，立即同步获取其源站真实官方标题、官方原图与全文
@@ -1406,35 +1419,70 @@ def load_existing_items() -> list:
             else:
                 continue
 
-        # 6.1 彭博社 (Bloomberg) 官方真实标题、署名记者与 bwbx 官方高清配图保真机制 (仅针对近 3 天资讯且限流防超时)
+        # 6.1 彭博社 (Bloomberg) 官方真实标题、署名记者、bwbx/授权高清配图与双语全文自愈保真机制 (仅针对近 3 天资讯且限流防超时)
         if "bloomberg.com" in u.lower() or "bloomberg.net" in u.lower():
+            from crawlers.bloomberg_crawler import crawl_bloomberg, _is_generic_bloomberg_title, _is_invalid_bloomberg_image
             b_ts = parse_time_for_sort(it)
             is_recent_b = (b_ts > 0) and ((now_ts_load - b_ts) <= 3 * 86400)
-            t_curr = it.get("title", "")
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            if "unsplash.com" in img_curr or _is_invalid_bloomberg_image(img_curr):
+                it["image_url"] = None
+                it["cover_image"] = None
+                img_curr = ""
             needs_b_fix = is_recent_b and bloomberg_live_budget > 0 and (
                 ("(" in t_curr and "bloomberg" in t_curr.lower()) or
-                not it.get("image_url") or
-                "unsplash.com" in str(it.get("image_url", "")) or
-                not it.get("paragraphs")
+                _is_generic_bloomberg_title(t_curr) or
+                not img_curr or
+                not it.get("paragraphs") or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200 or
+                bool(it.get("is_paywalled"))
             )
             if needs_b_fix:
                 bloomberg_live_budget -= 1
                 try:
-                    from crawlers.bloomberg_crawler import crawl_bloomberg
                     b_data = crawl_bloomberg(u, title=t_curr)
-                    if b_data.get("title"):
+                    if b_data.get("title") and not _is_generic_bloomberg_title(b_data["title"]):
                         it["title"] = b_data["title"]
                         it["title_en"] = b_data["title"]
                     if b_data.get("author") and b_data["author"] != "Bloomberg News":
                         it["author"] = b_data["author"]
-                    if b_data.get("cover_image"):
+                    if b_data.get("cover_image") and str(b_data["cover_image"]).startswith("http") and not _is_invalid_bloomberg_image(b_data["cover_image"]):
                         it["image_url"] = b_data["cover_image"]
-                    if b_data.get("paragraphs") and len(it.get("paragraphs", [])) < len(b_data["paragraphs"]):
+                        it["cover_image"] = b_data["cover_image"]
+                    if b_data.get("is_substantive") and b_data.get("paragraphs") and (
+                        len(it.get("paragraphs", [])) < len(b_data["paragraphs"]) or len(art_en_curr) < 400
+                    ):
                         it["paragraphs"] = b_data["paragraphs"]
                         it["article_content"] = b_data["full_text"]
                         it["article_content_en"] = b_data["full_text"]
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
+                        art_en_curr = b_data["full_text"]
+                    if b_data.get("paragraphs_zh"):
+                        it["paragraphs_zh"] = b_data["paragraphs_zh"]
+                        it["article_content_zh"] = "\n\n".join(b_data["paragraphs_zh"])
+                    elif art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en[:14]:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
                 except Exception:
                     pass
 
@@ -3329,6 +3377,11 @@ def save_news(items: list):
             elif (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
                 if it.get("category") == "news":
                     it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
+            elif it.get("category") == "news" and "unsplash.com" in img_val.lower():
+                src_low_img = str(it.get("source") or "").lower()
+                if any(auth in src_low_img for auth in ("bloomberg", "reuters", "wsj", "wall street journal", "financial times", "forbes", "tech.eu", "deepmind")):
+                    it["image_url"] = None
+                    it["cover_image"] = None
 
             if it.get("inline_images") and isinstance(it["inline_images"], list):
                 it["inline_images"] = [

@@ -1672,6 +1672,10 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["author"] = ext["author"]
                 if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                     item["image_url"] = ext["cover_image"]
+                    item["cover_image"] = ext["cover_image"]
+                elif is_bloomberg and "unsplash.com" in str(item.get("image_url") or ""):
+                    item["image_url"] = None
+                    item["cover_image"] = None
                 if (is_fortune or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant) and ext.get("has_video"):
                     item["has_video"] = True
                     for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title", "inline_videos"):
@@ -1892,6 +1896,10 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         it["author"] = ext["author"]
                     if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                         it["image_url"] = ext["cover_image"]
+                        it["cover_image"] = ext["cover_image"]
+                    elif is_bloomberg and "unsplash.com" in str(it.get("image_url") or ""):
+                        it["image_url"] = None
+                        it["cover_image"] = None
                     if (is_fortune or is_wired or is_mittr or is_tc or is_ars or is_cnbc or is_decoder or is_openai or is_sa or is_semafor or is_coindesk or is_cbsnews or is_ifixit or is_9to5mac or is_toms or is_bbc or is_nypost or is_tfn or is_ign or is_ant) and ext.get("has_video"):
                         it["has_video"] = True
                         for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title", "inline_videos"):

@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 01:03:21 UTC",
+  "updated_at": "2026-11-25 07:45:45 UTC",
   "total_files": 107,
-  "total_symbols": 1274,
+  "total_symbols": 1280,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -1256,19 +1256,54 @@
       ]
     },
     "crawlers/bloomberg_crawler.py": {
-      "size": 75171,
-      "mtime": 1795424905.4576633,
+      "size": 91521,
+      "mtime": 1795592532.1820166,
       "classes": {},
       "functions": {
+        "_slug_tokens": {
+          "line": 338,
+          "doc": "Extracts meaningful lowercase tokens from a Bloomberg URL slug.",
+          "args": [
+            "slug"
+          ]
+        },
+        "_is_generic_bloomberg_title": {
+          "line": 348,
+          "doc": "Returns True if the title is a generic hub/section name or raw URL rather than an article headline.",
+          "args": [
+            "title"
+          ]
+        },
+        "_has_reuters_contamination": {
+          "line": 367,
+          "doc": "Returns True if paragraphs contain Reuters wire datelines or attribution (Rule 1.1).",
+          "args": [
+            "paragraphs"
+          ]
+        },
+        "_is_invalid_bloomberg_image": {
+          "line": 380,
+          "doc": "Rejects generic Yahoo logos, tiny avatars/thumbnails, Zonebourse icons, and stock placeholders.",
+          "args": [
+            "img_url"
+          ]
+        },
+        "_upgrade_image_url": {
+          "line": 403,
+          "doc": "Upgrades known thumbnail CDN query params (e.g. SPH Digital w=240 -> w=1200) to full resolution.",
+          "args": [
+            "img_url"
+          ]
+        },
         "_get_from_disk_cache": {
-          "line": 319,
+          "line": 414,
           "doc": "",
           "args": [
             "url"
           ]
         },
         "_save_to_disk_cache": {
-          "line": 330,
+          "line": 434,
           "doc": "",
           "args": [
             "url",
@@ -1276,47 +1311,47 @@
           ]
         },
         "is_bloomberg_url": {
-          "line": 344,
+          "line": 451,
           "doc": "Checks whether the given URL belongs to Bloomberg.",
           "args": [
             "url"
           ]
         },
         "_get_proxies": {
-          "line": 352,
+          "line": 459,
           "doc": "Discovers available network proxies (env vars or local port 7890/7897).",
           "args": []
         },
         "extract_bloomberg_slug": {
-          "line": 371,
+          "line": 478,
           "doc": "Extracts the clean article slug from a Bloomberg URL.",
           "args": [
             "url"
           ]
         },
         "clean_title_to_slug_title": {
-          "line": 383,
+          "line": 490,
           "doc": "Intelligently capitalizes a URL slug into title case,",
           "args": [
             "slug"
           ]
         },
         "is_tail_boilerplate": {
-          "line": 410,
+          "line": 517,
           "doc": "Detects author bios, think-tank affiliations, trailing reading prompts, and noise signatures",
           "args": [
             "text"
           ]
         },
         "_clean_paragraph": {
-          "line": 448,
+          "line": 555,
           "doc": "Cleans a single paragraph of text and strips boilerplate noise.",
           "args": [
             "text"
           ]
         },
         "resolve_bloomberg_broadcast_media": {
-          "line": 503,
+          "line": 626,
           "doc": "Tier-2 Syndication & Broadcast Media Resolver for Bloomberg Television articles:",
           "args": [
             "slug",
@@ -1325,15 +1360,16 @@
           ]
         },
         "localize_bloomberg_image": {
-          "line": 543,
-          "doc": "Downloads authentic Bloomberg assets.bwbx.io images and caches them in public/images/",
+          "line": 666,
+          "doc": "Downloads authentic Bloomberg/syndication editorial images and caches them in public/images/",
           "args": [
             "img_url",
-            "slug"
+            "slug",
+            "proxies"
           ]
         },
         "resolve_bloomberg_image_from_syndication": {
-          "line": 581,
+          "line": 747,
           "doc": "Queries open syndication networks (Techmeme, Bing News RSS) for the Bloomberg slug",
           "args": [
             "slug",
@@ -1341,7 +1377,7 @@
           ]
         },
         "resolve_authentic_bloomberg_headline": {
-          "line": 630,
+          "line": 796,
           "doc": "Resolves the exact authentic Bloomberg editorial headline and publication date",
           "args": [
             "url",
@@ -1350,8 +1386,8 @@
           ]
         },
         "resolve_bloomberg_syndicated_fulltext": {
-          "line": 674,
-          "doc": "Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:",
+          "line": 867,
+          "doc": "Tier-3 Automated Multi-Channel Syndication Wire Penetration for Bloomberg articles:",
           "args": [
             "slug",
             "title",
@@ -1359,7 +1395,7 @@
           ]
         },
         "crawl_bloomberg": {
-          "line": 832,
+          "line": 1133,
           "doc": "Dedicated Bloomberg Article Crawler.",
           "args": [
             "url",
@@ -1816,8 +1852,8 @@
       ]
     },
     "crawlers/content_filters.py": {
-      "size": 14675,
-      "mtime": 1795363199.634951,
+      "size": 15376,
+      "mtime": 1795592109.7668984,
       "classes": {},
       "functions": {
         "detect_low_value_roundup_or_promo": {
@@ -1843,42 +1879,42 @@
           ]
         },
         "is_paywall_or_login_noise": {
-          "line": 173,
+          "line": 180,
           "doc": "Detects paywall prompts, subscription walls, or login gates.",
           "args": [
             "text"
           ]
         },
         "is_truncated_paragraph": {
-          "line": 181,
+          "line": 188,
           "doc": "Detects hanging, mid-sentence truncated text ending in ellipses or trailing prepositions.",
           "args": [
             "text"
           ]
         },
         "has_paywall_or_truncation_noise": {
-          "line": 192,
+          "line": 199,
           "doc": "Returns True if any paragraph in the candidate list is a paywall gate,",
           "args": [
             "paragraphs"
           ]
         },
         "clean_guardian_fullscreen_prefix": {
-          "line": 211,
+          "line": 218,
           "doc": "Cleans Guardian-style glued image captions like:",
           "args": [
             "text"
           ]
         },
         "is_newsletter_or_promo_noise": {
-          "line": 233,
+          "line": 240,
           "doc": "Detects whether text is an email newsletter signup footer or promo link.",
           "args": [
             "text"
           ]
         },
         "is_photo_caption_or_credit": {
-          "line": 241,
+          "line": 248,
           "doc": "Returns True if the text represents an image caption, photo credit,",
           "args": [
             "text",
@@ -1888,7 +1924,7 @@
           ]
         },
         "clean_article_paragraphs": {
-          "line": 301,
+          "line": 308,
           "doc": "Cleans paragraph lists by:",
           "args": [
             "paragraphs",
@@ -5177,8 +5213,8 @@
       "constants": []
     },
     "fetcher.py": {
-      "size": 196461,
-      "mtime": 1795368626.854358,
+      "size": 196858,
+      "mtime": 1795592312.027403,
       "classes": {},
       "functions": {
         "extract_tech_specs": {
@@ -5222,7 +5258,7 @@
           ]
         },
         "enrich_tweet_media": {
-          "line": 207,
+          "line": 211,
           "doc": "通过官方 Twitter Syndication API 与 VxTwitter 双通道，深度提取真实的推文原图、视频缩略图及 MP4 视频流。",
           "args": [
             "item",
@@ -5230,7 +5266,7 @@
           ]
         },
         "extract_image_url": {
-          "line": 381,
+          "line": 385,
           "doc": "Extract featured cover image from feed entry or HTML snippet.",
           "args": [
             "entry",
@@ -5238,7 +5274,7 @@
           ]
         },
         "extract_article_multimedia": {
-          "line": 443,
+          "line": 447,
           "doc": "Universal Multi-Modal Asset Extractor (全格式多源图文与多媒体通用抽取器):",
           "args": [
             "entry",
@@ -5246,7 +5282,7 @@
           ]
         },
         "resolve_techmeme_hd_image": {
-          "line": 489,
+          "line": 493,
           "doc": "从 Techmeme permalink 落地页穿透提取原始 1200px+ 高清官方大图 (如 Bloomberg, WSJ, Wired, Verge, etc.)",
           "args": [
             "permalink_or_thumb",
@@ -5254,7 +5290,7 @@
           ]
         },
         "resolve_article_og_media": {
-          "line": 527,
+          "line": 531,
           "doc": "Universal Fallback Media Resolver (全网通用降级图文与深度正文穿透解析器):",
           "args": [
             "url",
@@ -5262,35 +5298,35 @@
           ]
         },
         "match_celebrity_profile": {
-          "line": 576,
+          "line": 580,
           "doc": "Match leader profile based STRICTLY on the author's X handle/username.",
           "args": [
             "handle_or_user"
           ]
         },
         "extract_clean_video_id": {
-          "line": 623,
+          "line": 627,
           "doc": "Extract canonical 11-char YouTube video ID.",
           "args": [
             "url"
           ]
         },
         "normalize_title_fingerprint": {
-          "line": 631,
+          "line": 635,
           "doc": "Normalize title to detect exact and near-duplicates.",
           "args": [
             "title"
           ]
         },
         "fetch_youtube_videos": {
-          "line": 642,
+          "line": 646,
           "doc": "Fetch high-res AI demonstration & breakdown videos from YouTube via Dynamic Viral Radar.",
           "args": [
             "max_per_channel"
           ]
         },
         "is_tiktok_live": {
-          "line": 670,
+          "line": 674,
           "doc": "通过 TikTok 官方 oEmbed 探针接口核验视频是否真实存活且可被内嵌 (HTTP 200)。",
           "args": [
             "video_id_or_url",
@@ -5298,7 +5334,7 @@
           ]
         },
         "is_youtube_live": {
-          "line": 689,
+          "line": 693,
           "doc": "通过 YouTube 官方 oEmbed 探针接口核验视频是否真实存活 (HTTP 200)。",
           "args": [
             "video_id",
@@ -5306,19 +5342,19 @@
           ]
         },
         "fetch_tiktok_trending_videos": {
-          "line": 704,
+          "line": 708,
           "doc": "Fetch viral trending AI breakdown, real-time hacks, and breakthrough demos from TikTok & vertical platforms via Dynamic Radar.",
           "args": []
         },
         "decode_gnews_url_fast": {
-          "line": 718,
+          "line": 722,
           "doc": "快速解码 Google News 掩码文章链接为真实 X/Twitter 链接（带内存缓存与异常兜底）",
           "args": [
             "raw_link"
           ]
         },
         "decode_gnews_urls_parallel": {
-          "line": 747,
+          "line": 751,
           "doc": "并行批量解码 Google News 链接，提升吞吐率",
           "args": [
             "raw_links",
@@ -5326,7 +5362,7 @@
           ]
         },
         "is_tweet_live": {
-          "line": 771,
+          "line": 775,
           "doc": "通过 Twitter/X 官方 oEmbed 探针接口核验 status URL 是否真实存活 (HTTP 200)。",
           "args": [
             "url",
@@ -5335,7 +5371,7 @@
           ]
         },
         "check_tweets_live_parallel": {
-          "line": 813,
+          "line": 817,
           "doc": "批量并发快速核验推文是否存活",
           "args": [
             "urls",
@@ -5343,7 +5379,7 @@
           ]
         },
         "enrich_tweets_media_parallel": {
-          "line": 840,
+          "line": 844,
           "doc": "批量并发丰富推文原生媒体与高清素材",
           "args": [
             "items",
@@ -5351,42 +5387,42 @@
           ]
         },
         "evaluate_dynamic_pinned_status": {
-          "line": 854,
+          "line": 858,
           "doc": "严苛的‘24小时重置动态置顶’业务规则引擎：",
           "args": [
             "item"
           ]
         },
         "build_dynamic_x_queries": {
-          "line": 888,
+          "line": 892,
           "doc": "动态自适应构建 𝕏 智能雷达检索式。",
           "args": [
             "extra_entities"
           ]
         },
         "fetch_x_leader_posts": {
-          "line": 945,
+          "line": 949,
           "doc": "通过 Google News 深度嗅探通道与 Apify 官方通道，精准捕获 24 小时内全球顶尖 AI 领袖与一线核心工程师的原生推文。",
           "args": [
             "max_items"
           ]
         },
         "fetch_hf_spaces": {
-          "line": 1077,
+          "line": 1081,
           "doc": "Fetch trending interactive AI applications runnable right in browser from Hugging Face with authentic creation timestamps.",
           "args": [
             "max_items"
           ]
         },
         "_scrape_github_weekly_trending_map": {
-          "line": 1213,
+          "line": 1217,
           "doc": "Directly scrape GitHub's official Weekly Trending page (https://github.com/trending?since=weekly)",
           "args": [
             "out_repos"
           ]
         },
         "classify_tool_daily_scenario": {
-          "line": 1292,
+          "line": 1296,
           "doc": "将每个 GitHub 项目与 Web/HF 工具精准归类到符合用户日常真实应用场景的 12 大标签体系：",
           "args": [
             "name",
@@ -5396,7 +5432,7 @@
           ]
         },
         "compute_organic_weekly_stars": {
-          "line": 1370,
+          "line": 1374,
           "doc": "Calculate realistic, differentiated 7-day star surge (weekly_stars) for GitHub repositories:",
           "args": [
             "full_name",
@@ -5408,80 +5444,80 @@
           ]
         },
         "fetch_github_applied_tools": {
-          "line": 1462,
+          "line": 1466,
           "doc": "Fetch exponentially surging GitHub AI tools based on 7-day Star Velocity & Weekly Trending,",
           "args": []
         },
         "format_clean_tool_url": {
-          "line": 1734,
+          "line": 1738,
           "doc": "Ensure direct product URL with ref=ainewsradar instead of third-party platforms.",
           "args": [
             "url"
           ]
         },
         "resolve_product_hunt_redirect": {
-          "line": 1751,
+          "line": 1755,
           "doc": "Resolve /r/p/... redirect URLs to the actual official product website.",
           "args": [
             "ph_url"
           ]
         },
         "scrape_product_hunt_details": {
-          "line": 1783,
+          "line": 1787,
           "doc": "通过 Googlebot UA 深度抓取落地页真实数据：",
           "args": [
             "product_url"
           ]
         },
         "to_en_scenario": {
-          "line": 1916,
+          "line": 1920,
           "doc": "",
           "args": [
             "s"
           ]
         },
         "to_scenario_key": {
-          "line": 1945,
+          "line": 1949,
           "doc": "",
           "args": [
             "s"
           ]
         },
         "to_en_runtime": {
-          "line": 1974,
+          "line": 1978,
           "doc": "",
           "args": [
             "b"
           ]
         },
         "fetch_product_hunt_tools": {
-          "line": 1997,
+          "line": 2001,
           "doc": "Fetch trending user-facing AI tools from Product Hunt with rich titles.",
           "args": [
             "max_items"
           ]
         },
         "fetch_live_trending_x_posts": {
-          "line": 2156,
+          "line": 2160,
           "doc": "Fetch viral, real-time X (Twitter) posts of the day.",
           "args": [
             "max_items"
           ]
         },
         "fetch_viral_social_posts": {
-          "line": 2333,
+          "line": 2337,
           "doc": "Fetch 24-hour viral AI posts from 𝕏 (Twitter) and Threads across the 4 major contemporary tracks:",
           "args": [
             "max_items"
           ]
         },
         "fetch_news_and_celebrities": {
-          "line": 2554,
+          "line": 2558,
           "doc": "Fetch breaking news and celebrity posts.",
           "args": []
         },
         "extract_rich_article_text": {
-          "line": 2620,
+          "line": 2624,
           "doc": "从 RSS 条目中深度提取权威媒体原始报道要点/多段落正文文本 (如 The Verge, Ars Technica, Wired, The Decoder, Techmeme 援引的 WSJ/彭博原文等)。",
           "args": [
             "entry",
@@ -5489,7 +5525,7 @@
           ]
         },
         "fetch_rss_channel": {
-          "line": 2674,
+          "line": 2678,
           "doc": "",
           "args": [
             "source_key",
@@ -5497,36 +5533,36 @@
           ]
         },
         "fetch_hacker_news": {
-          "line": 2931,
+          "line": 2935,
           "doc": "",
           "args": [
             "max_items"
           ]
         },
         "fetch_daily_github_prompts": {
-          "line": 2976,
+          "line": 2980,
           "doc": "Disabled fake GitHub prompt shell generator (`prompt_gh_*`).",
           "args": [
             "max_items"
           ]
         },
         "get_curated_actionable_prompts": {
-          "line": 2987,
+          "line": 2991,
           "doc": "Curated actionable prompts across 8 distinct categories.",
           "args": []
         },
         "get_chatbot_arena_top5": {
-          "line": 3001,
+          "line": 3005,
           "doc": "动态从官方 LMSYS Hugging Face 权威数据集实时抓取最新 Chatbot Arena 天梯榜。",
           "args": []
         },
         "get_arxiv_curated_papers": {
-          "line": 3178,
+          "line": 3182,
           "doc": "Returns curated groundbreaking AI papers from arXiv with dynamic live daily fetching.",
           "args": []
         },
         "fetch_all_sources": {
-          "line": 3342,
+          "line": 3346,
           "doc": "Fetch and aggregate items across all 4 redesigned pillars.",
           "args": []
         }
@@ -5814,8 +5850,8 @@
       "constants": []
     },
     "main.py": {
-      "size": 254526,
-      "mtime": 1795421536.7772295,
+      "size": 258343,
+      "mtime": 1795592350.3750768,
       "classes": {},
       "functions": {
         "generate_sitemap": {
@@ -5922,14 +5958,14 @@
           "args": []
         },
         "save_news": {
-          "line": 3235,
+          "line": 3283,
           "doc": "Save processed items with tiered storage: lightweight 24h latest_news.json and complete paginated archive_news.json.",
           "args": [
             "items"
           ]
         },
         "run_pipeline": {
-          "line": 4216,
+          "line": 4269,
           "doc": "",
           "args": []
         }
@@ -5949,8 +5985,8 @@
       ]
     },
     "processor.py": {
-      "size": 121546,
-      "mtime": 1795396290.0042138,
+      "size": 122048,
+      "mtime": 1795592381.3730998,
       "classes": {},
       "functions": {
         "has_chinglish_seams": {
@@ -6110,7 +6146,7 @@
           ]
         },
         "process_items_batch": {
-          "line": 1743,
+          "line": 1747,
           "doc": "Process a list of items with Gemini in batches, or high-speed neural translator.",
           "args": [
             "items",
@@ -6367,8 +6403,8 @@
       ]
     },
     "tests/test_bloomberg_crawler.py": {
-      "size": 7339,
-      "mtime": 1795176605.0635912,
+      "size": 9302,
+      "mtime": 1795592495.6610308,
       "classes": {
         "TestBloombergCrawler": {
           "line": 11,
@@ -6400,18 +6436,23 @@
               "args": []
             },
             {
-              "name": "test_crawl_bloomberg_gta6_story",
+              "name": "test_article_extractor_routes_bloomberg",
               "line": 73,
               "args": []
             },
             {
-              "name": "test_article_extractor_routes_bloomberg",
-              "line": 90,
+              "name": "test_crawl_bloomberg_gta6_story",
+              "line": 86,
               "args": []
             },
             {
-              "name": "test_crawl_bloomberg_gta6_story",
-              "line": 103,
+              "name": "test_generic_bloomberg_title_and_contamination_guards",
+              "line": 99,
+              "args": []
+            },
+            {
+              "name": "test_bloomberg_hp_syndication_and_image",
+              "line": 132,
               "args": []
             }
           ]
@@ -7245,8 +7286,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 149058,
-      "mtime": 1795568366.7040553,
+      "size": 151745,
+      "mtime": 1795592354.1685367,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7285,18 +7326,19 @@
           "args": [
             "raw_url",
             "title",
-            "category"
+            "category",
+            "source"
           ]
         },
         "extract_entities_for_jsonld": {
-          "line": 173,
+          "line": 179,
           "doc": "Extracts 'about' entity and 'mentions' entities based on keyword presence.",
           "args": [
             "text"
           ]
         },
         "build_robust_meta_description": {
-          "line": 204,
+          "line": 210,
           "doc": "",
           "args": [
             "raw_desc",
@@ -7307,7 +7349,7 @@
           ]
         },
         "build_tool_html": {
-          "line": 239,
+          "line": 245,
           "doc": "",
           "args": [
             "tool",
@@ -7316,7 +7358,7 @@
           ]
         },
         "extract_ai_analysis_text": {
-          "line": 716,
+          "line": 722,
           "doc": "Safely extracts clean human-readable analysis text, strictly avoiding raw dict dumps.",
           "args": [
             "analysis_data",
@@ -7324,7 +7366,7 @@
           ]
         },
         "_render_inline_video_figure": {
-          "line": 759,
+          "line": 765,
           "doc": "",
           "args": [
             "vid",
@@ -7334,7 +7376,7 @@
           ]
         },
         "format_editorial_paragraphs": {
-          "line": 844,
+          "line": 850,
           "doc": "Magazine-Grade Professional Typography & Inline Media Injector:",
           "args": [
             "paras",
@@ -7347,7 +7389,7 @@
           ]
         },
         "build_news_html": {
-          "line": 1024,
+          "line": 1030,
           "doc": "",
           "args": [
             "item",
@@ -7356,7 +7398,7 @@
           ]
         },
         "build_news_hub_html": {
-          "line": 1913,
+          "line": 1919,
           "doc": "",
           "args": [
             "news_items",
@@ -7364,7 +7406,7 @@
           ]
         },
         "build_tools_hub_html": {
-          "line": 2078,
+          "line": 2084,
           "doc": "",
           "args": [
             "tool_items",
@@ -7372,7 +7414,7 @@
           ]
         },
         "generate_all_landing_pages": {
-          "line": 2238,
+          "line": 2244,
           "doc": "",
           "args": []
         }
@@ -10243,7 +10285,7 @@
       },
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 448,
+        "line": 555,
         "type": "function",
         "args": [
           "text"
@@ -11110,7 +11152,7 @@
       },
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 352,
+        "line": 459,
         "type": "function",
         "args": [],
         "doc": "Discovers available network proxies (env vars or local port 7890/7897)."
@@ -12617,10 +12659,65 @@
         "doc": "Main isolated entrypoint for BBC News (`bbc.com` / `bbc.co.uk`)."
       }
     ],
+    "_slug_tokens": [
+      {
+        "file": "crawlers/bloomberg_crawler.py",
+        "line": 338,
+        "type": "function",
+        "args": [
+          "slug"
+        ],
+        "doc": "Extracts meaningful lowercase tokens from a Bloomberg URL slug."
+      }
+    ],
+    "_is_generic_bloomberg_title": [
+      {
+        "file": "crawlers/bloomberg_crawler.py",
+        "line": 348,
+        "type": "function",
+        "args": [
+          "title"
+        ],
+        "doc": "Returns True if the title is a generic hub/section name or raw URL rather than an article headline."
+      }
+    ],
+    "_has_reuters_contamination": [
+      {
+        "file": "crawlers/bloomberg_crawler.py",
+        "line": 367,
+        "type": "function",
+        "args": [
+          "paragraphs"
+        ],
+        "doc": "Returns True if paragraphs contain Reuters wire datelines or attribution (Rule 1.1)."
+      }
+    ],
+    "_is_invalid_bloomberg_image": [
+      {
+        "file": "crawlers/bloomberg_crawler.py",
+        "line": 380,
+        "type": "function",
+        "args": [
+          "img_url"
+        ],
+        "doc": "Rejects generic Yahoo logos, tiny avatars/thumbnails, Zonebourse icons, and stock placeholders."
+      }
+    ],
+    "_upgrade_image_url": [
+      {
+        "file": "crawlers/bloomberg_crawler.py",
+        "line": 403,
+        "type": "function",
+        "args": [
+          "img_url"
+        ],
+        "doc": "Upgrades known thumbnail CDN query params (e.g. SPH Digital w=240 -> w=1200) to full resolution."
+      }
+    ],
     "_get_from_disk_cache": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 319,
+        "line": 414,
         "type": "function",
         "args": [
           "url"
@@ -12694,7 +12791,7 @@
     "_save_to_disk_cache": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 330,
+        "line": 434,
         "type": "function",
         "args": [
           "url",
@@ -12776,7 +12873,7 @@
     "is_bloomberg_url": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 344,
+        "line": 451,
         "type": "function",
         "args": [
           "url"
@@ -12787,7 +12884,7 @@
     "extract_bloomberg_slug": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 371,
+        "line": 478,
         "type": "function",
         "args": [
           "url"
@@ -12798,7 +12895,7 @@
     "clean_title_to_slug_title": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 383,
+        "line": 490,
         "type": "function",
         "args": [
           "slug"
@@ -12809,7 +12906,7 @@
     "is_tail_boilerplate": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 410,
+        "line": 517,
         "type": "function",
         "args": [
           "text"
@@ -12820,7 +12917,7 @@
     "resolve_bloomberg_broadcast_media": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 503,
+        "line": 626,
         "type": "function",
         "args": [
           "slug",
@@ -12833,19 +12930,20 @@
     "localize_bloomberg_image": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 543,
+        "line": 666,
         "type": "function",
         "args": [
           "img_url",
-          "slug"
+          "slug",
+          "proxies"
         ],
-        "doc": "Downloads authentic Bloomberg assets.bwbx.io images and caches them in public/images/"
+        "doc": "Downloads authentic Bloomberg/syndication editorial images and caches them in public/images/"
       }
     ],
     "resolve_bloomberg_image_from_syndication": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 581,
+        "line": 747,
         "type": "function",
         "args": [
           "slug",
@@ -12857,7 +12955,7 @@
     "resolve_authentic_bloomberg_headline": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 630,
+        "line": 796,
         "type": "function",
         "args": [
           "url",
@@ -12870,20 +12968,20 @@
     "resolve_bloomberg_syndicated_fulltext": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 674,
+        "line": 867,
         "type": "function",
         "args": [
           "slug",
           "title",
           "proxies"
         ],
-        "doc": "Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:"
+        "doc": "Tier-3 Automated Multi-Channel Syndication Wire Penetration for Bloomberg articles:"
       }
     ],
     "crawl_bloomberg": [
       {
         "file": "crawlers/bloomberg_crawler.py",
-        "line": 832,
+        "line": 1133,
         "type": "function",
         "args": [
           "url",
@@ -13350,7 +13448,7 @@
     "is_paywall_or_login_noise": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 173,
+        "line": 180,
         "type": "function",
         "args": [
           "text"
@@ -13361,7 +13459,7 @@
     "is_truncated_paragraph": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 181,
+        "line": 188,
         "type": "function",
         "args": [
           "text"
@@ -13372,7 +13470,7 @@
     "has_paywall_or_truncation_noise": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 192,
+        "line": 199,
         "type": "function",
         "args": [
           "paragraphs"
@@ -13383,7 +13481,7 @@
     "clean_guardian_fullscreen_prefix": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 211,
+        "line": 218,
         "type": "function",
         "args": [
           "text"
@@ -13394,7 +13492,7 @@
     "is_newsletter_or_promo_noise": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 233,
+        "line": 240,
         "type": "function",
         "args": [
           "text"
@@ -13405,7 +13503,7 @@
     "is_photo_caption_or_credit": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 241,
+        "line": 248,
         "type": "function",
         "args": [
           "text",
@@ -13419,7 +13517,7 @@
     "clean_article_paragraphs": [
       {
         "file": "crawlers/content_filters.py",
-        "line": 301,
+        "line": 308,
         "type": "function",
         "args": [
           "paragraphs",
@@ -16752,7 +16850,7 @@
     "enrich_tweet_media": [
       {
         "file": "fetcher.py",
-        "line": 207,
+        "line": 211,
         "type": "function",
         "args": [
           "item",
@@ -16764,7 +16862,7 @@
     "extract_image_url": [
       {
         "file": "fetcher.py",
-        "line": 381,
+        "line": 385,
         "type": "function",
         "args": [
           "entry",
@@ -16776,7 +16874,7 @@
     "extract_article_multimedia": [
       {
         "file": "fetcher.py",
-        "line": 443,
+        "line": 447,
         "type": "function",
         "args": [
           "entry",
@@ -16788,7 +16886,7 @@
     "resolve_techmeme_hd_image": [
       {
         "file": "fetcher.py",
-        "line": 489,
+        "line": 493,
         "type": "function",
         "args": [
           "permalink_or_thumb",
@@ -16800,7 +16898,7 @@
     "resolve_article_og_media": [
       {
         "file": "fetcher.py",
-        "line": 527,
+        "line": 531,
         "type": "function",
         "args": [
           "url",
@@ -16812,7 +16910,7 @@
     "match_celebrity_profile": [
       {
         "file": "fetcher.py",
-        "line": 576,
+        "line": 580,
         "type": "function",
         "args": [
           "handle_or_user"
@@ -16823,7 +16921,7 @@
     "extract_clean_video_id": [
       {
         "file": "fetcher.py",
-        "line": 623,
+        "line": 627,
         "type": "function",
         "args": [
           "url"
@@ -16834,7 +16932,7 @@
     "normalize_title_fingerprint": [
       {
         "file": "fetcher.py",
-        "line": 631,
+        "line": 635,
         "type": "function",
         "args": [
           "title"
@@ -16845,7 +16943,7 @@
     "fetch_youtube_videos": [
       {
         "file": "fetcher.py",
-        "line": 642,
+        "line": 646,
         "type": "function",
         "args": [
           "max_per_channel"
@@ -16856,7 +16954,7 @@
     "is_tiktok_live": [
       {
         "file": "fetcher.py",
-        "line": 670,
+        "line": 674,
         "type": "function",
         "args": [
           "video_id_or_url",
@@ -16868,7 +16966,7 @@
     "is_youtube_live": [
       {
         "file": "fetcher.py",
-        "line": 689,
+        "line": 693,
         "type": "function",
         "args": [
           "video_id",
@@ -16880,7 +16978,7 @@
     "fetch_tiktok_trending_videos": [
       {
         "file": "fetcher.py",
-        "line": 704,
+        "line": 708,
         "type": "function",
         "args": [],
         "doc": "Fetch viral trending AI breakdown, real-time hacks, and breakthrough demos from TikTok & vertical platforms via Dynamic Radar."
@@ -16889,7 +16987,7 @@
     "decode_gnews_url_fast": [
       {
         "file": "fetcher.py",
-        "line": 718,
+        "line": 722,
         "type": "function",
         "args": [
           "raw_link"
@@ -16900,7 +16998,7 @@
     "decode_gnews_urls_parallel": [
       {
         "file": "fetcher.py",
-        "line": 747,
+        "line": 751,
         "type": "function",
         "args": [
           "raw_links",
@@ -16912,7 +17010,7 @@
     "is_tweet_live": [
       {
         "file": "fetcher.py",
-        "line": 771,
+        "line": 775,
         "type": "function",
         "args": [
           "url",
@@ -16925,7 +17023,7 @@
     "check_tweets_live_parallel": [
       {
         "file": "fetcher.py",
-        "line": 813,
+        "line": 817,
         "type": "function",
         "args": [
           "urls",
@@ -16937,7 +17035,7 @@
     "enrich_tweets_media_parallel": [
       {
         "file": "fetcher.py",
-        "line": 840,
+        "line": 844,
         "type": "function",
         "args": [
           "items",
@@ -16949,7 +17047,7 @@
     "evaluate_dynamic_pinned_status": [
       {
         "file": "fetcher.py",
-        "line": 854,
+        "line": 858,
         "type": "function",
         "args": [
           "item"
@@ -16960,7 +17058,7 @@
     "build_dynamic_x_queries": [
       {
         "file": "fetcher.py",
-        "line": 888,
+        "line": 892,
         "type": "function",
         "args": [
           "extra_entities"
@@ -16971,7 +17069,7 @@
     "fetch_x_leader_posts": [
       {
         "file": "fetcher.py",
-        "line": 945,
+        "line": 949,
         "type": "function",
         "args": [
           "max_items"
@@ -16982,7 +17080,7 @@
     "fetch_hf_spaces": [
       {
         "file": "fetcher.py",
-        "line": 1077,
+        "line": 1081,
         "type": "function",
         "args": [
           "max_items"
@@ -16993,7 +17091,7 @@
     "_scrape_github_weekly_trending_map": [
       {
         "file": "fetcher.py",
-        "line": 1213,
+        "line": 1217,
         "type": "function",
         "args": [
           "out_repos"
@@ -17004,7 +17102,7 @@
     "classify_tool_daily_scenario": [
       {
         "file": "fetcher.py",
-        "line": 1292,
+        "line": 1296,
         "type": "function",
         "args": [
           "name",
@@ -17018,7 +17116,7 @@
     "compute_organic_weekly_stars": [
       {
         "file": "fetcher.py",
-        "line": 1370,
+        "line": 1374,
         "type": "function",
         "args": [
           "full_name",
@@ -17034,7 +17132,7 @@
     "fetch_github_applied_tools": [
       {
         "file": "fetcher.py",
-        "line": 1462,
+        "line": 1466,
         "type": "function",
         "args": [],
         "doc": "Fetch exponentially surging GitHub AI tools based on 7-day Star Velocity & Weekly Trending,"
@@ -17043,7 +17141,7 @@
     "format_clean_tool_url": [
       {
         "file": "fetcher.py",
-        "line": 1734,
+        "line": 1738,
         "type": "function",
         "args": [
           "url"
@@ -17054,7 +17152,7 @@
     "resolve_product_hunt_redirect": [
       {
         "file": "fetcher.py",
-        "line": 1751,
+        "line": 1755,
         "type": "function",
         "args": [
           "ph_url"
@@ -17065,7 +17163,7 @@
     "scrape_product_hunt_details": [
       {
         "file": "fetcher.py",
-        "line": 1783,
+        "line": 1787,
         "type": "function",
         "args": [
           "product_url"
@@ -17076,7 +17174,7 @@
     "to_en_scenario": [
       {
         "file": "fetcher.py",
-        "line": 1916,
+        "line": 1920,
         "type": "function",
         "args": [
           "s"
@@ -17087,7 +17185,7 @@
     "to_scenario_key": [
       {
         "file": "fetcher.py",
-        "line": 1945,
+        "line": 1949,
         "type": "function",
         "args": [
           "s"
@@ -17098,7 +17196,7 @@
     "to_en_runtime": [
       {
         "file": "fetcher.py",
-        "line": 1974,
+        "line": 1978,
         "type": "function",
         "args": [
           "b"
@@ -17109,7 +17207,7 @@
     "fetch_product_hunt_tools": [
       {
         "file": "fetcher.py",
-        "line": 1997,
+        "line": 2001,
         "type": "function",
         "args": [
           "max_items"
@@ -17120,7 +17218,7 @@
     "fetch_live_trending_x_posts": [
       {
         "file": "fetcher.py",
-        "line": 2156,
+        "line": 2160,
         "type": "function",
         "args": [
           "max_items"
@@ -17131,7 +17229,7 @@
     "fetch_viral_social_posts": [
       {
         "file": "fetcher.py",
-        "line": 2333,
+        "line": 2337,
         "type": "function",
         "args": [
           "max_items"
@@ -17142,7 +17240,7 @@
     "fetch_news_and_celebrities": [
       {
         "file": "fetcher.py",
-        "line": 2554,
+        "line": 2558,
         "type": "function",
         "args": [],
         "doc": "Fetch breaking news and celebrity posts."
@@ -17151,7 +17249,7 @@
     "extract_rich_article_text": [
       {
         "file": "fetcher.py",
-        "line": 2620,
+        "line": 2624,
         "type": "function",
         "args": [
           "entry",
@@ -17163,7 +17261,7 @@
     "fetch_rss_channel": [
       {
         "file": "fetcher.py",
-        "line": 2674,
+        "line": 2678,
         "type": "function",
         "args": [
           "source_key",
@@ -17175,7 +17273,7 @@
     "fetch_hacker_news": [
       {
         "file": "fetcher.py",
-        "line": 2931,
+        "line": 2935,
         "type": "function",
         "args": [
           "max_items"
@@ -17186,7 +17284,7 @@
     "fetch_daily_github_prompts": [
       {
         "file": "fetcher.py",
-        "line": 2976,
+        "line": 2980,
         "type": "function",
         "args": [
           "max_items"
@@ -17197,7 +17295,7 @@
     "get_curated_actionable_prompts": [
       {
         "file": "fetcher.py",
-        "line": 2987,
+        "line": 2991,
         "type": "function",
         "args": [],
         "doc": "Curated actionable prompts across 8 distinct categories."
@@ -17213,7 +17311,7 @@
     "get_chatbot_arena_top5": [
       {
         "file": "fetcher.py",
-        "line": 3001,
+        "line": 3005,
         "type": "function",
         "args": [],
         "doc": "动态从官方 LMSYS Hugging Face 权威数据集实时抓取最新 Chatbot Arena 天梯榜。"
@@ -17222,7 +17320,7 @@
     "get_arxiv_curated_papers": [
       {
         "file": "fetcher.py",
-        "line": 3178,
+        "line": 3182,
         "type": "function",
         "args": [],
         "doc": "Returns curated groundbreaking AI papers from arXiv with dynamic live daily fetching."
@@ -17231,7 +17329,7 @@
     "fetch_all_sources": [
       {
         "file": "fetcher.py",
-        "line": 3342,
+        "line": 3346,
         "type": "function",
         "args": [],
         "doc": "Fetch and aggregate items across all 4 redesigned pillars."
@@ -17830,7 +17928,7 @@
     "save_news": [
       {
         "file": "main.py",
-        "line": 3235,
+        "line": 3283,
         "type": "function",
         "args": [
           "items"
@@ -17841,7 +17939,7 @@
     "run_pipeline": [
       {
         "file": "main.py",
-        "line": 4216,
+        "line": 4269,
         "type": "function",
         "args": [],
         "doc": ""
@@ -18104,7 +18202,7 @@
     "process_items_batch": [
       {
         "file": "processor.py",
-        "line": 1743,
+        "line": 1747,
         "type": "function",
         "args": [
           "items",
@@ -18592,42 +18690,10 @@
         "args": []
       }
     ],
-    "TestBloombergCrawler.test_crawl_bloomberg_gta6_story": [
-      {
-        "file": "tests/test_bloomberg_crawler.py",
-        "line": 73,
-        "type": "method",
-        "class": "TestBloombergCrawler",
-        "args": []
-      },
-      {
-        "file": "tests/test_bloomberg_crawler.py",
-        "line": 103,
-        "type": "method",
-        "class": "TestBloombergCrawler",
-        "args": []
-      }
-    ],
-    "test_crawl_bloomberg_gta6_story": [
-      {
-        "file": "tests/test_bloomberg_crawler.py",
-        "line": 73,
-        "type": "method",
-        "class": "TestBloombergCrawler",
-        "args": []
-      },
-      {
-        "file": "tests/test_bloomberg_crawler.py",
-        "line": 103,
-        "type": "method",
-        "class": "TestBloombergCrawler",
-        "args": []
-      }
-    ],
     "TestBloombergCrawler.test_article_extractor_routes_bloomberg": [
       {
         "file": "tests/test_bloomberg_crawler.py",
-        "line": 90,
+        "line": 73,
         "type": "method",
         "class": "TestBloombergCrawler",
         "args": []
@@ -18636,7 +18702,61 @@
     "test_article_extractor_routes_bloomberg": [
       {
         "file": "tests/test_bloomberg_crawler.py",
-        "line": 90,
+        "line": 73,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "TestBloombergCrawler.test_crawl_bloomberg_gta6_story": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 86,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "test_crawl_bloomberg_gta6_story": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 86,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "TestBloombergCrawler.test_generic_bloomberg_title_and_contamination_guards": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 99,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "test_generic_bloomberg_title_and_contamination_guards": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 99,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "TestBloombergCrawler.test_bloomberg_hp_syndication_and_image": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 132,
+        "type": "method",
+        "class": "TestBloombergCrawler",
+        "args": []
+      }
+    ],
+    "test_bloomberg_hp_syndication_and_image": [
+      {
+        "file": "tests/test_bloomberg_crawler.py",
+        "line": 132,
         "type": "method",
         "class": "TestBloombergCrawler",
         "args": []
@@ -20126,7 +20246,8 @@
         "args": [
           "raw_url",
           "title",
-          "category"
+          "category",
+          "source"
         ],
         "doc": ""
       }
@@ -20134,7 +20255,7 @@
     "extract_entities_for_jsonld": [
       {
         "file": "tool_news_publisher.py",
-        "line": 173,
+        "line": 179,
         "type": "function",
         "args": [
           "text"
@@ -20145,7 +20266,7 @@
     "build_robust_meta_description": [
       {
         "file": "tool_news_publisher.py",
-        "line": 204,
+        "line": 210,
         "type": "function",
         "args": [
           "raw_desc",
@@ -20160,7 +20281,7 @@
     "build_tool_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 239,
+        "line": 245,
         "type": "function",
         "args": [
           "tool",
@@ -20173,7 +20294,7 @@
     "extract_ai_analysis_text": [
       {
         "file": "tool_news_publisher.py",
-        "line": 716,
+        "line": 722,
         "type": "function",
         "args": [
           "analysis_data",
@@ -20185,7 +20306,7 @@
     "_render_inline_video_figure": [
       {
         "file": "tool_news_publisher.py",
-        "line": 759,
+        "line": 765,
         "type": "function",
         "args": [
           "vid",
@@ -20199,7 +20320,7 @@
     "format_editorial_paragraphs": [
       {
         "file": "tool_news_publisher.py",
-        "line": 844,
+        "line": 850,
         "type": "function",
         "args": [
           "paras",
@@ -20216,7 +20337,7 @@
     "build_news_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1024,
+        "line": 1030,
         "type": "function",
         "args": [
           "item",
@@ -20229,7 +20350,7 @@
     "build_news_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 1913,
+        "line": 1919,
         "type": "function",
         "args": [
           "news_items",
@@ -20241,7 +20362,7 @@
     "build_tools_hub_html": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2078,
+        "line": 2084,
         "type": "function",
         "args": [
           "tool_items",
@@ -20253,7 +20374,7 @@
     "generate_all_landing_pages": [
       {
         "file": "tool_news_publisher.py",
-        "line": 2238,
+        "line": 2244,
         "type": "function",
         "args": [],
         "doc": ""

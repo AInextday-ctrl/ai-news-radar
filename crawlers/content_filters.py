@@ -160,7 +160,14 @@ PAYWALL_LOGIN_NOISE_INDICATORS = [
     re.compile(r"^\s*(?:subscribe|join\s+now)\s+to\s+(?:keep\s+reading|continue|access|read)\b", re.I),
     re.compile(r"^\s*to\s+continue\s+reading,?\s*(?:please\s+)?(?:log\s*in|subscribe|sign\s*in)\b", re.I),
     re.compile(r"\b(?:already a subscriber|already have an account)\??\s+(?:log\s*in|sign\s*in)\b", re.I),
-    re.compile(r"^(?:彭博法律提供可信的时事报道|登录以继续阅读|订阅以继续阅读|付费订阅以解锁|登录或注册以继续|成为会员以阅读|立即登录继续阅读)"),
+    re.compile(r"\byou have reached your maximum number of saved items\b", re.I),
+    re.compile(r"\b(?:you have reached your|reached your)\s+(?:free\s+)?(?:article|reading)\s+limit\b", re.I),
+    re.compile(r"\bfree articles? remaining\b", re.I),
+    re.compile(r"^\s*(?:register|create a free account)\s+to\s+(?:continue|keep)\s+reading\b", re.I),
+    re.compile(r"\bto continue,?\s*please\s+click\s+the\s+box\s+below\b", re.I),
+    re.compile(r"\bplease\s+(?:verify|confirm)\s+(?:you\s+are|that\s+you['’]?re)\s+(?:a\s+)?human\b", re.I),
+    re.compile(r"\bplease\s+enable\s+(?:js|javascript)\s+and\s+(?:disable\s+any\s+ad\s+blocker|cookies)\b", re.I),
+    re.compile(r"^(?:彭博法律提供可信的时事报道|登录以继续阅读|订阅以继续阅读|付费订阅以解锁|登录或注册以继续|成为会员以阅读|立即登录继续阅读|您已达到保存条目数量上限)"),
 ]
 
 TRUNCATION_INDICATORS = [

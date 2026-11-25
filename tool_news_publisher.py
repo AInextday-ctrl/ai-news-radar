@@ -99,14 +99,20 @@ def get_thematic_fallback_image(title: str = '', category: str = '') -> str:
         return THEMATIC_FALLBACK_IMAGES['gaming']
     return THEMATIC_FALLBACK_IMAGES['default']
 
-def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') -> str:
+def get_optimized_og_image(raw_url: str, title: str = '', category: str = '', source: str = '') -> str:
+    src_low = str(source or '').lower()
+    is_wire_source = any(auth in src_low for auth in ('bloomberg', 'reuters', 'wsj', 'wall street journal', 'financial times', 'forbes', 'tech.eu', 'deepmind', 'nytimes', 'new york times', 'washington post'))
+    fallback_img = THEMATIC_FALLBACK_IMAGES['default'] if is_wire_source else get_thematic_fallback_image(title, category)
+
     if not raw_url or not isinstance(raw_url, str) or len(raw_url.strip()) < 10:
-        return get_thematic_fallback_image(title, category)
+        return fallback_img
     raw_url = raw_url.strip()
+    if is_wire_source and 'images.unsplash.com' in raw_url:
+        return THEMATIC_FALLBACK_IMAGES['default']
     if raw_url.startswith('/images/') or raw_url.startswith('/img/'):
         return f'https://ainewsradar.xyz{raw_url}'
     if not raw_url.startswith('https://') and not raw_url.startswith('http://'):
-        return get_thematic_fallback_image(title, category)
+        return fallback_img
     if raw_url.startswith('http://'):
         raw_url = 'https://' + raw_url[7:]
     
@@ -126,7 +132,7 @@ def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') ->
     # Known anti-hotlinking domains (CNBC, FT, WSJ) that return 403 Forbidden to client browsers
     anti_hotlink_domains = ['cnbcfm.com', 'images.ft.com', 'wsj.net']
     if any(bd in raw_url.lower() for bd in anti_hotlink_domains):
-        return get_thematic_fallback_image(title, category)
+        return fallback_img
 
     # Other authentic direct HTTPS image URLs
     return raw_url
@@ -1069,11 +1075,11 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         lang_switch_label = "🇨🇳 Chinese Edition"
 
     raw_img = item.get("cover_image") or item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
-    image_url = get_optimized_og_image(raw_img, title, item.get("category", ""))
-    image_mime = "image/png" if image_url.lower().endswith(".png") else "image/jpeg"
     source_name = item.get("source") or "Tech Source"
     if not is_zh:
         source_name = sanitize_for_en(source_name) or "Tech Source"
+    image_url = get_optimized_og_image(raw_img, title, item.get("category", ""), source=item.get("source") or "")
+    image_mime = "image/png" if image_url.lower().endswith(".png") else "image/jpeg"
 
     source_url = item.get("url") or "#"
     sep = "&" if "?" in source_url else "?"
@@ -2335,24 +2341,51 @@ def generate_all_landing_pages():
             except Exception:
                 pass
 
+    # Helper for safe, slug-aware Bloomberg cache lookup
+    from crawlers.bloomberg_crawler import extract_bloomberg_slug as _bb_slug, _is_generic_bloomberg_title as _bb_bad_title, _is_invalid_bloomberg_image as _bb_bad_img
+    from crawlers.content_filters import has_paywall_or_truncation_noise as _has_pw_noise
+
+    bloomberg_slug_index = {}
+    for bk, bv in bloomberg_cache.items():
+        if isinstance(bv, dict) and bv.get("is_substantive") and len(bv.get("paragraphs") or []) >= 3:
+            if not _bb_bad_title(bv.get("title", "")) and not _has_pw_noise(bv.get("paragraphs") or []):
+                bs = _bb_slug(bk)
+                if bs and bs not in bloomberg_slug_index:
+                    bloomberg_slug_index[bs] = bv
+
+    def _lookup_valid_bloomberg_cache(raw_u: str) -> Optional[Dict[str, Any]]:
+        clean_u = raw_u.split("#")[0].strip()
+        canon_u = clean_u.split("?")[0].rstrip("/")
+        cand = bloomberg_cache.get(clean_u) or bloomberg_cache.get(canon_u) or bloomberg_slug_index.get(_bb_slug(clean_u))
+        if cand and cand.get("is_substantive") and len(cand.get("paragraphs") or []) >= 3:
+            if not _bb_bad_title(cand.get("title", "")) and not _has_pw_noise(cand.get("paragraphs") or []):
+                return cand
+        return None
+
     for it in news:
         nid = it.get("id")
         u = it.get("url") or ""
         # Check Bloomberg cache
         if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
             clean_u = u.split("#")[0].strip()
-            bc_entry = bloomberg_cache.get(clean_u)
-            if not bc_entry and clean_u:
+            bc_entry = _lookup_valid_bloomberg_cache(clean_u)
+            if not bc_entry and clean_u and ("bloomberg.com" in clean_u.lower() or "bloomberg.net" in clean_u.lower()):
                 try:
                     from crawlers.bloomberg_crawler import crawl_bloomberg
-                    bc_entry = crawl_bloomberg(clean_u)
+                    crawled_bc = crawl_bloomberg(clean_u, title=it.get("title", ""))
+                    if crawled_bc and crawled_bc.get("is_substantive") and len(crawled_bc.get("paragraphs") or []) >= 3:
+                        bc_entry = crawled_bc
                 except Exception:
                     pass
             if bc_entry:
-                for fld in ("paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                for fld in ("paragraphs", "paragraphs_zh", "full_text", "image_caption", "author"):
                     if bc_entry.get(fld):
                         it[fld] = bc_entry[fld]
-                if bc_entry.get("cover_image"):
+                if bc_entry.get("title") and not _bb_bad_title(bc_entry["title"]):
+                    it["title"] = bc_entry["title"]
+                    it["title_en"] = bc_entry["title"]
+                if bc_entry.get("cover_image") and not _bb_bad_img(bc_entry["cover_image"]):
+                    it["cover_image"] = bc_entry["cover_image"]
                     it["image_url"] = bc_entry["cover_image"]
                 it["is_substantive"] = True
                 it["is_paywalled"] = False
@@ -2446,12 +2479,16 @@ def generate_all_landing_pages():
                             u = it.get("url") or ""
                             if "bloomberg" in u.lower() or "bloomberg" in (it.get("source") or "").lower():
                                 clean_u = u.split("#")[0].strip()
-                                bc_entry = bloomberg_cache.get(clean_u)
+                                bc_entry = _lookup_valid_bloomberg_cache(clean_u)
                                 if bc_entry:
-                                    for fld in ("title", "title_en", "paragraphs", "paragraphs_zh", "full_text", "cover_image", "image_caption", "author"):
+                                    for fld in ("paragraphs", "paragraphs_zh", "full_text", "image_caption", "author"):
                                         if bc_entry.get(fld):
                                             it[fld] = bc_entry[fld]
-                                    if bc_entry.get("cover_image"):
+                                    if bc_entry.get("title") and not _bb_bad_title(bc_entry["title"]):
+                                        it["title"] = bc_entry["title"]
+                                        it["title_en"] = bc_entry["title"]
+                                    if bc_entry.get("cover_image") and not _bb_bad_img(bc_entry["cover_image"]):
+                                        it["cover_image"] = bc_entry["cover_image"]
                                         it["image_url"] = bc_entry["cover_image"]
                                     it["is_substantive"] = True
                                     it["is_paywalled"] = False
