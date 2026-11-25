@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 OpenAI，我们在保护代理方面采取深度防御⁠（在新窗口中打开）方法。虽然我们在培训和协调方面的投资是这项工作的基础，但我们还在代理工具 Codex（在新窗口中打开）中实施了功能，以提供额外的保护。由于 Codex 所做的最常见（且有潜在风险）的事情之一是在您的计算机上运行命令，因此我们构建了 Codex 沙箱，以便 Codex 可以在您控制的文件系统和网络限制内的现有环境中工作。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">沙盒（在新窗口中打开）限制程序运行时可以访问的内容。对于照片组织任务，您可以配置 Codex 沙箱，让命令读取和修改 ~/Pictures 中的文件，同时阻止网络访问以防止上传。对于代码审查，您可以允许访问在线文档，同时保持源文件只读。用户通过 ⁠(opens in a new window) 权限配置文件 ⁠(opens in a new window) 配置 Codex 沙箱，该配置文件定义了 Codex 会话的文件系统和网络限制。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在本文中，我们将从 Codex 沙箱默认值背后的权衡开始，然后解释沙箱的设计以及工具如何使用它来运行命令。我们将展示最终用户和企业如何根据自己的需求定制其权限，以及开发人员如何在自己的工具中重用沙箱。最后，我们将研究如何在 macOS、Linux 和 Windows 上实施这些限制。</p>
@@ -297,6 +295,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">禁用网络访问。这会阻止直接上传到外部服务，包括尝试窃取命令可以读取的数据。它还会阻止合法操作，例如下载依赖项，这需要额外的访问权限。</p>
 
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这些限制可以防止大量不良行为，但有害行为仍然可能发生。例如，代理可以将恶意代码注入本地安装的包（例如node_modules/prettier）中。这样的更改可能不会出现在 git status 中，因为 node_modules 通常被 Git 忽略。如果用户的编辑器在保存时运行该 Prettier 副本，则只需保存文件就可以在 Codex 沙箱之外执行恶意代码。这就是我们采取深度防御方法的原因：沙箱限制可以访问的命令，而训练和对齐帮助模型根据用户的意图使用该访问权限。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">有关定制沙箱权限并将其与企业环境中的其他保护相结合的指南，请参阅 Codex 安全指南⁠（在新窗口中打开）。</p>
@@ -310,7 +310,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1# 这是实际 API 的简化版本。2defspawn_command_under_sandbox(3program_and_args:list[str],4cwd:Path,5env:dict[str,str],6permission_profile:PermissionProfile,7network_proxy:NetworkProxy|None,8)-&gt;Child:此函数在沙箱中启动进程并返回一个子句柄，安全带可以使用它来等待它完成。每个子进程都会继承其父进程的沙箱约束，因此这些限制适用于命令启动的整个进程树，甚至适用于比原始进程寿命更长的后代。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

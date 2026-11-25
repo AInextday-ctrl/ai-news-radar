@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -275,8 +275,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The fix matters even for administrators who patched nine days earlier: the October 12 update covered only versions 19.2 and later, and the new fixed versions sit one patch above it, so an instance updated then is in range again.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The flaw, tracked as CVE-2026-110264, is rated 10.0 on the CVSS scale, the maximum. GitLab says that, under certain conditions, it could allow an unauthenticated user to run arbitrary code on the server due to an integer overflow during the compilation of a specially crafted regular expression.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">GitLab has not said what those conditions are. The company reports no sign the flaw has been used in attacks, and it is not listed in the U.S. CISA catalog of known exploited vulnerabilities as of October 22.</p>
@@ -288,6 +286,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Four of those versions are older than GitLab normally patches. The company&#x27;s policy covers the current release and the previous two monthly releases, which, as of today, are 19.5, 19.4, and 19.3.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">GitLab said it backported this fix to 18.11.13, 19.0.10, 19.1.9, and 19.2.9 on top of its standard releases, a step it reserves for severe issues.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The reason the flaw reaches so far back is the part of GitLab that failed. The regular-expression compiler is Ruby&#x27;s built-in engine, called Onigmo, which GitLab ships inside its own packages and patches in its own builds. A weakness in that engine is present wherever GitLab has shipped it, which is every release since 7.0.</p>
 
@@ -322,7 +322,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">//{if(!e.querySelector(&quot;br&quot;))return;ran=!0;let t=e.innerHTML;t=t.replace(/(\s*){2,}/gi,&quot;</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

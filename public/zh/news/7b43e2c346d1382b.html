@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">继 OpenAI 之后，Z.ai 推出了 GLM-5.4，这是其第一个基于环形变压器构建的大型模型。标准语言模型每次传递使用每个层一次，而 GLM-5.4 多次运行共享层块，细化前一传递的中间结果，使网络更深，而无需添加参数。自 GPT-6 Astra 以来，OpenAI 就使用了类似的架构。 Z.ai 表示，7500 亿参数模型的性能可与 2 至 3 万亿参数模型相媲美。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该团队将 2 月份发布的 GLM-5 基础模型重新训练为运行 28 层两次的循环模型。 Z.ai 写道，到目前为止，在相同计算预算下，从头开始训练的循环模型的表现比没有共享权重的模型要差。</p>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
@@ -297,6 +295,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">为了处理这个问题，GLM-5.4 对每个令牌使用专用门，并通过控制有多少新输出流回数据流。根据 Z.ai 的说法，该模型在第一次传递时谨慎地构建上下文，并在第二次传递时完整写回其更改。 Z.ai 说，对于困难的标记，第一遍的作用会更强。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">因为第二遍会使内存使用量加倍，所以两次遍共享 KV 缓存，即先前处理的令牌的临时内存。第二遍仅将其自己的额外值存储在一个小的本地窗口中。 Z.ai 表示，因此，即使在 100 万代币的环境下，与 GLM-5.3 相比，开销仍然是可控的。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">为了节省计算量，该模型使用稀疏注意力来预先选择最相关的早期标记，而不是每次都扫描整个上下文，这是一种标准技术。然后，第二遍重用第一遍的选择，而不是创建新的选择。根据 Z.ai 的说法，这与在每次传递中分别挑选令牌产生的结果几乎相同。该公司还表示，该模型在非高峰时段每秒可处理高达 200 个令牌，在负载下每秒可处理 70 至 80 个令牌。</p>
 
@@ -363,7 +363,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Z.ai 将 GLM-5.4 视为“通用编码”的起点，该公司表示，代码成为传统软件开发之外的任务的基础。为了说明这个想法，Z.ai 展示了一个由模型本身评分的音乐视频、一个用 FreeCAD 设计的六轴机器人手臂 GLM-5.4、一个完整的游戏，以及一个由数学几何和自定义着色器构建的交互式 3D 场景。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

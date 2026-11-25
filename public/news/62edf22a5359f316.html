@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -282,8 +282,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At OpenAI, we take a defense in depth⁠(opens in a new window) approach when it comes to safeguarding agents. While our investments in training and alignment are fundamental to this effort, we also implement features in our agentic harness, Codex⁠(opens in a new window), to provide additional protections. Because one of the most common (and potentially risky) things Codex does is run commands on your computer, we built the Codex sandbox so Codex can work in your existing environment within filesystem and network limits you control.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A ⁠(opens in a new window)sandbox⁠(opens in a new window) limits what a program can access while it runs. For a photo-organizing task, you might configure the Codex sandbox to let commands read and modify files in ~/Pictures while blocking network access to prevent uploads. For code review, you might allow access to online documentation while keeping source files read-only. Users configure the Codex sandbox through ⁠(opens in a new window)permission profiles⁠(opens in a new window), which define the filesystem and network restrictions for a Codex session.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In this article, we’ll start with the tradeoffs behind Codex’s sandbox defaults, then explain the sandbox’s design and how the harness uses it to run commands. We’ll show how end users and enterprises can tailor its permissions to their needs and how developers can reuse the sandbox in their own tools. Finally, we’ll examine how these restrictions are enforced on macOS, Linux, and Windows.</p>
@@ -295,6 +293,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Allows broad filesystem reads, subject to the user’s existing OS permissions. Compilers, runtimes, and build tools depend on SDKs, libraries, and configuration outside the repository. Restricting reads to the workspace would break many ordinary workflows. The tradeoff is that sensitive files elsewhere on the machine may also remain readable (such as config files containing API keys).</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Disables network access. This blocks direct uploads to external services, including attempts to exfiltrate data the command can read. It also prevents legitimate operations such as downloading dependencies, which require additional access.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">These restrictions prevent a large class of bad behavior, but harmful actions are still possible. For example, the agent could inject malicious code into a locally installed package such as node_modules/prettier. Such a change might not appear in git status because node_modules is often ignored by Git. If the user’s editor runs that copy of Prettier on save, simply saving a file could execute the malicious code outside the Codex sandbox. This is why we take a defense in depth approach: the sandbox limits what commands can access, while training and alignment help the model use that access in accordance with the user’s intent.</p>
 
@@ -404,7 +404,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Specifically, we use the seccompiler crate⁠(opens in a new window) to dynamically compile a BPF program based on the desired filters⁠(opens in a new window) and apply it to a launcher process in the sandbox so the constraints are inherited by the entire process tree. As such, bwrap does not run the user’s command, but runs the codex-linux-sandbox launcher with its own config args followed by the user’s command:</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

@@ -9563,9 +9563,9 @@
     var tagsMeta = document.querySelector('meta[name="ainr-tags"]');
     var descMeta = document.querySelector('meta[name="description"]');
     var h1El = document.querySelector('h1');
-    var bodyParas = document.querySelectorAll('.article-body p');
+    var bodyParas = document.querySelectorAll('.article-body p, .article-body h2, .article-body h3');
     var bodyText = '';
-    for (var i = 0; i < Math.min(2, bodyParas.length); i++) {
+    for (var i = 0; i < Math.min(16, bodyParas.length) && bodyText.length < 3000; i++) {
       bodyText += ' ' + (bodyParas[i].textContent || '');
     }
     return {
@@ -9621,9 +9621,12 @@
 
     var picked = [];
     var usedCategories = {};
+    var relFloor = typeof opts.relevantThreshold === 'number' ? opts.relevantThreshold : 1.5;
 
+    // 1. Prioritize category diversity ONLY among genuinely relevant matches (>= relFloor)
     if (opts.diverseCategories) {
       for (var j = 0; j < scored.length && picked.length < count; j++) {
+        if (scored[j].score < relFloor) break;
         var cand = scored[j].item;
         if (!usedCategories[cand.category]) {
           picked.push(cand);
@@ -9633,11 +9636,25 @@
       }
     }
 
+    // 2. Fill remaining slots with next highest-scoring relevant items before falling back
     for (var k = 0; k < scored.length && picked.length < count; k++) {
+      if (scored[k].score < relFloor && opts.allowWeakFallback === false) break;
+      if (scored[k].score < relFloor) break;
       var c2 = scored[k].item;
       if (!usedIds[c2.id]) {
         picked.push(c2);
         usedIds[c2.id] = true;
+      }
+    }
+
+    // 3. Fallback to general showcase items only when allowed (e.g., homepage strips)
+    if (opts.allowWeakFallback !== false) {
+      for (var m = 0; m < scored.length && picked.length < count; m++) {
+        var c3 = scored[m].item;
+        if (!usedIds[c3.id]) {
+          picked.push(c3);
+          usedIds[c3.id] = true;
+        }
       }
     }
 
@@ -9652,8 +9669,9 @@
     var style = document.createElement('style');
     style.id = 'ainr-monetization-css';
     style.textContent = [
+      '[data-ad-slot][data-ad-mounted="1"]{min-height:0!important;}',
       '.ainr-slot{box-sizing:border-box;width:100%;font-family:Inter,system-ui,-apple-system,sans-serif;}',
-      '.ainr-showcase{border-radius:18px;padding:16px 18px;transition:background .25s ease,border-color .25s ease,box-shadow .25s ease;}',
+      '.ainr-showcase{border-radius:18px;padding:15px 18px;transition:background .25s ease,border-color .25s ease,box-shadow .25s ease;}',
       '.ainr-theme-light .ainr-showcase{background:hsla(0,0%,100%,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(226,232,240,0.92);box-shadow:0 4px 20px -4px rgba(15,23,42,0.05);}',
       '.ainr-theme-dark .ainr-showcase{background:rgba(13,19,34,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid hsla(0,0%,100%,0.08);box-shadow:0 10px 30px -10px rgba(0,0,0,0.55);}',
 
@@ -9677,6 +9695,7 @@
       '.ainr-theme-dark .ainr-pcard:hover{border-color:rgba(129,140,248,0.55);box-shadow:0 14px 28px -8px rgba(0,0,0,0.68),0 0 22px -6px rgba(99,102,241,0.24);}',
 
       '.ainr-photo-wrap{position:relative;width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:12px 14px;overflow:hidden;box-sizing:border-box;transition:background .25s ease;}',
+      '.ainr-grid-3 .ainr-photo-wrap,.ainr-grid-2 .ainr-photo-wrap{aspect-ratio:16/10;padding:12px 18px;}',
       '.ainr-theme-light .ainr-photo-wrap,.ainr-theme-light .ainr-spot-imgwrap,.ainr-theme-light .ainr-bhero-stage{background:radial-gradient(circle at 50% 42%,#f8fafc 0%,#eef2f6 76%,#e4eaf2 100%);box-shadow:inset 0 -8px 14px -10px rgba(15,23,42,0.12);}',
       '.ainr-theme-dark .ainr-photo-wrap,.ainr-theme-dark .ainr-spot-imgwrap,.ainr-theme-dark .ainr-bhero-stage{background:radial-gradient(circle at 50% 42%,#c5d0de 0%,#aebbd0 70%,#99a8be 100%);box-shadow:inset 0 -14px 20px -12px rgba(13,19,34,0.38),inset 0 0 18px rgba(13,19,34,0.14);}',
 
@@ -9744,10 +9763,12 @@
       '.ainr-theme-dark .ainr-spot{background:linear-gradient(135deg,rgba(13,19,34,0.96) 0%,rgba(22,31,53,0.9) 100%);border:1px solid hsla(0,0%,100%,0.09);border-left:3px solid #818cf8;color:#f1f5f9;box-shadow:0 10px 28px -10px rgba(0,0,0,0.6);}',
       '.ainr-theme-dark .ainr-spot:hover{border-color:rgba(129,140,248,0.55);box-shadow:0 14px 32px -10px rgba(0,0,0,0.7),0 0 20px -6px rgba(99,102,241,0.24);}',
 
-      '.ainr-spot-imgwrap{width:154px;min-height:112px;flex-shrink:0;padding:12px 14px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;}',
+      '.ainr-spot-imgwrap{width:162px;min-height:118px;flex-shrink:0;padding:12px 16px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box;}',
       '.ainr-spot-body{min-width:0;flex:1;padding:14px 18px;display:flex;flex-direction:column;justify-content:center;}',
-      '.ainr-spot-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.02em;opacity:0.78;}',
-      '.ainr-spot-title{margin:4px 0 0;font-size:15px;font-weight:700;line-height:1.4;letter-spacing:-0.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}',
+      '.ainr-spot-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}',
+      '.ainr-spot-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.02em;opacity:0.82;}',
+      '.ainr-spot-title{margin:5px 0 0;font-size:15px;font-weight:750;line-height:1.38;letter-spacing:-0.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}',
+      '.ainr-spot-desc{margin:4px 0 0;font-size:12px;line-height:1.45;opacity:0.74;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}',
       '.ainr-spot-foot{margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;}',
       '.ainr-spot-pill{display:inline-flex;align-items:center;gap:4px;padding:5px 13px;border-radius:999px;font-size:11.5px;font-weight:650;white-space:nowrap;transition:background .18s ease,color .18s ease;}',
       '.ainr-theme-light .ainr-spot-pill{background:rgba(79,70,229,0.08);color:#4f46e5;}',
@@ -9759,7 +9780,12 @@
       '@media (max-width:1023px){.ainr-bgrid{grid-template-columns:1fr;gap:14px;}}',
       '@media (max-width:639px){',
         '.ainr-showcase{padding:13px 12px;border-radius:14px;}',
-        '.ainr-grid-6,.ainr-grid-3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}',
+        '.ainr-grid-6{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}',
+        '.ainr-grid-3,.ainr-grid-2{grid-template-columns:1fr;gap:10px;}',
+        '.ainr-grid-3 .ainr-pcard,.ainr-grid-2 .ainr-pcard{flex-direction:row;align-items:stretch;}',
+        '.ainr-grid-3 .ainr-photo-wrap,.ainr-grid-2 .ainr-photo-wrap{width:112px;min-height:88px;aspect-ratio:4/3;flex-shrink:0;padding:8px 10px;}',
+        '.ainr-grid-3 .ainr-pbody,.ainr-grid-2 .ainr-pbody{padding:10px 12px;justify-content:space-between;}',
+        '.ainr-grid-3 .ainr-pfoot,.ainr-grid-2 .ainr-pfoot{margin-top:6px;padding-top:6px;}',
         '.ainr-pcard{border-radius:12px;}',
         '.ainr-photo-wrap{padding:10px;}',
         '.ainr-pbody{padding:8px 10px 9px;}',
@@ -9769,9 +9795,10 @@
         '.ainr-btitle{font-size:14px;}',
         '.ainr-bdesc{font-size:12px;}',
         '.ainr-spot{border-radius:14px;}',
-        '.ainr-spot-imgwrap{width:108px;min-height:92px;padding:8px;}',
+        '.ainr-spot-imgwrap{width:108px;min-height:96px;padding:8px;}',
         '.ainr-spot-body{padding:11px 12px;}',
         '.ainr-spot-title{font-size:13.5px;}',
+        '.ainr-spot-desc{-webkit-line-clamp:2;}',
         '.ainr-spot-foot{margin-top:7px;}',
         '.ainr-spot-pill{padding:4px 10px;font-size:11px;}',
       '}'
@@ -9836,9 +9863,10 @@
   }
 
   function renderSpotlightCard(raw, lang) {
-    var p = localizeItem(raw, lang);
+    var p = localizeRichItem(raw, lang);
     var eyebrow = lang === 'zh' ? '亚马逊好物精选' : 'Amazon Pick';
     var ctaLabel = lang === 'zh' ? '前往亚马逊查看 →' : 'View on Amazon →';
+    var accentCls = 'ainr-bpill-' + (p.accent || 'indigo');
     var imgSrc = photoUrl(p);
     var imgCls = p.category === 'book' ? 'ainr-photo ainr-photo-book' : 'ainr-photo';
     return (
@@ -9847,8 +9875,12 @@
           '<img class="' + imgCls + '" src="' + esc(imgSrc) + '" alt="' + esc(p.name) + '" decoding="async" onerror="this.style.opacity=\'0.25\'">' +
         '</div>' +
         '<div class="ainr-spot-body">' +
-          '<span class="ainr-spot-eyebrow"><span class="ainr-dot"></span><span>' + esc(eyebrow) + '</span></span>' +
+          '<div class="ainr-spot-top">' +
+            '<span class="ainr-spot-eyebrow"><span class="ainr-dot"></span><span>' + esc(eyebrow) + '</span></span>' +
+            (p.badge ? '<span class="ainr-bpill ' + accentCls + '">' + esc(p.badge) + '</span>' : '') +
+          '</div>' +
           '<h4 class="ainr-spot-title">' + esc(p.name) + '</h4>' +
+          (p.tagline ? '<p class="ainr-spot-desc">' + esc(p.tagline) + '</p>' : '') +
           '<div class="ainr-spot-foot">' +
             '<span class="ainr-store">Amazon</span>' +
             '<span class="ainr-spot-pill">' + ctaLabel + '</span>' +
@@ -9964,13 +9996,32 @@
     }
 
     if (slotType === 'article-bottom' || slotType === 'tool-native') {
-      items = pickRelevantProducts(6, { diverseCategories: true });
-      if (!items.length) return;
+      items = pickRelevantProducts(3, {
+        diverseCategories: true,
+        minScore: 1.5,
+        allowWeakFallback: slotType === 'tool-native'
+      });
+      el.style.minHeight = '0';
+      if (!items.length) {
+        el.style.display = 'none';
+        return;
+      }
+      if (items.length === 1) {
+        el.innerHTML =
+          '<div class="ainr-slot ' + getThemeClass(el) + '">' +
+            '<div class="ainr-showcase">' +
+              renderMetaBar(lang, 'RELEVANT AMAZON PICK', '相关好物推荐') +
+              renderSpotlightCard(items[0], lang) +
+            '</div>' +
+          '</div>';
+        return;
+      }
+      var gridCls = items.length === 2 ? 'ainr-grid-2' : 'ainr-grid-3';
       el.innerHTML =
         '<div class="ainr-slot ' + getThemeClass(el) + '">' +
           '<div class="ainr-showcase">' +
-            renderMetaBar(lang, 'AMAZON PICKS', '亚马逊好物精选') +
-            '<div class="ainr-grid-3">' +
+            renderMetaBar(lang, 'RELEVANT AMAZON PICKS', '相关好物推荐') +
+            '<div class="' + gridCls + '">' +
               items.map(function (it) { return renderPhotoCard(it, lang); }).join('') +
             '</div>' +
           '</div>' +
@@ -9993,13 +10044,20 @@
       return;
     }
 
-    // Default: article-native / daily-native -> 1 single horizontal editorial spotlight, strictly high-relevance only
-    items = pickRelevantProducts(1, { minScore: 14 });
+    // Default: article-native / daily-native -> 1 single horizontal editorial spotlight ONLY on long-form (> 10 paragraphs) & strong relevance
+    var articleParas = document.querySelectorAll('.article-body p');
+    if (articleParas.length <= 10) {
+      el.style.display = 'none';
+      el.style.minHeight = '0';
+      return;
+    }
+    items = pickRelevantProducts(1, { minScore: 10, allowWeakFallback: false });
     if (!items.length) {
       el.style.display = 'none';
       el.style.minHeight = '0';
       return;
     }
+    el.style.minHeight = '0';
     el.innerHTML =
       '<div class="ainr-slot ' + getThemeClass(el) + '">' +
         renderSpotlightCard(items[0], lang) +

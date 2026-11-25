@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -275,8 +275,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Cloudflare has been part of a coordinated effort to deploy mitigations to protect the Internet, working with PHP foundation, OpenAI and Wiz among others. Cloudflare has developed and deployed web application firewall (WAF) protections since early October 2026, which were deployed about 9 hours ahead of public disclosure. Starting on October 21 3:02 am UTC, Cloudflare customers using our free or paid WAF were protected by default against php2shell.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Cloudflare successfully deployed multiple mitigations for all its customers while the vulnerability was leaked before the official release date and we observed attack traffic targeting our customers. We observed how attackers were mutating the attack payload to try to bypass our protections by tracking the volume of matches and cross-referencing with the rule logic.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Protecting against php2shell required more than standard request-based rules. Request data alone does not always provide enough evidence to distinguish an exploit from legitimate traffic. The origin’s response adds context, helping identify whether an exploit succeeded while reducing the risk of false positives.</p>
@@ -288,6 +286,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The protections are available and deployed automatically on all plans with WAF deployed, including Free users.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">PHP is used by almost 70% of websites. The php2shell vulnerabilities affect the PHP runtime itself and can allow attackers to execute malicious code on vulnerable servers, expose customer data, or disrupt services. Because PHP underpins widely used platforms such as WordPress and Magento, these flaws could potentially affect a large number of applications across the Internet.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The two vulnerabilities involve how PHP handles memory when something goes wrong while processing a HTTP request. Normally, PHP allocates memory to store the data it needs to process a request, then releases it when that work finishes. If processing stops unexpectedly, for example because it runs out of memory, PHP fails to clean up the memory safely. These vulnerabilities arise when PHP handles an error and then tries to use data that was not fully set up or memory that has already been released.</p>
 
@@ -320,7 +320,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Related tagsManaged RulesphpSecurityVulnerabilitiesWAFFollow on Social Media</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

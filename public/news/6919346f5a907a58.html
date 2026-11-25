@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -275,8 +275,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">SemiAnalysis - Note that the diagram is a simulation.In 2028 or even 2027, DeepSeek will likely be primarily using Huawei’s stack, especially with the external and internal pressure to build a fully domestic chinese ecosystem. As we show here and in future articles, the Huawei ecosystem is already mature and well developed, with strong foundations from the Ascend time and DeepSeek engineers building further ontop.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In this article, we’ll first examine Ascend 950PR’s architecture and benchmark its compute and memory performance. We then explore DeepSeek’s software releases, from TileLang’s compiler capabilities to hardware-specific kernel optimizations and rack-scale communication. Finally, we analyze DeepSeek-V4.1-Flash’s execution profile.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We deep-dived into CANN and the Ascend 950 architecture in our DeepSeek V4 Pro article. Since then, more interesting details have been revealed.</p>
@@ -302,6 +300,8 @@
 +===========================+===============+=====================================================+Running point chases reading 16 KiB of integer payload per launch, it stays near 134ns through 18 blocks, rises to 182ns at 56, then jumps to 391ns at 64. This is consistent with a second wave beyond 56 Vector cores.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">SemiAnalysisThen by running a scalar pointer-chase probe separately on every Cube and Vector core, recording load timings at matching addresses throughout a 128 MiB chain, we get the following graph. Each cell’s color represents the mean absolute difference between two cores&#x27; address profiles, producing two groups that match the decoded dies.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">SemiAnalysisGoing further, by timing a Vector core’s pointer chase while another core runs either memory traffic or register-only work; the extra slowdown reveals which subsystems share resources, supporting groups such as {0,2,4} and {1,3,5}. Mixed Cube/Vector launches identify each subsystem’s one Cube and two Vectors, which we draw together within those groups, with physical positions remaining schematic.</p>
 
@@ -351,7 +351,7 @@ frint svei8mm svebf16 i8mm bf16 dgh rng ecvFor this SKU, there are 7 configured,
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">SemiAnalysisAutoSchedule uses data dependencies and estimated execution times to plan which operations can overlap. It also chooses how many buffer slots to use within the available on-chip memory, allowing upcoming data to load while the current tile is being processed. Developers can guide these decisions when the default schedule is not suitable.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

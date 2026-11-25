@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Nightmare Eclipse 是一名研究人员的化名，该研究人员一直在公开地与微软发生争执，该公司又发布了另一个 Windows 零日漏洞。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">周二，Nightmare Eclipse 披露了 SignDrop，这是一个为本地用户提供某些 Windows 版本的完全系统权限的漏洞。该漏洞存在于通用日志文件系统中，微软将其描述为“在用户模式或内核模式下运行的软件客户端使用的通用日志服务”。通过强制 Windows Defender 等特权进程打开精心设计的 CLFS 容器，具有普通用户权限的攻击者可以滥用特权文件创建来将权限提升到 System.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该攻击利用 CLFS、Windows Defender 和 Windows 文件权限的交互。该漏洞利用 Windows Defender 打开标准用户通过调用 ServerMpUpdateEngineSignature 创建的日志文件，ServerMpUpdateEngineSignature 是用于处理防病毒签名更新的合法 Defender 函数。</p>
@@ -287,6 +285,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">讽刺的是，该漏洞源于微软于 2025 年 10 月推出的一项安全措施，旨在防止攻击者利用 CLFS 中的其他漏洞。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Nightmare Eclipse 写道：“如果一切都正确链接，有趣的是，这种合法的安全缓解措施可以用来对付自身，并允许特权提升。” “微软在这里所做的一切都是正确的，但逻辑允许滥用。”</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">更有趣的是，它可以用于对抗任何反恶意软件引擎，以绕过其自我防御（或篡改保护）机制，因为您可以在其自己的反恶意软件进程的上下文中触发任意文件创建，因此从其内核驱动程序的角度来看，文件创建请求来自其自己的合法进程，因此它会通过，这使得该漏洞独一无二，因为它可用于关闭任何防病毒/EDR。</p>
 
@@ -303,7 +303,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这个故事已更新以添加微软的评论。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

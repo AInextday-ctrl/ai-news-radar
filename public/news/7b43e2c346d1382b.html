@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -282,8 +282,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Following OpenAI, Z.ai is introducing GLM-5.4, its first large model built on a loop transformer. While standard language models use each layer once per pass, GLM-5.4 runs a block of shared layers multiple times, refining the intermediate results from the previous pass to make the network deeper without adding parameters. OpenAI has used a similar architecture since GPT-6 Astra. According to Z.ai, the 750-billion-parameter model reaches performance comparable to models with 2 to 3 trillion parameters.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The team retrained the GLM-5 base model released in February into a loop model that runs 28 layers twice. Loop models trained from scratch have so far performed worse than models without shared weights under the same compute budget, Z.ai writes.</p>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
@@ -305,6 +303,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Because the second pass would otherwise double memory usage, both passes share the KV cache, the temporary memory for previously processed tokens. The second pass stores its own extra values only in a small local window. As a result, Z.ai says, the overhead compared to GLM-5.3 stays manageable even at a 1-million-token context.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To save on compute as well, the model uses sparse attention to pick the most relevant earlier tokens upfront rather than scanning the entire context every time, a standard technique. The second pass then reuses that selection from the first instead of making a new one. According to Z.ai, that yields nearly the same results as picking tokens separately on each pass. The company also says the model reaches up to 200 tokens per second off-peak and 70 to 80 tokens per second under load.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
@@ -382,7 +382,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For its predecessor GLM-5.3, Z.ai kept the existing base model and drew all of its gains from post-training. The company delayed releasing its weights because of the model&#x27;s strong vulnerability-finding abilities, and Anthropic later found that GLM-5.3 could build exploits on its own, almost on par with Claude Mythos Preview.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -287,8 +287,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">By Okay Zed and Cyrus Forbes, Members of Technical Staff</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The staggering pace of agentic development has made traditional approaches to performance engineering unsustainable. To keep up, we built the Performance Factory, an autonomous system that uses the full capabilities of Codex and our models to find and fix regressions at an unprecedented speed. The Performance Factory, which runs in the cloud and automates investigating and resolving performance problems, enables us to keep pace with the ambition of our roadmap.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In the Performance Factory, our engineers define workflows for recurring jobs and write instructions for the Codex agents that carry them out. In particular, the Regression Workflow opens a task when a performance alert fires. An agent investigates the slowdown, records its findings in the task, and proposes a fix for an engineer to review. After deployment, another agent picks up the same task to check whether performance has returned to baseline. From investigating to authoring the fix to verifying mitigation, this first workflow in the Performance Factory has automated the entire process of fixing regressions. In just over three months, the Regression Workflow tracked more than 1,700 investigations and root caused over 600 cases. That’s 17 automated investigations every day.</p>
@@ -310,6 +308,8 @@
             </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1. Pre-Codex. Before Codex, engineers manually examined metrics and logs, compared traces, debugged live machines, and read code to investigate a slowdown. This work was time consuming, and knowing where to look often required deep knowledge of the service. Relevant signals were easy to miss. When we encountered the same kinds of problems repeatedly—like regressions in ChatGPT’s first token latency—we built advanced tools, like CPU and allocation profilers, to make those investigations easier. Over time, we accumulated more than 30 performance tools.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">2. Codex as a partner. Once we had Codex as a partner, engineers could ask, “Why did this get slower?” and work with Codex to investigate, even in an unfamiliar system. Codex could search large codebases, find relevant metrics and traces, follow interactions across services, and do appropriate profiling to piece together what had happened. But engineers still had to steer the process, knowing which performance tools to use and how to guide the investigation. Difficult investigations were more debuggable for more people, with less expertise and time required.</p>
 
@@ -497,7 +497,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Next time you’re using ChatGPT and notice a slowdown, there’s a good chance the Performance Factory is already figuring out why. Today, the bottleneck may be waiting for an engineer to review and merge the fix. We’re already exploring whether agents can do this themselves. As product development keeps accelerating with Codex, performance systems need to become increasingly autonomous and self-improving to keep up. Codex already helps us build ChatGPT faster. Now it’s helping us keep ChatGPT fast.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

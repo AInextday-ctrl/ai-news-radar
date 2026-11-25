@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -288,8 +288,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">为了衡量我们的模型在端到端芯片设计任务中的能力，我们评估了两个开源处理器设计的连续几代，并得出了有趣的发现。为了让值得信赖的评估者进行能力开发，我们正在与 Synopsys 合作，将前沿情报与工程师已经用来设计和验证芯片的电子设计自动化 (EDA) 工具集成起来。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
               <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>改进 Jalapeo 的计算块</span>
@@ -300,6 +298,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在管理和执行并行计算任务的矢量单元中，节省的资源来自浮点加法器和乘法器、转换函数、归约逻辑和特殊功能单元。这些模型探索了替代逻辑实现以及如何跨管道阶段划分计算，寻找共享硬件和减少中间存储的机会。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在矩阵单元（算术组件）中，浮点加法器、乘法器和低精度点积电路积累了改进。一项乘法器重新设计在综合过程中使用的单元面积减少了约 15%，同时将延迟从两个时钟周期减少到一个时钟周期。单独的加法器重新设计将单元面积减少了约 15%，同时保留了两个周期的延迟。点积逻辑和管道组织的进一步改进为整个区块带来了额外的节省。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在更广泛的 Jalapeo 设计工作中，团队估计模型提出的更改将矢量单元中的标准单元面积减少了约 13%，矩阵单元中的标准单元面积减少了 10%。这些优化在 Jalapeo 的芯片启动过程中得到了芯片验证。</p>
 
@@ -319,7 +319,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们为每个模型提供了每个内核的原始硬件描述，并要求其提高吞吐量（内核每秒可以执行的指令数）。例如，更改可能会让内核在更少的时钟周期内完成一条指令，但会使每个周期花费更长的时间。测量吞吐量可以捕捉到这两种影响。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

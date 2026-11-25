@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -297,8 +297,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to a forensic investigation by Will DePue, Chinese AI companies DeepSeek, Moonshot AI, MiniMax, and Ant Group are using Nvidia&#x27;s export-controlled Blackwell GPUs. DePue played a key role at OpenAI in building the Sora and Sora 2 video models as well as GPT-4o, o3, and GPT-5 before founding the nonprofit research group Unemployment Labs.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">His analysis, he says, provides the first technical evidence of this access. US officials and news outlets had suspected that DeepSeek and Moonshot AI were using Blackwell chips but never published proof. DePue wrote on X that senior researchers at OpenAI and Anthropic have already independently checked and confirmed his findings. According to DePue, six Chinese models released since April 2026 carry the distinct signature of Nvidia&#x27;s Blackwell generation, while earlier models such as DeepSeek-V3 and Kimi K2.5 show traces of Nvidia&#x27;s older Hopper generation.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The evidence comes directly from the published language models. An AI model consists of billions of numerical values called weights. Before training starts, PyTorch, the standard software framework, fills these empty slots with random numbers generated from a starting value called a seed. To distribute this massive amount of data quickly, the GPU splits the work across its individual compute cores. Because different chip models have different core counts, the filling process produces a characteristic pattern, according to the report. Older Hopper chips such as the H100 and H800 use 132 compute cores, while the newer Blackwell chips use exactly 148 or 152 cores depending on the model (B200/B300 or GB200/GB300).</p>
@@ -306,6 +304,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Training then adjusts these values millions of times, but some slots for unused words or symbols keep their initial random values. Even in heavily trained parts of the model, a faint statistical echo of the initial distribution survives, according to DePue. He says he worked the pattern backward and reproduced the results for DeepSeek-V4-Flash and Kimi K3 exactly on real Blackwell chips. He has published the verification code on GitHub.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Training runs costing more than half a billion dollars</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The analysis maps DeepSeek-V4-Flash and MiniMax-M3 to B200 or B300 chips (148 cores). DeepSeek-V4-Pro, Kimi K3, Kimi K3.1-Pro, and Ant Group&#x27;s Ling-3.1-flash show, according to the analysis, the 152-core pattern of Nvidia&#x27;s liquid-cooled GB200 or GB300 flagship rack systems. DePue says chance can be ruled out statistically and that the method correctly identified all 24 control models with known hardware, including Meta&#x27;s Llama 3.1 (H100).</p>
 
@@ -322,7 +322,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The data doesn&#x27;t reveal where the GPUs are or who owns them, according to the investigation. Because Chinese companies can rent computing capacity at data centers outside China, the report says its technical evidence shows access to Nvidia&#x27;s top hardware but does not by itself prove physical smuggling or a violation of US export law.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

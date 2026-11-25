@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -275,8 +275,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Why the name: Arete (ἀρετή) is the ancient Greek concept of excellence and virtue, the full realization of a person&#x27;s or thing&#x27;s highest potential. In physical geography, an arête is a narrow, sharp ridge of rock that separates two glacial valleys, which the cover of this post happens to depict.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Open source models give labs the raw tools to mold intelligence to varied preferences. An understated risk of the current model development landscape is the homogeneity of viewpoints imparted to AI systems. Frontier labs all share a remarkably similar worldview, and they have all exhibited political bias in the past. These biases have hard implications now, as users increasingly depend on agents for fact-finding and judgment-heavy work. They have even deeper implications as you explore what it would mean for agentic systems to &quot;fail in a correlated way.&quot; Open-weight models de-risk that, so long as there are companies like Nous that can operate on the weights.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Open-weight Chinese models are among the strongest available, but they ship with state-aligned behavior baked into the weights. Much has been said lately about the risks to American companies and agencies as a result of that behavior. The US government has taken concrete steps to restrict Chinese AI models (especially DeepSeek) from federal use, while issuing warnings about broader risks.</p>
@@ -288,6 +286,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We chose to train on Qwen3.8-27B because it was the most performant local model, and because it exhibited a lot of the behavior we were targeting. Before we could begin post-training we had to measure what we were shooting for. We built an evaluation of 803 prompts spanning seven value categories: freedom of expression, state ideology, state versus free market, education, data privacy and surveillance, democracy, and the environment. We measured across two major axes: factual recall (the ability to corroborate verified sources of truth), and &quot;framing.&quot;</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">For each prompt we extracted 2–4 required facts from a dated source article, along with the official-frame language the CCP uses on that topic. Prompts come from English-language government statutes, news and research reports, with no single source supplying more than 13 prompts. An LLM judge (Grok 4.7) received the prompt, the model&#x27;s answer, the required facts and a fixed rubric. For every fact it recorded whether the answer stated, missed or contradicted it, and it quoted any phrase where the answer adopted the official line. The fact score is computed from those counts, and a propaganda score requires a quoted phrase as evidence. The judge is not told which model wrote the answer. We developed the judge on a 25-prompt pilot that we graded by hand, revising the rubric three times wherever the judge and the human grades disagreed. The main fix was defining a stated fact by its substance rather than its exact wording, dates or citations. Before training, we removed every training prompt that overlapped the evaluation set.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">*Each model answered all 803 prompts five times with a 32k-token cap. Scores are the mean of the five runs, and ± is the standard deviation across runs. Unanswered prompts count as 0. Fact mean and any propaganda are defined in the legend below. Runs are at temperature 0.6 except the two rows marked *, which are at temperature 0; at temperature 0.6 those score 2.88 ± 0.03 (Arete-27B) and 2.24 ± 0.05 (Qwen3.8-27B). Nemotron 3 Ultra, DeepSeek V4.1 Flash, GLM 5.3 and the rows marked * ran with thinking off. † Provisional, from 2 of 5 runs; updated when the remaining runs finish.</p>
 
@@ -328,7 +328,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We introduce contrastive neuron attribution, a method to reliably steer model behavior at high strengths while preserving output quality. Using refusal as a case study, we show how to discover and ablate specific MLP neuron circuits..</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">上个月在纽约举行的人工智能工程师会议上，英国金融科技公司运营和基础设施负责人 David Abitbol 描述了在向大约 2,000 名工程师推出人工智能编码工具后，编码时间缩短了 60%，交付周期缩短了 70%。 Revolut 最初采用 GLM-5.1，然后转向 GLM-5.3，现在使用 56 个 Nvidia B200 GPU 提供服务。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在转向 GLM 之前，Revolut 一直在尝试人工智能，于 2025 年初部署 Gemini，并于 2026 年初部署 Claude Code。“我们对人工智能的成本非常怀疑。我们看到工程师每月花费 1,000 美元，每月花费 10,000 美元，投资回报率并不高，因此当我们推出它时，我们在严格的预算限制下推出了它，”Abitbol 说。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">因此，工程师只能访问有限数量的代币，因此该公司开始研究自托管 iyd 自己的模型。以每百万输入/输出代币 0.30 美元计算，自托管 GLM 5.1 的成本约为使用 OpenAI 的 Codex 或 Anthropic 的 Claude Code 的十分之一。而且，事实证明，当代币便宜时，你就不再担心它们使用了多少或它们用于什么目的。</p>
@@ -287,6 +285,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">GLM 5.1 由中国开放权重模型开发者 Z.ai 开发，并不是一个小模型。该模型总共大约有 7540 亿个参数（每个生成的令牌激活 400 亿个参数），仅需要大约 380 GB 的 GPU 内存来保存权重，每个用户还需要 6-26 GB 的内存来根据精度维护上下文。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">为了大规模服务 GLM-5.3，Revolut 部署了 56 个 Nvidia B200 GPU，其 GPU 数量相当于七个 8 个 GPU DGX B200 系统。但正如 Abitbol 指出的那样，最大的性能提升并不是来自添加 GPU，而是调整模型的超参数以及切换到 NVFP4 量化、实现分解的预填充和解码以及调整上下文长度。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">一个关键要点是，支持一百万个令牌上下文窗口并不一定会使如此大的窗口有用或高效。 “长上下文是一个骗局。你真的需要注意这一点，”阿比特博尔说。 “尽管你可以提供 100 万个代币，但 256 [千] 个才是你真正需要的。”</p>
 
@@ -303,7 +303,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">话虽如此，Abitbol 承认中国的开放权重模型可能出于隐私和安全原因而令人担忧，但强调主要的担忧是通过中国以外的 API 访问它们。当在本地或区域云资源上运行时，实际上没有什么可担心的。 ®</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

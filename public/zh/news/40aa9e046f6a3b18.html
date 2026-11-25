@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">从远处看，现代人工智能的构建方式似乎与过去几十年软件的构建方式类似：使用针对特定功能的多种技术。确实有多种方法，但它们不是从头开始设计某些东西，而是主要利用来自更简单且难以解释的过程的智能：在非常大的数据集上训练压缩器（或等效的预测器）。 1</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我相信跟踪训练更好的压缩器的进展速度是理解人工智能进步弧线的关键。在这篇文章中，我主张建立困惑度（或等效的交叉熵损失）作为模型开发人员之间进行比较并告知共享安全标准的指标。作为第一步，我为 OpenAI 的预训练进度提供了更多的透明度。发布我们的内部困惑度测量结果需要考虑一些因素；它让竞争对手更清楚地了解我们的立场，但这种担忧被整个行业建立共享安全措施的紧迫性所抵消。 OpenAI 希望这能够成为为未来的配速工作建立共享科学基础的一步。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">人工智能开发的一个简化但基本信息丰富的观点是，首先构建一台大型计算机，然后使用它在大型非结构化数据集上预训练模型（压缩器），然后在不同的环境中应用各种技术（例如提示、微调或强化学习）以激发该模型的潜在功能。算法的进步可以模糊训练阶段之间的区别，但我们仍然可以将具有难以预测的突发能力（我之前称之为“外星人思维”）的人工智能的创建与随后的有针对性的诱导分开。</p>
@@ -287,6 +285,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">主要由这一指标描述的模型的功能范围是惊人的。 GPT-2 在旧数据集 4 上设置了最先进的新困惑度，可以说是第一个能够一致地制定连贯文本段落的模型。下一个重大飞跃是 GPT-3，它能够在给出一些任务示例的情况下进行学习。 GPT-3.5 在我们当前的主要评估数据集上的对数困惑度约为 0.99，能够进行流畅的对话，并构成了原始 ChatGPT 的基础。 GPT-4 的得分约为 0.91，能够熟练有效地利用思维链推理，这推动了后续有针对性地激发这种能力并创建现代推理模型。现在，当我们的损失已降至 0.8 以下时，我们看到了网络安全和数学等领域变革能力的出现。我想再次强调的是，一旦满足这些精确的困惑度阈值，这些能力就会出现，这一点根本不清楚——它们从根本上可以被视为这一指标进展中的新兴潜在能力。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">随着人工智能的快速发展，我们衡量下游能力的范围和方式可能会迅速改变。在大多数现代基准上评估 GPT-2 和 GPT-3 没有什么意义；当时使用的基准在 GPT-4 附近基本饱和。相比之下，我相信关注预训练的进展可能会提供有用的信息。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">进步速度的一个特殊变化来自人工智能对其自身发展的贡献越来越大。最常讨论的指标围绕人工智能在开发周期的各个阶段增强和取代人类研究人员；最终的拐点是“完全递归自我改进”，该过程将完全自动化，无需人工监督。除了考虑这种状态是我们为了维持人类控制而显然应该避免的事情之外，我发现这个一般框架遗漏了一些至关重要的东西。人工智能参与开发过程的一个关键部分：预训练的算法研究，可能会带来潜在的改变。</p>
 
@@ -303,7 +303,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">不考虑预训练之外的进步。最值得注意的是，思想链推理并不会减少模型所实现的复杂性，尽管它会导致能力的大幅提高。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -282,8 +282,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Over the past year, we’ve published lots of data that shows that frontier AI models are more than capable of discovering and exploiting security vulnerabilities. Showing how previously unknown vulnerabilities might be exploited is, however, only the start of what frontier AI models can do for cyber defense. In this post, we summarize some of our initial research into automated attack surface analysis and reduction: the process of using AI models to map the code that is reachable, then removing or restricting access to anything than a given deployment doesn’t need to expose.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Automated attack surface analysis and reduction can meaningfully improve the security of deployed software in the near term. Securing software by finding and fixing individual vulnerabilities alone scales poorly: fixing even a critical vulnerability tells you nothing about the vulnerabilities that remain. By contrast, reducing code reachability can reduce the severity of unknown vulnerabilities, including the ones that might be under active exploitation. These techniques don’t remove the unknown vulnerabilities in the code, but they do make the vulnerabilities harder to reach, and thereby reduce their severity. Minimizing codebases’ attack surface results in better security without ever having to find or fix an individual vulnerability.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Below, we preview some of the data we’ve collected from applying attack surface reduction techniques to large open-source codebases using Claude. Our aim in doing so is to show that Claude can meaningfully, and economically, improve software security through the methods we outline. Specifically, we ran Claude over 25 projects (in a variety of languages), and it discovered 493 issues. With these results in mind, we discuss how developers can apply similar techniques to their own code.</p>
@@ -295,6 +293,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Automated attack surface analysis and reduction techniques aim to discover unnecessary attack surfaces, then move that code behind an appropriate gate. This might involve moving code from pre-authentication to post-authentication, from 0-click to 1-click, from on-by-default to explicit opt-in, or from the first message of a protocol to deeper in the session state machine. Some code is meant to be reachable before these stages, but a lot it is not, and, given the complexity that comes with code churn across thousands or millions of lines of code, unnecessary exposure of features often goes unnoticed.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">There are numerous ways to reduce the attack surface of code. In our own research efforts, we focused on three methods in particular:</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• Default configuration. We identified code that was reachable in its shipped default configuration but wasn’t intended to be used by any default functionality.</p>
 
@@ -360,7 +360,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We encourage organizations to explore using Claude to analyze and reduce the attack surface of the software they depend on. We expect this to be one of the most practical ways that developers can measurably improve the security of the code the world already runs on.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

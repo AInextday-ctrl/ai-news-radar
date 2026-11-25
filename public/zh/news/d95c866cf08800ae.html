@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inkling 2 Mini 是一个循环变压器，为每个令牌运行模型的中间层三次。这使得模型能够应用更多的推理并用更少的标记得出正确的答案，特别是在依赖推理质量的代理编码等任务上。 Inkling 2 Mini 在 DeepSWE v1.1 (48.2%) 和 Vals Index v2.2 (46.5%) 等基准测试中以少于 100B 的总参数领先于所有开放权重模型。它的运行速度也比类似性能的模型更快。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inkling 2 Mini 是一个混合专家模型，具有 26.4B 总参数、3.4B 活跃参数和每个令牌 5.4B 权重激活来解释循环。循环允许模型推理更长时间，而无需写下其推理，这对于监控很重要：我们通过阅读模型的思想链（CoT）来监督和理解模型的行为的能力。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们使用 Inkling 2 Mini 以及我们随其发布的特定于研究的可变循环变体测量了循环对性能和可监控性的影响。可变循环模型的无 CoT 时间范围从一次传递的 16 秒提高到三次传递的 37 秒，并且其在串行推理基准上的性能不断提高到十次循环，是训练时的两倍。该模型的思想链随着循环的增多而变得越来越短，但始终保持清晰。随着循环的添加，该模型在代理破坏测试中并没有出现更高的趋势。</p>
@@ -287,6 +285,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inkling 2 Mini 的大部分权重都在 NVFP4 中进行训练和本地部署，最后四层在 MXFP8 中。 Inkling 2 Mini 的总内存占用约为 20GB，使其可以在消费笔记本电脑和台式人工智能计算机等本地设备上运行。我们的研究人员将 Inkling 2 Mini 带到了飞机上，它在 MacBook Pro 上离线运行，并在几分钟内构建了一个可玩的飞行模拟器。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">打开视频：PlaneBench 飞行模拟器演示，屏幕上有手机视频插图 0:0015× 正在加载 Inkling 2 Mini 内置的飞行模拟器... 要尝试飞行模拟器，请在桌面上打开此页面。 Inkling 2 Mini 已发布开放权重，今天可在 Tinker 上进行推理和定制。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inkling 2 Mini 的优点与 Inkling 2 Small 的优点一致：它在长期代理工作上表现最好，并且在我们测量的大多数任务上是类似大小的开放权重模型中最好的。</p>
 
@@ -303,7 +303,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Inkling 2 Mini 并不是多回合聊天或具有许多约束的指令的最强小型模型：它在 MultiChallenge 上得分为 50.0%，在 ComplexConstraints v1.1 上得分为 33.4%，均落后于 Qwen3.8-27B。它还在推理密集型基准测试中落后于较大的模型，例如 CritPt v2 和 HLE-Diamond。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

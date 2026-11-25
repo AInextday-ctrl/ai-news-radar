@@ -533,7 +533,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   {TAILWIND_THEME_HEAD}
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   
@@ -727,7 +727,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
       </div>
     </article>
 
-    <aside aria-label="Partner Spotlight" data-ad-slot="tool-native" class="mt-9 mb-5 min-h-[380px]"></aside>
+    <aside aria-label="Partner Spotlight" data-ad-slot="tool-native" class="mt-9 mb-5 min-h-[260px]"></aside>
 
     {related_html}
 
@@ -1010,6 +1010,13 @@ def format_editorial_paragraphs(
             </figure>
             """.strip())
 
+    # In-Content Native Slot: Only inject inside long-form articles (> 10 paragraphs) at a natural midpoint
+    mid_ad_idx = -1
+    if total > 10:
+        mid_ad_idx = max(4, min(total // 2 - 1, 7))
+        if _anchored_media.get(mid_ad_idx) and mid_ad_idx + 1 < total - 2 and not _anchored_media.get(mid_ad_idx + 1):
+            mid_ad_idx += 1
+
     # 若首段前存在前置视频/配图（after_para == -1），在正文开头原位输出
     _emit_slot_media(-1)
 
@@ -1074,8 +1081,7 @@ def format_editorial_paragraphs(
 
         _emit_slot_media(i)
 
-        # In-Content Native Slot: In substantive long-form reading (total >= 4), inject once after paragraph 2
-        if total >= 4 and i == 1:
+        if i == mid_ad_idx:
             rendered_elements.append(
                 '<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>'
             )
@@ -1532,7 +1538,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             {p_html}
           </div>
           {excerpt_notice_html}
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         """
 
@@ -1794,7 +1800,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   {TAILWIND_THEME_HEAD}
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   

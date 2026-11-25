@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -295,8 +295,6 @@
               <span>Executive summary</span>
             </h3>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When you talk to a friend in person, you have many ways to know it is really them: you can see them, hear them, shake their hand. When you talk to an AI model, you have almost none. A user querying a model today cannot check that the responses came from the specific model that a developer claims is responding, as opposed to one secretly substituted in by a routing service for cost reasons, or even by an attacker who has tampered with the token stream. Judging from the model’s output alone is unreliable, even if it produces high-quality responses. Cryptographic proofs of inference solve this problem: they let a model provider commit to a model and then prove that each response was produced by that model. Such proofs could enable applications ranging from consumer products to internal security, and could contribute to a toolkit for verifying compliance with AI pacing requirements.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Specifically, we have made progress on a powerful type of cryptographic proof known as a “zkSNARK”, which is uniquely fit for provable inference (owing to its strong hiding and efficiency properties). In this post, we share some of that progress, primarily through a system we call FlashProve. A brief technical summary is as follows:</p>
@@ -308,6 +306,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• Prior open-source systems are orders of magnitude slower, as we discuss in section 6. Claude found novel ways to apply state-of-the-art tools in the cryptography and security literature, while relying on well-established design principles for cryptographic proof systems. The commitment to the model, and subsequent inference proofs, hide the weights of the model; hiding the architecture of the model is not a goal of this system.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• Claude is good at optimization, but often makes decisions that are hard to evaluate, especially in large complex systems. We counter this by providing top-level auditable statements in Lean (a formal verification language) for the claimed security guarantees.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Today we are releasing five artifacts:</p>
 
@@ -502,7 +502,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">• Longer contexts. The system currently proves inference over contexts of up to 1,024 tokens. This is quite short in comparison to the contexts accumulated in chat settings. Ideally, this context length could be increased to full context windows for frontier models (which regularly have context windows of 100s of thousands to millions of tokens).</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

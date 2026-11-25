@@ -71,7 +71,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -282,8 +282,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Since the Hugging Face incident⁠ in July, we&#x27;ve strengthened safeguards and alignment requirements for how we train, test, and deploy models. This post explains how we evaluate and manage risk at each stage, from highly sandboxed training environments to the Codex deployment you use on your computer. We evaluate both models and safeguards at each stage, requiring a safety review to advance to the next stage.</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We use defense in depth with multiple layers of protection that reduce dependence on any single safeguard. If one layer fails, others help prevent harm, limit consequences, or alert us so we can intervene.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Effective monitoring depends on model monitorability - how reliably monitors can detect mistakes or unsafe behavior from a model’s reasoning and actions. For example, a model that verbalizes its intention to cheat in its chain-of-thought (CoT) is more monitorable than one that omits this information. We evaluate monitorability during training and before deployment, develop better methods for measuring⁠(opens in a new window) it, and study what affects it⁠(opens in a new window).</p>
@@ -295,6 +293,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Internal deployment: OpenAI employees use models for practical work.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">External deployment: Models become available to people and organizations more broadly.</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We rely on different layers at different stages. During training, when alignment is less certain, we depend more heavily on sandboxing and monitoring. As models gain broader access during deployment, alignment and system-level controls become increasingly important. At each stage, we evaluate whether the combined protections are sufficient for the model’s capabilities and access. Our determinations may be reviewed with our Safety Advisory Group (SAG) and overseen by the Safety and Security Committee (SSC) of the OpenAI Foundation’s Board of Directors.</p>
 
@@ -416,7 +416,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Introducing GPT‑Rosalind for life sciences research⁠ — A specialized model for biology, drug discovery, and translational medicine, available to eligible organizations through a trusted-access program.</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

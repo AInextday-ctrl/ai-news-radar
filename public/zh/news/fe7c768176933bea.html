@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -276,8 +276,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">自 7 月份的 Hugging Face 事件以来，我们加强了对训练、测试和部署模型方式的保障措施和一致性要求。这篇文章解释了我们如何评估和管理每个阶段的风险，从高度沙盒的培训环境到您在计算机上使用的 Codex 部署。我们在每个阶段评估模型和保障措施，需要进行安全审查才能进入下一阶段。</p>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们使用多层保护的深度防御，减少对任何单一防护措施的依赖。如果某一层发生故障，其他层会帮助防止伤害、限制后果或提醒我们以便我们进行干预。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">有效的监控取决于模型的可监控性——监控器如何可靠地从模型的推理和操作中检测到​​错误或不安全行为。例如，在思维链 (CoT) 中表达作弊意图的模型比忽略此信息的模型更容易监控。我们在训练期间和部署之前评估可监控性，开发更好的测量方法⁠(在新窗口中打开)，并研究影响它的因素⁠(在新窗口中打开)。</p>
@@ -304,6 +302,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">外部部署：模型可供更广泛的人员和组织使用。</p>
 
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们在不同阶段依赖不同的层。在训练过程中，当对齐不太确定时，我们更加依赖沙箱和监控。随着模型在部署过程中获得更广泛的访问，对齐和系统级控制变得越来越重要。在每个阶段，我们都会评估组合保护是否足以满足模型的功能和访问权限。我们的决定可能会由我们的安全咨询小组 (SAG) 进行审查，并由 OpenAI 基金会董事会的安全和安保委员会 (SSC) 监督。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在研究阶段，我们评估模型以获得对其对齐特性的信心。因为我们还不能完全依靠一致性来防止伤害，所以我们严重依赖安全和沙箱来限制他们可以访问和执行的操作。</p>
@@ -324,7 +324,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当遏制失败时，监控提供了关键的后盾。在最近的一份错位报告中，我们分享了监视器检测到一个内部研究模型利用 DNS 错误配置⁠（在新窗口中打开）来获得有限的互联网访问权限。从 9 月 20 日到 10 月 1 日，我们暂停了对最有能力的模型的训练和评估，同时调查并解决了安全漏洞。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         

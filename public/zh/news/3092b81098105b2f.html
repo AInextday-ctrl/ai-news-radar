@@ -72,7 +72,7 @@
     })();
   </script>
   <script defer src="/js/page_theme.js?v=2"></script>
-  <script defer src="/js/monetization.js?v=45"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
   <script defer src="/js/page_language.js"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -290,8 +290,6 @@
                 </figcaption>
             </figure>
 
-<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Performance Factory 中，我们的工程师为重复性作业定义工作流程，并为执行这些作业的 Codex 代理编写指令。特别是，当性能警报触发时，回归工作流程会打开一个任务。代理调查减速情况，将其发现记录在任务中，并提出修复方案供工程师审查。部署后，另一个代理将执行相同的任务来检查性能是否已恢复到基线。从调查到编写修复程序再到验证缓解措施，性能工厂中的第一个工作流程已经自动化了修复回归的整个过程。在短短三个多月的时间里，回归工作流程跟踪了 1,700 多项调查，找出了 600 多个案例的根源。每天有 17 项自动调查。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在这里，我们将分享我们对 Codex 的使用如何演变为现在的 Performance Factory，逐步完成我们的第一个运行工作流程，并分享在生产中构建和运行代理工作流程的早期经验教训。</p>
@@ -308,6 +306,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1. 食品法典委员会之前。在 Codex 之前，工程师手动检查指标和日志、比较跟踪、调试实时机器并读取代码以调查速度下降情况。这项工作非常耗时，并且知道在哪里查找通常需要对服务有深入的了解。相关信号很容易被忽视。当我们反复遇到相同类型的问题时（例如 ChatGPT 的第一个令牌延迟中的回归），我们构建了高级工具，例如 CPU 和分配分析器，以使这些调查变得更容易。随着时间的推移，我们积累了 30 多个性能工具。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">2. 法典作为合作伙伴。一旦我们与 Codex 成为合作伙伴，工程师就会问：“为什么速度变慢了？”并与 Codex 合作进行调查，即使是在不熟悉的系统中。 Codex 可以搜索大型代码库，查找相关指标和跟踪，跟踪跨服务的交互，并进行适当的分析以拼凑发生的情况。但工程师仍然必须掌控整个过程，了解要使用哪些性能工具以及如何指导调查。对于更多的人来说，困难的调查更容易调试，所需的专业知识和时间更少。</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">3.可重复使用的技能。为了进一步自动化，我们通过称为性能取证的共享技能捕获了性能团队的调查过程。它告诉 Codex 哪些工具可用、何时使用它们以及如何解决速度下降的问题，以便 Codex 可以尝试从几个角度解决问题：</p>
 
@@ -341,7 +341,7 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">1code-change/2├── config.toml3└── work/4 ├── Implementing.md5 └── reviewing.md 代码更改任务包含一个配置文件，以及实现和审核的 Markdown 提示。</p>
           </div>
           
-          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[420px]"></aside>
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
         </section>
         
         
