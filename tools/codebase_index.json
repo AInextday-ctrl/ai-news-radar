@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 10:08:43 UTC",
-  "total_files": 110,
-  "total_symbols": 1294,
+  "updated_at": "2026-11-25 10:19:03 UTC",
+  "total_files": 109,
+  "total_symbols": 1290,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -581,7 +581,7 @@
     },
     "content_publisher.py": {
       "size": 271976,
-      "mtime": 1795601269.0336142,
+      "mtime": 1795601881.3067636,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -7287,7 +7287,7 @@
     },
     "tool_news_publisher.py": {
       "size": 154869,
-      "mtime": 1795601272.6964538,
+      "mtime": 1795601883.0977151,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7493,51 +7493,6 @@
         }
       },
       "constants": []
-    },
-    "tools/clean_product_backgrounds.py": {
-      "size": 8217,
-      "mtime": 1795601121.8040397,
-      "classes": {},
-      "functions": {
-        "_is_studio_white": {
-          "line": 29,
-          "doc": "",
-          "args": [
-            "r",
-            "g",
-            "b",
-            "lum_min",
-            "chroma_max"
-          ]
-        },
-        "_defringe_alpha_edges": {
-          "line": 33,
-          "doc": "Erodes/feathers bright neutral 1-2px halos bordering transparent background.",
-          "args": [
-            "rgba"
-          ]
-        },
-        "_strip_studio_bg": {
-          "line": 85,
-          "doc": "",
-          "args": [
-            "im",
-            "category",
-            "icon_type"
-          ]
-        },
-        "main": {
-          "line": 182,
-          "doc": "",
-          "args": []
-        }
-      },
-      "constants": [
-        "WORKSPACE_DIR",
-        "CATALOG_PATH",
-        "PRODUCTS_DIR",
-        "HOLLOW_ICON_TYPES"
-      ]
     },
     "tools/fast_index.py": {
       "size": 28041,
@@ -10850,13 +10805,6 @@
       {
         "file": "generate_bilingual_compliance.py",
         "line": 693,
-        "type": "function",
-        "args": [],
-        "doc": ""
-      },
-      {
-        "file": "tools/clean_product_backgrounds.py",
-        "line": 182,
         "type": "function",
         "args": [],
         "doc": ""
@@ -20598,45 +20546,6 @@
         "line": 5,
         "type": "function",
         "args": [],
-        "doc": ""
-      }
-    ],
-    "_is_studio_white": [
-      {
-        "file": "tools/clean_product_backgrounds.py",
-        "line": 29,
-        "type": "function",
-        "args": [
-          "r",
-          "g",
-          "b",
-          "lum_min",
-          "chroma_max"
-        ],
-        "doc": ""
-      }
-    ],
-    "_defringe_alpha_edges": [
-      {
-        "file": "tools/clean_product_backgrounds.py",
-        "line": 33,
-        "type": "function",
-        "args": [
-          "rgba"
-        ],
-        "doc": "Erodes/feathers bright neutral 1-2px halos bordering transparent background."
-      }
-    ],
-    "_strip_studio_bg": [
-      {
-        "file": "tools/clean_product_backgrounds.py",
-        "line": 85,
-        "type": "function",
-        "args": [
-          "im",
-          "category",
-          "icon_type"
-        ],
         "doc": ""
       }
     ],
