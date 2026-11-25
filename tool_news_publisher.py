@@ -79,7 +79,7 @@ TAILWIND_THEME_HEAD = """<script src="https://cdn.tailwindcss.com"></script>
       } catch (e) {}
     })();
   </script>
-  <script defer src="/js/page_theme.js"></script>"""
+  <script defer src="/js/page_theme.js?v=2"></script>"""
 
 
 def build_theme_toggle_html(is_zh: bool = False) -> str:
@@ -533,7 +533,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   {TAILWIND_THEME_HEAD}
-  <script defer src="/js/monetization.js"></script>
+  <script defer src="/js/monetization.js?v=43"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   
@@ -1794,7 +1794,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   {TAILWIND_THEME_HEAD}
-  <script defer src="/js/monetization.js"></script>
+  <script defer src="/js/monetization.js?v=43"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
   

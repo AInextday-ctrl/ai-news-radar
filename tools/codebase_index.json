@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-25 09:34:49 UTC",
+  "updated_at": "2026-11-25 10:08:43 UTC",
   "total_files": 110,
-  "total_symbols": 1293,
+  "total_symbols": 1294,
   "source_registry": {
     "bloomberg.com": {
       "source": "Bloomberg",
@@ -580,8 +580,8 @@
       ]
     },
     "content_publisher.py": {
-      "size": 271971,
-      "mtime": 1795568314.6542034,
+      "size": 271976,
+      "mtime": 1795601269.0336142,
       "classes": {},
       "functions": {
         "format_static_tool_card": {
@@ -7286,8 +7286,8 @@
       ]
     },
     "tool_news_publisher.py": {
-      "size": 154855,
-      "mtime": 1795598630.265249,
+      "size": 154869,
+      "mtime": 1795601272.6964538,
       "classes": {},
       "functions": {
         "parse_iso_date": {
@@ -7495,12 +7495,12 @@
       "constants": []
     },
     "tools/clean_product_backgrounds.py": {
-      "size": 5904,
-      "mtime": 1795599053.784792,
+      "size": 8217,
+      "mtime": 1795601121.8040397,
       "classes": {},
       "functions": {
         "_is_studio_white": {
-          "line": 30,
+          "line": 29,
           "doc": "",
           "args": [
             "r",
@@ -7510,8 +7510,15 @@
             "chroma_max"
           ]
         },
+        "_defringe_alpha_edges": {
+          "line": 33,
+          "doc": "Erodes/feathers bright neutral 1-2px halos bordering transparent background.",
+          "args": [
+            "rgba"
+          ]
+        },
         "_strip_studio_bg": {
-          "line": 34,
+          "line": 85,
           "doc": "",
           "args": [
             "im",
@@ -7520,7 +7527,7 @@
           ]
         },
         "main": {
-          "line": 129,
+          "line": 182,
           "doc": "",
           "args": []
         }
@@ -10849,7 +10856,7 @@
       },
       {
         "file": "tools/clean_product_backgrounds.py",
-        "line": 129,
+        "line": 182,
         "type": "function",
         "args": [],
         "doc": ""
@@ -20597,7 +20604,7 @@
     "_is_studio_white": [
       {
         "file": "tools/clean_product_backgrounds.py",
-        "line": 30,
+        "line": 29,
         "type": "function",
         "args": [
           "r",
@@ -20609,10 +20616,21 @@
         "doc": ""
       }
     ],
+    "_defringe_alpha_edges": [
+      {
+        "file": "tools/clean_product_backgrounds.py",
+        "line": 33,
+        "type": "function",
+        "args": [
+          "rgba"
+        ],
+        "doc": "Erodes/feathers bright neutral 1-2px halos bordering transparent background."
+      }
+    ],
     "_strip_studio_bg": [
       {
         "file": "tools/clean_product_backgrounds.py",
-        "line": 34,
+        "line": 85,
         "type": "function",
         "args": [
           "im",
