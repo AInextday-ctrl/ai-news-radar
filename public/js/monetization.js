@@ -9860,6 +9860,20 @@
   }
 
   function observeThemeChanges() {
+    if (typeof window !== 'undefined' && window.addEventListener) {
+      window.addEventListener('storage', function (e) {
+        if (!e || e.key !== 'theme') return;
+        var mode = e.newValue || 'auto';
+        if (typeof window.applyPageTheme === 'function') {
+          window.applyPageTheme();
+        } else if (typeof window.setTheme === 'function') {
+          window.setTheme(mode);
+        } else {
+          var prefersDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', mode === 'dark' || (mode === 'auto' && prefersDark));
+        }
+      });
+    }
     if (typeof MutationObserver === 'undefined') return;
     var observer = new MutationObserver(function () {
       var dark = isDarkPage();

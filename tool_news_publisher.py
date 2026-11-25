@@ -68,6 +68,35 @@ def escape(val: Any) -> str:
     return html.escape(str(val or ""))
 
 
+TAILWIND_THEME_HEAD = """<script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js"></script>"""
+
+
+def build_theme_toggle_html(is_zh: bool = False) -> str:
+    """Renders compact Light/Dark/Auto theme toggle matching the homepage switcher."""
+    t_light = "浅色模式" if is_zh else "Light Mode"
+    t_dark = "深色模式" if is_zh else "Dark Mode"
+    t_auto = "跟随系统" if is_zh else "Follow System"
+    aria_grp = "主题切换" if is_zh else "Theme switcher"
+    return (
+        f'<div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="{aria_grp}">'
+        f'<button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme(\'light\')" title="{t_light}" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button>'
+        f'<button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme(\'dark\')" title="{t_dark}" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button>'
+        f'<button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme(\'auto\')" title="{t_auto}" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button>'
+        f'</div>'
+    )
+
+
 def build_ainr_tags_meta(item: Dict[str, Any], is_zh: bool = False) -> str:
     """Builds comma-separated contextual tags for monetization & semantic matching."""
     parts = []
@@ -503,7 +532,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
-  <script src="https://cdn.tailwindcss.com"></script>
+  {TAILWIND_THEME_HEAD}
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
@@ -613,6 +642,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        {build_theme_toggle_html(is_zh)}
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
           <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
           <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
@@ -1763,7 +1793,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
-  <script src="https://cdn.tailwindcss.com"></script>
+  {TAILWIND_THEME_HEAD}
   <script defer src="/js/monetization.js"></script>
   <script defer src="/js/page_language.js"></script>
   {CLARITY_SCRIPT}
@@ -1788,6 +1818,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </a>
       </div>
       <div class="flex items-center gap-2 notranslate">
+        {build_theme_toggle_html(is_zh)}
         <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="{"切换全站 31 种多语言版本" if is_zh else "Switch between 31 language editions"}">
           <span id="page-lang-flag">{"🇨🇳" if is_zh else "🇬🇧"}</span>
           <span id="page-lang-text">{"简体中文" if is_zh else "English"}</span>
