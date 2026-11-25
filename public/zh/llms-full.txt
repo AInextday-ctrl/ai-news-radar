@@ -1,12 +1,32 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-25 07:21:38Z
+生成时间: 2026-11-25 07:36:42Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### 华为携手飞昂科技构建国产EDA工具链
+- 落地页链接: https://ainewsradar.xyz/zh/news/9e2ed194bca2dd5b
+- 原始信源: Nikkei Asia (https://asia.nikkei.com/spotlight/huawei-crackdown/china-s-huawei-says-it-has-homegrown-answer-to-us-chip-design-tool-curbs)
+- 核心摘要: 华为自2019年起联合飞昂科技研发Tau EDA工具，旨在通过“Tau缩放定律”突破芯片设计领域的美方技术封锁
+- 核验事实清单:
+  * 【核心事件】华为技术有限公司（研发团队）、飞昂科技（Phlexing Technology，董事长何清）在北京华为创新与知识产权论坛：联合研发名为“Tau EDA”的工具链，打通芯片设计、制造与封装全流程
+  * 【起因与机理】应对2019年起美国实体清单限制，通过自主EDA生态实现先进制程芯片自主可控
+  * 【核心事实细节】针对美国EDA技术禁运的系统性突围。
+  * 【各方立场与态度】构建连接设计、制造与封装的国产化生态。
+
+### 欧盟拟向成人网站施压强化年龄核验
+- 落地页链接: https://ainewsradar.xyz/zh/news/937ffda0fbece8e2
+- 原始信源: Financial Times (https://www.ft.com/content/049151e8-f97f-4d63-9a6e-5a6d1fcc9dd8)
+- 核心摘要: 欧盟委员会正督促Pornhub等成人网站引入更严格年龄核验，并筹备构建覆盖全欧盟的通用核验应用
+- 核验事实清单:
+  * 【核心事件】欧盟委员会（European Commission）、Pornhub等成人内容提供商在欧盟管辖范围内的数字服务监管：强制要求执行更严苛的年龄核验标准，并推动开发欧盟统一身份验证应用
+  * 【起因与机理】针对未成年人网络内容保护的合规压力
+  * 【调查与监管诉求】平台合规压力增大，成人内容接入受限。
+  * 【涉及范围与推进】后续涉及全欧范围数字服务监管标准对齐。
 
 ### 华为鸿蒙系统装机量突破一亿大关
 - 落地页链接: https://ainewsradar.xyz/zh/news/a9c75f2ee2729cb9
@@ -284,26 +304,6 @@
   * 【关键数据与实测】核心规模：MCP SDK月下载量超7亿，连接器数量逾1万个。
   * 【各方立场与态度】技术优化：Tool Search按需加载机制使上下文占用率下降超85%。
 
-### Fincher新作AI视觉争议调查
-- 落地页链接: https://ainewsradar.xyz/zh/news/b70cbcdaae89168f
-- 原始信源: The Verge AI (https://www.theverge.com/entertainment/1041417/david-fincher-netflix-cliff-booth-ai-interpositive)
-- 核心摘要: David Fincher执导的新片因视觉效果呈现不一致引发AI使用质疑，导演此前曾对AI迭代持开放态度
-- 核验事实清单:
-  * 【核心事件】导演 David Fincher；制片方 Netflix在影视公映与影评界：因电影视觉效果疑似滥用生成式AI引发公众与影评人抵制
-  * 【起因与机理】公众对生成式AI介入专业电影创作的品质忧虑及导演对AI迭代的态度
-  * 【调查与监管诉求】观众质疑Fincher新作滥用生成式AI导致视觉品质下降。
-  * 【各方立场与态度】影视行业内部关于AI与传统影像审美边界的争议升级。
-
-### 诺华CEO：AI将药物研发周期缩短但难短期根除疾病
-- 落地页链接: https://ainewsradar.xyz/zh/news/e681c68cc7c33a2a
-- 原始信源: THE DECODER (https://the-decoder.com/novartis-ceo-says-ai-will-shave-four-years-off-drug-development-not-cure-all-disease/)
-- 核心摘要: 诺华CEO Vas Narasimhan反驳AI十年内根除癌症的乐观预期，预判AI仅能将药物研发周期从12年缩短至8年
-- 核验事实清单:
-  * 【核心事件】Vas Narasimhan（诺华制药CEO、Anthropic董事会成员）在制药行业AI应用评估：修正关于AI在生物医疗领域的预期，强调研发周期的边际优化而非激进的疾病终结
-  * 【起因与机理】应对近期AI领域领袖关于AI在十年内攻克癌症等疾病的激进言论
-  * 【关键数据与实测】他预测未来十年AI能将药物开发周期从12年缩短至8年，并将临床开发成功率由8%提升至12%。
-  * 【核心诉求与态度】强调生物实验与数据复杂性对AI的客观约束。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -312,8 +312,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,527 Stars，总计 53,853 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,527 Stars (总星标 53,853)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,527 Stars，总计 53,856 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,527 Stars (总星标 53,856)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -321,8 +321,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0831ca93321eceea
 - 官方/开源地址: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - 一句话亮点: 用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式
-- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +12,581 Stars，总计 21,893 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +12,581 Stars (总星标 21,893)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +12,581 Stars，总计 21,913 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +12,581 Stars (总星标 21,913)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -330,8 +330,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5765d0dd8c4b61bf
 - 官方/开源地址: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切
-- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +2,993 Stars，总计 10,810 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,993 Stars (总星标 10,810)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +2,993 Stars，总计 10,817 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,993 Stars (总星标 10,817)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🎬 视频剪辑与生成 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -339,8 +339,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f689ccec41c0119a
 - 官方/开源地址: https://github.com/dream-num/univer?ref=ainewsradar
 - 一句话亮点: 使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔
-- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,278 Stars，总计 31,755 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,278 Stars (总星标 31,755)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,278 Stars，总计 31,757 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,278 Stars (总星标 31,757)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/dream-num/univer.git`
 
@@ -348,8 +348,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,890 Stars，总计 32,938 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,890 Stars (总星标 32,938)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,890 Stars，总计 32,947 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,890 Stars (总星标 32,947)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
@@ -357,8 +357,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
 - 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
-- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,753 Stars，总计 21,624 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,753 Stars (总星标 21,624)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,753 Stars，总计 21,627 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,753 Stars (总星标 21,627)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -366,8 +366,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/5b083f806d24b3ce
 - 官方/开源地址: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - 一句话亮点: AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要
-- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,369 Stars，总计 74,526 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,369 Stars (总星标 74,526)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: last30days-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,369 Stars，总计 74,533 Stars）。AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,369 Stars (总星标 74,533)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -375,8 +375,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/3924c8f295303f30
 - 官方/开源地址: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - 一句话亮点: 安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释
-- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +2,638 Stars，总计 56,142 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,638 Stars (总星标 56,142)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +2,638 Stars，总计 56,147 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,638 Stars (总星标 56,147)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -384,8 +384,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,494 Stars，总计 10,896 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,494 Stars (总星标 10,896)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,494 Stars，总计 10,899 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,494 Stars (总星标 10,899)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -402,10 +402,19 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/60ff2010aa4a95f7
 - 官方/开源地址: https://hermes-agent.nousresearch.com?ref=ainewsradar
 - 一句话亮点: 与您共同成长的代理商
-- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,638 Stars，总计 265,962 Stars）。与您共同成长的代理商，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,638 Stars (总星标 265,962)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 核心概览: hermes-agent 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,641 Stars，总计 265,969 Stars）。与您共同成长的代理商，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,641 Stars (总星标 265,969)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/hermes-agent.git`
+
+### Vibe-Trading
+- 落地页链接: https://ainewsradar.xyz/zh/tools/7a3170ba6d51d19e
+- 官方/开源地址: https://vibetrading.wiki/?ref=ainewsradar
+- 一句话亮点: “Vibe-Trading：您的个人交易代理”
+- 核心概览: Vibe-Trading 是一款专注于 💼 金融看盘·求职与生活 的开源 AI 工具（本周新增 +1,552 Stars，总计 38,826 Stars）。“Vibe-Trading：您的个人交易代理”，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,552 Stars (总星标 38,826)', '🎯 针对 💼 金融看盘·求职与生活 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💼 金融看盘·求职与生活 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/Vibe-Trading.git`
 
 ### yogurt
 - 落地页链接: https://ainewsradar.xyz/zh/tools/a3cea48fa89b965a
@@ -415,15 +424,6 @@
 - 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,650 Stars (总星标 3,410)', '🎯 针对 📊 办公文档与 PPT 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 📊 办公文档与 PPT 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/yogurt.git`
-
-### Vibe-Trading
-- 落地页链接: https://ainewsradar.xyz/zh/tools/7a3170ba6d51d19e
-- 官方/开源地址: https://vibetrading.wiki/?ref=ainewsradar
-- 一句话亮点: “Vibe-Trading：您的个人交易代理”
-- 核心概览: Vibe-Trading 是一款专注于 💼 金融看盘·求职与生活 的开源 AI 工具（本周新增 +1,549 Stars，总计 38,821 Stars）。“Vibe-Trading：您的个人交易代理”，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,549 Stars (总星标 38,821)', '🎯 针对 💼 金融看盘·求职与生活 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💼 金融看盘·求职与生活 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/Vibe-Trading.git`
 
 ### oh-my-pi
 - 落地页链接: https://ainewsradar.xyz/zh/tools/fe2cb26e6766533f
