@@ -1,26 +1,26 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-11-26T21:04:04.344955+00:00",
+  "updated_at": "2026-11-26T21:18:57.666434+00:00",
   "date": "2026-11-26",
   "total_articles": 1,
   "audit_funnel": {
-    "total_candidates": 11152,
-    "previously_published_excluded": 79,
-    "fresh_candidates_scanned": 11073,
-    "disqualified_count": 11072,
-    "qualified_count": 1,
-    "published_count": 1,
+    "total_candidates": 11156,
+    "previously_published_excluded": 80,
+    "fresh_candidates_scanned": 11076,
+    "disqualified_count": 11076,
+    "qualified_count": 3,
+    "published_count": 3,
     "pass_rate_percent": 0.0,
     "disqualified_breakdown": {
-      "previously_published": 79,
-      "no_authentic_media": 2880,
+      "previously_published": 80,
+      "no_authentic_media": 2883,
       "outdated_baselines": 17,
-      "below_score_threshold": 8177
+      "below_score_threshold": 8178
     },
     "disqualification_reasons_desc": [
-      "历史已发条目排除 (防止重复炒冷饭): 79 篇 (打标永久封存，0 Token 跳过)",
-      "缺少一手真实图文/视频凭证: 2880 篇 (按硬门禁扣40分一票否决)",
+      "历史已发条目排除 (防止重复炒冷饭): 80 篇 (打标永久封存，0 Token 跳过)",
+      "缺少一手真实图文/视频凭证: 2883 篇 (按硬门禁扣40分一票否决)",
       "引用过时淘汰陈旧基准: 17 篇 (扣20分)",
-      "观点平庸/缺乏硬核架构与落地账本 (<95分): 8177 篇"
+      "观点平庸/缺乏硬核架构与落地账本 (<95分): 8178 篇"
     ],
     "processed_marking_mode": "全量打标与去重流水线 (Ledger & Anti-Repeat Pipeline 已激活)",
     "token_economy_mode": "极速省Token分级防线: 98.8% 候选在本地规则层 0 Token 拦截，已发布文章永久排除防重复生成"
