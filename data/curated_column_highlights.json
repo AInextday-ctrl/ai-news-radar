@@ -1,39 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 15:50:49 UTC",
+  "generated_at": "2026-11-26 16:05:37 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 15:50:49 UTC",
+      "updated_at": "2026-11-26 16:05:37 UTC",
       "headline_item": {
-        "id": "1dee411fe8cf7550",
+        "id": "47698e1a3ddee53f",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "在 OpenAI 和 Anthropic 关闭数据大门后，一位中国人工智能开发者转而求助于 Google 和 Meta",
-        "title_en": "After OpenAI and Anthropic shut the door on their data, a Chinese AI developer is turning to Google and Meta instead",
-        "source": "THE DECODER",
-        "author": "Maximilian Schreiner",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_e1f5b5960c50c286.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_e1f5b5960c50c286.jpg",
-        "published_at": "2026-11-26T15:45:08+00:00",
-        "url": "https://the-decoder.com/after-openai-and-anthropic-shut-the-door-on-their-data-a-chinese-ai-developer-is-turning-to-google-and-meta-instead/",
-        "event_summary_zh": "中国人工智能公司 Z.AI 和 Moonshot AI 不得不推迟推出下一代旗舰模型，并正在寻找新的训练数据来源。在美国关闭了英伟达芯片的云漏洞、英伟达停止向东南亚发货以及美国公司打击",
-        "event_summary_en": "Chinese AI companies Z.AI and Moonshot AI have to delay their next flagship models and are looking for new sources of training data. The effects now reach beyond previously known delays, after the US closed the cloud loophole for Nvidia chips, Nvidia halted shipments to Southeast Asia, and US companies cracked down on model distillation.\n\nAs a result, Z.AI's roughly 3-trillion-parameter GLM-5.5 model, planned for November, is likely to slip into the first quarter of 2027, Reuters reports, citing",
+        "title_zh": "Avicena获超1亿美元融资，微LED光互连技术加速落地",
+        "title_en": "Avicena, which links AI chips with microLEDs instead of lasers, raised a $100M+ Series C led by Intervest, with participation from SK Hynix, Samsung, and AMD (Cristian Dina/The Next Web)",
+        "source": "The Next Web",
+        "author": "The Next Web",
+        "cover_image": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
+        "image_url": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
+        "published_at": "2026-11-26T15:50:27+00:00",
+        "url": "https://thenextweb.com/news/avicena-100m-series-c-microled-optical-interconnects-ai",
+        "event_summary_zh": "光互连技术初创公司Avicena完成超1亿美元C轮融资，将用于部署基于MicroLED的非激光数据传输平台",
+        "event_summary_en": "Sunnyvale-based Avicena has raised over $100M in Series C funding, led by InterVest with participation from SK Hynix, Samsung, and AMD. The company's LightBundle platform utilizes MicroLED arrays instead of traditional lasers to address bandwidth and power bottlenecks in data movement between processors and memory in AI clusters.",
         "core_facts_zh": [
-          "【核心事件】OpenAI 官方团队：在 OpenAI 和 Anthropic 关闭数据大门后，一位中国人工智能开发者转而求助于 Google 和 Meta",
-          "【关键技术规格】中国人工智能公司 Z.AI 和 Moonshot AI 不得不推迟推出下一代旗舰模型，并正在寻找新的训练数据来源。",
-          "【行业研判】在美国关闭了英伟达芯片的云漏洞、英伟达停止向东南亚发货以及美国公司打击模型蒸馏之后，影响现在超出了之前已知的延迟。"
+          "【核心事件】Avicena (CEO Kevin Pope), InterVest, SK海力士, 三星电子, AMD在AI数据中心基础设施领域：完成C轮超1亿美元融资，开发基于MicroLED的LightBundle光互连平台",
+          "【起因与机理】应对AI计算中铜互连在能耗、带宽密度及传输距离上的物理限制",
+          "【关键数据与实测】Avicena完成超1亿美元C轮融资以扩大LightBundle平台研发。",
+          "【各方立场与态度】AMD、SK海力士及三星的联合注资印证了该技术在下一代内存互连中的战略价值。"
         ],
         "core_facts_en": [
-          "[Core Event] Maximilian Schreiner: After OpenAI and Anthropic shut the door on their data, a Chinese AI developer is turning to Google and Meta instead",
-          "[Root Cause & Mechanism] As a result, Z.AI's roughly 3-trillion-parameter GLM-5.5 model, planned for November, is likely to slip into the first quarter of 2027, Reuters reports, citing.",
-          "[Key Technical Spec] Chinese AI companies Z.AI and Moonshot AI have to delay their next flagship models and are looking for new sources of training data.",
-          "[Industry Analysis] The effects now reach beyond previously known delays, after the US closed the cloud loophole for Nvidia chips, Nvidia halted shipments to Southeast Asia, and US companies cracked down on model distillation."
+          "[Core Event] Avicena (CEO Kevin Pope), InterVest, SK Hynix, Samsung, AMD (AI data center infrastructure): Raised $100M+ Series C to scale LightBundle, a MicroLED-based optical interconnect",
+          "[Root Cause & Mechanism] To overcome physical limitations of copper interconnects regarding energy, density, and reach",
+          "[Key Metrics] Avicena raised over $100M in Series C to scale LightBundle platform.",
+          "[Key Position & Outlook] Strategic investment from AMD, SK Hynix, and Samsung validates its potential for future memory interconnects."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "Avicena规避昂贵激光器的技术路线，直接切中光互连在大规模部署中的成本痛点，通过将光学器件整合至封装侧，有望重塑下一代高带宽内存（HBM）与计算核心间的互连架构。此轮融资中顶尖存储与处理器巨头的集体背书，预示着光互连已进入从实验室原型向系统级集成的商业化关键期。",
+        "industry_impact_en": "By bypassing expensive lasers, Avicena’s architecture addresses the primary cost barrier to widespread optical interconnect deployment, potentially reshaping the integration of HBM and compute dies. The backing from key memory and processor giants signals a shift from prototype development to systemic commercialization for optical interconnects."
       },
       "headlines": [
+        {
+          "id": "47698e1a3ddee53f",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Avicena获超1亿美元融资，微LED光互连技术加速落地",
+          "title_en": "Avicena, which links AI chips with microLEDs instead of lasers, raised a $100M+ Series C led by Intervest, with participation from SK Hynix, Samsung, and AMD (Cristian Dina/The Next Web)",
+          "source": "The Next Web",
+          "author": "The Next Web",
+          "cover_image": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
+          "image_url": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
+          "published_at": "2026-11-26T15:50:27+00:00",
+          "url": "https://thenextweb.com/news/avicena-100m-series-c-microled-optical-interconnects-ai",
+          "event_summary_zh": "光互连技术初创公司Avicena完成超1亿美元C轮融资，将用于部署基于MicroLED的非激光数据传输平台",
+          "event_summary_en": "Sunnyvale-based Avicena has raised over $100M in Series C funding, led by InterVest with participation from SK Hynix, Samsung, and AMD. The company's LightBundle platform utilizes MicroLED arrays instead of traditional lasers to address bandwidth and power bottlenecks in data movement between processors and memory in AI clusters.",
+          "core_facts_zh": [
+            "【核心事件】Avicena (CEO Kevin Pope), InterVest, SK海力士, 三星电子, AMD在AI数据中心基础设施领域：完成C轮超1亿美元融资，开发基于MicroLED的LightBundle光互连平台",
+            "【起因与机理】应对AI计算中铜互连在能耗、带宽密度及传输距离上的物理限制",
+            "【关键数据与实测】Avicena完成超1亿美元C轮融资以扩大LightBundle平台研发。",
+            "【各方立场与态度】AMD、SK海力士及三星的联合注资印证了该技术在下一代内存互连中的战略价值。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Avicena (CEO Kevin Pope), InterVest, SK Hynix, Samsung, AMD (AI data center infrastructure): Raised $100M+ Series C to scale LightBundle, a MicroLED-based optical interconnect",
+            "[Root Cause & Mechanism] To overcome physical limitations of copper interconnects regarding energy, density, and reach",
+            "[Key Metrics] Avicena raised over $100M in Series C to scale LightBundle platform.",
+            "[Key Position & Outlook] Strategic investment from AMD, SK Hynix, and Samsung validates its potential for future memory interconnects."
+          ],
+          "industry_impact_zh": "Avicena规避昂贵激光器的技术路线，直接切中光互连在大规模部署中的成本痛点，通过将光学器件整合至封装侧，有望重塑下一代高带宽内存（HBM）与计算核心间的互连架构。此轮融资中顶尖存储与处理器巨头的集体背书，预示着光互连已进入从实验室原型向系统级集成的商业化关键期。",
+          "industry_impact_en": "By bypassing expensive lasers, Avicena’s architecture addresses the primary cost barrier to widespread optical interconnect deployment, potentially reshaping the integration of HBM and compute dies. The backing from key memory and processor giants signals a shift from prototype development to systemic commercialization for optical interconnects."
+        },
         {
           "id": "1dee411fe8cf7550",
           "tag_zh": "📰 业界动态",
@@ -90,41 +120,12 @@
           ],
           "industry_impact_zh": "德州能源市场的这一波“抢跑”反映了算力基础设施对独立能源供应的强依赖性，企业倾向于自建发电设施以规避公共电网容量瓶颈。随着州政权更迭带来的政策转向，高能耗数据中心在地方准入与ESG监管层面将面临更加复杂的合规成本考量。",
           "industry_impact_en": "This regulatory rush highlights the high dependence of hyperscale data centers on self-supplied energy to bypass public grid constraints. As political shifts introduce stricter local permitting and potential climate compliance costs, the economic viability of power-intensive compute infrastructure in the region will face significant pressure."
-        },
-        {
-          "id": "49a48463b240287f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "FCC批准SpaceX部署百万颗轨道计算卫星",
-          "title_en": "FCC clears SpaceX to deploy up to 1 million Starmind satellites for orbital AI data centers by 2040",
-          "source": "THE DECODER",
-          "author": "Maximilian Schreiner",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_0b4e606a9cab87c6.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_0b4e606a9cab87c6.jpg",
-          "published_at": "2026-11-26T13:41:07+00:00",
-          "url": "https://the-decoder.com/fcc-clears-spacex-to-deploy-up-to-1-million-starmind-satellites-for-orbital-ai-data-centers-by-2040/",
-          "event_summary_zh": "美国联邦通信委员会批准SpaceX部署百万颗Starmind卫星，用于构建轨道AI算力集群以应对地面计算需求",
-          "event_summary_en": "The US Federal Communications Commission (FCC) has authorized SpaceX to deploy up to 1 million satellites as part of the 'Starmind' constellation. This initiative aims to establish orbital compute modules for processing AI data to alleviate terrestrial compute demand, with approvals covering radio links for satellite monitoring and control redundancy.",
-          "core_facts_zh": [
-            "【核心事件】美国联邦通信委员会（FCC）、SpaceX在美国通信监管机构/近地轨道：获批部署百万颗Starmind卫星用于轨道AI算力处理",
-            "【起因与机理】应对地面AI算力供给瓶颈，探索商业化太空计算基础设施",
-            "【关键数据与实测】获准部署100万颗Starmind计算卫星。",
-            "【各方立场与态度】射频链路与光学连接构成冗余监管架构。"
-          ],
-          "core_facts_en": [
-            "[Core Event] FCC, SpaceX: Authorized deployment of 1 million 'Starmind' satellites for AI compute",
-            "[Root Cause & Mechanism] Addressing terrestrial AI compute bottlenecks and pioneering space-based compute infrastructure",
-            "[Key Technical Spec] Approval for up to 1 million Starmind compute satellites.",
-            "[Key Position & Outlook] Radio links approved for redundant monitoring and control of the constellation."
-          ],
-          "industry_impact_zh": "将算力部署至轨道不仅是对冲地面电力与散热约束的激进尝试，更标志着SpaceX正在将低轨网络向计算基础设施转型。此举将重塑边缘计算的地理维度，但卫星在严苛环境下的AI算力密度及数据传输时延仍是制约商业落地的前沿技术挑战。",
-          "industry_impact_en": "Moving compute to orbit is an aggressive strategy to hedge against terrestrial constraints on power and thermal management, marking SpaceX’s pivot toward becoming an orbital compute provider. While this reshapes edge computing, significant technical barriers remain regarding AI compute density and latency in space-hardened environments."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 15:50:49 UTC",
+      "updated_at": "2026-11-26 16:05:37 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -235,7 +236,7 @@
           "id": "dcdb89791ae4558d",
           "name": "@DarioAmodei",
           "handle": "@DarioAmodei",
-          "role_zh": "AI 先锋极客",
+          "role_zh": "AI 先锋观察者",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/DarioAmodei",
           "topic_zh": "智能体架构与协同",
@@ -249,10 +250,10 @@
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "152.0k",
-            "likes": "38.2k",
-            "comments": "2.1k",
-            "retweets": "5.6k",
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
             "platform": "x",
             "verified": true
           },
@@ -291,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 15:50:49 UTC",
+      "updated_at": "2026-11-26 16:05:37 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
