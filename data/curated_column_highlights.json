@@ -1,40 +1,95 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 10:03:55 UTC",
+  "generated_at": "2026-11-26 10:21:54 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 10:03:55 UTC",
+      "updated_at": "2026-11-26 10:21:54 UTC",
       "headline_item": {
-        "id": "ae5d0522480ea7e5",
+        "id": "6ab3ffaf2c32c763",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "MiniMax AI模型被曝存在数据隐私漏洞",
-        "title_en": "Confidential Data Sent to Chinese AI Firm MiniMax Was Accessed Without Authorization, US Research Firm Identifies",
-        "source": "Reuters",
-        "author": "Reuters",
-        "cover_image": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
-        "image_url": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
-        "published_at": "2026-11-26T09:15:02+00:00",
-        "url": "https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/",
-        "event_summary_zh": "美资安公司Dragos调查发现，中国AI独角兽MiniMax的云服务存在用户隐私数据被第三方非法访问的重大风险",
-        "event_summary_en": "Dragos Chief Research Officer HD Moore revealed that AI startup MiniMax improperly stores private web links from user prompts despite opt-out requests. Security researchers observed unauthorized third-party access to these links, accompanied by suspicious traffic originating from Beijing, Shanghai, and the Moscow region, alongside attempts to exfiltrate private software code.",
+        "title_zh": "下一代仿生手就在这里——它们可以感觉到",
+        "title_en": "The next generation of bionic hands is here—and they can feel",
+        "source": "MIT Tech Review",
+        "author": "Jessica Hamzelou",
+        "cover_image": "https://ainewsradar.xyz/images/mittr_4e3bb94a63325ce2.jpg",
+        "image_url": "https://ainewsradar.xyz/images/mittr_4e3bb94a63325ce2.jpg",
+        "published_at": "2026-11-26T09:59:00+00:00",
+        "url": "https://www.technologyreview.com/2026/11/26/1149923/the-next-generation-of-bionic-hands-is-here-and-they-can-feel/",
+        "event_summary_zh": "阿维戴维森在青少年时期失去了左手。从那时起，他就装了一些假肢。但他的最新作品有所不同——它连接到了他前臂上部的神经，让他能够感受到压力",
+        "event_summary_en": "Avi Davidson lost his left hand as a teenager. Since then, he’s cycled through a few prosthetics. But his latest is different—it’s wired up to nerves in the upper part of his forearm and allows him to feel pressure. For the first time in years, he can use his left limb to handle delicate objects like grapes, eggs, and a loved one’s hand.\n\nDavidson, who is taking part in a clinical trial run by the University of Utah, is the ninth person to have this experimental device implanted in his arm. But",
         "core_facts_zh": [
-          "【核心事件】MiniMax（AI大模型厂商）；HD Moore（Dragos首席研究官）在企业云服务后端与API调用接口：未经授权的数据留存、第三方非法访问用户私密链接与代码",
-          "【起因与机理】后端数据处理机制存在安全缺陷，未能有效执行用户隐私保护指令",
-          "【关键技术规格】MiniMax后端处理机制被发现会非法留存用户私密请求链接。",
-          "【各方立场与态度】隐私保护缺失可能引发跨国合规危机及云端部署信任崩塌。"
+          "【核心事件】杰西卡·哈姆泽卢：下一代仿生手就在这里——它们可以感觉到",
+          "【核心事实细节】下一代仿生手就在这里——它们可以感觉到。",
+          "【行业研判】多年来，他第一次可以用左肢处理葡萄、鸡蛋和亲人的手等精致物体。"
         ],
         "core_facts_en": [
-          "[Core Event] MiniMax; HD Moore, CRO of Dragos: Unauthorized data retention and third-party access to sensitive URLs and code",
-          "[Root Cause & Mechanism] Security flaws in data handling and non-compliance with privacy-preservation settings",
-          "[Key Fact Detail] MiniMax backend improperly retains private user request links.",
-          "[Industry Impact & Outlook] Security flaws pose risks to cross-border compliance and cloud deployment trust."
+          "[Core Event] Jessica Hamzelou: The next generation of bionic hands is here—and they can feel",
+          "[Root Cause & Mechanism] Avi Davidson lost his left hand as a teenager.",
+          "[Key Fact Detail] The next generation of bionic hands is here—and they can feel.",
+          "[Industry Analysis] Davidson, who is taking part in a clinical trial run by the University of Utah, is the ninth person to have this experimental device implanted in his arm."
         ],
-        "industry_impact_zh": "此事件暴露出AI推理服务中隐私护栏的架构性缺失，特别是多模态模型在云端处理请求时缺乏严格的即时内存擦除机制。该漏洞将极大削弱企业级用户对国产大模型出海部署的信任度，预计监管层将针对AI训练数据源与推理请求的合规性审查进一步收紧。",
-        "industry_impact_en": "The incident highlights a critical architectural gap in AI inference services regarding the lack of real-time memory erasure for multimodal requests. This vulnerability significantly undermines enterprise trust in deploying domestic models globally, likely triggering stricter regulatory scrutiny over AI inference data handling and compliance."
+        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
       },
       "headlines": [
+        {
+          "id": "6ab3ffaf2c32c763",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "下一代仿生手就在这里——它们可以感觉到",
+          "title_en": "The next generation of bionic hands is here—and they can feel",
+          "source": "MIT Tech Review",
+          "author": "Jessica Hamzelou",
+          "cover_image": "https://ainewsradar.xyz/images/mittr_4e3bb94a63325ce2.jpg",
+          "image_url": "https://ainewsradar.xyz/images/mittr_4e3bb94a63325ce2.jpg",
+          "published_at": "2026-11-26T09:59:00+00:00",
+          "url": "https://www.technologyreview.com/2026/11/26/1149923/the-next-generation-of-bionic-hands-is-here-and-they-can-feel/",
+          "event_summary_zh": "阿维戴维森在青少年时期失去了左手。从那时起，他就装了一些假肢。但他的最新作品有所不同——它连接到了他前臂上部的神经，让他能够感受到压力",
+          "event_summary_en": "Avi Davidson lost his left hand as a teenager. Since then, he’s cycled through a few prosthetics. But his latest is different—it’s wired up to nerves in the upper part of his forearm and allows him to feel pressure. For the first time in years, he can use his left limb to handle delicate objects like grapes, eggs, and a loved one’s hand.\n\nDavidson, who is taking part in a clinical trial run by the University of Utah, is the ninth person to have this experimental device implanted in his arm. But",
+          "core_facts_zh": [
+            "【核心事件】杰西卡·哈姆泽卢：下一代仿生手就在这里——它们可以感觉到",
+            "【核心事实细节】下一代仿生手就在这里——它们可以感觉到。",
+            "【行业研判】多年来，他第一次可以用左肢处理葡萄、鸡蛋和亲人的手等精致物体。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jessica Hamzelou: The next generation of bionic hands is here—and they can feel",
+            "[Root Cause & Mechanism] Avi Davidson lost his left hand as a teenager.",
+            "[Key Fact Detail] The next generation of bionic hands is here—and they can feel.",
+            "[Industry Analysis] Davidson, who is taking part in a clinical trial run by the University of Utah, is the ninth person to have this experimental device implanted in his arm."
+          ],
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        },
+        {
+          "id": "ba06dcec909743e9",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "资料来源：领先的人工智能实验室正在研究重大的、未发布的算法突破，这些突破可能会破坏已部署的密码系统，但其确切性质尚不清楚",
+          "title_en": "Sources: leading AI labs are sitting on major, unreleased algorithmic breakthroughs that could break deployed cryptosystems, but their exact nature is unknown (Scott Aaronson/Shtetl-Optimized)",
+          "source": "Shtetl-Optimized",
+          "author": "Shtetl-Optimized",
+          "cover_image": "",
+          "image_url": "",
+          "published_at": "2026-11-26T09:50:19+00:00",
+          "url": "https://scottaaronson.blog/?p=10379",
+          "event_summary_zh": "Scott Aaronson / Shtetl 优化：\n资料来源：领先的人工智能实验室正在研究重大的、未发布的算法突破，这些突破可能会破坏已部署的密码系统，但它们的确切性质尚不清楚——我觉得我以前的帖子（和帖子标题）、播客和",
+          "event_summary_en": "I feel like my previous posts (and post titles), and podcasts, and talks, have failed to do full justice to the magnitude of what's now happening, so I'm trying again.",
+          "core_facts_zh": [
+            "【核心事件】资料来源：领先的人工智能实验室正在研究重大的、未发布的算法突破，这些突破可能会破坏已部署的密码系统，但其确切性质尚不清楚",
+            "【起因与机理】降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+            "【关键技术规格】资料来源在全球产业与技术前沿一线。",
+            "【行业研判】Scott Aaronson / Shtetl 优化：\n资料来源：领先的人工智能实验室正在研究重大的、未发布的算法突破，这些突破可能会破坏已部署的密码系统，但它们的确切性质尚不清楚——我觉得我以前的帖子（和帖子标题）和播客。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Sources: leading AI labs are sitting on major, unreleased algorithmic breakthroughs that could break deployed cryptosystems, but their exact nature is unknown (Scott Aaronson/Shtetl-Optimized)",
+            "[Context & Motivation] I feel like my previous posts (and post titles), and podcasts, and talks, have failed to do full justice to the magnitude of what's now happening, so I'm trying again..",
+            "[Key Fact] Scott Aaronson / Shtetl-Optimized:."
+          ],
+          "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        },
         {
           "id": "ae5d0522480ea7e5",
           "tag_zh": "📰 业界动态",
@@ -63,70 +118,12 @@
           ],
           "industry_impact_zh": "此事件暴露出AI推理服务中隐私护栏的架构性缺失，特别是多模态模型在云端处理请求时缺乏严格的即时内存擦除机制。该漏洞将极大削弱企业级用户对国产大模型出海部署的信任度，预计监管层将针对AI训练数据源与推理请求的合规性审查进一步收紧。",
           "industry_impact_en": "The incident highlights a critical architectural gap in AI inference services regarding the lack of real-time memory erasure for multimodal requests. This vulnerability significantly undermines enterprise trust in deploying domestic models globally, likely triggering stricter regulatory scrutiny over AI inference data handling and compliance."
-        },
-        {
-          "id": "5daa8e562c8347dc",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
-          "title_en": "Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
-          "source": "Conversations with Tyler",
-          "author": "Conversations with Tyler",
-          "cover_image": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
-          "image_url": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
-          "published_at": "2026-11-26T08:55:02+00:00",
-          "url": "https://conversationswithtyler.com/episodes/moxie-marlinspike/",
-          "event_summary_zh": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
-          "event_summary_en": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp",
-          "core_facts_zh": [
-            "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
-            "【起因与机理】端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-            "【调查与监管诉求】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。",
-            "【各方立场与态度】Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
-            "[Context & Motivation] Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype.",
-            "[Key Technical Spec] He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history.",
-            "[Industry Analysis] That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp."
-          ],
-          "industry_impact_zh": "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "147bb8d5738a87a4",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI基建挤占内存产能，消费电子成本攀升",
-          "title_en": "The Global Memory-Chip Shortage Will Cost Us All",
-          "source": "Wall Street Journal",
-          "author": "Wall Street Journal",
-          "cover_image": "https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg",
-          "published_at": "2026-11-26T07:30:01+00:00",
-          "url": "https://www.wsj.com/tech/memory-chip-shortage-ai-electronics-prices-e58a065a?st=Rx7QaC",
-          "event_summary_zh": "全球科技巨头对RAM需求激增，导致内存芯片供应紧缺，预计消费电子产品价格将在未来12至24个月内持续上涨",
-          "event_summary_en": "Global memory chip supplies are tightening as tech giants like Google, Microsoft, and Meta aggressively procure RAM for AI data center expansion. This shift has triggered a surge in consumer electronic manufacturing costs, with industry experts projecting significant retail price hikes and supply constraints lasting through 2027.",
-          "core_facts_zh": [
-            "【核心事件】Google、Microsoft、Meta等科技巨头在全球内存芯片供应链：大量抢购RAM资源，导致消费电子市场供应短缺，成品价格预期增长超20%",
-            "【起因与机理】AI算力中心对高带宽内存与存力资源的极致消耗",
-            "【关键数据与实测】I think the $600 laptop and cheap desktop market has pretty much disappeared at this point,” he said.。",
-            "【各方立场与态度】RAM短缺局面预计持续至2027年。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Tech giants including Google, Microsoft, and Meta (Global semiconductor supply chain): Aggressive procurement of RAM causing shortage and projected 20%+ price increases for consumer electronics",
-            "[Root Cause & Mechanism] Explosive demand for RAM in AI data centers",
-            "[Key Metrics] I think the $600 laptop and cheap desktop market has pretty much disappeared at this point,” he said.",
-            "[Key Position & Outlook] Shortage anticipated to persist until 2027."
-          ],
-          "industry_impact_zh": "存储芯片作为AI基础设施的隐性瓶颈，正在迫使消费电子产业面临成本结构重塑。这一供需失衡不仅是短期周期波动，更反映了存储厂商在AI溢价驱动下，战略性缩减传统DRAM产能以优先满足高利润数据中心需求的产业链阵痛。",
-          "industry_impact_en": "Memory chips are emerging as a hidden bottleneck in AI infrastructure, forcing a restructuring of the consumer electronics cost base. This imbalance highlights a strategic shift where manufacturers prioritize high-margin AI demand, effectively marginalizing traditional consumer segments."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 10:03:55 UTC",
+      "updated_at": "2026-11-26 10:21:54 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -293,7 +290,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 10:03:55 UTC",
+      "updated_at": "2026-11-26 10:21:54 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,7 +443,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "23.6k",
+          "stars": "23.7k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
