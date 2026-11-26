@@ -6,35 +6,64 @@
       "category": "news",
       "updated_at": "2026-11-26 00:40:45 UTC",
       "headline_item": {
-        "id": "3cda90686f85d5c6",
+        "id": "185c72a06f464cc2",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美42州总检察长联手阻击Character.ai数据拍卖",
-        "title_en": "Character.AI’s plan to auction off users’ private chats challenged by state AGs",
-        "source": "TechCrunch",
-        "author": "Sarah Perez",
-        "cover_image": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
-        "image_url": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
-        "published_at": "2026-11-25T23:50:04+00:00",
-        "url": "https://techcrunch.com/2026/11/25/state-ags-fight-character-ais-plan-to-auction-off-users-private-chats/",
-        "event_summary_zh": "Character.ai在破产程序中计划拍卖包含2100万用户隐私的聊天记录，引发42州总检察长集体诉讼干预",
-        "event_summary_en": "Character.ai, currently under Chapter 11 bankruptcy, intends to auction sensitive data from 21 million users, including 2.1 million minors, to Smirks and Pangs Acquisition LLC. A coalition of 42 state attorneys general, led by California AG Rob Bonta and Connecticut AG William Tong, is challenging this move, citing breaches of privacy commitments and potential violations of state chatbot safety laws effective January 2027.",
+        "title_zh": "美法院裁定亚马逊须对第三方缺陷商品召回负责",
+        "title_en": "Amazon loses its latest attempt to get out of handling more recall notices",
+        "source": "The Verge",
+        "author": "Emma Roth",
+        "cover_image": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
+        "image_url": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
+        "published_at": "2026-11-26T00:25:01+00:00",
+        "url": "https://www.theverge.com/tech/1042870/amazon-recall-order-cpsc",
+        "event_summary_zh": "美国马里兰州地方法院裁定亚马逊作为分销商，必须对经由其平台销售且存在重大安全隐患的超40万件第三方商品负责",
+        "event_summary_en": "The U.S. District Court for the District of Maryland ruled that Amazon acts as a distributor, not merely a logistics provider, regarding its 'Fulfilled by Amazon' services. Consequently, the company is mandated to comply with the U.S. Consumer Product Safety Commission's order to recall over 400,000 hazardous third-party products, including faulty carbon monoxide detectors and non-compliant children's apparel.",
         "core_facts_zh": [
-          "【核心事件】Character.ai（破产企业）、Smirks and Pangs Acquisition LLC（竞购方）、Rob Bonta（加州总检察长）在美国破产法院破产重组程序：试图拍卖2100万用户私人聊天记录及个人数据，监管机构要求停止该行为",
-          "【起因与机理】保护用户隐私，防止破产资产处置违背联邦及州消费保护法",
-          "【关键数据与实测】涉及2100万用户隐私，其中包含210万未成年人账户数据。",
-          "【行业影响与走向】法律风险点包括违背隐私协议及各州即将实施的聊天机器人监管法规。"
+          "【核心事件】亚马逊（Amazon）、美国消费品安全委员会（CPSC）、美国马里兰州地方法院在美国司法管辖区及电商平台流通环节：亚马逊败诉，须履行超40万件危险产品的召回责任",
+          "【起因与机理】法院认定亚马逊通过FBA深度参与销售流程，构成分销商而非单纯物流环节",
+          "【关键数据与实测】涉及超40万件缺陷产品，包括易燃睡衣及不合格探测器。",
+          "【各方立场与态度】电商平台合规边界从物流仓储向上游供应链准入延伸。"
         ],
         "core_facts_en": [
-          "[Core Event] Character.ai (Bankrupt entity), Smirks and Pangs Acquisition LLC (Bidder), Rob Bonta (CA AG) (U.S. Bankruptcy Court proceedings): Auction of 21 million user chat logs and personal data; AGs seeking injunction",
-          "[Root Cause & Mechanism] Prevent circumvention of consumer privacy protections and state-level safety statutes",
-          "[Key Metrics] Impacts 21M users, including 2.1M minors.",
-          "[Official Stance & Demand] Legal conflict with privacy promises and upcoming state-level chatbot regulations."
+          "[Core Event] Amazon, U.S. Consumer Product Safety Commission (CPSC), U.S. District Court for the District of Maryland: Amazon lost the legal battle and must facilitate the recall of over 400,000 hazardous products",
+          "[Root Cause & Mechanism] Court ruled Amazon acts as a distributor due to its active role in the FBA fulfillment process",
+          "[Key Fact Detail] Court mandates Amazon's liability for third-party products under FBA.",
+          "[Industry Impact & Outlook] Platform compliance scope expands from logistics to supply chain accountability."
         ],
-        "industry_impact_zh": "本案凸显了AI初创企业在破产重组中的资产价值与隐私权保护的尖锐对立，数据资产变现合法性已成为行业监管的核心盲区。未来破产托管协议需强制性纳入数据销毁或“禁止重售”条款，否则将引发针对AI存量数据集交易的系统性地方法律诉讼。",
-        "industry_impact_en": "The case highlights the conflict between monetizing AI datasets during insolvency and fundamental user privacy rights, marking a critical regulatory blind spot. Future bankruptcy protocols must mandate 'no-resale' or data-destruction clauses to avoid systemic legal challenges regarding the liquidation of proprietary AI training materials."
+        "industry_impact_zh": "此判决打破了电商平台长期以来借助“物流中立”身份避险的护城河，标志着监管机构正强制将平台责任延伸至全链路供应链管理。未来跨国电商需重构其风险内控体系，将高风险品类的准入审查与售后责任成本内化为商业运行的基础支出。",
+        "industry_impact_en": "This ruling erodes the 'logistics-neutral' legal defense long held by e-commerce giants, signifying a shift toward mandatory platform accountability across the entire supply chain. E-commerce platforms must now internalize the costs of product liability and risk-based vetting, fundamentally altering their operational cost structures for third-party marketplace sales."
       },
       "headlines": [
+        {
+          "id": "185c72a06f464cc2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美法院裁定亚马逊须对第三方缺陷商品召回负责",
+          "title_en": "Amazon loses its latest attempt to get out of handling more recall notices",
+          "source": "The Verge",
+          "author": "Emma Roth",
+          "cover_image": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
+          "image_url": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
+          "published_at": "2026-11-26T00:25:01+00:00",
+          "url": "https://www.theverge.com/tech/1042870/amazon-recall-order-cpsc",
+          "event_summary_zh": "美国马里兰州地方法院裁定亚马逊作为分销商，必须对经由其平台销售且存在重大安全隐患的超40万件第三方商品负责",
+          "event_summary_en": "The U.S. District Court for the District of Maryland ruled that Amazon acts as a distributor, not merely a logistics provider, regarding its 'Fulfilled by Amazon' services. Consequently, the company is mandated to comply with the U.S. Consumer Product Safety Commission's order to recall over 400,000 hazardous third-party products, including faulty carbon monoxide detectors and non-compliant children's apparel.",
+          "core_facts_zh": [
+            "【核心事件】亚马逊（Amazon）、美国消费品安全委员会（CPSC）、美国马里兰州地方法院在美国司法管辖区及电商平台流通环节：亚马逊败诉，须履行超40万件危险产品的召回责任",
+            "【起因与机理】法院认定亚马逊通过FBA深度参与销售流程，构成分销商而非单纯物流环节",
+            "【关键数据与实测】涉及超40万件缺陷产品，包括易燃睡衣及不合格探测器。",
+            "【各方立场与态度】电商平台合规边界从物流仓储向上游供应链准入延伸。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Amazon, U.S. Consumer Product Safety Commission (CPSC), U.S. District Court for the District of Maryland: Amazon lost the legal battle and must facilitate the recall of over 400,000 hazardous products",
+            "[Root Cause & Mechanism] Court ruled Amazon acts as a distributor due to its active role in the FBA fulfillment process",
+            "[Key Fact Detail] Court mandates Amazon's liability for third-party products under FBA.",
+            "[Industry Impact & Outlook] Platform compliance scope expands from logistics to supply chain accountability."
+          ],
+          "industry_impact_zh": "此判决打破了电商平台长期以来借助“物流中立”身份避险的护城河，标志着监管机构正强制将平台责任延伸至全链路供应链管理。未来跨国电商需重构其风险内控体系，将高风险品类的准入审查与售后责任成本内化为商业运行的基础支出。",
+          "industry_impact_en": "This ruling erodes the 'logistics-neutral' legal defense long held by e-commerce giants, signifying a shift toward mandatory platform accountability across the entire supply chain. E-commerce platforms must now internalize the costs of product liability and risk-based vetting, fundamentally altering their operational cost structures for third-party marketplace sales."
+        },
         {
           "id": "3cda90686f85d5c6",
           "tag_zh": "📰 业界动态",
@@ -92,35 +121,6 @@
           ],
           "industry_impact_zh": "此举标志着模型厂商正试图通过OS层面的渗透，将AI模型从单一聊天界面转化为替代轻量级软件分发的底层平台。通过将本地应用生命周期与Claude账号权限绑定，Anthropic正在建立一套基于生成式UI的生态闭环，实质上挑战了现有应用商店对软件交互与分发的垄断权。",
           "industry_impact_en": "This move signals a strategic shift from chat-based interfaces to OS-level platform integration, positioning the AI model as the underlying engine for software distribution. By binding local app lifecycles to Claude user accounts, Anthropic is constructing an AI-native ecosystem that implicitly challenges the dominance of traditional app stores in software interaction and delivery."
-        },
-        {
-          "id": "426751942b8f186f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "美国防部曾计划引用《国防生产法》干预英伟达高层更迭",
-          "title_en": "Hegseth, Pentagon officials floated using wartime law to reappoint Nvidia CEO",
-          "source": "Washington Post",
-          "author": "Elizabeth Dwoskin, Tara  Copp, Nancy Cook, and Natalie Allison",
-          "cover_image": "https://ainewsradar.xyz/images/wapo_358a20a24ed4e7c3.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wapo_358a20a24ed4e7c3.jpg",
-          "published_at": "2026-11-25T22:55:03+00:00",
-          "url": "https://www.washingtonpost.com/technology/2026/11/25/hegseth-pentagon-officials-floated-using-wartime-law-reappoint-nvidia-ceo/",
-          "event_summary_zh": "特朗普政府官员曾研讨利用《国防生产法》作为筹码，向英伟达施压以促成黄仁勋重返首席执行官岗位，以此维护AI关键产能安全",
-          "event_summary_en": "US Defense Secretary Pete Hegseth and Deputy Steve Feinberg explored invoking the 1950 Defense Production Act to pressure Nvidia’s board to reinstate Jensen Huang as CEO. The move was motivated by the administration’s perception of Nvidia as a national security pillar essential for maintaining dominance in the AI arms race against China.",
-          "core_facts_zh": [
-            "【核心事件】皮特·赫格斯思（国防部长）、史蒂夫·费恩伯格（高级副手）、黄仁勋（英伟达CEO）在特朗普政府内部闭门会议：拟利用《国防生产法》强行干预英伟达公司治理，以确保特定管理层留任",
-            "【起因与机理】视英伟达AI芯片技术为地缘政治博弈中的核心国家安全资产",
-            "【核心事实细节】美政府高层讨论调用《国防生产法》干预英伟达领导层重组。",
-            "【各方立场与态度】反映了美政府在关键技术领域对私营企业采取强力行政管控的激进倾向。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Pete Hegseth (Defense Secretary), Steve Feinberg (Deputy), Jensen Huang (Nvidia CEO): Considering using the DPA as leverage to force a change in corporate governance",
-            "[Root Cause & Mechanism] Strategic necessity of AI dominance and national security concerns",
-            "[Key Fact Detail] Administration officials explored the DPA to influence Nvidia's leadership.",
-            "[Key Position & Outlook] Reflects aggressive policy intervention in the private tech sector."
-          ],
-          "industry_impact_zh": "此事件标志着美国产业政策逻辑的重大转向，即国家力量开始直接渗透至私营科技公司的治理结构中，视关键技术领袖为国家战略资源。这虽能短期保障企业战略对齐国家安全需求，但也引发了关于技术独立性与行政过度干预的监管风险重估。",
-          "industry_impact_en": "This incident signals a paradigm shift in US industrial policy, where the state directly intervenes in the governance of critical tech firms, viewing key executives as national strategic assets. While this aligns corporate strategy with national security, it introduces significant long-term risks regarding regulatory overreach and market autonomy."
         }
       ]
     },
