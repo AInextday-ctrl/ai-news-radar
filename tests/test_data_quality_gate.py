@@ -183,7 +183,8 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(conflict_files) == 0, f"断言 9 失败：检测到 {len(conflict_files)} 个文件含有 Git 冲突标记: {conflict_files}"
     print(f"✅ 断言 9 通过: 零 Git 冲突与脏文本污染 (核心 public 与 data 文件零冲突标记)")
 
-    # 10. 零长推文严重截断门禁 (保证 items 与 grouped.celebrity 均达到无损多段落翻译水位)
+    # 10. 零长推文严重截断门禁 (保证 items 与 grouped.celebrity 均达到无损多段落翻译水位，且严禁 RSS/Syndication 280 字符截断)
+    from fetcher import is_tweet_text_truncated
     truncated_tweets = []
     all_check_items = list(payload.get("items", []))
     for g_k in ("celebrity", "news"):
@@ -198,8 +199,19 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             if not f_zh or len(f_zh) < len(f_en) * 0.25:
                 truncated_tweets.append(f"{it.get('author_handle', 'unknown')}: EN({len(f_en)}) vs ZH({len(f_zh)})")
 
+    active_celebs = list(grouped.get("celebrity", [])[:30]) + list(payload.get("viral_ticker_tweets", []))
+    seen_tr_ids = set()
+    for it in active_celebs:
+        tid = it.get("id") or it.get("url")
+        if tid in seen_tr_ids:
+            continue
+        seen_tr_ids.add(tid)
+        f_en = str(it.get("full_text_en") or "").strip()
+        if is_tweet_text_truncated(f_en):
+            truncated_tweets.append(f"{it.get('author_handle', 'unknown')}({it.get('id')}): RSS/Syndication截断({len(f_en)} chars): {f_en[-30:]}")
+
     assert len(truncated_tweets) == 0, f"断言 10 失败：检测到 {len(truncated_tweets)} 条推文/资讯存在严重截断: {truncated_tweets[:5]}"
-    print(f"✅ 断言 10 通过: 零长推文严重截断 (全量 {len(all_check_items)} 处推文/资讯 100% 同步多段落无损译文)")
+    print(f"✅ 断言 10 通过: 零长推文严重截断 (全量 {len(all_check_items)} 处推文/资讯 100% 同步多段落无损译文，且活跃推文零 280 字符截断)")
 
     # 11. 多段落排版无损保真门禁 (严禁将多段落推文抹平为0换行的单行文本块)
     flat_multiline_items = []
@@ -644,14 +656,22 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
                         break
             grouped[cat_k] = curr_items
 
-    # 1. 过滤垃圾/低熵推文
+    # 1. 过滤垃圾/低熵推文 & 补全被 RSS/Syndication 截断的长推文
+    from fetcher import is_tweet_text_truncated, enrich_tweets_media_parallel
     for cat in ["celebrity"]:
         if cat in grouped and isinstance(grouped[cat], list):
             grouped[cat] = [it for it in grouped[cat] if is_meaningful_tweet(it)]
+            trunc_batch = [it for it in grouped[cat][:30] if is_tweet_text_truncated(str(it.get("full_text_en") or ""))]
+            if trunc_batch:
+                print(f"🔧 [Self-Healing] 检测到 {len(trunc_batch)} 条截断推文，正在并发补全完整正文...")
+                enrich_tweets_media_parallel(trunc_batch, max_workers=10)
 
     # 2. 走马灯垃圾推文自愈
     if "viral_ticker_tweets" in data and isinstance(data["viral_ticker_tweets"], list):
         data["viral_ticker_tweets"] = [it for it in data["viral_ticker_tweets"] if is_meaningful_tweet(it)]
+        trunc_vt = [it for it in data["viral_ticker_tweets"] if is_tweet_text_truncated(str(it.get("full_text_en") or ""))]
+        if trunc_vt:
+            enrich_tweets_media_parallel(trunc_vt, max_workers=8)
 
     # 3. 过滤非 AI 视频与清洗历史视频时效
     clean_vids = []

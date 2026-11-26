@@ -208,9 +208,131 @@ def get_smart_cover_url(title: str, category: str = "news", source: str = "") ->
     return None
 
 
+def is_tweet_text_truncated(text: str) -> bool:
+    """Detects RSS/Syndication 280-char mid-word/mid-sentence tweet truncation."""
+    raw = str(text or "").strip()
+    if not raw:
+        return False
+    if re.search(r'https?://t\.co/\S+\s*$', raw):
+        return True
+    s = re.sub(r'https?://t\.co/\S+', '', raw).strip()
+    if 220 <= len(s) <= 295:
+        if re.search(r'(?:\.{2,}|…)\s*$', s):
+            return True
+        if (
+            not re.search(r'[.!?。！？"\'\)\]:;]\s*$', s)
+            and not re.search(r'[\U0001F300-\U0001FAFF]\s*$', s)
+            and not re.search(r'(?:@[A-Za-z0-9_]{2,}|#[A-Za-z0-9_]{2,}|https?://(?!t\.co/)\S+)\s*$', s)
+        ):
+            return True
+    return False
+
+
+def _get_local_proxy_url() -> Optional[str]:
+    """Returns local proxy URL when running outside GitHub Actions if port 7890 is listening."""
+    if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
+        return None
+    for env_k in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy"):
+        val = os.environ.get(env_k, "").strip()
+        if val:
+            return val
+    try:
+        s = socket.socket()
+        s.settimeout(0.25)
+        ok = s.connect_ex(("127.0.0.1", 7890)) == 0
+        s.close()
+        if ok:
+            return "http://127.0.0.1:7890"
+    except Exception:
+        pass
+    return None
+
+
+def _hydrate_tweet_from_fxtwitter(user: str, status_id: str, item: Dict[str, Any], client: Optional[httpx.Client] = None) -> bool:
+    """Hydrates full untruncated note_tweet text and official media via FxTwitter API."""
+    if httpx is None:
+        return False
+    proxy_url = _get_local_proxy_url()
+    close_client = False
+    if client is None or proxy_url:
+        try:
+            client = httpx.Client(
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
+                proxy=proxy_url,
+                timeout=8.0,
+            )
+        except TypeError:
+            client = httpx.Client(
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
+                timeout=8.0,
+            )
+        close_client = True
+    try:
+        r = client.get(f"https://api.fxtwitter.com/{user}/status/{status_id}")
+        if r.status_code != 200:
+            return False
+        payload = r.json()
+        tw = payload.get("tweet") if isinstance(payload, dict) else None
+        if not isinstance(tw, dict):
+            return False
+
+        fx_text = str(tw.get("text") or "").strip()
+        cur_en = str(item.get("full_text_en") or item.get("quote_en") or item.get("title_en") or "").strip()
+        if fx_text and (len(fx_text) > len(cur_en) + 12 or ("t.co/" in cur_en and len(fx_text) >= len(cur_en))):
+            item["full_text_en"] = fx_text
+            item["quote_en"] = fx_text
+            item["title_en"] = fx_text
+            item["summary_en"] = fx_text
+            item["content_snippet"] = fx_text
+            try:
+                zh_full = clean_news_text(free_translate_zh(fx_text), preserve_paragraphs=True)
+            except TypeError:
+                zh_full = clean_news_text(free_translate_zh(fx_text))
+            except Exception:
+                zh_full = ""
+            if zh_full and re.search(r'[\u4e00-\u9fff]', zh_full):
+                item["full_text_zh"] = zh_full
+                item["quote_zh"] = zh_full
+                item["summary_zh"] = zh_full
+                if not item.get("title_zh") or len(str(item.get("title_zh") or "")) > 60:
+                    item["title_zh"] = zh_full[:120]
+
+        media_obj = tw.get("media") or {}
+        if isinstance(media_obj, dict) and (not item.get("image_url") or "pbs.twimg.com" not in str(item.get("image_url") or "")):
+            fx_imgs = []
+            fx_video = None
+            has_vid = False
+            for ph in media_obj.get("photos") or []:
+                if isinstance(ph, dict) and ph.get("url"):
+                    fx_imgs.append(ph["url"])
+            for vd in media_obj.get("videos") or []:
+                if isinstance(vd, dict):
+                    has_vid = True
+                    if vd.get("thumbnail_url"):
+                        fx_imgs.append(vd["thumbnail_url"])
+                    if vd.get("url"):
+                        fx_video = fx_video or vd["url"]
+            if fx_imgs:
+                item["image_url"] = fx_imgs[0]
+                item["media_urls"] = fx_imgs
+            if fx_video:
+                item["video_url"] = fx_video
+            if has_vid:
+                item["has_video"] = True
+
+        item["fxtwitter_hydrated"] = True
+        return True
+    except Exception:
+        return False
+    finally:
+        if close_client:
+            client.close()
+
+
 def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = None) -> Dict[str, Any]:
     """
-    通过官方 Twitter Syndication API 与 VxTwitter 双通道，深度提取真实的推文原图、视频缩略图及 MP4 视频流。
+    通过 FxTwitter 与官方 Twitter Syndication API 双通道，深度补全被 RSS 截断的完整长推文正文，
+    并提取真实的推文原图、视频缩略图及 MP4 视频流。
     - 绝不使用任何 Unsplash 等虚构图库；
     - 若推文原本即为纯文字，则维持无图纯文字排版；
     - 若推文含图/含视频，则 100% 提取官方 pbs.twimg.com 原生素材。
@@ -234,6 +356,12 @@ def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = No
     if item.get("media_urls"):
         item["media_urls"] = [m for m in item["media_urls"] if "t.co/" not in str(m)]
 
+    cur_en = str(item.get("full_text_en") or item.get("quote_en") or item.get("title_en") or "").strip()
+    needs_text_hydrate = (
+        not item.get("fxtwitter_hydrated")
+        and (is_tweet_text_truncated(cur_en) or (110 <= len(cur_en) <= 295) or "t.co/" in cur_en or not cur_en)
+    )
+
     needs_enrich = (
         not item.get("image_url")
         or "t.co/" in existing_img
@@ -242,6 +370,12 @@ def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = No
         or "/video/" in u
         or "amplify_video_thumb" not in existing_img
     )
+    if not needs_text_hydrate and not needs_enrich and item.get("media_urls") and any("pbs.twimg.com" in str(m) for m in item["media_urls"]):
+        return item
+
+    if needs_text_hydrate:
+        _hydrate_tweet_from_fxtwitter(user, status_id, item, client)
+
     if not needs_enrich and item.get("media_urls") and any("pbs.twimg.com" in str(m) for m in item["media_urls"]):
         return item
 
@@ -2546,6 +2680,11 @@ def fetch_viral_social_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                             track_added += 1
             except Exception as e:
                 print(f"  ❌ [平台爆帖-{track_name}] 探测异常: {e}")
+
+    # 对新抓到的 X 爆帖并发补全完整长推文正文与原生媒体（防止 Google News RSS 255 字符截断）
+    unhydrated_x = [it for it in items if it.get("platform") == "x" and not it.get("fxtwitter_hydrated")]
+    if unhydrated_x:
+        enrich_tweets_media_parallel(unhydrated_x, max_workers=10)
 
     # 保证按发布时间倒序排列
     items.sort(key=lambda x: x.get("raw_published_at") or "", reverse=True)

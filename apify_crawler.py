@@ -432,8 +432,23 @@ def fetch_incremental_tweets(
             skipped_known += 1
             continue
 
-        # 3. 严格过滤低价值、无观点、无实质内容的水帖与寒暄碎碎念
-        tweet_text = (it.get("text") or it.get("fullText") or "").strip()
+        # 3. 严格过滤低价值、无观点、无实质内容的水帖与寒暄碎碎念（优先取完整 note_tweet/fullText）
+        note_obj = it.get("noteTweet") or it.get("note_tweet") or {}
+        note_text = ""
+        if isinstance(note_obj, dict):
+            note_text = (
+                note_obj.get("text")
+                or (note_obj.get("note_tweet_results") or {}).get("result", {}).get("text")
+                or ""
+            ).strip()
+        text_candidates = [
+            note_text,
+            (it.get("fullText") or "").strip(),
+            (it.get("full_text") or "").strip(),
+            (it.get("rawContent") or "").strip(),
+            (it.get("text") or "").strip(),
+        ]
+        tweet_text = max(text_candidates, key=len) if any(text_candidates) else ""
         if not tweet_text:
             continue
         if re.fullmatch(r'https?://\S+', tweet_text):
@@ -686,7 +701,14 @@ def fetch_incremental_tweets(
         }
 
         img_u = str(news_item.get("image_url") or "")
-        if not img_u or "t.co/" in img_u or "pbs.twimg.com" not in img_u or news_item.get("has_video"):
+        if (
+            not img_u
+            or "t.co/" in img_u
+            or "pbs.twimg.com" not in img_u
+            or news_item.get("has_video")
+            or (110 <= len(tweet_text) <= 295)
+            or "t.co/" in tweet_text
+        ):
             enrich_tweet_media(news_item)
 
         new_items.append(news_item)

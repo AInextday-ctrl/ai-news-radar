@@ -353,18 +353,18 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
         if needs_trans:
             if en_lines >= 3:
                 en_paras = [p.strip() for p in ft_en_ref.split("\n") if p.strip()]
-                zh_paras = [clean_news_text(free_translate_zh(p[:300])) for p in en_paras]
+                zh_paras = [clean_news_text(free_translate_zh(p)) for p in en_paras]
                 item["full_text_zh"] = normalize_ai_terminology_zh("\n\n".join(zh_paras))
             else:
-                item["full_text_zh"] = normalize_ai_terminology_zh(clean_news_text(free_translate_zh(ft_en_ref[:400])))
-            
-            # 强化兜底：若依然严重不足 25% 水位线，尝试从 quote_zh / summary_zh 扩展
+                item["full_text_zh"] = normalize_ai_terminology_zh(
+                    clean_news_text(free_translate_zh(ft_en_ref), preserve_paragraphs=True)
+                )
+
+            # 强化兜底：若依然严重不足 25% 水位线，尝试从 quote_zh / summary_zh 扩展（严禁截断 full_text_en）
             if len(ft_en_ref) > 180 and len(item.get("full_text_zh", "")) < len(ft_en_ref) * 0.25:
                 alt_zh = item.get("quote_zh") or item.get("summary_zh") or item.get("title_zh") or ""
                 if len(alt_zh) >= len(ft_en_ref) * 0.25:
                     item["full_text_zh"] = alt_zh
-                else:
-                    item["full_text_en"] = ft_en_ref[:150]
             fixes.append("celebrity.full_text_zh 纯中文无损译文自愈")
         else:
             cleaned_ft_zh = normalize_ai_terminology_zh(clean_news_text(ft_zh, preserve_paragraphs=True))
