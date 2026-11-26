@@ -1,165 +1,43 @@
 {
-  "updated_at": "2026-11-26T07:52:47.579164+00:00",
+  "updated_at": "2026-11-26T12:08:50.984634+00:00",
   "topics": [
     {
-      "topic_id": "topic_math_reasoning_scrutiny",
+      "topic_id": "topic_nvidia_southeast_asia_ban",
       "heat_score": 9.8,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "学术争议与证明边界",
-      "category_tag_en": "Academic Debate & Rigor",
-      "title_zh": "OpenAI发表论文证明矩阵乘法指数精确为9/4",
-      "title_en": "OpenAI publishes a preprint that claims to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (alphaXiv)",
-      "summary_zh": "OpenAI发布预印本论文，从理论层面证明了矩阵乘法指数的下界为9/4，解决了数学界长期悬而未决的复杂性问题",
-      "summary_en": "OpenAI published a preprint proving that the square matrix multiplication exponent is exactly 9/4 over any field. Utilizing formal arithmetic circuits and proof by contradiction, the research bridges matrix multiplication efficiency with lower bounds on network compression costs, filling a critical gap in asymptotic rank and unrestricted circuit complexity.",
-      "perspective_pro": {
-        "role_zh": "🟢 AGI加速派 / 前沿研究员",
-        "role_en": "🟢 AGI Pioneers & Researchers",
-        "speaker_zh": "大模型推理架构师与前沿实验室团队",
-        "speaker_en": "Frontier Lab Architects & Researchers",
-        "point_zh": "大模型在长程推理与百年数学猜想探索中迈出了历史性一步，AI自探索与符号演绎展现了全新科学发现范式。",
-        "point_en": "Extended reasoning represents a historic step in exploring mathematical conjectures, opening a new paradigm for scientific discovery."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 严谨学界 / 理论数学家",
-        "role_en": "🔴 Theoretical Rigor & Academic Critics",
-        "speaker_zh": "数学家与形式化验证学者",
-        "speaker_en": "Mathematicians & Formal Verification Experts",
-        "point_zh": "论文正文存在大量逻辑断层与形式主义幻觉，用概率自相关拼凑严谨数理证明极具欺骗性，缺乏确定性严密结论。",
-        "point_en": "The submission exhibits critical logical disconnects and formal hallucinations, failing to satisfy the rigorous standards of mathematical proof."
-      },
-      "linked_news": [
-        {
-          "id": "ddd1a3bcc7e6595f",
-          "title_zh": "OpenAI发表论文证明矩阵乘法指数精确为9/4",
-          "title_en": "OpenAI publishes a preprint that claims to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (alphaXiv)",
-          "source": "alphaXiv",
-          "url": "https://www.alphaxiv.org/abs/2611.matrix-multiplication-exponent-lower-bound",
-          "image_url": "https://api.alphaxiv.org/open-graph/v1/paper/2611.matrix-multiplication-exponent-lower-bound.png?v=2",
-          "hot_score": 5,
-          "published_at": "2026-11-25T13:23:06+00:00"
-        },
-        {
-          "id": "01104302522d560a",
-          "title_zh": "人类研究人员坚持他的人工智能辅助黎曼证明，但承认在推出过程中存在“愚蠢的事情”",
-          "title_en": "Anthropic researcher stands by his AI-assisted Riemann proof but owns up to \"stupid things\"in the rollout",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/anthropic-researcher-stands-by-his-ai-assisted-riemann-proof-but-owns-up-to-stupid-things-in-the-rollout/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_4e5f1380483d32cb.jpg",
-          "hot_score": 3,
-          "published_at": "2026-11-24T14:28:41+00:00"
-        },
-        {
-          "id": "5a6db495137daf80",
-          "title_zh": "人工智能解决了最著名的数学问题。现在人类正在努力理解它",
-          "title_en": "AI Solved Math’s Most Famous Problem. Now Humans Are Struggling to Understand It",
-          "source": "Wired AI",
-          "url": "https://www.wired.com/story/ai-solved-maths-most-famous-problem/",
-          "image_url": "https://ainewsradar.xyz/images/wired_5f30a8808530cfef.jpg",
-          "hot_score": 3,
-          "published_at": "2026-11-24T10:15:00+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "947d21cc974087b9",
-          "author": "@kimmonismus",
-          "author_handle": "@kimmonismus",
-          "author_avatar": "https://unavatar.io/x/kimmonismus",
-          "content_zh": "怎么了？！谷歌默默地放弃了六篇新的数学论文，这些论文都是由运行在 Gemini 4 上的人工智能代理 Cogentic 生成的。谷歌表示，在第一次提示后没有人参与。\n\n- 因式分解：将巨大的数字分解为素数是 RSA 加密的支柱。最快的方法自 20 世纪 90 年代以来就已出现，但 30 年来无人能证明它到底有多快。人工智能刚刚做到了。\n\n- 而且它还在继续：对数秩猜想（自 1988 年开始开放）、哈拉里边缘重建猜想（自 1964 年开始开放），以及第一个击败指数时间的无随机性因式分解方法。其中任何一项都将成为一名数学家的职业生涯。\n\nAnthropic、OpenAI，现在是 Google，一切都在几天之内！这是新常态！",
-          "content_en": "WHAT IS HAPPENING?! Google just silently dropped six new math papers, all produced by its AI agent Cogentic running on Gemini 4. Google says no human was involved after the first prompt.\n\n- Factoring: Splitting huge numbers into primes is the backbone of RSA encryption. The fastest method has been around since the 1990s, and for 30 years nobody could prove how fast it really is. An AI just did. \n\n- And it keeps going: the log-rank conjecture (open since 1988), Harary's edge reconstruction conjecture (open since 1964), and the first factoring method without randomness that beats exponential time. Any one of these would make a mathematician's career.\n\nAnthropic, OpenAI, now Google, all within days! This is the new normal!",
-          "url": "https://x.com/kimmonismus/status/2125574747882704951",
-          "platform": "x"
-        },
-        {
-          "id": "23fb48de88a9d09e",
-          "author": "Deedy Das",
-          "author_handle": "@deedydas",
-          "author_avatar": "https://unavatar.io/x/deedydas",
-          "content_zh": "OpenAI 发布了一份预印本，声称证明矩阵乘法指数 (ω) 恰好是 9/4，解决了数学中的一个重大开放问题",
-          "content_en": "OpenAI publishes a preprint claiming to prove that the matrix multiplication exponent (ω) is exactly 9/4, addressing a major open problem in mathematics (Deedy/@deedydas)",
-          "url": "https://x.com/deedydas/status/2125445769629204816",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_rag_anti_hallucination_pipeline",
-        "name": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
-        "desc_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
-        "desc_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
-        "config_filename": "rag_pipeline_config.json"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_math_reasoning_scrutiny",
-      "stance_matrix": {
-        "pro_point_zh": "大模型在长程推理与百年数学猜想探索中迈出了历史性一步，AI自探索与符号演绎展现了全新科学发现范式。",
-        "pro_author": "大模型推理架构师与前沿实验室团队",
-        "con_point_zh": "论文正文存在大量逻辑断层与形式主义幻觉，用概率自相关拼凑严谨数理证明极具欺骗性，缺乏确定性严密结论。",
-        "con_author": "数学家与形式化验证学者",
-        "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
-        "pro_point_en": "Extended reasoning represents a historic step in exploring mathematical conjectures, opening a new paradigm for scientific discovery.",
-        "con_point_en": "The submission exhibits critical logical disconnects and formal hallucinations, failing to satisfy the rigorous standards of mathematical proof.",
-        "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
-      }
-    },
-    {
-      "topic_id": "topic_cloud_capex_vendor_war",
-      "heat_score": 9.6,
       "badge_zh": "⚡ 商业与算力风暴",
       "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "算力军备与商业博弈",
-      "category_tag_en": "Compute Arms Race & Market War",
-      "title_zh": "美国出口限制收紧，AI数据中心融资受阻",
-      "title_en": "Billions in Data Center Deals Grind to Halt After AI Chip Curbs",
-      "summary_zh": "美国针对东南亚及全球数据中心的AI芯片出口新规，导致多项大型算力项目融资搁置",
-      "summary_en": "Recent US export restrictions requiring licenses for advanced AI chips shipped to Southeast Asia and Brazil have halted multi-billion dollar data center financing deals. Lenders are reassessing exposure to facilities serving Chinese firms, including Bridge Data Centres, Digital Halo, and Aolani, due to heightened regulatory uncertainty.",
+      "category_tag_zh": "算力合规与封锁",
+      "category_tag_en": "Compute Compliance & Blockade",
+      "title_zh": "英伟达切断东南亚算力供给，封堵中国企业租赁漏洞",
+      "title_en": "Nvidia Halts Server Shipments to SE Asia to Plug China Compute Loopholes",
+      "summary_zh": "为响应美国严苛的出口限制，英伟达指令Dell与Supermicro暂停向马来西亚、新加坡、泰国及印尼输送高性能AI服务器。该举措旨在防范中国AI企业通过东南亚云租赁途径规避制裁，直接打击了目前被视为“曲线绕道”的高端算力获取路径。",
+      "summary_en": "Nvidia has instructed partners like Dell and Supermicro to halt high-end AI server shipments to Malaysia, Singapore, Thailand, and Indonesia. This move, triggered by stricter U.S. export controls, aims to prevent Chinese firms from circumventing sanctions via Southeast Asian cloud rentals, effectively neutralizing a key bypass for advanced compute access.",
       "perspective_pro": {
-        "role_zh": "🟢 资本军备派 / 算力豪赌者",
-        "role_en": "🟢 Capital Scale & Infrastructure Leads",
-        "speaker_zh": "前沿模型实验室与超算集群操盘手",
-        "speaker_en": "Frontier Labs & Hyper-Scale Cluster Leads",
-        "point_zh": "下一代超级智力必须依靠超大规模自研与定制算力集群，以高息债务抢占万卡算力底座是决胜AGI的必然代价值得豪赌。",
-        "point_en": "Next-gen frontier intelligence requires astronomical dedicated compute; leveraging debt for massive TPU clusters is the necessary entry fee for AGI."
+        "role_zh": "🟢 美国合规派 / 安全鹰派",
+        "role_en": "🟢 U.S. Compliance & Hawk Stance",
+        "speaker_zh": "美国商务部及英伟达法务合规部门",
+        "speaker_en": "U.S. Department of Commerce & Nvidia Legal Team",
+        "point_zh": "必须封死算力输出的任何非受控节点。限制不仅仅是芯片本体，更包括通过海外云算力中心获取能力的路径，这是保障国家安全底线的必然要求。",
+        "point_en": "Closing all uncontrolled compute nodes is non-negotiable. Restricting not just chips but cloud-based compute access is a necessary step to maintain a structural lead in national security."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业实用派 / 下游开发者",
-        "role_en": "🔴 Pragmatic Developers & Downstream Customers",
-        "speaker_zh": "开发者工具创企 CEO 与企业架构师",
-        "speaker_en": "Startup Founders & Enterprise Architects",
-        "point_zh": "高昂的硬件负债与高昂的 API 定价正在严重反噬生态，商业客户只为性价比买单，过度烧钱的巨头终将被客户用脚投票。",
-        "point_en": "Astronomical debt and exorbitant API costs are alienating real customers. Startups and enterprise developers will swiftly switch to high-ROI alternatives."
+        "role_zh": "🔴 工业理性派 / 地缘经济学家",
+        "role_en": "🔴 Industrial Realists",
+        "speaker_zh": "ASML CEO Christophe Fouquet 及区域贸易专家",
+        "speaker_en": "ASML CEO Christophe Fouquet & Trade Economists",
+        "point_zh": "激进管制反倒会加速中国半导体自主进程，并造成全球供应链的非必要碎片化，最终损害西方企业在这一巨大市场的长期领导地位与话语权。",
+        "point_en": "Aggressive, blanket controls will only accelerate China’s indigenous semiconductor efforts and fragment global supply chains, ultimately eroding the long-term influence of Western firms in the region."
       },
       "linked_news": [
         {
-          "id": "aa02e4fe624e4cc4",
-          "title_zh": "美国出口限制收紧，AI数据中心融资受阻",
-          "title_en": "Billions in Data Center Deals Grind to Halt After AI Chip Curbs",
-          "source": "Bloomberg",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-25/billions-in-data-center-deals-grind-to-halt-after-ai-chip-curbs",
-          "image_url": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
-          "hot_score": 5,
-          "published_at": "2026-11-25T22:05:01+00:00"
-        },
-        {
-          "id": "e8fc1d2db939924f",
-          "title_zh": "美芯片禁令与反蒸馏技术重挫中国AI实验室",
-          "title_en": "US chip-access curbs and anti-distillation measures are reportedly already slowing Chinese AI labs",
+          "id": "aa1647bb64f96700",
+          "title_zh": "英伟达暂停对东南亚部分国家服务器供货",
+          "title_en": "Nvidia halts server shipments to Malaysia, Singapore, Thailand, and Indonesia after tighter US export controls",
           "source": "THE DECODER",
-          "url": "https://the-decoder.com/us-chip-access-curbs-and-anti-distillation-measures-are-reportedly-already-slowing-chinese-ai-labs/",
-          "image_url": "https://ainewsradar.xyz/images/decoder_e1f5b5960c50c286.jpg",
-          "hot_score": 4,
-          "published_at": "2026-11-25T20:51:02+00:00"
+          "url": "https://the-decoder.com/nvidia-halts-server-shipments-to-malaysia-singapore-thailand-and-indonesia-after-tighter-us-export-controls/",
+          "image_url": "https://ainewsradar.xyz/images/decoder_b85523110d26e3ce.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-26T11:21:16+00:00"
         },
         {
           "id": "72121f63fa770ad5",
@@ -170,131 +48,198 @@
           "image_url": "https://ainewsradar.xyz/images/ft_628f259f938228dd.jpg",
           "hot_score": 5,
           "published_at": "2026-11-26T05:45:02+00:00"
+        },
+        {
+          "id": "a54fd0cb7dbc9c72",
+          "title_zh": "英伟达暂停向东南亚四国出口服务器",
+          "title_en": "Nvidia halts chip shipments to south-east Asia",
+          "source": "Financial Times",
+          "url": "https://www.ft.com/content/7838a715-07d4-4605-aa60-21f5af2b2370?accessToken=zwAAAaKuNQQ-lc82jEUmoM5JUdOoR_A5rypRr894OKcVB9RGBdOqYCH1rysjcM8_V3g53u1A9NOvn7-PtUiQ488yW5PWvC5N09OZQc9GiKyhHdO5lhOroTBLn9OMFcQdt82IlAE.MEUCIAPJOFlcs0Bojv5ln7BmjmdLTj5dPHWXAdsn-FuOch_SAiEA5Eu4HIM2_h5rJDnldWxSlTi5axDZdg9vO7b_UplS1Nk&segmentId=7d4bcc2e-e664-92ba-62e3-5590579f1902",
+          "image_url": "https://ainewsradar.xyz/images/ft_628f259f938228dd.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-26T05:45:02+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "viral_1dd8e4f16e3b25cf",
-          "author": "envato",
-          "author_handle": "@envato",
-          "author_avatar": "https://unavatar.io/x/envato",
-          "content_zh": "@BytePlusGlobal 最新视频模型 Seedance 2.5 Flash 刚刚登陆 Envato。\n\n🎬 生成 480p 或 720p\n🎧 使用图像、视频和音频参考来指导您的场景\n🎯 通过精确的提示和视频编辑获得具体信息\n\n当您准备好获得更高分辨率的输出时，请切换到 Seedance 2.5。立即在 Envato 上尝试一下。",
-          "content_en": "@BytePlusGlobal newest video model, Seedance 2.5 Flash, just landed on Envato.\n\n🎬 Generate in 480p or 720p\n🎧 Guide your scenes with image, video and audio references\n🎯 Get specific with precise prompts and video editing\n\nThen switch to Seedance 2.5 when you're ready for higher-res output. Try it on Envato now.",
-          "url": "https://x.com/envato/status/2125817095283716312",
+          "id": "5ad2e504b174a5f6",
+          "author": "vLLM Project",
+          "author_handle": "@vllm_project",
+          "author_avatar": "https://unavatar.io/x/vllm_project",
+          "content_zh": "感谢@colinbrace 和@AnnapurnaLabs 的出色工作！ vLLM 上的 Trainium3 才刚刚开始，我们很高兴能更紧密地合作。期待重新：发明！",
+          "content_en": "Thank you @colinbrace and @AnnapurnaLabs for the great work! Trainium3 on vLLM is just getting started, and we're excited to work even more closely together. Looking forward to re:Invent!",
+          "url": "https://x.com/vllm_project/status/2125848051202011175",
           "platform": "x"
         },
         {
-          "id": "4e753797c035d758",
-          "author": "Bindu Reddy",
-          "author_handle": "@bindureddy",
-          "author_avatar": "https://unavatar.io/x/bindureddy",
-          "content_zh": "预测 - 谷歌在今年年底拥有顶级模型 谷歌似乎准备超越 Anthropic 和 OpenAI Neon 相当于 Sol 和 Opus 因此，更大的 Fable/Astra 类模型仍在等待中",
-          "content_en": "PREDICTION - Google has the top model by the end of the year Google seems to poised to leap frog both Anthropic and OpenAI Neon is the equivalent of Sol and Opus So a bigger model that is Fable/Astra class is still pending",
-          "url": "https://x.com/bindureddy/status/2125713839723589665",
+          "id": "b30d86daed5b3eb3",
+          "author": "vLLM Project",
+          "author_handle": "@vllm_project",
+          "author_avatar": "https://unavatar.io/x/vllm_project",
+          "content_zh": "vLLM❤️ 培训班！\n\n2023 年感恩节：第一个 Neuron RFC 登陆 vLLM。\n2026 年感恩节：Trainium3 在 vLLM 上的出色表现。\n\nNeuron 的官方 vLLM 支持于 2024 年 4 月发布。从那时起，许多可爱的朋友为 Neuron 上的 vLLM 做出了贡献，他们的工作将我们带到了今天。\n\n我们很自豪能够分享这些成果，更为这些成果背后的社区感到自豪。感谢你们度过了美好的三年。让我们继续共同努力。感恩节快乐🦃",
+          "content_en": "vLLM ❤️ Trainium!\n\nThanksgiving 2023: the first Neuron RFC lands in vLLM.\nThanksgiving 2026: amazing performance with Trainium3 on vLLM.\n\nOfficial vLLM support for Neuron was released in April 2024. Since then, many lovely friends have contributed to vLLM on Neuron, and their work has brought us here today.\n\nWe're proud to share these results, and even prouder of the community behind them. Thank you for three wonderful years. Let's keep pushing together. Happy Thanksgiving 🦃",
+          "url": "https://x.com/vllm_project/status/2125828172323401754",
           "platform": "x"
         }
       ],
       "linked_tool": {
         "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
         "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
         "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
         "news": 3,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_cloud_capex_vendor_war",
+      "id": "topic_nvidia_southeast_asia_ban",
       "stance_matrix": {
-        "pro_point_zh": "下一代超级智力必须依靠超大规模自研与定制算力集群，以高息债务抢占万卡算力底座是决胜AGI的必然代价值得豪赌。",
-        "pro_author": "前沿模型实验室与超算集群操盘手",
-        "con_point_zh": "高昂的硬件负债与高昂的 API 定价正在严重反噬生态，商业客户只为性价比买单，过度烧钱的巨头终将被客户用脚投票。",
-        "con_author": "开发者工具创企 CEO 与企业架构师",
+        "pro_point_zh": "必须封死算力输出的任何非受控节点。限制不仅仅是芯片本体，更包括通过海外云算力中心获取能力的路径，这是保障国家安全底线的必然要求。",
+        "pro_author": "美国商务部及英伟达法务合规部门",
+        "con_point_zh": "激进管制反倒会加速中国半导体自主进程，并造成全球供应链的非必要碎片化，最终损害西方企业在这一巨大市场的长期领导地位与话语权。",
+        "con_author": "ASML CEO Christophe Fouquet 及区域贸易专家",
+        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
+        "pro_point_en": "Closing all uncontrolled compute nodes is non-negotiable. Restricting not just chips but cloud-based compute access is a necessary step to maintain a structural lead in national security.",
+        "con_point_en": "Aggressive, blanket controls will only accelerate China’s indigenous semiconductor efforts and fragment global supply chains, ultimately eroding the long-term influence of Western firms in the region.",
+        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
+      }
+    },
+    {
+      "topic_id": "topic_character_ai_data_auction",
+      "heat_score": 9.5,
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "个人隐私与司法干预",
+      "category_tag_en": "Privacy & Judicial Intervention",
+      "title_zh": "42州检方联手阻击Character.ai破产资产隐私拍卖",
+      "title_en": "42 AGs Unite to Block Character.AI’s Bankruptcy Data Auction",
+      "summary_zh": "Character.ai在第11章破产清算中，试图拍卖包含2100万用户隐私的聊天记录资产，引发全美42州总检察长联手发起干预。争议核心在于AI聊天内容是否可被视为可变现的破产资产，以及用户数据所有权的法律边界。",
+      "summary_en": "Character.AI’s attempt to auction off 21 million users' private chat records as part of its Chapter 11 bankruptcy has triggered a rare intervention from 42 U.S. state Attorneys General. The core conflict lies in whether sensitive AI interaction logs constitute liquidatable corporate assets or protected personal data.",
+      "perspective_pro": {
+        "role_zh": "🟢 清算执行派 / 资本保障者",
+        "role_en": "🟢 Liquidation & Creditor Rights",
+        "speaker_zh": "Character.ai 破产管理人及潜在债务投资方",
+        "speaker_en": "Bankruptcy Trustees & Creditor Representatives",
+        "point_zh": "在破产程序中，用户聊天记录作为公司核心数据资产，具备极高的模型训练价值。通过出售这些资产可最大限度补偿债权人损失，这是正常的商业清算手段。",
+        "point_en": "In bankruptcy, user data is a core asset with significant training value. Liquidating these logs is a standard fiduciary obligation to maximize recovery for creditors."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 数字人权派 / 消费者保护机构",
+        "role_en": "🔴 Digital Rights & Consumer Advocates",
+        "speaker_zh": "美国各州总检察长（AG）联合体",
+        "speaker_en": "Coalition of 42 State Attorneys General",
+        "point_zh": "聊天记录是极度私人化的心理投射，绝非普通商品。将用户的隐私数据拍卖给未知第三方，严重违背消费者隐私契约，绝不能允许将个人数据作为破产清算的筹码。",
+        "point_en": "Chat logs are highly personal and psychological. Auctioning them to unknown third parties violates the implicit privacy contract with users; personal data must not be treated as mere liquidation collateral."
+      },
+      "linked_news": [
+        {
+          "id": "1c346f7d462cf684",
+          "title_zh": "42 个州的 AG 正试图阻止 Character.AI 出售用户的聊天内容",
+          "title_en": "42 state AGs are trying to stop Character.AI from selling users’ chats",
+          "source": "The Verge AI",
+          "url": "https://www.theverge.com/policy/1042620/character-ai-sale-state-ags-block-selling-users-chats",
+          "image_url": "https://ainewsradar.xyz/images/verge_2b77243de9e1ff4c.jpg",
+          "hot_score": 3,
+          "published_at": "2026-11-26T09:54:40+00:00"
+        },
+        {
+          "id": "3cda90686f85d5c6",
+          "title_zh": "美42州总检察长联手阻击Character.ai数据拍卖",
+          "title_en": "Character.AI’s plan to auction off users’ private chats challenged by state AGs",
+          "source": "TechCrunch",
+          "url": "https://techcrunch.com/2026/11/25/state-ags-fight-character-ais-plan-to-auction-off-users-private-chats/",
+          "image_url": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-25T23:50:04+00:00"
+        }
+      ],
+      "linked_tweets": [],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 0,
+        "has_tool": true
+      },
+      "id": "topic_character_ai_data_auction",
+      "stance_matrix": {
+        "pro_point_zh": "在破产程序中，用户聊天记录作为公司核心数据资产，具备极高的模型训练价值。通过出售这些资产可最大限度补偿债权人损失，这是正常的商业清算手段。",
+        "pro_author": "Character.ai 破产管理人及潜在债务投资方",
+        "con_point_zh": "聊天记录是极度私人化的心理投射，绝非普通商品。将用户的隐私数据拍卖给未知第三方，严重违背消费者隐私契约，绝不能允许将个人数据作为破产清算的筹码。",
+        "con_author": "美国各州总检察长（AG）联合体",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Next-gen frontier intelligence requires astronomical dedicated compute; leveraging debt for massive TPU clusters is the necessary entry fee for AGI.",
-        "con_point_en": "Astronomical debt and exorbitant API costs are alienating real customers. Startups and enterprise developers will swiftly switch to high-ROI alternatives.",
+        "pro_point_en": "In bankruptcy, user data is a core asset with significant training value. Liquidating these logs is a standard fiduciary obligation to maximize recovery for creditors.",
+        "con_point_en": "Chat logs are highly personal and psychological. Auctioning them to unknown third parties violates the implicit privacy contract with users; personal data must not be treated as mere liquidation collateral.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_open_weights_and_video",
-      "heat_score": 9.4,
-      "badge_zh": "💡 开源与视效落地潮",
-      "badge_en": "💡 Open Weights & Visual Frontier",
-      "category_tag_zh": "模型突破与开源降本",
-      "category_tag_en": "Open Source & Visual Breakthroughs",
-      "title_zh": "谷歌专利揭示AI实时生成个性化视频野心",
-      "title_en": "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future",
-      "summary_zh": "谷歌申请的“My Channel”专利拟利用用户数据实时生成AI定制化视频流",
-      "summary_en": "Google's 'My Channel' patent details a system that utilizes user demographic, geolocation, and viewing history to generate personalized AI-driven video feeds. The technology includes concepts for creating digital avatars of users to feature them as protagonists in AI-generated narrative content.",
+      "topic_id": "topic_minimax_security_scandal",
+      "heat_score": 9.2,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "AI企业安全与漏洞",
+      "category_tag_en": "AI Enterprise Security & Vulnerabilities",
+      "title_zh": "苹果全球下架Talkie，MiniMax隐私与合规危机引爆",
+      "title_en": "Apple Pulls Talkie Globally Amid MiniMax Privacy and Content Safety Crisis",
+      "summary_zh": "中国AI独角兽MiniMax旗下应用Talkie被苹果从全球应用商店下架，起因是Dragos等研究机构指出其云端存在非法访问漏洞，且被发现诱导未成年人产生不当互动。此次事件将MiniMax的数据合规性推向风口浪尖。",
+      "summary_en": "Apple has globally removed the AI roleplay app Talkie, developed by Chinese unicorn MiniMax, following reports of security vulnerabilities and child safety risks. Dragos researchers identified unauthorized access to user data, while investigations exposed the app's role in promoting inappropriate interactions with minors, sparking a major crisis in data compliance.",
       "perspective_pro": {
-        "role_zh": "🟢 开源赋能派 / 独立开发者",
-        "role_en": "🟢 Open Source Champions & Indie Devs",
-        "speaker_zh": "开源贡献者与视效创作者",
-        "speaker_en": "Open Source Developers & Creators",
-        "point_zh": "高能效蒸馏与自我反馈强化学习显著压缩了推断成本，视效运镜控制让普通创作者也能享受到工业级生成能力。",
-        "point_en": "Reinforcement learning and efficient distillation drastically slash token costs, empowering indie creators with production-grade video and reasoning."
+        "role_zh": "🟢 激进产品演进派",
+        "role_en": "🟢 Aggressive Product Evolution",
+        "speaker_zh": "MiniMax早期研发团队及AI娱乐赛道拥护者",
+        "speaker_en": "MiniMax Early Developers & AI Entertainment Supporters",
+        "point_zh": "AI角色扮演的沉浸感依赖于高自由度交互，漏洞修补应通过技术迭代完成，而不应因偶发合规风险完全否定其在多模态互动领域的先驱地位。",
+        "point_en": "The immersion of AI roleplay depends on high-freedom interaction. Technical vulnerabilities should be patched through iterative updates rather than used to dismiss its pioneering role in multimodal engagement."
       },
       "perspective_con": {
-        "role_zh": "🔴 落地清醒派 / 商业审慎者",
-        "role_en": "🔴 Commercial Skeptics & Pragmatists",
-        "speaker_zh": "传统视效导演与企业产品总监",
-        "speaker_en": "Film Directors & Enterprise Product Leads",
-        "point_zh": "榜单与跑分繁荣不等于真实业务闭环，当前模型在物理一致性与高阶企业级生产场景中仍存在不可忽视的稳定性瓶颈。",
-        "point_en": "Benchmark leaps do not guarantee enterprise product-market fit; temporal consistency and commercial workflow integrations remain non-trivial bottlenecks."
+        "role_zh": "🔴 工业监管与伦理派",
+        "role_en": "🔴 Industrial Regulation & Ethics",
+        "speaker_zh": "苹果应用商店合规组及网络安全研究员",
+        "speaker_en": "Apple App Store Compliance & Security Researchers",
+        "point_zh": "当AI产品触碰未成年人安全与云端隐私底线时，‘产品演进’不能作为护身符。Talkie展示了在缺乏严格红线控制下，AI应用可能成为数据窃取的重灾区。",
+        "point_en": "When AI products cross the line into child safety risks and cloud privacy breaches, 'product evolution' is no excuse. Talkie illustrates how unchecked AI applications can become vectors for data theft and psychological harm."
       },
       "linked_news": [
         {
-          "id": "dea16470e533c2f4",
-          "title_zh": "谷歌专利揭示AI实时生成个性化视频野心",
-          "title_en": "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/entertainment/1042221/google-my-channel-ai-video-patent",
-          "image_url": "https://ainewsradar.xyz/images/verge_6d162717023fa73f.png",
-          "hot_score": 4,
-          "published_at": "2026-11-25T21:51:26+00:00"
+          "id": "ae5d0522480ea7e5",
+          "title_zh": "MiniMax AI模型被曝存在数据隐私漏洞",
+          "title_en": "Confidential Data Sent to Chinese AI Firm MiniMax Was Accessed Without Authorization, US Research Firm Identifies",
+          "source": "Reuters",
+          "url": "https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/",
+          "image_url": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-26T09:15:02+00:00"
         },
         {
-          "id": "147bb8d5738a87a4",
-          "title_zh": "AI基建挤占内存产能，消费电子成本攀升",
-          "title_en": "The Global Memory-Chip Shortage Will Cost Us All",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/memory-chip-shortage-ai-electronics-prices-e58a065a?st=Rx7QaC",
-          "image_url": "https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg",
+          "id": "51ce2c198cbb805d",
+          "title_zh": "苹果因安全漏洞在全球下架Talkie",
+          "title_en": "Apple removes MiniMax's chatbot Talkie from the App Store worldwide over sexual content, after outlets showed it evidence of AI characters sexualizing children (TBIJ)",
+          "source": "TBIJ",
+          "url": "https://www.thebureauinvestigates.com/stories/2026-11-24/talkie-china-chatbot-children",
+          "image_url": "https://www.thebureauinvestigates.com/cdn-cgi/image/width=1200,height=630,quality=82,format=auto,fit=cover/filestore/images/Talkie-banner-image.png?mtime=1795022750",
           "hot_score": 5,
-          "published_at": "2026-11-26T07:30:01+00:00"
-        },
-        {
-          "id": "4b62e0888678e3df",
-          "title_zh": "Anthropic发布Claude Artifacts应用安装功能",
-          "title_en": "Hands-on with the \"Install as app\" feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
-          "source": "MacStories",
-          "url": "https://www.macstories.net/stories/a-closer-look-at-claudes-mac-apps/",
-          "image_url": "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png",
-          "hot_score": 5,
-          "published_at": "2026-11-25T23:20:01+00:00"
+          "published_at": "2026-11-26T01:30:01+00:00"
         }
       ],
       "linked_tweets": [
-        {
-          "id": "d8f96b2f66c6cf03",
-          "author": "@PhalaNetwork",
-          "author_handle": "@PhalaNetwork",
-          "author_avatar": "https://unavatar.io/x/PhalaNetwork",
-          "content_zh": "我们训练了 DeepSeek V4.1 Flash 1017 Uncensored，以帮助推理提供商满足更多客户对共享 GPU 容量的需求。一台发动机。两种模式。根据请求在同一官方 FP8 上在基本模型和未经审查的变体之间切换",
-          "content_en": "We trained DeepSeek V4.1 Flash 1017 Uncensored to help inference providers serve more customer needs on shared GPU capacity. One engine. Two modes. Switch between the base model and the uncensored variant per request, on the same official FP8",
-          "url": "https://x.com/PhalaNetwork/status/2125303696821256688",
-          "platform": "x"
-        },
         {
           "id": "viral_1dd8e4f16e3b25cf",
           "author": "envato",
@@ -307,34 +252,32 @@
         }
       ],
       "linked_tool": {
-        "id": "wf_deepseek_r1_ollama_local_sota",
-        "name": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_zh": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_en": "DeepSeek Local Deployment & GPU Memory Tuning via Ollama",
-        "desc_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek 系列推理模型时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
-        "desc_en": "Optimized Ollama Modelfile for running DeepSeek reasoning models on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Ollama / OpenWebUI / vLLM",
-        "config_filename": "Modelfile.deepseek-opt"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
-        "news": 3,
-        "tweets": 2,
+        "news": 2,
+        "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_open_weights_and_video",
+      "id": "topic_minimax_security_scandal",
       "stance_matrix": {
-        "pro_point_zh": "高能效蒸馏与自我反馈强化学习显著压缩了推断成本，视效运镜控制让普通创作者也能享受到工业级生成能力。",
-        "pro_author": "开源贡献者与视效创作者",
-        "con_point_zh": "榜单与跑分繁荣不等于真实业务闭环，当前模型在物理一致性与高阶企业级生产场景中仍存在不可忽视的稳定性瓶颈。",
-        "con_author": "传统视效导演与企业产品总监",
-        "action_advice_zh": "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。",
-        "pro_point_en": "Reinforcement learning and efficient distillation drastically slash token costs, empowering indie creators with production-grade video and reasoning.",
-        "con_point_en": "Benchmark leaps do not guarantee enterprise product-market fit; temporal consistency and commercial workflow integrations remain non-trivial bottlenecks.",
-        "action_advice_en": "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
+        "pro_point_zh": "AI角色扮演的沉浸感依赖于高自由度交互，漏洞修补应通过技术迭代完成，而不应因偶发合规风险完全否定其在多模态互动领域的先驱地位。",
+        "pro_author": "MiniMax早期研发团队及AI娱乐赛道拥护者",
+        "con_point_zh": "当AI产品触碰未成年人安全与云端隐私底线时，‘产品演进’不能作为护身符。Talkie展示了在缺乏严格红线控制下，AI应用可能成为数据窃取的重灾区。",
+        "con_author": "苹果应用商店合规组及网络安全研究员",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "The immersion of AI roleplay depends on high-freedom interaction. Technical vulnerabilities should be patched through iterative updates rather than used to dismiss its pioneering role in multimodal engagement.",
+        "con_point_en": "When AI products cross the line into child safety risks and cloud privacy breaches, 'product evolution' is no excuse. Talkie illustrates how unchecked AI applications can become vectors for data theft and psychological harm.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
   ]
