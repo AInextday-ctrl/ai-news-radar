@@ -1,10 +1,10 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 10:21:54 UTC",
+  "generated_at": "2026-11-26 10:36:15 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 10:21:54 UTC",
+      "updated_at": "2026-11-26 10:36:15 UTC",
       "headline_item": {
         "id": "6ab3ffaf2c32c763",
         "tag_zh": "📰 业界动态",
@@ -63,6 +63,34 @@
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         },
         {
+          "id": "1c346f7d462cf684",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "42 个州的 AG 正试图阻止 Character.AI 出售用户的聊天内容",
+          "title_en": "42 state AGs are trying to stop Character.AI from selling users’ chats",
+          "source": "The Verge AI",
+          "author": "Terrence O'Brien",
+          "cover_image": "https://ainewsradar.xyz/images/verge_2b77243de9e1ff4c.jpg",
+          "image_url": "https://ainewsradar.xyz/images/verge_2b77243de9e1ff4c.jpg",
+          "published_at": "2026-11-26T09:54:40+00:00",
+          "url": "https://www.theverge.com/policy/1042620/character-ai-sale-state-ags-block-selling-users-chats",
+          "event_summary_zh": "由 42 名州总检察长组成的联盟正试图阻止 Character.AI 在根据美国破产法第 11 章进行破产程序时出售用户数据。在大量几乎相同的新闻稿中，各个 AG 指责该公司计划拍卖“超过 2100 万美国人的私人聊天记录”",
+          "event_summary_en": "A coalition of 42 state attorneys general is trying to prevent Character.AI from selling off user data as it navigates Chapter 11 bankruptcy proceedings. In a deluge of nearly identical press releases, the various AGs accuse the company of planning to auction off “the private chat histories of more than 21 million U.S. accounts — more than 2.1 million of them registered to minors — with no safeguards for the people whose conversations are being sold.”\n\nIn October, Character.AI filed for bankrupt",
+          "core_facts_zh": [
+            "【核心事件】泰伦斯·奥布莱恩：42 个州的 AG 正试图阻止 Character.AI 出售用户的聊天内容",
+            "【关键数据与实测】在大量几乎相同的新闻稿中，各个 AG 指责该公司计划拍卖“超过 2100 万个美国帐户的私人聊天记录——超过 2.1 个帐户。",
+            "【行业研判】由 42 名州总检察长组成的联盟正试图阻止 Character.AI 在根据美国破产法第 11 章进行破产程序时出售用户数据。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Terrence O'Brien: 42 state AGs are trying to stop Character.AI from selling users’ chats",
+            "[Root Cause & Mechanism] A coalition of 42 state attorneys general is trying to prevent Character.AI from selling off user data as it navigates Chapter 11 bankruptcy proceedings.",
+            "[Key Fact Detail] In a deluge of nearly identical press releases, the various AGs accuse the company of planning to auction off “the private chat histories of more than 21 million U.S.",
+            "[Industry Analysis] accounts — more than 2.1 million of them registered to minors — with no safeguards for the people whose conversations are being sold.”\n\nIn October, Character.AI filed for bankrupt."
+          ],
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        },
+        {
           "id": "ba06dcec909743e9",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
@@ -89,41 +117,12 @@
           ],
           "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "ae5d0522480ea7e5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "MiniMax AI模型被曝存在数据隐私漏洞",
-          "title_en": "Confidential Data Sent to Chinese AI Firm MiniMax Was Accessed Without Authorization, US Research Firm Identifies",
-          "source": "Reuters",
-          "author": "Reuters",
-          "cover_image": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
-          "image_url": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
-          "published_at": "2026-11-26T09:15:02+00:00",
-          "url": "https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/",
-          "event_summary_zh": "美资安公司Dragos调查发现，中国AI独角兽MiniMax的云服务存在用户隐私数据被第三方非法访问的重大风险",
-          "event_summary_en": "Dragos Chief Research Officer HD Moore revealed that AI startup MiniMax improperly stores private web links from user prompts despite opt-out requests. Security researchers observed unauthorized third-party access to these links, accompanied by suspicious traffic originating from Beijing, Shanghai, and the Moscow region, alongside attempts to exfiltrate private software code.",
-          "core_facts_zh": [
-            "【核心事件】MiniMax（AI大模型厂商）；HD Moore（Dragos首席研究官）在企业云服务后端与API调用接口：未经授权的数据留存、第三方非法访问用户私密链接与代码",
-            "【起因与机理】后端数据处理机制存在安全缺陷，未能有效执行用户隐私保护指令",
-            "【关键技术规格】MiniMax后端处理机制被发现会非法留存用户私密请求链接。",
-            "【各方立场与态度】隐私保护缺失可能引发跨国合规危机及云端部署信任崩塌。"
-          ],
-          "core_facts_en": [
-            "[Core Event] MiniMax; HD Moore, CRO of Dragos: Unauthorized data retention and third-party access to sensitive URLs and code",
-            "[Root Cause & Mechanism] Security flaws in data handling and non-compliance with privacy-preservation settings",
-            "[Key Fact Detail] MiniMax backend improperly retains private user request links.",
-            "[Industry Impact & Outlook] Security flaws pose risks to cross-border compliance and cloud deployment trust."
-          ],
-          "industry_impact_zh": "此事件暴露出AI推理服务中隐私护栏的架构性缺失，特别是多模态模型在云端处理请求时缺乏严格的即时内存擦除机制。该漏洞将极大削弱企业级用户对国产大模型出海部署的信任度，预计监管层将针对AI训练数据源与推理请求的合规性审查进一步收紧。",
-          "industry_impact_en": "The incident highlights a critical architectural gap in AI inference services regarding the lack of real-time memory erasure for multimodal requests. This vulnerability significantly undermines enterprise trust in deploying domestic models globally, likely triggering stricter regulatory scrutiny over AI inference data handling and compliance."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 10:21:54 UTC",
+      "updated_at": "2026-11-26 10:36:15 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -290,7 +289,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 10:21:54 UTC",
+      "updated_at": "2026-11-26 10:36:15 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
