@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-25 23:48:04 UTC",
+  "generated_at": "2026-11-26 00:05:34 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-25 23:48:05 UTC",
+      "updated_at": "2026-11-26 00:05:34 UTC",
       "headline_item": {
-        "id": "4b62e0888678e3df",
+        "id": "3cda90686f85d5c6",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Anthropic发布Claude Artifacts应用安装功能",
-        "title_en": "Hands-on with the \"Install as app\" feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
-        "source": "MacStories",
-        "author": "MacStories",
-        "cover_image": "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png",
-        "image_url": "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png",
-        "published_at": "2026-11-25T23:20:01+00:00",
-        "url": "https://www.macstories.net/stories/a-closer-look-at-claudes-mac-apps/",
-        "event_summary_zh": "Anthropic在Claude桌面端推出Artifacts“安装为应用”功能，支持将网页端生成内容转化为独立的本地桌面应用",
-        "event_summary_en": "Anthropic has launched the 'Install as app' beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications. Based on an Electron shim, these apps require the main Claude process to handle model interactions and system permissions, with files localized and indexed for OS-native integration.",
+        "title_zh": "美42州总检察长联手阻击Character.ai数据拍卖",
+        "title_en": "Character.AI’s plan to auction off users’ private chats challenged by state AGs",
+        "source": "TechCrunch",
+        "author": "Sarah Perez",
+        "cover_image": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
+        "image_url": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
+        "published_at": "2026-11-25T23:50:04+00:00",
+        "url": "https://techcrunch.com/2026/11/25/state-ags-fight-character-ais-plan-to-auction-off-users-private-chats/",
+        "event_summary_zh": "Character.ai在破产程序中计划拍卖包含2100万用户隐私的聊天记录，引发42州总检察长集体诉讼干预",
+        "event_summary_en": "Character.ai, currently under Chapter 11 bankruptcy, intends to auction sensitive data from 21 million users, including 2.1 million minors, to Smirks and Pangs Acquisition LLC. A coalition of 42 state attorneys general, led by California AG Rob Bonta and Connecticut AG William Tong, is challenging this move, citing breaches of privacy commitments and potential violations of state chatbot safety laws effective January 2027.",
         "core_facts_zh": [
-          "【核心事件】Anthropic（人工智能研究公司）在Claude桌面客户端（Mac/Windows）：支持将Artifacts内容通过Electron技术转化为独立桌面应用，同步调用Claude模型与连接器能力",
-          "【起因与机理】旨在降低代码生成内容的交付门槛，打破传统应用分发范式，增强用户对生成式AI工具的使用粘性",
-          "【核心事实细节】Artifacts支持转化为独立桌面应用（含图标与独立窗口）。",
-          "【各方立场与态度】预示AI厂商向软件分发平台转型的底层技术野心。"
+          "【核心事件】Character.ai（破产企业）、Smirks and Pangs Acquisition LLC（竞购方）、Rob Bonta（加州总检察长）在美国破产法院破产重组程序：试图拍卖2100万用户私人聊天记录及个人数据，监管机构要求停止该行为",
+          "【起因与机理】保护用户隐私，防止破产资产处置违背联邦及州消费保护法",
+          "【关键数据与实测】涉及2100万用户隐私，其中包含210万未成年人账户数据。",
+          "【行业影响与走向】法律风险点包括违背隐私协议及各州即将实施的聊天机器人监管法规。"
         ],
         "core_facts_en": [
-          "[Core Event] Anthropic: Enables packaging Artifacts as standalone desktop applications using Electron, leveraging integrated Claude model and connector capabilities.",
-          "[Root Cause & Mechanism] To lower the barrier for deploying AI-generated code and bypass traditional distribution bottlenecks.",
-          "[Key Fact Detail] Artifacts convertibility into standalone desktop apps with native icons/windows.",
-          "[Key Position & Outlook] Strategic shift toward AI-native software distribution platforms."
+          "[Core Event] Character.ai (Bankrupt entity), Smirks and Pangs Acquisition LLC (Bidder), Rob Bonta (CA AG) (U.S. Bankruptcy Court proceedings): Auction of 21 million user chat logs and personal data; AGs seeking injunction",
+          "[Root Cause & Mechanism] Prevent circumvention of consumer privacy protections and state-level safety statutes",
+          "[Key Metrics] Impacts 21M users, including 2.1M minors.",
+          "[Official Stance & Demand] Legal conflict with privacy promises and upcoming state-level chatbot regulations."
         ],
-        "industry_impact_zh": "此举标志着模型厂商正试图通过OS层面的渗透，将AI模型从单一聊天界面转化为替代轻量级软件分发的底层平台。通过将本地应用生命周期与Claude账号权限绑定，Anthropic正在建立一套基于生成式UI的生态闭环，实质上挑战了现有应用商店对软件交互与分发的垄断权。",
-        "industry_impact_en": "This move signals a strategic shift from chat-based interfaces to OS-level platform integration, positioning the AI model as the underlying engine for software distribution. By binding local app lifecycles to Claude user accounts, Anthropic is constructing an AI-native ecosystem that implicitly challenges the dominance of traditional app stores in software interaction and delivery."
+        "industry_impact_zh": "本案凸显了AI初创企业在破产重组中的资产价值与隐私权保护的尖锐对立，数据资产变现合法性已成为行业监管的核心盲区。未来破产托管协议需强制性纳入数据销毁或“禁止重售”条款，否则将引发针对AI存量数据集交易的系统性地方法律诉讼。",
+        "industry_impact_en": "The case highlights the conflict between monetizing AI datasets during insolvency and fundamental user privacy rights, marking a critical regulatory blind spot. Future bankruptcy protocols must mandate 'no-resale' or data-destruction clauses to avoid systemic legal challenges regarding the liquidation of proprietary AI training materials."
       },
       "headlines": [
+        {
+          "id": "3cda90686f85d5c6",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美42州总检察长联手阻击Character.ai数据拍卖",
+          "title_en": "Character.AI’s plan to auction off users’ private chats challenged by state AGs",
+          "source": "TechCrunch",
+          "author": "Sarah Perez",
+          "cover_image": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
+          "image_url": "https://ainewsradar.xyz/images/tc_9b4324f49e406a6c.jpg",
+          "published_at": "2026-11-25T23:50:04+00:00",
+          "url": "https://techcrunch.com/2026/11/25/state-ags-fight-character-ais-plan-to-auction-off-users-private-chats/",
+          "event_summary_zh": "Character.ai在破产程序中计划拍卖包含2100万用户隐私的聊天记录，引发42州总检察长集体诉讼干预",
+          "event_summary_en": "Character.ai, currently under Chapter 11 bankruptcy, intends to auction sensitive data from 21 million users, including 2.1 million minors, to Smirks and Pangs Acquisition LLC. A coalition of 42 state attorneys general, led by California AG Rob Bonta and Connecticut AG William Tong, is challenging this move, citing breaches of privacy commitments and potential violations of state chatbot safety laws effective January 2027.",
+          "core_facts_zh": [
+            "【核心事件】Character.ai（破产企业）、Smirks and Pangs Acquisition LLC（竞购方）、Rob Bonta（加州总检察长）在美国破产法院破产重组程序：试图拍卖2100万用户私人聊天记录及个人数据，监管机构要求停止该行为",
+            "【起因与机理】保护用户隐私，防止破产资产处置违背联邦及州消费保护法",
+            "【关键数据与实测】涉及2100万用户隐私，其中包含210万未成年人账户数据。",
+            "【行业影响与走向】法律风险点包括违背隐私协议及各州即将实施的聊天机器人监管法规。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Character.ai (Bankrupt entity), Smirks and Pangs Acquisition LLC (Bidder), Rob Bonta (CA AG) (U.S. Bankruptcy Court proceedings): Auction of 21 million user chat logs and personal data; AGs seeking injunction",
+            "[Root Cause & Mechanism] Prevent circumvention of consumer privacy protections and state-level safety statutes",
+            "[Key Metrics] Impacts 21M users, including 2.1M minors.",
+            "[Official Stance & Demand] Legal conflict with privacy promises and upcoming state-level chatbot regulations."
+          ],
+          "industry_impact_zh": "本案凸显了AI初创企业在破产重组中的资产价值与隐私权保护的尖锐对立，数据资产变现合法性已成为行业监管的核心盲区。未来破产托管协议需强制性纳入数据销毁或“禁止重售”条款，否则将引发针对AI存量数据集交易的系统性地方法律诉讼。",
+          "industry_impact_en": "The case highlights the conflict between monetizing AI datasets during insolvency and fundamental user privacy rights, marking a critical regulatory blind spot. Future bankruptcy protocols must mandate 'no-resale' or data-destruction clauses to avoid systemic legal challenges regarding the liquidation of proprietary AI training materials."
+        },
         {
           "id": "4b62e0888678e3df",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "此事件标志着美国产业政策逻辑的重大转向，即国家力量开始直接渗透至私营科技公司的治理结构中，视关键技术领袖为国家战略资源。这虽能短期保障企业战略对齐国家安全需求，但也引发了关于技术独立性与行政过度干预的监管风险重估。",
           "industry_impact_en": "This incident signals a paradigm shift in US industrial policy, where the state directly intervenes in the governance of critical tech firms, viewing key executives as national strategic assets. While this aligns corporate strategy with national security, it introduces significant long-term risks regarding regulatory overreach and market autonomy."
-        },
-        {
-          "id": "aa02e4fe624e4cc4",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "美国出口限制收紧，AI数据中心融资受阻",
-          "title_en": "Billions in Data Center Deals Grind to Halt After AI Chip Curbs",
-          "source": "Bloomberg",
-          "author": "Megawati Wijaya",
-          "cover_image": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
-          "image_url": "https://ainewsradar.xyz/images/bloomberg_billions-in-data-center-deals-grind-to-h.jpg",
-          "published_at": "2026-11-25T22:05:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-25/billions-in-data-center-deals-grind-to-halt-after-ai-chip-curbs",
-          "event_summary_zh": "美国针对东南亚及全球数据中心的AI芯片出口新规，导致多项大型算力项目融资搁置",
-          "event_summary_en": "Recent US export restrictions requiring licenses for advanced AI chips shipped to Southeast Asia and Brazil have halted multi-billion dollar data center financing deals. Lenders are reassessing exposure to facilities serving Chinese firms, including Bridge Data Centres, Digital Halo, and Aolani, due to heightened regulatory uncertainty.",
-          "core_facts_zh": [
-            "【核心事件】贝恩资本（Bain Capital）、Bridge Data Centres、Digital Halo、Aolani、美国商务部在东南亚地区（马来西亚、新加坡等）数据中心融资市场：出口限制导致针对中资客户的算力基建贷款出现违约风险，多家银行暂停融资审核",
-            "【起因与机理】美国防范中资企业绕道海外远程获取算力，将出口管制触角延伸至第三方国家的算力基础设施",
-            "【关键数据与实测】数据中心需在90天内获得独立许可，以维持对中资客户的算力租用服务。",
-            "【涉及范围与推进】贝恩资本等机构涉及中资算力租赁的数据中心融资被迫叫停或重新评估。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Bain Capital, Bridge Data Centres, Digital Halo, Aolani, US Department of Commerce: Export restrictions caused funding halts for projects serving Chinese clients, forcing lenders to reassess credit risk.",
-            "[Root Cause & Mechanism] US move to curb Chinese companies from accessing remote compute power via third-party offshore data centers.",
-            "[Key Metrics] Some lenders have delayed moving forward as they do more due diligence on an upsized $6.",
-            "[Key Position & Outlook] Data centers have a 90-day grace period to obtain licenses for existing services to Chinese entities."
-          ],
-          "industry_impact_zh": "此举标志着美方对AI硬件的管控逻辑已从单一“卖方限制”转向针对“算力租用生态”的全方位围堵，将离岸数据中心变为监管高压区。未来中资AI企业在海外部署算力集群的合规成本将呈指数级增长，供应链金融机构将因地缘政治风险溢价而大幅收缩对东南亚算力基建的授信规模。",
-          "industry_impact_en": "The shift from hardware export bans to monitoring remote compute access marks a strategic expansion of US surveillance into the offshore data center ecosystem. Expect capital flight from Southeast Asian compute projects as financial institutions factor in uncontrollable regulatory risks, significantly raising the barriers for Chinese firms building offshore AI infrastructure."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-25 23:48:05 UTC",
+      "updated_at": "2026-11-26 00:05:34 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-25 23:48:05 UTC",
+      "updated_at": "2026-11-26 00:05:34 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,13 +446,13 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "22.9k",
+          "stars": "23k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
           "category_en": "💻 Code AST & Architecture",
-          "one_liner_zh": "用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 84 项技能、15 个斜线命令、跨 24 个核心漏洞策划的 681 个披露报告模式",
-          "one_liner_en": "A Claude Code skill bundle for bug hunting and external red-team work - 84 skill",
+          "one_liner_zh": "用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 85 项技能、16 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式",
+          "one_liner_en": "A Claude Code skill bundle for bug hunting and external red-team work - 85 skill",
           "url": "https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar"
         }
       ]
