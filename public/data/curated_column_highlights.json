@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 20:03:58 UTC",
+  "generated_at": "2026-11-26 20:20:49 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 20:03:58 UTC",
+      "updated_at": "2026-11-26 20:20:49 UTC",
       "headline_item": {
-        "id": "c62ff1f57e1da819",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "前OpenAI研究员谈AI数学突破的深层意义",
-        "title_en": "Former OpenAI researcher says the Riemann proof matters less than the fact that an AI system can produce it",
-        "source": "THE DECODER",
-        "author": "Matthias Bastian",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_059d4db571bad584.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_059d4db571bad584.jpg",
-        "published_at": "2026-11-26T19:31:46+00:00",
-        "url": "https://the-decoder.com/former-openai-researcher-says-the-riemann-proof-matters-less-than-the-fact-that-an-ai-system-can-produce-it/",
-        "event_summary_zh": "复杂性理论家Scott Aaronson指出，AI证明数学定理的价值不在于结论本身，而在于AI已具备系统性解决复杂逻辑问题的底层推理能力",
-        "event_summary_en": "Scott Aaronson, professor at UT Austin and former OpenAI researcher, argues the significance of AI math breakthroughs lies in the system's ability to explore mathematical truth, not just the specific proofs. He emphasizes that establishing lower bounds in matrix multiplication and Fourier transforms reveals hard computational limits and signals a potential breakthrough in the P vs NP problem.",
+        "id": "918413cfa3a86037",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "币安遭受63亿美元加密盗窃案，宣布完成复原",
+        "title_en": "Binance says withdrawals stabilise after $6.3 billion cryptocurrency heist",
+        "source": "Reuters",
+        "author": "Reuters",
+        "cover_image": "https://ainewsradar.xyz/images/reuters_56b232d4240cabf1.jpg",
+        "image_url": "https://ainewsradar.xyz/images/reuters_56b232d4240cabf1.jpg",
+        "published_at": "2026-11-26T19:55:02+00:00",
+        "url": "https://www.reuters.com/technology/binance-lifts-withdrawal-suspension-after-63-billion-crypto-heist-2026-11-26/",
+        "event_summary_zh": "币安联席首席执行官Richard Teng确认，在经历63亿美元热钱包失窃事件后，平台已通过SAFU基金完成95%资金补偿",
+        "event_summary_en": "Binance co-CEO Richard Teng confirmed at Hong Kong Fintech Week that 95% of the $6.3 billion stolen during the October 29 hot wallet breach has been replenished using the Secure Asset Fund for Users (SAFU). The FBI attributed the attack to the North Korean-linked group TraderTraitor, highlighting critical security vulnerabilities in centralized exchange hot wallet infrastructure.",
         "core_facts_zh": [
-          "【核心事件】Scott Aaronson (德克萨斯大学奥斯汀分校教授、前OpenAI研究员)在学术博客与理论计算机科学探讨：论述AI生成数学证明的深层意义及算法下界发现",
-          "【起因与机理】AI在计算复杂性领域展现出超越既往工具的系统性推理能力",
-          "【核心事实细节】AI证明能力的跨越超越了单个数学命题的实用性。",
-          "【各方立场与态度】预示了P vs NP难题解决的可能性及密码学领域的潜在变革。"
+          "【核心事件】Richard Teng（币安联席首席执行官）、TraderTraitor（朝鲜背景黑客组织）在香港金融科技周 / 全球加密市场：完成95%被盗资产补偿，承诺发布事件详细技术调查报告",
+          "【起因与机理】针对热钱包漏洞的系统性黑客攻击导致历史上最大规模数字资产损失",
+          "【关键数据与实测】币安处理历史最大规模63亿美元资产被盗，已补偿95%用户损失。",
+          "【各方立场与态度】交易所正寻求通过场外交易补齐剩余5%流动性不足的代币。"
         ],
         "core_facts_en": [
-          "[Core Event] Scott Aaronson (Professor at UT Austin, former OpenAI researcher): Analyzing the implications of AI-generated math proofs and algorithmic lower bounds",
-          "[Root Cause & Mechanism] AI's demonstrated capacity for systematic reasoning beyond traditional computational limits",
-          "[Key Fact Detail] AI reasoning capabilities surpass individual mathematical proofs.",
-          "[Key Position & Outlook] Implications for P vs NP and potential disruptions in cryptography."
+          "[Core Event] Richard Teng (Binance co-CEO), TraderTraitor (State-sponsored hacking group) (Hong Kong Fintech Week): Replenished 95% of stolen assets; committed to a detailed post-mortem report",
+          "[Root Cause & Mechanism] Systemic exploitation of hot wallet vulnerabilities resulting in record-breaking digital asset theft",
+          "[Key Metrics] Binance addresses record $6.3B theft with 95% compensation.",
+          "[Key Position & Outlook] Ongoing efforts to acquire remaining 5% of illiquid tokens via OTC."
         ],
-        "industry_impact_zh": "AI从单纯的生成式应用转向严谨的科学发现逻辑，标志着其正在从“概率拟合”跨越至“符号逻辑推理”。对于工业界而言，这意味着密码学破解与算法复杂度优化将成为AI实验室下一个隐秘的战略高地，相关技术突破可能重塑计算基础设施的底层逻辑。",
-        "industry_impact_en": "The shift from generative application to rigorous scientific discovery suggests AI is transitioning from probabilistic fitting to formal logical reasoning. For industry players, this indicates that cryptographic security and algorithmic optimization are becoming the next strategic frontier, potentially rewriting the underlying foundations of computational infrastructure."
+        "industry_impact_zh": "此次事件深刻揭示了交易所热钱包架构在高流动性需求与极端安全防护之间的结构性矛盾，尤其在跨链基础设施遭受针对性攻击时，中心化交易所的资产池抗风险能力面临严峻考验。作为行业头部机构，币安的快速偿付能力虽然短期内修复了用户信任，但此类合规性与安全性挑战将倒逼全球加密机构加速向多方计算（MPC）及更严苛的资产托管方案转型。",
+        "industry_impact_en": "This incident highlights the structural conflict between high-frequency liquidity requirements and robust security in hot wallet architectures, exposing the fragility of centralized exchanges under targeted multi-chain exploits. While Binance’s rapid replenishment preserves user confidence, the industry will inevitably accelerate the adoption of Multi-Party Computation (MPC) and more rigorous institutional-grade custody solutions."
       },
       "headlines": [
+        {
+          "id": "918413cfa3a86037",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "币安遭受63亿美元加密盗窃案，宣布完成复原",
+          "title_en": "Binance says withdrawals stabilise after $6.3 billion cryptocurrency heist",
+          "source": "Reuters",
+          "author": "Reuters",
+          "cover_image": "https://ainewsradar.xyz/images/reuters_56b232d4240cabf1.jpg",
+          "image_url": "https://ainewsradar.xyz/images/reuters_56b232d4240cabf1.jpg",
+          "published_at": "2026-11-26T19:55:02+00:00",
+          "url": "https://www.reuters.com/technology/binance-lifts-withdrawal-suspension-after-63-billion-crypto-heist-2026-11-26/",
+          "event_summary_zh": "币安联席首席执行官Richard Teng确认，在经历63亿美元热钱包失窃事件后，平台已通过SAFU基金完成95%资金补偿",
+          "event_summary_en": "Binance co-CEO Richard Teng confirmed at Hong Kong Fintech Week that 95% of the $6.3 billion stolen during the October 29 hot wallet breach has been replenished using the Secure Asset Fund for Users (SAFU). The FBI attributed the attack to the North Korean-linked group TraderTraitor, highlighting critical security vulnerabilities in centralized exchange hot wallet infrastructure.",
+          "core_facts_zh": [
+            "【核心事件】Richard Teng（币安联席首席执行官）、TraderTraitor（朝鲜背景黑客组织）在香港金融科技周 / 全球加密市场：完成95%被盗资产补偿，承诺发布事件详细技术调查报告",
+            "【起因与机理】针对热钱包漏洞的系统性黑客攻击导致历史上最大规模数字资产损失",
+            "【关键数据与实测】币安处理历史最大规模63亿美元资产被盗，已补偿95%用户损失。",
+            "【各方立场与态度】交易所正寻求通过场外交易补齐剩余5%流动性不足的代币。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Richard Teng (Binance co-CEO), TraderTraitor (State-sponsored hacking group) (Hong Kong Fintech Week): Replenished 95% of stolen assets; committed to a detailed post-mortem report",
+            "[Root Cause & Mechanism] Systemic exploitation of hot wallet vulnerabilities resulting in record-breaking digital asset theft",
+            "[Key Metrics] Binance addresses record $6.3B theft with 95% compensation.",
+            "[Key Position & Outlook] Ongoing efforts to acquire remaining 5% of illiquid tokens via OTC."
+          ],
+          "industry_impact_zh": "此次事件深刻揭示了交易所热钱包架构在高流动性需求与极端安全防护之间的结构性矛盾，尤其在跨链基础设施遭受针对性攻击时，中心化交易所的资产池抗风险能力面临严峻考验。作为行业头部机构，币安的快速偿付能力虽然短期内修复了用户信任，但此类合规性与安全性挑战将倒逼全球加密机构加速向多方计算（MPC）及更严苛的资产托管方案转型。",
+          "industry_impact_en": "This incident highlights the structural conflict between high-frequency liquidity requirements and robust security in hot wallet architectures, exposing the fragility of centralized exchanges under targeted multi-chain exploits. While Binance’s rapid replenishment preserves user confidence, the industry will inevitably accelerate the adoption of Multi-Party Computation (MPC) and more rigorous institutional-grade custody solutions."
+        },
         {
           "id": "c62ff1f57e1da819",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "8cd31296d9e7c885",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI修复定价漏洞，GPT-6.2 Astra用户额度缩减",
-          "title_en": "GPT-6.2 Astra users now hit limits 40% faster after OpenAI patched a pricing error",
-          "source": "THE DECODER",
-          "author": "Matthias Bastian",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_dae675c4c8dc5979.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_dae675c4c8dc5979.jpg",
-          "published_at": "2026-11-26T17:28:56+00:00",
-          "url": "https://the-decoder.com/gpt-6-2-astra-users-now-hit-limits-40-faster-after-openai-patched-a-pricing-error/",
-          "event_summary_zh": "OpenAI因定价计算错误修复漏洞，导致GPT-6.2 Astra与Sol模型用户配额消耗速度分别提升40%与25%",
-          "event_summary_en": "OpenAI engineer Thibault Sottiaux confirmed that a billing bug during the GPT-6.2 Astra and Sol rollout has been rectified. The fix results in a 40% and 25% faster consumption rate for Astra and Sol quotas respectively, while the company provides extra resets and free Fast Mode access for subscribers as compensation.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI公司代码工程师Thibault Sottiaux在OpenAI产品定价与模型服务平台：修复GPT-6.2 Astra/Sol计费漏洞，调整用户配额消耗速率，并补偿订阅权益",
-            "【起因与机理】因计算错误导致的定价逻辑偏差，导致公司实际收入与模型算力消耗不匹配",
-            "【关键数据与实测】Astra配额消耗加速40%，Sol加速25%。",
-            "【各方立场与态度】针对Go/Plus/Pro/Business用户提供额外配额重置及Fast Mode权益补偿。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Thibault Sottiaux, OpenAI Codex Engineer: Fixed billing bug, adjusted quota consumption rates, and issued subscription compensations",
-            "[Root Cause & Mechanism] Inaccurate pricing logic leading to a discrepancy between revenue and compute costs",
-            "[Key Metrics] 40% faster consumption for Astra and 25% for Sol.",
-            "[Key Position & Outlook] Compensation via additional resets and free Fast Mode access."
-          ],
-          "industry_impact_zh": "此事件反映出AI服务商在向复杂Agentic（代理）架构转型时，对推理算力成本评估存在高度不确定性。将Chat与Work模式合并的尝试表明，OpenAI正试图通过动态分配算力逻辑以压低边际成本，但这直接增加了模型调度的复杂性与不可预测的Token消耗压力。",
-          "industry_impact_en": "This incident underscores the inherent uncertainty in quantifying inference compute costs as providers pivot to complex Agentic architectures. The move to merge Chat and Work modes demonstrates OpenAI's attempt to optimize marginal costs via dynamic compute allocation, which simultaneously introduces architectural complexity and volatile token consumption profiles."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 20:03:58 UTC",
+      "updated_at": "2026-11-26 20:20:49 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -262,18 +262,18 @@
           "url": "https://x.com/thsottiaux/status/2125853628250599730"
         },
         {
-          "id": "88428524559e4a4b",
-          "name": "@GergelyOrosz",
-          "handle": "@GergelyOrosz",
+          "id": "386a23af0bebd5f8",
+          "name": "@DWeisburd",
+          "handle": "@DWeisburd",
           "role_zh": "AI 先锋观察者",
           "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/GergelyOrosz",
+          "avatar": "https://unavatar.io/x/DWeisburd",
           "topic_zh": "智能体架构与协同",
           "topic_en": "Agentic Workflows",
-          "event_context_zh": "如果你想知道人工智能带来的变化有多大：拥有大规模产品市场契合度和盈利商业模式的价值数十亿美元的科技公司，如果不响应代理，就会受到威胁。\n\n扎皮尔：众多之一\n\n许多其他全数字公司也面临同样的问题",
-          "event_context_en": "In case you’re wondering how massive of a change AI is: tech billion-dollar companies that had massive product-market fi",
-          "quote_zh": "如果你想知道人工智能带来的变化有多大：拥有大规模产品市场契合度和盈利商业模式的价值数十亿美元的科技公司，如果不响应代理，就会受到威胁。\n\n扎皮尔：众多之一\n\n许多其他全数字公司也面临同样的问题",
-          "quote_en": "In case you’re wondering how massive of a change AI is: tech billion-dollar companies that had massive product-market fit and v profitable business models are under threat if they don’t respond to agents.\n\nZapier: one of many\n\nSo many other all-digital co’s with the same problem",
+          "event_context_zh": "场：⁣\n⁣\n“我们正在成长，而不是设计一些这项技术。我们在自然界中发现了一些东西。”⁣\n⁣\n但他也指出，我们向这些模型提供了人类用语言表达的所有希望、梦想和恐惧。所以镜子看起来也和这个一模一样。⁣\n⁣\n弗兰肯斯坦是医生的名字，而不是怪物的名字。 Borthwick 认为细节比人们意识到的更重要。",
+          "event_context_en": "John Borthwick (@Borthwick), founder of Betaworks, named his AI agent after himself eleven years ago. Back then, scripte",
+          "quote_zh": "Betaworks 的创始人 John Borthwick (@Borthwick) 十一年前以自己的名字命名了他的人工智能代理。当时，编写脚本是为了回避“你是人工智能吗？”的问题。与“你是投资者吗？”⁣\n⁣\n他对这些模型是否有意识的实际立场：⁣\n⁣\n“我们正在成长，而不是设计一些这项技术。我们在自然界中发现了一些东西。”⁣\n⁣\n但他也指出，我们向这些模型提供了人类用语言表达的所有希望、梦想和恐惧。所以镜子看起来也和这个一模一样。⁣\n⁣\n弗兰肯斯坦是医生的名字，而不是怪物的名字。 Borthwick 认为细节比人们意识到的更重要。",
+          "quote_en": "John Borthwick (@Borthwick), founder of Betaworks, named his AI agent after himself eleven years ago. Back then, scripted to dodge the question \"are you an AI?\" with \"are you an investor?\"⁣\n⁣\nHis actual position on whether these models are conscious:⁣\n⁣\n\"We are growing, not designing some of this technology. We've discovered something in nature.\"⁣\n⁣\nBut he also points out we fed these models every hope, dream, and fear humans have ever put into language. So a mirror would look exactly like this too.⁣\n⁣\nFrankenstein was the doctor's name, not the monster's. Borthwick thinks that detail matters more than people realize.",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
@@ -286,14 +286,14 @@
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-26T16:54:07+00:00",
-          "url": "https://x.com/GergelyOrosz/status/2125996533384724981"
+          "published_at": "2026-11-26T17:19:02+00:00",
+          "url": "https://x.com/DWeisburd/status/2126002802769940885"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 20:03:58 UTC",
+      "updated_at": "2026-11-26 20:20:49 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
