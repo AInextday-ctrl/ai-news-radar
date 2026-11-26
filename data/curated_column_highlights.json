@@ -1,40 +1,98 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 16:05:37 UTC",
+  "generated_at": "2026-11-26 16:20:57 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 16:05:37 UTC",
+      "updated_at": "2026-11-26 16:20:57 UTC",
       "headline_item": {
-        "id": "47698e1a3ddee53f",
+        "id": "abcfeb7a75c7d4cb",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Avicena获超1亿美元融资，微LED光互连技术加速落地",
-        "title_en": "Avicena, which links AI chips with microLEDs instead of lasers, raised a $100M+ Series C led by Intervest, with participation from SK Hynix, Samsung, and AMD (Cristian Dina/The Next Web)",
-        "source": "The Next Web",
-        "author": "The Next Web",
-        "cover_image": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
-        "image_url": "https://media.thenextweb.com/2026/11/avicena-lightbundle-microled-evaluation-kit-monitors.jpg",
-        "published_at": "2026-11-26T15:50:27+00:00",
-        "url": "https://thenextweb.com/news/avicena-100m-series-c-microled-optical-interconnects-ai",
-        "event_summary_zh": "光互连技术初创公司Avicena完成超1亿美元C轮融资，将用于部署基于MicroLED的非激光数据传输平台",
-        "event_summary_en": "Sunnyvale-based Avicena has raised over $100M in Series C funding, led by InterVest with participation from SK Hynix, Samsung, and AMD. The company's LightBundle platform utilizes MicroLED arrays instead of traditional lasers to address bandwidth and power bottlenecks in data movement between processors and memory in AI clusters.",
+        "title_zh": "Rockstar游戏工会化提议被否决",
+        "title_en": "UK workers at Rockstar Games vote against a union recognition deal, with only 25% voting in favor; source: 1,544 employees, or 93.2% of eligible workers, voted (Chris Kerr/Vertical Slice)",
+        "source": "Vertical Slice",
+        "author": "Vertical Slice",
+        "cover_image": "https://storage.ghost.io/c/83/ae/83ae1391-311e-4ba5-a8ec-7a0ea72ef568/content/images/size/w1200/2026/11/GTA-Union-Header-1.png",
+        "image_url": "https://storage.ghost.io/c/83/ae/83ae1391-311e-4ba5-a8ec-7a0ea72ef568/content/images/size/w1200/2026/11/GTA-Union-Header-1.png",
+        "published_at": "2026-11-26T16:10:01+00:00",
+        "url": "https://www.verticalslice.news/rockstar-workers-vote-against-historic-union-recognition-deal/",
+        "event_summary_zh": "Rockstar Games英国工作室员工投票否决了与RGWU工会的承认协议，75%的员工投下反对票",
+        "event_summary_en": "1,544 employees at Rockstar Games UK voted against recognizing the Rockstar Game Workers Union (RGWU) as their official bargaining body. Despite the high-profile launch of GTA VI, 75% of voters rejected the proposal, meaning management remains under no obligation to engage in formal union negotiations.",
         "core_facts_zh": [
-          "【核心事件】Avicena (CEO Kevin Pope), InterVest, SK海力士, 三星电子, AMD在AI数据中心基础设施领域：完成C轮超1亿美元融资，开发基于MicroLED的LightBundle光互连平台",
-          "【起因与机理】应对AI计算中铜互连在能耗、带宽密度及传输距离上的物理限制",
-          "【关键数据与实测】Avicena完成超1亿美元C轮融资以扩大LightBundle平台研发。",
-          "【各方立场与态度】AMD、SK海力士及三星的联合注资印证了该技术在下一代内存互连中的战略价值。"
+          "【核心事件】Rockstar Games英国工作室员工；Rockstar游戏工会(RGWU)；独立英国工人工会(IWGB)在英国游戏行业：投票否决了工会承认协议，仅25%支持，管理层与工会间的正式谈判机制未能达成",
+          "【起因与机理】员工倾向于维持直接沟通模式，且部分员工对工会整合存疑，倾向于保留现行薪酬与HR管理架构",
+          "【关键数据与实测】Rockstar英国工作室员工投票否决工会承认协议，反对率达75%。",
+          "【各方立场与态度】管理层与工会间的强制性谈判框架未能建立，工会将继续以非正式形式存在。"
         ],
         "core_facts_en": [
-          "[Core Event] Avicena (CEO Kevin Pope), InterVest, SK Hynix, Samsung, AMD (AI data center infrastructure): Raised $100M+ Series C to scale LightBundle, a MicroLED-based optical interconnect",
-          "[Root Cause & Mechanism] To overcome physical limitations of copper interconnects regarding energy, density, and reach",
-          "[Key Metrics] Avicena raised over $100M in Series C to scale LightBundle platform.",
-          "[Key Position & Outlook] Strategic investment from AMD, SK Hynix, and Samsung validates its potential for future memory interconnects."
+          "[Core Event] Rockstar Games UK employees; RGWU; IWGB (UK video game sector): Voted against union recognition with a 75% 'no' result, blocking formal bargaining rights",
+          "[Root Cause & Mechanism] Preference for direct management-employee relations and lack of consensus on union value proposition",
+          "[Key Metrics] Rockstar UK employees rejected union recognition with 75% voting against.",
+          "[Official Stance & Demand] Formal negotiation requirements are off the table, with the union maintaining non-recognized status."
         ],
-        "industry_impact_zh": "Avicena规避昂贵激光器的技术路线，直接切中光互连在大规模部署中的成本痛点，通过将光学器件整合至封装侧，有望重塑下一代高带宽内存（HBM）与计算核心间的互连架构。此轮融资中顶尖存储与处理器巨头的集体背书，预示着光互连已进入从实验室原型向系统级集成的商业化关键期。",
-        "industry_impact_en": "By bypassing expensive lasers, Avicena’s architecture addresses the primary cost barrier to widespread optical interconnect deployment, potentially reshaping the integration of HBM and compute dies. The backing from key memory and processor giants signals a shift from prototype development to systemic commercialization for optical interconnects."
+        "industry_impact_zh": "此结果反映了超大型单机游戏工作室内部独特的精英文化与“高回报-高强度”共识，削弱了工会运动在顶级商业开发场景中的渗透力。在全球大型游戏公司面临版权与工会化的双重冲击背景下，该投票表明短期内头部IP的商业稳定性仍优先于劳工组织集体话语权。",
+        "industry_impact_en": "The outcome underscores the unique 'high-performance' culture within elite game studios, where the lure of massive commercial success often outweighs the desire for formal collective bargaining. It suggests that in the current hyper-competitive AAA development landscape, direct employment stability remains a stronger gravitational force than unionization for top-tier talent."
       },
       "headlines": [
+        {
+          "id": "abcfeb7a75c7d4cb",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Rockstar游戏工会化提议被否决",
+          "title_en": "UK workers at Rockstar Games vote against a union recognition deal, with only 25% voting in favor; source: 1,544 employees, or 93.2% of eligible workers, voted (Chris Kerr/Vertical Slice)",
+          "source": "Vertical Slice",
+          "author": "Vertical Slice",
+          "cover_image": "https://storage.ghost.io/c/83/ae/83ae1391-311e-4ba5-a8ec-7a0ea72ef568/content/images/size/w1200/2026/11/GTA-Union-Header-1.png",
+          "image_url": "https://storage.ghost.io/c/83/ae/83ae1391-311e-4ba5-a8ec-7a0ea72ef568/content/images/size/w1200/2026/11/GTA-Union-Header-1.png",
+          "published_at": "2026-11-26T16:10:01+00:00",
+          "url": "https://www.verticalslice.news/rockstar-workers-vote-against-historic-union-recognition-deal/",
+          "event_summary_zh": "Rockstar Games英国工作室员工投票否决了与RGWU工会的承认协议，75%的员工投下反对票",
+          "event_summary_en": "1,544 employees at Rockstar Games UK voted against recognizing the Rockstar Game Workers Union (RGWU) as their official bargaining body. Despite the high-profile launch of GTA VI, 75% of voters rejected the proposal, meaning management remains under no obligation to engage in formal union negotiations.",
+          "core_facts_zh": [
+            "【核心事件】Rockstar Games英国工作室员工；Rockstar游戏工会(RGWU)；独立英国工人工会(IWGB)在英国游戏行业：投票否决了工会承认协议，仅25%支持，管理层与工会间的正式谈判机制未能达成",
+            "【起因与机理】员工倾向于维持直接沟通模式，且部分员工对工会整合存疑，倾向于保留现行薪酬与HR管理架构",
+            "【关键数据与实测】Rockstar英国工作室员工投票否决工会承认协议，反对率达75%。",
+            "【各方立场与态度】管理层与工会间的强制性谈判框架未能建立，工会将继续以非正式形式存在。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Rockstar Games UK employees; RGWU; IWGB (UK video game sector): Voted against union recognition with a 75% 'no' result, blocking formal bargaining rights",
+            "[Root Cause & Mechanism] Preference for direct management-employee relations and lack of consensus on union value proposition",
+            "[Key Metrics] Rockstar UK employees rejected union recognition with 75% voting against.",
+            "[Official Stance & Demand] Formal negotiation requirements are off the table, with the union maintaining non-recognized status."
+          ],
+          "industry_impact_zh": "此结果反映了超大型单机游戏工作室内部独特的精英文化与“高回报-高强度”共识，削弱了工会运动在顶级商业开发场景中的渗透力。在全球大型游戏公司面临版权与工会化的双重冲击背景下，该投票表明短期内头部IP的商业稳定性仍优先于劳工组织集体话语权。",
+          "industry_impact_en": "The outcome underscores the unique 'high-performance' culture within elite game studios, where the lure of massive commercial success often outweighs the desire for formal collective bargaining. It suggests that in the current hyper-competitive AAA development landscape, direct employment stability remains a stronger gravitational force than unionization for top-tier talent."
+        },
+        {
+          "id": "4263ca0717a4b6d7",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Neui推出基于Go语言的AI代理Web框架",
+          "title_en": "Show HN: Neui – Go web apps with a built-in AI agent",
+          "source": "Hacker News",
+          "author": "derstruct",
+          "cover_image": "https://opengraph.githubassets.com/9e541e81dc09b35a3b603fbd4e66e17948cf2f1f312861b5abe78f44901b47d0/doors-dev/neui",
+          "image_url": "https://opengraph.githubassets.com/9e541e81dc09b35a3b603fbd4e66e17948cf2f1f312861b5abe78f44901b47d0/doors-dev/neui",
+          "published_at": "2026-11-26T16:09:36Z",
+          "url": "https://github.com/doors-dev/neui",
+          "event_summary_zh": "Neui推出一套将Go语言Web框架与AI代理整合的栈，支持在UI中直接通过标注实现自动化操作",
+          "event_summary_en": "Neui has launched an integrated stack that combines a Go-based web framework (Doors) with an AI agent. By allowing developers to annotate UI elements, the agent can interact with the page, execute backend scripts, and automate workflows natively without the need for additional API layers or state synchronization.",
+          "core_facts_zh": [
+            "【核心事件】Neui开发团队在Go语言生态与Web开发工具领域：发布整合AI代理的Web框架，支持交互元素标记、工作空间隔离与自动化处理",
+            "【起因与机理】旨在简化前端与AI代理间的集成，通过上下文共享与权限 scoped 设计解决copilot类工具开发冗余问题",
+            "【核心事实细节】采用Doors框架，实现Go Web开发与AI代理单栈运行。",
+            "【各方立场与态度】支持长对话缓存优化，降低推理与交互成本。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Neui development team (Go ecosystem and Web dev tooling): Launched an AI-integrated web stack with native UI interaction and workspace capabilities.",
+            "[Root Cause & Mechanism] To eliminate the friction of building API-heavy AI agents by binding UI logic directly to backend tools.",
+            "[Key Technical Spec] Uses Doors framework for single-stack execution of Go apps and AI agents.",
+            "[Key Position & Outlook] Optimizes context caching to reduce operational costs for AI-driven interactions."
+          ],
+          "industry_impact_zh": "此技术方案标志着AI集成从“插件化”转向“原生化”，通过将UI定义与代理逻辑绑定，降低了上下文冗余与缓存开销。在自动化交互领域，这种直通式调用逻辑有望成为Go语言开发复杂企业级交互应用的新范式，直接对现有的RESTful API构建逻辑构成替代压力。",
+          "industry_impact_en": "This technical approach signals a shift from 'plugin-based' AI integration to 'native-stack' integration. By binding UI definitions directly to agent logic, Neui minimizes context bloating and latency, offering a potential new paradigm for Go-based enterprise applications that challenges traditional RESTful API architectures in agent-driven workflows."
+        },
         {
           "id": "47698e1a3ddee53f",
           "tag_zh": "📰 业界动态",
@@ -63,69 +121,12 @@
           ],
           "industry_impact_zh": "Avicena规避昂贵激光器的技术路线，直接切中光互连在大规模部署中的成本痛点，通过将光学器件整合至封装侧，有望重塑下一代高带宽内存（HBM）与计算核心间的互连架构。此轮融资中顶尖存储与处理器巨头的集体背书，预示着光互连已进入从实验室原型向系统级集成的商业化关键期。",
           "industry_impact_en": "By bypassing expensive lasers, Avicena’s architecture addresses the primary cost barrier to widespread optical interconnect deployment, potentially reshaping the integration of HBM and compute dies. The backing from key memory and processor giants signals a shift from prototype development to systemic commercialization for optical interconnects."
-        },
-        {
-          "id": "1dee411fe8cf7550",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "在 OpenAI 和 Anthropic 关闭数据大门后，一位中国人工智能开发者转而求助于 Google 和 Meta",
-          "title_en": "After OpenAI and Anthropic shut the door on their data, a Chinese AI developer is turning to Google and Meta instead",
-          "source": "THE DECODER",
-          "author": "Maximilian Schreiner",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_e1f5b5960c50c286.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_e1f5b5960c50c286.jpg",
-          "published_at": "2026-11-26T15:45:08+00:00",
-          "url": "https://the-decoder.com/after-openai-and-anthropic-shut-the-door-on-their-data-a-chinese-ai-developer-is-turning-to-google-and-meta-instead/",
-          "event_summary_zh": "中国人工智能公司 Z.AI 和 Moonshot AI 不得不推迟推出下一代旗舰模型，并正在寻找新的训练数据来源。在美国关闭了英伟达芯片的云漏洞、英伟达停止向东南亚发货以及美国公司打击",
-          "event_summary_en": "Chinese AI companies Z.AI and Moonshot AI have to delay their next flagship models and are looking for new sources of training data. The effects now reach beyond previously known delays, after the US closed the cloud loophole for Nvidia chips, Nvidia halted shipments to Southeast Asia, and US companies cracked down on model distillation.\n\nAs a result, Z.AI's roughly 3-trillion-parameter GLM-5.5 model, planned for November, is likely to slip into the first quarter of 2027, Reuters reports, citing",
-          "core_facts_zh": [
-            "【核心事件】OpenAI 官方团队：在 OpenAI 和 Anthropic 关闭数据大门后，一位中国人工智能开发者转而求助于 Google 和 Meta",
-            "【关键技术规格】中国人工智能公司 Z.AI 和 Moonshot AI 不得不推迟推出下一代旗舰模型，并正在寻找新的训练数据来源。",
-            "【行业研判】在美国关闭了英伟达芯片的云漏洞、英伟达停止向东南亚发货以及美国公司打击模型蒸馏之后，影响现在超出了之前已知的延迟。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Maximilian Schreiner: After OpenAI and Anthropic shut the door on their data, a Chinese AI developer is turning to Google and Meta instead",
-            "[Root Cause & Mechanism] As a result, Z.AI's roughly 3-trillion-parameter GLM-5.5 model, planned for November, is likely to slip into the first quarter of 2027, Reuters reports, citing.",
-            "[Key Technical Spec] Chinese AI companies Z.AI and Moonshot AI have to delay their next flagship models and are looking for new sources of training data.",
-            "[Industry Analysis] The effects now reach beyond previously known delays, after the US closed the cloud loophole for Nvidia chips, Nvidia halted shipments to Southeast Asia, and US companies cracked down on model distillation."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "c10740e1f3468a9e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "德州重启数据中心审批，SpaceX天然气电站获批",
-          "title_en": "Texas resumes data centre permitting before Democrats take over",
-          "source": "Financial Times",
-          "author": "Stephanie Findlay",
-          "cover_image": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
-          "image_url": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
-          "published_at": "2026-11-26T13:45:00+00:00",
-          "url": "https://www.ft.com/content/e0a1bf7a-7c28-4a20-8ca8-86dc7d5097b3",
-          "event_summary_zh": "德州环境质量委员会在州长指令下恢复数据中心审批，批准了包括SpaceX在内的多个电力设施项目以应对算力扩张需求",
-          "event_summary_en": "The Texas Commission on Environmental Quality (TCEQ) has resumed environmental permitting for data centers under a directive from outgoing Republican Governor Greg Abbott. The approvals include SpaceX's $24 billion gas-fired power and supercomputing complex near Brownsville, as developers scramble to secure rights before incoming Democratic Governor Gina Hinojosa takes office in January with a mandate to curtail industry expansion and tax incentives.",
-          "core_facts_zh": [
-            "【核心事件】德克萨斯州环境质量委员会（TCEQ）、州长格雷格·阿博特、准州长吉娜·伊诺霍萨、SpaceX在美国德克萨斯州：重启数据中心项目审批，批准包括SpaceX在内的能源设施许可",
-            "【起因与机理】利用政权更迭前的窗口期，规避新政府可能实施的开发限制与政策不确定性",
-            "【关键数据与实测】SpaceX获批240亿美元天然气电站与超算中心许可。",
-            "【各方立场与态度】防范准州长伊诺霍萨上任后可能实施的 moratorium（开发禁令）及税收优惠清理。"
-          ],
-          "core_facts_en": [
-            "[Core Event] TCEQ, Governor Greg Abbott, Governor-elect Gina Hinojosa, SpaceX (Texas, USA): Resumed permitting for data center projects, including SpaceX facility approvals",
-            "[Root Cause & Mechanism] To lock in infrastructure projects before a potential regulatory crackdown under the incoming administration",
-            "[Key Metrics] SpaceX secures permits for a $24B gas power plant and supercomputing facility.",
-            "[Key Position & Outlook] Developers aim to beat potential moratoriums and tax cut rollbacks under Governor-elect Hinojosa."
-          ],
-          "industry_impact_zh": "德州能源市场的这一波“抢跑”反映了算力基础设施对独立能源供应的强依赖性，企业倾向于自建发电设施以规避公共电网容量瓶颈。随着州政权更迭带来的政策转向，高能耗数据中心在地方准入与ESG监管层面将面临更加复杂的合规成本考量。",
-          "industry_impact_en": "This regulatory rush highlights the high dependence of hyperscale data centers on self-supplied energy to bypass public grid constraints. As political shifts introduce stricter local permitting and potential climate compliance costs, the economic viability of power-intensive compute infrastructure in the region will face significant pressure."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 16:05:37 UTC",
+      "updated_at": "2026-11-26 16:20:58 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -292,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 16:05:37 UTC",
+      "updated_at": "2026-11-26 16:20:58 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
