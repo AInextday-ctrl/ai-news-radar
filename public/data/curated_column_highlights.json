@@ -1,40 +1,98 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 13:35:16 UTC",
+  "generated_at": "2026-11-26 13:50:36 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 13:35:16 UTC",
+      "updated_at": "2026-11-26 13:50:36 UTC",
       "headline_item": {
-        "id": "dac517a9efe00f89",
+        "id": "c10740e1f3468a9e",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "TrustedRouter获600万美元融资提升企业AI隐私",
-        "title_en": "TrustedRouter Aims to Give Companies Greater Privacy With AI",
-        "source": "Bloomberg",
-        "author": "Bloomberg",
-        "cover_image": "",
-        "image_url": "",
-        "published_at": "2026-11-26T13:30:01+00:00",
-        "url": "https://www.bloomberg.com/news/newsletters/2026-11-26/trustedrouter-aims-to-give-companies-greater-privacy-with-ai",
-        "event_summary_zh": "隐私计算初创公司TrustedRouter融资600万美元，其端到端加密与机密计算方案日处理AI Token量已超60亿",
-        "event_summary_en": "Privacy computing startup TrustedRouter raised $6 million to provide end-to-end encryption and confidential computing for enterprise AI queries. The platform’s daily token processing volume surged to 6 billion from 1 billion in August, aiming to mitigate data leakage risks in corporate AI adoption.",
+        "title_zh": "德州重启数据中心审批，SpaceX天然气电站获批",
+        "title_en": "Texas resumes data centre permitting before Democrats take over",
+        "source": "Financial Times",
+        "author": "Stephanie Findlay",
+        "cover_image": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
+        "image_url": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
+        "published_at": "2026-11-26T13:45:00+00:00",
+        "url": "https://www.ft.com/content/e0a1bf7a-7c28-4a20-8ca8-86dc7d5097b3",
+        "event_summary_zh": "德州环境质量委员会在州长指令下恢复数据中心审批，批准了包括SpaceX在内的多个电力设施项目以应对算力扩张需求",
+        "event_summary_en": "The Texas Commission on Environmental Quality (TCEQ) has resumed environmental permitting for data centers under a directive from outgoing Republican Governor Greg Abbott. The approvals include SpaceX's $24 billion gas-fired power and supercomputing complex near Brownsville, as developers scramble to secure rights before incoming Democratic Governor Gina Hinojosa takes office in January with a mandate to curtail industry expansion and tax incentives.",
         "core_facts_zh": [
-          "【核心事件】可信路由器在企业AI算力与隐私计算领域：完成600万美元融资，日处理Token规模达60亿，提供端到端加密与机密计算接口",
-          "【起因与机理】满足企业在使用通用大模型时对数据主权与合规的严苛要求",
-          "【关键数据与实测】隐私计算初创公司TrustedRouter在近期完成600万美元融资，通过部署端到端加密与机密计算架构，为企业级AI交互提供隐私保护方案。",
-          "【各方立场与态度】端到端加密与机密计算成为进入企业市场的核心技术准入标准。"
+          "【核心事件】德克萨斯州环境质量委员会（TCEQ）、州长格雷格·阿博特、准州长吉娜·伊诺霍萨、SpaceX在美国德克萨斯州：重启数据中心项目审批，批准包括SpaceX在内的能源设施许可",
+          "【起因与机理】利用政权更迭前的窗口期，规避新政府可能实施的开发限制与政策不确定性",
+          "【关键数据与实测】SpaceX获批240亿美元天然气电站与超算中心许可。",
+          "【各方立场与态度】防范准州长伊诺霍萨上任后可能实施的 moratorium（开发禁令）及税收优惠清理。"
         ],
         "core_facts_en": [
-          "[Core Event] TrustedRouter: Raised $6M, scaled to 6B tokens/day, offering E2EE and confidential computing",
-          "[Root Cause & Mechanism] To address enterprise data sovereignty and compliance requirements in AI deployment",
-          "[Key Metrics] Privacy computing startup TrustedRouter raised $6 million to provide end-to-end encryption and confidential computing for enterprise AI queries.",
-          "[Key Position & Outlook] E2EE and confidential computing become standard technical barrier for market entry."
+          "[Core Event] TCEQ, Governor Greg Abbott, Governor-elect Gina Hinojosa, SpaceX (Texas, USA): Resumed permitting for data center projects, including SpaceX facility approvals",
+          "[Root Cause & Mechanism] To lock in infrastructure projects before a potential regulatory crackdown under the incoming administration",
+          "[Key Metrics] SpaceX secures permits for a $24B gas power plant and supercomputing facility.",
+          "[Key Position & Outlook] Developers aim to beat potential moratoriums and tax cut rollbacks under Governor-elect Hinojosa."
         ],
-        "industry_impact_zh": "企业端AI采纳的核心阻碍已从算力成本转向数据合规性，机密计算与TEE（可信执行环境）将成为连接通用大模型与企业私有数据库的标准中间件。这一市场格局表明，AI基础设施的竞争将分化为模型参数规模的暴力增长与底层通信隐私架构的安全护城河建设。",
-        "industry_impact_en": "The bottleneck for enterprise AI adoption has shifted from compute costs to data compliance, positioning TEE-based confidential computing as the essential middleware between LLMs and corporate data. This confirms that AI infrastructure competition is bifurcating into model scale dominance and low-level secure communication architecture."
+        "industry_impact_zh": "德州能源市场的这一波“抢跑”反映了算力基础设施对独立能源供应的强依赖性，企业倾向于自建发电设施以规避公共电网容量瓶颈。随着州政权更迭带来的政策转向，高能耗数据中心在地方准入与ESG监管层面将面临更加复杂的合规成本考量。",
+        "industry_impact_en": "This regulatory rush highlights the high dependence of hyperscale data centers on self-supplied energy to bypass public grid constraints. As political shifts introduce stricter local permitting and potential climate compliance costs, the economic viability of power-intensive compute infrastructure in the region will face significant pressure."
       },
       "headlines": [
+        {
+          "id": "c10740e1f3468a9e",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "德州重启数据中心审批，SpaceX天然气电站获批",
+          "title_en": "Texas resumes data centre permitting before Democrats take over",
+          "source": "Financial Times",
+          "author": "Stephanie Findlay",
+          "cover_image": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_d7e4fe555989c7cb.jpg",
+          "published_at": "2026-11-26T13:45:00+00:00",
+          "url": "https://www.ft.com/content/e0a1bf7a-7c28-4a20-8ca8-86dc7d5097b3",
+          "event_summary_zh": "德州环境质量委员会在州长指令下恢复数据中心审批，批准了包括SpaceX在内的多个电力设施项目以应对算力扩张需求",
+          "event_summary_en": "The Texas Commission on Environmental Quality (TCEQ) has resumed environmental permitting for data centers under a directive from outgoing Republican Governor Greg Abbott. The approvals include SpaceX's $24 billion gas-fired power and supercomputing complex near Brownsville, as developers scramble to secure rights before incoming Democratic Governor Gina Hinojosa takes office in January with a mandate to curtail industry expansion and tax incentives.",
+          "core_facts_zh": [
+            "【核心事件】德克萨斯州环境质量委员会（TCEQ）、州长格雷格·阿博特、准州长吉娜·伊诺霍萨、SpaceX在美国德克萨斯州：重启数据中心项目审批，批准包括SpaceX在内的能源设施许可",
+            "【起因与机理】利用政权更迭前的窗口期，规避新政府可能实施的开发限制与政策不确定性",
+            "【关键数据与实测】SpaceX获批240亿美元天然气电站与超算中心许可。",
+            "【各方立场与态度】防范准州长伊诺霍萨上任后可能实施的 moratorium（开发禁令）及税收优惠清理。"
+          ],
+          "core_facts_en": [
+            "[Core Event] TCEQ, Governor Greg Abbott, Governor-elect Gina Hinojosa, SpaceX (Texas, USA): Resumed permitting for data center projects, including SpaceX facility approvals",
+            "[Root Cause & Mechanism] To lock in infrastructure projects before a potential regulatory crackdown under the incoming administration",
+            "[Key Metrics] SpaceX secures permits for a $24B gas power plant and supercomputing facility.",
+            "[Key Position & Outlook] Developers aim to beat potential moratoriums and tax cut rollbacks under Governor-elect Hinojosa."
+          ],
+          "industry_impact_zh": "德州能源市场的这一波“抢跑”反映了算力基础设施对独立能源供应的强依赖性，企业倾向于自建发电设施以规避公共电网容量瓶颈。随着州政权更迭带来的政策转向，高能耗数据中心在地方准入与ESG监管层面将面临更加复杂的合规成本考量。",
+          "industry_impact_en": "This regulatory rush highlights the high dependence of hyperscale data centers on self-supplied energy to bypass public grid constraints. As political shifts introduce stricter local permitting and potential climate compliance costs, the economic viability of power-intensive compute infrastructure in the region will face significant pressure."
+        },
+        {
+          "id": "49a48463b240287f",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "FCC批准SpaceX部署百万颗轨道计算卫星",
+          "title_en": "FCC clears SpaceX to deploy up to 1 million Starmind satellites for orbital AI data centers by 2040",
+          "source": "THE DECODER",
+          "author": "Maximilian Schreiner",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_0b4e606a9cab87c6.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_0b4e606a9cab87c6.jpg",
+          "published_at": "2026-11-26T13:41:07+00:00",
+          "url": "https://the-decoder.com/fcc-clears-spacex-to-deploy-up-to-1-million-starmind-satellites-for-orbital-ai-data-centers-by-2040/",
+          "event_summary_zh": "美国联邦通信委员会批准SpaceX部署百万颗Starmind卫星，用于构建轨道AI算力集群以应对地面计算需求",
+          "event_summary_en": "The US Federal Communications Commission (FCC) has authorized SpaceX to deploy up to 1 million satellites as part of the 'Starmind' constellation. This initiative aims to establish orbital compute modules for processing AI data to alleviate terrestrial compute demand, with approvals covering radio links for satellite monitoring and control redundancy.",
+          "core_facts_zh": [
+            "【核心事件】美国联邦通信委员会（FCC）、SpaceX在美国通信监管机构/近地轨道：获批部署百万颗Starmind卫星用于轨道AI算力处理",
+            "【起因与机理】应对地面AI算力供给瓶颈，探索商业化太空计算基础设施",
+            "【关键数据与实测】获准部署100万颗Starmind计算卫星。",
+            "【各方立场与态度】射频链路与光学连接构成冗余监管架构。"
+          ],
+          "core_facts_en": [
+            "[Core Event] FCC, SpaceX: Authorized deployment of 1 million 'Starmind' satellites for AI compute",
+            "[Root Cause & Mechanism] Addressing terrestrial AI compute bottlenecks and pioneering space-based compute infrastructure",
+            "[Key Technical Spec] Approval for up to 1 million Starmind compute satellites.",
+            "[Key Position & Outlook] Radio links approved for redundant monitoring and control of the constellation."
+          ],
+          "industry_impact_zh": "将算力部署至轨道不仅是对冲地面电力与散热约束的激进尝试，更标志着SpaceX正在将低轨网络向计算基础设施转型。此举将重塑边缘计算的地理维度，但卫星在严苛环境下的AI算力密度及数据传输时延仍是制约商业落地的前沿技术挑战。",
+          "industry_impact_en": "Moving compute to orbit is an aggressive strategy to hedge against terrestrial constraints on power and thermal management, marking SpaceX’s pivot toward becoming an orbital compute provider. While this reshapes edge computing, significant technical barriers remain regarding AI compute density and latency in space-hardened environments."
+        },
         {
           "id": "dac517a9efe00f89",
           "tag_zh": "📰 业界动态",
@@ -63,69 +121,12 @@
           ],
           "industry_impact_zh": "企业端AI采纳的核心阻碍已从算力成本转向数据合规性，机密计算与TEE（可信执行环境）将成为连接通用大模型与企业私有数据库的标准中间件。这一市场格局表明，AI基础设施的竞争将分化为模型参数规模的暴力增长与底层通信隐私架构的安全护城河建设。",
           "industry_impact_en": "The bottleneck for enterprise AI adoption has shifted from compute costs to data compliance, positioning TEE-based confidential computing as the essential middleware between LLMs and corporate data. This confirms that AI infrastructure competition is bifurcating into model scale dominance and low-level secure communication architecture."
-        },
-        {
-          "id": "cfbb2a6edef193ce",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英国金融行为监管局拟强化DeFi准入制度",
-          "title_en": "The UK FCA says it plans to require DeFi platforms to obtain authorization, adopting a stricter stance than the US and the EU after the $6.3B Binance hack (Financial Times)",
-          "source": "Financial Times",
-          "author": "Financial Times",
-          "cover_image": "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F95095510-8e08-4d92-808e-9890792c1175.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
-          "image_url": "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F95095510-8e08-4d92-808e-9890792c1175.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
-          "published_at": "2026-11-26T13:10:04+00:00",
-          "url": "https://www.ft.com/content/ec820cb6-4983-4ece-8e7b-de116b57525d",
-          "event_summary_zh": "英国FCA计划强制去中心化金融平台获取授权，以应对洗钱与欺诈风险",
-          "event_summary_en": "The UK Financial Conduct Authority (FCA), led by Jane Moore (Head of Payments and Digital Assets), plans to mandate authorization for DeFi platforms to close regulatory gaps in anti-money laundering and consumer protection. Regulators emphasize that the recent $6.3 billion Binance hack, where stolen assets flowed through DeFi protocols for laundering, necessitates stricter oversight beyond current market norms.",
-          "core_facts_zh": [
-            "【核心事件】英国金融行为监管局 (FCA) 及其支付与数字资产部门负责人简·摩尔 (Jane Moore)：拟推行强制性的平台授权制度，旨在冻结资产与规避非法洗钱风险",
-            "【起因与机理】Binance 63亿美元被盗资产利用DeFi协议洗钱暴露了去中心化架构的监管盲区",
-            "【关键数据与实测】以63亿美元资产被盗后的洗钱路径为核心监管触发点。",
-            "【各方立场与态度】行业担忧合规成本将削弱英国金融科技竞争力并驱逐创新。"
-          ],
-          "core_facts_en": [
-            "[Core Event] UK Financial Conduct Authority (FCA) and Jane Moore, Head of Payments and Digital Assets: Mandating authorization for DeFi platforms to enable asset freezing and mitigate money laundering",
-            "[Root Cause & Mechanism] The $6.3 billion Binance hack revealed critical vulnerabilities in how DeFi facilitates the rapid movement of illicit funds",
-            "[Key Metrics] The $6.3 billion Binance hack serves as the primary regulatory trigger.",
-            "[Key Position & Outlook] Industry concerns regarding compliance costs stifling innovation and competitiveness."
-          ],
-          "industry_impact_zh": "英国此举不仅是针对特定洗钱事件的战术响应，更标志着全球加密监管正式从“中心化交易所合规”转向“协议层强制准入”的深水期。此举将极大地增加去中心化协议的合规成本，可能导致资本与技术开发者向监管更宽松的司法管辖区迁徙，从而在全球DeFi创新竞争中引发地缘监管分叉。",
-          "industry_impact_en": "This move marks a paradigm shift in global crypto regulation, transitioning from central exchange oversight to mandated protocol-level authorization. The resulting increase in compliance costs may trigger a migration of developers and capital to more permissive jurisdictions, creating a structural regulatory divergence in global DeFi innovation."
-        },
-        {
-          "id": "e625ecdc4275c276",
-          "tag_zh": "🎁 算力福利",
-          "tag_en": "🎁 Promos & Credits",
-          "title_zh": "OpenAI 表示，它纠正了 GPT-6.2 Astra 和 Sol 启动计费错误，该错误错误地折扣了使用量； Astra 用户现在达到极限的速度将加快 40%",
-          "title_en": "OpenAI says it corrected a GPT-6.2 Astra and Sol launch billing mistake that had incorrectly discounted usage; Astra users will now hit their limits 40% faster (Graham Barlow/TechRadar)",
-          "source": "TechRadar",
-          "author": "TechRadar",
-          "cover_image": "https://cdn.mos.cms.futurecdn.net/sgNC3MbaR7RbcasFNpEHA-2560-80.jpg",
-          "image_url": "https://cdn.mos.cms.futurecdn.net/sgNC3MbaR7RbcasFNpEHA-2560-80.jpg",
-          "published_at": "2026-11-26T13:01:08+00:00",
-          "url": "https://www.techradar.com/ai-platforms-assistants/chatgpt/weve-fixed-this-now-so-the-same-work-will-use-more-of-your-plans-usage-allowance-openai-admits-it-made-a-mistake-when-launching-gpt-6-2-and-now-paying-chatgpt-users-could-hit-their-usage-limits-up-to-40-percent-faster",
-          "event_summary_zh": "如果您在过去的一周里一直喜欢使用 OpenAI 的新 GPT-6.2 模型，特别是因为它们现在也可以在聊天模式下工作，那么我有一些坏消息：OpenAI 承认它在启动模型时犯了计费错误 - 现在它已经纠正了错误，您将更快地达到使用限制。在一个p",
-          "event_summary_en": "If you've been enjoying using OpenAI's new GPT-6.2 models over the past week, especially since they also now work in Chat mode, I've got some bad news: OpenAI has admitted that it made a billing mistake when launching the models — and now that it's corrected the error, you'll reach your usage limits much faster.\n\nIn a post on X, OpenAI's Thibault Sottiaux explained that the company had incorrectly discounted usage of its new GPT-6.2 Astra and Sol models for most users. As a result of this mistak",
-          "core_facts_zh": [
-            "【核心事件】OpenAI 官方团队：OpenAI 表示，它纠正了 GPT-6.2 Astra 和 Sol 启动计费错误，该错误错误地折扣了使用量； Astra 用户现在达到极限的速度将加快 40%",
-            "【起因与机理】如果您在过去的一周里一直喜欢使用 OpenAI 的新 GPT-6.2 模型，特别是因为它们现在也可以在聊天模式下工作，那么我有一些坏消息：OpenAI 承认它在启动模型时犯了计费错误 - 现在它已经纠正了错误，您将更快地达到使用限制。",
-            "【核心事实细节】在 X 的帖子中，OpenAI 的 Thibault S。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: OpenAI says it corrected a GPT-6.2 Astra and Sol launch billing mistake that had incorrectly discounted usage; Astra users will now hit their limits 40% faster (Graham Barlow/TechRadar)",
-            "[Root Cause & Mechanism] If you've been enjoying using OpenAI's new GPT-6.2 models over the past week, especially since they also now work in Chat mode, I've got some bad news: OpenAI has admitted that it made a billing mistake when launching the models — and now that it's corrected the error, you'll reach your usage limits much faster.",
-            "[Key Metrics] As a result of this mistake being corrected, users will now hit their usage limits 40% faster on Astra and 25% faster on Sol, compared with last week.",
-            "[Industry Analysis] As a result of this mistak."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 13:35:16 UTC",
+      "updated_at": "2026-11-26 13:50:36 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -292,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 13:35:16 UTC",
+      "updated_at": "2026-11-26 13:50:36 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
