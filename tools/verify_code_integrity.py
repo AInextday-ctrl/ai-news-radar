@@ -8,17 +8,21 @@ tools/verify_code_integrity.py
 1. 静态扫描工程关键源文件，阻断静默时间伪造反模式 (如 datetime.now() 赋给发布时间、diff_hours: 12.0 兜底)；
 2. 校验前后端双轨同构：验证 content_publisher.py (SSR) 与 public/js/app.js (CSR) 均包含历史时效防御门禁；
 3. 执行单元回归测试套件 (tests/test_video_pipeline.py)；
-4. 输出代码索引依赖与符号健康度报告。
+4. 自动增量同步代码库极速索引 (tools/fast_index.py)；
+5. 校验项目作用域规则文件 24 KB 截断红线与全量爬虫注册表完整性。
 """
 
-import os
-import sys
-import re
-import unittest
+from __future__ import annotations
 
-if sys.stdout.encoding.lower() != 'utf-8':
+import os
+import re
+import sys
+import unittest
+from typing import List
+
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     try:
-        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
 
@@ -27,9 +31,9 @@ if WORKSPACE_DIR not in sys.path:
     sys.path.insert(0, WORKSPACE_DIR)
 
 
-def scan_anti_patterns() -> list:
+def scan_anti_patterns() -> List[str]:
     """扫描代码中可能导致时间伪造或静默回退的危险反模式"""
-    errors = []
+    errors: List[str] = []
 
     # 1. 检查 content_publisher.py 绝不允许将 diff_hours 硬编码兜底为 12.0
     pub_file = os.path.join(WORKSPACE_DIR, "content_publisher.py")
@@ -72,7 +76,7 @@ def run_unit_tests() -> bool:
     return result.wasSuccessful()
 
 
-def main():
+def main() -> None:
     print("=" * 60)
     print("[Code Integrity Guard] 正在执行全工程代码规范与防回退静态校验...")
     print("=" * 60)
@@ -98,12 +102,28 @@ def main():
     # 步骤 3: 代码库极速索引与全景架构自动同步
     print("\n[INDEX] 正在校验代码库极速索引时效与架构注册表...")
     try:
-        from tools.fast_index import auto_sync_if_stale
+        from tools.fast_index import auto_sync_if_stale, discover_rules_and_skills, run_health_check
+
         synced = auto_sync_if_stale()
         if synced:
             print("[PASS] 代码库极速索引已自动增量同步刷新 (tools/codebase_index.json & tools/CODEBASE_INDEX.md)")
         else:
             print("[PASS] 代码库极速索引处于最新状态，100% 覆盖全工程符号")
+
+        # 步骤 4: 项目作用域规则 24 KB 预算与爬虫注册表硬校验
+        print("\n[RULES] 正在校验项目作用域规则体积预算 (<=24,000 B) 与全量爬虫注册表...")
+        rs = discover_rules_and_skills()
+        for r in rs.get("rules", []):
+            print(f"   - {r['file']:20s} | {r['bytes']:6,d} B ({r['budget_pct']:4.1f}%) [{r['status']}]")
+        ok, issues = run_health_check()
+        if not ok:
+            print("[FAIL] 规则预算或索引注册表校验未通过:")
+            for iss in issues:
+                print(f"   - {iss}")
+            sys.exit(1)
+        print("[PASS] 所有项目作用域规则均位于 24 KB 安全预算内，全量信源爬虫注册表 100% 完整")
+    except SystemExit:
+        raise
     except Exception as e:
         print(f"[WARN] 极速索引同步校验轻微异常放行: {e}")
 
