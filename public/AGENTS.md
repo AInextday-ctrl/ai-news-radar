@@ -21,6 +21,9 @@
    - 凡改动卡片渲染规则，须同步检查 `content_publisher.py`（SSR）、`public/js/app.js`（桌面 CSR）与 `public/m/js/mobile.js`（移动 CSR）。
 3. **DOM 降级正文提取卫语句**：弹窗降级解析正文时，若目标节点为纯列表（`UL`/`OL`）或内部缺少 `<p>` 段落，严禁渲染为“深度报道原文实录”，防止要点列表冒充正文。
 4. **严禁语言泄漏与半截括号**：英文版（`/en/`）及 `_en` 渲染零中文字符；模型适配范围按 `AGENTS.md` §8 使用通用能力梯队，严禁硬编码过时微版本号。
+5. **置顶推文双轨同构与关键词防裁剪**：
+   - `public/js/app.js` 检索推文与置顶条目必须优先读取全局 `cachedData`（`cachedData.grouped?.celebrity`、`cachedData.items`），严禁仅依赖不存在的 `window.newsData` 或局部越域变量；前后端 `isTiboResetTweet` / `is_tibo_reset_tweet` 时效窗口统一保持 `48h`。
+   - `format_tibo_pinned_card` 与 `renderTiboPinnedCard` 严禁在提取 `reset` / `重置` 关键句前对多段正文做定长 `250` 字符硬截断；若核心重置声明位于后段，须自动组排“首句 + 重置核心句”并配合 `leading-snug line-clamp-4` 确保卡片首屏可见。
 
 ---
 
@@ -35,5 +38,5 @@
 
 ## 4. 变更交付与双端复核
 
-1. 修改 `public/js/*.js` 等前端源文件后，同步刷新压缩/版本化产物（如适用）、重跑静态发布器与双门禁（`python tools/verify_code_integrity.py` + `python tests/test_data_quality_gate.py`）。
+1. 修改 `src/input.css` 或 HTML 中的 Tailwind 类（含 `dark:bg-[#...]` 主题色）后，必须执行 Tailwind 构建并同步覆盖 HTML 与断言 22 引用的版本化 CSS（如 `public/css/style-v736.min.css` / `style-v735.min.css`），核验新样式已编入压缩包；修改 `public/js/app.js` 后，必须使用 `npx --no-install terser public/js/app.js -c -m -o public/js/app-v746.min.js`（并同步 `app.min.js` 及按需对齐 `public/zh/js/app.js`），再重跑 `content_publisher.py` 与双门禁（`python tools/verify_code_integrity.py` + `python tests/test_data_quality_gate.py`）。
 2. 通过 `python tools/safe_sync.py` 推送上线后，必须对 `https://ainewsradar.xyz` 与 `https://ai-radar-news.web.app` 真实抓包确认 HTTP 200 及静态资源生效。

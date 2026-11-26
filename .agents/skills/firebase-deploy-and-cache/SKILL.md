@@ -21,7 +21,11 @@ When `https://ainewsradar.xyz` or static assets appear unchanged after a push:
 Even with `retainedReleaseCount` configured, frequent 24x7 deploys can leave orphaned `FINALIZED` versions consuming tens of GB and silently halting new releases.
 
 1. **Prune stale versions via Hosting REST API**:
-   - Run:
+   - In Windows PowerShell behind a local proxy, set proxy env vars first:
+     ```powershell
+     $env:HTTP_PROXY='http://127.0.0.1:7890'; $env:HTTPS_PROXY='http://127.0.0.1:7890'
+     ```
+   - Run (if an explicit `gcloud` auth token is needed, inject `GCP_ACCESS_TOKEN` via `gcloud.CMD auth print-access-token`):
      ```bash
      python tools/prune_firebase_versions.py 2
      ```
@@ -31,9 +35,9 @@ Even with `retainedReleaseCount` configured, frequent 24x7 deploys can leave orp
 2. **Pre-deploy CI protection**:
    - `.github/workflows/update_and_deploy.yml` activates `SA_KEY` via `gcloud auth activate-service-account`, sets `GCP_ACCESS_TOKEN`, and executes `python tools/prune_firebase_versions.py 2` both before deployment and automatically on quota retry.
 3. **Manual fallback deploy**:
-   - After pruning locally, trigger:
+   - After pruning locally (with proxy env vars active if on Windows behind `127.0.0.1:7890`), trigger:
      ```bash
-     npx firebase-tools deploy --only hosting --non-interactive
+     npx --no-install firebase-tools deploy --only hosting --project ai-radar-news --non-interactive
      ```
 
 ## 3. Immutable vs Mutable Asset Caching Rules (`firebase.json`)

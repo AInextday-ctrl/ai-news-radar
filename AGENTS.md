@@ -14,6 +14,7 @@
 5. **URL/Slug 规范化与检索安全**：提取 URL slug 必须先 `re.sub(r'^-+|-+$', '', slug)` 剔除首尾连字符与特殊符号；严禁将带前导 `-` 的原始 slug 拼入搜索引擎查询（防触发负向排除符自锁）。
 6. **零付费墙试读与缓存防投毒**：严禁入库/渲染试读残篇与登录诱导语（`Log in to keep reading`、`Bloomberg Law provides`、`Sign in to access`、`登录以继续阅读`、`订阅以解锁` 等），统一经 `is_paywall_or_login_noise` / `has_paywall_or_truncation_noise` 过滤；从任何本地磁盘缓存加载历史条目时必须复检，命中杂质即强制废弃重抓。
 7. **电讯语义校验与禁泛型头像**：二级电讯穿透必须双向比对标题与核心摘要关键词重合度（≥ 35%），杜绝单点关键词误抓无关文章；严禁收录 `bwrite-generic-profile`、`author-profile`、`avatar`、`width=44`、`headshot` 等小尺寸头像/占位图，无高清原图时仅回退 `/images/og-default.jpg`。
+8. **社媒长推文无损补全与防切片截断**：RSS/Syndication 抓取的 X/Twitter 正文若落入 110–295 字符或含断尾特征/`t.co/` 链接，视为潜在截断，必须经 FxTwitter API（带重试、自动探测代理 `127.0.0.1:7890`、并发 `≤ 6`）或 Apify `noteTweet` 补全完整正文，并在补全后立即重算 `evaluate_dynamic_pinned_status`；`language_sentinel.py` 处理原文参考字段严禁使用 `[:300]`、`[:400]` 等硬切片。
 
 ---
 
@@ -31,7 +32,7 @@
 1. **按需分卷加载**：历史内容按分类切片 96 条/卷（`vol_{N}.json`），按页加载，严禁回退为单体大归档拉取；Page 1 须由 `cachedData.grouped[tab]` 0ms 直出。
 2. **公共数据体积红线**：`public/data/latest_news.json` 必须严格 ≤ 850 KB（CI 断言 14 阻断），剔除与 `paragraphs` 重复的 `article_content_en` 等冗余字段。
 3. **后端主库第一源与双轨兜底**：服务端静态编译（`tool_news_publisher.py`、`content_publisher.py`）必须以完整后端主库（`data/latest_news.json`、`data/master_archive.json`）为第一数据源，严禁倒挂读取前端精简版 `public/data/latest_news.json`；正文渲染须优先读完整长文，为空时无缝降级拼接 `paragraphs` / `paragraphs_zh`。
-4. **全容器与镜像字段原子同步**：更新/回填条目时必须同步刷新 `data/latest_news.json`（含 `items` 与 `grouped[cat]`）、`data/master_archive.json`、`data/archive_news.json`、`public/data/latest_news.json` 及对应 `vol_{N}.json`；同步保持 `paragraphs`/`paragraphs_zh`、`article_content`/`article_content_zh`/`original_content`、`lead_paragraph` 一致。
+4. **全容器原子同步与前端精简库显式重建**：`language_sentinel.py` 与 `content_publisher.py` 不会自动将 `data/latest_news.json` 的改动派生覆盖 `public/data/latest_news.json`。凡更新或回填条目，必须先按 `id` 去重并同步刷新 `data/latest_news.json`（含 `items`、`grouped[cat]`、`viral_ticker_tweets`）、`data/master_archive.json`、`data/archive_news.json` 与 `vol_{N}.json`，**显式重建精简版 `public/data/latest_news.json`（≤ 850 KB）**，再同步保持 `paragraphs`/`paragraphs_zh`、`article_content`/`article_content_zh`/`original_content`、`lead_paragraph` 一致后执行哨兵与静态发布器。
 5. **首页零割裂与双轨同构**：
    - **幂等 SSR 容器替换**：`content_publisher.py` 注入 `stream-news/videos/prompts/tools/arxiv` 严禁依赖一次性注释占位符，须使用基于边界锚点的无状态全覆盖替换。
    - **水合时间戳强校验**：`public/js/app.js` 复用 SSR DOM 前必须校验 `ssrUpdated && data.updated_at && ssrUpdated === data.updated_at`，版本变更立即强制 `renderUI()`。
@@ -94,7 +95,7 @@
 1. **即时推送交付铁律**：凡修改前端、模板、`monetization.js`、配置或外链，本地门禁通过后严禁停留在工作区，必须立即同步推送 `origin main` 触发生产部署，以“生产环境已生效”为完成标准。
 2. **纯现金变现与多品类聚合**：仅接入支持直接现金提现（银行卡、Wise ACH、支付宝、PayPal 等）的返佣/广告联盟，**绝对严禁**代金券/积分/站内 Token；优先依托聚合联盟或自动展示网络覆盖多品类，严禁推荐对新站/`.xyz` 域名存在黑盒机器秒拒的平台（如 Impact）。
 3. **零 Monetag 与核心静态资产固锁**：全站彻底下线并阻断 Monetag 广告/跳转/弹窗；`content_publisher.py` 与 `tool_news_publisher.py` 严禁输出任何 Monetag 标签；确保版本化核心样式/脚本（如 `/css/style-v735.min.css`、`/js/app-v746.min.js`）完整存在并受 `tests/test_data_quality_gate.py` **断言 22** 强校验。
-4. **免锁本地置顶同步 (`tools/safe_sync.py`)**：严禁依赖易死锁的手动 git 拉推命令，统一由 `python tools/safe_sync.py` 执行——自动清除 `.git/*.lock` / `shallow.lock` / `maintenance.lock`，绑定本地代理 `127.0.0.1:7890`，采用 `git pull --rebase -X ours origin main` 确保本地改动绝对置顶不被机器人提交冲刷。
+4. **免锁本地置顶同步 (`tools/safe_sync.py`)**：严禁依赖易死锁的手动 git 拉推命令，统一由 `python tools/safe_sync.py` 执行——自动清除 `.git/*.lock` / `shallow.lock` / `maintenance.lock`，绑定本地代理 `127.0.0.1:7890`；采用 `git pull --rebase -X theirs origin main`（注：`git rebase` 语义下 `-X theirs` 保留本地提交、`-X ours` 才是上游分支），非 rebase 合并兜底再使用 `--no-rebase -X ours`。关键数据同步推送后，须立即以 `git show HEAD:public/data/latest_news.json` 复核目标字段未在冲突中被远端覆盖。
 5. **双生产域名现场抓包复核**：涉及前端样式、脚本或关键布局变更部署后，严禁仅凭终端日志宣告完成，必须通过 Python 实测抓取 `https://ainewsradar.xyz` 与 `https://ai-radar-news.web.app`，确认 HTTP 200、核心资产可访问且渲染正常后再交付。
 
 ---
