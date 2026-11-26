@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构、规则与符号极速索引 (Codebase Fast Index v2.0)
 
-> **生成时间**: `2026-11-26 07:27:31 UTC` | **代码文件**: `124` 个 | **索引符号**: `1446` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
+> **生成时间**: `2026-11-26 07:57:53 UTC` | **代码文件**: `124` 个 | **索引符号**: `1446` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，经 `tools/verify_code_integrity.py` 与 `.git/hooks/pre-commit` 自动增量同步刷新。
 
 ---
@@ -65,9 +65,9 @@
 
 - [`main.py`](../main.py) (252.3 KB): `generate_sitemap, inject_seo_static_content, generate_daily_briefing, parse_time_for_sort, is_tibo_reset_tweet...`
 - [`processor.py`](../processor.py) (119.2 KB): `has_chinglish_seams, strip_chinglish_to_english, normalize_ai_terminology_zh, free_translate_zh, free_translate_en...`
-- [`fetcher.py`](../fetcher.py) (197.9 KB): `extract_tech_specs, make_id, is_primarily_english, parse_to_iso, get_smart_cover_url...`
+- [`fetcher.py`](../fetcher.py) (198.7 KB): `extract_tech_specs, make_id, is_primarily_english, parse_to_iso, get_smart_cover_url...`
 - [`article_extractor.py`](../article_extractor.py) (56.4 KB): `ArticleExtractor, extract_article_substantive`
-- [`apify_crawler.py`](../apify_crawler.py) (41.0 KB): `get_apify_tokens, get_apify_token, load_crawler_state, save_crawler_state, format_metric_count...`
+- [`apify_crawler.py`](../apify_crawler.py) (41.9 KB): `get_apify_tokens, get_apify_token, load_crawler_state, save_crawler_state, format_metric_count...`
 - [`config.py`](../config.py) (109.9 KB): `constants: CATEGORIES, SCENARIO_TAGS, PRICING_TAGS, CELEBRITY_PROFILES, SOURCES...`
 - [`knowledge_base.py`](../knowledge_base.py) (20.1 KB): `DynamicKnowledgeStore`
 - [`translate_fast.py`](../translate_fast.py) (4.6 KB): `is_valid_chinese_content, translate_single_item, ensure_articles_translated, sync_all_json_files`
@@ -84,7 +84,7 @@
 ### 静态发布与 SEO/GEO 引擎 (Static Publishing & Distribution)
 *单篇静态落地页编译、首页 SSR 注入、分卷切片、Sitemap 生成与 IndexNow 秒级收录推送。*
 
-- [`content_publisher.py`](../content_publisher.py) (265.6 KB): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
+- [`content_publisher.py`](../content_publisher.py) (266.8 KB): `format_static_tool_card, format_static_video_card, format_static_prompt_card, format_static_arxiv_card, parse_tweet_time...`
 - [`tool_news_publisher.py`](../tool_news_publisher.py) (151.5 KB): `parse_iso_date, sanitize_for_en, escape, build_theme_toggle_html, build_ainr_tags_meta...`
 - [`build_flagship_articles.py`](../build_flagship_articles.py) (30.1 KB): `generate_article_page, generate_articles_index, build_all_flagship_pages, main`
 - [`seo_geo_engine.py`](../seo_geo_engine.py) (40.5 KB): `atomic_write_text, atomic_write_bytes, sanitize_for_en, xml_escape, parse_iso_or_rfc...`
@@ -101,7 +101,7 @@
 ### 前端客户端与单页交互 (Frontend SPA, Theme & Monetization)
 *极速弹窗阅读、分卷按需加载、联盟好物光学混合展示、主题/多语言切换与移动端自适应。*
 
-- [`public/js/app.js`](../public/js/app.js) (759.2 KB): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
+- [`public/js/app.js`](../public/js/app.js) (760.3 KB): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
 - [`public/js/monetization.js`](../public/js/monetization.js) (365.4 KB): `amzDp, amzSearch, isZhPage, isDarkPage, esc...`
 - [`public/js/page_language.js`](../public/js/page_language.js) (23.8 KB): `showToast, updateButtonLabel, ensureChineseConverter, loadTranslateEngine, exec...`
 - [`public/js/page_theme.js`](../public/js/page_theme.js) (3.0 KB): `getStoredTheme, resolveIsDark, updateToggleButtons, applyPageTheme, setPageTheme...`
@@ -118,7 +118,7 @@
 - [`tools/fetch_affiliate_images.py`](../tools/fetch_affiliate_images.py) (8.1 KB): `main`
 - [`tools/generate_thumbnails.py`](../tools/generate_thumbnails.py) (2.1 KB): `ensure_thumbnails`
 - [`tools/prune_firebase_versions.py`](../tools/prune_firebase_versions.py) (4.3 KB): `prune_old_versions`
-- [`tools/safe_sync.py`](../tools/safe_sync.py) (3.7 KB): `clean_git_locks, setup_proxy, run_sync`
+- [`tools/safe_sync.py`](../tools/safe_sync.py) (3.8 KB): `clean_git_locks, setup_proxy, run_sync`
 - [`tools/sync_forbes_data.py`](../tools/sync_forbes_data.py) (4.3 KB): `patch_item, sync_file`
 - [`tools/test_fetch_pillars.py`](../tools/test_fetch_pillars.py) (5.8 KB): `test_pillars`
 - [`tools/trigger_workflow.py`](../tools/trigger_workflow.py) (1.9 KB): `trigger_dispatch`
@@ -150,7 +150,7 @@
 - [`tests/test_cbsnews_crawler.py`](../tests/test_cbsnews_crawler.py) (4.4 KB): `TestCBSNewsCrawler`
 - [`tests/test_cnbc_crawler.py`](../tests/test_cnbc_crawler.py) (4.3 KB): `TestCnbcCrawler`
 - [`tests/test_coindesk_crawler.py`](../tests/test_coindesk_crawler.py) (5.3 KB): `TestCoinDeskCrawler`
-- [`tests/test_data_quality_gate.py`](../tests/test_data_quality_gate.py) (51.0 KB): `run_quality_gate_assertions, auto_heal_dataset`
+- [`tests/test_data_quality_gate.py`](../tests/test_data_quality_gate.py) (51.6 KB): `run_quality_gate_assertions, auto_heal_dataset`
 - [`tests/test_decoder_crawler.py`](../tests/test_decoder_crawler.py) (8.2 KB): `TestDecoderCrawler`
 - [`tests/test_fortune_crawler.py`](../tests/test_fortune_crawler.py) (6.5 KB): `TestFortuneCrawler`
 - [`tests/test_ft_crawler.py`](../tests/test_ft_crawler.py) (4.3 KB): `TestFtCrawler`
@@ -180,21 +180,21 @@
 **核心数据仓与公共分发：**
 - **`data/affiliate_products.json`** (`310.8 KB`)
 - **`data/apify_crawler_state.json`** (`385.3 KB`)
-- **`data/archive_celebrity.json`** (`25.91 MB`)
-- **`data/archive_news.json`** (`63.03 MB`)
-- **`data/curated_column_highlights.json`** (`36.1 KB`)
+- **`data/archive_celebrity.json`** (`27.27 MB`)
+- **`data/archive_news.json`** (`63.09 MB`)
+- **`data/curated_column_highlights.json`** (`36.2 KB`)
 - **`data/curated_prompts_library.json`** (`42.2 KB`)
 - **`data/curated_workflows_library.json`** (`13.6 KB`)
 - **`data/github_stars_history.json`** (`101.1 KB`)
-- **`data/indexnow_ledger.json`** (`291.1 KB`)
+- **`data/indexnow_ledger.json`** (`291.7 KB`)
 - **`data/knowledge_graph.json`** (`65.8 KB`)
-- **`data/latest_news.json`** (`25.11 MB`)
+- **`data/latest_news.json`** (`27.45 MB`)
 - **`data/latest_wechat.json`** (`23.1 KB`)
-- **`data/master_archive.json`** (`78.11 MB`)
-- **`data/processed_news_ledger.json`** (`9.45 MB`)
+- **`data/master_archive.json`** (`79.08 MB`)
+- **`data/processed_news_ledger.json`** (`9.46 MB`)
 - **`data/sota_model_registry.json`** (`9.5 KB`)
 - **`data/topic_focus.json`** (`21.9 KB`)
-- **`public/data/latest_news.json`** (`642.6 KB`)
+- **`public/data/latest_news.json`** (`591.6 KB`)
 - **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `15.80 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
 
 ---

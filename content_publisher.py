@@ -2475,14 +2475,29 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
     if is_zh:
         raw_text = it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
-        text = safe_text(raw_text, 250)
+        # Surface the core reset sentence prominently if buried in a long multi-paragraph post
+        reset_match = re.search(r'[^。！？\n]*?(?:重置|reset)[^。！？\n]*[。！？]?', raw_text, re.I)
+        if reset_match and reset_match.start() > 50:
+            lead_m = re.match(r'^([^。！？\n]+[。！？]?)', raw_text)
+            lead_part = lead_m.group(1).strip() if lead_m else raw_text[:45].strip()
+            combined = f"{lead_part} … {reset_match.group(0).strip()}"
+            text = safe_text(combined, 220)
+        else:
+            text = safe_text(raw_text, 250)
         badge_text = "🔥 24H RESET 置顶"
         spotlight_tag = "24h 独家聚焦 · 锁定首位"
         btn_text = "查看原帖 ↗"
     else:
         raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
-        text = safe_text(raw_text, 250)
+        reset_match = re.search(r'[^.!?\n]*?\breset\b[^.!?\n]*[.!?]?', raw_text, re.I)
+        if reset_match and reset_match.start() > 90:
+            lead_m = re.match(r'^([^.!?\n]+[.!?]?)', raw_text)
+            lead_part = lead_m.group(1).strip() if lead_m else raw_text[:80].strip()
+            combined = f"{lead_part} ... {reset_match.group(0).strip()}"
+            text = safe_text(combined, 260)
+        else:
+            text = safe_text(raw_text, 250)
         badge_text = "🔥 24H RESET PINNED"
         spotlight_tag = "24h Spotlight · Pinned #1"
         btn_text = "View Post ↗"
@@ -2551,7 +2566,7 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                   </div>
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-snug line-clamp-4 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
                     {hl_text}
                   </p>
                   {thumb_html}
@@ -3018,14 +3033,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if v_cand:
                 viral_items = v_cand[:12]
 
-        # 检查最高优先级：是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
+        # 检查最高优先级：是否存在 48 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
         pinned_tibo_en = None
         for cand in viral_items:
             if is_tibo_reset_tweet(cand, now_ts):
                 pinned_tibo_en = cand
                 break
         if not pinned_tibo_en:
-            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
+            celeb_fallback_en = (payload.get("grouped", {}).get("celebrity") or []) + [
+                it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")
+            ]
+            for cand in celeb_fallback_en:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_en = cand
                     break
@@ -3697,7 +3715,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 pinned_tibo_zh = cand
                 break
         if not pinned_tibo_zh:
-            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
+            celeb_fallback_zh = (payload.get("grouped", {}).get("celebrity") or []) + [
+                it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")
+            ]
+            for cand in celeb_fallback_zh:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_zh = cand
                     break

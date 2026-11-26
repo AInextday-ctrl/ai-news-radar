@@ -259,19 +259,31 @@ def _hydrate_tweet_from_fxtwitter(user: str, status_id: str, item: Dict[str, Any
             client = httpx.Client(
                 headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
                 proxy=proxy_url,
-                timeout=8.0,
+                timeout=12.0,
             )
         except TypeError:
             client = httpx.Client(
                 headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
-                timeout=8.0,
+                timeout=12.0,
             )
         close_client = True
     try:
-        r = client.get(f"https://api.fxtwitter.com/{user}/status/{status_id}")
-        if r.status_code != 200:
-            return False
-        payload = r.json()
+        payload = None
+        for attempt in range(2):
+            try:
+                r = client.get(f"https://api.fxtwitter.com/{user}/status/{status_id}")
+                if r.status_code == 200:
+                    payload = r.json()
+                    break
+                if r.status_code in (429, 500, 502, 503, 504) and attempt == 0:
+                    time.sleep(0.6)
+                    continue
+                return False
+            except Exception:
+                if attempt == 0:
+                    time.sleep(0.6)
+                    continue
+                return False
         tw = payload.get("tweet") if isinstance(payload, dict) else None
         if not isinstance(tw, dict):
             return False
@@ -296,6 +308,7 @@ def _hydrate_tweet_from_fxtwitter(user: str, status_id: str, item: Dict[str, Any
                 item["summary_zh"] = zh_full
                 if not item.get("title_zh") or len(str(item.get("title_zh") or "")) > 60:
                     item["title_zh"] = zh_full[:120]
+            evaluate_dynamic_pinned_status(item)
 
         media_obj = tw.get("media") or {}
         if isinstance(media_obj, dict) and (not item.get("image_url") or "pbs.twimg.com" not in str(item.get("image_url") or "")):
@@ -1015,7 +1028,14 @@ def evaluate_dynamic_pinned_status(item: Dict[str, Any]) -> bool:
         return False
 
     # 检查是否属于重置 / 思维链重启等突破关键词
-    text = f"{item.get('title', '')} {item.get('title_zh', '')} {item.get('summary_zh', '')} {item.get('content_snippet', '')} {' '.join(item.get('tags', []))}".lower()
+    text = (
+        f"{item.get('title', '')} {item.get('title_zh', '')} {item.get('title_en', '')} "
+        f"{item.get('summary_zh', '')} {item.get('summary_en', '')} "
+        f"{item.get('content_snippet', '')} "
+        f"{item.get('full_text_en', '')} {item.get('full_text_zh', '')} "
+        f"{item.get('quote_en', '')} {item.get('quote_zh', '')} "
+        f"{' '.join(str(t) for t in (item.get('tags') or []))}"
+    ).lower()
     reset_keywords = ["重置", "reset", "思维链重启", "context reset", "gpt reset", "model reset"]
     is_reset = any(kw in text for kw in reset_keywords)
 

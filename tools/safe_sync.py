@@ -60,11 +60,11 @@ def run_sync() -> bool:
         )
         print("   " + (commit_res.stdout.strip() or "Committed."))
 
-    # Step 2: Fetch and rebase with -X ours to prevent robot commit conflicts
-    print("🔄 [SafeSync] Pulling latest robot syncs from origin/main with rebase (-X ours)...")
+    # Step 2: Fetch and rebase with -X theirs (rebase semantics: ours=upstream, theirs=local commits) to keep local fixes on top
+    print("🔄 [SafeSync] Pulling latest robot syncs from origin/main with rebase (-X theirs, keeping local commits)...")
     clean_git_locks()
     pull_res = subprocess.run(
-        ["git", "pull", "--rebase", "-X", "ours", "origin", "main"],
+        ["git", "pull", "--rebase", "-X", "theirs", "origin", "main"],
         cwd=WORKSPACE_DIR,
         capture_output=True,
         text=True,

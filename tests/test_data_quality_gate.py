@@ -225,7 +225,8 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(flat_multiline_items) == 0, f"断言 11 失败：检测到 {len(flat_multiline_items)} 条多段落推文排版被抹平为单行: {flat_multiline_items[:5]}"
     print(f"✅ 断言 11 通过: 多段落排版高保真全量达标 (零多段推文排版抹平)")
 
-    # 12. Tibo Codex 重置推文准确性门禁 (严禁把招募/闲聊推文置顶或标记为 Codex 重置公告)
+    # 12. Tibo Codex 重置推文准确性门禁 (严禁把招募/闲聊推文置顶或标记为 Codex 重置公告，且活跃期内必须锁在走马灯首位)
+    from main import is_tibo_reset_tweet
     viral_ticker = payload.get("viral_ticker_tweets", [])
     for it in viral_ticker:
         h = str(it.get("author_handle") or "").lower()
@@ -233,7 +234,15 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             text = f"{it.get('title', '')} {it.get('full_text_en', '')}".lower()
             assert "dm if you want to help scale" not in text, "断言 12 失败：Tibo 招募推文被错误置顶为重置公告！"
             assert any(k in text for k in ["reset", "rest and reset", "quota", "usage limit"]), "断言 12 失败：置顶的 Tibo 推文未包含重置关键词！"
-    print(f"✅ 断言 12 通过: Tibo Codex 重置推文准确性达标 (零非重置推文被误置顶)")
+    active_reset_candidates = [
+        it for it in (grouped.get("celebrity", []) + payload.get("items", []))
+        if is_tibo_reset_tweet(it)
+    ]
+    if active_reset_candidates:
+        assert len(viral_ticker) > 0 and is_tibo_reset_tweet(viral_ticker[0]), (
+            f"断言 12 失败：检测到活跃 @thsottiaux 重置推文 ({active_reset_candidates[0].get('id')})，但 viral_ticker_tweets[0] 未锁定置顶该推文！"
+        )
+    print(f"✅ 断言 12 通过: Tibo Codex 重置推文准确性与首页置顶首位锁定达标")
 
     # 13. 资讯六要素与零模板化事实门禁 (严禁万金油套话，必须包含主体、事件、起因、数据等深度事实)
     boilerplate_bullets = []
@@ -664,14 +673,14 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
             trunc_batch = [it for it in grouped[cat][:30] if is_tweet_text_truncated(str(it.get("full_text_en") or ""))]
             if trunc_batch:
                 print(f"🔧 [Self-Healing] 检测到 {len(trunc_batch)} 条截断推文，正在并发补全完整正文...")
-                enrich_tweets_media_parallel(trunc_batch, max_workers=10)
+                enrich_tweets_media_parallel(trunc_batch, max_workers=6)
 
     # 2. 走马灯垃圾推文自愈
     if "viral_ticker_tweets" in data and isinstance(data["viral_ticker_tweets"], list):
         data["viral_ticker_tweets"] = [it for it in data["viral_ticker_tweets"] if is_meaningful_tweet(it)]
         trunc_vt = [it for it in data["viral_ticker_tweets"] if is_tweet_text_truncated(str(it.get("full_text_en") or ""))]
         if trunc_vt:
-            enrich_tweets_media_parallel(trunc_vt, max_workers=8)
+            enrich_tweets_media_parallel(trunc_vt, max_workers=6)
 
     # 3. 过滤非 AI 视频与清洗历史视频时效
     clean_vids = []

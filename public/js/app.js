@@ -2768,13 +2768,13 @@ AI资讯雷达=AI News Radar
       const isReset = text.includes('reset') || text.includes('重置');
       if (!isReset) return false;
 
-      // 维持24小时 (自推文发布时间起算)
+      // 维持48小时 (与后端 172800s 对齐，自推文发布时间起算)
       const rawTime = item.raw_published_at || item.pubDate || item.date || item.created_at || item.time;
       if (!rawTime) return false;
       const pubTs = new Date(rawTime).getTime();
       if (isNaN(pubTs) || pubTs <= 0) return false;
       const diffHours = (Date.now() - pubTs) / (1000 * 3600);
-      return diffHours >= -1 && diffHours <= 24;
+      return diffHours >= -1 && diffHours <= 48;
     }
 
     // 严格过滤无意义单句推文、脱离语境闲聊回复、纯标签灌水、Web3营销与断头线程碎片
@@ -4190,7 +4190,23 @@ AI资讯雷达=AI News Radar
       const author = 'Thibault Sottiaux (Tibo)';
       const handle = '@thsottiaux';
       const role = escapeHtml(isZh ? (item.author_role || 'OpenAI Codex 负责人 / 前沿模型产品主管') : (item.author_role_en || 'OpenAI Codex Lead / Frontier Models Product'));
-      let text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
+      let rawCardText = String(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || '')).replace(/\s*https:\/\/t\.co\/\w+$/g, '').trim();
+      if (isZh) {
+        const rm = rawCardText.match(/[^。！？\n]*?(?:重置|reset)[^。！？\n]*[。！？]?/i);
+        if (rm && rm.index > 50) {
+          const lm = rawCardText.match(/^([^。！？\n]+[。！？]?)/);
+          const lead = lm ? lm[1].trim() : rawCardText.slice(0, 45).trim();
+          rawCardText = `${lead} … ${rm[0].trim()}`;
+        }
+      } else {
+        const rm = rawCardText.match(/[^.!?\n]*?\breset\b[^.!?\n]*[.!?]?/i);
+        if (rm && rm.index > 90) {
+          const lm = rawCardText.match(/^([^.!?\n]+[.!?]?)/);
+          const lead = lm ? lm[1].trim() : rawCardText.slice(0, 80).trim();
+          rawCardText = `${lead} ... ${rm[0].trim()}`;
+        }
+      }
+      let text = escapeHtml(rawCardText);
       
       // 重点高亮 Reset / 重置
       const hlText = text.replace(/\b(reset)\b/gi, '<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">$1</span>')
@@ -4252,7 +4268,7 @@ AI资讯雷达=AI News Radar
             </div>
           </div>
           <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-            <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+            <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-snug line-clamp-4 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
               ${hlText}
             </p>
             ${thumbHtml}
@@ -4459,6 +4475,8 @@ AI资讯雷达=AI News Radar
 
       const tiboResetTweet = (tweets || []).find(it => isTiboResetTweet(it)) || 
                              (typeof allCeleb !== 'undefined' && Array.isArray(allCeleb) ? allCeleb.find(it => isTiboResetTweet(it)) : null) ||
+                             (typeof cachedData !== 'undefined' && cachedData && cachedData.grouped?.celebrity ? cachedData.grouped.celebrity.find(it => isTiboResetTweet(it)) : null) ||
+                             (typeof cachedData !== 'undefined' && cachedData && Array.isArray(cachedData.items) ? cachedData.items.find(it => isTiboResetTweet(it)) : null) ||
                              (window.newsData && window.newsData.grouped?.celebrity ? window.newsData.grouped.celebrity.find(it => isTiboResetTweet(it)) : null);
       const titleEl = document.getElementById('viral-ticker-title');
       const subtitleEl = document.getElementById('viral-ticker-subtitle');
