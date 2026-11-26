@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 01:04:58 UTC",
+  "generated_at": "2026-11-26 01:20:30 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 01:04:58 UTC",
+      "updated_at": "2026-11-26 01:20:30 UTC",
       "headline_item": {
-        "id": "185c72a06f464cc2",
+        "id": "435ead4f98674057",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美法院裁定亚马逊须对第三方缺陷商品召回负责",
-        "title_en": "Amazon loses its latest attempt to get out of handling more recall notices",
-        "source": "The Verge",
-        "author": "Emma Roth",
-        "cover_image": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
-        "image_url": "https://ainewsradar.xyz/images/verge_734813bfe1f3eca1.jpg",
-        "published_at": "2026-11-26T00:25:01+00:00",
-        "url": "https://www.theverge.com/tech/1042870/amazon-recall-order-cpsc",
-        "event_summary_zh": "美国马里兰州地方法院裁定亚马逊作为分销商，必须对经由其平台销售且存在重大安全隐患的超40万件第三方商品负责",
-        "event_summary_en": "The U.S. District Court for the District of Maryland ruled that Amazon acts as a distributor, not merely a logistics provider, regarding its 'Fulfilled by Amazon' services. Consequently, the company is mandated to comply with the U.S. Consumer Product Safety Commission's order to recall over 400,000 hazardous third-party products, including faulty carbon monoxide detectors and non-compliant children's apparel.",
+        "title_zh": "Neuralink获FDA批准启动ALS患者脑机接口临床试验",
+        "title_en": "Neuralink Gets Clearance for Brain-Implant Trial in ALS Patients",
+        "source": "Bloomberg",
+        "author": "Bloomberg",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_neuralink-gets-clearance-for-brain-impla.jpg",
+        "image_url": "https://ainewsradar.xyz/images/bloomberg_neuralink-gets-clearance-for-brain-impla.jpg",
+        "published_at": "2026-11-26T01:00:13+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-25/neuralink-gets-clearance-for-brain-implant-trial-in-als-patients",
+        "event_summary_zh": "Neuralink获美国FDA批准开展N1脑机接口临床试验，旨在评估其在ALS患者中的安全性能与数字化设备控制能力",
+        "event_summary_en": "Neuralink has secured FDA clearance to initiate the 'LINK' pivotal study, evaluating the safety and performance of the N1 brain implant in patients with ALS. The trial will utilize the R1 surgical robot to implant ultra-thin threads, focusing on the system's ability to translate neural activity into precise digital pointer control and interface clicks.",
         "core_facts_zh": [
-          "【核心事件】亚马逊（Amazon）、美国消费品安全委员会（CPSC）、美国马里兰州地方法院在美国司法管辖区及电商平台流通环节：亚马逊败诉，须履行超40万件危险产品的召回责任",
-          "【起因与机理】法院认定亚马逊通过FBA深度参与销售流程，构成分销商而非单纯物流环节",
-          "【关键数据与实测】涉及超40万件缺陷产品，包括易燃睡衣及不合格探测器。",
-          "【各方立场与态度】电商平台合规边界从物流仓储向上游供应链准入延伸。"
+          "【核心事件】Neuralink (脑机接口公司), 美国食品药品监督管理局 (FDA)在美国临床试验环境：启动评估N1植入物在ALS患者群体中的临床安全性与意念控制效能的研究",
+          "【起因与机理】验证Telepathy系统的商业化可行性并扩大脑机接口的适用临床病症范围",
+          "【核心事实细节】Neuralink获FDA批准进行ALS患者的N1脑机接口临床试验。",
+          "【各方立场与态度】试验采用R1手术机器人植入，受试者将接受为期两年的定期评估。"
         ],
         "core_facts_en": [
-          "[Core Event] Amazon, U.S. Consumer Product Safety Commission (CPSC), U.S. District Court for the District of Maryland: Amazon lost the legal battle and must facilitate the recall of over 400,000 hazardous products",
-          "[Root Cause & Mechanism] Court ruled Amazon acts as a distributor due to its active role in the FBA fulfillment process",
-          "[Key Fact Detail] Court mandates Amazon's liability for third-party products under FBA.",
-          "[Industry Impact & Outlook] Platform compliance scope expands from logistics to supply chain accountability."
+          "[Core Event] Neuralink, U.S. Food and Drug Administration (FDA): Commence a pivotal study evaluating the safety and efficacy of the N1 implant for ALS patients",
+          "[Root Cause & Mechanism] Validate the commercial viability of the Telepathy system and expand clinical indications",
+          "[Key Fact Detail] Neuralink receives FDA clearance for N1 clinical trials targeting ALS patients.",
+          "[Key Position & Outlook] Trial utilizes R1 robot for implantation, with a longitudinal monitoring period of two years."
         ],
-        "industry_impact_zh": "此判决打破了电商平台长期以来借助“物流中立”身份避险的护城河，标志着监管机构正强制将平台责任延伸至全链路供应链管理。未来跨国电商需重构其风险内控体系，将高风险品类的准入审查与售后责任成本内化为商业运行的基础支出。",
-        "industry_impact_en": "This ruling erodes the 'logistics-neutral' legal defense long held by e-commerce giants, signifying a shift toward mandatory platform accountability across the entire supply chain. E-commerce platforms must now internalize the costs of product liability and risk-based vetting, fundamentally altering their operational cost structures for third-party marketplace sales."
+        "industry_impact_zh": "此次获批标志着Neuralink从单点测试转向针对特定神经退行性疾病的系统性临床验证，其核心壁垒已由硬件植入转向神经信号解码算法的稳定性。随着临床数据的积累，Neuralink正加速构建一套“硬件+算法+交互平台”的闭环，这将迫使医疗器械巨头重新评估脑机接口作为神经康复辅助设备的颠覆性定价能力。",
+        "industry_impact_en": "This approval marks Neuralink's transition from proof-of-concept testing to systematic clinical validation for neurodegenerative diseases, shifting the competitive barrier from hardware implantation to the stability of neural decoding algorithms. As clinical data matures, the company's full-stack integration of hardware, software, and interface will force legacy medical device manufacturers to re-evaluate the disruptive pricing potential of BCI in neurological rehabilitation."
       },
       "headlines": [
+        {
+          "id": "435ead4f98674057",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Neuralink获FDA批准启动ALS患者脑机接口临床试验",
+          "title_en": "Neuralink Gets Clearance for Brain-Implant Trial in ALS Patients",
+          "source": "Bloomberg",
+          "author": "Bloomberg",
+          "cover_image": "https://ainewsradar.xyz/images/bloomberg_neuralink-gets-clearance-for-brain-impla.jpg",
+          "image_url": "https://ainewsradar.xyz/images/bloomberg_neuralink-gets-clearance-for-brain-impla.jpg",
+          "published_at": "2026-11-26T01:00:13+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-25/neuralink-gets-clearance-for-brain-implant-trial-in-als-patients",
+          "event_summary_zh": "Neuralink获美国FDA批准开展N1脑机接口临床试验，旨在评估其在ALS患者中的安全性能与数字化设备控制能力",
+          "event_summary_en": "Neuralink has secured FDA clearance to initiate the 'LINK' pivotal study, evaluating the safety and performance of the N1 brain implant in patients with ALS. The trial will utilize the R1 surgical robot to implant ultra-thin threads, focusing on the system's ability to translate neural activity into precise digital pointer control and interface clicks.",
+          "core_facts_zh": [
+            "【核心事件】Neuralink (脑机接口公司), 美国食品药品监督管理局 (FDA)在美国临床试验环境：启动评估N1植入物在ALS患者群体中的临床安全性与意念控制效能的研究",
+            "【起因与机理】验证Telepathy系统的商业化可行性并扩大脑机接口的适用临床病症范围",
+            "【核心事实细节】Neuralink获FDA批准进行ALS患者的N1脑机接口临床试验。",
+            "【各方立场与态度】试验采用R1手术机器人植入，受试者将接受为期两年的定期评估。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Neuralink, U.S. Food and Drug Administration (FDA): Commence a pivotal study evaluating the safety and efficacy of the N1 implant for ALS patients",
+            "[Root Cause & Mechanism] Validate the commercial viability of the Telepathy system and expand clinical indications",
+            "[Key Fact Detail] Neuralink receives FDA clearance for N1 clinical trials targeting ALS patients.",
+            "[Key Position & Outlook] Trial utilizes R1 robot for implantation, with a longitudinal monitoring period of two years."
+          ],
+          "industry_impact_zh": "此次获批标志着Neuralink从单点测试转向针对特定神经退行性疾病的系统性临床验证，其核心壁垒已由硬件植入转向神经信号解码算法的稳定性。随着临床数据的积累，Neuralink正加速构建一套“硬件+算法+交互平台”的闭环，这将迫使医疗器械巨头重新评估脑机接口作为神经康复辅助设备的颠覆性定价能力。",
+          "industry_impact_en": "This approval marks Neuralink's transition from proof-of-concept testing to systematic clinical validation for neurodegenerative diseases, shifting the competitive barrier from hardware implantation to the stability of neural decoding algorithms. As clinical data matures, the company's full-stack integration of hardware, software, and interface will force legacy medical device manufacturers to re-evaluate the disruptive pricing potential of BCI in neurological rehabilitation."
+        },
         {
           "id": "185c72a06f464cc2",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "本案凸显了AI初创企业在破产重组中的资产价值与隐私权保护的尖锐对立，数据资产变现合法性已成为行业监管的核心盲区。未来破产托管协议需强制性纳入数据销毁或“禁止重售”条款，否则将引发针对AI存量数据集交易的系统性地方法律诉讼。",
           "industry_impact_en": "The case highlights the conflict between monetizing AI datasets during insolvency and fundamental user privacy rights, marking a critical regulatory blind spot. Future bankruptcy protocols must mandate 'no-resale' or data-destruction clauses to avoid systemic legal challenges regarding the liquidation of proprietary AI training materials."
-        },
-        {
-          "id": "4b62e0888678e3df",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Anthropic发布Claude Artifacts应用安装功能",
-          "title_en": "Hands-on with the \"Install as app\" feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)",
-          "source": "MacStories",
-          "author": "MacStories",
-          "cover_image": "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png",
-          "image_url": "https://cdn.macstories.net/images/uploads/2026/11/25/shortcut-upload-1795625565922-e54ce57825.png",
-          "published_at": "2026-11-25T23:20:01+00:00",
-          "url": "https://www.macstories.net/stories/a-closer-look-at-claudes-mac-apps/",
-          "event_summary_zh": "Anthropic在Claude桌面端推出Artifacts“安装为应用”功能，支持将网页端生成内容转化为独立的本地桌面应用",
-          "event_summary_en": "Anthropic has launched the 'Install as app' beta for Mac and Windows, allowing users to package Claude Artifacts into standalone desktop applications. Based on an Electron shim, these apps require the main Claude process to handle model interactions and system permissions, with files localized and indexed for OS-native integration.",
-          "core_facts_zh": [
-            "【核心事件】Anthropic（人工智能研究公司）在Claude桌面客户端（Mac/Windows）：支持将Artifacts内容通过Electron技术转化为独立桌面应用，同步调用Claude模型与连接器能力",
-            "【起因与机理】旨在降低代码生成内容的交付门槛，打破传统应用分发范式，增强用户对生成式AI工具的使用粘性",
-            "【核心事实细节】Artifacts支持转化为独立桌面应用（含图标与独立窗口）。",
-            "【各方立场与态度】预示AI厂商向软件分发平台转型的底层技术野心。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Anthropic: Enables packaging Artifacts as standalone desktop applications using Electron, leveraging integrated Claude model and connector capabilities.",
-            "[Root Cause & Mechanism] To lower the barrier for deploying AI-generated code and bypass traditional distribution bottlenecks.",
-            "[Key Fact Detail] Artifacts convertibility into standalone desktop apps with native icons/windows.",
-            "[Key Position & Outlook] Strategic shift toward AI-native software distribution platforms."
-          ],
-          "industry_impact_zh": "此举标志着模型厂商正试图通过OS层面的渗透，将AI模型从单一聊天界面转化为替代轻量级软件分发的底层平台。通过将本地应用生命周期与Claude账号权限绑定，Anthropic正在建立一套基于生成式UI的生态闭环，实质上挑战了现有应用商店对软件交互与分发的垄断权。",
-          "industry_impact_en": "This move signals a strategic shift from chat-based interfaces to OS-level platform integration, positioning the AI model as the underlying engine for software distribution. By binding local app lifecycles to Claude user accounts, Anthropic is constructing an AI-native ecosystem that implicitly challenges the dominance of traditional app stores in software interaction and delivery."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 01:04:58 UTC",
+      "updated_at": "2026-11-26 01:20:30 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 01:04:58 UTC",
+      "updated_at": "2026-11-26 01:20:30 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
