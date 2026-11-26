@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 C… | AI 资讯雷达</title>
+  <meta name="description" content="Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息">
+  <meta name="ainr-tags" content="📰 Industry News, news, Conversations with Tyler, Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler), 📰 业界动态, Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 C… | AI 资讯雷达">
+  <meta property="og:description" content="Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息">
+  <meta property="og:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="og:image:secure_url" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <meta name="twitter:title" content="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 C… | AI 资讯雷达">
+  <meta name="twitter:description" content="Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息">
+  <meta name="twitter:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="twitter:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta name="twitter:image:alt" content="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答">
+  <meta name="citation_publication_date" content="2026-11-26">
+  <meta name="citation_author" content="Conversations with Tyler">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <meta name="citation_abstract" content="Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js?v=2"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
+  <script defer src="/js/page_language.js"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI News Radar",
+          "item": "https://ainewsradar.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI 行业快讯",
+          "item": "https://ainewsradar.xyz/zh#news"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+          "item": "https://ainewsradar.xyz/zh/news/5daa8e562c8347dc"
+        }
+      ]
+    },
+    {
+      "@type": "NewsArticle",
+      "headline": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+      "description": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
+      "image": [
+        "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png"
+      ],
+      "url": "https://ainewsradar.xyz/zh/news/5daa8e562c8347dc",
+      "datePublished": "2026-11-26T08:55:02+00:00",
+      "dateModified": "2026-11-26T08:55:02+00:00",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/5daa8e562c8347dc",
+      "articleSection": "Artificial Intelligence",
+      "articleBody": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索历史记录。这种背景使他成为该领域最大的实时问题的异常直接的对话者：最近大量的人工智能辅助数学结果是否会使密码学本身面临风险，以及如果公钥加密在没有任何警告的情况下停止工作，世界实际上应该做什么。\n\n泰勒和莫克西讨论人工智能是否可以破解密码学、Marlinspike 自己的私人人工智能聊天服务、他对人工智能模型而不是使用它们的人类进行监视的案例、他对机场面部识别的怀疑、他暂时提出的基于同意的集中监控的案例、为什么他认为执法应该故意不完美、是什么让 Signal 与 WhatsApp 不同、他对目前使用的加密货币的怀疑、他似乎对五角大楼群聊丑闻几乎感到高兴，几乎独自淹没在其中旧金山湾、星链从上世纪 90 年代末单人航行、搭便车穿越美国的经历、每次国际飞行时都会被秘密标记的神秘时期、他下一步要建造的东西等等。\n\n2026 年 10 月 10 日，在进步根源研究所主办的进步会议上现场录制。特别感谢 Wild Horse Productions 的视频制作。\n\n帮助我们在 2027 年继续对话。立即向“与泰勒对话”捐款。\n\n泰勒·考恩：大家好，欢迎回到《与泰勒对话》。今天，我非常荣幸能与莫克西·马林斯派克 (Moxie Marlinspike) 聊天。莫西，你可以说，是信号人。他是一位企业家、密码学家、计算机安全研究员。他建造了信号。他是相关非营利组织的联合创始人，是相关有限责任公司的首任首席执行官，他设计了 Signal、WhatsApp、Facebook Messenger、Skype 等背后的加密协议。莫西，很高兴你在这里。\n\n莫西·马林斯派克： 谢谢。来到这里很紧张。\n\n考恩：我有很多问题。它们对我们来说令人伤脑筋，但对您来说可能不是。所有来自人工智能的数学进步，它们会打破密码学吗？\n\nCOWEN：这不是我们想要的令人放心的答案，对吧？\n\n马林斯派克：是的。有一些合理的担忧。许多密码学都是基于我们认为难以解决的问题。人们长期以来一直在思考它们，但也许人工智能比我们更擅长思考它们。密码学界已经为后量子时代的此类事情做好了一段时间的准备。每个人都在谨慎行事。希望人工智能也能帮助改进我们可以应用的新密码技术和方法。\n\nCOWEN：从事量子工作的人告诉我要改变公司实际工作的方式，大公司可能需要长达五年的时间。如果大量数学结果出来并且加密可以部分被破解，我们没有五年的时间，对吧？\n\n马林斯派克：也许吧。这取决于您所说的损坏或部分损坏是什么意思。某些算法可能比其他算法更容易受到攻击。这可能就像我们需要使用更大的密钥大小来增加安全范围一样。后量子的东西是一个有趣的练习，因为我们曾经经历过这个五年周期，现在我们做得更好了。如果再做一次，可能需要不到五年的时间。\n\nCOWEN：如果发生的话会是什么样子？比如说，OpenAI 可能会提前几天通过一些奇怪的资产交易、资金重新分配发布一些新的数学问题解决方案。消息一出。第二天，我们是否都惊慌失措，或者只是平淡无奇，或者我们没有注意到？资产价格开始下跌？你已经考虑过这一切。\n\nMARLINSPIKE：我不知道我是否考虑过这一切。有一个世界真的很糟糕。如果结果表明所有公钥加密技术都不再起作用，那么整个互联网就会遇到麻烦。就像您不能再相信您的操作系统映像更新一样。你不能相信你与任何网站、银行、在线的连接。一切又都是纯文本了。这是最坏的情况。\n\n有各种各样的中间情况，或者根本没有。我很难真正了解。我不是数学界的人。最近所有的数学结果都出来了。这些都是难题，但我很难知道有多少人真正在研究这些问题。几天前的晚上，我问了一个可能更熟悉数学的人，他说：“哦，很多人。”我当时想，“哦，那是多少？”他说，“几十个。”在某种程度上，这是令人鼓舞的，因为我认为超过数十人已经思考这些密码学问题可能更长时间了，但同样，我们不知道。",
+      "wordCount": 1733,
+      "keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Conversations with Tyler",
+      "isBasedOn": "https://conversationswithtyler.com/episodes/moxie-marlinspike/?ref=ainewsradar",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Artificial Intelligence",
+          "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+        }
+      ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz"
+      },
+      "license": "https://ainewsradar.xyz/editorial-policy",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".executive-summary",
+          "h1",
+          ".article-body",
+          ".fact-card"
+        ]
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AI News Radar Editorial Team",
+        "url": "https://ainewsradar.xyz/zh/about"
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ainewsradar.xyz/favicon.ico"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答 的核心事实与事件脉络是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答 端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。 美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。 Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。 Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索历史记录。那个背景马克。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI 资讯雷达</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回雷达首页
+        </a>
+      </div>
+      <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="主题切换"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="切换全站 31 种多语言版本">
+          <span id="page-lang-flag">🇨🇳</span>
+          <span id="page-lang-text">简体中文</span>
+          <span class="text-[10px] text-slate-400">▼</span>
+        </button>
+        <a href="https://ainewsradar.xyz/news/5daa8e562c8347dc" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 切换英文 (EN)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png" alt="Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: Conversations with Tyler
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>记者 / 供稿: Conversations with Tyler</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="核心要点提炼与关键事实" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【调查与监管诉求】</strong>美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。</li>
+          </ul>
+        </section>
+        
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Conversations with Tyler 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索历史记录。这种背景使他成为该领域最大的实时问题的异常直接的对话者：最近大量的人工智能辅助数学结果是否会使密码学本身面临风险，以及如果公钥加密在没有任何警告的情况下停止工作，世界实际上应该做什么。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">泰勒和莫克西讨论人工智能是否可以破解密码学、Marlinspike 自己的私人人工智能聊天服务、他对人工智能模型而不是使用它们的人类进行监视的案例、他对机场面部识别的怀疑、他暂时提出的基于同意的集中监控的案例、为什么他认为执法应该故意不完美、是什么让 Signal 与 WhatsApp 不同、他对目前使用的加密货币的怀疑、他似乎对五角大楼群聊丑闻几乎感到高兴，几乎独自淹没在其中旧金山湾、星链从上世纪 90 年代末单人航行、搭便车穿越美国的经历、每次国际飞行时都会被秘密标记的神秘时期、他下一步要建造的东西等等。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">2026 年 10 月 10 日，在进步根源研究所主办的进步会议上现场录制。特别感谢 Wild Horse Productions 的视频制作。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">帮助我们在 2027 年继续对话。立即向“与泰勒对话”捐款。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">泰勒·考恩：大家好，欢迎回到《与泰勒对话》。今天，我非常荣幸能与莫克西·马林斯派克 (Moxie Marlinspike) 聊天。莫西，你可以说，是信号人。他是一位企业家、密码学家、计算机安全研究员。他建造了信号。他是相关非营利组织的联合创始人，是相关有限责任公司的首任首席执行官，他设计了 Signal、WhatsApp、Facebook Messenger、Skype 等背后的加密协议。莫西，很高兴你在这里。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">莫西·马林斯派克： 谢谢。来到这里很紧张。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">考恩：我有很多问题。它们对我们来说令人伤脑筋，但对您来说可能不是。所有来自人工智能的数学进步，它们会打破密码学吗？</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN：这不是我们想要的令人放心的答案，对吧？</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">马林斯派克：是的。有一些合理的担忧。许多密码学都是基于我们认为难以解决的问题。人们长期以来一直在思考它们，但也许人工智能比我们更擅长思考它们。密码学界已经为后量子时代的此类事情做好了一段时间的准备。每个人都在谨慎行事。希望人工智能也能帮助改进我们可以应用的新密码技术和方法。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN：从事量子工作的人告诉我要改变公司实际工作的方式，大公司可能需要长达五年的时间。如果大量数学结果出来并且加密可以部分被破解，我们没有五年的时间，对吧？</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">马林斯派克：也许吧。这取决于您所说的损坏或部分损坏是什么意思。某些算法可能比其他算法更容易受到攻击。这可能就像我们需要使用更大的密钥大小来增加安全范围一样。后量子的东西是一个有趣的练习，因为我们曾经经历过这个五年周期，现在我们做得更好了。如果再做一次，可能需要不到五年的时间。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN：如果发生的话会是什么样子？比如说，OpenAI 可能会提前几天通过一些奇怪的资产交易、资金重新分配发布一些新的数学问题解决方案。消息一出。第二天，我们是否都惊慌失措，或者只是平淡无奇，或者我们没有注意到？资产价格开始下跌？你已经考虑过这一切。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE：我不知道我是否考虑过这一切。有一个世界真的很糟糕。如果结果表明所有公钥加密技术都不再起作用，那么整个互联网就会遇到麻烦。就像您不能再相信您的操作系统映像更新一样。你不能相信你与任何网站、银行、在线的连接。一切又都是纯文本了。这是最坏的情况。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">有各种各样的中间情况，或者根本没有。我很难真正了解。我不是数学界的人。最近所有的数学结果都出来了。这些都是难题，但我很难知道有多少人真正在研究这些问题。几天前的晚上，我问了一个可能更熟悉数学的人，他说：“哦，很多人。”我当时想，“哦，那是多少？”他说，“几十个。”在某种程度上，这是令人鼓舞的，因为我认为超过数十人已经思考这些密码学问题可能更长时间了，但同样，我们不知道。</p>
+          </div>
+          
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。 Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索历史记录。那个背景马克。</p>
+        </div>
+        
+
+      </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>分享至</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>复制分享链接</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://conversationswithtyler.com/episodes/moxie-marlinspike/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 阅读原资讯官网报道 ↗</span>
+        </a>
+
+      </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="版权归属与免责声明" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">版权归属与免责声明：</strong>本页内容系 AI 资讯雷达基于公开可访问信息进行的行业追踪整理与中文编译，仅供学习交流与信息参考，不构成任何投资、商业或法律建议。原文标题、正文报道、商标、配图及内嵌音视频之完整著作权均严格归属原始发布机构 <strong class="text-slate-600 dark:text-slate-300">Conversations with Tyler</strong> 及原作者所有，建议读者点击上方原始链接访问并订阅支持正版原创媒体。如权利人认为内容涉权或需限制展示/立即下架，请查阅 <a href="/zh/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">版权声明与 DMCA 下架机制</a> 并致函 <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a>（24–48 小时内快速处置）。</p>
+      </aside>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/147bb8d5738a87a4" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg" alt="AI基建挤占内存产能，消费电子成本攀升" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wall Street Journal</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">AI基建挤占内存产能，消费电子成本攀升</h4>
+            </a>
+            
+            <a href="/zh/news/74b9654424d4921d" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_6338f05e94fe14d4.jpg" alt="AI产业叙事反转，软件股抗跌性超半导体" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">AI产业叙事反转，软件股抗跌性超半导体</h4>
+            </a>
+            
+            <a href="/zh/news/e7f2fb770e8efb3e" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://cms.therecord.media/uploads/microsoft_sign_pexels_altabena_efbc5ae4db.jpg" alt="中朝黑客组织引入AI自动化渗透工具ARTEX" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Record</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">中朝黑客组织引入AI自动化渗透工具ARTEX</h4>
+            </a>
+            
+            <a href="/zh/news/72121f63fa770ad5" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_628f259f938228dd.jpg" alt="英伟达暂停向东南亚四国供应AI算力服务器" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">英伟达暂停向东南亚四国供应AI算力服务器</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/zh/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">关于我们</a><a href="/zh/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">编辑方针</a><a href="/zh/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">版权与 DMCA 免责</a><a href="/zh/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">服务条款</a><a href="/zh/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">隐私政策</a><a href="/zh/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">联系我们</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; 所有第三方报道版权归原发布机构及作者所有</p>
+    </div>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "5daa8e562c8347dc",
+      type: "news",
+      title: "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+      snippet: "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
+      url: window.location.href,
+      image_url: "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>

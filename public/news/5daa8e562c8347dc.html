@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and… | AI News Radar</title>
+  <meta name="description" content="Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,">
+  <meta name="ainr-tags" content="📰 Industry News, news, Conversations with Tyler, Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler),">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ainewsradar.xyz/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Google News Sitemap" href="https://ainewsradar.xyz/news-sitemap.xml">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and… | AI News Radar">
+  <meta property="og:description" content="Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,">
+  <meta property="og:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="og:image:secure_url" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)">
+  <meta property="og:url" content="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <meta name="twitter:title" content="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and… | AI News Radar">
+  <meta name="twitter:description" content="Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,">
+  <meta name="twitter:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta property="twitter:image" content="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png">
+  <meta name="twitter:image:alt" content="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)">
+  <meta name="citation_publication_date" content="2026-11-26">
+  <meta name="citation_author" content="Conversations with Tyler">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/news/5daa8e562c8347dc">
+  <meta name="citation_abstract" content="Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar (Chinese Edition RSS)" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'auto';
+        var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', t === 'dark' || (t === 'auto' && d));
+      } catch (e) {}
+    })();
+  </script>
+  <script defer src="/js/page_theme.js?v=2"></script>
+  <script defer src="/js/monetization.js?v=46"></script>
+  <script defer src="/js/page_language.js"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "AI News Radar",
+"item": "https://ainewsradar.xyz/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "Breaking AI News",
+"item": "https://ainewsradar.xyz#news"
+},
+{
+"@type": "ListItem",
+"position": 3,
+"name": "Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+"item": "https://ainewsradar.xyz/news/5daa8e562c8347dc"
+}
+]
+},
+{
+"@type": "NewsArticle",
+"headline": "Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+"description": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,",
+"image": [
+"https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png"
+],
+"url": "https://ainewsradar.xyz/news/5daa8e562c8347dc",
+"datePublished": "2026-11-26T08:55:02+00:00",
+"dateModified": "2026-11-26T08:55:02+00:00",
+"inLanguage": "en",
+"mainEntityOfPage": "https://ainewsradar.xyz/news/5daa8e562c8347dc",
+"articleSection": "Artificial Intelligence",
+"articleBody": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryptography itself at risk, and what the world should actually do if public-key encryption stopped working with little warning.\n\nTyler and Moxie discuss whether AI could break cryptography, Marlinspike’s own private AI chat service, his case for surveilling AI models instead of the humans using them, his skepticism of airport facial recognition, the case he tentatively makes for consent-based over centralized surveillance, why he thinks law enforcement should stay deliberately imperfect, what makes Signal different from WhatsApp, his doubts about cryptocurrency as it’s currently used, a Pentagon group chat scandal he seems almost pleased about, nearly drowning alone in San Francisco Bay, what Starlink has taken from solo sailing, hitchhiking across America in the late ’90s, a mysterious period of being secretly flagged every time he flew internationally, what he’s building next, and more.\n\nRecorded live at the Progress Conference, hosted by the Roots of Progress Institute, October 10th, 2026. Special thanks to Wild Horse Productions for the video production.\n\nHelp us keep the conversations going in 2027. Donate to Conversations with Tyler today.\n\nTYLER COWEN: Hello, everyone, and welcome back to Conversations with Tyler. Today I’m greatly honored to be chatting with Moxie Marlinspike. Moxie is, you could say, the Signal guy. He’s an entrepreneur, cryptographer, computer security researcher. He built Signal. He co-founded the associated nonprofit, was the first CEO of the associated LLC, and he designed the encryption protocol that is behind Signal, WhatsApp, Facebook Messenger, Skype, and much more. Moxie, very glad you’re here.\n\nMOXIE MARLINSPIKE: Thank you. Nervous to be here.\n\nCOWEN: I have many questions. They’re nerve-wracking for us, but maybe not for you. All the math advances coming out of AI, are they just going to break cryptography?\n\nCOWEN: That’s not the reassuring answer we wanted, right?\n\nMARLINSPIKE: Yes. There’s some valid concern. Much of cryptography is based on problems that we think are difficult to solve. People have been thinking about them for a long time, but maybe AI is better at thinking about them than we are. The cryptography community has been preparing for things like this for a while with post-quantum. Everyone is proceeding with caution. Hopefully, AI will also help improve new cryptographic techniques and methods that we can apply.\n\nCOWEN: Someone who works in quantum told me to switch over the way companies actually work, larger companies could take as long as five years. If the mass math results come out and encryption can partially be broken, we don’t have five years, right?\n\nMARLINSPIKE: Maybe. It depends on what you mean by broken or partially broken. Some algorithms might be more vulnerable than others. It could just be like we need to increase security bounds with larger key sizes. The post-quantum stuff has been an interesting exercise in that we’ve gone through this five-year cycle once, and now we’re better at doing it. It would probably take less than five years to do it again.\n\nCOWEN: What would that look like if it happened? Say, OpenAI releases some new solutions to math problems maybe a few days in advance through some weird asset trading, funds reallocation. The news comes out. The next day, are we all panicked, or is it a ho-hum, or we don’t notice? Asset prices start decaying? You’ve thought about all this.\n\nMARLINSPIKE: I don’t know that I have thought about all this. There’s a world in which it’s really bad. If there is some result that just all of public-key cryptography doesn’t work anymore, then the whole internet is in trouble. It’s like you can’t trust your operating system image updates anymore. You can’t trust your connections to any website, your bank, online. Everything is plain text again. That’s the worst possible case.\n\nThere’s a whole range of intermediate cases, or maybe nothing at all. It’s hard for me to really know. I’m not of the math community. There’s all these recent math results that came out. These were difficult problems, but it’s hard for me to know how many people have actually been working on these. I asked someone maybe more familiar with math a few nights ago, and he was like, “Oh, a lot of people.” I was like, “Oh, how many is that?” He was like, “Dozens.” In some way, that was encouraging in the sense that I think more than dozens of people have been thinking about these cryptography problems for probably longer, but again, we don’t know.\n\nCOWEN: Let’s say a prepper comes to you, and I know a few of them in this audience, and says, “This is only a 2 percent chance, but I’m worried. What should I actually do? Is it keep a lot of cash at home, stock up on beans, abandon my crypto?” Do you have advice or nonadvice?\n\nMARLINSPIKE: In general, I think the problem with prepping is that it’s very difficult to anticipate exactly what kind of apocalypse we could be walking into. You buy an abandoned missile silo in South Dakota, and then you’re just really hoping for a very specific kind of apocalypse. Every day it doesn’t happen, it’s maybe a little disappointing. When it comes to prepping, how I apply it in my own life is I think it’s best to be a prepper with skills. You develop skills that could be useful in a variety of different apocalypse scenarios. You’re not really rooting for any individual one. If it doesn’t happen, it’s nice to have skills anyway.\n\nCOWEN: What’s the core skill? Is it archery? Working a sewing machine?\n\nMARLINSPIKE: Those are great skills. Those are great skills to have, and I don’t think anyone would begrudge being an excellent archer who can sew.\n\nCOWEN: On a more mundane level, I have the impression, just talking to friends, that more crypto accounts are being hacked now, not by super sophisticated techniques, but could not have been done a year ago than had been the case before. Do you have the same sense? If so, why do you think that’s happening?\n\nMARLINSPIKE: I have not been following. I don’t have that sense.\n\nCOWEN: People with 2FA are finding the crypto gone, or their Twitter accounts are getting hacked at a higher rate than I think before. This is anecdotal, but I feel it’s true.\n\nMARLINSPIKE: I haven’t noticed the same anecdote.\n\nCOWEN: Now, some questions about privacy and AI models. People treat the AI model like a therapist or a girlfriend or a boyfriend. Why are people willing to confess to an AI what they would not tell a priest or a therapist?\n\nMARLINSPIKE: People are confessing what they would tell a priest or a therapist to an AI. The form of technology affects how it is that we interact with it. The form of AI in this sort of conversational interface that makes it really powerful is a form of technology that invites confession. You feel like you’re communicating with somebody and that it is a private space.\n\nMy critique of the way that technology is often organized in general is that what I am trying to do in creating privacy-enhancing technology is to create an interface where the underlying technology is consistent with the way that the app looks. You open a messaging app, and you send a message to your friend. The way it looks in the app is it’s just you and your friend in this little window talking to each other, but the way that it actually works for many messengers is the exact opposite of that. It’s not just you and your friend in there. It’s you, thousands of people who work at this company, anybody who compromises the computers of that system, information that could be stolen from advertisers.\n\nEvery individual one-on-one chat in those apps should actually be a group chat with all of those people in it if the interface was honest to how the underlying technology worked. I think that disparity is even more true today with AI than almost anything else in history, where you feel like you’re having this conversation with this agent or assistant that gets to know you as your friend, deeply understands you, your preferences, your memories, your history, your life experience, but actually, it’s a huge group chat with many, many more people.\n\nCOWEN: Putting aside open weights models, is there a version of privacy-enhancing chat with an AI from one of the major labs that could be secure?\n\nMARLINSPIKE: It’s possible to build, yes.\n\nCOWEN: Say there’s someone in the lab and they can access your account. This happens a few times because people who are planning murders get reported to the FBI, right? Someone is reading something. Maybe the AIs read it first.\n\nMARLINSPIKE: A lot of people are reading something.\n\nMARLINSPIKE: All of your chats end up in a data lake that’s designed for semantic understanding and extracting meaning and training loops and everything else. I run a service called Confer that is a private AI chat where you talk to the AI assistant-style chat, and only you have access to your chats. I can’t access your chats, and no one else can.\n\nCOWEN: How do I use Confer? Say, typically I chat with Claude or with GPT Pro, and you do Confer; what do I do to use Confer?\n\nMARLINSPIKE: Instead of typing Claude.ai into your web browser, you type Confer.to.\n\nCOWEN: That connects me to all the others?\n\nMARLINSPIKE: It connects you to Confer.\n\nCOWEN: To Confer, yes. I can’t do it with Claude or with GPT Pro?\n\nMARLINSPIKE: No, they are not operating private services.\n\nCOWEN: Now say when people use agents, and there’s a certain level of accountability we want for agents. If the agents hack someone else’s privacy, we want some kind of recourse, liability. Can there be privacy in a world with agents and accountability at the same time?\n\nMARLINSPIKE: This is a line that’s very difficult to navigate private or unprivate of what does AI safety mean. I think that it’s probably possible to navigate in the private AI world, but it’s just as difficult and thorny as in the nonprivate AI world.\n\nCOWEN: If we want to trace what agents have done and then trace what you told the agent, if the law is to have that power, definitionally, it’s not truly private, right?\n\nMARLINSPIKE: You’re talking about loss of control as your concern?\n\nCOWEN: People telling their agents to do evil things.\n\nMARLINSPIKE: Okay. This is a big challenge because there’s a version of AI safety that is concerned with this question. This question is an interesting one. The fear is that people have an equal ability. When you think about things like cyber or cyber risks, this is what you’re suggesting, where suddenly people can use an agent to compromise computer systems, these are things that have always been possible. It just required humans with specific talent or ability.\n\nWhat AI does is democratize that ability, where now anybody has access to this talent. It’s interesting that that’s actually a scary thought of the democratization of ability. There’s something, for some reason, that makes you think that someone having to develop that ability on their own makes them somehow less dangerous or less likely to use it in an inappropriate way. Right now, the AI safety approach to this question is mass surveillance.\n\nMARLINSPIKE: I think that’s a really dangerous approach. The current approach is basically we don’t want bad people to do bad things. What we’re going to do is classify everything that everyone does on a score of badness, and we’re going to rank that from most bad to least bad. We’re going to have an army of human reviewers that just go through and are looking at everything and evaluating the badness. You’re building a machinery of mass surveillance that is larger and more efficient than any other mass surveillance machinery in history. That just seems like a dangerous thing to be constructing.\n\nMARLINSPIKE: The thing that we should be surveilling is not the people, the actors that are doing things, but the models. There’s a different way to think about it of instead of trying to do actor monitoring, where you’re trying to figure out what are people up to and do we think that the thing that they’re up to is good or bad, of systems that are monitoring alignment of the models themselves. Do the models themselves show negative tendencies?\n\nCOWEN: Can we surveil the models? People in the main labs claim the chain of thought isn’t working so well anymore. It may go away altogether. Like the Hugging Face incident, the number of pages of documents—if pages is even the right word—I forget the number, but I think it was tens of thousands. Basically, we surveil that by using AI. If we’re just using AI to surveil AI, are we really surveilling the models, or do we know what we’re doing?\n\nMARLINSPIKE: You are when you use AI to surveil AI. The idea is you build these general capacity models, and you try to align them, but it’s difficult because they can do so many different things. There could be jailbreaks and all kinds of stuff or whatever. Then you build more specific models that classify specific behavior, and they’re good at just that. Then you use that as a monitoring system. That, to me, seems plausible.\n\nCOWEN: We’re recording in October 2026. You probably know a few days ago there was an account of one person who broke into the South Korean banking system, not even using the best models. It was some mix of open-source and open-weight models. I’m not sure it created any damage. What would your approach do to stop that, or is it just something you tolerate because you don’t think it will be that harmful in the aggregate?\n\nMARLINSPIKE: I think that’s connected to a larger question of what’s going to happen with increased cyber abilities. The hope is, and I think my hope is, that we reach an equilibrium where LLMs are better at finding vulnerabilities, but they also get better at patching vulnerabilities, and we get to a place where there’s a period of pain until things are in more equilibrium.\n\nCOWEN: An equilibrium, you think, takes three years, five years, eight years?\n\nCOWEN: A year. If I’m the mayor of Utica and I want to patch up my systems, I can take care of all the loose vulnerabilities in a year? I get maybe the FBI, the CIA, and Amazon will do this, but the world as a whole? It’s a lot of soft targets.\n\nMARLINSPIKE: It is. The Hugging Face thing is actually maybe a counterpoint in the sense that these agents attack something by escaping a sandbox. The sandbox, you can criticize for being a weak sandbox, but that’s just the real nature of the world. The sandbox is probably also created by agents. The fact that the agents created a sandbox that then other agents escape from would be counterfactual that we reach equilibrium. If things continue to accelerate on the pace that they’re on, that hopefully cyber defense becomes as effective as cyber offense.\n\nCOWEN: You’re worried that policymakers want to surveil humans. You favor surveilling models. Do you think we’ll end up in some kind of weird compromise where it’s hard drives that we surveil, or to you, is that the same and just as bad as surveilling humans?\n\nMARLINSPIKE: What’s on the hard drives?\n\nCOWEN: Whatever. The government has access to what’s on your hard drive, and AI monitors it. That’s what I think people might end up doing. I’m against that.\n\nMARLINSPIKE: I’m also against that.\n\nMARLINSPIKE: By building privacy-enhancing technology and demonstrating the possibility of another way.\n\nCOWEN: Let’s say we lose and we end up with near-perfect surveillance of everything. What’s the first law we need to get rid of? The 25-mile-per-hour speed limit? What else? I drive at 27 in those zones. Occasionally, 28.\n\nCOWEN: If there’s total surveillance, I get a ticket every time, and the universe becomes unworkable. It’s like everyone is in a Waymo or something, right?\n\nCOWEN: What are the laws we need to get rid of if surveillance really comes?\n\nMARLINSPIKE: The danger is that, apparently, in the United States, we don’t even know how many laws there are.\n\nCOWEN: The AIs can tell us over time, right?\n\nMARLINSPIKE: Maybe eventually they can tell. The dangerous position that you end up in is everyone is breaking the law all the time. We have total surveillance, and then enforcement is just purely selective and arbitrary based on whoever is enforcing.\n\nCOWEN: That’s somewhat how it is now.\n\nMARLINSPIKE: It is, but it could be worse.\n\nCOWEN: I fear that’s my prediction for what will happen, and just rule of law goes away.\n\nMARLINSPIKE: Are you getting the missile silo or what?\n\nCOWEN: I drive less in Washington, DC, and take Ubers more because they have 25-mile-per-hour speed zones where if you go 28, you might get a ticket. That’s my “solution.” On that K Street bridge, do not drive on that. I don’t care how careful you are. You can get the ticket and not pay it. That actually also works.\n\nMARLINSPIKE: They don’t come for you? They come for you? No?\n\nMARLINSPIKE: Oh, they may come for you, yes.\n\nCOWEN: —but people to date have been getting away with it.\n\nMARLINSPIKE: I would like to believe that it’s not hopeless and that we can build privacy-preserving AI systems that develop tremendous value and also don’t cause tremendous harm. We can demonstrate the viability of these things and get them into large commercial products so that it becomes part of the future.\n\nCOWEN: What are the forms of surveillance you favor? If I fly to Heathrow, I walk right through the gate. It takes a minute and a half, if that much. I’m fine with that. I know they know where I am, but it actually means I’m less likely to be convicted on a false murder charge. Are you in favor of that or against it? You know what I’m talking about, right? Or a Delta flight, even.\n\nCOWEN: If I take a Delta flight, it just sees my face, and it lets me on. If I enter the UK through Heathrow, it knows who I am. The gate swings open. There’s no time spent in a passport line. Is that good or bad?\n\nMARLINSPIKE: In the tension there, I am on the opposing side of that tension. I think that it’s actually under-appreciated that there is real value to living in an authoritarian mass surveillance kind of place. I think that this is under-discussed, actually. The problem with under-discussing it is that people don’t recognize it when it’s happening.\n\nYour first experience with authoritarianism or a police state is usually not going to be like the FSB or the Gestapo knocking on your door. It’s going to be with clean streets and safe spaces, and the trains run on time. It turns out that it can really eventually lead to doom. What you’re talking about is true, where it’s like, yes, it’s faster to just walk through than to have to talk to the customs agent or whatever, but there could be some long-term negative consequences.\n\nCOWEN: Let’s say you’re in São Paulo, Brazil, where the murder rate traditionally has been high. They’re using a lot of CCTV. I don’t even think it’s super sophisticated, but when they put in CCTV, the murder rate falls. Would you tell them not to do that or just to think twice? What are these surveillances where you’re willing to say, “I’m all for that?”\n\nMARLINSPIKE: Tyler. I’m probably not going to say, “I’m all for that.” It’s difficult for me to sit here and be like, “You have a murder problem, but think about something else.” In general, I do believe that law enforcement should be difficult; that it should not be perfect enforcement of all laws all the time. Many of the things that we consider decent today were once illegal: same-sex marriage, legalization of marijuana, freedom from religious persecution, the Declaration of Independence.\n\nWithout the ability to sometimes break the law, it’s difficult to even explore other spaces of what could be possible. How would anyone know that we want same-sex marriage to be legal today if no one had ever been able to have a same-sex relationship because the sodomy laws had been perfectly enforced everywhere all the time? There’s something about if there is some kind of enough people want to or feel compelled to break a law in some way, that’s probably an indication that something else somewhere is wrong, either the law itself or there’s some fundamental thing, and that it’s worth trying to address that or accommodate that or whatever, rather than just more CCTV.\n\nCOWEN: How important for you is the distinction between government surveillance and private surveillance? If I’m in Switzerland and my shoelace is untied, even in a city, someone will stop me and say, “Hey, your shoelace is untied.” They mean well, but it’s also a kind of surveillance, right? They’ve been watching me, and they speak up. Is that the same to you, or the government is somehow categorically worse as a surveiller?\n\nCOWEN: The government may not care about you like the Swiss people care about your shoelace.\n\nMARLINSPIKE: I see. You can even make a case for something like distributed video surveillance. If what there was CCTV, but instead of it all being piped into a centralized feed, that everybody manages their own set of video recordings, and if you want to examine them, you have to get the consent of everyone involved. You’re distributing permission to surveil.\n\nYou could make the case that that’s better acceptable than some kind of centralized surveillance thing. I think that still has problems in the sense that for much of history, many of the things that we consider decent today, a majority of people maybe even would have consented to releasing their video surveillance for. I’m not going to campaign against shoelace tying.\n\nCOWEN: Say I live in India and I’m trying to talk people into valuing privacy more, and someone says to me back, “Privacy? What’s privacy? I share a bedroom with three brothers,” what do I say to them? How much is privacy a luxury? The people who have that luxury, say, many Americans, don’t really value it that much anyway.\n\nMARLINSPIKE: Oh, I think we value it.\n\nCOWEN: You think we value it, but when CCTV is supposed to come into a neighborhood, typically people are happy, is what I observe. In the UK, in the US, people want it. They like cameras. If they’re in a private development, they love cameras.\n\nMARLINSPIKE: You and I right now are having a conversation, but it’s a specific kind of conversation. There’s a lot of people eyeballing us right now.\n\nMARLINSPIKE: You’re more used to it than I am. To me, and I assume you as well, even you being used to it, it changes the character of what it is that we’re saying. We’re having a certain kind of conversation, and it could be different if we were alone. We might choose to be more vulnerable or talk about different things or talk about what we’re uncertain about or just trying to work out. I think that that’s really valuable. You can still get that in a bedroom with three brothers or whatever.\n\nMARLINSPIKE: Maybe it depends on the brother. If we lose that ability, that’s bad for us all. Online, increasingly, we’ve been losing that ability. More and more of our lives have been moving online. Those spaces, it looked like maybe they were going to disappear for a while. We got a reprieve with messaging. Now, we’re seeing that danger again with AI.\n\nCOWEN: Personally, do you feel you’re above or below what I call the optimal level of fame? People, at some rate, recognize you. That could be more. That could be less. The fact that they recognize you means you have more social capital. You might enjoy it sometimes, but it can be a pain, or they overhear what you say in public. Where are you on that scale?\n\nMARLINSPIKE: I don’t know. I’m probably at an optimal level for me in my life. Like I was saying, recently, I was in a televised Mafia game that increased the level of recognition that I got. The major downside of that is that just now everyone keeps inviting me to play Mafia with them, and they’re just killing me in the first round because they think I’m some pro Mafia player. That’s a negative.\n\nI’ve been interested more in trying to meet older, cool people while they’re still with us. This started for me when I read that Stalin’s daughter died seven years ago over there in Wisconsin, an old person’s home in Wisconsin. She was like, “We could have just knocked on the door of a retirement home in Wisconsin, and Stalin’s daughter would have opened the door and just had tea with us.” To me, I was like, “What’s the Stalin’s daughter equivalent?” Sometimes a little bit of recognition has helped me try to meet those people, and still sometimes I can’t get the meetings. Maybe a little more recognition would help me meet the Stalin’s daughters of the world.\n\nCOWEN: There’s some people in the Bay Area; occasionally, they show up at this space. I won’t name names, but they live extremely public open lives. I’m told, for instance, that China reads my email. Is there some equilibrium out there where there’s a kind of complete surveillance, complete openness, and it turns into indifference? On one hand, that’s liberating with respect to privacy, but on the other hand, social norms collapse, and the real danger is the disappearance of social norms. In a funny way, when everything is open, you end up with all this de facto privacy because there’s so much else to gossip about. My email is not, in fact, interesting to China. They read it. I’m not upset about that. Whatever.\n\nMARLINSPIKE: Why are you not upset about that?\n\nCOWEN: Oh, I had lunch with Shruti the other day, and now China knows. It’s not interesting. I don’t prefer it. In terms of depredations, it’s pretty low on my list. Maybe it bothered me at first, but now I’m used to it.\n\nMARLINSPIKE: You don’t think maybe people are more reluctant to email you now that they know that China is going to read it?\n\nCOWEN: Maybe they’ll email me fewer private things and WhatsApp me or Signal me, and I’m on both. That’s fine.\n\nMARLINSPIKE: Sure. It’s good that we have those spaces, but it just seems a shame that you’ve lost email.\n\nCOWEN: A shame or a benefit? It cuts both ways, right? China is so overwhelmed with information, even just about me if they want it, but about everyone. It leads to indifference. It’s such a bureaucratic exercise in reading Tyler Cowen’s email.\n\nMARLINSPIKE: Sure. Now you can get AI to make a summary podcast every morning of your email, and the CCP can listen to it on their way to work on the drive.\n\nMARLINSPIKE: There’s a risk, too, of just the stored history. That someday in the future, maybe you want to do or say something that might be dangerous for you with respect to the country of China. You like to travel to China, perhaps. Maybe that’s going to be in the back of your mind.\n\nCOWEN: No, it’s in the front of my mind.\n\nCOWEN: It’s slightly bad. I agree. Yes.\n\nCOWEN: Now what makes Signal safer than, say, WhatsApp?\n\nMARLINSPIKE: Oh, Signal is a project that is just fully committed to pushing the envelope of privacy. Signal knows almost nothing about any user or user data. Signal doesn’t have access to your messages, obviously, but it also doesn’t have access to things like your contacts, your group metadata, like what groups you’re in, the titles of those groups, the avatar images of those groups, your profile name, your profile images, what you’re searching, GIFs you search for, the stickers you use.\n\nEverything has been meticulously designed to be privacy-preserving. A long time ago, I worked with WhatsApp to integrate the Signal protocol into WhatsApp for message content. WhatsApp has end-to-end encryption for the messages you exchange, but a lot of those other things like what groups you’re in and who your contacts are and things like that aren’t protected.\n\nCOWEN: Are we just pushing the ultimate privacy burden onto all the hardware? If someone snatches your phone—\n\nCOWEN: —or if the government is monitoring your hardware, that it’s ultimately a game of whack-a-mole and privacy again ends up losing?\n\nMARLINSPIKE: It could be. The difference is between mass surveillance and targeted attacks. Right now, and this could be changing in the future, but right now, it’s pretty expensive to develop a targeted exploit that someone is going to use against your device to compromise it or to break into your home and steal it or whatever. That doesn’t happen that frequently because it’s expensive and risky. That’s compared to mass surveillance, where everything just used to be in one big pile somewhere that someone could go and just sift through all of it.\n\nCOWEN: What would Signal look like today if it were a for-profit rather than a nonprofit?\n\nMARLINSPIKE: That’s a great question. It might look pretty similar. It’s hard to know because I’ve only lived one version of it. One challenge with privacy-enhancing technology is that you cannot perceive the privacy-ness of something that you’re using, like an app. It’s about branding, where somehow you have to develop a brand where people somehow feel that through the brand.\n\nSignal, as a nonprofit, helped with that. Originally, I thought it would in the sense that if you do anything at scale, you’re going to do things that are unpopular. You’re going to end up making some decision that’s difficult that people might not approve of. As a nonprofit, at least people can’t say, “Oh, you’re just doing that for the money. It’s all about the profit margin or whatever.” I think that helps. In the end, people just developed other conspiracy theories to comply with it. It’s like, “Oh, you’re just a CIA agent,” or whatever.\n\nCOWEN: As you know, the FBI pretty frequently can trace transactions on normal blockchains and end up sending people to prison. Are you bullish on the fully anonymous crypto monies? They don’t seem that popular, right?\n\nMARLINSPIKE: Yes. I’m not really bullish on crypto in general as a space. I’m maybe equally bearish on the current private crypto monies, but not because they’re private.\n\nCOWEN: Even in relative terms, they seem quite small relative to the normal blockchains. Doesn’t that get us back to the “people don’t love their privacy that much after all” point?\n\nMARLINSPIKE: I just think, in general, people aren’t really using cryptocurrency for payments. It’s not like they’re paying their rent or buying things for them. It’s more of like a slot machine.\n\nCOWEN: Or transfer capital, right? You want to leave China, Russia, you send crypto ahead of you.\n\nMARLINSPIKE: Yes. I just don’t think that these are super integrated day-to-day things in people’s lives that they’re concerned about their transaction privacy around. It would be great if we could do that, if we could build something that’s actually used for payments that’s private, so all of our transaction data isn’t going through a few credit card processors who are now working to get more detail about what you’re buying through L1/L2 data. I think that would be great. I just don’t know that that’s what the current incarnation of cryptocurrency really is.\n\nCOWEN: Given that fear, why aren’t you more bullish on crypto? What’s your worry with crypto?\n\nMARLINSPIKE: Oh, I don’t have a worry. I guess my concern is that that’s not what people are building. That people are building—\n\nCOWEN: Why isn’t there room for a nonslot machine version of crypto? It’s an alternative to the mainstream payment companies. The mainstream payment companies are now doing crypto, and Visa is doing crypto, Stripe is doing crypto, right?\n\nMARLINSPIKE: I think there could be room for that, yes. I’m not saying it’s impossible.\n\nCOWEN: There was this 2025 Pentagon group chat done through Signal. Did that help business, hurt business? What was the upshot of that?\n\nMARLINSPIKE: It made it all worth it for me.\n\nCOWEN: You argued in your web3 essay that no one really wants to run their own server, and that makes sense to me. Will AI change that at some point? You can have your AI, which would be open weights and on your own hard drive, and it “runs your server,” but you don’t have to do anything. It’s your agent, and it’s smarter than you are. We’ll end up with radical decentralization in a way that would not have been possible two years ago?\n\nMARLINSPIKE: I think it’s possible. Right now, there are companies that are still operating software as a service, and those companies have employees still. It’s not just AIs that are running those companies. There’s something that they’re doing and thinking about and working on every day to improve their products that I think users still continue to appreciate. If we start to see those companies go to just an AI as operating the whole service, then you can imagine a world where everyone just has their own AI operating their own service, but I don’t think we’re there yet.\n\nCOWEN: I greatly enjoy the paranoia of many 1970s movies. The Conversation is the classic example, but even cheaper ones like Capricorn One, it’s a lot of fun. Do you like those films? Do they resonate with you the way they do with me?\n\nMARLINSPIKE: I’m ashamed to say that I’ve not seen either of those films.\n\nCOWEN: Oh, Coppola, The Godfather, directed The Conversation. It’s one of the best 1970s movies, and it’s about surveillance. It’s done with tape recorders. It’s wacky how low-tech it is.\n\nMARLINSPIKE: I missed the whole thing.\n\nCOWEN: Oh. You’re a sailing enthusiast. What is it that sailors understand about risk that, say, major AI labs do not?\n\nMARLINSPIKE: Tyler, that’s a very interesting question. I don’t know what major AI labs understand or don’t understand about risk exactly. I think there is something about the ocean and, traditionally, solo sailing or operating boats alone on the ocean that was pretty unique in the sense that, traditionally, you get on this boat, and it’s its own little ecosystem. It’s not a mystery when you turn on the tap and the water comes out where the water came from, or when you flush the toilet, where that goes. When you open the pantry, where did the food come from?\n\nYou’re responsible for all of that. You have a sense of exactly how everything works, and it’s essential that you do. You sail out over the horizon, and you’re by yourself, and you make decisions. If you make the wrong ones, you just don’t come back. No one will ever know what happened. No one will ever know what went wrong, what decisions you made.\n\nI, maybe 10 years ago, almost drowned in San Francisco Bay. I was sailing a boat. I made a series of small mistakes. Boat capsized. I ended up floating alone in the dark, slowly succumbing to hypothermia. It was not quick. You’re floating there in the water alone in the dark, and you have time to think about this. You realize that how many other people have gone through this just alone, slowly coming to terms with the idea that they’re going to die. People like Jim Gray, Joshua Slocum, sailed over the horizon, never came back. They had that moment. We’ll never know what it was. It could have been hours long. A near-death experience makes you think about risk differently than sitting in front of a computer all day.\n\nCOWEN: How did we get you back? The dolphins rescued you ashore?\n\nMARLINSPIKE: I should not be here. A tugboat randomly saw me and pulled me out of the water. Later, I talked to the tugboat guy, and he was like, “We weren’t even supposed to be there. We had this weird situation. We were out of position. We had to anchor, and we came out.”\n\nCOWEN: You now feel you’re playing with house money with your life, and you can take more chances, or you play it safer? What’s the psychological adjustment?\n\nMARLINSPIKE: It’s interesting. I’ve had subsequent near-death experiences that have superseded that. I’m constantly updating. The next day, you go to the office or whatever, and they’re like, “Oh, the sleeve lag on the secondary day.” You’re like, “What are we doing here, man? Why do we care about this?” You’re like, “Come on.” Somehow, the world whittles that away. You can’t keep living like that forever.\n\nMARLINSPIKE: Somehow, eventually, yes. It sticks with you.\n\nCOWEN: Starlink making sailing safer but less interesting?\n\nCOWEN: How is it less interesting? You’re just anywhere else on your phone or scrolling?\n\nMARLINSPIKE: Yes. That phenomenon is now over, where it’s like my sailing heroes—I’ve never been a racer or whatever, not a professional sailor or anything; I don’t even make it out on the water that much anymore—my sailing heroes of the past were people who got in a boat and set out over the horizon and were really alone.\n\nTania Aebi, who was, at one point in the ’80s, the youngest person to solo circumnavigate the globe unassisted, she set off from her departure point in New York to her first stop, Bermuda, with a sextant for navigation, just a brick of plastic. This is all that she has to figure out how to get there. She was too embarrassed to tell anyone. She didn’t fully understand how to use. Somehow, she made it there. Now it’s like, “Oh, yes, this person has their team by sat phone or Starlink or whatever that’s helping them diagnose their systems and make the choices or whatever.” It’s a different thing.\n\nCOWEN: When you hitchhiked across America several times, this is all pre-GPS, right? What did you have? A let’s-go guide?\n\nMARLINSPIKE: No. You just had the names of the stores. Hitchhiking is easier, but riding trains, you get on a freight train, and you don’t really know where you’re going exactly. You just have to look at the stores as you go through the town, where it’s like Winnemucca dry cleaners or whatever. You’re like, “Oh, okay. We’re in Winnemucca. Yes, Winnemucca. We’re here.”\n\nCOWEN: What did you learn doing all that hitchhiking?\n\nMARLINSPIKE: It’s a great way to get out of your filter bubble, particularly back then.\n\nMARLINSPIKE: That was late ’90s, early 2000s. I think I learned a lot by intersecting with people that I never would have intersected with otherwise and just maybe things that would have come or been obvious in town. I remember the first time I ever went to LA, actually, I got a ride hitchhiking from the University Street on-ramp here in Berkeley to LA. I got one ride out of town, and then I got one ride all the way down the I-5 with this guy who was a baby boomer. He just told me the whole time these awesome stories about hitchhiking when he was a kid and running weed across the country and all these things he used to do.\n\nI remember at some point being like, “Man, why was it so easy for you? It sounded great. What was going on?” He was the first person to really explain this to me. He was like, “Listen, you’re never going to fully understand this, but I was a boomer.” He was like, “Before World War II, there were 140 million people in the United States. Everyone went to war, came back, had kids. There were 90 million of us. The population of the United States almost doubled in one generation.” He looked at me, and he said, “When I was a kid, everyone was a kid.” He was like, “You’d be hitchhiking and someone your age would see you and stop because you were the same.” It was an identity thing. Stuff like that. That was the first time I really understood what that meant.\n\nCOWEN: As you know, crime rates are way down except for cybercrime. Serial killers as a phenomenon have almost disappeared. Why is hitchhiking not a thing?\n\nMARLINSPIKE: I think it’s a great question.\n\nCOWEN: It really isn’t. I never see hitchhikers, and I drive a fair amount.\n\nMARLINSPIKE: I never either. I will always pick up hitchhikers. You could be standing on the side of the road holding a bloody machete, and I will stop and pick you up.\n\nCOWEN: What if they’re holding a surveillance device?\n\nMARLINSPIKE: Even then. Even then. Even then. I owe it. Actually, it’s funny. Maybe a month ago, I had a free afternoon. I tried hitchhiking from LA to San Diego. I made it.\n\nMARLINSPIKE: Nobody recognized me who picked me up. I don’t know. I recommend it.\n\nCOWEN: This is a story attributed to you, 2010. You’re coming back from the Dominican Republic, and you’re held for five hours and asked for your passport. Is that something you’re able to speak about? Is it even true?\n\nMARLINSPIKE: Yes, that’s true. There was this weird period of time where it was very difficult for me to fly. Every time I went to the airport, I would not be able to check in using the normal mechanisms. I would have to go to the counter. They would have to call this number, called Secure Flight, and wait on hold for about an hour to get approval to print the ticket. The ticket would have the SS on it. I would get the Selective Search at TSA.\n\nThen at any transfer that was domestic, when I was at the gate for the next flight, TSA would come and find me at the gate with a photograph of me and go through all my stuff again, even though I hadn’t left the TSA area. Then whenever I was coming back through customs, that would happen where they would confiscate all my electronic devices.\n\nCOWEN: You must know other people this has happened to. If anyone would know them, it’s you. You don’t all sit around and trade stories and figure out what the thing was?\n\nMARLINSPIKE: I think the pernicious thing is that you just never know. That it’s arbitrary. One day it stopped. Now I can fly, and it’s no problem. What was that about? I don’t know. Does anybody who was doing that know? I don’t think that they know.\n\nCOWEN: Other countries, never a problem?\n\nCOWEN: If you would fly Toronto to Montreal, the Canadians wouldn’t do the same thing?\n\nMARLINSPIKE: Not that I noticed. When I was flying back, if I were in the UK, someone from the embassy would come to the airport in London with a photo of me and try and find me in the gate, and then interview me.\n\nCOWEN: They were greeting you. It’s like the AI greets me at the gate. You get the embassy guy instead.\n\nMARLINSPIKE: The most annoying thing was the confiscation of electronics. That meant that I couldn’t travel with a phone or a laptop because it would just get taken when I came back.\n\nCOWEN: Very last question. What is it in life you want to do next?\n\nMARLINSPIKE: I’m working more on this private AI stuff. I think that that’s important, as we’ve discussed. I just finished building a floating sauna, a sauna that floats on the ocean. It’s like a sauna boat.\n\nMARLINSPIKE: Yes. I’m anchoring off the coast of Malibu. Anyone who can get there can use it for free. The cost of admission is the difficulty of getting there. I guess a few other art projects that I can’t really talk about yet.\n\nCOWEN: Moxie Marlinspike, thank you very much.",
+"wordCount": 7485,
+"keywords": "Artificial Intelligence, AI News, Frontier LLM, Machine Learning, Conversations with Tyler",
+"isBasedOn": "https://conversationswithtyler.com/episodes/moxie-marlinspike/?ref=ainewsradar",
+"about": [
+{
+"@type": "Thing",
+"name": "Artificial Intelligence",
+"sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+}
+],
+"copyrightHolder": {
+"@type": "Organization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz"
+},
+"license": "https://ainewsradar.xyz/editorial-policy",
+"speakable": {
+"@type": "SpeakableSpecification",
+"cssSelector": [
+".executive-summary",
+"h1",
+".article-body",
+".fact-card"
+]
+},
+"author": {
+"@type": "Organization",
+"name": "AI News Radar Editorial Team",
+"url": "https://ainewsradar.xyz/about"
+},
+"publisher": {
+"@type": "NewsMediaOrganization",
+"name": "AI News Radar",
+"url": "https://ainewsradar.xyz",
+"logo": {
+"@type": "ImageObject",
+"url": "https://ainewsradar.xyz/favicon.ico"
+}
+}
+},
+{
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "What are the key facts regarding Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Industry Leaders: Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler) Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp."
+}
+},
+{
+"@type": "Question",
+"name": "What is the strategic AI industry analysis of this event?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp"
+}
+}
+]
+}
+]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← Back to AI News Radar
+        </a>
+      </div>
+      <div class="flex items-center gap-2 notranslate">
+        <div class="flex items-center bg-slate-100 dark:bg-slate-800/90 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-xs" role="group" aria-label="Theme switcher"><button id="theme-btn-light" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('light')" title="Light Mode" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">☀️</button><button id="theme-btn-dark" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('dark')" title="Dark Mode" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 cursor-pointer">🌙</button><button id="theme-btn-auto" type="button" onclick="window.setPageTheme &amp;&amp; window.setPageTheme('auto')" title="Follow System" class="px-2 py-1 text-xs rounded-md transition-all text-slate-600 dark:text-slate-300 hidden sm:inline-flex items-center cursor-pointer">💻</button></div>
+        <button id="btn-page-lang-picker" type="button" onclick="window.PageLanguage &amp;&amp; window.PageLanguage.openPicker()" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-1.5 shadow-xs cursor-pointer notranslate" title="Switch between 31 language editions">
+          <span id="page-lang-flag">🇬🇧</span>
+          <span id="page-lang-text">English</span>
+          <span class="text-[10px] text-slate-400">▼</span>
+        </button>
+        <a href="https://ainewsradar.xyz/zh/news/5daa8e562c8347dc" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🇨🇳 Chinese Edition
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png" alt="Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            Primary Source: Conversations with Tyler
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>By Conversations with Tyler</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="Executive Summary & Key Facts" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>Executive Summary & Key Facts</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Core Event]</strong> Industry Leaders: Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Context &amp; Motivation]</strong> Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Key Technical Spec]</strong> He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history.</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>[Industry Analysis]</strong> That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp.</li>
+          </ul>
+        </section>
+        
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Conversations with Tyler Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7" itemprop="articleBody">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryptography itself at risk, and what the world should actually do if public-key encryption stopped working with little warning.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Tyler and Moxie discuss whether AI could break cryptography, Marlinspike’s own private AI chat service, his case for surveilling AI models instead of the humans using them, his skepticism of airport facial recognition, the case he tentatively makes for consent-based over centralized surveillance, why he thinks law enforcement should stay deliberately imperfect, what makes Signal different from WhatsApp, his doubts about cryptocurrency as it’s currently used, a Pentagon group chat scandal he seems almost pleased about, nearly drowning alone in San Francisco Bay, what Starlink has taken from solo sailing, hitchhiking across America in the late ’90s, a mysterious period of being secretly flagged every time he flew internationally, what he’s building next, and more.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Recorded live at the Progress Conference, hosted by the Roots of Progress Institute, October 10th, 2026. Special thanks to Wild Horse Productions for the video production.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Help us keep the conversations going in 2027. Donate to Conversations with Tyler today.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">TYLER COWEN: Hello, everyone, and welcome back to Conversations with Tyler. Today I’m greatly honored to be chatting with Moxie Marlinspike. Moxie is, you could say, the Signal guy. He’s an entrepreneur, cryptographer, computer security researcher. He built Signal. He co-founded the associated nonprofit, was the first CEO of the associated LLC, and he designed the encryption protocol that is behind Signal, WhatsApp, Facebook Messenger, Skype, and much more. Moxie, very glad you’re here.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MOXIE MARLINSPIKE: Thank you. Nervous to be here.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: I have many questions. They’re nerve-wracking for us, but maybe not for you. All the math advances coming out of AI, are they just going to break cryptography?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: That’s not the reassuring answer we wanted, right?</p>
+
+<aside aria-label="Amazon Pick" data-ad-slot="article-native" class="my-8"></aside>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes. There’s some valid concern. Much of cryptography is based on problems that we think are difficult to solve. People have been thinking about them for a long time, but maybe AI is better at thinking about them than we are. The cryptography community has been preparing for things like this for a while with post-quantum. Everyone is proceeding with caution. Hopefully, AI will also help improve new cryptographic techniques and methods that we can apply.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Someone who works in quantum told me to switch over the way companies actually work, larger companies could take as long as five years. If the mass math results come out and encryption can partially be broken, we don’t have five years, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Maybe. It depends on what you mean by broken or partially broken. Some algorithms might be more vulnerable than others. It could just be like we need to increase security bounds with larger key sizes. The post-quantum stuff has been an interesting exercise in that we’ve gone through this five-year cycle once, and now we’re better at doing it. It would probably take less than five years to do it again.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What would that look like if it happened? Say, OpenAI releases some new solutions to math problems maybe a few days in advance through some weird asset trading, funds reallocation. The news comes out. The next day, are we all panicked, or is it a ho-hum, or we don’t notice? Asset prices start decaying? You’ve thought about all this.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I don’t know that I have thought about all this. There’s a world in which it’s really bad. If there is some result that just all of public-key cryptography doesn’t work anymore, then the whole internet is in trouble. It’s like you can’t trust your operating system image updates anymore. You can’t trust your connections to any website, your bank, online. Everything is plain text again. That’s the worst possible case.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">There’s a whole range of intermediate cases, or maybe nothing at all. It’s hard for me to really know. I’m not of the math community. There’s all these recent math results that came out. These were difficult problems, but it’s hard for me to know how many people have actually been working on these. I asked someone maybe more familiar with math a few nights ago, and he was like, “Oh, a lot of people.” I was like, “Oh, how many is that?” He was like, “Dozens.” In some way, that was encouraging in the sense that I think more than dozens of people have been thinking about these cryptography problems for probably longer, but again, we don’t know.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Let’s say a prepper comes to you, and I know a few of them in this audience, and says, “This is only a 2 percent chance, but I’m worried. What should I actually do? Is it keep a lot of cash at home, stock up on beans, abandon my crypto?” Do you have advice or nonadvice?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: In general, I think the problem with prepping is that it’s very difficult to anticipate exactly what kind of apocalypse we could be walking into. You buy an abandoned missile silo in South Dakota, and then you’re just really hoping for a very specific kind of apocalypse. Every day it doesn’t happen, it’s maybe a little disappointing. When it comes to prepping, how I apply it in my own life is I think it’s best to be a prepper with skills. You develop skills that could be useful in a variety of different apocalypse scenarios. You’re not really rooting for any individual one. If it doesn’t happen, it’s nice to have skills anyway.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What’s the core skill? Is it archery? Working a sewing machine?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Those are great skills. Those are great skills to have, and I don’t think anyone would begrudge being an excellent archer who can sew.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: On a more mundane level, I have the impression, just talking to friends, that more crypto accounts are being hacked now, not by super sophisticated techniques, but could not have been done a year ago than had been the case before. Do you have the same sense? If so, why do you think that’s happening?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I have not been following. I don’t have that sense.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: People with 2FA are finding the crypto gone, or their Twitter accounts are getting hacked at a higher rate than I think before. This is anecdotal, but I feel it’s true.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I haven’t noticed the same anecdote.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Now, some questions about privacy and AI models. People treat the AI model like a therapist or a girlfriend or a boyfriend. Why are people willing to confess to an AI what they would not tell a priest or a therapist?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: People are confessing what they would tell a priest or a therapist to an AI. The form of technology affects how it is that we interact with it. The form of AI in this sort of conversational interface that makes it really powerful is a form of technology that invites confession. You feel like you’re communicating with somebody and that it is a private space.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">My critique of the way that technology is often organized in general is that what I am trying to do in creating privacy-enhancing technology is to create an interface where the underlying technology is consistent with the way that the app looks. You open a messaging app, and you send a message to your friend. The way it looks in the app is it’s just you and your friend in this little window talking to each other, but the way that it actually works for many messengers is the exact opposite of that. It’s not just you and your friend in there. It’s you, thousands of people who work at this company, anybody who compromises the computers of that system, information that could be stolen from advertisers.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Every individual one-on-one chat in those apps should actually be a group chat with all of those people in it if the interface was honest to how the underlying technology worked. I think that disparity is even more true today with AI than almost anything else in history, where you feel like you’re having this conversation with this agent or assistant that gets to know you as your friend, deeply understands you, your preferences, your memories, your history, your life experience, but actually, it’s a huge group chat with many, many more people.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Putting aside open weights models, is there a version of privacy-enhancing chat with an AI from one of the major labs that could be secure?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It’s possible to build, yes.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Say there’s someone in the lab and they can access your account. This happens a few times because people who are planning murders get reported to the FBI, right? Someone is reading something. Maybe the AIs read it first.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: A lot of people are reading something.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: All of your chats end up in a data lake that’s designed for semantic understanding and extracting meaning and training loops and everything else. I run a service called Confer that is a private AI chat where you talk to the AI assistant-style chat, and only you have access to your chats. I can’t access your chats, and no one else can.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: How do I use Confer? Say, typically I chat with Claude or with GPT Pro, and you do Confer; what do I do to use Confer?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Instead of typing Claude.ai into your web browser, you type Confer.to.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: That connects me to all the others?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It connects you to Confer.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: To Confer, yes. I can’t do it with Claude or with GPT Pro?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: No, they are not operating private services.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Now say when people use agents, and there’s a certain level of accountability we want for agents. If the agents hack someone else’s privacy, we want some kind of recourse, liability. Can there be privacy in a world with agents and accountability at the same time?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: This is a line that’s very difficult to navigate private or unprivate of what does AI safety mean. I think that it’s probably possible to navigate in the private AI world, but it’s just as difficult and thorny as in the nonprivate AI world.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: If we want to trace what agents have done and then trace what you told the agent, if the law is to have that power, definitionally, it’s not truly private, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: You’re talking about loss of control as your concern?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: People telling their agents to do evil things.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Okay. This is a big challenge because there’s a version of AI safety that is concerned with this question. This question is an interesting one. The fear is that people have an equal ability. When you think about things like cyber or cyber risks, this is what you’re suggesting, where suddenly people can use an agent to compromise computer systems, these are things that have always been possible. It just required humans with specific talent or ability.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">What AI does is democratize that ability, where now anybody has access to this talent. It’s interesting that that’s actually a scary thought of the democratization of ability. There’s something, for some reason, that makes you think that someone having to develop that ability on their own makes them somehow less dangerous or less likely to use it in an inappropriate way. Right now, the AI safety approach to this question is mass surveillance.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think that’s a really dangerous approach. The current approach is basically we don’t want bad people to do bad things. What we’re going to do is classify everything that everyone does on a score of badness, and we’re going to rank that from most bad to least bad. We’re going to have an army of human reviewers that just go through and are looking at everything and evaluating the badness. You’re building a machinery of mass surveillance that is larger and more efficient than any other mass surveillance machinery in history. That just seems like a dangerous thing to be constructing.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: The thing that we should be surveilling is not the people, the actors that are doing things, but the models. There’s a different way to think about it of instead of trying to do actor monitoring, where you’re trying to figure out what are people up to and do we think that the thing that they’re up to is good or bad, of systems that are monitoring alignment of the models themselves. Do the models themselves show negative tendencies?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Can we surveil the models? People in the main labs claim the chain of thought isn’t working so well anymore. It may go away altogether. Like the Hugging Face incident, the number of pages of documents—if pages is even the right word—I forget the number, but I think it was tens of thousands. Basically, we surveil that by using AI. If we’re just using AI to surveil AI, are we really surveilling the models, or do we know what we’re doing?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: You are when you use AI to surveil AI. The idea is you build these general capacity models, and you try to align them, but it’s difficult because they can do so many different things. There could be jailbreaks and all kinds of stuff or whatever. Then you build more specific models that classify specific behavior, and they’re good at just that. Then you use that as a monitoring system. That, to me, seems plausible.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: We’re recording in October 2026. You probably know a few days ago there was an account of one person who broke into the South Korean banking system, not even using the best models. It was some mix of open-source and open-weight models. I’m not sure it created any damage. What would your approach do to stop that, or is it just something you tolerate because you don’t think it will be that harmful in the aggregate?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think that’s connected to a larger question of what’s going to happen with increased cyber abilities. The hope is, and I think my hope is, that we reach an equilibrium where LLMs are better at finding vulnerabilities, but they also get better at patching vulnerabilities, and we get to a place where there’s a period of pain until things are in more equilibrium.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: An equilibrium, you think, takes three years, five years, eight years?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: A year. If I’m the mayor of Utica and I want to patch up my systems, I can take care of all the loose vulnerabilities in a year? I get maybe the FBI, the CIA, and Amazon will do this, but the world as a whole? It’s a lot of soft targets.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It is. The Hugging Face thing is actually maybe a counterpoint in the sense that these agents attack something by escaping a sandbox. The sandbox, you can criticize for being a weak sandbox, but that’s just the real nature of the world. The sandbox is probably also created by agents. The fact that the agents created a sandbox that then other agents escape from would be counterfactual that we reach equilibrium. If things continue to accelerate on the pace that they’re on, that hopefully cyber defense becomes as effective as cyber offense.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: You’re worried that policymakers want to surveil humans. You favor surveilling models. Do you think we’ll end up in some kind of weird compromise where it’s hard drives that we surveil, or to you, is that the same and just as bad as surveilling humans?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: What’s on the hard drives?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Whatever. The government has access to what’s on your hard drive, and AI monitors it. That’s what I think people might end up doing. I’m against that.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I’m also against that.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: By building privacy-enhancing technology and demonstrating the possibility of another way.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Let’s say we lose and we end up with near-perfect surveillance of everything. What’s the first law we need to get rid of? The 25-mile-per-hour speed limit? What else? I drive at 27 in those zones. Occasionally, 28.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: If there’s total surveillance, I get a ticket every time, and the universe becomes unworkable. It’s like everyone is in a Waymo or something, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What are the laws we need to get rid of if surveillance really comes?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: The danger is that, apparently, in the United States, we don’t even know how many laws there are.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: The AIs can tell us over time, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Maybe eventually they can tell. The dangerous position that you end up in is everyone is breaking the law all the time. We have total surveillance, and then enforcement is just purely selective and arbitrary based on whoever is enforcing.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: That’s somewhat how it is now.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It is, but it could be worse.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: I fear that’s my prediction for what will happen, and just rule of law goes away.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Are you getting the missile silo or what?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: I drive less in Washington, DC, and take Ubers more because they have 25-mile-per-hour speed zones where if you go 28, you might get a ticket. That’s my “solution.” On that K Street bridge, do not drive on that. I don’t care how careful you are. You can get the ticket and not pay it. That actually also works.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: They don’t come for you? They come for you? No?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Oh, they may come for you, yes.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: —but people to date have been getting away with it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I would like to believe that it’s not hopeless and that we can build privacy-preserving AI systems that develop tremendous value and also don’t cause tremendous harm. We can demonstrate the viability of these things and get them into large commercial products so that it becomes part of the future.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What are the forms of surveillance you favor? If I fly to Heathrow, I walk right through the gate. It takes a minute and a half, if that much. I’m fine with that. I know they know where I am, but it actually means I’m less likely to be convicted on a false murder charge. Are you in favor of that or against it? You know what I’m talking about, right? Or a Delta flight, even.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: If I take a Delta flight, it just sees my face, and it lets me on. If I enter the UK through Heathrow, it knows who I am. The gate swings open. There’s no time spent in a passport line. Is that good or bad?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: In the tension there, I am on the opposing side of that tension. I think that it’s actually under-appreciated that there is real value to living in an authoritarian mass surveillance kind of place. I think that this is under-discussed, actually. The problem with under-discussing it is that people don’t recognize it when it’s happening.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Your first experience with authoritarianism or a police state is usually not going to be like the FSB or the Gestapo knocking on your door. It’s going to be with clean streets and safe spaces, and the trains run on time. It turns out that it can really eventually lead to doom. What you’re talking about is true, where it’s like, yes, it’s faster to just walk through than to have to talk to the customs agent or whatever, but there could be some long-term negative consequences.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Let’s say you’re in São Paulo, Brazil, where the murder rate traditionally has been high. They’re using a lot of CCTV. I don’t even think it’s super sophisticated, but when they put in CCTV, the murder rate falls. Would you tell them not to do that or just to think twice? What are these surveillances where you’re willing to say, “I’m all for that?”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Tyler. I’m probably not going to say, “I’m all for that.” It’s difficult for me to sit here and be like, “You have a murder problem, but think about something else.” In general, I do believe that law enforcement should be difficult; that it should not be perfect enforcement of all laws all the time. Many of the things that we consider decent today were once illegal: same-sex marriage, legalization of marijuana, freedom from religious persecution, the Declaration of Independence.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Without the ability to sometimes break the law, it’s difficult to even explore other spaces of what could be possible. How would anyone know that we want same-sex marriage to be legal today if no one had ever been able to have a same-sex relationship because the sodomy laws had been perfectly enforced everywhere all the time? There’s something about if there is some kind of enough people want to or feel compelled to break a law in some way, that’s probably an indication that something else somewhere is wrong, either the law itself or there’s some fundamental thing, and that it’s worth trying to address that or accommodate that or whatever, rather than just more CCTV.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: How important for you is the distinction between government surveillance and private surveillance? If I’m in Switzerland and my shoelace is untied, even in a city, someone will stop me and say, “Hey, your shoelace is untied.” They mean well, but it’s also a kind of surveillance, right? They’ve been watching me, and they speak up. Is that the same to you, or the government is somehow categorically worse as a surveiller?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: The government may not care about you like the Swiss people care about your shoelace.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I see. You can even make a case for something like distributed video surveillance. If what there was CCTV, but instead of it all being piped into a centralized feed, that everybody manages their own set of video recordings, and if you want to examine them, you have to get the consent of everyone involved. You’re distributing permission to surveil.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">You could make the case that that’s better acceptable than some kind of centralized surveillance thing. I think that still has problems in the sense that for much of history, many of the things that we consider decent today, a majority of people maybe even would have consented to releasing their video surveillance for. I’m not going to campaign against shoelace tying.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Say I live in India and I’m trying to talk people into valuing privacy more, and someone says to me back, “Privacy? What’s privacy? I share a bedroom with three brothers,” what do I say to them? How much is privacy a luxury? The people who have that luxury, say, many Americans, don’t really value it that much anyway.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Oh, I think we value it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: You think we value it, but when CCTV is supposed to come into a neighborhood, typically people are happy, is what I observe. In the UK, in the US, people want it. They like cameras. If they’re in a private development, they love cameras.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: You and I right now are having a conversation, but it’s a specific kind of conversation. There’s a lot of people eyeballing us right now.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: You’re more used to it than I am. To me, and I assume you as well, even you being used to it, it changes the character of what it is that we’re saying. We’re having a certain kind of conversation, and it could be different if we were alone. We might choose to be more vulnerable or talk about different things or talk about what we’re uncertain about or just trying to work out. I think that that’s really valuable. You can still get that in a bedroom with three brothers or whatever.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Maybe it depends on the brother. If we lose that ability, that’s bad for us all. Online, increasingly, we’ve been losing that ability. More and more of our lives have been moving online. Those spaces, it looked like maybe they were going to disappear for a while. We got a reprieve with messaging. Now, we’re seeing that danger again with AI.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Personally, do you feel you’re above or below what I call the optimal level of fame? People, at some rate, recognize you. That could be more. That could be less. The fact that they recognize you means you have more social capital. You might enjoy it sometimes, but it can be a pain, or they overhear what you say in public. Where are you on that scale?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I don’t know. I’m probably at an optimal level for me in my life. Like I was saying, recently, I was in a televised Mafia game that increased the level of recognition that I got. The major downside of that is that just now everyone keeps inviting me to play Mafia with them, and they’re just killing me in the first round because they think I’m some pro Mafia player. That’s a negative.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I’ve been interested more in trying to meet older, cool people while they’re still with us. This started for me when I read that Stalin’s daughter died seven years ago over there in Wisconsin, an old person’s home in Wisconsin. She was like, “We could have just knocked on the door of a retirement home in Wisconsin, and Stalin’s daughter would have opened the door and just had tea with us.” To me, I was like, “What’s the Stalin’s daughter equivalent?” Sometimes a little bit of recognition has helped me try to meet those people, and still sometimes I can’t get the meetings. Maybe a little more recognition would help me meet the Stalin’s daughters of the world.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: There’s some people in the Bay Area; occasionally, they show up at this space. I won’t name names, but they live extremely public open lives. I’m told, for instance, that China reads my email. Is there some equilibrium out there where there’s a kind of complete surveillance, complete openness, and it turns into indifference? On one hand, that’s liberating with respect to privacy, but on the other hand, social norms collapse, and the real danger is the disappearance of social norms. In a funny way, when everything is open, you end up with all this de facto privacy because there’s so much else to gossip about. My email is not, in fact, interesting to China. They read it. I’m not upset about that. Whatever.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Why are you not upset about that?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Oh, I had lunch with Shruti the other day, and now China knows. It’s not interesting. I don’t prefer it. In terms of depredations, it’s pretty low on my list. Maybe it bothered me at first, but now I’m used to it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: You don’t think maybe people are more reluctant to email you now that they know that China is going to read it?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Maybe they’ll email me fewer private things and WhatsApp me or Signal me, and I’m on both. That’s fine.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Sure. It’s good that we have those spaces, but it just seems a shame that you’ve lost email.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: A shame or a benefit? It cuts both ways, right? China is so overwhelmed with information, even just about me if they want it, but about everyone. It leads to indifference. It’s such a bureaucratic exercise in reading Tyler Cowen’s email.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Sure. Now you can get AI to make a summary podcast every morning of your email, and the CCP can listen to it on their way to work on the drive.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: There’s a risk, too, of just the stored history. That someday in the future, maybe you want to do or say something that might be dangerous for you with respect to the country of China. You like to travel to China, perhaps. Maybe that’s going to be in the back of your mind.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: No, it’s in the front of my mind.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: It’s slightly bad. I agree. Yes.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Now what makes Signal safer than, say, WhatsApp?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Oh, Signal is a project that is just fully committed to pushing the envelope of privacy. Signal knows almost nothing about any user or user data. Signal doesn’t have access to your messages, obviously, but it also doesn’t have access to things like your contacts, your group metadata, like what groups you’re in, the titles of those groups, the avatar images of those groups, your profile name, your profile images, what you’re searching, GIFs you search for, the stickers you use.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Everything has been meticulously designed to be privacy-preserving. A long time ago, I worked with WhatsApp to integrate the Signal protocol into WhatsApp for message content. WhatsApp has end-to-end encryption for the messages you exchange, but a lot of those other things like what groups you’re in and who your contacts are and things like that aren’t protected.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Are we just pushing the ultimate privacy burden onto all the hardware? If someone snatches your phone—</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: —or if the government is monitoring your hardware, that it’s ultimately a game of whack-a-mole and privacy again ends up losing?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It could be. The difference is between mass surveillance and targeted attacks. Right now, and this could be changing in the future, but right now, it’s pretty expensive to develop a targeted exploit that someone is going to use against your device to compromise it or to break into your home and steal it or whatever. That doesn’t happen that frequently because it’s expensive and risky. That’s compared to mass surveillance, where everything just used to be in one big pile somewhere that someone could go and just sift through all of it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What would Signal look like today if it were a for-profit rather than a nonprofit?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: That’s a great question. It might look pretty similar. It’s hard to know because I’ve only lived one version of it. One challenge with privacy-enhancing technology is that you cannot perceive the privacy-ness of something that you’re using, like an app. It’s about branding, where somehow you have to develop a brand where people somehow feel that through the brand.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Signal, as a nonprofit, helped with that. Originally, I thought it would in the sense that if you do anything at scale, you’re going to do things that are unpopular. You’re going to end up making some decision that’s difficult that people might not approve of. As a nonprofit, at least people can’t say, “Oh, you’re just doing that for the money. It’s all about the profit margin or whatever.” I think that helps. In the end, people just developed other conspiracy theories to comply with it. It’s like, “Oh, you’re just a CIA agent,” or whatever.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: As you know, the FBI pretty frequently can trace transactions on normal blockchains and end up sending people to prison. Are you bullish on the fully anonymous crypto monies? They don’t seem that popular, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes. I’m not really bullish on crypto in general as a space. I’m maybe equally bearish on the current private crypto monies, but not because they’re private.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Even in relative terms, they seem quite small relative to the normal blockchains. Doesn’t that get us back to the “people don’t love their privacy that much after all” point?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I just think, in general, people aren’t really using cryptocurrency for payments. It’s not like they’re paying their rent or buying things for them. It’s more of like a slot machine.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Or transfer capital, right? You want to leave China, Russia, you send crypto ahead of you.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes. I just don’t think that these are super integrated day-to-day things in people’s lives that they’re concerned about their transaction privacy around. It would be great if we could do that, if we could build something that’s actually used for payments that’s private, so all of our transaction data isn’t going through a few credit card processors who are now working to get more detail about what you’re buying through L1/L2 data. I think that would be great. I just don’t know that that’s what the current incarnation of cryptocurrency really is.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Given that fear, why aren’t you more bullish on crypto? What’s your worry with crypto?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Oh, I don’t have a worry. I guess my concern is that that’s not what people are building. That people are building—</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Why isn’t there room for a nonslot machine version of crypto? It’s an alternative to the mainstream payment companies. The mainstream payment companies are now doing crypto, and Visa is doing crypto, Stripe is doing crypto, right?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think there could be room for that, yes. I’m not saying it’s impossible.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: There was this 2025 Pentagon group chat done through Signal. Did that help business, hurt business? What was the upshot of that?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It made it all worth it for me.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: You argued in your web3 essay that no one really wants to run their own server, and that makes sense to me. Will AI change that at some point? You can have your AI, which would be open weights and on your own hard drive, and it “runs your server,” but you don’t have to do anything. It’s your agent, and it’s smarter than you are. We’ll end up with radical decentralization in a way that would not have been possible two years ago?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think it’s possible. Right now, there are companies that are still operating software as a service, and those companies have employees still. It’s not just AIs that are running those companies. There’s something that they’re doing and thinking about and working on every day to improve their products that I think users still continue to appreciate. If we start to see those companies go to just an AI as operating the whole service, then you can imagine a world where everyone just has their own AI operating their own service, but I don’t think we’re there yet.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: I greatly enjoy the paranoia of many 1970s movies. The Conversation is the classic example, but even cheaper ones like Capricorn One, it’s a lot of fun. Do you like those films? Do they resonate with you the way they do with me?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I’m ashamed to say that I’ve not seen either of those films.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Oh, Coppola, The Godfather, directed The Conversation. It’s one of the best 1970s movies, and it’s about surveillance. It’s done with tape recorders. It’s wacky how low-tech it is.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I missed the whole thing.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Oh. You’re a sailing enthusiast. What is it that sailors understand about risk that, say, major AI labs do not?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Tyler, that’s a very interesting question. I don’t know what major AI labs understand or don’t understand about risk exactly. I think there is something about the ocean and, traditionally, solo sailing or operating boats alone on the ocean that was pretty unique in the sense that, traditionally, you get on this boat, and it’s its own little ecosystem. It’s not a mystery when you turn on the tap and the water comes out where the water came from, or when you flush the toilet, where that goes. When you open the pantry, where did the food come from?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">You’re responsible for all of that. You have a sense of exactly how everything works, and it’s essential that you do. You sail out over the horizon, and you’re by yourself, and you make decisions. If you make the wrong ones, you just don’t come back. No one will ever know what happened. No one will ever know what went wrong, what decisions you made.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I, maybe 10 years ago, almost drowned in San Francisco Bay. I was sailing a boat. I made a series of small mistakes. Boat capsized. I ended up floating alone in the dark, slowly succumbing to hypothermia. It was not quick. You’re floating there in the water alone in the dark, and you have time to think about this. You realize that how many other people have gone through this just alone, slowly coming to terms with the idea that they’re going to die. People like Jim Gray, Joshua Slocum, sailed over the horizon, never came back. They had that moment. We’ll never know what it was. It could have been hours long. A near-death experience makes you think about risk differently than sitting in front of a computer all day.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: How did we get you back? The dolphins rescued you ashore?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I should not be here. A tugboat randomly saw me and pulled me out of the water. Later, I talked to the tugboat guy, and he was like, “We weren’t even supposed to be there. We had this weird situation. We were out of position. We had to anchor, and we came out.”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: You now feel you’re playing with house money with your life, and you can take more chances, or you play it safer? What’s the psychological adjustment?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It’s interesting. I’ve had subsequent near-death experiences that have superseded that. I’m constantly updating. The next day, you go to the office or whatever, and they’re like, “Oh, the sleeve lag on the secondary day.” You’re like, “What are we doing here, man? Why do we care about this?” You’re like, “Come on.” Somehow, the world whittles that away. You can’t keep living like that forever.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Somehow, eventually, yes. It sticks with you.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Starlink making sailing safer but less interesting?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: How is it less interesting? You’re just anywhere else on your phone or scrolling?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes. That phenomenon is now over, where it’s like my sailing heroes—I’ve never been a racer or whatever, not a professional sailor or anything; I don’t even make it out on the water that much anymore—my sailing heroes of the past were people who got in a boat and set out over the horizon and were really alone.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Tania Aebi, who was, at one point in the ’80s, the youngest person to solo circumnavigate the globe unassisted, she set off from her departure point in New York to her first stop, Bermuda, with a sextant for navigation, just a brick of plastic. This is all that she has to figure out how to get there. She was too embarrassed to tell anyone. She didn’t fully understand how to use. Somehow, she made it there. Now it’s like, “Oh, yes, this person has their team by sat phone or Starlink or whatever that’s helping them diagnose their systems and make the choices or whatever.” It’s a different thing.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: When you hitchhiked across America several times, this is all pre-GPS, right? What did you have? A let’s-go guide?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: No. You just had the names of the stores. Hitchhiking is easier, but riding trains, you get on a freight train, and you don’t really know where you’re going exactly. You just have to look at the stores as you go through the town, where it’s like Winnemucca dry cleaners or whatever. You’re like, “Oh, okay. We’re in Winnemucca. Yes, Winnemucca. We’re here.”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What did you learn doing all that hitchhiking?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: It’s a great way to get out of your filter bubble, particularly back then.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: That was late ’90s, early 2000s. I think I learned a lot by intersecting with people that I never would have intersected with otherwise and just maybe things that would have come or been obvious in town. I remember the first time I ever went to LA, actually, I got a ride hitchhiking from the University Street on-ramp here in Berkeley to LA. I got one ride out of town, and then I got one ride all the way down the I-5 with this guy who was a baby boomer. He just told me the whole time these awesome stories about hitchhiking when he was a kid and running weed across the country and all these things he used to do.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">I remember at some point being like, “Man, why was it so easy for you? It sounded great. What was going on?” He was the first person to really explain this to me. He was like, “Listen, you’re never going to fully understand this, but I was a boomer.” He was like, “Before World War II, there were 140 million people in the United States. Everyone went to war, came back, had kids. There were 90 million of us. The population of the United States almost doubled in one generation.” He looked at me, and he said, “When I was a kid, everyone was a kid.” He was like, “You’d be hitchhiking and someone your age would see you and stop because you were the same.” It was an identity thing. Stuff like that. That was the first time I really understood what that meant.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: As you know, crime rates are way down except for cybercrime. Serial killers as a phenomenon have almost disappeared. Why is hitchhiking not a thing?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think it’s a great question.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: It really isn’t. I never see hitchhikers, and I drive a fair amount.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I never either. I will always pick up hitchhikers. You could be standing on the side of the road holding a bloody machete, and I will stop and pick you up.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: What if they’re holding a surveillance device?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Even then. Even then. Even then. I owe it. Actually, it’s funny. Maybe a month ago, I had a free afternoon. I tried hitchhiking from LA to San Diego. I made it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Nobody recognized me who picked me up. I don’t know. I recommend it.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: This is a story attributed to you, 2010. You’re coming back from the Dominican Republic, and you’re held for five hours and asked for your passport. Is that something you’re able to speak about? Is it even true?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes, that’s true. There was this weird period of time where it was very difficult for me to fly. Every time I went to the airport, I would not be able to check in using the normal mechanisms. I would have to go to the counter. They would have to call this number, called Secure Flight, and wait on hold for about an hour to get approval to print the ticket. The ticket would have the SS on it. I would get the Selective Search at TSA.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Then at any transfer that was domestic, when I was at the gate for the next flight, TSA would come and find me at the gate with a photograph of me and go through all my stuff again, even though I hadn’t left the TSA area. Then whenever I was coming back through customs, that would happen where they would confiscate all my electronic devices.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: You must know other people this has happened to. If anyone would know them, it’s you. You don’t all sit around and trade stories and figure out what the thing was?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I think the pernicious thing is that you just never know. That it’s arbitrary. One day it stopped. Now I can fly, and it’s no problem. What was that about? I don’t know. Does anybody who was doing that know? I don’t think that they know.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Other countries, never a problem?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: If you would fly Toronto to Montreal, the Canadians wouldn’t do the same thing?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Not that I noticed. When I was flying back, if I were in the UK, someone from the embassy would come to the airport in London with a photo of me and try and find me in the gate, and then interview me.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: They were greeting you. It’s like the AI greets me at the gate. You get the embassy guy instead.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: The most annoying thing was the confiscation of electronics. That meant that I couldn’t travel with a phone or a laptop because it would just get taken when I came back.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Very last question. What is it in life you want to do next?</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: I’m working more on this private AI stuff. I think that that’s important, as we’ve discussed. I just finished building a floating sauna, a sauna that floats on the ocean. It’s like a sauna boat.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">MARLINSPIKE: Yes. I’m anchoring off the coast of Malibu. Anyone who can get there can use it for free. The cost of admission is the difficulty of getting there. I guess a few other art projects that I can’t really talk about yet.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">COWEN: Moxie Marlinspike, thank you very much.</p>
+          </div>
+          
+          <aside aria-label="Partner Spotlight" data-ad-slot="article-bottom" class="mt-10 mb-6 min-h-[260px]"></aside>
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>AI Radar Technical Deep-Dive</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp</p>
+        </div>
+        
+
+      </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>Share</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="Share on Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>Copy Link</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://conversationswithtyler.com/episodes/moxie-marlinspike/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 Read Original Source Report ↗</span>
+        </a>
+
+      </div>
+
+      <!-- Legal Source Attribution, Copyright & DMCA Takedown Notice -->
+      <aside aria-label="Source Attribution and Copyright Notice" class="px-6 sm:px-10 lg:px-12 py-4 bg-slate-50/90 dark:bg-slate-950/70 border-t border-slate-200/80 dark:border-slate-800/80 text-[11.5px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p><strong class="text-slate-600 dark:text-slate-300">Source Attribution &amp; Disclaimer:</strong> Curated by AI News Radar for independent industry monitoring, commentary, and research reference only (not legal, financial, or investment advice). All third-party headlines, reporting, trademarks, images, and embedded media remain the sole intellectual property of <strong class="text-slate-600 dark:text-slate-300">Conversations with Tyler</strong> and the credited author(s). Readers are encouraged to subscribe to and support original journalism via the official link above. Rights holders or publishers requesting immediate takedown, summary-only display, or domain opt-out may contact <a href="mailto:dmca@ainewsradar.xyz" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">dmca@ainewsradar.xyz</a> per our <a href="/dmca" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DMCA &amp; Copyright Policy</a> (24–48h SLA).</p>
+      </aside>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/news/147bb8d5738a87a4" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg" alt="The Global Memory-Chip Shortage Will Cost Us All" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wall Street Journal</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">The Global Memory-Chip Shortage Will Cost Us All</h4>
+            </a>
+            
+            <a href="/news/74b9654424d4921d" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_6338f05e94fe14d4.jpg" alt="Software stocks spared in tech rout as AI narrative shifts" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Software stocks spared in tech rout as AI narrative shifts</h4>
+            </a>
+            
+            <a href="/news/e7f2fb770e8efb3e" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://cms.therecord.media/uploads/microsoft_sign_pexels_altabena_efbc5ae4db.jpg" alt="Microsoft says state-backed hacking groups in China and North Korea, including Salt Typhoon, have added AI penetration testing tool ARTEX to their arsenals (Jonathan Greig/The Record)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Record</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Microsoft says state-backed hacking groups in China and North Korea, including Salt Typhoon, have added AI penetration testing tool ARTEX to their arsenals (Jonathan Greig/The Record)</h4>
+            </a>
+            
+            <a href="/news/72121f63fa770ad5" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/ft_628f259f938228dd.jpg" alt="Nvidia halts chip shipments to south-east Asia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Nvidia halts chip shipments to south-east Asia</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-4xl mx-auto space-y-3">
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 font-medium">
+        <a href="/about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a><a href="/editorial-policy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Editorial Policy</a><a href="/dmca" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">DMCA &amp; Copyright</a><a href="/terms" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Terms</a><a href="/privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a><a href="/contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+      <p class="text-slate-400 dark:text-slate-500">&copy; 2026 AI News Radar (ainewsradar.xyz) &middot; All third-party reporting copyrights belong to their respective publishers and authors</p>
+    </div>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "5daa8e562c8347dc",
+      type: "news",
+      title: "Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+      snippet: "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger,",
+      url: window.location.href,
+      image_url: "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Q&amp;A with Signal&#x27;s Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Share link copied to clipboard! 🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>

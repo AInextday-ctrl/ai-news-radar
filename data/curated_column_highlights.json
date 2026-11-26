@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 08:49:43 UTC",
+  "generated_at": "2026-11-26 09:05:18 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 08:49:43 UTC",
+      "updated_at": "2026-11-26 09:05:18 UTC",
       "headline_item": {
-        "id": "147bb8d5738a87a4",
+        "id": "5daa8e562c8347dc",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "AI基建挤占内存产能，消费电子成本攀升",
-        "title_en": "The Global Memory-Chip Shortage Will Cost Us All",
-        "source": "Wall Street Journal",
-        "author": "Wall Street Journal",
-        "cover_image": "https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg",
-        "image_url": "https://ainewsradar.xyz/images/wsj_eaf22057731da0c6.jpg",
-        "published_at": "2026-11-26T07:30:01+00:00",
-        "url": "https://www.wsj.com/tech/memory-chip-shortage-ai-electronics-prices-e58a065a?st=Rx7QaC",
-        "event_summary_zh": "全球科技巨头对RAM需求激增，导致内存芯片供应紧缺，预计消费电子产品价格将在未来12至24个月内持续上涨",
-        "event_summary_en": "Global memory chip supplies are tightening as tech giants like Google, Microsoft, and Meta aggressively procure RAM for AI data center expansion. This shift has triggered a surge in consumer electronic manufacturing costs, with industry experts projecting significant retail price hikes and supply constraints lasting through 2027.",
+        "title_zh": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+        "title_en": "Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+        "source": "Conversations with Tyler",
+        "author": "Conversations with Tyler",
+        "cover_image": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
+        "image_url": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
+        "published_at": "2026-11-26T08:55:02+00:00",
+        "url": "https://conversationswithtyler.com/episodes/moxie-marlinspike/",
+        "event_summary_zh": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
+        "event_summary_en": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp",
         "core_facts_zh": [
-          "【核心事件】Google、Microsoft、Meta等科技巨头在全球内存芯片供应链：大量抢购RAM资源，导致消费电子市场供应短缺，成品价格预期增长超20%",
-          "【起因与机理】AI算力中心对高带宽内存与存力资源的极致消耗",
-          "【关键数据与实测】I think the $600 laptop and cheap desktop market has pretty much disappeared at this point,” he said.。",
-          "【各方立场与态度】RAM短缺局面预计持续至2027年。"
+          "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+          "【起因与机理】端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
+          "【调查与监管诉求】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。",
+          "【各方立场与态度】Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。"
         ],
         "core_facts_en": [
-          "[Core Event] Tech giants including Google, Microsoft, and Meta (Global semiconductor supply chain): Aggressive procurement of RAM causing shortage and projected 20%+ price increases for consumer electronics",
-          "[Root Cause & Mechanism] Explosive demand for RAM in AI data centers",
-          "[Key Metrics] I think the $600 laptop and cheap desktop market has pretty much disappeared at this point,” he said.",
-          "[Key Position & Outlook] Shortage anticipated to persist until 2027."
+          "[Core Event] Industry Leaders: Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+          "[Context & Motivation] Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype.",
+          "[Key Technical Spec] He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history.",
+          "[Industry Analysis] That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp."
         ],
-        "industry_impact_zh": "存储芯片作为AI基础设施的隐性瓶颈，正在迫使消费电子产业面临成本结构重塑。这一供需失衡不仅是短期周期波动，更反映了存储厂商在AI溢价驱动下，战略性缩减传统DRAM产能以优先满足高利润数据中心需求的产业链阵痛。",
-        "industry_impact_en": "Memory chips are emerging as a hidden bottleneck in AI infrastructure, forcing a restructuring of the consumer electronics cost base. This imbalance highlights a strategic shift where manufacturers prioritize high-margin AI demand, effectively marginalizing traditional consumer segments."
+        "industry_impact_zh": "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
+        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
       },
       "headlines": [
+        {
+          "id": "5daa8e562c8347dc",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+          "title_en": "Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+          "source": "Conversations with Tyler",
+          "author": "Conversations with Tyler",
+          "cover_image": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
+          "image_url": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
+          "published_at": "2026-11-26T08:55:02+00:00",
+          "url": "https://conversationswithtyler.com/episodes/moxie-marlinspike/",
+          "event_summary_zh": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
+          "event_summary_en": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp",
+          "core_facts_zh": [
+            "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
+            "【起因与机理】端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
+            "【调查与监管诉求】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。",
+            "【各方立场与态度】Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
+            "[Context & Motivation] Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype.",
+            "[Key Technical Spec] He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history.",
+            "[Industry Analysis] That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp."
+          ],
+          "industry_impact_zh": "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        },
         {
           "id": "147bb8d5738a87a4",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "市场对AI收益分配的认知已完成从‘卖铲子’到‘算力过剩担忧’的博弈修正。半导体作为AI基建的边际效用递减，使得具备高迁移成本与专有数据壁垒的软件SaaS公司重新获得估值溢价，产业链中心正在向应用层的护城河回归。",
           "industry_impact_en": "The market has completed a paradigm shift from 'shovel-selling' to hardware overcapacity concerns. As marginal utility of compute hardware diminishes, capital is flowing back to software firms with high switching costs and proprietary data moats, signaling a structural return to application-layer focus."
-        },
-        {
-          "id": "e7f2fb770e8efb3e",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "中朝黑客组织引入AI自动化渗透工具ARTEX",
-          "title_en": "Microsoft says state-backed hacking groups in China and North Korea, including Salt Typhoon, have added AI penetration testing tool ARTEX to their arsenals (Jonathan Greig/The Record)",
-          "source": "The Record",
-          "author": "The Record",
-          "cover_image": "https://cms.therecord.media/uploads/microsoft_sign_pexels_altabena_efbc5ae4db.jpg",
-          "image_url": "https://cms.therecord.media/uploads/microsoft_sign_pexels_altabena_efbc5ae4db.jpg",
-          "published_at": "2026-11-26T06:00:48+00:00",
-          "url": "https://therecord.media/microsoft-china-salt-typhoon-using-artex-ai-tool",
-          "event_summary_zh": "微软报告称受国家支持的黑客组织正利用名为ARTEX的AI工具实施网络攻击",
-          "event_summary_en": "Microsoft reports that state-sponsored hacking groups, including Salt Typhoon, have integrated the AI-powered penetration testing tool ARTEX into their offensive arsenals. By automating reconnaissance, credential theft, and vulnerability scanning, the tool compresses intrusion cycles to minutes while bypassing static signature detection via behavioral obfuscation.",
-          "core_facts_zh": [
-            "【核心事件】微软安全情报部门、Salt Typhoon、Crystal Typhoon等攻击组织在全球关键基础设施与电信领域：利用AI平台ARTEX实施自动化网络侦察与提权入侵",
-            "【起因与机理】AI技术的自动化特性可显著提升渗透效率并降低被传统防御系统监测的概率",
-            "【核心事实细节】ARTEX平台实现多阶段攻击的自动化，大幅缩短入侵时间。",
-            "【各方立场与态度】行为特征分析成为防御此类AI驱动型攻击的唯一可靠防线。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Microsoft Security Intelligence, Salt Typhoon, Crystal Typhoon: Utilization of the AI platform ARTEX for automated network reconnaissance and privileged access",
-            "[Root Cause & Mechanism] AI-enabled automation significantly accelerates intrusion timelines and evades traditional signature-based detection",
-            "[Key Fact Detail] ARTEX enables multi-stage automated attacks, significantly compressing intrusion cycles.",
-            "[Key Position & Outlook] Behavioral analysis emerges as the only viable defense against AI-driven intrusion."
-          ],
-          "industry_impact_zh": "此事件标志着网络攻防战正式进入‘AI机器速度’时代，攻击者利用自动化代理规避基于静态特征的检测体系。这也迫使各国网络防御架构必须从传统的边界防御转向基于行为特征与异常实时分析的零信任动态响应模式。",
-          "industry_impact_en": "This development signals the shift of cyber warfare into an 'AI-machine speed' era, where attackers leverage autonomous agents to outpace static signature-based detection. Consequently, critical cyber defense architectures must abandon legacy perimeters in favor of behavioral analysis and real-time zero-trust orchestration."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 08:49:43 UTC",
+      "updated_at": "2026-11-26 09:05:18 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 08:49:43 UTC",
+      "updated_at": "2026-11-26 09:05:18 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -446,7 +446,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "23.5k",
+          "stars": "23.6k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
