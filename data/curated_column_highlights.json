@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 09:05:18 UTC",
+  "generated_at": "2026-11-26 09:19:56 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 09:05:18 UTC",
+      "updated_at": "2026-11-26 09:19:57 UTC",
       "headline_item": {
-        "id": "5daa8e562c8347dc",
+        "id": "ae5d0522480ea7e5",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
-        "title_en": "Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
-        "source": "Conversations with Tyler",
-        "author": "Conversations with Tyler",
-        "cover_image": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
-        "image_url": "https://conversationswithtyler.com/wp-content/uploads/2026/10/CWT-305-MoxieMarlinspike-hero.png",
-        "published_at": "2026-11-26T08:55:02+00:00",
-        "url": "https://conversationswithtyler.com/episodes/moxie-marlinspike/",
-        "event_summary_zh": "Moxie Marlinspike 构建了 Signal 并设计了其底层的加密协议——该协议也保护 WhatsApp、Facebook Messenger 和 Skype 的安全。他的职业生涯都花在了隐私的乏味、结构性方面，甚至公司本身是否可以看到你的联系人、你的群组名称或你的搜索信息",
-        "event_summary_en": "Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype. He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history. That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp",
+        "title_zh": "MiniMax AI模型被曝存在数据隐私漏洞",
+        "title_en": "Confidential Data Sent to Chinese AI Firm MiniMax Was Accessed Without Authorization, US Research Firm Identifies",
+        "source": "Reuters",
+        "author": "Reuters",
+        "cover_image": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
+        "image_url": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
+        "published_at": "2026-11-26T09:15:02+00:00",
+        "url": "https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/",
+        "event_summary_zh": "美资安公司Dragos调查发现，中国AI独角兽MiniMax的云服务存在用户隐私数据被第三方非法访问的重大风险",
+        "event_summary_en": "Dragos Chief Research Officer HD Moore revealed that AI startup MiniMax improperly stores private web links from user prompts despite opt-out requests. Security researchers observed unauthorized third-party access to these links, accompanied by suspicious traffic originating from Beijing, Shanghai, and the Moscow region, alongside attempts to exfiltrate private software code.",
         "core_facts_zh": [
-          "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答",
-          "【起因与机理】端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-          "【调查与监管诉求】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。",
-          "【各方立场与态度】Signal 的 Moxie Marlinspike 就 AI 和密码学、他的专注于隐私的 AI 聊天服务 Confer、监视 AI 模型而不是用户等进行了问答。"
+          "【核心事件】MiniMax（AI大模型厂商）；HD Moore（Dragos首席研究官）在企业云服务后端与API调用接口：未经授权的数据留存、第三方非法访问用户私密链接与代码",
+          "【起因与机理】后端数据处理机制存在安全缺陷，未能有效执行用户隐私保护指令",
+          "【关键技术规格】MiniMax后端处理机制被发现会非法留存用户私密请求链接。",
+          "【各方立场与态度】隐私保护缺失可能引发跨国合规危机及云端部署信任崩塌。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Q&A with Signal's Moxie Marlinspike on AI and cryptography, his privacy-focused AI chat service Confer, surveilling AI models rather than users, and more (Tyler Cowen/Conversations with Tyler)",
-          "[Context & Motivation] Moxie Marlinspike built Signal and designed the encryption protocol underneath it — the same protocol that also secures WhatsApp, Facebook Messenger, and Skype.",
-          "[Key Technical Spec] He’s spent his career on the unglamorous, structural side of privacy, down to whether the company itself can see your contacts, your group names, or your search history.",
-          "[Industry Analysis] That background makes him an unusually direct interlocutor on the biggest live question in his field: whether the recent flood of AI-assisted math results could put cryp."
+          "[Core Event] MiniMax; HD Moore, CRO of Dragos: Unauthorized data retention and third-party access to sensitive URLs and code",
+          "[Root Cause & Mechanism] Security flaws in data handling and non-compliance with privacy-preservation settings",
+          "[Key Fact Detail] MiniMax backend improperly retains private user request links.",
+          "[Industry Impact & Outlook] Security flaws pose risks to cross-border compliance and cloud deployment trust."
         ],
-        "industry_impact_zh": "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        "industry_impact_zh": "此事件暴露出AI推理服务中隐私护栏的架构性缺失，特别是多模态模型在云端处理请求时缺乏严格的即时内存擦除机制。该漏洞将极大削弱企业级用户对国产大模型出海部署的信任度，预计监管层将针对AI训练数据源与推理请求的合规性审查进一步收紧。",
+        "industry_impact_en": "The incident highlights a critical architectural gap in AI inference services regarding the lack of real-time memory erasure for multimodal requests. This vulnerability significantly undermines enterprise trust in deploying domestic models globally, likely triggering stricter regulatory scrutiny over AI inference data handling and compliance."
       },
       "headlines": [
+        {
+          "id": "ae5d0522480ea7e5",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "MiniMax AI模型被曝存在数据隐私漏洞",
+          "title_en": "Confidential Data Sent to Chinese AI Firm MiniMax Was Accessed Without Authorization, US Research Firm Identifies",
+          "source": "Reuters",
+          "author": "Reuters",
+          "cover_image": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
+          "image_url": "https://ainewsradar.xyz/images/reuters_21f22a81887903a8.jpg",
+          "published_at": "2026-11-26T09:15:02+00:00",
+          "url": "https://www.reuters.com/world/data-chinese-ai-firm-minimax-accessed-by-unidentified-parties-researcher-says-2026-11-26/",
+          "event_summary_zh": "美资安公司Dragos调查发现，中国AI独角兽MiniMax的云服务存在用户隐私数据被第三方非法访问的重大风险",
+          "event_summary_en": "Dragos Chief Research Officer HD Moore revealed that AI startup MiniMax improperly stores private web links from user prompts despite opt-out requests. Security researchers observed unauthorized third-party access to these links, accompanied by suspicious traffic originating from Beijing, Shanghai, and the Moscow region, alongside attempts to exfiltrate private software code.",
+          "core_facts_zh": [
+            "【核心事件】MiniMax（AI大模型厂商）；HD Moore（Dragos首席研究官）在企业云服务后端与API调用接口：未经授权的数据留存、第三方非法访问用户私密链接与代码",
+            "【起因与机理】后端数据处理机制存在安全缺陷，未能有效执行用户隐私保护指令",
+            "【关键技术规格】MiniMax后端处理机制被发现会非法留存用户私密请求链接。",
+            "【各方立场与态度】隐私保护缺失可能引发跨国合规危机及云端部署信任崩塌。"
+          ],
+          "core_facts_en": [
+            "[Core Event] MiniMax; HD Moore, CRO of Dragos: Unauthorized data retention and third-party access to sensitive URLs and code",
+            "[Root Cause & Mechanism] Security flaws in data handling and non-compliance with privacy-preservation settings",
+            "[Key Fact Detail] MiniMax backend improperly retains private user request links.",
+            "[Industry Impact & Outlook] Security flaws pose risks to cross-border compliance and cloud deployment trust."
+          ],
+          "industry_impact_zh": "此事件暴露出AI推理服务中隐私护栏的架构性缺失，特别是多模态模型在云端处理请求时缺乏严格的即时内存擦除机制。该漏洞将极大削弱企业级用户对国产大模型出海部署的信任度，预计监管层将针对AI训练数据源与推理请求的合规性审查进一步收紧。",
+          "industry_impact_en": "The incident highlights a critical architectural gap in AI inference services regarding the lack of real-time memory erasure for multimodal requests. This vulnerability significantly undermines enterprise trust in deploying domestic models globally, likely triggering stricter regulatory scrutiny over AI inference data handling and compliance."
+        },
         {
           "id": "5daa8e562c8347dc",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "存储芯片作为AI基础设施的隐性瓶颈，正在迫使消费电子产业面临成本结构重塑。这一供需失衡不仅是短期周期波动，更反映了存储厂商在AI溢价驱动下，战略性缩减传统DRAM产能以优先满足高利润数据中心需求的产业链阵痛。",
           "industry_impact_en": "Memory chips are emerging as a hidden bottleneck in AI infrastructure, forcing a restructuring of the consumer electronics cost base. This imbalance highlights a strategic shift where manufacturers prioritize high-margin AI demand, effectively marginalizing traditional consumer segments."
-        },
-        {
-          "id": "74b9654424d4921d",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI产业叙事反转，软件股抗跌性超半导体",
-          "title_en": "Software stocks spared in tech rout as AI narrative shifts",
-          "source": "Financial Times",
-          "author": "Emily Herbert",
-          "cover_image": "https://ainewsradar.xyz/images/ft_6338f05e94fe14d4.jpg",
-          "image_url": "https://ainewsradar.xyz/images/ft_6338f05e94fe14d4.jpg",
-          "published_at": "2026-11-26T06:20:05+00:00",
-          "url": "https://www.ft.com/content/90b82a64-4f58-45d7-8a6a-4c2730545b65",
-          "event_summary_zh": "市场对AI价值链预期发生逆转，投资者减持芯片股并回流至具防御属性的软件板块",
-          "event_summary_en": "Investors are rotating away from semiconductor dominance toward software firms possessing proprietary datasets and entrenched customer bases. Despite early 2026 sell-offs driven by fears of AI-driven obsolescence, the software sector now exhibits greater defensive value amidst broader tech market volatility.",
-          "core_facts_zh": [
-            "【核心事件】德意志银行、巴克莱资本、曼氏集团等机构投资者在全球资本市场科技板块：资本从半导体板块撤出并重新布局具有结构性竞争优势的软件公司",
-            "【起因与机理】AI红利预期从单纯的算力基础设施转向软件端的落地与护城河价值重构",
-            "【核心事实细节】资本市场对AI价值链的预期由硬件基建转向软件应用。",
-            "【各方立场与态度】具备专有数据集与高客户粘性的软件企业被定义为结构性胜出者。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Institutional investors including Deutsche Bank, Barclays, and Man Group (Global technology equity markets): Capital rotation from semiconductor hardware into defensive, data-moat-heavy software firms",
-            "[Root Cause & Mechanism] Shift in AI investment thesis from infrastructure-first to sustainable software application value",
-            "[Market & Financial Detail] Market sentiment shifting from AI hardware infrastructure to software application utility.",
-            "[Key Position & Outlook] Software firms with data moats and high retention re-emerging as structural winners."
-          ],
-          "industry_impact_zh": "市场对AI收益分配的认知已完成从‘卖铲子’到‘算力过剩担忧’的博弈修正。半导体作为AI基建的边际效用递减，使得具备高迁移成本与专有数据壁垒的软件SaaS公司重新获得估值溢价，产业链中心正在向应用层的护城河回归。",
-          "industry_impact_en": "The market has completed a paradigm shift from 'shovel-selling' to hardware overcapacity concerns. As marginal utility of compute hardware diminishes, capital is flowing back to software firms with high switching costs and proprietary data moats, signaling a structural return to application-layer focus."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 09:05:18 UTC",
+      "updated_at": "2026-11-26 09:19:57 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 09:05:18 UTC",
+      "updated_at": "2026-11-26 09:19:57 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
