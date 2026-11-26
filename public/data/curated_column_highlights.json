@@ -1,10 +1,10 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-26 18:35:55 UTC",
+  "generated_at": "2026-11-26 18:50:09 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-26 18:35:55 UTC",
+      "updated_at": "2026-11-26 18:50:10 UTC",
       "headline_item": {
         "id": "3f14cef721c74d85",
         "tag_zh": "📰 业界动态",
@@ -126,7 +126,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-26 18:35:55 UTC",
+      "updated_at": "2026-11-26 18:50:10 UTC",
       "author": "karpathy",
       "author_handle": "@karpathy",
       "author_role_zh": "AI 极客 / 社区开发者",
@@ -176,34 +176,6 @@
           },
           "published_at": "2026-11-26T02:31:52+00:00",
           "url": "https://x.com/karpathy/status/2125779541952246039"
-        },
-        {
-          "id": "c39a7aace0deea02",
-          "name": "Demis Hassabis",
-          "handle": "@demishassabis",
-          "role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/demishassabis",
-          "topic_zh": "Demis Hassabis 行",
-          "topic_en": "Demis Hassabis on AI",
-          "event_context_zh": "据 𝕏 (Twitter) 报道（技术焦点：硅谷焦点推文）：你应该尝试 Gemini Neon，这是一个很好的模型......🫡，更多技术实测与行业影响持续跟踪。",
-          "event_context_en": "You should try Gemini Neon, it's a good model... 🫡",
-          "quote_zh": "你应该尝试 Gemini Neon，这是一个很好的模型......🫡",
-          "quote_en": "You should try Gemini Neon, it's a good model... 🫡",
-          "thesis_zh": "深入探讨Demis Hassabis 行的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Demis Hassabis on AI, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-25T18:48:54+00:00",
-          "url": "https://x.com/demishassabis/status/2125663033993437651"
         },
         {
           "id": "17f166e5aa72748b",
@@ -288,12 +260,40 @@
           },
           "published_at": "2026-11-26T07:26:16+00:00",
           "url": "https://x.com/thsottiaux/status/2125853628250599730"
+        },
+        {
+          "id": "1ebb0e656249fcdb",
+          "name": "@MiaAI_lab",
+          "handle": "@MiaAI_lab",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/MiaAI_lab",
+          "topic_zh": "AI 编程范式变革",
+          "topic_en": "AI Coding & Engineering",
+          "event_context_zh": "Flash-Next-Single-DGX-Spark-TensorFold\n- Inkling 2 Mini：如果您想要出色的 3D 和后端性能，请选择此产品。它还适合 64 GB DGX Spark。\nhttps://github.com/MiaAI-Lab/Inkling-2-Mini-DGX-Spark-TensorFold\n\n我知道人们希望在同一个 Spark 上运行 DeepSeek V4.1 Flash 和 GLM 5.3 Flash，但它们必须进行大量量化，并且您将获得糟糕的体验。帮自己一个忙，不要这样做。\n\n2x DGX 火花：\n- GLM 5.3 Flash - 我的首选！\nhttps://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104\n- DeepSeek V4.1 Flash - 绝佳的选择\nhttps://github.com/MiaAI-Lab/DeepSeek-v4.1-Flash-1017-2x-DGX-Sparks\n\n4x DGX 火花：\n- DeepSeek V4.1 Flash - 您可以在 4 个 Spark 上运行的最快的东西\nhttps://github.com/Picom-code/pico-dgx-ds4\n- GLM 5.3（完整） - 就质量而言，您可以运行的最好的东西\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n6x DGX 火花：\n- GLM 5.3（完整） - 就质量而言，您可以运行的最好的东西，并且运行得非常棒。\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n8+ DGX Sparks：瓦尔哈拉\n运行 GLM 5.3 + DeepSeek V4.1 Flash，或者直接在所有 8 个 Spark 上运行 GLM。\n\n您还可以在 Sparks 之一上使用 Imagination Studio 来生成出色的本地图像和视频：\nhttps://github.com/drowzeys/Imagination-Studio-by-keys-Wasserman\n\n在这里找到我所有的食谱：\nhttps://mia-ai.net/models",
+          "event_context_en": "Best models to run on your DGX Spark(s)\n\nOne DGX Spark - only two options:\n- Qwen3.8 Flash Next: pick this if your focus",
+          "quote_zh": "在 DGX Spark 上运行的最佳模型\n\n一台 DGX Spark - 只有两种选择：\n- Qwen3.8 Flash Next：如果您的重点是前端，请选择此选项\nhttps://github.com/MiaAI-Lab/Qwen3.8-Flash-Next-Single-DGX-Spark-TensorFold\n- Inkling 2 Mini：如果您想要出色的 3D 和后端性能，请选择此产品。它还适合 64 GB DGX Spark。\nhttps://github.com/MiaAI-Lab/Inkling-2-Mini-DGX-Spark-TensorFold\n\n我知道人们希望在同一个 Spark 上运行 DeepSeek V4.1 Flash 和 GLM 5.3 Flash，但它们必须进行大量量化，并且您将获得糟糕的体验。帮自己一个忙，不要这样做。\n\n2x DGX 火花：\n- GLM 5.3 Flash - 我的首选！\nhttps://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104\n- DeepSeek V4.1 Flash - 绝佳的选择\nhttps://github.com/MiaAI-Lab/DeepSeek-v4.1-Flash-1017-2x-DGX-Sparks\n\n4x DGX 火花：\n- DeepSeek V4.1 Flash - 您可以在 4 个 Spark 上运行的最快的东西\nhttps://github.com/Picom-code/pico-dgx-ds4\n- GLM 5.3（完整） - 就质量而言，您可以运行的最好的东西\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n6x DGX 火花：\n- GLM 5.3（完整） - 就质量而言，您可以运行的最好的东西，并且运行得非常棒。\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n8+ DGX Sparks：瓦尔哈拉\n运行 GLM 5.3 + DeepSeek V4.1 Flash，或者直接在所有 8 个 Spark 上运行 GLM。\n\n您还可以在 Sparks 之一上使用 Imagination Studio 来生成出色的本地图像和视频：\nhttps://github.com/drowzeys/Imagination-Studio-by-keys-Wasserman\n\n在这里找到我所有的食谱：\nhttps://mia-ai.net/models",
+          "quote_en": "Best models to run on your DGX Spark(s)\n\nOne DGX Spark - only two options:\n- Qwen3.8 Flash Next: pick this if your focus is frontend\nhttps://github.com/MiaAI-Lab/Qwen3.8-Flash-Next-Single-DGX-Spark-TensorFold\n- Inkling 2 Mini: pick this if you want great 3D and backend performance. It will also fit 64 GB DGX Spark.\nhttps://github.com/MiaAI-Lab/Inkling-2-Mini-DGX-Spark-TensorFold\n\nI know people want to run DeepSeek V4.1 Flash and GLM 5.3 Flash on one spark, but they'd have to be heavily quantized and you'll have a bad experience. Do yourself a favor and don't do it.\n\n2x DGX Sparks:\n- GLM 5.3 Flash - my preferred choice!\nhttps://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104\n- DeepSeek V4.1 Flash - great alternative\nhttps://github.com/MiaAI-Lab/DeepSeek-v4.1-Flash-1017-2x-DGX-Sparks\n\n4x DGX Sparks:\n- DeepSeek V4.1 Flash - fastest thing you can run on your 4 Sparks\nhttps://github.com/Picom-code/pico-dgx-ds4\n- GLM 5.3 (full) - best thing you can run in terms of quality\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n6x DGX Sparks:\n- GLM 5.3 (full) - best thing you can run in terms of quality, and runs AWESOME.\nhttps://github.com/MiaAI-Lab/GLM-5.3-DERISKED-Cyber-DGX-Sparks-TensorFold\n\n8+ DGX Sparks: Valhalla\nRun GLM 5.3 + DeepSeek V4.1 Flash, or just go nuts and run GLM on all 8 sparks.\n\nYou can also use Imagination Studio on one of the Sparks for awesome local image and video generation:\nhttps://github.com/drowzeys/Imagination-Studio-by-keys-Wasserman\n\nFind all my recipes here:\nhttps://mia-ai.net/models",
+          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-26T15:30:14+00:00",
+          "url": "https://x.com/MiaAI_lab/status/2125975423964082600"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-26 18:35:55 UTC",
+      "updated_at": "2026-11-26 18:50:10 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
