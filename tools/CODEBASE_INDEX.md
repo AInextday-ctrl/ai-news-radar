@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构、规则与符号极速索引 (Codebase Fast Index v2.0)
 
-> **生成时间**: `2026-11-26 02:56:38 UTC` | **代码文件**: `124` 个 | **索引符号**: `1443` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
+> **生成时间**: `2026-11-26 07:03:00 UTC` | **代码文件**: `124` 个 | **索引符号**: `1443` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，经 `tools/verify_code_integrity.py` 与 `.git/hooks/pre-commit` 自动增量同步刷新。
 
 ---
@@ -9,14 +9,14 @@
 
 | 规则文件 | 作用域 | 体积 / 上限 (24,000 B) | 预算占比 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
-| [`AGENTS.md`](../AGENTS.md) | `.` | `13,312 B` | `55.5%` | `OK` |
-| [`crawlers/AGENTS.md`](../crawlers/AGENTS.md) | `crawlers` | `6,443 B` | `26.8%` | `OK` |
-| [`public/AGENTS.md`](../public/AGENTS.md) | `public` | `3,576 B` | `14.9%` | `OK` |
+| [`AGENTS.md`](../AGENTS.md) | `.` | `13,424 B` | `55.9%` | `OK` |
+| [`crawlers/AGENTS.md`](../crawlers/AGENTS.md) | `crawlers` | `6,509 B` | `27.1%` | `OK` |
+| [`public/AGENTS.md`](../public/AGENTS.md) | `public` | `3,615 B` | `15.1%` | `OK` |
 
 | 工作区技能 (Skill) | 路径 | 体积 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | **`affiliate-ui-and-theming`** | [`.agents/skills/affiliate-ui-and-theming/SKILL.md`](../.agents/skills/affiliate-ui-and-theming/SKILL.md) | `3,922 B` | Guides Amazon Associates showcase visual engineering, optical mix-blend product staging, strict contextual rel... |
-| **`codebase-fast-index`** | [`.agents/skills/codebase-fast-index/SKILL.md`](../.agents/skills/codebase-fast-index/SKILL.md) | `3,160 B` | Fast codebase, scoped-rules, and data store indexing for AI News Radar. Use when locating functions, classes, ... |
+| **`codebase-fast-index`** | [`.agents/skills/codebase-fast-index/SKILL.md`](../.agents/skills/codebase-fast-index/SKILL.md) | `3,225 B` | Fast codebase, scoped-rules, and data store indexing for AI News Radar. Use when locating functions, classes, ... |
 | **`firebase-deploy-and-cache`** | [`.agents/skills/firebase-deploy-and-cache/SKILL.md`](../.agents/skills/firebase-deploy-and-cache/SKILL.md) | `3,294 B` | Diagnoses stale Firebase Hosting rollouts, resolves HTTP 429 Hosting storage quota blocks via version pruning,... |
 
 ---
@@ -114,7 +114,7 @@
 - [`tools/audit_source_crawlers.py`](../tools/audit_source_crawlers.py) (7.4 KB): `audit_all_crawlers`
 - [`tools/build_affiliate_catalog.py`](../tools/build_affiliate_catalog.py) (3.8 KB): `validate_catalog, sync_into_monetization_js`
 - [`tools/check_seo_descriptions.py`](../tools/check_seo_descriptions.py) (2.6 KB): `check`
-- [`tools/fast_index.py`](../tools/fast_index.py) (60.6 KB): `discover_unregistered_crawlers, discover_rules_and_skills, discover_data_stores, extract_python_symbols, extract_js_symbols...`
+- [`tools/fast_index.py`](../tools/fast_index.py) (62.1 KB): `discover_unregistered_crawlers, discover_rules_and_skills, discover_data_stores, extract_python_symbols, extract_js_symbols...`
 - [`tools/fetch_affiliate_images.py`](../tools/fetch_affiliate_images.py) (8.1 KB): `main`
 - [`tools/generate_thumbnails.py`](../tools/generate_thumbnails.py) (2.1 KB): `ensure_thumbnails`
 - [`tools/prune_firebase_versions.py`](../tools/prune_firebase_versions.py) (4.3 KB): `prune_old_versions`
@@ -150,7 +150,7 @@
 - [`tests/test_cbsnews_crawler.py`](../tests/test_cbsnews_crawler.py) (4.4 KB): `TestCBSNewsCrawler`
 - [`tests/test_cnbc_crawler.py`](../tests/test_cnbc_crawler.py) (4.3 KB): `TestCnbcCrawler`
 - [`tests/test_coindesk_crawler.py`](../tests/test_coindesk_crawler.py) (5.3 KB): `TestCoinDeskCrawler`
-- [`tests/test_data_quality_gate.py`](../tests/test_data_quality_gate.py) (48.6 KB): `run_quality_gate_assertions, auto_heal_dataset`
+- [`tests/test_data_quality_gate.py`](../tests/test_data_quality_gate.py) (49.7 KB): `run_quality_gate_assertions, auto_heal_dataset`
 - [`tests/test_decoder_crawler.py`](../tests/test_decoder_crawler.py) (8.2 KB): `TestDecoderCrawler`
 - [`tests/test_fortune_crawler.py`](../tests/test_fortune_crawler.py) (6.5 KB): `TestFortuneCrawler`
 - [`tests/test_ft_crawler.py`](../tests/test_ft_crawler.py) (4.3 KB): `TestFtCrawler`
@@ -172,7 +172,7 @@
 - [`tests/test_wapo_crawler.py`](../tests/test_wapo_crawler.py) (5.9 KB): `TestWashingtonCrawlers`
 - [`tests/test_wired_crawler.py`](../tests/test_wired_crawler.py) (4.8 KB): `TestWiredCrawler`
 - [`tests/test_wsj_crawler.py`](../tests/test_wsj_crawler.py) (4.7 KB): `TestWsjCrawler`
-- [`tools/verify_code_integrity.py`](../tools/verify_code_integrity.py) (5.8 KB): `scan_anti_patterns, run_unit_tests, main`
+- [`tools/verify_code_integrity.py`](../tools/verify_code_integrity.py) (5.9 KB): `scan_anti_patterns, run_unit_tests, main`
 
 ### 底层数据存储仓 (Data Stores & Cache Registries)
 *后端主库（latest_news.json）、全量归档（master_archive.json）、精选库与信源持久化缓存（仅索引元数据）。*
@@ -180,22 +180,22 @@
 **核心数据仓与公共分发：**
 - **`data/affiliate_products.json`** (`310.8 KB`)
 - **`data/apify_crawler_state.json`** (`385.3 KB`)
-- **`data/archive_celebrity.json`** (`24.61 MB`)
-- **`data/archive_news.json`** (`61.48 MB`)
-- **`data/curated_column_highlights.json`** (`37.1 KB`)
+- **`data/archive_celebrity.json`** (`25.48 MB`)
+- **`data/archive_news.json`** (`63.03 MB`)
+- **`data/curated_column_highlights.json`** (`36.1 KB`)
 - **`data/curated_prompts_library.json`** (`42.2 KB`)
 - **`data/curated_workflows_library.json`** (`13.6 KB`)
 - **`data/github_stars_history.json`** (`101.1 KB`)
-- **`data/indexnow_ledger.json`** (`283.3 KB`)
-- **`data/knowledge_graph.json`** (`65.0 KB`)
-- **`data/latest_news.json`** (`25.40 MB`)
-- **`data/latest_wechat.json`** (`22.1 KB`)
-- **`data/master_archive.json`** (`83.97 MB`)
-- **`data/processed_news_ledger.json`** (`9.28 MB`)
+- **`data/indexnow_ledger.json`** (`291.1 KB`)
+- **`data/knowledge_graph.json`** (`65.8 KB`)
+- **`data/latest_news.json`** (`24.31 MB`)
+- **`data/latest_wechat.json`** (`23.1 KB`)
+- **`data/master_archive.json`** (`77.74 MB`)
+- **`data/processed_news_ledger.json`** (`9.45 MB`)
 - **`data/sota_model_registry.json`** (`9.5 KB`)
-- **`data/topic_focus.json`** (`19.4 KB`)
-- **`public/data/latest_news.json`** (`590.9 KB`)
-- **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `15.13 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
+- **`data/topic_focus.json`** (`21.9 KB`)
+- **`public/data/latest_news.json`** (`558.9 KB`)
+- **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `15.80 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
 
 ---
 

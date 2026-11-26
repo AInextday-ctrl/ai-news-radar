@@ -129,7 +129,7 @@ jobs:
             npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || \
             (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
             (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
-            (echo "❌ Firebase 部署遇到身份验证错误。如果提示 credentials are no longer valid，说明 FIREBASE_TOKEN 已过期，请在本地运行 firebase login:ci 生成新 Token，或在 Google Cloud 开启 Service Account 并配置 FIREBASE_SERVICE_ACCOUNT。")
+            (echo "❌ Firebase 部署失败（可能 FIREBASE_TOKEN 已过期或触发 Hosting 429 存储配额上限，请配置 FIREBASE_SERVICE_ACCOUNT 以启用自动版本清理或运行 python tools/prune_firebase_versions.py）。" && exit 1)
 
           else
             echo "⚠️ [Notice] 未在 GitHub Secrets 中配置有效部署凭据 (FIREBASE_SERVICE_ACCOUNT 或 FIREBASE_TOKEN)。"

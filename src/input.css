@@ -152,6 +152,22 @@ html:not(.dark) nav {
 
 }
 
+html.dark header.sticky {
+
+  background-color: rgba(7, 11, 22, 0.95) !important;
+
+  border-color: rgba(30, 41, 59, 0.8) !important;
+
+}
+
+html.dark nav.sticky {
+
+  background-color: rgba(9, 14, 28, 0.95) !important;
+
+  border-color: rgb(30, 41, 59) !important;
+
+}
+
 
 
 /* Light Mode Text Contrast Fixes */
@@ -2177,4 +2193,11 @@ html:not(.dark) .mobile-nav-item.active::after {
   #topic-focus-section {
     padding: 0.875rem !important;
   }
+}
+
+.news-img-box:empty {
+  display: none !important;
+}
+.news-img-box[data-broken='1'] {
+  display: none !important;
 }

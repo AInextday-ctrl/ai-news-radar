@@ -557,12 +557,19 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     # 断言 22: 核心静态资产完整性与零 Monetag 污染硬性门禁
     # ----------------------------------------------------
     # 1. 核心 CSS 与 JS 静态资产存在性与非空校验（彻底杜绝裸 HTML 样式丢失白屏）
+    css_v736 = os.path.join(WORKSPACE_DIR, "public", "css", "style-v736.min.css")
     critical_assets = [
+        css_v736,
         os.path.join(WORKSPACE_DIR, "public", "css", "style-v735.min.css"),
         os.path.join(WORKSPACE_DIR, "public", "js", "app-v746.min.js"),
     ]
     missing_assets = [os.path.relpath(p, WORKSPACE_DIR) for p in critical_assets if not os.path.exists(p) or os.path.getsize(p) < 1000]
     assert len(missing_assets) == 0, f"断言 22 失败：检测到核心样式或脚本资产丢失/为空: {missing_assets}"
+    with open(css_v736, "r", encoding="utf-8") as f:
+        css_v736_txt = f.read()
+    assert "header.sticky" in css_v736_txt and "nav.sticky" in css_v736_txt, (
+        "断言 22 失败：style-v736.min.css 缺失深色主题 header.sticky / nav.sticky 样式规则！"
+    )
 
     # 2. 彻底杜绝 Monetag 第三方广告与弹窗代码污染
     core_pages = [
@@ -767,11 +774,21 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
                     if p_str:
                         new_paras.append(p_str)
                 it["paragraphs"] = new_paras
+            from crawlers.content_filters import is_truncated_paragraph
             for fld in ("summary_en", "summary_zh", "app_hook"):
                 val = str(it.get(fld) or "").strip()
                 if val:
                     val = wire_reg.sub('', val).strip()
                     val = trailing_reg.sub('.', val).strip()
+                    if is_truncated_paragraph(val):
+                        if fld == "summary_en" and isinstance(it.get("paragraphs"), list) and it["paragraphs"]:
+                            clean_p0 = str(it["paragraphs"][0] or "").strip()
+                            if clean_p0 and not is_truncated_paragraph(clean_p0):
+                                val = clean_p0
+                        if is_truncated_paragraph(val):
+                            val = re.sub(r'[\s,]*(?:\.{2,}|…)\s*$', '', val).strip()
+                            if val and val[-1] not in '.!?。！？':
+                                val += '。' if fld == "summary_zh" else '.'
                     it[fld] = val
 
     # 5. 确保 public 目录文件轻量化 (剔除冗余大键)
