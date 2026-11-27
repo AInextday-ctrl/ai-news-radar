@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-27 18:49:20 UTC",
+  "generated_at": "2026-11-27 19:05:53 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-27 18:49:20 UTC",
+      "updated_at": "2026-11-27 19:05:53 UTC",
       "headline_item": {
-        "id": "9da1a37c264f9a1a",
+        "id": "e0584eaf575549b8",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "禁售英伟达芯片现身上海数据中心",
-        "title_en": "Banned Nvidia Blackwell chips turn up in a Shanghai data center linked to Alice Huang, Bloomberg reports",
-        "source": "THE DECODER",
-        "author": "Matthias Bastian",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_48028a28159cab80.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_48028a28159cab80.jpg",
-        "published_at": "2026-11-27T18:27:02+00:00",
-        "url": "https://the-decoder.com/banned-nvidia-blackwell-chips-turn-up-in-a-shanghai-data-center-linked-to-alice-huang-bloomberg-reports/",
-        "event_summary_zh": "上海数据中心违规部署英伟达GB200/GB300服务器，该中心关联至遭美方制裁的芯片贸易链条",
-        "event_summary_en": "Shanghai Shuoyao and Shanghai Kezhan listed Nvidia GB300-NVL72 racks and GB200 servers as loan collateral in filings with Shanghai Innovation Bank. The hardware traces back to Taiwanese manufacturer Gigabyte, and Shanghai Shuoyao maintains deep business ties with Megaspeed, a Singapore-based firm recently added to the US trade blacklist.",
+        "title_zh": "OpenAI反诉苹果窃取商业机密并阻碍硬件供应",
+        "title_en": "OpenAI countersues Apple for stealing trade secrets",
+        "source": "Financial Times",
+        "author": "Tim Bradshaw and Michael Acton",
+        "cover_image": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
+        "image_url": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
+        "published_at": "2026-11-27T18:57:47+00:00",
+        "url": "https://www.ft.com/content/af599e07-d44c-4068-ab84-6ee3c85551d4",
+        "event_summary_zh": "OpenAI向加州法院提起反诉，指控苹果利用供应链影响力威胁供应商并盗取核心技术机密",
+        "event_summary_en": "OpenAI filed a countersuit in a California court accusing Apple of leveraging its supply chain dominance to coerce suppliers and block collaboration with the AI firm. This follows Apple's prior legal claims alleging that former employees, including OpenAI's Chief Hardware Officer Tang Tan, misappropriated sensitive product and supply chain data, marking a direct escalation of the rivalry into the AI-native hardware space.",
         "core_facts_zh": [
-          "【核心事件】上海硕瑶、上海克展、Megaspeed（涉事企业）、英伟达（芯片供应商）、技嘉科技（硬件制造）在上海某数据中心：违规安装并抵押禁售级AI加速芯片GB200/GB300系列",
-          "【起因与机理】绕过美方针对高端算力芯片的对华出口管制措施",
-          "【关键技术规格】企业利用禁售芯片作为银行贷款抵押物，暴露了算力资产的违规流通路径。",
-          "【各方立场与态度】通过序列号溯源确定设备源自台湾技嘉科技，引发出口合规审计压力升级。"
+          "【核心事件】OpenAI（原告/被告）与苹果（被告/原告）在加州法院：指控对方窃取商业机密及垄断性供应链压制",
+          "【起因与机理】双方在AI硬件终端布局上的正面竞争冲突",
+          "【商业与财务细节】OpenAI正式向加州法院提起反诉，指控苹果非法干预其供应链。",
+          "【各方立场与态度】OpenAI计划开发个人终端硬件，直接冲击苹果的市场统治力。"
         ],
         "core_facts_en": [
-          "[Core Event] Shanghai Shuoyao, Shanghai Kezhan, Megaspeed, Nvidia, Gigabyte (A Shanghai-based data center): Illegal deployment and collateralization of sanctioned Blackwell-series chips",
-          "[Root Cause & Mechanism] Circumvention of US export control regulations on high-end AI compute",
-          "[Regulatory & Investigation Focus] Use of sanctioned chips as collateral exposes illicit hardware circulation paths.",
-          "[Key Position & Outlook] Hardware serial numbers trace back to Gigabyte, raising pressure on export compliance."
+          "[Core Event] OpenAI and Apple (California Court): Allegations of trade secret theft and supply chain coercion",
+          "[Root Cause & Mechanism] Direct conflict in the AI-native personal device market",
+          "[Key Metrics] The new legal action comes after OpenAI acquired io, the studio led by Apple’s former design chief Sir Jony Ive, for $6.",
+          "[Key Position & Outlook] OpenAI's hardware ambitions directly threaten Apple's market dominance."
         ],
-        "industry_impact_zh": "此事件揭示了复杂的多层转运机制已形成针对算力封锁的“灰色通径”，即便面对严格的海关与出口管制，通过第三方保修数据库与金融抵押关联仍能暴露出黑市物流路径。这不仅挑战了英伟达自身的合规审核体系，更将倒逼美国监管机构进一步收紧对台湾代工厂及东南亚中转节点的直接制裁，未来算力供应链的审计颗粒度将从企业实体转向具体的设备序列号追溯。",
-        "industry_impact_en": "This incident highlights the emergence of sophisticated grey-market channels for circumventing compute blockades, bypassing regulatory scrutiny through multi-layered transit. It exposes the fragility of current export compliance, likely triggering tighter US regulatory pressure on Taiwanese foundries and Southeast Asian intermediaries, shifting audit granularities from corporate entities to individual hardware serial number tracking."
+        "industry_impact_zh": "此案标志着AI科技巨头正从软件生态竞争转向垂直硬件终端的深度整合。OpenAI通过收购Jony Ive领衔的团队意图构建独立计算终端，直接威胁苹果的核心壁垒，苹果则利用对供应链的绝对议价权实施“防守式制裁”，这种基于实物供应链的“卡脖子”策略将成为未来科技巨头争夺边缘侧AI控制权的主战场。",
+        "industry_impact_en": "This litigation signals a strategic shift from software ecosystem competition to the vertical integration of AI-native hardware. By attempting to field its own devices, OpenAI poses an existential threat to Apple’s walled garden, forcing Apple to exercise its supply chain dominance to exert defensive control; this physical-layer bottleneck will define the battle for edge-AI supremacy."
       },
       "headlines": [
+        {
+          "id": "e0584eaf575549b8",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenAI反诉苹果窃取商业机密并阻碍硬件供应",
+          "title_en": "OpenAI countersues Apple for stealing trade secrets",
+          "source": "Financial Times",
+          "author": "Tim Bradshaw and Michael Acton",
+          "cover_image": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
+          "published_at": "2026-11-27T18:57:47+00:00",
+          "url": "https://www.ft.com/content/af599e07-d44c-4068-ab84-6ee3c85551d4",
+          "event_summary_zh": "OpenAI向加州法院提起反诉，指控苹果利用供应链影响力威胁供应商并盗取核心技术机密",
+          "event_summary_en": "OpenAI filed a countersuit in a California court accusing Apple of leveraging its supply chain dominance to coerce suppliers and block collaboration with the AI firm. This follows Apple's prior legal claims alleging that former employees, including OpenAI's Chief Hardware Officer Tang Tan, misappropriated sensitive product and supply chain data, marking a direct escalation of the rivalry into the AI-native hardware space.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI（原告/被告）与苹果（被告/原告）在加州法院：指控对方窃取商业机密及垄断性供应链压制",
+            "【起因与机理】双方在AI硬件终端布局上的正面竞争冲突",
+            "【商业与财务细节】OpenAI正式向加州法院提起反诉，指控苹果非法干预其供应链。",
+            "【各方立场与态度】OpenAI计划开发个人终端硬件，直接冲击苹果的市场统治力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI and Apple (California Court): Allegations of trade secret theft and supply chain coercion",
+            "[Root Cause & Mechanism] Direct conflict in the AI-native personal device market",
+            "[Key Metrics] The new legal action comes after OpenAI acquired io, the studio led by Apple’s former design chief Sir Jony Ive, for $6.",
+            "[Key Position & Outlook] OpenAI's hardware ambitions directly threaten Apple's market dominance."
+          ],
+          "industry_impact_zh": "此案标志着AI科技巨头正从软件生态竞争转向垂直硬件终端的深度整合。OpenAI通过收购Jony Ive领衔的团队意图构建独立计算终端，直接威胁苹果的核心壁垒，苹果则利用对供应链的绝对议价权实施“防守式制裁”，这种基于实物供应链的“卡脖子”策略将成为未来科技巨头争夺边缘侧AI控制权的主战场。",
+          "industry_impact_en": "This litigation signals a strategic shift from software ecosystem competition to the vertical integration of AI-native hardware. By attempting to field its own devices, OpenAI poses an existential threat to Apple’s walled garden, forcing Apple to exercise its supply chain dominance to exert defensive control; this physical-layer bottleneck will define the battle for edge-AI supremacy."
+        },
         {
           "id": "9da1a37c264f9a1a",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "欧洲市场的AI困境本质是资本配置与劳动力结构的高度刚性，导致AI从工具转化为生产力时产生的边际效应极低。这种组织级摩擦力将持续拉大欧美科技企业的营运绩效差距，迫使欧洲企业在垂直行业应用上必须寻找差异化路径，而非盲目复刻美国通用型AI应用。",
           "industry_impact_en": "The European AI dilemma is rooted in rigid capital allocation and labor structures, leading to negligible marginal productivity gains. This organizational friction will continue to widen the performance gap between US and European firms, forcing the latter to prioritize vertical-specific AI strategies over generalist implementations."
-        },
-        {
-          "id": "0ae5833742d783c7",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "杨立昆离职Meta并创立AMI Labs，力推JEPA模型",
-          "title_en": "Three studies from Meta and AMI Labs back Yann LeCun's bet on JEPA world models over large language models",
-          "source": "THE DECODER",
-          "author": "Maximilian Schreiner",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
-          "published_at": "2026-11-27T16:58:56+00:00",
-          "url": "https://the-decoder.com/three-studies-from-meta-and-ami-labs-back-yann-lecuns-bet-on-jepa-world-models-over-large-language-models/",
-          "event_summary_zh": "AI科学家杨立昆离开Meta后创办AMI Labs，筹集超10亿美元资金，致力于开发具备因果推断能力的JEPA物理世界模型",
-          "event_summary_en": "AI scientist Yann LeCun left Meta in late 2025 to co-found AMI Labs. The company is advancing the Joint Embedding Predictive Architecture (JEPA) to model cause-and-effect in physical environments, aiming to transcend the limitations of current Large Language Models in physical world interaction.",
-          "core_facts_zh": [
-            "【核心事件】杨立昆（前Meta首席人工智能科学家，AMI Labs联合创始人）在Meta及AMI Labs：离职并创立AMI Labs，筹资超10亿美元，聚焦JEPA物理世界建模架构",
-            "【起因与机理】认为大语言模型难以实现人类水平的通用智能，需从物理交互视角重构机器智能路线",
-            "【关键数据与实测】融资规模超10亿美元，核心技术路线确认为JEPA（联合嵌入预测架构）。",
-            "【各方立场与态度】技术重心从语言处理转向机器人、工业控制及可穿戴设备的因果推理与行动规划。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Yann LeCun (Former Chief AI Scientist at Meta, Co-founder of AMI Labs) (Meta and AMI Labs): Departed Meta to co-found AMI Labs, raising $1B+ to focus on JEPA physical world architecture",
-            "[Root Cause & Mechanism] Believes LLMs are insufficient for human-level intelligence; advocates for physical world causal reasoning",
-            "[Key Metrics] Secured over $1 billion in funding to advance JEPA architecture.",
-            "[Key Position & Outlook] Shift in technical focus from language processing to physical-world causal reasoning and planning."
-          ],
-          "industry_impact_zh": "杨立昆从通用大模型向物理交互世界的范式转移，标志着产业界对LLM上限的审视已从概率生成转向因果推理，预示着具身智能领域在技术架构上的新一轮分化。AMI Labs的出现实质上是针对当前算力军备竞赛下、缺乏物理认知能力的AI基础设施所发起的替代性技术路径博弈。",
-          "industry_impact_en": "LeCun’s pivot from LLMs to physical world models signals a critical industry re-evaluation of AI scaling, shifting from probabilistic generation to causal reasoning. This strategic move highlights an emerging architectural split, positioning AMI Labs to challenge existing AI infrastructure that lacks fundamental grounding in physical dynamics."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-27 18:49:20 UTC",
+      "updated_at": "2026-11-27 19:05:54 UTC",
       "author": "Mistral AI",
       "author_handle": "@MistralAI",
       "author_role_zh": "欧洲前沿开源与商业模型实验室",
@@ -293,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-27 18:49:20 UTC",
+      "updated_at": "2026-11-27 19:05:54 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
