@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-27 16:51:14 UTC",
+  "generated_at": "2026-11-27 17:07:59 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-27 16:51:14 UTC",
+      "updated_at": "2026-11-27 17:07:59 UTC",
       "headline_item": {
-        "id": "cfb1a015d1f11908",
+        "id": "0ae5833742d783c7",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "SAP遭遇网络攻击，源代码遭非法修改",
-        "title_en": "SAP confirms a cybersecurity incident; report: hackers obtained its staffers' authentication tokens, letting them copy and alter source code stored on GitHub (Eduard Kovacs/SecurityWeek)",
-        "source": "SecurityWeek",
-        "author": "SecurityWeek",
-        "cover_image": "https://www.securityweek.com/wp-content/uploads/2026/09/SAP_vulnerability-patches.jpg",
-        "image_url": "https://www.securityweek.com/wp-content/uploads/2026/09/SAP_vulnerability-patches.jpg",
-        "published_at": "2026-11-27T16:35:08+00:00",
-        "url": "https://www.securityweek.com/sap-confirms-cyberattack-source-code-reportedly-compromised/",
-        "event_summary_zh": "SAP确认发生网络安全事件，攻击者通过窃取员工身份验证令牌，成功访问并篡改了存储在GitHub上的源代码",
-        "event_summary_en": "Enterprise software giant SAP confirmed a security breach where attackers obtained employee authentication tokens to gain unauthorized access to company GitHub repositories, allowing them to copy and alter source code. This incident exposes critical vulnerabilities within the software development supply chain's identity management.",
+        "title_zh": "杨立昆离职Meta并创立AMI Labs，力推JEPA模型",
+        "title_en": "Three studies from Meta and AMI Labs back Yann LeCun's bet on JEPA world models over large language models",
+        "source": "THE DECODER",
+        "author": "Maximilian Schreiner",
+        "cover_image": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
+        "image_url": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
+        "published_at": "2026-11-27T16:58:56+00:00",
+        "url": "https://the-decoder.com/three-studies-from-meta-and-ami-labs-back-yann-lecuns-bet-on-jepa-world-models-over-large-language-models/",
+        "event_summary_zh": "AI科学家杨立昆离开Meta后创办AMI Labs，筹集超10亿美元资金，致力于开发具备因果推断能力的JEPA物理世界模型",
+        "event_summary_en": "AI scientist Yann LeCun left Meta in late 2025 to co-found AMI Labs. The company is advancing the Joint Embedding Predictive Architecture (JEPA) to model cause-and-effect in physical environments, aiming to transcend the limitations of current Large Language Models in physical world interaction.",
         "core_facts_zh": [
-          "【核心事件】SAP SE（企业软件巨头）在GitHub代码托管平台：员工身份令牌被窃，导致核心源代码被非法访问与篡改",
-          "【起因与机理】身份验证机制遭受攻击，导致研发侧供应链安全失控",
-          "【关键技术规格】攻击者通过窃取身份认证令牌绕过安全壁垒。",
-          "【各方立场与态度】软件供应链安全治理面临研发内网准入挑战。"
+          "【核心事件】杨立昆（前Meta首席人工智能科学家，AMI Labs联合创始人）在Meta及AMI Labs：离职并创立AMI Labs，筹资超10亿美元，聚焦JEPA物理世界建模架构",
+          "【起因与机理】认为大语言模型难以实现人类水平的通用智能，需从物理交互视角重构机器智能路线",
+          "【关键数据与实测】融资规模超10亿美元，核心技术路线确认为JEPA（联合嵌入预测架构）。",
+          "【各方立场与态度】技术重心从语言处理转向机器人、工业控制及可穿戴设备的因果推理与行动规划。"
         ],
         "core_facts_en": [
-          "[Core Event] SAP SE (GitHub repositories): Staff authentication tokens compromised, leading to source code access and modification",
-          "[Root Cause & Mechanism] Security breach in identity authentication protocols within the development pipeline",
-          "[Regulatory & Investigation Focus] Attackers bypassed security via stolen authentication tokens.",
-          "[Industry Impact & Outlook] Supply chain integrity faces critical access control challenges."
+          "[Core Event] Yann LeCun (Former Chief AI Scientist at Meta, Co-founder of AMI Labs) (Meta and AMI Labs): Departed Meta to co-found AMI Labs, raising $1B+ to focus on JEPA physical world architecture",
+          "[Root Cause & Mechanism] Believes LLMs are insufficient for human-level intelligence; advocates for physical world causal reasoning",
+          "[Key Metrics] Secured over $1 billion in funding to advance JEPA architecture.",
+          "[Key Position & Outlook] Shift in technical focus from language processing to physical-world causal reasoning and planning."
         ],
-        "industry_impact_zh": "此次事件凸显了DevOps研发环境中身份凭证管理与代码完整性保护的极高风险，尤其是对于SAP此类核心商业系统而言。通过凭证窃取进行的代码篡改，可能引发深层的供应链投毒隐患，软件厂商需加速转向基于硬件加密与零信任架构的研发内网准入控制。",
-        "industry_impact_en": "This breach highlights severe risks in DevSecOps identity management and code integrity, particularly for core business software providers. Code tampering via token theft necessitates an urgent industry-wide transition toward hardware-based authentication and zero-trust development environments to mitigate supply chain poisoning risks."
+        "industry_impact_zh": "杨立昆从通用大模型向物理交互世界的范式转移，标志着产业界对LLM上限的审视已从概率生成转向因果推理，预示着具身智能领域在技术架构上的新一轮分化。AMI Labs的出现实质上是针对当前算力军备竞赛下、缺乏物理认知能力的AI基础设施所发起的替代性技术路径博弈。",
+        "industry_impact_en": "LeCun’s pivot from LLMs to physical world models signals a critical industry re-evaluation of AI scaling, shifting from probabilistic generation to causal reasoning. This strategic move highlights an emerging architectural split, positioning AMI Labs to challenge existing AI infrastructure that lacks fundamental grounding in physical dynamics."
       },
       "headlines": [
+        {
+          "id": "0ae5833742d783c7",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "杨立昆离职Meta并创立AMI Labs，力推JEPA模型",
+          "title_en": "Three studies from Meta and AMI Labs back Yann LeCun's bet on JEPA world models over large language models",
+          "source": "THE DECODER",
+          "author": "Maximilian Schreiner",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_1eea9b8f055f1309.jpg",
+          "published_at": "2026-11-27T16:58:56+00:00",
+          "url": "https://the-decoder.com/three-studies-from-meta-and-ami-labs-back-yann-lecuns-bet-on-jepa-world-models-over-large-language-models/",
+          "event_summary_zh": "AI科学家杨立昆离开Meta后创办AMI Labs，筹集超10亿美元资金，致力于开发具备因果推断能力的JEPA物理世界模型",
+          "event_summary_en": "AI scientist Yann LeCun left Meta in late 2025 to co-found AMI Labs. The company is advancing the Joint Embedding Predictive Architecture (JEPA) to model cause-and-effect in physical environments, aiming to transcend the limitations of current Large Language Models in physical world interaction.",
+          "core_facts_zh": [
+            "【核心事件】杨立昆（前Meta首席人工智能科学家，AMI Labs联合创始人）在Meta及AMI Labs：离职并创立AMI Labs，筹资超10亿美元，聚焦JEPA物理世界建模架构",
+            "【起因与机理】认为大语言模型难以实现人类水平的通用智能，需从物理交互视角重构机器智能路线",
+            "【关键数据与实测】融资规模超10亿美元，核心技术路线确认为JEPA（联合嵌入预测架构）。",
+            "【各方立场与态度】技术重心从语言处理转向机器人、工业控制及可穿戴设备的因果推理与行动规划。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Yann LeCun (Former Chief AI Scientist at Meta, Co-founder of AMI Labs) (Meta and AMI Labs): Departed Meta to co-found AMI Labs, raising $1B+ to focus on JEPA physical world architecture",
+            "[Root Cause & Mechanism] Believes LLMs are insufficient for human-level intelligence; advocates for physical world causal reasoning",
+            "[Key Metrics] Secured over $1 billion in funding to advance JEPA architecture.",
+            "[Key Position & Outlook] Shift in technical focus from language processing to physical-world causal reasoning and planning."
+          ],
+          "industry_impact_zh": "杨立昆从通用大模型向物理交互世界的范式转移，标志着产业界对LLM上限的审视已从概率生成转向因果推理，预示着具身智能领域在技术架构上的新一轮分化。AMI Labs的出现实质上是针对当前算力军备竞赛下、缺乏物理认知能力的AI基础设施所发起的替代性技术路径博弈。",
+          "industry_impact_en": "LeCun’s pivot from LLMs to physical world models signals a critical industry re-evaluation of AI scaling, shifting from probabilistic generation to causal reasoning. This strategic move highlights an emerging architectural split, positioning AMI Labs to challenge existing AI infrastructure that lacks fundamental grounding in physical dynamics."
+        },
         {
           "id": "cfb1a015d1f11908",
           "tag_zh": "📰 业界动态",
@@ -92,41 +121,12 @@
           ],
           "industry_impact_zh": "此次事件揭示了单一平台架构在跨云基础设施（集纳微软、亚马逊等）时的安全脆弱性，AI辅助攻击已将传统的补丁修复周期压缩至危险区间。国防供应链的云化程度与黑客探测能力的失衡，将迫使美国防部重构其零信任安全架构，特别是针对AI驱动的自动化漏洞扫描进行防御升级。",
           "industry_impact_en": "The breach highlights the systemic fragility of centralized cloud infrastructures aggregating multiple providers when faced with AI-accelerated vulnerability scanning. This event will likely force a fundamental architectural shift in US defense security protocols toward more robust, AI-resistant zero-trust models."
-        },
-        {
-          "id": "b55b1cf54fbaa17d",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI开发Athena平台旨在规范业务数据",
-          "title_en": "OpenAI is building \"Athena\"data platform to cut down on AI agent guesswork",
-          "source": "THE DECODER",
-          "author": "Matthias Bastian",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_b6645140e7e8a3b5.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_b6645140e7e8a3b5.jpg",
-          "published_at": "2026-11-27T16:05:23+00:00",
-          "url": "https://the-decoder.com/openai-is-building-athena-data-platform-to-cut-down-on-ai-agent-guesswork/",
-          "event_summary_zh": "OpenAI正研发代号“Athena”的数据平台，通过语义层统一业务指标，以提升AI智能体处理复杂商业数据的准确性",
-          "event_summary_en": "OpenAI is developing a data platform codenamed 'Athena' to create a semantic layer for consistent business metrics, aimed at reducing AI agents' reliance on guesswork during data analysis. The initiative addresses accuracy concerns in current AI tools and serves as a strategic move to deepen enterprise software integration.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI在企业级AI数据基础设施：开发Athena语义层平台，实现商业规则标准化",
-            "【起因与机理】现有AI Agent在处理业务数据时存在准确率缺陷，亟需统一数据语境",
-            "【商业与财务细节】产品逻辑：构建业务指标语义层，统一AI对商业数据的理解。",
-            "【行业影响与走向】产业影响：通过标准化商业规则，形成强客户黏性，直接竞争数据平台市场。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI (Enterprise AI data infrastructure): Building 'Athena' semantic layer for standardized business logic",
-            "[Root Cause & Mechanism] High error rates in current agents and the need for better enterprise-context management",
-            "[Key Technical Spec] Product Logic: Establishing a semantic layer for consistent interpretation of business data.",
-            "[Industry Impact & Outlook] Impact: Deepening customer lock-in by embedding business logic directly into the model's data context."
-          ],
-          "industry_impact_zh": "OpenAI此举意在从单纯的“模型提供商”转向“企业业务工作流基础设施商”，语义层即数据的护城河，一旦嵌入企业内部指标库，迁移成本将显著提高。在Snowflake与Databricks已布局语义层的背景下，OpenAI通过Athena将战火延伸至数据治理底层，旨在确立其Agent生态在垂直领域的确定性优势。",
-          "industry_impact_en": "OpenAI is shifting from a model provider to an enterprise infrastructure player; establishing a proprietary semantic layer creates high switching costs and deepens product stickiness. This moves the competitive landscape directly into the data governance layer, challenging incumbents like Snowflake and Databricks."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-27 16:51:14 UTC",
+      "updated_at": "2026-11-27 17:07:59 UTC",
       "author": "NVIDIA AI",
       "author_handle": "@NVIDIAAI",
       "author_role_zh": "NVIDIA AI 研究与开发者生态",
@@ -176,6 +176,34 @@
           },
           "published_at": "2026-11-26T18:00:38+00:00",
           "url": "https://x.com/NVIDIAAI/status/2126013273573298400"
+        },
+        {
+          "id": "40105bf16bee1470",
+          "name": "@oliviscusAI",
+          "handle": "@oliviscusAI",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/oliviscusAI",
+          "topic_zh": "开源模型与权重生态",
+          "topic_en": "Open Weights Ecosystem",
+          "event_context_zh": "一次性读取文档，因此它可以使用周围的页面作为上下文。\n\n• 用于全文档解析的 32K 上下文窗口\n• 开箱即用的多语言支持\n• 解析基准达到 93%，比基线高 6 个点\n• 长度超过 40 页的文档错误率低于 0.11\n• 100% 在您自己的硬件上本地运行\n• 可与 Transformers、vLLM、SGLang、Docker、Ollama 和 llama.cpp 配合使用\n\nTextract、Google Vision 和 Azure Doc Intelligence 等云 OCR 服务每 1,000 个页面收费 1.50 至 15 美元。在您的机器上运行 Unlimited OCR 意味着无需支付每页费用。\n\n它是 100% 开源的，在 Hugging Face 上的下载量已达到 190 万次。",
+          "event_context_en": "🚨 CHINA OPEN SOURCED AN OCR THAT EATS 100 PAGE PDFS IN ONE PASS\n\nit’s called Unlimited OCR. Baidu built it to take DeepS",
+          "quote_zh": "🚨 中国开源了一个 OCR，可以一次性处理 100 页 PDF\n\n这就是所谓的无限 OCR。百度构建它是为了将 DeepSeek OCR 更进一步，该模型只有 3B 参数。\n\n当逐页 OCR 继续下一页时，可能会丢失表格的踪迹。无限 OCR 一次性读取文档，因此它可以使用周围的页面作为上下文。\n\n• 用于全文档解析的 32K 上下文窗口\n• 开箱即用的多语言支持\n• 解析基准达到 93%，比基线高 6 个点\n• 长度超过 40 页的文档错误率低于 0.11\n• 100% 在您自己的硬件上本地运行\n• 可与 Transformers、vLLM、SGLang、Docker、Ollama 和 llama.cpp 配合使用\n\nTextract、Google Vision 和 Azure Doc Intelligence 等云 OCR 服务每 1,000 个页面收费 1.50 至 15 美元。在您的机器上运行 Unlimited OCR 意味着无需支付每页费用。\n\n它是 100% 开源的，在 Hugging Face 上的下载量已达到 190 万次。",
+          "quote_en": "🚨 CHINA OPEN SOURCED AN OCR THAT EATS 100 PAGE PDFS IN ONE PASS\n\nit’s called Unlimited OCR. Baidu built it to take DeepSeek OCR a step further, and the model has only 3B parameters.\n\npage-by-page OCR can lose track of a table when it continues on the next page. Unlimited OCR reads the document in one pass, so it can use the surrounding pages for context.\n\n• 32K context window for full-document parsing\n• multilingual support out of the box\n• 93% on the parsing benchmark, 6 points above baseline\n• error rate below 0.11 on documents longer than 40 pages\n• runs 100% locally on your own hardware\n• works with Transformers, vLLM, SGLang, Docker, Ollama and llama.cpp\n\ncloud OCR services like Textract, Google Vision and Azure Doc Intelligence charge $1.50 to $15 per 1,000 pages. running Unlimited OCR on your machine means no per-page fee.\n\nit’s 100% open source and has reached 1.9M downloads on Hugging Face.",
+          "thesis_zh": "深入探讨开源模型与权重生态的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Open Weights Ecosystem, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-27T15:23:27+00:00",
+          "url": "https://x.com/oliviscusAI/status/2126336105637466577"
         },
         {
           "id": "e1c26b5bcb5cf637",
@@ -260,40 +288,12 @@
           },
           "published_at": "2026-11-27T14:10:02+00:00",
           "url": "https://x.com/hackernoon/status/2126317627903459673"
-        },
-        {
-          "id": "40ac703fd10de9e8",
-          "name": "@scythe_io",
-          "handle": "@scythe_io",
-          "role_zh": "AI 先锋观察者",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/scythe_io",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "MCP 使人工智能代理能够访问工具、系统和敏感数据。谁控制他们能做什么，这些控制真的有效吗？ Bryson Bort 和 Jake Williams 关于 MCP 安全、代理滥用和对抗性验证。 https://hubs.ly/Q04F-XLB0 #MCP #AISecu",
-          "event_context_en": "MCP gives AI agents access to tools, systems, and sensitive data. Who controls what they can do, and do those controls a",
-          "quote_zh": "MCP 使人工智能代理能够访问工具、系统和敏感数据。谁控制他们能做什么，这些控制真的有效吗？\n\nBryson Bort 和 Jake Williams 关于 MCP 安全、代理滥用和对抗性验证。\n\nhttps://hubs.ly/Q04F-XLB0\n\n#MCP #AISecurity",
-          "quote_en": "MCP gives AI agents access to tools, systems, and sensitive data. Who controls what they can do, and do those controls actually work?\n\nBryson Bort and Jake Williams on MCP security, agent abuse, and adversarial validation.\n\nhttps://hubs.ly/Q04F-XLB0\n\n#MCP #AISecurity",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-27T13:45:00+00:00",
-          "url": "https://x.com/scythe_io/status/2126311327173837189"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-27 16:51:14 UTC",
+      "updated_at": "2026-11-27 17:07:59 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
