@@ -1,5 +1,5 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-11-27T04:04:15.108916+00:00",
+  "updated_at": "2026-11-27T04:18:27.980558+00:00",
   "date": "2026-11-27",
   "total_articles": 1,
   "audit_funnel": {
@@ -12,15 +12,15 @@ window.WECHAT_ARTICLES_DATA = {
     "pass_rate_percent": 0.0,
     "disqualified_breakdown": {
       "previously_published": 80,
-      "no_authentic_media": 2908,
+      "no_authentic_media": 2909,
       "outdated_baselines": 18,
-      "below_score_threshold": 8233
+      "below_score_threshold": 8232
     },
     "disqualification_reasons_desc": [
       "历史已发条目排除 (防止重复炒冷饭): 80 篇 (打标永久封存，0 Token 跳过)",
-      "缺少一手真实图文/视频凭证: 2908 篇 (按硬门禁扣40分一票否决)",
+      "缺少一手真实图文/视频凭证: 2909 篇 (按硬门禁扣40分一票否决)",
       "引用过时淘汰陈旧基准: 18 篇 (扣20分)",
-      "观点平庸/缺乏硬核架构与落地账本 (<95分): 8233 篇"
+      "观点平庸/缺乏硬核架构与落地账本 (<95分): 8232 篇"
     ],
     "processed_marking_mode": "全量打标与去重流水线 (Ledger & Anti-Repeat Pipeline 已激活)",
     "token_economy_mode": "极速省Token分级防线: 98.8% 候选在本地规则层 0 Token 拦截，已发布文章永久排除防重复生成"
