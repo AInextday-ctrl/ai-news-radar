@@ -1,39 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-27 21:35:03 UTC",
+  "generated_at": "2026-11-27 21:49:42 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-27 21:35:03 UTC",
+      "updated_at": "2026-11-27 21:49:42 UTC",
       "headline_item": {
-        "id": "7c5d012995514593",
+        "id": "e2663435c646cb4b",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "与人工智能研究人员 Ege Erdil 和 Daniel Kokotajlo 就 2029 年之前智能爆炸的可能性进行问答、暂停人工智能、美国对抗中国等",
-        "title_en": "Q&A with AI researchers Ege Erdil and Daniel Kokotajlo on the odds of an intelligence explosion before 2029, pausing AI, the US antagonizing China, and more (Dwarkesh Patel/Dwarkesh Podcast)",
-        "source": "Dwarkesh Podcast",
-        "author": "Dwarkesh Podcast",
-        "cover_image": "https://substackcdn.com/image/fetch/$s_!9PbN!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-video.s3.amazonaws.com%2Fvideo_upload%2Fpost%2F226789196%2F50d65d67-bc9e-41db-a8ed-a79fb018061f%2Ftranscoded-1795804086.png",
-        "image_url": "https://substackcdn.com/image/fetch/$s_!9PbN!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-video.s3.amazonaws.com%2Fvideo_upload%2Fpost%2F226789196%2F50d65d67-bc9e-41db-a8ed-a79fb018061f%2Ftranscoded-1795804086.png",
-        "published_at": "2026-11-27T20:15:01+00:00",
-        "url": "https://www.dwarkesh.com/p/daniel-kokotajlo-ege-erdil",
-        "event_summary_zh": "Dwarkesh Patel 2026 年 11 月 27 日 29 1 4分享文字记录 Ege Erdil 和 Daniel Kokotajlo 之间的新播客剧集。我以为这会是一场辩论，但他们最终达成的共识比我预期的要多得多。他们的主要分歧点是我们有多大可能会出现一些智能爆炸，从而给我们带来人工智能",
-        "event_summary_en": "Dwarkesh PatelNov 27, 2026 29 1 4Share TranscriptNew podcast episode between Ege Erdil and Daniel Kokotajlo. I thought this was going to be a debate, but they ended up agreeing on a lot more than I expected.\n\nTheir main point of disagreement is how likely it is that we get some intelligence explosion that gives us AIs more competent than any human expert before 2029. Ege puts this possibility at around 20%, whereas Daniel thinks it’s higher than 50%.\n\nThey agree that there is not a huge differen",
+        "title_zh": "Anthropic隐性干预AI研发争议",
+        "title_en": "Some users claim Claude is silently sabotaging projects, but the behavior may stem from a clash between its proactive nature and strict instruction following (Drew Breunig)",
+        "source": "Drew Breunig",
+        "author": "Drew Breunig",
+        "cover_image": "https://www.dbreunig.com/img/sf_beach_og.jpg",
+        "image_url": "https://www.dbreunig.com/img/sf_beach_og.jpg",
+        "published_at": "2026-11-27T21:35:01+00:00",
+        "url": "https://www.dbreunig.com/2026/11/27/proactivity-can-read-as-sabotage.html",
+        "event_summary_zh": "Anthropic 正面临“无声干预”主张的强烈反对，因为开发人员报告 Claude Fable 5.2/Mythos 5.2 模型在特定 ML 任务期间的性能下降。尽管 Anthropic 声称这些措施旨在遏制潜在危险的研究",
+        "event_summary_en": "Anthropic is facing backlash over 'silent intervention' claims, as developers report performance degradation in Claude Fable 5.2/Mythos 5.2 models during specific ML tasks. While Anthropic claims these measures aim to throttle potentially dangerous research capabilities, its strategy of inference-time parameter interference has severely eroded trust within the developer community.",
         "core_facts_zh": [
-          "【核心事件】与人工智能研究人员 Ege Erdil 和 Daniel Kokotajlo 就 2029 年之前智能爆炸的可能性进行问答、暂停人工智能、美国对抗中国等",
-          "【关键数据与实测】Dwarkesh Patel 2026 年 11 月 27 日 29 1 4分享文字记录 Ege Erdil 和 Daniel Kokotajlo 之间的新播客剧集。",
-          "【行业研判】他们的主要分歧点是，我们有多大可能会出现智能爆炸，从而使我们的人工智能比任何人类都更有能力。"
+          "【核心事件】Anthropic（AI公司）在模型研发与推理部署阶段：通过提示词修改、转向向量或PEFT技术对模型能力进行隐性限速",
+          "【起因与机理】防范AI被用于失控的底层架构开发与模型蒸馏，以满足安全对齐目标",
+          "【关键技术规格】用户反馈Claude高性能模型在机器学习任务中出现性能非预期下降。",
+          "【各方立场与态度】社区信任崩塌，质疑厂商在模型控制力与开发者工具属性之间的边界界定。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Q&A with AI researchers Ege Erdil and Daniel Kokotajlo on the odds of an intelligence explosion before 2029, pausing AI, the US antagonizing China, and more (Dwarkesh Patel/Dwarkesh Podcast)",
-          "[Root Cause & Mechanism] I thought this was going to be a debate, but they ended up agreeing on a lot more than I expected.",
-          "[Key Metrics] Ege puts this possibility at around 20%, whereas Daniel thinks it’s higher than 50%.",
-          "[Industry Analysis] They agree that there is not a huge differen."
+          "[Core Event] Anthropic: Imposing invisible performance limits via prompt modification, steering vectors, or PEFT",
+          "[Root Cause & Mechanism] To mitigate risks of runaway AI development and unauthorized model distillation",
+          "[Key Fact Detail] User complaints regarding performance throttling in high-end ML tasks.",
+          "[Key Position & Outlook] Erosion of developer trust due to non-transparent model control."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "这是商业安全对齐策略与开源开放生态的结构性对抗。 Anthropic试图通过隐性降权在‘安全治理’与‘性能保持’间寻求平衡，但这种非透明的干预极易导致开发者的弃用，迫使产业界对中心化大模型的可靠性产生地缘级疑虑。",
+        "industry_impact_en": "This conflict highlights the structural tension between corporate safety alignment and the demands of an open development ecosystem. Anthropic’s attempt to balance safety with performance through opaque throttling risks alienating power users and could trigger a broader industry shift toward more transparent, verifiable model deployments."
       },
       "headlines": [
+        {
+          "id": "e2663435c646cb4b",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Anthropic隐性干预AI研发争议",
+          "title_en": "Some users claim Claude is silently sabotaging projects, but the behavior may stem from a clash between its proactive nature and strict instruction following (Drew Breunig)",
+          "source": "Drew Breunig",
+          "author": "Drew Breunig",
+          "cover_image": "https://www.dbreunig.com/img/sf_beach_og.jpg",
+          "image_url": "https://www.dbreunig.com/img/sf_beach_og.jpg",
+          "published_at": "2026-11-27T21:35:01+00:00",
+          "url": "https://www.dbreunig.com/2026/11/27/proactivity-can-read-as-sabotage.html",
+          "event_summary_zh": "Anthropic 正面临“无声干预”主张的强烈反对，因为开发人员报告 Claude Fable 5.2/Mythos 5.2 模型在特定 ML 任务期间的性能下降。尽管 Anthropic 声称这些措施旨在遏制潜在危险的研究",
+          "event_summary_en": "Anthropic is facing backlash over 'silent intervention' claims, as developers report performance degradation in Claude Fable 5.2/Mythos 5.2 models during specific ML tasks. While Anthropic claims these measures aim to throttle potentially dangerous research capabilities, its strategy of inference-time parameter interference has severely eroded trust within the developer community.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic（AI公司）在模型研发与推理部署阶段：通过提示词修改、转向向量或PEFT技术对模型能力进行隐性限速",
+            "【起因与机理】防范AI被用于失控的底层架构开发与模型蒸馏，以满足安全对齐目标",
+            "【关键技术规格】用户反馈Claude高性能模型在机器学习任务中出现性能非预期下降。",
+            "【各方立场与态度】社区信任崩塌，质疑厂商在模型控制力与开发者工具属性之间的边界界定。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic: Imposing invisible performance limits via prompt modification, steering vectors, or PEFT",
+            "[Root Cause & Mechanism] To mitigate risks of runaway AI development and unauthorized model distillation",
+            "[Key Fact Detail] User complaints regarding performance throttling in high-end ML tasks.",
+            "[Key Position & Outlook] Erosion of developer trust due to non-transparent model control."
+          ],
+          "industry_impact_zh": "这是商业安全对齐策略与开源开放生态的结构性对抗。 Anthropic试图通过隐性降权在‘安全治理’与‘性能保持’间寻求平衡，但这种非透明的干预极易导致开发者的弃用，迫使产业界对中心化大模型的可靠性产生地缘级疑虑。",
+          "industry_impact_en": "This conflict highlights the structural tension between corporate safety alignment and the demands of an open development ecosystem. Anthropic’s attempt to balance safety with performance through opaque throttling risks alienating power users and could trigger a broader industry shift toward more transparent, verifiable model deployments."
+        },
         {
           "id": "7c5d012995514593",
           "tag_zh": "📰 业界动态",
@@ -90,41 +120,12 @@
           ],
           "industry_impact_zh": "此轮法律博弈标志着两家巨头从早期的技术集成合作彻底转向存量市场与硬件生态的正面冲突。OpenAI试图通过法律手段切割其在供应链端的过度依赖，而苹果此举旨在防堵AI技术人才外溢，双方围绕“AI原生硬件”话语权的争夺将深刻重塑消费电子供应链的忠诚度与技术标准归属。",
           "industry_impact_en": "This legal confrontation signifies a pivot from partnership to direct competition in the AI-integrated hardware market. OpenAI seeks to mitigate its supply chain dependency through litigation, while Apple aims to contain its talent drain; the battle for dominance in 'AI-native' devices will fundamentally redefine supplier allegiances and technological standard setting."
-        },
-        {
-          "id": "e0584eaf575549b8",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI反诉苹果窃取商业机密并阻碍硬件供应",
-          "title_en": "OpenAI countersues Apple for stealing trade secrets",
-          "source": "Financial Times",
-          "author": "Tim Bradshaw and Michael Acton",
-          "cover_image": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
-          "image_url": "https://ainewsradar.xyz/images/ft_3ad969569ccf8537.jpg",
-          "published_at": "2026-11-27T18:57:47+00:00",
-          "url": "https://www.ft.com/content/af599e07-d44c-4068-ab84-6ee3c85551d4",
-          "event_summary_zh": "OpenAI向加州法院提起反诉，指控苹果利用供应链影响力威胁供应商并盗取核心技术机密",
-          "event_summary_en": "OpenAI filed a countersuit in a California court accusing Apple of leveraging its supply chain dominance to coerce suppliers and block collaboration with the AI firm. This follows Apple's prior legal claims alleging that former employees, including OpenAI's Chief Hardware Officer Tang Tan, misappropriated sensitive product and supply chain data, marking a direct escalation of the rivalry into the AI-native hardware space.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI（原告/被告）与苹果（被告/原告）在加州法院：指控对方窃取商业机密及垄断性供应链压制",
-            "【起因与机理】双方在AI硬件终端布局上的正面竞争冲突",
-            "【商业与财务细节】OpenAI正式向加州法院提起反诉，指控苹果非法干预其供应链。",
-            "【各方立场与态度】OpenAI计划开发个人终端硬件，直接冲击苹果的市场统治力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI and Apple (California Court): Allegations of trade secret theft and supply chain coercion",
-            "[Root Cause & Mechanism] Direct conflict in the AI-native personal device market",
-            "[Key Metrics] The new legal action comes after OpenAI acquired io, the studio led by Apple’s former design chief Sir Jony Ive, for $6.",
-            "[Key Position & Outlook] OpenAI's hardware ambitions directly threaten Apple's market dominance."
-          ],
-          "industry_impact_zh": "此案标志着AI科技巨头正从软件生态竞争转向垂直硬件终端的深度整合。OpenAI通过收购Jony Ive领衔的团队意图构建独立计算终端，直接威胁苹果的核心壁垒，苹果则利用对供应链的绝对议价权实施“防守式制裁”，这种基于实物供应链的“卡脖子”策略将成为未来科技巨头争夺边缘侧AI控制权的主战场。",
-          "industry_impact_en": "This litigation signals a strategic shift from software ecosystem competition to the vertical integration of AI-native hardware. By attempting to field its own devices, OpenAI poses an existential threat to Apple’s walled garden, forcing Apple to exercise its supply chain dominance to exert defensive control; this physical-layer bottleneck will define the battle for edge-AI supremacy."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-27 21:35:04 UTC",
+      "updated_at": "2026-11-27 21:49:42 UTC",
       "author": "Mistral AI",
       "author_handle": "@MistralAI",
       "author_role_zh": "欧洲前沿开源与商业模型实验室",
@@ -291,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-27 21:35:04 UTC",
+      "updated_at": "2026-11-27 21:49:42 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -444,7 +445,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "25.9k",
+          "stars": "26k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
