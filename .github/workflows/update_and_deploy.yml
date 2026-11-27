@@ -106,6 +106,24 @@ jobs:
         run: |
           SA_KEY="${FIREBASE_SERVICE_ACCOUNT:-$FIREBASE_SERVICE_ACCOUNT_AI_RADAR_NEWS}"
 
+          FB_DIR="$RUNNER_TEMP/fbtools"
+          if [ -n "$SA_KEY" ] || [ -n "$FIREBASE_TOKEN" ]; then
+            echo "📦 [Deploy] 准备 firebase-tools 运行环境..."
+            npm install --no-save --prefix "$FB_DIR" firebase-tools --no-audit --no-fund >/dev/null 2>&1 || true
+          fi
+
+          run_firebase() {
+            if [ -x "$FB_DIR/node_modules/.bin/firebase" ]; then
+              "$FB_DIR/node_modules/.bin/firebase" "$@"
+            else
+              npx --yes firebase-tools "$@"
+            fi
+          }
+
+          if [ -f "$FB_DIR/node_modules/firebase-tools/lib/auth.js" ]; then
+            export FIREBASE_TOOLS_AUTH_JS="$FB_DIR/node_modules/firebase-tools/lib/auth.js"
+          fi
+
           if [ -n "$SA_KEY" ]; then
             echo "🚀 [Deploy] 检测到 Google Cloud Service Account 凭据，正在执行零信任安全部署..."
             KEY_FILE="$RUNNER_TEMP/firebase-sa-key.json"
@@ -116,20 +134,21 @@ jobs:
               GCP_ACCESS_TOKEN="$(gcloud auth print-access-token 2>/dev/null || true)" python tools/prune_firebase_versions.py 2 || echo "⚠️ 旧版本自动清理跳过，继续部署"
             fi
 
-            npx --yes firebase-tools deploy --only hosting --non-interactive || \
-            (echo "⚠️ 首次部署异常，尝试清理旧版本并在 5 秒后重试 (1/2)..." && (GCP_ACCESS_TOKEN="$(gcloud auth print-access-token 2>/dev/null || true)" python tools/prune_firebase_versions.py 1 || true) && sleep 5 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
-            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
+            run_firebase deploy --only hosting --non-interactive || \
+            (echo "⚠️ 首次部署异常，尝试清理旧版本并在 5 秒后重试 (1/2)..." && (GCP_ACCESS_TOKEN="$(gcloud auth print-access-token 2>/dev/null || true)" python tools/prune_firebase_versions.py 1 || true) && sleep 5 && run_firebase deploy --only hosting --non-interactive) || \
+            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && run_firebase deploy --only hosting --non-interactive) || \
             (echo "❌ Firebase Service Account 部署失败，请检查 Service Account 权限或 Hosting 配额。" && exit 1)
 
           elif [ -n "$FIREBASE_TOKEN" ]; then
-            echo "🚀 [Deploy] 检测到 FIREBASE_TOKEN，正在执行部署..."
+            echo "🚀 [Deploy] 检测到 FIREBASE_TOKEN，先执行旧版本配额清理再部署..."
             export FIREBASE_TOKEN="$FIREBASE_TOKEN"
+            python tools/prune_firebase_versions.py 2 || echo "⚠️ 旧版本自动清理跳过，继续部署"
 
-            npx --yes firebase-tools deploy --only hosting --non-interactive || \
-            npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || \
-            (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
-            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
-            (echo "❌ Firebase 部署失败（可能 FIREBASE_TOKEN 已过期或触发 Hosting 429 存储配额上限，请配置 FIREBASE_SERVICE_ACCOUNT 以启用自动版本清理或运行 python tools/prune_firebase_versions.py）。" && exit 1)
+            run_firebase deploy --only hosting --non-interactive || \
+            run_firebase deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || \
+            (echo "⚠️ 首次部署异常，执行激进清理旧版本并在 5 秒后自动重试 (1/2)..." && (python tools/prune_firebase_versions.py 1 || true) && sleep 5 && (run_firebase deploy --only hosting --non-interactive || run_firebase deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
+            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && (run_firebase deploy --only hosting --non-interactive || run_firebase deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
+            (echo "❌ Firebase 部署失败（可能 FIREBASE_TOKEN 已过期或触发 Hosting 429 存储配额上限，请检查 FIREBASE_TOKEN 或配置 FIREBASE_SERVICE_ACCOUNT）。" && exit 1)
 
           else
             echo "⚠️ [Notice] 未在 GitHub Secrets 中配置有效部署凭据 (FIREBASE_SERVICE_ACCOUNT 或 FIREBASE_TOKEN)。"

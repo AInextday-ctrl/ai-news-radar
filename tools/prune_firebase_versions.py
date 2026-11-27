@@ -9,6 +9,8 @@ Always preserves the current `live` channel version plus the newest `keep` versi
 """
 from __future__ import annotations
 
+import glob
+import json
 import os
 import subprocess
 import sys
@@ -28,10 +30,65 @@ PROXIES: Optional[Dict[str, str]] = (
 )
 
 
+def _find_firebase_tools_auth_js() -> Optional[str]:
+    explicit = os.environ.get("FIREBASE_TOOLS_AUTH_JS", "").strip()
+    if explicit and os.path.isfile(explicit):
+        return explicit
+
+    search_patterns = [
+        os.path.expanduser("~/.npm/_npx/*/node_modules/firebase-tools/lib/auth.js"),
+        os.path.expandvars(r"%LOCALAPPDATA%\npm-cache\_npx\*\node_modules\firebase-tools\lib\auth.js"),
+        os.path.expandvars(r"%APPDATA%\npm\node_modules\firebase-tools\lib\auth.js"),
+        "/usr/local/lib/node_modules/firebase-tools/lib/auth.js",
+        "/usr/lib/node_modules/firebase-tools/lib/auth.js",
+    ]
+    for pattern in search_patterns:
+        matches = glob.glob(pattern)
+        if matches:
+            return matches[0]
+    return None
+
+
+def _exchange_firebase_token(refresh_token: str) -> Optional[str]:
+    auth_js = _find_firebase_tools_auth_js()
+    if not auth_js:
+        return None
+
+    env = os.environ.copy()
+    env["FIREBASE_TOKEN"] = refresh_token
+    if PROXIES and "HTTP_PROXY" not in env:
+        env["HTTP_PROXY"] = PROXIES["http"]
+        env["HTTPS_PROXY"] = PROXIES["https"]
+
+    js = (
+        f"const auth = require({json.dumps(auth_js.replace(chr(92), '/'))});"
+        "auth.getAccessToken(process.env.FIREBASE_TOKEN, [])"
+        ".then(t => process.stdout.write((t && t.access_token) ? t.access_token : ''))"
+        ".catch(e => { console.error(e && e.message ? e.message : String(e)); process.exit(1); });"
+    )
+    res = subprocess.run(
+        ["node", "-e", js],
+        env=env,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    if res.returncode == 0 and res.stdout.strip():
+        return res.stdout.strip()
+    return None
+
+
 def _get_access_token() -> str:
     env_tok = os.environ.get("GCP_ACCESS_TOKEN", "").strip()
     if env_tok:
         return env_tok
+
+    fb_tok = os.environ.get("FIREBASE_TOKEN", "").strip()
+    if fb_tok:
+        exchanged = _exchange_firebase_token(fb_tok)
+        if exchanged:
+            return exchanged
+
     return subprocess.check_output(
         "gcloud auth print-access-token", shell=True, text=True
     ).strip()
@@ -70,20 +127,29 @@ def prune_old_versions(keep: int = 2, max_pages: int = 12) -> None:
     if live_ver:
         protected.add(live_ver)
 
-    all_versions = []
+    all_versions: List[Dict[str, object]] = []
+    use_filter = True
     page_token: Optional[str] = None
     for page_no in range(1, max_pages + 1):
         params: Dict[str, str] = {"pageSize": "100"}
+        if use_filter:
+            params["filter"] = 'status="FINALIZED" OR status="CREATED"'
         if page_token:
             params["pageToken"] = page_token
         resp = requests.get(
             f"{BASE_URL}/versions", headers=hdrs, params=params, proxies=PROXIES, timeout=20
         )
+        if resp.status_code == 400 and use_filter and page_no == 1:
+            use_filter = False
+            params.pop("filter", None)
+            resp = requests.get(
+                f"{BASE_URL}/versions", headers=hdrs, params=params, proxies=PROXIES, timeout=20
+            )
         resp.raise_for_status()
         data = resp.json()
         batch = data.get("versions", [])
         all_versions.extend(batch)
-        print(f"[PAGE {page_no}] Fetched {len(batch)} versions (total={len(all_versions)})", flush=True)
+        print(f"[PAGE {page_no}] Fetched {len(batch)} active versions (total={len(all_versions)})", flush=True)
         page_token = data.get("nextPageToken")
         if not page_token:
             break

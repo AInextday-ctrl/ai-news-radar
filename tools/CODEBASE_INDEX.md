@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构、规则与符号极速索引 (Codebase Fast Index v2.0)
 
-> **生成时间**: `2026-11-26 08:21:05 UTC` | **代码文件**: `124` 个 | **索引符号**: `1446` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
+> **生成时间**: `2026-11-27 01:02:56 UTC` | **代码文件**: `124` 个 | **索引符号**: `1448` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，经 `tools/verify_code_integrity.py` 与 `.git/hooks/pre-commit` 自动增量同步刷新。
 
 ---
@@ -117,7 +117,7 @@
 - [`tools/fast_index.py`](../tools/fast_index.py) (62.1 KB): `discover_unregistered_crawlers, discover_rules_and_skills, discover_data_stores, extract_python_symbols, extract_js_symbols...`
 - [`tools/fetch_affiliate_images.py`](../tools/fetch_affiliate_images.py) (8.1 KB): `main`
 - [`tools/generate_thumbnails.py`](../tools/generate_thumbnails.py) (2.1 KB): `ensure_thumbnails`
-- [`tools/prune_firebase_versions.py`](../tools/prune_firebase_versions.py) (4.3 KB): `prune_old_versions`
+- [`tools/prune_firebase_versions.py`](../tools/prune_firebase_versions.py) (6.7 KB): `prune_old_versions`
 - [`tools/safe_sync.py`](../tools/safe_sync.py) (3.8 KB): `clean_git_locks, setup_proxy, run_sync`
 - [`tools/sync_forbes_data.py`](../tools/sync_forbes_data.py) (4.3 KB): `patch_item, sync_file`
 - [`tools/test_fetch_pillars.py`](../tools/test_fetch_pillars.py) (5.8 KB): `test_pillars`
