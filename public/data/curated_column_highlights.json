@@ -1,10 +1,10 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-27 12:21:14 UTC",
+  "generated_at": "2026-11-27 12:34:54 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-27 12:21:14 UTC",
+      "updated_at": "2026-11-27 12:34:54 UTC",
       "headline_item": {
         "id": "18e69b15e2158551",
         "tag_zh": "📰 业界动态",
@@ -123,7 +123,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-27 12:21:14 UTC",
+      "updated_at": "2026-11-27 12:34:54 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -231,46 +231,18 @@
           "url": "https://x.com/swyx/status/2125969097276178943"
         },
         {
-          "id": "eb9f5e127bb74911",
-          "name": "@GithubProjects",
-          "handle": "@GithubProjects",
+          "id": "3c5ea8f61bfa9454",
+          "name": "@tom_doerr",
+          "handle": "@tom_doerr",
           "role_zh": "AI 先锋观察者",
           "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/GithubProjects",
-          "topic_zh": "@GithubProjects ",
-          "topic_en": "@GithubProjects on A",
-          "event_context_zh": "Ollama推出官方Python库，支持通过pip安装并快速实现同步或异步调用本地及云端模型。",
-          "event_context_en": "Ollama has released an official Python library, enabling developers to integrate local or cloud-based LLMs into applications with minimal code via pip installation. The library natively supports both synchronous and asynchronous operations, lowering the barrier for LLM inference in edge computing.",
-          "quote_zh": "只需几行代码即可从空白 Python 文件与本地 Ollama 模型聊天。 Ollama Python 库将本地或云模型聊天添加到您的应用程序中，同步或异步，随 pip 安装。",
-          "quote_en": "From a blank Python file to chat with a local Ollama model in a few lines. The Ollama Python library adds local or cloud model chat to your app, sync or async, installed with pip.",
-          "thesis_zh": "深入探讨@GithubProjects 的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in @GithubProjects on A, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-27T09:30:04+00:00",
-          "url": "https://x.com/GithubProjects/status/2126247171175682475"
-        },
-        {
-          "id": "2072c00de4ae4ab1",
-          "name": "@DailyDoseOfDS_",
-          "handle": "@DailyDoseOfDS_",
-          "role_zh": "AI 先锋观察者",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/DailyDoseOfDS_",
+          "avatar": "https://unavatar.io/x/tom_doerr",
           "topic_zh": "AI 编程范式变革",
           "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "GPU 操作。\n\n它启动一系列操作来进行注意力、矩阵相乘、标准化、采样、数据移动和其他工作。\n\n如果没有 CUDA Graph，CPU 会单独准备并提交这些操作。\n\n每次启动仅增加少量开销，但逐个令牌解码会对每个生成的令牌重复类似的序列。\n\n这造成了一个奇怪的瓶颈。\n\n有些内核只需几微秒即可完成。 GPU 可以在 CPU 提交下一个内核之前完成一个内核。\n\n这会在探查器跟踪中留下空白空间。这些差距不是模型计算。它们显示 GPU 正在等待下一个操作。\n\nCUDA Graph 改变了这项工作到达 GPU 的方式。\n\n运行时捕获一次可重复的操作序列，包括它们的依赖项。稍后的迭代通过一个图启动重放捕获的序列，而不是单独提交每个操作。\n\n需要明确的是，内核本身并没有变得更快。\n\n此外，模型不会变小，并且前向传递执行几乎相同的计算。\n\n大部分收益来自于消除内核之间的 CPU 启动工作。\n\n这在 LLM 解码期间特别有用。\n\n每个解码步骤为每个序列处理一个新标记。这会产生许多短的、重复的 GPU 操作，其中启动开销可能成为总延迟的一个有意义的部分。\n\n预填充通常表现不同。\n\n较大的提示可以让 GPU 进行更多并行工作，从而生成运行时间更长的内核。当这些内核已经让 GPU 忙碌时，减少启动开销就不那么重要了。\n\n还有一个权衡。\n\n捕获的图在每次重放时都需要相同的内核序列、稳定的参数、固定的内存地址和兼容的执行结构。\n\n推理服务器可处理不同的批量大小以及不同的预填充、混合和解码工作负载。一张捕获的图无法有效覆盖每条执行路径。\n\n因此，vLLM 和 TensorRT-LLM 等引擎可以捕获几种常见执行情况和批量大小的图表。\n\n当实时批次与捕获的大小不匹配时，引擎可以使用急切执行或将批次填充到捕获的大小。\n\n捕获更多尺寸可以提高图形覆盖范围，但也会消耗更多 GPU 内存并增加启动时间。\n\n因此 CUDA Graph 并不是通用的推理速度开关。\n\n他们以灵活性和设置成本为代价换取较低的稳态启动开销。\n\n下图显示了核心机制。\n\n- 如果没有图表，CPU 会独立提交每个内核，并且可能会在 GPU 时间线上留下空闲间隙。\n- 通过图表，序列被捕获一次并作为一个单元重播。\n\nCUDA 图是为什么 LLM 推理需要专门的服务引擎而不是标准预测 API 的一个例子。\n\n我们之前解释了传统 ML 推理和 LLM 推理之间的五个架构差异。\n\n请阅读下面的内容。",
-          "event_context_en": "A tricky LLM interview question:\n\nYou move your LLM to a faster GPU.\n\nProfiling confirms its kernels now finish sooner, ",
-          "quote_zh": "一个棘手的LLM面试问题：\n\n您将 LLM 转移到更快的 GPU。\n\n分析证实其内核现在完成得更快，但生成令牌之间的时间几乎没有变化。\n\n模型、精度和批量大小相同。\n\n预期的加速哪里去了？\n\n（答案如下）\n\nLLM 前向传递并不是一项巨大的 GPU 操作。\n\n它启动一系列操作来进行注意力、矩阵相乘、标准化、采样、数据移动和其他工作。\n\n如果没有 CUDA Graph，CPU 会单独准备并提交这些操作。\n\n每次启动仅增加少量开销，但逐个令牌解码会对每个生成的令牌重复类似的序列。\n\n这造成了一个奇怪的瓶颈。\n\n有些内核只需几微秒即可完成。 GPU 可以在 CPU 提交下一个内核之前完成一个内核。\n\n这会在探查器跟踪中留下空白空间。这些差距不是模型计算。它们显示 GPU 正在等待下一个操作。\n\nCUDA Graph 改变了这项工作到达 GPU 的方式。\n\n运行时捕获一次可重复的操作序列，包括它们的依赖项。稍后的迭代通过一个图启动重放捕获的序列，而不是单独提交每个操作。\n\n需要明确的是，内核本身并没有变得更快。\n\n此外，模型不会变小，并且前向传播执行几乎相同的计算。\n\n大部分收益来自于消除内核之间的 CPU 启动工作。\n\n这在 LLM 解码期间特别有用。\n\n每个解码步骤为每个序列处理一个新标记。这会产生许多短的、重复的 GPU 操作，其中启动开销可能成为总延迟的一个有意义的部分。\n\n预填充通常表现不同。\n\n较大的提示可以让 GPU 进行更多并行工作，从而生成运行时间更长的内核。当这些内核已经让 GPU 变得忙碌时，减少启动开销就不那么重要了。\n\n还有一个权衡。\n\n捕获的图在每次重放时都需要相同的内核序列、稳定的参数、固定的内存地址和兼容的执行结构。\n\n推理服务器可处理不同的批量大小以及不同的预填充、混合和解码工作负载。一张捕获的图无法有效覆盖每条执行路径。\n\n因此，vLLM 和 TensorRT-LLM 等引擎可以捕获几种常见执行情况和批量大小的图表。\n\n当实时批次与捕获的大小不匹配时，引擎可以使用急切执行或将批次填充到捕获的大小。\n\n捕获更多尺寸可以提高图形覆盖范围，但也会消耗更多 GPU 内存并增加启动时间。\n\n因此 CUDA Graph 并不是通用的推理速度开关。\n\n他们以灵活性和设置成本为代价来换取较低的稳态启动开销。\n\n下图显示了核心机制。\n\n- 如果没有图表，CPU 会独立提交每个内核，并且可能会在 GPU 时间线上留下空闲间隙。\n- 通过图表，序列被捕获一次并作为一个单元重播。\n\nCUDA 图是为什么 LLM 推理需要专门的服务引擎而不是标准预测 API 的一个例子。\n\n我们之前解释了传统 ML 推理和 LLM 推理之间的五个架构差异。\n\n请阅读下面的内容。",
-          "quote_en": "A tricky LLM interview question:\n\nYou move your LLM to a faster GPU.\n\nProfiling confirms its kernels now finish sooner, but the time between generated tokens barely changes.\n\nThe model, precision, and batch size are identical.\n\nWhere did the expected speedup go?\n\n(answer below)\n\nAn LLM forward pass is not one giant GPU operation.\n\nIt launches a sequence of operations for attention, matmul, normalization, sampling, data movement, and other work.\n\nWithout CUDA Graphs, the CPU prepares and submits these operations individually.\n\nEach launch adds only a small amount of overhead, but token-by-token decoding repeats a similar sequence for every generated token.\n\nThis creates a strange bottleneck.\n\nSome kernels finish in only a few microseconds. The GPU can complete one kernel before the CPU has submitted the next one.\n\nThat leaves empty spaces in a profiler trace. These gaps are not model computation. They show the GPU waiting for its next operation.\n\nCUDA Graphs change how this work reaches the GPU.\n\nThe runtime captures a repeatable sequence of operations once, including their dependencies. Later iterations replay the captured sequence through one graph launch instead of submitting every operation separately.\n\nTo be clear, the kernels themselves do not become substantially faster.\n\nAlso, the model does not get smaller, and the forward pass performs almost the same computation.\n\nMost of the gain comes from removing CPU launch work between kernels.\n\nThis is especially useful during LLM decoding.\n\nEach decoding step processes one new token per sequence. This produces many short, repeated GPU operations where launch overhead can become a meaningful part of total latency.\n\nPrefill often behaves differently.\n\nA large prompt gives the GPU more parallel work, producing longer-running kernels. When those kernels already keep the GPU busy, reducing launch overhead matters less.\n\nThere is also a tradeoff.\n\nA captured graph expects the same kernel sequence, stable arguments, fixed memory addresses, and a compatible execution structure on every replay.\n\nInference servers handle varying batch sizes and different prefill, mixed, and decode workloads. One captured graph cannot cover every execution path efficiently.\n\nEngines such as vLLM and TensorRT-LLM therefore capture graphs for several common execution cases and batch sizes.\n\nWhen a live batch does not match a captured size, the engine may use eager execution or pad the batch to a captured size.\n\nCapturing more sizes improves graph coverage, but it also consumes more GPU memory and increases startup time.\n\nSo CUDA Graphs are not a universal inference speed switch.\n\nThey trade flexibility and setup cost for lower steady-state launch overhead.\n\nThe visual below shows the core mechanism.\n\n- Without a graph, the CPU submits each kernel independently and may leave idle gaps on the GPU timeline.\n- With a graph, the sequence is captured once and replayed as a unit.\n\nCUDA Graphs are one example of why LLM inference needs a specialized serving engine rather than a standard prediction API.\n\nWe previously explained five architectural differences between traditional ML inference and LLM inference.\n\nRead it below.",
+          "event_context_zh": "高智商委员会在不同的分析角色之间进行结构化辩论，以解决 Claude Code、Codex 和 Gemini CLI 中的复杂决策。\n\nhttps://github.com/0xNyk/council-of-high-intelligenc",
+          "event_context_en": "The Council of High Intelligence runs structured debates between different analytical personas to resolve complex decisi",
+          "quote_zh": "高智商委员会在不同的分析角色之间进行结构化辩论，以解决 Claude Code、Codex 和 Gemini CLI 中的复杂决策。\n\nhttps://github.com/0xNyk/council-of-high-intelligence",
+          "quote_en": "The Council of High Intelligence runs structured debates between different analytical personas to resolve complex decisions in Claude Code, Codex, and Gemini CLI.\n\nhttps://github.com/0xNyk/council-of-high-intelligence",
           "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
@@ -283,14 +255,42 @@
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-27T09:30:03+00:00",
-          "url": "https://x.com/DailyDoseOfDS_/status/2126247168424267808"
+          "published_at": "2026-11-27T12:19:02+00:00",
+          "url": "https://x.com/tom_doerr/status/2126289693629108281"
+        },
+        {
+          "id": "8e74ff679257c53b",
+          "name": "@DataChaz",
+          "handle": "@DataChaz",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/DataChaz",
+          "topic_zh": "@DataChaz 行业前沿观察",
+          "topic_en": "@DataChaz on AI",
+          "event_context_zh": "社交平台针对模型上下文协议（MCP）的存续状态展开讨论。",
+          "event_context_en": "Recent technical discussions have emerged regarding the persistence and roadmap of the Model Context Protocol (MCP) within the AI ecosystem. As a critical middleware connecting LLMs to external data sources, the protocol is currently undergoing architectural refinement.",
+          "quote_zh": "那些认为 MCP 现在已经死了的人：",
+          "quote_en": "folks who thought MCP was dead right now:",
+          "thesis_zh": "深入探讨@DataChaz 行业前沿观察的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in @DataChaz on AI, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-27T10:31:37+00:00",
+          "url": "https://x.com/DataChaz/status/2126262663520879041"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-27 12:21:14 UTC",
+      "updated_at": "2026-11-27 12:34:54 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
