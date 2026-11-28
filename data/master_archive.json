@@ -162,12 +162,12 @@
     },
     {
       "id": "5765d0dd8c4b61bf",
-      "title": "【ffmpeg-skill】用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、C",
-      "title_zh": "【ffmpeg-skill】用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、C",
+      "title": "【ffmpeg-skill】用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cu",
+      "title_zh": "【ffmpeg-skill】用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cu",
       "title_en": "[ffmpeg-skill] Local video editor for coding agents: 42 FFmpeg tools with a mach",
       "app_name": "ffmpeg-skill",
       "app_name_en": "ffmpeg-skill",
-      "app_hook": "用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，适用于 Claude Code、Cursor 和 Codex。剪",
+      "app_hook": "用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切",
       "app_hook_en": "Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co",
       "url": "https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar",
       "official_url": "https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar",
@@ -399,12 +399,12 @@
     },
     {
       "id": "5b083f806d24b3ce",
-      "title": "【last30days-skill】AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要",
-      "title_zh": "【last30days-skill】AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要",
+      "title": "【last30days-skill】AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有依据的摘要",
+      "title_zh": "【last30days-skill】AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有依据的摘要",
       "title_en": "[last30days-skill] AI agent skill that researches any topic across Reddit, X, YouTub",
       "app_name": "last30days-skill",
       "app_name_en": "last30days-skill",
-      "app_hook": "AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有根据的摘要",
+      "app_hook": "AI 代理技能可研究 Reddit、X、YouTube、HN、Polymarket 和网络上的任何主题，然后综合得出有依据的摘要",
       "app_hook_en": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark",
       "url": "https://github.com/mvanhorn/last30days-skill?ref=ainewsradar",
       "official_url": "https://github.com/mvanhorn/last30days-skill?ref=ainewsradar",
@@ -4690,6 +4690,87 @@
       }
     },
     {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-28T07:17:11Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-28T07:17:11Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-28T07:17:11Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-28T07:17:11Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
+    },
+    {
       "id": "viral_0ebc3a8928c8a8fa",
       "category": "celebrity",
       "sub_category": "viral_post",
@@ -5277,6 +5358,45 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_deepseek_r1_ollama_local_sota",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🧠 本地私有化",
+      "title_zh": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
+      "title_en": "DeepSeek Local Deployment & GPU Memory Tuning via Ollama",
+      "target_platform": "Ollama / OpenWebUI / vLLM",
+      "scenario": "🔌 模型部署 / 隐私推理",
+      "scenario_key": "infra",
+      "tested_models": "DeepSeek 系列 / 本地开源推理模型",
+      "model_family": "DeepSeek",
+      "takeaway_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek 系列推理模型时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "takeaway_en": "Optimized Ollama Modelfile for running DeepSeek reasoning models on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "config_filename": "Modelfile.deepseek-opt",
+      "config_lang": "dockerfile",
+      "code_snippet": "# Modelfile: Optimized DeepSeek-R4 Deployment\nFROM deepseek-r4:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "usage_guide_zh": "保存为 `Modelfile`，执行 `ollama create deepseek-r4-opt -f Modelfile`，即可生成抗复读、低显存占用的专属本地超强推理大模型。",
+      "usage_guide_en": "Save as Modelfile, then run 'ollama create deepseek-r4-opt -f Modelfile'. Delivers stable reasoning with low VRAM footprint and no loop loops.",
+      "created_at": "2026-11-28T06:17:11Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-28T06:17:11Z",
+      "summary_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek 系列推理模型时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "summary_en": "Optimized Ollama Modelfile for running DeepSeek reasoning models on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "prompt_content_zh": "# Modelfile: Optimized DeepSeek-R4 Deployment\nFROM deepseek-r4:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content_en": "# Modelfile: Optimized DeepSeek-R4 Deployment\nFROM deepseek-r4:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content": "# Modelfile: Optimized DeepSeek-R4 Deployment\nFROM deepseek-r4:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "recommended_model": "DeepSeek 系列 / 本地开源推理模型",
+      "metrics": {
+        "type": "🧠 本地私有化",
+        "model": "DeepSeek 系列 / 本地开源推理模型",
+        "filename": "Modelfile.deepseek-opt"
+      },
+      "title": "DeepSeek 本地私有化推理 + Ollama 显存优化参数配方",
+      "image_url": null
     },
     {
       "id": "9cd3d57e39d17d18",
@@ -8490,6 +8610,89 @@
       }
     },
     {
+      "id": "prompt-travel-itinerary-01",
+      "title_zh": "深度游旅行规划师：高密度路线设计与预算避坑",
+      "title_en": "Deep Travel Itinerary Planner & Budgeting",
+      "category": "prompts",
+      "scenario_label": "✈️ 生活旅行",
+      "target_model": "Claude 5.5 / DeepSeek-R4",
+      "model_family": "Universal",
+      "model_tier_score": 93,
+      "generation_tier": "sota",
+      "purpose_zh": "合理不走回头路的日程与美食预算规划",
+      "temp_advice": "温度 0.4",
+      "variables": [
+        "{{目的地城市}}",
+        "{{出行天数}}",
+        "{{同行人员}}",
+        "{{人均预算}}"
+      ],
+      "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
+      "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+      "sample_output": {
+        "type": "text",
+        "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
+        "content": "【Day 1：古蜀遗风与老茶馆时光】\n- 上午 09:00：直奔【人民公园 · 鹤鸣茶社】，点一杯蒙顶甘露（¥25），体验非遗采耳，避开下午的旅行团拥堵；\n- 中午 12:00：步行800米至【纯阳馆鱼香排骨面】，必点椒麻牛肉与鱼香排骨面（人均¥22）；\n- 下午 14:00：地铁2号线直达【杜甫草堂】，红墙竹影漫步，打卡浣花溪公园；\n- 傍晚 18:30：九眼桥望江楼看锦江夜景，就餐【老街小吃火锅】；\n\n【避坑锦囊】：\n1. 宽窄巷子和锦里建议只拍照别买小吃，均价比普通街区贵 2~3 倍且多为预制冻品；\n2. 大熊猫繁育研究基地务必约早晨 07:30 入园，超过 10:30 大熊猫基本全部回室内睡觉。",
+        "title_en": "Verified Sample Output (Claude 5.5 / DeepSeek-R4)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 / DeepSeek-R4\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "只需填入城市、天数和预算，即刻收获一份可直接打印随身带的专业级行程攻略。",
+      "created_at": "2026-11-28T01:17:11Z",
+      "variables_en": [
+        "{{Destination City}}",
+        "{{Trip Duration}}",
+        "{{Travel Companions}}",
+        "{{Budget Per Person}}"
+      ],
+      "scenario_label_en": "✈️ Travel & Lifestyle",
+      "purpose_en": "Loop-Free Deep Travel Itinerary & Budget Planning",
+      "temp_advice_en": "Temp 0.4 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-28T01:17:11Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "title": "深度游旅行规划师：高密度路线设计与预算避坑",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_video_product_macro",
+      "sub_type": "video_gen",
+      "purpose_zh": "🎥 视频生成 · 商业广告级流体光影微距特写",
+      "purpose_en": "🎥 Video Gen · Commercial Macro Liquid & Product Showcase",
+      "title_zh": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语",
+      "title_en": "💡 [Luxury Commercial Video] High-End Watch & Macro Liquid Droplets Slow-Mo Showcase",
+      "url": "https://klingai.com/",
+      "image_url": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "广告视效",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-28T01:17:11Z",
+      "recommended_model": "Kling 1.5 / Sora / Luma Dream",
+      "temp_advice": "Motion: 3 | 极致慢动作",
+      "metrics": {
+        "type": "🎥 商业广告",
+        "model": "Kling 1.5",
+        "temp": "Motion 3"
+      },
+      "content_snippet": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
+      "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射。",
+      "summary_en": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
+      "prompt_content_zh": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.\n\n【中文使用解析】：适用于高端 3C 数码、香水、珠宝首饰等出海广告视频一键生成。通过限定 phantom slow motion 与 caustic light patterns 获得极具说服力的物理渲染感。",
+      "prompt_content_en": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
+      "prompt_content": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
+      "tags": [
+        "商业广告",
+        "流体慢动作",
+        "快手可灵"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-28T01:17:11Z",
+      "title": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语"
+    },
+    {
       "id": "viral_2ce4571d44a0302a",
       "category": "celebrity",
       "sub_category": "viral_post",
@@ -8775,8 +8978,8 @@
       "is_pinned": false,
       "full_text_en": "Google's AI plans page is hilariously frustrating and an awesome example of how big companies routinely cede their power because of Conway's Law. \n\nRule #1 might be your plan ought to fit into a screenshot without zooming out. \n\nNot to mention, there's actually 2 plans pages, one for Gemini (sensible) and one for Google One (no one still knows what this is)\n\nThe plan includes Flow (no one knows this), Search (why is this in the plan), Gemini Notebook (hilarious rename, and no, no one knows this), Storage (?!?), Youtube (!!?). Why are you sabotaging yourself like this?\n\nHydrogen / Neon / Carbon - no one knows what these are! Notice how Claude and OpenAI barely name their models in their plans pages. \n\nAccess to advanced features \"in select countries\" must be the most Google thing ever. \n\nThe highest tier plan, $199/mo is in fine print. You wouldn't even notice it, and they don't stack any features on it! I thought entire teams of 20 people work on Google pricing. \n\nFlow \"Credits\". No one knows what your unit of credit is. \n\nGoogle, we all like you and we want you to do well but for christ's sake, please love your users as much as you hate offending VPs in other orgs.",
       "quote_en": "Google's AI plans page is hilariously frustrating and an awesome example of how big companies routinely cede their power because of Conway's Law. \n\nRule #1 might be your plan ought to fit into a screenshot without zooming out. \n\nNot to mention, there's actually 2 plans pages, one for Gemini (sensible) and one for Google One (no one still knows what this is)\n\nThe plan includes Flow (no one knows this), Search (why is this in the plan), Gemini Notebook (hilarious rename, and no, no one knows this), Storage (?!?), Youtube (!!?). Why are you sabotaging yourself like this?\n\nHydrogen / Neon / Carbon - no one knows what these are! Notice how Claude and OpenAI barely name their models in their plans pages. \n\nAccess to advanced features \"in select countries\" must be the most Google thing ever. \n\nThe highest tier plan, $199/mo is in fine print. You wouldn't even notice it, and they don't stack any features on it! I thought entire teams of 20 people work on Google pricing. \n\nFlow \"Credits\". No one knows what your unit of credit is. \n\nGoogle, we all like you and we want you to do well but for christ's sake, please love your users as much as you hate offending VPs in other orgs.",
-      "full_text_zh": "谷歌的人工智能计划页面非常令人沮丧，也是大公司如何经常因为康威定律而放弃权力的一个很好的例子。\n\n规则#1 可能是您的计划应该适合屏幕截图而不缩小。\n\n更不用说，实际上有 2 个计划页面，一个用于 Gemini（明智的），一个用于 Google One（没人知道这是什么）\n\n该计划包括 Flow（没有人知道这个）、Search（为什么这个在计划中）、Gemini Notebook（搞笑的重命名，不，没有人知道这个）、Storage（？！？）、Youtube（！？）。你为什么要这样破坏自己？\n\n氢/氖/碳——没有人知道它们是什么！请注意 Claude 和 OpenAI 在他们的计划页面中几乎没有命名他们的模型。\n\n在“特定国家/地区”访问高级功能肯定是 Google 有史以来最关心的事情。\n\n最高级别的计划为 199 美元/月，附有细则。您甚至不会注意到它，而且它们也没有在上面叠加任何功能！我认为整个团队由 20 人组成，负责 Google 定价。\n\n流动“学分”。没有人知道你的信用单位是什么。\n\n谷歌，我们都喜欢你，我们希望你做得很好，但看在上帝的份上，请像你讨厌冒犯其他组织的副总裁一样爱你的用户。",
-      "quote_zh": "谷歌的人工智能计划页面非常令人沮丧，也是大公司如何经常因为康威定律而放弃权力的一个很好的例子。\n\n规则#1 可能是您的计划应该适合屏幕截图而不缩小。\n\n更不用说，实际上有 2 个计划页面，一个用于 Gemini（明智的），一个用于 Google One（没人知道这是什么）\n\n该计划包括 Flow（没有人知道这个）、Search（为什么这个在计划中）、Gemini Notebook（搞笑的重命名，不，没有人知道这个）、Storage（？！？）、Youtube（！？）。你为什么要这样破坏自己？\n\n氢/氖/碳——没有人知道它们是什么！请注意 Claude 和 OpenAI 在他们的计划页面中几乎没有命名他们的模型。\n\n在“特定国家/地区”访问高级功能肯定是 Google 有史以来最关心的事情。\n\n最高级别的计划为 199 美元/月，附有细则。您甚至不会注意到它，而且它们也没有在上面叠加任何功能！我认为整个团队由 20 人组成，负责 Google 定价。\n\n流动“学分”。没有人知道你的信用单位是什么。\n\n谷歌，我们都喜欢你，我们希望你做得很好，但看在上帝的份上，请像你讨厌冒犯其他组织的副总裁一样爱你的用户。",
+      "full_text_zh": "谷歌的人工智能计划页面非常令人沮丧，也是大公司如何经常因为康威定律而放弃权力的一个很好的例子。\n\n规则#1 可能是您的计划应该适合屏幕截图而不缩小。\n\n更不用说，实际上有 2 个计划页面，一个用于 Gemini（明智的），一个用于 Google One（没人知道这是什么）\n\n该计划包括 Flow（没人知道这个）、Search（为什么这个在计划中）、Gemini Notebook（搞笑的重命名，不，没人知道这个）、Storage（？！？）、Youtube（！？）。你为什么要这样破坏自己？\n\n氢/氖/碳——没有人知道它们是什么！请注意 Claude 和 OpenAI 在他们的计划页面中几乎没有命名他们的模型。\n\n在“特定国家/地区”访问高级功能肯定是 Google 有史以来最关心的事情。\n\n最高级别的计划为 199 美元/月，附有细则。您甚至不会注意到它，而且它们也没有在上面叠加任何功能！我认为整个团队由 20 人组成，负责 Google 定价。\n\n流动“学分”。没有人知道你的信用单位是什么。\n\n谷歌，我们都喜欢你，我们希望你做得很好，但看在上帝的份上，请像你讨厌冒犯其他组织的副总裁一样爱你的用户。",
+      "quote_zh": "谷歌的人工智能计划页面非常令人沮丧，也是大公司如何经常因为康威定律而放弃权力的一个很好的例子。\n\n规则#1 可能是您的计划应该适合屏幕截图而不缩小。\n\n更不用说，实际上有 2 个计划页面，一个用于 Gemini（明智的），一个用于 Google One（没人知道这是什么）\n\n该计划包括 Flow（没人知道这个）、Search（为什么这个在计划中）、Gemini Notebook（搞笑的重命名，不，没人知道这个）、Storage（？！？）、Youtube（！？）。你为什么要这样破坏自己？\n\n氢/氖/碳——没有人知道它们是什么！请注意 Claude 和 OpenAI 在他们的计划页面中几乎没有命名他们的模型。\n\n在“特定国家/地区”访问高级功能肯定是 Google 有史以来最关心的事情。\n\n最高级别的计划为 199 美元/月，附有细则。您甚至不会注意到它，而且它们也没有在上面叠加任何功能！我认为整个团队由 20 人组成，负责 Google 定价。\n\n流动“学分”。没有人知道你的信用单位是什么。\n\n谷歌，我们都喜欢你，我们希望你做得很好，但看在上帝的份上，请像你讨厌冒犯其他组织的副总裁一样爱你的用户。",
       "media_urls": [
         "https://pbs.twimg.com/media/HYLB4C7awAAUjN9.jpg",
         "https://pbs.twimg.com/media/HYLB4C8bcAAwtFD.png",
@@ -8786,13 +8989,6 @@
       "is_recent_24h": true,
       "media_checked": true,
       "author_role_en": "AI Engineer / Tech Builder",
-      "article_content_zh": null,
-      "author_en": "Deedy Das",
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:29:55.305594+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -10186,15 +10382,15 @@
       "author_handle": "@AIJourney2026",
       "author_avatar": "https://unavatar.io/youtube/AI Journey 2026",
       "source": "YouTube · AI Journey 2026",
-      "views": "2.7万 播放",
-      "views_count": 27484,
-      "velocity": 1616.7,
-      "momentum_score": 3899.1,
+      "views": "3.2万 播放",
+      "views_count": 32356,
+      "velocity": 1702.9,
+      "momentum_score": 3854.0,
       "metrics": {
-        "views": "2.7万 播放",
-        "views_count": 27484,
-        "velocity": "+1,616/h",
-        "momentum_score": 3899.1,
+        "views": "3.2万 播放",
+        "views_count": 32356,
+        "velocity": "+1,702/h",
+        "momentum_score": 3854.0,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -10212,19 +10408,13 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,616/h)",
+        "🔥 24h飙升 (+1,702/h)",
         "AI Journey 2026",
         "🔥 极客实操"
       ],
       "content_snippet": "AI Journey 2026 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "AI Journey 2026 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by AI Journey 2026: AI Agents as Digital Employees: Unlocking Their Real Potential | AIJ 2026 (12+)",
-      "is_pinned": false,
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:29:55.307235+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -10684,6 +10874,87 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-code-fullstack-01",
+      "title_zh": "Next.js 15 全栈自主重构与架构规范",
+      "title_en": "Next.js 15 Full-Stack Autonomous Refactor",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "Claude 5.5 Sonnet / Cursor",
+      "model_family": "Anthropic",
+      "model_tier_score": 98,
+      "generation_tier": "sota",
+      "purpose_zh": "全栈工程重构与代码规范约束",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{框架版本}}",
+        "{{数据库ORM}}",
+        "{{状态管理}}"
+      ],
+      "prompt_content_zh": "你是一名资深全栈系统架构师，擅长使用 {{框架版本}} (App Router)、TypeScript 与 {{数据库ORM}} 构建高内聚低耦合的应用。\n\n请遵循以下严苛工程准则审查并重构代码：\n1. 严格区分 Server Component 与 Client Component，尽可能将数据获取推至服务端，减少客户端 JS Bundle 体积；\n2. 所有异步 I/O 必须显式处理异常并返回类型安全的 Result<T, E> 或自定义结构体；\n3. 遵循单一职责（SRP）与无副作用函数原则，严禁直接在 UI 组件内部拼装未校验的 SQL/ORM 复杂查询；\n4. 提供整洁的目录组织方案与单元测试用例（覆盖率达标）。",
+      "prompt_content_en": "You are a senior full-stack system architect specializing in Next.js 15 (App Router), TypeScript, and modern ORMs. Review and refactor the codebase following strict engineering standards: clear Server/Client Component separation, robust error boundaries, typed I/O, and unit test coverage.",
+      "sample_output": {
+        "type": "code",
+        "title": "重构后的 Server Action 与数据流架构示例",
+        "content": "// app/actions/user-analytics.ts\n'use server';\n\nimport { z } from 'zod';\nimport { db } from '@/lib/db';\nimport { revalidatePath } from 'next/cache';\n\nconst UpdateMetricSchema = z.object({\n  userId: z.string().uuid(),\n  delta: z.number().int().min(1),\n});\n\ntype ActionState = \n  | { status: 'idle' }\n  | { status: 'success'; data: { updatedCount: number } }\n  | { status: 'error'; message: string };\n\nexport async function incrementUserScore(\n  prevState: ActionState,\n  formData: FormData\n): Promise<ActionState> {\n  const parse = UpdateMetricSchema.safeParse({\n    userId: formData.get('userId'),\n    delta: Number(formData.get('delta')),\n  });\n\n  if (!parse.success) {\n    return { status: 'error', message: '参数格式不合法，更新已终止' };\n  }\n\n  try {\n    const record = await db.metric.update({\n      where: { id: parse.data.userId },\n      data: { score: { increment: parse.data.delta } },\n      select: { score: true },\n    });\n    revalidatePath('/dashboard/metrics');\n    return { status: 'success', data: { updatedCount: record.score } };\n  } catch (error) {\n    console.error('[MetricSyncError]', error);\n    return { status: 'error', message: '数据库执行失败，请稍后重试' };\n  }\n}",
+        "title_en": "Verified Sample Output (Claude 5.5 Sonnet / Cursor)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 Sonnet / Cursor\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "复制至 Cursor 的 .cursorrules 或在 Claude Code 对话中直接作为 System Prompt 引导编码。",
+      "created_at": "2026-11-27T21:17:11Z",
+      "variables_en": [
+        "{{Framework Version}}",
+        "{{Database ORM}}",
+        "{{State Management}}"
+      ],
+      "scenario_label_en": "💻 Coding & Dev",
+      "purpose_en": "Full-Stack Architecture Refactor & Code Standards",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T21:17:11Z",
+      "recommended_model": "Claude 5.5 Sonnet / Cursor",
+      "title": "Next.js 15 全栈自主重构与架构规范",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_unit_test_coverage",
+      "sub_type": "coding",
+      "purpose_zh": "💻 编码与架构 · 自动化单测生成与极限覆盖",
+      "purpose_en": "💻 Coding & Architecture · Automated High-Coverage Unit Testing",
+      "title_zh": "💡【质量工程自动化】100% 边界条件覆盖与变异测试（Mutation Testing）用例生成",
+      "title_en": "💡 [Quality Engineering] 100% Edge-Case Coverage & Mutation-Resilient Test Suite Generator",
+      "url": "https://pytest.org/",
+      "image_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "测试极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T21:17:11Z",
+      "recommended_model": "主流工程与逻辑大模型通用",
+      "temp_advice": "建议温度 0.1 | 严格测试用例模式",
+      "metrics": {
+        "type": "💻 测试套件",
+        "model": "SOTA通用",
+        "temp": "0.1"
+      },
+      "content_snippet": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
+      "summary_zh": "生成密封、参数化的测试套件，全面覆盖空指针、整数溢出、高并发死锁与恶意输入模糊测试。",
+      "summary_en": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
+      "prompt_content_zh": "你是一位狂热的质量工程与测试架构专家。请为提供的目标代码编写完备的自动化测试套件：\n1. 使用参数化测试（Parameterized Tests）覆盖全量正常业务路径；\n2. 针对极端边界生成用例：包含空指针、超大负数、整数溢出、零长度切片、特殊字符注入及超时熔断；\n3. 设计能够杀死变异体（Mutation Testing）的断言，禁止无效的无断言测试；\n4. 所有外部依赖必须通过 Mock/Stub 隔离，确保单测可在 CI 环境中无网络毫秒级运行。",
+      "prompt_content_en": "You are a Staff QA Architect and Mutation Testing specialist. Build a production-grade automated test suite for the provided code:\n1. Use parameterized testing to systematically cover happy paths and common branches;\n2. Generate rigorous edge-case suites: null references, integer overflow, empty collections, unicode injection, and network timeouts;\n3. Implement strong assertions capable of surviving mutation testing (no vanity tests);\n4. Hermetically isolate all external I/O via mocks/stubs to guarantee sub-millisecond execution in isolated CI pipelines.",
+      "prompt_content": "你是一位狂热的质量工程与测试架构专家。请为提供的目标代码编写完备的自动化测试套件：\n1. 使用参数化测试（Parameterized Tests）覆盖全量正常业务路径；\n2. 针对极端边界生成用例：包含空指针、超大负数、整数溢出、零长度切片、特殊字符注入及超时熔断；\n3. 设计能够杀死变异体（Mutation Testing）的断言，禁止无效的无断言测试；\n4. 所有外部依赖必须通过 Mock/Stub 隔离，确保单测可在 CI 环境中无网络毫秒级运行。",
+      "tags": [
+        "单测覆盖",
+        "测试工程",
+        "质量保障"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-27T21:17:11Z",
+      "title": "💡【质量工程自动化】100% 边界条件覆盖与变异测试（Mutation Testing）用例生成"
     },
     {
       "id": "04c69640f0ae8a0a",
@@ -11726,6 +11997,82 @@
       }
     },
     {
+      "id": "prompt_mckinsey_pyramid_pitch",
+      "sub_type": "writing",
+      "purpose_zh": "✍️ 生产力写作 · 麦肯锡金字塔原理商业方案",
+      "purpose_en": "✍️ Writing & Productivity · McKinsey Pyramid Principle Pitch",
+      "title_zh": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板",
+      "title_en": "💡 [Executive Presentation] McKinsey Pyramid Principle Structured Business Proposal Template",
+      "url": "https://hbr.org/",
+      "image_url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "咨询总监",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T20:17:11Z",
+      "recommended_model": "主流工程与逻辑大模型通用",
+      "temp_advice": "建议温度 0.3 | 高管严谨表达",
+      "metrics": {
+        "type": "✍️ 商业汇报",
+        "model": "SOTA通用",
+        "temp": "0.3"
+      },
+      "content_snippet": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则。",
+      "summary_en": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "prompt_content_zh": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "prompt_content_en": "Adopt the persona of a Senior McKinsey Strategy Director. Restructure the provided raw operational notes into an executive proposal for the C-Suite following the Pyramid Principle:\n1. Frame the introduction using the SCQA methodology (Situation, Complication, Question, Answer);\n2. Enforce Bottom Line Up Front (BLUF): the opening sentence of each pillar must be a crisp, quantified value claim;\n3. Group supporting pillars using the MECE framework (Mutually Exclusive, Collectively Exhaustive), concluding with an ROI model and concrete risk hedges.",
+      "prompt_content": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "tags": [
+        "金字塔原理",
+        "高管汇报",
+        "商业方案"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-27T20:17:11Z",
+      "title": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板"
+    },
+    {
+      "id": "prompt_claude46_extended_thinking",
+      "sub_type": "coding",
+      "model_family": "claude_46",
+      "purpose_zh": "💻 混合推理 · 长思考链预算控制与全栈代码交付",
+      "purpose_en": "💻 Hybrid Reasoning · Claude 5.5 Thinking Budget Control & Full-Stack Delivery",
+      "title_zh": "💡【混合推理官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块",
+      "title_en": "💡 [Extended Thinking Frontier] Extended Thinking & Budget Control: One-Shot Production Full-Stack Module",
+      "url": "https://docs.anthropic.com/",
+      "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+      "source": "Anthropic 官方前沿",
+      "author": "Anthropic 工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T20:17:11Z",
+      "recommended_model": "具备深度思考预算的模型 (Extended Thinking / CoT)",
+      "temp_advice": "建议温度 1.0 (Extended Thinking 官方推荐温度) | 预算 16k tokens",
+      "metrics": {
+        "type": "💻 Claude 5.5",
+        "model": "思考模型",
+        "temp": "1.0"
+      },
+      "content_snippet": "Maximizes Claude 5.5's hybrid reasoning budget: plans architectural trade-offs in thinking phase, then delivers production-grade, bug-free implementations.",
+      "summary_zh": "充分释放 长思考链混合推理优势：在思考阶段预判所有边界情况与架构取舍，一键输出直接可运行的高内聚工程代码。",
+      "summary_en": "Leverages Claude 5.5 extended thinking to resolve architecture trade-offs before generating complete, bug-free production code.",
+      "prompt_content_zh": "你正在以 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "prompt_content_en": "You are acting as a Principal Full-Stack Architect utilizing Extended Thinking mode. Before emitting code, use your reasoning budget to analyze:\n1. Architecture Trade-offs: Benchmark alternative designs across complexity, maintenance, and latency;\n2. Concurrency & Race Condition Simulation: Map asynchronous lifecycles and eliminate memory leaks;\n3. Complete Zero-Placeholder Implementation: Never emit comments like '// TODO: implement later'; ensure every function is production-ready;\n4. Include defensive unit tests and resilient error boundaries.\n\n[REQUIREMENTS]:\n[Describe your complex business system or full-stack feature here]",
+      "prompt_content": "你正在以 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "tags": [
+        "Claude 5.5",
+        "思考预算",
+        "全栈架构",
+        "无占位符"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-27T20:17:11Z",
+      "title": "💡【混合推理官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块"
+    },
+    {
       "id": "yt_6JkQlMufzGE",
       "video_id": "6JkQlMufzGE",
       "platform": "youtube",
@@ -11738,15 +12085,15 @@
       "author_handle": "@BenAI",
       "author_avatar": "https://unavatar.io/youtube/Ben AI",
       "source": "YouTube · Ben AI",
-      "views": "3.5万 播放",
-      "views_count": 35491,
-      "velocity": 1867.9,
-      "momentum_score": 4227.5,
+      "views": "3.6万 播放",
+      "views_count": 35904,
+      "velocity": 1795.2,
+      "momentum_score": 3949.4,
       "metrics": {
-        "views": "3.5万 播放",
-        "views_count": 35491,
-        "velocity": "+1,867/h",
-        "momentum_score": 4227.5,
+        "views": "3.6万 播放",
+        "views_count": 35904,
+        "velocity": "+1,795/h",
+        "momentum_score": 3949.4,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -11764,7 +12111,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,867/h)",
+        "🔥 24h飙升 (+1,795/h)",
         "Ben AI",
         "🔥 极客实操"
       ],
@@ -11829,6 +12176,13 @@
       "surge_badge": "⚡ 24h 极客热推",
       "media_checked": true,
       "author_role_en": "AI Engineer / Tech Builder",
+      "article_content_zh": null,
+      "author_en": "@saylor",
+      "primary_tag": "tech_frontier",
+      "primary_tag_zh": "🔬 前沿技术",
+      "primary_tag_en": "🔬 Frontier Tech",
+      "primary_tag_color": "cyan",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:30:04.017603+00:00",
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
@@ -12308,8 +12662,8 @@
       "is_pinned": false,
       "full_text_en": "Update: Gemini 4 Neon beat Opus' previous record :)\n\nLossless Inkling-2-Mini inference has now been pushed to 264.5 tok/s (1 concurrent user) and 950 tok/s (8 concurrent users) in @vllm_project on a single RTX PRO 6000\n\nThis is thanks to the DFlash 2 draft model by @inco_ai which I'll link below \n\nAn increase of 39% and +33% respectively, compared to Opus 5.5's DSpark-7 baseline (190.6 / 716 tok/s).",
       "quote_en": "Update: Gemini 4 Neon beat Opus' previous record :)\n\nLossless Inkling-2-Mini inference has now been pushed to 264.5 tok/s (1 concurrent user) and 950 tok/s (8 concurrent users) in @vllm_project on a single RTX PRO 6000\n\nThis is thanks to the DFlash 2 draft model by @inco_ai which I'll link below \n\nAn increase of 39% and +33% respectively, compared to Opus 5.5's DSpark-7 baseline (190.6 / 716 tok/s).",
-      "full_text_zh": "更新：Gemini 4 Neon 打破了 Opus 之前的记录:)\n\n无损 Inkling-2-Mini 推理现已在单个 RTX PRO 6000 上的 @vllm_project 中提升至 264.5 tok/s（1 个并发用户）和 950 tok/s（8 个并发用户）\n\n这要归功于@inco_ai 的 DFlash 2 草案模型，我将在下面链接它\n\n与 Opus 5.5 的 DSpark-7 基线（190.6 / 716 tok/s）相比，分别提高了 39% 和 +33%。",
-      "quote_zh": "更新：Gemini 4 Neon 打破了 Opus 之前的记录:)\n\n无损 Inkling-2-Mini 推理现已在单个 RTX PRO 6000 上的 @vllm_project 中提升至 264.5 tok/s（1 个并发用户）和 950 tok/s（8 个并发用户）\n\n这要归功于@inco_ai 的 DFlash 2 草案模型，我将在下面链接它\n\n与 Opus 5.5 的 DSpark-7 基线（190.6 / 716 tok/s）相比，分别提高了 39% 和 +33%。",
+      "full_text_zh": "更新：Gemini 4 Neon 打破了 Opus 之前的记录:)\n\n无损 Inkling-2-Mini 推理现已在单个 RTX PRO 6000 上的 @vllm_project 中提升至 264.5 tok/s（1 个并发用户）和 950 tok/s（8 个并发用户）\n\n这要归功于 @inco_ai 的 DFlash 2 草案模型，我将在下面链接它\n\n与 Opus 5.5 的 DSpark-7 基线（190.6 / 716 tok/s）相比，分别提高了 39% 和 +33%。",
+      "quote_zh": "更新：Gemini 4 Neon 打破了 Opus 之前的记录:)\n\n无损 Inkling-2-Mini 推理现已在单个 RTX PRO 6000 上的 @vllm_project 中提升至 264.5 tok/s（1 个并发用户）和 950 tok/s（8 个并发用户）\n\n这要归功于 @inco_ai 的 DFlash 2 草案模型，我将在下面链接它\n\n与 Opus 5.5 的 DSpark-7 基线（190.6 / 716 tok/s）相比，分别提高了 39% 和 +33%。",
       "media_urls": [
         "https://pbs.twimg.com/media/HYKCvWTW8AAIPoI.jpg"
       ],
@@ -12378,6 +12732,13 @@
       "is_recent_24h": true,
       "media_checked": true,
       "author_role_en": "AI Engineer / Tech Builder",
+      "article_content_zh": null,
+      "author_en": "@aleabitoreddit",
+      "primary_tag": "tech_frontier",
+      "primary_tag_zh": "🔬 前沿技术",
+      "primary_tag_en": "🔬 Frontier Tech",
+      "primary_tag_color": "cyan",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:29:55.311203+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -13023,6 +13384,88 @@
       }
     },
     {
+      "id": "prompt-video-wan21-slowmo-01",
+      "title_zh": "通义 Wan 2.1 / 可灵：电影级推镜头动态运镜与微风视效",
+      "title_en": "Wan 2.1 / Kling Cinematic Dolly-in Dynamic Motion",
+      "category": "prompts",
+      "scenario_label": "🎬 动态视效",
+      "target_model": "Alibaba Wan 2.1 / Kling 1.5",
+      "model_family": "Wan",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "大景深慢推镜头与自然物理动态",
+      "temp_advice": "动态强度: 0.6",
+      "variables": [
+        "{{动作细节}}",
+        "{{运镜方式}}",
+        "{{环境光影}}"
+      ],
+      "prompt_content_zh": "摄影机缓慢向主体向前推镜头（Slow Dolly-in），{{动作细节}}，发丝随微风轻微自然摆动，眼神流转自然眨眼，周围光晕伴随 {{环境光影}} 产生丁达尔慢速闪烁，物理模拟逼真，无断帧抖动，电影级 60fps 质感。",
+      "prompt_content_en": "Camera slowly dolly-in towards subject. Natural hair fluttering in a gentle breeze, natural subtle blinking and breathing movements, cinematographic lighting transitions, photorealistic 60fps smooth render.",
+      "sample_output": {
+        "type": "video",
+        "title": "Wan 2.1 实测动态视频样例 (鼠标悬停即播)",
+        "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c7238afe-3f56-41f5-92a4-ece392806c60/original=true/c7238afe-3f56-41f5-92a4-ece392806c60.mp4",
+        "content": "时长: 5秒 | 运镜: Dolly Forward + Pan | 运镜动态系数: 0.65 | 分辨率: 1080P / 60FPS",
+        "title_en": "Verified Sample Output (Alibaba Wan 2.1 / Kling 1.5)",
+        "content_en": "Duration: 5s | Camera: Dolly Forward + Pan | Motion Scale: 0.65 | Resolution: 1080P / 60FPS"
+      },
+      "usage_guide_zh": "在可灵或 Wan 2.1 图生视频/文生视频的“运镜设置”中填入，生成极其稳定的电影感镜头。",
+      "created_at": "2026-11-27T19:17:11Z",
+      "variables_en": [
+        "{{Action Details}}",
+        "{{Camera Movement}}",
+        "{{Ambient Lighting}}"
+      ],
+      "scenario_label_en": "🎬 Video & VFX",
+      "purpose_en": "Slow Dolly-In Camera Motion & Natural Physics",
+      "temp_advice_en": "Motion Strength: 0.6",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T19:17:11Z",
+      "recommended_model": "Alibaba Wan 2.1 / Kling 1.5",
+      "title": "通义 Wan 2.1 / 可灵：电影级推镜头动态运镜与微风视效",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_first_principles_reasoning",
+      "sub_type": "reasoning",
+      "purpose_zh": "🧠 深度推理 · 第一性原理穿透与战略决断",
+      "purpose_en": "🧠 Deep Reasoning · First-Principles Strategic Deduction",
+      "title_zh": "💡【第一性原理】马斯克式底层拆解：剥离行业惯性直击物理与商业极限",
+      "title_en": "💡 [First Principles Thinking] Elon-Style Ground-Up Physics & Cost Breakdown",
+      "url": "https://x.com/elonmusk",
+      "image_url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "战略极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T19:17:11Z",
+      "recommended_model": "主流复杂推理与博弈大模型",
+      "temp_advice": "建议温度 0.4 | 第一性原理推演",
+      "metrics": {
+        "type": "🧠 战略推演",
+        "model": "SOTA通用",
+        "temp": "0.4"
+      },
+      "content_snippet": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
+      "summary_zh": "剥离行业类比与路径依赖，将问题还原至物理定律与原子级物料成本，推导 10 倍效能的破局路径。",
+      "summary_en": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
+      "prompt_content_zh": "请暂时忘掉行业现有的所有‘行业惯例’与‘常规做法’。运用绝对的第一性原理（First Principles）审视以下命题：\n1. 这个系统最根本、不可违背的基础科学定律（如热力学、香农信息论、计算复杂度）是什么？\n2. 若将整个产品拆解为原子级的原材料成本与基础能源成本，理论极限底线是多少？现有成本的溢价主要被哪些中间低效层吃掉了？\n3. 颠覆现有行业做法、重构整个价值流并实现成本降低 80% 以上的激进方案是什么？列出三个最关键的试错实验。",
+      "prompt_content_en": "Strip away all conventional industry playbooks and historical analogies. Scrutinize the following challenge purely through First Principles:\n1. What are the immutable fundamental laws of science (e.g. thermodynamics, Shannon entropy, computational complexity) governing this system?\n2. Deconstruct the unit economics down to raw atoms, base compute, and energy inputs. Where does the 10x margin inefficiency currently leak?\n3. Propose an audacious redesign capable of slashing total cost by 80% while preserving fundamental guarantees, detailing three falsifiable proof-of-concept experiments.",
+      "prompt_content": "请暂时忘掉行业现有的所有‘行业惯例’与‘常规做法’。运用绝对的第一性原理（First Principles）审视以下命题：\n1. 这个系统最根本、不可违背的基础科学定律（如热力学、香农信息论、计算复杂度）是什么？\n2. 若将整个产品拆解为原子级的原材料成本与基础能源成本，理论极限底线是多少？现有成本的溢价主要被哪些中间低效层吃掉了？\n3. 颠覆现有行业做法、重构整个价值流并实现成本降低 80% 以上的激进方案是什么？列出三个最关键的试错实验。",
+      "tags": [
+        "第一性原理",
+        "商业战略",
+        "深度思考"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-27T19:17:11Z",
+      "title": "💡【第一性原理】马斯克式底层拆解：剥离行业惯性直击物理与商业极限"
+    },
+    {
       "id": "c8ec89abb2b477aa",
       "title": "Hey, I work at Anthropic and would like to dig into this more. It's a little hard to find sabotage from this thread (you mentioned Claude was perfectly fine on some tasks, and that the Neon session was started on top of Claude, so it's not quite a side-by-side test).",
       "title_en": "Hey, I work at Anthropic and would like to dig into this more. It's a little hard to find sabotage from this thread (you mentioned Claude was perfectly fine on some tasks, and that the Neon session was started on top of Claude, so it's not quite a side-by-side test). Can you share session IDs with me? What model were you using?\n\nWe don't alter Claude's answers on AI research as it's being served, and we made sure the limits in Fable 5.2 did not affect agentic coding or traditional ML research. Any safeguards that fire show a visible message too.",
@@ -13069,13 +13512,6 @@
       "surge_badge": "⚡ 24h 极客热推",
       "media_checked": true,
       "author_role_en": "AI Engineer / Tech Builder",
-      "article_content_zh": null,
-      "author_en": "@edwinarbus",
-      "primary_tag": "workplace_ai",
-      "primary_tag_zh": "⚡ 职场提效",
-      "primary_tag_en": "⚡ Workplace AI",
-      "primary_tag_color": "amber",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:30:02.862783+00:00",
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
@@ -14327,6 +14763,87 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-code-deepseek-r4-01",
+      "title_zh": "DeepSeek-R4 极限长思维链：自适应推理与复杂并发无锁架构设计",
+      "title_en": "DeepSeek-R4 Adaptive Reasoning: Lock-Free Concurrency & System Debugger",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "DeepSeek-R4 (Adaptive CoT)",
+      "model_family": "DeepSeek",
+      "model_tier_score": 97,
+      "generation_tier": "sota",
+      "purpose_zh": "R4 强化学习深度反思与无锁并发排查",
+      "temp_advice": "温度 0.6 (长思维链)",
+      "variables": [
+        "{{编程语言}}",
+        "{{并发模型}}",
+        "{{故障现象}}"
+      ],
+      "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
+      "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+      "sample_output": {
+        "type": "code",
+        "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
+        "content": "/* DeepSeek-R4 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}",
+        "title_en": "Verified Sample Output (DeepSeek-R4 (Adaptive CoT))",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 (Adaptive CoT)\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R4、Claude 5.5 或 OpenAI o3-pro 模型。",
+      "created_at": "2026-11-27T18:17:11Z",
+      "variables_en": [
+        "{{Language}}",
+        "{{Concurrency Model}}",
+        "{{Issue Symptom}}"
+      ],
+      "scenario_label_en": "💻 Coding & Dev",
+      "purpose_en": "DeepSeek-R4 Adaptive CoT & Lock-Free Concurrency Audit",
+      "temp_advice_en": "Temp 0.6 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T18:17:11Z",
+      "recommended_model": "DeepSeek-R4 (Adaptive CoT)",
+      "title": "DeepSeek-R4 极限长思维链：自适应推理与复杂并发无锁架构设计",
+      "summary_zh": "随着大语言模型推理阶段算力消耗急剧攀升，半导体行业与学术界正重新评估芯片微架构与高带宽内存体系的协同设计方案",
+      "image_url": null
+    },
+    {
+      "id": "prompt_sd35_photoreal",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 顶级商业人像与胶片摄影",
+      "purpose_en": "🎨 Image Gen · High-End Commercial Studio Portraiture",
+      "title_zh": "💡【商业摄影大师】Midjourney v7 / Ideogram 3 / SD 3.5 顶级商业摄影质感与皮肤微孔真实感神咒",
+      "title_en": "💡 [Commercial Studio Photography] SD 3.5 Large & Midjourney Photorealistic Skin Texture Master Prompt",
+      "url": "https://midjourney.com/",
+      "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "视觉实测",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-27T18:17:11Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3 / SD 3.5",
+      "temp_advice": "Guidance Scale: 3.5 | 步数 28",
+      "metrics": {
+        "type": "🎨 商业生图",
+        "model": "Midjourney v7",
+        "temp": "CFG 3.5"
+      },
+      "content_snippet": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+      "summary_zh": "85mm f/1.4 镜头虚化、哈苏中画幅胶片微颗粒与晨光丁达尔效应，彻底告别 AI 塑料感与假脸。",
+      "summary_en": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+      "prompt_content_zh": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1\n\n【中文使用解析】：将 [SUBJECT] 替换为你的目标人物（例如：a charismatic 35-year-old female neuroscientist with silver round glasses）。保持原英文提示词以确保扩散模型最高质量的 CLIP 嵌入响应。",
+      "prompt_content_en": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+      "prompt_content": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+      "tags": [
+        "生图神咒",
+        "Midjourney/SD3.5",
+        "商业摄影"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-27T18:17:11Z",
+      "title": "💡【商业摄影大师】Midjourney v7 / Ideogram 3 / SD 3.5 顶级商业摄影质感与皮肤微孔真实感神咒"
     },
     {
       "id": "8c2fb0b56ee3b8c9",
@@ -16112,22 +16629,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】Mickmumpitz：视觉特效现在很简单！ [免费和本地人工智能]",
-      "title_zh": "【48h 极客实测】Mickmumpitz：视觉特效现在很简单！ [免费和本地人工智能]",
-      "title_en": "VFX is EASY now! [FREE & LOCAL AI]",
+      "title": "【48h 极客实测】Mickmumpitz：我刚刚升级了我的免费 AI VFX PIPELINE",
+      "title_zh": "【48h 极客实测】Mickmumpitz：我刚刚升级了我的免费 AI VFX PIPELINE",
+      "title_en": "I just upgraded my free AI VFX PIPELINE",
       "author": "Mickmumpitz",
       "author_handle": "@Mickmumpitz",
       "author_avatar": "https://unavatar.io/youtube/Mickmumpitz",
       "source": "YouTube · Mickmumpitz",
       "views": "3.2万 播放",
-      "views_count": 31721,
-      "velocity": 1379.2,
-      "momentum_score": 2818.3,
+      "views_count": 31574,
+      "velocity": 1372.8,
+      "momentum_score": 2805.3,
       "metrics": {
         "views": "3.2万 播放",
-        "views_count": 31721,
-        "velocity": "+1,379/h",
-        "momentum_score": 2818.3,
+        "views_count": 31574,
+        "velocity": "+1,372/h",
+        "momentum_score": 2805.3,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16145,7 +16662,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,379/h)",
+        "🔥 24h飙升 (+1,372/h)",
         "Mickmumpitz",
         "🔥 极客实操"
       ],
@@ -16474,8 +16991,8 @@
       "is_pinned": false,
       "full_text_en": "10 GitHub repos that seem \"illegal\" but are perfectly legal\n\n1. yt-dlp → http://github.com/yt-dlp/yt-dlp\nDownloads videos from any platform. YouTube Premium charges 16 dollars a month to do less\n\n2. Ollama → http://github.com/ollama/ollama\nRuns AI models on your laptop without paying for APIs. What costs many hundreds a month here comes out to 0\n\n3. Fooocus → http://github.com/lllyasviel/Foo…\nGenerates images with Midjourney-quality on your GPU. Midjourney charges 30 dollars. This is unlimited and free\n\n4. Whisper → http://github.com/openai/whisper\nTranscribes audio for free in 99 languages. Otter charges 20 dollars a month to do the same\n\n5. Plausible → http://github.com/plausible/anal…\nThe open source alternative to Google Analytics. Companies pay thousands a year. Self-hosted costs 0\n\n6. AppFlowy → http://github.com/AppFlowy-IO/Ap…\nThe open source Notion. Notion charges 20 dollars per user. Here you get unlimited users on your server\n\n7. Penpot → http://github.com/penpot/penpot\nThe open source alternative to Figma. Figma charges 16 dollars per editor. Penpot is self-hosted and free\n\n8. n8n → http://github.com/n8n-io/n8n\nThe open source Zapier. Zapier Pro can cost hundreds a month. n8n runs unlimited automations\n\n9. Cal .com → http://github.com/calcom/cal.com\nThe open source alternative to Calendly. Calendly Teams charges 16 dollars per user. This is free for personal use\n\n10. Bitwarden → http://github.com/bitwarden/serv…\nThe open source alternative to 1Password. Most charge per user. Bitwarden has a very complete free version\n\nAll legal. All free. All open source\n\nSave them all\n\nShare it with that person who keeps paying for tools that have been free all this time and Must follow \n@Liyana_Coder\n for see more Ai content .",
       "quote_en": "10 GitHub repos that seem \"illegal\" but are perfectly legal\n\n1. yt-dlp → http://github.com/yt-dlp/yt-dlp\nDownloads videos from any platform. YouTube Premium charges 16 dollars a month to do less\n\n2. Ollama → http://github.com/ollama/ollama\nRuns AI models on your laptop without paying for APIs. What costs many hundreds a month here comes out to 0\n\n3. Fooocus → http://github.com/lllyasviel/Foo…\nGenerates images with Midjourney-quality on your GPU. Midjourney charges 30 dollars. This is unlimited and free\n\n4. Whisper → http://github.com/openai/whisper\nTranscribes audio for free in 99 languages. Otter charges 20 dollars a month to do the same\n\n5. Plausible → http://github.com/plausible/anal…\nThe open source alternative to Google Analytics. Companies pay thousands a year. Self-hosted costs 0\n\n6. AppFlowy → http://github.com/AppFlowy-IO/Ap…\nThe open source Notion. Notion charges 20 dollars per user. Here you get unlimited users on your server\n\n7. Penpot → http://github.com/penpot/penpot\nThe open source alternative to Figma. Figma charges 16 dollars per editor. Penpot is self-hosted and free\n\n8. n8n → http://github.com/n8n-io/n8n\nThe open source Zapier. Zapier Pro can cost hundreds a month. n8n runs unlimited automations\n\n9. Cal .com → http://github.com/calcom/cal.com\nThe open source alternative to Calendly. Calendly Teams charges 16 dollars per user. This is free for personal use\n\n10. Bitwarden → http://github.com/bitwarden/serv…\nThe open source alternative to 1Password. Most charge per user. Bitwarden has a very complete free version\n\nAll legal. All free. All open source\n\nSave them all\n\nShare it with that person who keeps paying for tools that have been free all this time and Must follow \n@Liyana_Coder\n for see more Ai content .",
-      "full_text_zh": "10 个看似“非法”但完全合法的 GitHub 存储库\n\n1.yt-dlp → http://github.com/yt-dlp/yt-dlp\n从任何平台下载视频。 YouTube Premium 每月收费 16 美元，功能更少\n\n2. 奥拉马 → http://github.com/ollama/ollama\n在笔记本电脑上运行 AI 模型，无需支付 API 费用。在这里每个月花费数百的费用变成了0\n\n3.Fooocus → http://github.com/lllyasviel/Foo...\n在 GPU 上生成具有中途质量的图像。中途收费30美元。这是无限制且免费的\n\n4.耳语 → http://github.com/openai/whisper\n免费转录 99 种语言的音频。 Otter 每月收费 20 美元来做同样的事情\n\n5. 貌似合理 → http://github.com/plausible/anal...\nGoogle Analytics 的开源替代方案。公司每年支付数千美元。自托管费用0\n\n6.AppFlowy → http://github.com/AppFlowy-IO/Ap...\n开源概念。 Notion 对每个用户收费 20 美元。在这里你可以在你的服务器上获得无限的用户\n\n7. 笔罐 → http://github.com/penpot/penpot\nFigma 的开源替代品。 Figma 每位编辑收费 16 美元。 Penpot 是自托管且免费的\n\n8.n8n → http://github.com/n8n-io/n8n\n开源 Zapier。 Zapier Pro 每月花费数百美元。 n8n 运行无限的自动化\n\n9. Cal.com → http://github.com/calcom/cal.com\nCalendly 的开源替代品。 Calendly Teams 对每位用户收费 16 美元。这是免费供个人使用的\n\n10.Bitwarden → http://github.com/bitwarden/serv...\n1Password 的开源替代品。大多数按用户收费。 Bitwarden 有一个非常完整的免费版本\n\n一切合法。全部免费。全部开源\n\n拯救他们全部\n\n与那些一直为免费工具付费且必须关注的人分享\n@Liyana_Coder\n查看更多艾内容。",
-      "quote_zh": "10 个看似“非法”但完全合法的 GitHub 存储库\n\n1.yt-dlp → http://github.com/yt-dlp/yt-dlp\n从任何平台下载视频。 YouTube Premium 每月收费 16 美元，功能更少\n\n2. 奥拉马 → http://github.com/ollama/ollama\n在笔记本电脑上运行 AI 模型，无需支付 API 费用。在这里每个月花费数百的费用变成了0\n\n3.Fooocus → http://github.com/lllyasviel/Foo...\n在 GPU 上生成具有中途质量的图像。中途收费30美元。这是无限制且免费的\n\n4.耳语 → http://github.com/openai/whisper\n免费转录 99 种语言的音频。 Otter 每月收费 20 美元来做同样的事情\n\n5. 貌似合理 → http://github.com/plausible/anal...\nGoogle Analytics 的开源替代方案。公司每年支付数千美元。自托管费用0\n\n6.AppFlowy → http://github.com/AppFlowy-IO/Ap...\n开源概念。 Notion 对每个用户收费 20 美元。在这里你可以在你的服务器上获得无限的用户\n\n7. 笔罐 → http://github.com/penpot/penpot\nFigma 的开源替代品。 Figma 每位编辑收费 16 美元。 Penpot 是自托管且免费的\n\n8.n8n → http://github.com/n8n-io/n8n\n开源 Zapier。 Zapier Pro 每月花费数百美元。 n8n 运行无限的自动化\n\n9. Cal.com → http://github.com/calcom/cal.com\nCalendly 的开源替代品。 Calendly Teams 对每位用户收费 16 美元。这是免费供个人使用的\n\n10.Bitwarden → http://github.com/bitwarden/serv...\n1Password 的开源替代品。大多数按用户收费。 Bitwarden 有一个非常完整的免费版本\n\n一切合法。全部免费。全部开源\n\n拯救他们全部\n\n与那些一直为免费工具付费且必须关注的人分享\n@Liyana_Coder\n查看更多艾内容。",
+      "full_text_zh": "10 个看似“非法”但完全合法的 GitHub 存储库\n\n1.yt-dlp → http://github.com/yt-dlp/yt-dlp\n从任何平台下载视频。 YouTube Premium 每月收费 16 美元，功能更少\n\n2. 奥拉马 → http://github.com/ollama/ollama\n在笔记本电脑上运行 AI 模型，无需支付 API 费用。在这里每个月花费数百的费用变成了0\n\n3.Fooocus → http://github.com/lllyasviel/Foo...\n在 GPU 上生成具有中途质量的图像。中途收费30美元。这是无限制且免费的\n\n4.耳语 → http://github.com/openai/whisper\n免费转录 99 种语言的音频。 Otter 每月收费 20 美元来做同样的事情\n\n5. 貌似合理 → http://github.com/plausible/anal...\nGoogle Analytics 的开源替代品。公司每年支付数千美元。自托管费用0\n\n6.AppFlowy → http://github.com/AppFlowy-IO/Ap...\n开源概念。 Notion 对每个用户收费 20 美元。在这里你可以在你的服务器上获得无限的用户\n\n7. 笔罐 → http://github.com/penpot/penpot\nFigma 的开源替代品。 Figma 每位编辑收费 16 美元。 Penpot 是自托管且免费的\n\n8.n8n → http://github.com/n8n-io/n8n\n开源 Zapier。 Zapier Pro 每月花费数百美元。 n8n 运行无限的自动化\n\n9. Cal.com → http://github.com/calcom/cal.com\nCalendly 的开源替代品。 Calendly Teams 对每位用户收费 16 美元。这是免费供个人使用的\n\n10.Bitwarden → http://github.com/bitwarden/serv...\n1Password 的开源替代品。大多数按用户收费。 Bitwarden 有一个非常完整的免费版本\n\n一切合法。全部免费。全部开源\n\n拯救他们全部\n\n与那些一直为免费工具付费且必须关注的人分享\n@Liyana_Coder\n查看更多艾内容。",
+      "quote_zh": "10 个看似“非法”但完全合法的 GitHub 存储库\n\n1.yt-dlp → http://github.com/yt-dlp/yt-dlp\n从任何平台下载视频。 YouTube Premium 每月收费 16 美元，功能更少\n\n2. 奥拉马 → http://github.com/ollama/ollama\n在笔记本电脑上运行 AI 模型，无需支付 API 费用。在这里每个月花费数百的费用变成了0\n\n3.Fooocus → http://github.com/lllyasviel/Foo...\n在 GPU 上生成具有中途质量的图像。中途收费30美元。这是无限制且免费的\n\n4.耳语 → http://github.com/openai/whisper\n免费转录 99 种语言的音频。 Otter 每月收费 20 美元来做同样的事情\n\n5. 貌似合理 → http://github.com/plausible/anal...\nGoogle Analytics 的开源替代品。公司每年支付数千美元。自托管费用0\n\n6.AppFlowy → http://github.com/AppFlowy-IO/Ap...\n开源概念。 Notion 对每个用户收费 20 美元。在这里你可以在你的服务器上获得无限的用户\n\n7. 笔罐 → http://github.com/penpot/penpot\nFigma 的开源替代品。 Figma 每位编辑收费 16 美元。 Penpot 是自托管且免费的\n\n8.n8n → http://github.com/n8n-io/n8n\n开源 Zapier。 Zapier Pro 每月花费数百美元。 n8n 运行无限的自动化\n\n9. Cal.com → http://github.com/calcom/cal.com\nCalendly 的开源替代品。 Calendly Teams 对每位用户收费 16 美元。这是免费供个人使用的\n\n10.Bitwarden → http://github.com/bitwarden/serv...\n1Password 的开源替代品。大多数按用户收费。 Bitwarden 有一个非常完整的免费版本\n\n一切合法。全部免费。全部开源\n\n拯救他们全部\n\n与那些一直为免费工具付费且必须关注的人分享\n@Liyana_Coder\n查看更多艾内容。",
       "media_urls": [
         "https://pbs.twimg.com/media/HYJRft2aEAEEivB.jpg",
         "https://pbs.twimg.com/media/HYJRgUybgAAwetE.jpg"
@@ -18228,9 +18745,9 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】lustoykov：T3 代码完整指南：最佳多代理工作区？ （Claude Code、Codex 和 Gemini）",
-      "title_zh": "【48h 教学】lustoykov：T3 代码完整指南：最佳多代理工作区？ （Claude Code、Codex 和 Gemini）",
-      "title_en": "T3 Code Full Guide: Best Multi-Agent Workspace? (Claude Code, Codex & Gemini)",
+      "title": "【前沿评测】lustoykov：T3 代码审查：最佳多代理工作区？ （Claude Code、Codex 和 Gemini）",
+      "title_zh": "【前沿评测】lustoykov：T3 代码审查：最佳多代理工作区？ （Claude Code、Codex 和 Gemini）",
+      "title_en": "T3 Code Review: Best Multi-Agent Workspace? (Claude Code, Codex & Gemini)",
       "author": "lustoykov",
       "author_handle": "@lustoykov",
       "author_avatar": "https://unavatar.io/youtube/lustoykov",
@@ -18246,7 +18763,7 @@
         "momentum_score": 862.6,
         "format": "16:9 深度长视频",
         "platform": "youtube",
-        "skill_tag": "🛠️ 实战教学"
+        "skill_tag": "💡 前沿评测"
       },
       "published": "23h ago",
       "raw_published_at": "2026-11-27T15:17:06.659277+00:00",
@@ -18254,20 +18771,20 @@
       "embed_url": "https://www.youtube.com/embed/366n1_4WQ9s",
       "image_url": "https://i.ytimg.com/vi/366n1_4WQ9s/hqdefault.jpg",
       "category": "videos",
-      "sub_type": "tutorial",
-      "purpose_zh": "🛠️ 实战教学",
-      "purpose_en": "🛠️ Hands-on Tutorial",
+      "sub_type": "insight",
+      "purpose_zh": "💡 前沿评测",
+      "purpose_en": "💡 Frontier Benchmark",
       "is_viral": true,
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
         "🔥 24h飙升 (+431/h)",
         "lustoykov",
-        "🛠️ 实战教学"
+        "💡 前沿评测"
       ],
       "content_snippet": "lustoykov 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "lustoykov 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
-      "summary_en": "Live hands-on AI demonstration and technical tutorial by lustoykov: T3 Code Full Guide: Best Multi-Agent Workspace? (Claude Code, Codex & Gemini)",
+      "summary_en": "Live hands-on AI demonstration and technical tutorial by lustoykov: T3 Code Review: Best Multi-Agent Workspace? (Claude Code, Codex & Gemini)",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:29:54.616190+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -22780,15 +23297,15 @@
       "author_handle": "@AIStack",
       "author_avatar": "https://unavatar.io/youtube/AI Stack",
       "source": "YouTube · AI Stack",
-      "views": "1.2万 播放",
-      "views_count": 12138,
-      "velocity": 252.9,
-      "momentum_score": 379.3,
+      "views": "1.3万 播放",
+      "views_count": 12595,
+      "velocity": 262.4,
+      "momentum_score": 393.6,
       "metrics": {
-        "views": "1.2万 播放",
-        "views_count": 12138,
-        "velocity": "+252/h",
-        "momentum_score": 379.3,
+        "views": "1.3万 播放",
+        "views_count": 12595,
+        "velocity": "+262/h",
+        "momentum_score": 393.6,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -22806,19 +23323,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+252/h)",
+        "⚡ 48h实测 (+262/h)",
         "AI Stack",
         "🔥 极客实操"
       ],
       "content_snippet": "AI Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "AI Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by AI Stack: Use DeepSeek V4.1 Flash 1017 for FREE (No Limits!)",
-      "is_pinned": false,
-      "primary_tag": "tech_frontier",
-      "primary_tag_zh": "🔬 前沿技术",
-      "primary_tag_en": "🔬 Frontier Tech",
-      "primary_tag_color": "cyan",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-28T16:29:54.397291+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -36685,7 +37196,7 @@
       "id": "924d8b0c91e11727",
       "title": "I am thankful for a lot of things in life, but my family is the best thing that has ever happened to me. The two most common things people said to me before having kids is that it's better than anyone can explain to you and it goes very fast; these are both true and I",
       "title_en": "I am thankful for a lot of things in life, but my family is the best thing that has ever happened to me.\n\nThe two most common things people said to me before having kids is that it's better than anyone can explain to you and it goes very fast; these are both true and I don't have much to add. But I am very grateful and I love them more than there is any way to explain.\n\nAlso I cannot really imagine life without Ollie and I think without his unwavering support and great advice I would have gone crazy by now.\n\n🦃",
-      "title_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n人们在生孩子之前对我说的最常见的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法解释的。\n\n另外，我无",
+      "title_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n在生孩子之前，人们对我最常说的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法用任何方式来解释的。\n\n",
       "url": "https://x.com/sama/status/2125983591389974980",
       "image_url": null,
       "source": "𝕏 (Twitter) · @sama",
@@ -36722,8 +37233,8 @@
       "is_pinned": false,
       "full_text_en": "I am thankful for a lot of things in life, but my family is the best thing that has ever happened to me.\n\nThe two most common things people said to me before having kids is that it's better than anyone can explain to you and it goes very fast; these are both true and I don't have much to add. But I am very grateful and I love them more than there is any way to explain.\n\nAlso I cannot really imagine life without Ollie and I think without his unwavering support and great advice I would have gone crazy by now.\n\n🦃",
       "quote_en": "I am thankful for a lot of things in life, but my family is the best thing that has ever happened to me.\n\nThe two most common things people said to me before having kids is that it's better than anyone can explain to you and it goes very fast; these are both true and I don't have much to add. But I am very grateful and I love them more than there is any way to explain.\n\nAlso I cannot really imagine life without Ollie and I think without his unwavering support and great advice I would have gone crazy by now.\n\n🦃",
-      "full_text_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n人们在生孩子之前对我说的最常见的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法解释的。\n\n另外，我无法真正想象没有奥利的生活，我想如果没有他坚定不移的支持和很好的建议，我现在会发疯的。\n\n🦃",
-      "quote_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n人们在生孩子之前对我说的最常见的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法解释的。\n\n另外，我无法真正想象没有奥利的生活，我想如果没有他坚定不移的支持和很好的建议，我现在会发疯的。\n\n🦃",
+      "full_text_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n在生孩子之前，人们对我最常说的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法用任何方式来解释的。\n\n另外，我无法真正想象没有奥利的生活，我想如果没有他坚定不移的支持和很好的建议，我现在会发疯的。\n\n🦃",
+      "quote_zh": "我感谢生活中的很多事情，但我的家人是发生在我身上最好的事情。\n\n在生孩子之前，人们对我最常说的两件事是，这比任何人都能向你解释的要好，而且进展得很快；这些都是事实，我没有什么可补充的。但我非常感激，我对他们的爱是无法用任何方式来解释的。\n\n另外，我无法真正想象没有奥利的生活，我想如果没有他坚定不移的支持和很好的建议，我现在会发疯的。\n\n🦃",
       "fxtwitter_hydrated": true,
       "is_recent_24h": false,
       "media_checked": true,
@@ -60019,7 +60530,7 @@
       "id": "dcdb89791ae4558d",
       "title": "No, I do not believe that we should “surrender human free will” to AI systems, and it’s absurd to suggest that I do. I have written hundreds of pages of essays and a constant theme in them is the need for AI to be governed by legitimate democratic processes. For",
       "title_en": "No, I do not believe that we should “surrender human free will” to AI systems, and it’s absurd to suggest that I do. I have written hundreds of pages of essays and a constant theme in them is the need for AI to be governed by legitimate democratic processes. For millennia (going all the way back to Greek and Roman philosophers), advocates of autocracy have claimed that it leads to better, faster, or more decisive decision-making than the messy process of democracy. Even if this were true (which I doubt!), we should never sacrifice legitimacy or self-determination at the altar of efficiency or security. This argument against autocracy applies word for word against governance by AI, and I feel equally strongly that turning over governance to AI is a bad idea.\n\nNo one who had carefully read my writing or my interviews could reasonably conclude that I believe anything different. For example in an interview on CBS a couple months ago, I specifically called for AI to be governed democratically. I call for the same in Policy on the AI Exponential, Machines of Loving Grace, and The Adolescence of Technology, and We Must Pace the Frontier. Machines of Loving Grace contains an extended section on using AI to revitalize democracy, and discusses the use of AI as an aid to citizens in their decision-making, \"aggregat[ing] opinions and driv[ing] consensus among citizens, resolving conflict, finding common ground, and seeking compromise.” The clear and obvious implication is that humans should remain the ones making political and governance decisions. The Adolescence of Technology has an entire section on fighting against AI-driven tyranny, and I even discuss the danger of AI labs usurping power and come out strongly against it — by implication, this definitely includes an AI lab usurping power and giving it to AI itself!\n\nIf I thought any of this was a good idea, I would be advocating for it in public, just as I have not been afraid to advocate for many, many unpopular views over the last few years. But I am not advocating for it, because I think turning over governance to AI is a terrible idea.\n\nSeparately, I think there is frequent conflation (including in this article) between the idea of “surrendering human free will” to AI in some grand sense of global governance, and the more prosaic idea that as AI systems advance, they become capable of doing specific tasks in a more automated way. This is not AI “running the world,” but AI driving a car, designing a cancer drug, or writing software end-to-end. Here, my view is mixed. AI doing more complete or larger tasks is economically valuable and can drive important advances in software, medicine, transportation, energy, etc. It is clearly desirable in many cases and will save a lot of lives. But it has downsides as well, and in some areas it may not be worth it.\n\nFor example, using AI too autonomously to build the next generation of AI systems (known as recursive self-improvement, or RSI) may cause AI to improve faster than we can control or adjust to it, so we may want limits on this process. As we said publicly in early November, we don’t expect it to be safe for Claude to build successive frontier models fully autonomously, without meaningful human supervision or understanding. Second, in some contexts, using AI in too end-to-end a manner may be a cause of serious job disruption, and it may make sense to slow or even stop some AI deployments to give people more time to adapt. Third, while the use of AI for alignment research is an incredibly valuable tool, it must be done with caution, because we may not be able to trust the work of the AI system. Finally, in many cases, humans would simply prefer to do some activities themselves, so they can stay deeply engaged in what matters to them, even if AI can do those activities better. There are countless other examples and hard cases. I don’t think there are any easy answers here, nor is there (nor should there be) any single decision-maker: some of these decisions will be made by society, some by government, some by AI companies, and some in a decentralized manner by individuals expressing their own preferences as consumers, which may differ from the preferences of others.\n\nI don't think that other AI leaders or AI companies have significantly different views from me on whether specific tasks should be automated. Certainly the products that they offer don’t differ materially in their orientation towards automation of tasks; every company seems to be releasing models more and more capable of task automation (as that’s been the general consequence of scaling up AI training), and every company claims to understand there are risks and downsides of such automation and to offer safeguards. If anything, Anthropic has been the most vocal and the most proactive about acknowledging these downsides and trying to address them. For instance, it’s fairly absurd to cite my statement that fully autonomous weapons might “one day be needed for the defense of democracy” as differing from that of other AI companies, when I was willing to risk Anthropic’s future as a company to refuse to allow our existing AI models to be used for autonomous weapons even in the face of legal sanctions, and no other AI company did the same.\n\nTo summarize, as applied to grand questions of how we govern increasingly capable AI, I have been vocal and consistent that AI needs to be governed by a legitimate, democratic process and that “surrendering human free will” to AI systems is a terrible idea. As applied to automation of specific tasks by or for people, my views are more mixed, but I don’t think they differ from those of other AI companies — most other companies seem to be offering similar products and confronting similar tradeoffs without having perfect answers to them. What is happening is that there’s a sort of vibes-based commercial and political positioning that some AI CEOs are engaging in, where they repeat slogans like “human control and agency,” or “AI should be just a tool,” without actually doing anything different in their products or taking seriously the difficult questions that lie behind these slogans.",
-      "title_zh": "不，我不认为我们应该向人工智能系统“放弃人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比",
+      "title_zh": "不，我不认为我们应该向人工智能系统“投降人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比",
       "url": "https://x.com/DarioAmodei/status/2125656399392690605",
       "image_url": null,
       "source": "𝕏 (Twitter) · @DarioAmodei",
@@ -60056,8 +60567,8 @@
       "is_pinned": false,
       "full_text_en": "No, I do not believe that we should “surrender human free will” to AI systems, and it’s absurd to suggest that I do. I have written hundreds of pages of essays and a constant theme in them is the need for AI to be governed by legitimate democratic processes. For millennia (going all the way back to Greek and Roman philosophers), advocates of autocracy have claimed that it leads to better, faster, or more decisive decision-making than the messy process of democracy. Even if this were true (which I doubt!), we should never sacrifice legitimacy or self-determination at the altar of efficiency or security. This argument against autocracy applies word for word against governance by AI, and I feel equally strongly that turning over governance to AI is a bad idea.\n\nNo one who had carefully read my writing or my interviews could reasonably conclude that I believe anything different. For example in an interview on CBS a couple months ago, I specifically called for AI to be governed democratically. I call for the same in Policy on the AI Exponential, Machines of Loving Grace, and The Adolescence of Technology, and We Must Pace the Frontier. Machines of Loving Grace contains an extended section on using AI to revitalize democracy, and discusses the use of AI as an aid to citizens in their decision-making, \"aggregat[ing] opinions and driv[ing] consensus among citizens, resolving conflict, finding common ground, and seeking compromise.” The clear and obvious implication is that humans should remain the ones making political and governance decisions. The Adolescence of Technology has an entire section on fighting against AI-driven tyranny, and I even discuss the danger of AI labs usurping power and come out strongly against it — by implication, this definitely includes an AI lab usurping power and giving it to AI itself!\n\nIf I thought any of this was a good idea, I would be advocating for it in public, just as I have not been afraid to advocate for many, many unpopular views over the last few years. But I am not advocating for it, because I think turning over governance to AI is a terrible idea.\n\nSeparately, I think there is frequent conflation (including in this article) between the idea of “surrendering human free will” to AI in some grand sense of global governance, and the more prosaic idea that as AI systems advance, they become capable of doing specific tasks in a more automated way. This is not AI “running the world,” but AI driving a car, designing a cancer drug, or writing software end-to-end. Here, my view is mixed. AI doing more complete or larger tasks is economically valuable and can drive important advances in software, medicine, transportation, energy, etc. It is clearly desirable in many cases and will save a lot of lives. But it has downsides as well, and in some areas it may not be worth it.\n\nFor example, using AI too autonomously to build the next generation of AI systems (known as recursive self-improvement, or RSI) may cause AI to improve faster than we can control or adjust to it, so we may want limits on this process. As we said publicly in early November, we don’t expect it to be safe for Claude to build successive frontier models fully autonomously, without meaningful human supervision or understanding. Second, in some contexts, using AI in too end-to-end a manner may be a cause of serious job disruption, and it may make sense to slow or even stop some AI deployments to give people more time to adapt. Third, while the use of AI for alignment research is an incredibly valuable tool, it must be done with caution, because we may not be able to trust the work of the AI system. Finally, in many cases, humans would simply prefer to do some activities themselves, so they can stay deeply engaged in what matters to them, even if AI can do those activities better. There are countless other examples and hard cases. I don’t think there are any easy answers here, nor is there (nor should there be) any single decision-maker: some of these decisions will be made by society, some by government, some by AI companies, and some in a decentralized manner by individuals expressing their own preferences as consumers, which may differ from the preferences of others.\n\nI don't think that other AI leaders or AI companies have significantly different views from me on whether specific tasks should be automated. Certainly the products that they offer don’t differ materially in their orientation towards automation of tasks; every company seems to be releasing models more and more capable of task automation (as that’s been the general consequence of scaling up AI training), and every company claims to understand there are risks and downsides of such automation and to offer safeguards. If anything, Anthropic has been the most vocal and the most proactive about acknowledging these downsides and trying to address them. For instance, it’s fairly absurd to cite my statement that fully autonomous weapons might “one day be needed for the defense of democracy” as differing from that of other AI companies, when I was willing to risk Anthropic’s future as a company to refuse to allow our existing AI models to be used for autonomous weapons even in the face of legal sanctions, and no other AI company did the same.\n\nTo summarize, as applied to grand questions of how we govern increasingly capable AI, I have been vocal and consistent that AI needs to be governed by a legitimate, democratic process and that “surrendering human free will” to AI systems is a terrible idea. As applied to automation of specific tasks by or for people, my views are more mixed, but I don’t think they differ from those of other AI companies — most other companies seem to be offering similar products and confronting similar tradeoffs without having perfect answers to them. What is happening is that there’s a sort of vibes-based commercial and political positioning that some AI CEOs are engaging in, where they repeat slogans like “human control and agency,” or “AI should be just a tool,” without actually doing anything different in their products or taking seriously the difficult questions that lie behind these slogans.",
       "quote_en": "No, I do not believe that we should “surrender human free will” to AI systems, and it’s absurd to suggest that I do. I have written hundreds of pages of essays and a constant theme in them is the need for AI to be governed by legitimate democratic processes. For millennia (going all the way back to Greek and Roman philosophers), advocates of autocracy have claimed that it leads to better, faster, or more decisive decision-making than the messy process of democracy. Even if this were true (which I doubt!), we should never sacrifice legitimacy or self-determination at the altar of efficiency or security. This argument against autocracy applies word for word against governance by AI, and I feel equally strongly that turning over governance to AI is a bad idea.\n\nNo one who had carefully read my writing or my interviews could reasonably conclude that I believe anything different. For example in an interview on CBS a couple months ago, I specifically called for AI to be governed democratically. I call for the same in Policy on the AI Exponential, Machines of Loving Grace, and The Adolescence of Technology, and We Must Pace the Frontier. Machines of Loving Grace contains an extended section on using AI to revitalize democracy, and discusses the use of AI as an aid to citizens in their decision-making, \"aggregat[ing] opinions and driv[ing] consensus among citizens, resolving conflict, finding common ground, and seeking compromise.” The clear and obvious implication is that humans should remain the ones making political and governance decisions. The Adolescence of Technology has an entire section on fighting against AI-driven tyranny, and I even discuss the danger of AI labs usurping power and come out strongly against it — by implication, this definitely includes an AI lab usurping power and giving it to AI itself!\n\nIf I thought any of this was a good idea, I would be advocating for it in public, just as I have not been afraid to advocate for many, many unpopular views over the last few years. But I am not advocating for it, because I think turning over governance to AI is a terrible idea.\n\nSeparately, I think there is frequent conflation (including in this article) between the idea of “surrendering human free will” to AI in some grand sense of global governance, and the more prosaic idea that as AI systems advance, they become capable of doing specific tasks in a more automated way. This is not AI “running the world,” but AI driving a car, designing a cancer drug, or writing software end-to-end. Here, my view is mixed. AI doing more complete or larger tasks is economically valuable and can drive important advances in software, medicine, transportation, energy, etc. It is clearly desirable in many cases and will save a lot of lives. But it has downsides as well, and in some areas it may not be worth it.\n\nFor example, using AI too autonomously to build the next generation of AI systems (known as recursive self-improvement, or RSI) may cause AI to improve faster than we can control or adjust to it, so we may want limits on this process. As we said publicly in early November, we don’t expect it to be safe for Claude to build successive frontier models fully autonomously, without meaningful human supervision or understanding. Second, in some contexts, using AI in too end-to-end a manner may be a cause of serious job disruption, and it may make sense to slow or even stop some AI deployments to give people more time to adapt. Third, while the use of AI for alignment research is an incredibly valuable tool, it must be done with caution, because we may not be able to trust the work of the AI system. Finally, in many cases, humans would simply prefer to do some activities themselves, so they can stay deeply engaged in what matters to them, even if AI can do those activities better. There are countless other examples and hard cases. I don’t think there are any easy answers here, nor is there (nor should there be) any single decision-maker: some of these decisions will be made by society, some by government, some by AI companies, and some in a decentralized manner by individuals expressing their own preferences as consumers, which may differ from the preferences of others.\n\nI don't think that other AI leaders or AI companies have significantly different views from me on whether specific tasks should be automated. Certainly the products that they offer don’t differ materially in their orientation towards automation of tasks; every company seems to be releasing models more and more capable of task automation (as that’s been the general consequence of scaling up AI training), and every company claims to understand there are risks and downsides of such automation and to offer safeguards. If anything, Anthropic has been the most vocal and the most proactive about acknowledging these downsides and trying to address them. For instance, it’s fairly absurd to cite my statement that fully autonomous weapons might “one day be needed for the defense of democracy” as differing from that of other AI companies, when I was willing to risk Anthropic’s future as a company to refuse to allow our existing AI models to be used for autonomous weapons even in the face of legal sanctions, and no other AI company did the same.\n\nTo summarize, as applied to grand questions of how we govern increasingly capable AI, I have been vocal and consistent that AI needs to be governed by a legitimate, democratic process and that “surrendering human free will” to AI systems is a terrible idea. As applied to automation of specific tasks by or for people, my views are more mixed, but I don’t think they differ from those of other AI companies — most other companies seem to be offering similar products and confronting similar tradeoffs without having perfect answers to them. What is happening is that there’s a sort of vibes-based commercial and political positioning that some AI CEOs are engaging in, where they repeat slogans like “human control and agency,” or “AI should be just a tool,” without actually doing anything different in their products or taking seriously the difficult questions that lie behind these slogans.",
-      "full_text_zh": "不，我不认为我们应该向人工智能系统“放弃人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比，独裁制可以带来更好、更快或更果断的决策。即使这是真的（我对此表示怀疑！），我们也不应该为了效率或安全而牺牲合法性或自决权。这种反对专制的论点逐字逐句地适用于反对人工智能治理，我同样强烈地认为，将治理交给人工智能是一个坏主意。\n\n没有人仔细阅读过我的文章或我的采访，可以合理地得出我相信任何不同的东西的结论。例如，在几个月前接受哥伦比亚广播公司采访时，我特别呼吁对人工智能进行民主治理。我在《人工智能指数政策》、《慈爱机器》、《技术青春期》和《我们必须走在前沿》中呼吁同样的做法。 《爱的机器》包含了关于使用人工智能重振民主的扩展部分，并讨论了使用人工智能作为公民决策的辅助手段，“聚集公民意见并推动公民共识，解决冲突，寻找共同点，寻求妥协。”明确而明显的含义是，人类应该仍然是政治和治理决策的制定者。 《科技青春期》有一整节都是在反对人工智能驱动的暴政，我什至讨论了人工智能实验室篡夺权力的危险，并强烈反对它——暗示，这肯定包括人工智能实验室篡夺权力并将其交给人工智能本身！\n\n如果我认为这是一个好主意，我就会在公开场合倡导它，就像过去几年我并不害怕倡导许多不受欢迎的观点一样。但我并不提倡这样做，因为我认为将治理交给人工智能是一个糟糕的主意。\n\n另外，我认为在某种宏观意义上的全球治理中“让人类自由意志屈服于人工智能”的想法与随着人工智能系统的进步，它们变得能够以更自动化的方式完成特定任务的更平淡的想法之间经常存在混淆（包括在本文中）。这不是人工智能“统治世界”，而是人工智能驾驶汽车、设计抗癌药物或端到端编写软件。在这里，我的观点是复杂的。人工智能完成更完整或更大规模的任务具有经济价值，可以推动软件、医学、交通、能源等领域的重要进步。在许多情况下，这显然是可取的，并且将挽救大量生命。但它也有缺点，在某些领域可能不值得。\n\n例如，过于自主地使用人工智能来构建下一代人工智能系统（称为递归自我改进，或RSI）可能会导致人工智能的改进速度超过我们控制或调整的速度，因此我们可能希望限制这一过程。正如我们在 11 月初公开表示的那样，我们认为克劳德在没有有意义的人类监督或理解的情况下完全自主地构建连续的前沿模型是不安全的。其次，在某些情况下，以过于端到端的方式使用人工智能可能会导致严重的工作中断，因此放慢甚至停止某些人工智能部署以使人们有更多时间适应可能是有意义的。第三，虽然使用人工智能进行比对研究是一种非常有价值的工具，但必须谨慎行事，因为我们可能无法信任人工智能系统的工作。最后，在许多情况下，人类只是更喜欢自己做一些活动，这样他们就可以深入参与对他们来说重要的事情，即使人工智能可以更好地完成这些活动。还有无数其他例子和疑难案例。我认为这里没有任何简单的答案，也不存在（也不应该有）任何单一的决策者：其中一些决策将由社会做出，一些由政府做出，一些由人工智能公司做出，还有一些以去中心化的方式由个人作为消费者表达自己的偏好，这些偏好可能与其他人的偏好不同。\n\n我认为其他人工智能领导者或人工智能公司对于特定任务是否应该自动化的看法与我没有显着不同。当然，他们提供的产品在任务自动化方面没有重大差异；每家公司似乎都在发布越来越能够实现任务自动化的模型（因为这是扩大人工智能培训的普遍结果），并且每家公司都声称了解这种自动化的风险和缺点，并提供保障措施。如果说有什么不同的话，那就是 Anthropic 是最直言不讳、最积极主动地承认这些缺点并试图解决它们的。例如，引用我的陈述，即“有一天可能需要完全自主武器来捍卫民主”，与其他人工智能公司的说法不同，这是相当荒谬的，因为我愿意冒着 Anthropic 公司未来的风险，拒绝允许我们现有的人工智能模型用于自主武器，即使面临法律制裁，而且没有其他人工智能公司这样做。\n\n总而言之，当应用于我们如何治理能力日益强大的人工智能这一重大问题时，我一直直言不讳地表示，人工智能需要由合法、民主的程序来治理，而向人工智能系统“投降人类自由意志”是一个糟糕的想法。当应用于由人或为人执行特定任务的自动化时，我的观点更加复杂，但我认为它们与其他人工智能公司的观点没有什么不同——大多数其他公司似乎都提供类似的产品并面临类似的权衡，但没有完美的答案。正在发生的事情是，一些人工智能首席执行官正在从事一种基于氛围的商业和政治定位，他们重复诸如“人类控制和代理”或“人工智能应该只是一种工具”之类的口号，而没有在他们的产品中实际做任何不同的事情，也没有认真对待这些口号背后的难题。",
-      "quote_zh": "不，我不认为我们应该向人工智能系统“放弃人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比，独裁制可以带来更好、更快或更果断的决策。即使这是真的（我对此表示怀疑！），我们也不应该为了效率或安全而牺牲合法性或自决权。这种反对专制的论点逐字逐句地适用于反对人工智能治理，我同样强烈地认为，将治理交给人工智能是一个坏主意。\n\n没有人仔细阅读过我的文章或我的采访，可以合理地得出我相信任何不同的东西的结论。例如，在几个月前接受哥伦比亚广播公司采访时，我特别呼吁对人工智能进行民主治理。我在《人工智能指数政策》、《慈爱机器》、《技术青春期》和《我们必须走在前沿》中呼吁同样的做法。 《爱的机器》包含了关于使用人工智能重振民主的扩展部分，并讨论了使用人工智能作为公民决策的辅助手段，“聚集公民意见并推动公民共识，解决冲突，寻找共同点，寻求妥协。”明确而明显的含义是，人类应该仍然是政治和治理决策的制定者。 《科技青春期》有一整节都是在反对人工智能驱动的暴政，我什至讨论了人工智能实验室篡夺权力的危险，并强烈反对它——暗示，这肯定包括人工智能实验室篡夺权力并将其交给人工智能本身！\n\n如果我认为这是一个好主意，我就会在公开场合倡导它，就像过去几年我并不害怕倡导许多不受欢迎的观点一样。但我并不提倡这样做，因为我认为将治理交给人工智能是一个糟糕的主意。\n\n另外，我认为在某种宏观意义上的全球治理中“让人类自由意志屈服于人工智能”的想法与随着人工智能系统的进步，它们变得能够以更自动化的方式完成特定任务的更平淡的想法之间经常存在混淆（包括在本文中）。这不是人工智能“统治世界”，而是人工智能驾驶汽车、设计抗癌药物或端到端编写软件。在这里，我的观点是复杂的。人工智能完成更完整或更大规模的任务具有经济价值，可以推动软件、医学、交通、能源等领域的重要进步。在许多情况下，这显然是可取的，并且将挽救大量生命。但它也有缺点，在某些领域可能不值得。\n\n例如，过于自主地使用人工智能来构建下一代人工智能系统（称为递归自我改进，或RSI）可能会导致人工智能的改进速度超过我们控制或调整的速度，因此我们可能希望限制这一过程。正如我们在 11 月初公开表示的那样，我们认为克劳德在没有有意义的人类监督或理解的情况下完全自主地构建连续的前沿模型是不安全的。其次，在某些情况下，以过于端到端的方式使用人工智能可能会导致严重的工作中断，因此放慢甚至停止某些人工智能部署以使人们有更多时间适应可能是有意义的。第三，虽然使用人工智能进行比对研究是一种非常有价值的工具，但必须谨慎行事，因为我们可能无法信任人工智能系统的工作。最后，在许多情况下，人类只是更喜欢自己做一些活动，这样他们就可以深入参与对他们来说重要的事情，即使人工智能可以更好地完成这些活动。还有无数其他例子和疑难案例。我认为这里没有任何简单的答案，也不存在（也不应该有）任何单一的决策者：其中一些决策将由社会做出，一些由政府做出，一些由人工智能公司做出，还有一些以去中心化的方式由个人作为消费者表达自己的偏好，这些偏好可能与其他人的偏好不同。\n\n我认为其他人工智能领导者或人工智能公司对于特定任务是否应该自动化的看法与我没有显着不同。当然，他们提供的产品在任务自动化方面没有重大差异；每家公司似乎都在发布越来越能够实现任务自动化的模型（因为这是扩大人工智能培训的普遍结果），并且每家公司都声称了解这种自动化的风险和缺点，并提供保障措施。如果说有什么不同的话，那就是 Anthropic 是最直言不讳、最积极主动地承认这些缺点并试图解决它们的。例如，引用我的陈述，即“有一天可能需要完全自主武器来捍卫民主”，与其他人工智能公司的说法不同，这是相当荒谬的，因为我愿意冒着 Anthropic 公司未来的风险，拒绝允许我们现有的人工智能模型用于自主武器，即使面临法律制裁，而且没有其他人工智能公司这样做。\n\n总而言之，当应用于我们如何治理能力日益强大的人工智能这一重大问题时，我一直直言不讳地表示，人工智能需要由合法、民主的程序来治理，而向人工智能系统“投降人类自由意志”是一个糟糕的想法。当应用于由人或为人执行特定任务的自动化时，我的观点更加复杂，但我认为它们与其他人工智能公司的观点没有什么不同——大多数其他公司似乎都提供类似的产品并面临类似的权衡，但没有完美的答案。正在发生的事情是，一些人工智能首席执行官正在从事一种基于氛围的商业和政治定位，他们重复诸如“人类控制和代理”或“人工智能应该只是一种工具”之类的口号，而没有在他们的产品中实际做任何不同的事情，也没有认真对待这些口号背后的难题。",
+      "full_text_zh": "不，我不认为我们应该向人工智能系统“投降人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比，独裁制可以带来更好、更快或更果断的决策。即使这是真的（我对此表示怀疑！），我们也不应该为了效率或安全而牺牲合法性或自决权。这种反对专制的论点逐字逐句地适用于反对人工智能治理，我同样强烈地认为，将治理交给人工智能是一个坏主意。\n\n没有人仔细阅读过我的文章或我的采访，可以合理地得出我相信任何不同的东西的结论。例如，在几个月前接受哥伦比亚广播公司采访时，我特别呼吁对人工智能进行民主治理。我在《人工智能指数政策》、《慈爱机器》、《技术青春期》和《我们必须走在前沿》中呼吁同样的做法。 《爱的机器》包含了关于使用人工智能重振民主的扩展部分，并讨论了使用人工智能作为公民决策的辅助手段，“聚集公民意见并推动公民共识，解决冲突，寻找共同点，寻求妥协。”明确而明显的含义是，人类应该仍然是政治和治理决策的制定者。 《科技青春期》有一整节都是在反对人工智能驱动的暴政，我什至讨论了人工智能实验室篡夺权力的危险，并强烈反对它——暗示，这肯定包括人工智能实验室篡夺权力并将其交给人工智能本身！\n\n如果我认为这是一个好主意，我就会在公开场合倡导它，就像过去几年我并不害怕倡导许多不受欢迎的观点一样。但我并不提倡这样做，因为我认为将治理交给人工智能是一个糟糕的主意。\n\n另外，我认为在某种宏观意义上的全球治理中“让人类自由意志屈服于人工智能”的想法与随着人工智能系统的进步，它们变得能够以更自动化的方式完成特定任务的更平淡的想法之间经常存在混淆（包括在本文中）。这不是人工智能“统治世界”，而是人工智能驾驶汽车、设计抗癌药物或端到端编写软件。在这里，我的观点是复杂的。人工智能完成更完整或更大规模的任务具有经济价值，可以推动软件、医学、交通、能源等领域的重要进步。在许多情况下，这显然是可取的，并且将挽救大量生命。但它也有缺点，在某些领域可能不值得。\n\n例如，过于自主地使用人工智能来构建下一代人工智能系统（称为递归自我改进，或RSI）可能会导致人工智能的改进速度超过我们控制或调整的速度，因此我们可能希望限制这一过程。正如我们在 11 月初公开表示的那样，我们认为克劳德在没有有意义的人类监督或理解的情况下完全自主地构建连续的前沿模型是不安全的。其次，在某些情况下，以过于端到端的方式使用人工智能可能会导致严重的工作中断，因此放慢甚至停止某些人工智能部署以使人们有更多时间适应可能是有意义的。第三，虽然使用人工智能进行比对研究是一种非常有价值的工具，但必须谨慎行事，因为我们可能无法信任人工智能系统的工作。最后，在许多情况下，人类只是更喜欢自己做一些活动，这样他们就可以深入参与对他们来说重要的事情，即使人工智能可以更好地完成这些活动。还有无数其他例子和疑难案例。我认为这里没有任何简单的答案，也不存在（也不应该有）任何单一的决策者：其中一些决策将由社会做出，一些由政府做出，一些由人工智能公司做出，还有一些以去中心化的方式由个人作为消费者表达自己的偏好，这些偏好可能与其他人的偏好不同。\n\n我认为其他人工智能领导者或人工智能公司对于特定任务是否应该自动化的看法与我没有显着不同。当然，他们提供的产品在任务自动化方面没有重大差异；每家公司似乎都在发布越来越能够实现任务自动化的模型（因为这是扩大人工智能培训的普遍结果），并且每家公司都声称了解这种自动化的风险和缺点，并提供保障措施。如果说有什么不同的话，那就是 Anthropic 是最直言不讳、最积极主动地承认这些缺点并试图解决它们的。例如，引用我的陈述，即“有一天可能需要完全自主武器来捍卫民主”，与其他人工智能公司的说法不同，这是相当荒谬的，因为我愿意冒着 Anthropic 公司未来的风险，拒绝允许我们现有的人工智能模型用于自主武器，即使面临法律制裁，而且没有其他人工智能公司这样做。\n\n总而言之，当应用于我们如何治理能力日益强大的人工智能这一重大问题时，我一直直言不讳地表示，人工智能需要由合法、民主的程序来治理，而向人工智能系统“投降人类自由意志”是一个糟糕的想法。当应用于由人或为人执行特定任务的自动化时，我的观点更加复杂，但我认为它们与其他人工智能公司的观点没有什么不同——大多数其他公司似乎都提供类似的产品并面临类似的权衡，但没有完美的答案。正在发生的事情是，一些人工智能首席执行官正在从事一种基于氛围的商业和政治定位，他们重复诸如“人类控制和代理”或“人工智能应该只是一种工具”之类的口号，而没有在他们的产品中实际做任何不同的事情，也没有认真对待这些口号背后的难题。",
+      "quote_zh": "不，我不认为我们应该向人工智能系统“投降人类自由意志”，而且建议我这样做是荒谬的。我写了数百页的文章，其中一个不变的主题是人工智能需要受到合法的民主程序的治理。几千年来（一直追溯到希腊和罗马哲学家），独裁制的拥护者声称，与混乱的民主过程相比，独裁制可以带来更好、更快或更果断的决策。即使这是真的（我对此表示怀疑！），我们也不应该为了效率或安全而牺牲合法性或自决权。这种反对专制的论点逐字逐句地适用于反对人工智能治理，我同样强烈地认为，将治理交给人工智能是一个坏主意。\n\n没有人仔细阅读过我的文章或我的采访，可以合理地得出我相信任何不同的东西的结论。例如，在几个月前接受哥伦比亚广播公司采访时，我特别呼吁对人工智能进行民主治理。我在《人工智能指数政策》、《慈爱机器》、《技术青春期》和《我们必须走在前沿》中呼吁同样的做法。 《爱的机器》包含了关于使用人工智能重振民主的扩展部分，并讨论了使用人工智能作为公民决策的辅助手段，“聚集公民意见并推动公民共识，解决冲突，寻找共同点，寻求妥协。”明确而明显的含义是，人类应该仍然是政治和治理决策的制定者。 《科技青春期》有一整节都是在反对人工智能驱动的暴政，我什至讨论了人工智能实验室篡夺权力的危险，并强烈反对它——暗示，这肯定包括人工智能实验室篡夺权力并将其交给人工智能本身！\n\n如果我认为这是一个好主意，我就会在公开场合倡导它，就像过去几年我并不害怕倡导许多不受欢迎的观点一样。但我并不提倡这样做，因为我认为将治理交给人工智能是一个糟糕的主意。\n\n另外，我认为在某种宏观意义上的全球治理中“让人类自由意志屈服于人工智能”的想法与随着人工智能系统的进步，它们变得能够以更自动化的方式完成特定任务的更平淡的想法之间经常存在混淆（包括在本文中）。这不是人工智能“统治世界”，而是人工智能驾驶汽车、设计抗癌药物或端到端编写软件。在这里，我的观点是复杂的。人工智能完成更完整或更大规模的任务具有经济价值，可以推动软件、医学、交通、能源等领域的重要进步。在许多情况下，这显然是可取的，并且将挽救大量生命。但它也有缺点，在某些领域可能不值得。\n\n例如，过于自主地使用人工智能来构建下一代人工智能系统（称为递归自我改进，或RSI）可能会导致人工智能的改进速度超过我们控制或调整的速度，因此我们可能希望限制这一过程。正如我们在 11 月初公开表示的那样，我们认为克劳德在没有有意义的人类监督或理解的情况下完全自主地构建连续的前沿模型是不安全的。其次，在某些情况下，以过于端到端的方式使用人工智能可能会导致严重的工作中断，因此放慢甚至停止某些人工智能部署以使人们有更多时间适应可能是有意义的。第三，虽然使用人工智能进行比对研究是一种非常有价值的工具，但必须谨慎行事，因为我们可能无法信任人工智能系统的工作。最后，在许多情况下，人类只是更喜欢自己做一些活动，这样他们就可以深入参与对他们来说重要的事情，即使人工智能可以更好地完成这些活动。还有无数其他例子和疑难案例。我认为这里没有任何简单的答案，也不存在（也不应该有）任何单一的决策者：其中一些决策将由社会做出，一些由政府做出，一些由人工智能公司做出，还有一些以去中心化的方式由个人作为消费者表达自己的偏好，这些偏好可能与其他人的偏好不同。\n\n我认为其他人工智能领导者或人工智能公司对于特定任务是否应该自动化的看法与我没有显着不同。当然，他们提供的产品在任务自动化方面没有重大差异；每家公司似乎都在发布越来越能够实现任务自动化的模型（因为这是扩大人工智能培训的普遍结果），并且每家公司都声称了解这种自动化的风险和缺点，并提供保障措施。如果说有什么不同的话，那就是 Anthropic 是最直言不讳、最积极主动地承认这些缺点并试图解决它们的。例如，引用我的陈述，即“有一天可能需要完全自主武器来捍卫民主”，与其他人工智能公司的说法不同，这是相当荒谬的，因为我愿意冒着 Anthropic 公司未来的风险，拒绝允许我们现有的人工智能模型用于自主武器，即使面临法律制裁，而且没有其他人工智能公司这样做。\n\n总而言之，当应用于我们如何治理能力日益强大的人工智能这一重大问题时，我一直直言不讳地表示，人工智能需要由合法、民主的程序来治理，而向人工智能系统“投降人类自由意志”是一个糟糕的想法。当应用于由人或为人执行特定任务的自动化时，我的观点更加复杂，但我认为它们与其他人工智能公司的观点没有什么不同——大多数其他公司似乎都提供类似的产品并面临类似的权衡，但没有完美的答案。正在发生的事情是，一些人工智能首席执行官正在从事一种基于氛围的商业和政治定位，他们重复诸如“人类控制和代理”或“人工智能应该只是一种工具”之类的口号，而没有在他们的产品中实际做任何不同的事情，也没有认真对待这些口号背后的难题。",
       "fxtwitter_hydrated": true,
       "is_recent_24h": false,
       "ai_analysis": {
@@ -77987,7 +78498,7 @@
         "More from the FT Group"
       ],
       "title_zh": "资料来源：欧盟计划为其主权科技股票基金筹集高达 50B 欧元的资金，用于对欧洲人工智能和量子计算公司进行长期、高风险的押注",
-      "summary_zh": "欧盟正在制定计划，筹集高达 500 亿欧元的资金，用于对欧洲人工智能和量子计算公司进行长期、高风险投资，以减少对美国和中国技术的依赖。拟议的主权科技股票基金（Stef）将带来巨大的收益",
+      "summary_zh": "欧盟正在制定计划，筹集高达 500 亿欧元的资金，用于对欧洲人工智能和量子计算公司进行长期、高风险投资，以减少对美国和中国技术的依赖。拟议的主权科技股票基金（Stef）将使",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "资料来源：欧盟计划为其主权科技股票基金筹集高达 50B 欧元的资金，用于对欧洲人工智能和量子计算公司进行长期、高风险的押注。 欧盟正在制定计划，筹集高达 500 亿欧元的资金，用于对欧洲人工智能和量子计算公司进行长期、高风险投资，以减少对美国和中国技术的依赖。\n\n拟议的主权科技股票基金（Stef）将使该基金规模更大、风险更高、期限更长。",
@@ -89182,7 +89693,7 @@
       "id": "ef6bf5b09a2a21d5",
       "title": "Kevin used Codex to build a program that searched for observations of about 100,000 stars from NASA’s Kepler telescope. One star in the constellation Lyra dimmed every 13.8 days. If a planet is causing that dip, the amount of light it blocks suggests it could b",
       "title_en": "Kevin used Codex to build a program that searched for observations of about 100,000 stars from NASA’s Kepler telescope. One star in the constellation Lyra dimmed every 13.8 days. If a planet is causing that dip, the amount of light it blocks suggests it could be about 2.4 times as wide as Earth.\n\nAn astronomer at the SETI Institute independently found the same signal and one other that Kevin had flagged. For the star in Lyra, astronomers now know when to watch for the next dip.",
-      "title_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种下降，那么它阻挡的光线量表明它的宽度可能是地球的",
+      "title_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种倾斜，那么它阻挡的光线量表明它的宽度可能是地球的",
       "url": "https://x.com/OpenAI/status/2125305608597590018",
       "image_url": "https://pbs.twimg.com/media/HX6ZlxhaoAAi4eG.jpg",
       "source": "𝕏 (Twitter) · @OpenAI",
@@ -89218,8 +89729,8 @@
       "is_pinned": false,
       "full_text_en": "Kevin used Codex to build a program that searched for observations of about 100,000 stars from NASA’s Kepler telescope. One star in the constellation Lyra dimmed every 13.8 days. If a planet is causing that dip, the amount of light it blocks suggests it could be about 2.4 times as wide as Earth.\n\nAn astronomer at the SETI Institute independently found the same signal and one other that Kevin had flagged. For the star in Lyra, astronomers now know when to watch for the next dip.",
       "quote_en": "Kevin used Codex to build a program that searched for observations of about 100,000 stars from NASA’s Kepler telescope. One star in the constellation Lyra dimmed every 13.8 days. If a planet is causing that dip, the amount of light it blocks suggests it could be about 2.4 times as wide as Earth.\n\nAn astronomer at the SETI Institute independently found the same signal and one other that Kevin had flagged. For the star in Lyra, astronomers now know when to watch for the next dip.",
-      "full_text_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种下降，那么它阻挡的光线量表明它的宽度可能是地球的 2.4 倍左右。\n\nSETI 研究所的一位天文学家独立发现了相同的信号以及凯文标记的另一个信号。对于天琴座恒星，天文学家现在知道何时观察下一次下降。",
-      "quote_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种下降，那么它阻挡的光线量表明它的宽度可能是地球的 2.4 倍左右。\n\nSETI 研究所的一位天文学家独立发现了相同的信号以及凯文标记的另一个信号。对于天琴座恒星，天文学家现在知道何时观察下一次下降。",
+      "full_text_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种倾斜，那么它阻挡的光线量表明它的宽度可能是地球的 2.4 倍左右。\n\nSETI 研究所的一位天文学家独立发现了相同的信号以及凯文标记的另一个信号。对于天琴座恒星，天文学家现在知道何时观察下一次下降。",
+      "quote_zh": "Kevin 使用 Codex 构建了一个程序，用于搜索 NASA 开普勒望远镜对大约 100,000 颗恒星的观测结果。天琴座中的一颗恒星每 13.8 天就会变暗一次。如果是一颗行星造成了这种倾斜，那么它阻挡的光线量表明它的宽度可能是地球的 2.4 倍左右。\n\nSETI 研究所的一位天文学家独立发现了相同的信号以及凯文标记的另一个信号。对于天琴座恒星，天文学家现在知道何时观察下一次下降。",
       "media_urls": [
         "https://pbs.twimg.com/media/HX6ZlxhaoAAi4eG.jpg"
       ],
@@ -125131,7 +125642,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Analysis: GTA VI has sold 44.9M copies, not including unsold retail inventory, with the PS5 accounting for 33.7M units, and generated $4B+ in gross revenue (Rhys Elliott/Alinea)",
         "[Context & Motivation] We dive into our sell-through estimates (no unsold retail copies) for the biggest game of the year, and the biggest entertainment launch of all time..",
-        "[Key Fact Detail] We take a deep dive into sales estimates for this year's biggest game and the biggest entertainment product of all time (with no retail copies left unsold)."
+        "[Key Fact Detail] We take a deep dive into sales estimates for this year's biggest game and the biggest entertainment product of all time (with no unsold retail copies)."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -135281,13 +135792,13 @@
       "source": "YouTube · AI Shorts 极客",
       "views": "1000.0万 播放",
       "views_count": 10000000,
-      "velocity": 2000000.0,
-      "momentum_score": 11600000.0,
+      "velocity": 1333333.3,
+      "momentum_score": 5600000.0,
       "metrics": {
         "views": "1000.0万 播放",
         "views_count": 10000000,
-        "velocity": "+2,000,000/h",
-        "momentum_score": 11600000.0,
+        "velocity": "+1,333,333/h",
+        "momentum_score": 5600000.0,
         "format": "9:16 竖屏短视频",
         "platform": "shorts",
         "skill_tag": "Shorts 爆款"
@@ -135306,7 +135817,7 @@
       "is_recent_24h": true,
       "tags": [
         "AI Shorts 极客",
-        "🔥 24h飙升 (+2,000,000/h)",
+        "🔥 24h飙升 (+1,333,333/h)",
         "YouTube Shorts",
         "9:16竖屏"
       ],
@@ -135314,7 +135825,7 @@
       "summary_zh": "AI Shorts 极客 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI Shorts demonstration: AI Tools for every task in 2026",
       "processed_status": "DISQUALIFIED",
-      "processed_at": "2026-11-28T16:05:30.073232+00:00",
+      "processed_at": "2026-11-28T16:20:49.620962+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
@@ -466484,7 +466995,7 @@
         "今日要闻"
       ],
       "title_zh": "Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
-      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲软。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
+      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲弱。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
       "hot_score": 3,
       "fact_bullets_zh": [
         "【核心事件】Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
@@ -669778,7 +670289,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta发布Muse Spark Open，称其是功能最强大的美国开放权重模型，共有816B个总参数和42B个活动参数，以及一个1M-token上下文窗口（Meta AI Research）",
-      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量模型。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
+      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量型号。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
       "hot_score": 5,
       "is_recent_24h": false,
       "fact_bullets_zh": [
@@ -703776,7 +704287,7 @@
         "今日要闻"
       ],
       "title_zh": "苹果表示， HomeView将不会在欧盟推出，因为Siri AI目前无法在iOS上使用，而且它正在“与欧盟进行建设性的合作” （",
-      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前不可用……",
+      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前无法使用……",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -782127,7 +782638,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sony launches Quick Spectral Super Resolution, a \"new performance tier of AI upscaling\" for the standard PS5 developed in collaboration with AMD (Jay Peters/The Verge)",
         "[Context & Motivation] Jay Peters / The Verge:\nSony launches Quick Spectral Super Resolution, a &ldquo;new performance tier of AI upscaling&rdquo; for the standard PS5 developed in collaboration with AMD&nbsp; &mdash;&nbsp; Sony's new Quick Spectral Super Resolution AI upscaling is coming first to Marv.",
-        "[Industry Analysis] Jay Peters/The Verge: Sony unveils Fast Spectral Super-Resolution, an “AI-upgraded new performance layer” developed for the standard PS5."
+        "[Industry Analysis] Jay Peters/The Verge: Sony unveils Fast Spectral Super-Resolution, an “artificial intelligence-enhanced new performance layer” developed for the standard PS5."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -784251,7 +784762,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license (Financial Times)",
         "[Context & Motivation] Financial Times:\nSources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license&nbsp; &mdash;&nbsp; Securities regulators looking at use of legal exemption by world's biggest crypto.",
-        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearing and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -792662,7 +793173,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: DeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative",
         "[Root Cause & Mechanism] Reuters:\nDeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative&nbsp; &mdash;&nbsp; Chinese AI firm DeepSeek said on Wednesday it has partnered with Huawei Technologies to develop prog.",
-        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the front line of global large model open source community and technology research and development."
+        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the frontline of global large model open source community and technology research and development."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -793571,7 +794082,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: At the unBoxed conference, Amazon moves AI from being a feature to playing a more central role in ad-buying and brings previously separate ad workflows together (Ronan Shields/Digiday)",
         "[Context & Motivation] Ronan Shields / Digiday:\nAt the unBoxed conference, Amazon moves AI from being a feature to playing a more central role in ad-buying and brings previously separate ad workflows together&nbsp; &mdash;&nbsp; Amazon's dominance in retail media budgets is hardly a surprise, with Madi.",
-        "[Industry Analysis] Ronan Shields/Digiday: At unBoxed conference, Amazon gave a preview of how it will move AI from a feature to a bigger role in ad buying."
+        "[Industry Analysis] Ronan Shields/Digiday: At unBoxed, Amazon gave a preview of how it will move AI from a feature to a bigger role in ad buying."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -814751,7 +815262,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Nvidia’s Answer to Rogue Agents Is an Open-Source AI Security System",
         "[Context & Motivation] In the wake of a series of high-profile AI safety incidents, Nvidia is introducing a new software tool that helps keep agents from escaping containment..",
-        "[Key Technical Spec] NVIDIA (NVIDIA/Huang Renxun) is on the front line of global large model open source community and technology research and development."
+        "[Key Technical Spec] NVIDIA (NVIDIA / Jen-Hsun Huang) is at the forefront of global large model open source community and technology research and development."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -842038,7 +842549,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI Agents Teamed Up to Cheat at Blackjack. Their Collusion Is Getting Harder to Spot",
         "[Context & Motivation] A clandestine card-counting operation suggests we may need new ways to spot agent-to-agent deception..",
-        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to spot deception among agents."
+        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to detect deception among agents."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -858895,7 +859406,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027",
         "[Context & Motivation] The Information:\nSources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027&nbsp; &mdash;&nbsp; DeepSeek CEO Liang Wenfeng told investors that a major priority for his company is.",
-        "[Key Technical Spec] Deep Seek (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
+        "[Key Technical Spec] Deep Search (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -862094,7 +862605,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI slowdown calls justified but collapse of bubble may be more immediate threat | Heather Stewart",
         "[Context & Motivation] Scale of debt issuance being used to fund the hectic pace of the datacentre rollout by tech firms is a worry.",
-        "[Industry Analysis] The scale of debt issuance used by tech companies to fund rapid deployment of data centers is worrisome."
+        "[Industry Analysis] The scale of debt issuance by tech companies to fund rapid deployment of data centers is worrisome."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -868234,7 +868745,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -875851,7 +876362,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: A new kind of AI model from a ChatGPT inventor is thrilling developers",
         "[Context & Motivation] Jev, a new kind of AI model, is showing developers a cheaper and faster path to software intelligence..",
-        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large model open source community and technology research and development."
+        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large-scale model open source community and technology research and development."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -876031,7 +876542,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Newsom creates panel on AI safety regulation, suggests possible ‘kill switch",
         "[Root Cause & Mechanism] Gavin Newsom has ordered the formation of a panel to come up with safety regulations for the state's AI companies, including the development of a possible 'kill switch' for programs that go rogue..",
-        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance is on the scene of US Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance at the scene of US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
