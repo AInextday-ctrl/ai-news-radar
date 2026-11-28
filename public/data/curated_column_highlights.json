@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 16:06:24 UTC",
+  "generated_at": "2026-11-28 16:30:34 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 16:06:24 UTC",
+      "updated_at": "2026-11-28 16:30:34 UTC",
       "headline_item": {
-        "id": "ac4ff8a3f4c0028d",
+        "id": "ff576df1623b210a",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英国议会要求Anthropic提交未删减AI安全报告",
-        "title_en": "UK Parliament demands unredacted METR safety report after Anthropic redacts most of the evidence",
-        "source": "THE DECODER",
-        "author": "Matthias Bastian",
-        "cover_image": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
-        "image_url": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
-        "published_at": "2026-11-28T13:42:00+00:00",
-        "url": "https://the-decoder.com/uk-parliament-demands-unredacted-metr-safety-report-after-anthropic-redacts-most-of-the-evidence/",
-        "event_summary_zh": "英国议会商业委员会致函Anthropic，要求披露METR安全报告的完整原始版本及删减原因",
-        "event_summary_en": "Liam Byrne, Chair of the UK House of Commons Business Committee, has formally requested Pip White, Anthropic's head of UK and Ireland, to provide the unredacted version of the November 5 METR safety report by December 4. The committee is probing the internal acceleration of AI development and the rationale behind Anthropic’s decision to redact critical evidence from the assessment.",
+        "title_zh": "美国国防供应链产能受限，AI数据中心竞争挤压制造资源",
+        "title_en": "AI data centre boom piles pressure on stressed US defence sector",
+        "source": "Financial Times",
+        "author": "Christian Davies",
+        "cover_image": "https://ainewsradar.xyz/images/ft_fbb9152809594afd.jpg",
+        "image_url": "https://ainewsradar.xyz/images/ft_fbb9152809594afd.jpg",
+        "published_at": "2026-11-28T16:15:03+00:00",
+        "url": "https://www.ft.com/content/76143592-b1c8-42d2-bf4c-17aa87255467?accessToken=zwAAAaIgiLyjkc92FDWSschC0tO_TBeqhyVUZw.MEQCIBmgVqJJzHOv1Qe-PIiWUFFtTF5ylTNetqBdlwsyHc7_AiAChLJ-vCeIaMVO5WUFLlz5TOaszBKx430YqEkEKnp9BA&sharetype=gift&token=838699d9-46f1-4d5e-8012-243438eac6c0",
+        "event_summary_zh": "美国国防工业面临产能瓶颈，AI数据中心建设引发的资源挤压与高标准合规门槛阻碍了核心零部件的大规模扩产",
+        "event_summary_en": "The U.S. defense sector faces severe production bottlenecks as record-high demand meets supply chain constraints. Aggravated by intense resource competition from AI data center expansion and stringent compliance requirements like ITAR and CMMC, defense contractors struggle to translate theoretical capacity into qualified output.",
         "core_facts_zh": [
-          "【核心事件】英国下议院商业委员会主席Liam Byrne、Anthropic负责人Pip White在英国议会调查听证程序：要求提交METR报告未删减原件并解释删减动机",
-          "【起因与机理】报告显示Anthropic研发速率提升系数高达1.3至3倍且缺乏明显瓶颈，议会认为公众知情权被人为屏蔽",
-          "【关键数据与实测】报告显示Anthropic研发进度提速达3倍，但因核心证据被隐藏引发监管质疑。",
-          "【各方立场与态度】设定12月4日为提交截止期限，重点审查AI安全评估中的信息透明度与合规性。"
+          "【核心事件】美国国防工业、航空航天工业协会（AIA）、普华永道（PwC）在美国国防制造供应链：国防生产能力无法满足急剧扩大的订单需求，面临技术数据保护与制造资源双重制约",
+          "【起因与机理】AI基建争夺制造资源、国防合规门槛高以及熟练工程师与合规供应链的稀缺",
+          "【商业与财务细节】国防与商业航天订单积压处于历史峰值，但实际交付能力与需求严重脱节。",
+          "【各方立场与态度】IT与网络安全合规（CMMC/ITAR）构成了国防制造业极高的准入门槛。"
         ],
         "core_facts_en": [
-          "[Core Event] Liam Byrne (UK MP), Pip White (Anthropic UK/Ireland Head) (UK Parliamentary inquiry): Demand for the unredacted METR report and justification for redactions",
-          "[Root Cause & Mechanism] The report indicated 1.3x-3x acceleration in development with no bottlenecks, raising concerns over transparency",
-          "[Key Fact Detail] UK Parliament demands the original, unredacted METR AI safety report from Anthropic.",
-          "[Key Position & Outlook] December 4 deadline set to address transparency concerns in frontier AI safety assessments."
+          "[Core Event] U.S. Aerospace and Defense Industry, Aerospace Industries Association (AIA), PwC: Inability to scale production to meet record backlogs due to compliance hurdles and resource scarcity",
+          "[Root Cause & Mechanism] Competition from AI data center infrastructure and stringent regulatory standards (ITAR/CMMC)",
+          "[Regulatory & Investigation Focus] Record-high defense backlogs met with restricted production scalability.",
+          "[Industry Impact & Outlook] High regulatory hurdles (ITAR/CMMC) creating exclusionary supply chain barriers."
         ],
-        "industry_impact_zh": "此次博弈不仅是透明度之争，更是监管机构试图穿透“商业机密”围墙以评估前沿AI模型外溢风险的范式转移。Anthropic对关键证据的删减反映了顶尖AI实验室在履行安全评估承诺与保护极端技术壁垒之间的剧烈冲突，预示着各国政府将加速建立超越企业自愿披露的强制性评估框架。",
-        "industry_impact_en": "This confrontation signals a paradigm shift where regulators are piercing 'trade secret' defenses to quantify frontier AI risks. Anthropic's redactions highlight the inherent tension between safety pledges and intellectual property protection, signaling that governments are moving toward mandatory disclosure frameworks that supersede voluntary industry reporting."
+        "industry_impact_zh": "国防制造正面临向“数字主权”与“物理产能”双重高门槛转型的阵痛，AI基础设施的无序扩张已对国家安全供应链造成实质性挤压。未来政府势必出台强制性分配机制，将关键制造资源从民用数据中心向高价值军事需求倾斜，行业准入门槛将进一步抬高。",
+        "industry_impact_en": "Defense manufacturing is at an inflection point where digital sovereignty and physical capacity mandates collide. The unchecked expansion of AI data centers is creating structural resource competition; expect government intervention to enforce priority allocation, effectively raising barriers to entry for civilian industrial players."
       },
       "headlines": [
+        {
+          "id": "ff576df1623b210a",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国国防供应链产能受限，AI数据中心竞争挤压制造资源",
+          "title_en": "AI data centre boom piles pressure on stressed US defence sector",
+          "source": "Financial Times",
+          "author": "Christian Davies",
+          "cover_image": "https://ainewsradar.xyz/images/ft_fbb9152809594afd.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_fbb9152809594afd.jpg",
+          "published_at": "2026-11-28T16:15:03+00:00",
+          "url": "https://www.ft.com/content/76143592-b1c8-42d2-bf4c-17aa87255467?accessToken=zwAAAaIgiLyjkc92FDWSschC0tO_TBeqhyVUZw.MEQCIBmgVqJJzHOv1Qe-PIiWUFFtTF5ylTNetqBdlwsyHc7_AiAChLJ-vCeIaMVO5WUFLlz5TOaszBKx430YqEkEKnp9BA&sharetype=gift&token=838699d9-46f1-4d5e-8012-243438eac6c0",
+          "event_summary_zh": "美国国防工业面临产能瓶颈，AI数据中心建设引发的资源挤压与高标准合规门槛阻碍了核心零部件的大规模扩产",
+          "event_summary_en": "The U.S. defense sector faces severe production bottlenecks as record-high demand meets supply chain constraints. Aggravated by intense resource competition from AI data center expansion and stringent compliance requirements like ITAR and CMMC, defense contractors struggle to translate theoretical capacity into qualified output.",
+          "core_facts_zh": [
+            "【核心事件】美国国防工业、航空航天工业协会（AIA）、普华永道（PwC）在美国国防制造供应链：国防生产能力无法满足急剧扩大的订单需求，面临技术数据保护与制造资源双重制约",
+            "【起因与机理】AI基建争夺制造资源、国防合规门槛高以及熟练工程师与合规供应链的稀缺",
+            "【商业与财务细节】国防与商业航天订单积压处于历史峰值，但实际交付能力与需求严重脱节。",
+            "【各方立场与态度】IT与网络安全合规（CMMC/ITAR）构成了国防制造业极高的准入门槛。"
+          ],
+          "core_facts_en": [
+            "[Core Event] U.S. Aerospace and Defense Industry, Aerospace Industries Association (AIA), PwC: Inability to scale production to meet record backlogs due to compliance hurdles and resource scarcity",
+            "[Root Cause & Mechanism] Competition from AI data center infrastructure and stringent regulatory standards (ITAR/CMMC)",
+            "[Regulatory & Investigation Focus] Record-high defense backlogs met with restricted production scalability.",
+            "[Industry Impact & Outlook] High regulatory hurdles (ITAR/CMMC) creating exclusionary supply chain barriers."
+          ],
+          "industry_impact_zh": "国防制造正面临向“数字主权”与“物理产能”双重高门槛转型的阵痛，AI基础设施的无序扩张已对国家安全供应链造成实质性挤压。未来政府势必出台强制性分配机制，将关键制造资源从民用数据中心向高价值军事需求倾斜，行业准入门槛将进一步抬高。",
+          "industry_impact_en": "Defense manufacturing is at an inflection point where digital sovereignty and physical capacity mandates collide. The unchecked expansion of AI data centers is creating structural resource competition; expect government intervention to enforce priority allocation, effectively raising barriers to entry for civilian industrial players."
+        },
         {
           "id": "ac4ff8a3f4c0028d",
           "tag_zh": "📰 业界动态",
@@ -91,41 +120,12 @@
           ],
           "industry_impact_zh": "大模型参数狂飙到数万亿之后，AI 的物理对手终于从算法工程师变成了国家电网。算力扩张的终点不是数学极限，而是变压器与输电线路的吞吐上限。谁能锁定长期稳定的清洁能源供给，谁才能在接下来的算力耐力赛中站稳脚跟。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "c3e56227deff7379",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "Google DeepMind发布通用能力评测基准",
-          "title_en": "Google Deepmind's \"Humanity's First Exam\"shows top AI models still fail simple everyday tasks under repeated runs",
-          "source": "THE DECODER",
-          "author": "Matthias Bastian",
-          "cover_image": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
-          "image_url": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
-          "published_at": "2026-11-28T11:12:30+00:00",
-          "url": "https://the-decoder.com/google-deepminds-humanitys-first-exam-shows-top-ai-models-still-fail-simple-everyday-tasks-under-repeated-runs/",
-          "event_summary_zh": "Google DeepMind推出“人类首场考试”基准，旨在评估模型在重复任务中的鲁棒性而非极限峰值性能",
-          "event_summary_en": "Google DeepMind has introduced 'Humanity's First Exam,' a benchmark designed to evaluate AI model robustness in everyday tasks rather than peak performance. Early results indicate that while leading models can solve nearly all task families in single instances, none remain error-free across repeated runs and variations.",
-          "core_facts_zh": [
-            "【核心事件】谷歌深度思维在AI能力评测领域：发布旨在验证模型可靠性的基准测试工具，量化长期运行与任务变化的抗干扰能力",
-            "【起因与机理】针对现有AI测试过度关注极限智力表现的局限性，尝试建立更符合生产级部署的可靠性度量体系",
-            "【关键技术规格】基准测试重心由模型峰值智力转向全链路运行鲁棒性。",
-            "【行业影响与走向】将直接影响后续大模型在复杂自动化流程中的部署信任度评级。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google DeepMind (AI benchmarking domain): Launched a benchmark focused on reliability and consistency across repeated executions",
-            "[Root Cause & Mechanism] To shift focus from peak theoretical capability to industrial-grade deployment stability",
-            "[Key Technical Spec] Focus shift from peak intelligence to system robustness.",
-            "[Key Position & Outlook] Implications for trust-level assessment in industrial automation."
-          ],
-          "industry_impact_zh": "该基准明确了AI从原型开发走向工业级生产的痛点，即在非确定性场景下的高频错误积累（Stochastic Failure）。当前的行业共识正在从“单一指标领先”转向“系统工程鲁棒性”，这将直接改变后续大规模AI基建的测试逻辑与算法优化优先级。",
-          "industry_impact_en": "The benchmark underscores the transition from prototype performance to industrial-grade reliability, specifically addressing the cumulative stochastic failures in real-world environments. This shift signals a broader industry trend toward prioritizing system-level robustness over peak benchmark scores for enterprise-grade AI deployment."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 16:06:24 UTC",
+      "updated_at": "2026-11-28 16:30:34 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -175,34 +175,6 @@
           },
           "published_at": "2026-11-28T07:41:56+00:00",
           "url": "https://x.com/AravSrinivas/status/2126582346937930238"
-        },
-        {
-          "id": "eedab5a5163527c6",
-          "name": "Swyx (Shawn Wang)",
-          "handle": "@swyx",
-          "role_zh": "AI Engineer Foundation / Latent Space 主理人",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/swyx",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "上自 2023 年以来，前沿和近前沿实验室的数量每年都增加一倍，这是迄今为止最大的存在，反驳了惨痛的教训是人工智能产业经济的唯一决定因素。 @saranormous 称之为神经多样性模型，基本上它是驱动特工实验室和人工智能工程生死存亡的最重要的宏观因素。",
-          "event_context_en": "google has a new tibo, spawning just as neon is the hottest frontier model in the world. banked resets and all\n\nthis is ",
-          "quote_zh": "谷歌有一个新的 tibo，就像 neon 是世界上最热门的前沿模型一样诞生。银行重置和所有\n\n这是一个完全焕发活力的 GDM，与我记忆中的 Gemini 2.5 以来我们从未见过它不同。 @latentspacepod 即将发表文章，但基本上自 2023 年以来，前沿和近前沿实验室的数量每年都增加一倍，这是迄今为止最大的存在，反驳了惨痛的教训是人工智能产业经济的唯一决定因素。 @saranormous 称之为神经多样性模型，基本上它是驱动特工实验室和人工智能工程生死存亡的最重要的宏观因素。",
-          "quote_en": "google has a new tibo, spawning just as neon is the hottest frontier model in the world. banked resets and all\n\nthis is a completely revitalized GDM unlike which we have not seen since basically Gemini 2.5 in my memory. writeup coming @latentspacepod but basically the # of frontier and near-frontier labs has ~doubled every year since 2023 and that’s by far the biggest existence disproof that the bitter lesson is the sole determinant of ai industrial economics. @saranormous calls it model neurodiversity and basically its the single most impt macro factor driving the life/death of agent labs and ai engineering.",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-27T16:30:00+00:00",
-          "url": "https://x.com/swyx/status/2126352854394790172"
         },
         {
           "id": "66d33ed24d1b30ae",
@@ -287,12 +259,40 @@
           },
           "published_at": "2026-11-28T14:10:51+00:00",
           "url": "https://x.com/gumroad/status/2126680224225996950"
+        },
+        {
+          "id": "bf3faeb4f2dcf3cb",
+          "name": "@MotoGP",
+          "handle": "@MotoGP",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/MotoGP",
+          "topic_zh": "@MotoGP 行业前沿观察",
+          "topic_en": "@MotoGP on AI",
+          "event_context_zh": "据 𝕏 (Twitter) 报道（技术焦点：硅谷焦点推文）：灯亮了...哦不！马克的自行车着火了！ 🔥😱 #巴伦西亚GP 🏁，更多技术实测与行业影响持续跟踪。",
+          "event_context_en": "Lights ou...OH NO! MARC'S BIKE IS ON FIRE! 🔥😱 #ValenciaGP 🏁",
+          "quote_zh": "灯亮了...哦不！马克的自行车着火了！ 🔥😱 #巴伦西亚GP 🏁",
+          "quote_en": "Lights ou...OH NO! MARC'S BIKE IS ON FIRE! 🔥😱 #ValenciaGP 🏁",
+          "thesis_zh": "深入探讨@MotoGP 行业前沿观察的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in @MotoGP on AI, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-28T14:04:34+00:00",
+          "url": "https://x.com/MotoGP/status/2126678641480204448"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 16:06:24 UTC",
+      "updated_at": "2026-11-28 16:30:34 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
