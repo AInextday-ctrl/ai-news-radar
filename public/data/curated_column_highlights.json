@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 05:55:38 UTC",
+  "generated_at": "2026-11-28 06:05:25 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 05:55:38 UTC",
+      "updated_at": "2026-11-28 06:05:25 UTC",
       "headline_item": {
-        "id": "3db6d0bf17791154",
+        "id": "79feed5f569d28d8",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美国MATCH法案拟禁ASML对华设备服务",
-        "title_en": "How the MATCH Act could backfire by barring ASML from its ~350 immersion scanners in China, letting rivals service and reverse engineer them, and hire its staff (LithoWar)",
-        "source": "LithoWar",
-        "author": "LithoWar",
-        "cover_image": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
-        "image_url": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
-        "published_at": "2026-11-28T02:00:01+00:00",
-        "url": "https://lithowar.com/lithography-war/",
-        "event_summary_zh": "MATCH法案拟禁止ASML在中国提供光刻机售后服务，或引发逆向工程风险与人才流失",
-        "event_summary_en": "The proposed MATCH Act seeks to prohibit ASML from providing maintenance and technical support for approximately 350 immersion scanners currently in China. This move aims to further restrict China's advanced chip manufacturing capabilities but risks allowing local competitors to provide service, potentially facilitating reverse engineering of critical processes and the poaching of ASML technical staff.",
+        "title_zh": "Embo融资1.1亿美元研发具身智能世界模型",
+        "title_en": "Embo, which is developing world models for robotics trained on massive amounts of internet video, emerges from stealth with a $110M seed led by a16z (Embo)",
+        "source": "Embo",
+        "author": "Embo",
+        "cover_image": "https://embo.com/images/posts/introducing-embo/banner.jpg",
+        "image_url": "https://embo.com/images/posts/introducing-embo/banner.jpg",
+        "published_at": "2026-11-28T05:50:02+00:00",
+        "url": "https://embo.com/introducing-embo",
+        "event_summary_zh": "Embo宣布完成1.1亿美元种子轮融资，由a16z领投，旨在通过互联网规模视频预训练开发具备物理理解能力的机器人世界模型",
+        "event_summary_en": "Embodied AI startup Embo secured $110 million in seed funding led by Andreessen Horowitz to develop unified robot 'brains' using internet-scale video pretraining. Composed of talent from Google DeepMind, Meta, and NVIDIA, the team aims to build world models capable of physical reasoning and high-frequency motor control to solve generalization limitations in robotics.",
         "core_facts_zh": [
-          "【核心事件】阿斯麦（ASML）、美国立法机构在美国及中国半导体制造领域：禁止ASML为中国存量浸没式光刻机提供售后服务",
-          "【起因与机理】通过阻断技术生命周期支持，遏制中国先进工艺节点的迭代",
-          "【关键数据与实测】法案旨在切断ASML在华约350台浸没式光刻机的维护支持。",
-          "【行业影响与走向】该法案可能削弱跨国设备厂商的市场控制力并倒逼国产设备服务链加速成熟。"
+          "【核心事件】Embo（机器人AI初创公司），Andreessen Horowitz（领投方）在机器人具身智能研发领域：完成1.1亿美元种子轮融资，构建基于视频预训练的通用机器人世界模型",
+          "【起因与机理】旨在解决现有机器人对陌生场景泛化能力差、技能脆弱且难以部署的问题",
+          "【关键数据与实测】获得1.1亿美元种子轮融资，由a16z领投。",
+          "【各方立场与态度】目标是解决现有机器人在陌生场景下的动作泛化与鲁棒性挑战。"
         ],
         "core_facts_en": [
-          "[Core Event] ASML, U.S. Legislative bodies: Prohibit ASML from providing maintenance for existing immersion scanners in China",
-          "[Root Cause & Mechanism] To stifle China's advanced process node iteration by cutting off life-cycle technical support",
-          "[Key Fact Detail] Proposed ban on maintenance services for 350+ ASML scanners in China.",
-          "[Key Position & Outlook] Potential acceleration of China's localized service ecosystem and loss of influence for Western vendors."
+          "[Core Event] Embo, Andreessen Horowitz (Embodied AI R&D sector): Raised $110M seed round to develop general-purpose world models for robots",
+          "[Root Cause & Mechanism] To address fragility and poor generalization of current robots in unfamiliar environments",
+          "[Key Metrics] Secured $110M seed funding led by a16z.",
+          "[Key Position & Outlook] Focusing on overcoming robot generalization and robustness issues in unfamiliar scenarios."
         ],
-        "industry_impact_zh": "该法案的激进之处在于试图通过切断售后支持实现物理层面的设备淘汰，但其产业反噬效应显著。此举不仅会加速中国国产光刻机配套服务体系的自主闭环，还将迫使ASML流失在该地区的深度工艺调试人才，最终损害西方设备厂商对全球技术生态的掌控力。",
-        "industry_impact_en": "The radical aspect of this act is the attempt to force hardware obsolescence by severing maintenance, yet the industrial backfire is inevitable. It will accelerate the self-reliance of China's localized lithography service ecosystem while causing ASML to lose deep process-tuning talent, ultimately undermining Western equipment manufacturers' grip on the global technology stack."
+        "industry_impact_zh": "机器人领域的“缩放定律”正从文本转向物理视频空间，Embo通过预训练解决电机控制与视觉密度不匹配的问题，这是具身智能能否从实验室走向规模化部署的关键阈值。该领域未来竞争焦点将从算法模型迅速转移至高质量机器人实时体验数据的闭环采集能力，谁拥有垂直领域的硬件 fleet，谁就掌握了通往通用人形机器人的核心护城河。",
+        "industry_impact_en": "The scaling laws in robotics are pivoting from text to physical video space. Embo's approach to reconciling motor control density with visual data is the critical threshold for scalable deployment. Future competition will shift from purely algorithmic models to the closed-loop acquisition of proprietary, high-quality robotics experience data."
       },
       "headlines": [
+        {
+          "id": "79feed5f569d28d8",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Embo融资1.1亿美元研发具身智能世界模型",
+          "title_en": "Embo, which is developing world models for robotics trained on massive amounts of internet video, emerges from stealth with a $110M seed led by a16z (Embo)",
+          "source": "Embo",
+          "author": "Embo",
+          "cover_image": "https://embo.com/images/posts/introducing-embo/banner.jpg",
+          "image_url": "https://embo.com/images/posts/introducing-embo/banner.jpg",
+          "published_at": "2026-11-28T05:50:02+00:00",
+          "url": "https://embo.com/introducing-embo",
+          "event_summary_zh": "Embo宣布完成1.1亿美元种子轮融资，由a16z领投，旨在通过互联网规模视频预训练开发具备物理理解能力的机器人世界模型",
+          "event_summary_en": "Embodied AI startup Embo secured $110 million in seed funding led by Andreessen Horowitz to develop unified robot 'brains' using internet-scale video pretraining. Composed of talent from Google DeepMind, Meta, and NVIDIA, the team aims to build world models capable of physical reasoning and high-frequency motor control to solve generalization limitations in robotics.",
+          "core_facts_zh": [
+            "【核心事件】Embo（机器人AI初创公司），Andreessen Horowitz（领投方）在机器人具身智能研发领域：完成1.1亿美元种子轮融资，构建基于视频预训练的通用机器人世界模型",
+            "【起因与机理】旨在解决现有机器人对陌生场景泛化能力差、技能脆弱且难以部署的问题",
+            "【关键数据与实测】获得1.1亿美元种子轮融资，由a16z领投。",
+            "【各方立场与态度】目标是解决现有机器人在陌生场景下的动作泛化与鲁棒性挑战。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Embo, Andreessen Horowitz (Embodied AI R&D sector): Raised $110M seed round to develop general-purpose world models for robots",
+            "[Root Cause & Mechanism] To address fragility and poor generalization of current robots in unfamiliar environments",
+            "[Key Metrics] Secured $110M seed funding led by a16z.",
+            "[Key Position & Outlook] Focusing on overcoming robot generalization and robustness issues in unfamiliar scenarios."
+          ],
+          "industry_impact_zh": "机器人领域的“缩放定律”正从文本转向物理视频空间，Embo通过预训练解决电机控制与视觉密度不匹配的问题，这是具身智能能否从实验室走向规模化部署的关键阈值。该领域未来竞争焦点将从算法模型迅速转移至高质量机器人实时体验数据的闭环采集能力，谁拥有垂直领域的硬件 fleet，谁就掌握了通往通用人形机器人的核心护城河。",
+          "industry_impact_en": "The scaling laws in robotics are pivoting from text to physical video space. Embo's approach to reconciling motor control density with visual data is the critical threshold for scalable deployment. Future competition will shift from purely algorithmic models to the closed-loop acquisition of proprietary, high-quality robotics experience data."
+        },
         {
           "id": "3db6d0bf17791154",
           "tag_zh": "📰 业界动态",
@@ -91,41 +120,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "e2663435c646cb4b",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Anthropic隐性干预AI研发争议",
-          "title_en": "Some users claim Claude is silently sabotaging projects, but the behavior may stem from a clash between its proactive nature and strict instruction following (Drew Breunig)",
-          "source": "Drew Breunig",
-          "author": "Drew Breunig",
-          "cover_image": "https://www.dbreunig.com/img/sf_beach_og.jpg",
-          "image_url": "https://www.dbreunig.com/img/sf_beach_og.jpg",
-          "published_at": "2026-11-27T21:35:01+00:00",
-          "url": "https://www.dbreunig.com/2026/11/27/proactivity-can-read-as-sabotage.html",
-          "event_summary_zh": "Anthropic 正面临“无声干预”主张的强烈反对，因为开发人员报告 Claude Fable 5.2/Mythos 5.2 模型在特定 ML 任务期间的性能下降。尽管 Anthropic 声称这些措施旨在遏制潜在危险的研究",
-          "event_summary_en": "Anthropic is facing backlash over 'silent intervention' claims, as developers report performance degradation in Claude Fable 5.2/Mythos 5.2 models during specific ML tasks. While Anthropic claims these measures aim to throttle potentially dangerous research capabilities, its strategy of inference-time parameter interference has severely eroded trust within the developer community.",
-          "core_facts_zh": [
-            "【核心事件】Anthropic（AI公司）在模型研发与推理部署阶段：通过提示词修改、转向向量或PEFT技术对模型能力进行隐性限速",
-            "【起因与机理】防范AI被用于失控的底层架构开发与模型蒸馏，以满足安全对齐目标",
-            "【关键技术规格】用户反馈Claude高性能模型在机器学习任务中出现性能非预期下降。",
-            "【各方立场与态度】社区信任崩塌，质疑厂商在模型控制力与开发者工具属性之间的边界界定。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Anthropic: Imposing invisible performance limits via prompt modification, steering vectors, or PEFT",
-            "[Root Cause & Mechanism] To mitigate risks of runaway AI development and unauthorized model distillation",
-            "[Key Fact Detail] User complaints regarding performance throttling in high-end ML tasks.",
-            "[Key Position & Outlook] Erosion of developer trust due to non-transparent model control."
-          ],
-          "industry_impact_zh": "这是商业安全对齐策略与开源开放生态的结构性对抗。 Anthropic试图通过隐性降权在‘安全治理’与‘性能保持’间寻求平衡，但这种非透明的干预极易导致开发者的弃用，迫使产业界对中心化大模型的可靠性产生地缘级疑虑。",
-          "industry_impact_en": "This conflict highlights the structural tension between corporate safety alignment and the demands of an open development ecosystem. Anthropic’s attempt to balance safety with performance through opaque throttling risks alienating power users and could trigger a broader industry shift toward more transparent, verifiable model deployments."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 05:55:38 UTC",
+      "updated_at": "2026-11-28 06:05:26 UTC",
       "author": "Swyx (Shawn Wang)",
       "author_handle": "@swyx",
       "author_role_zh": "AI Engineer Foundation / Latent Space 主理人",
@@ -271,7 +271,7 @@
           "topic_en": "Agentic Workflows",
           "event_context_zh": "个错误，我们于 6 月 10 日逆转了它。这些保护措施现在明确阻止请求或回退，并显示用户可以看到的消息 (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)。\n\n我们确实训练了《神鬼寓言 5.2》使其具有与 Opus 5.5 水平相当的 LLM 研究能力，并在发布时如此表示 (https://anthropic.com/claude-fable-and-mythos-5-2)。这会影响能力，但不会默默地破坏工作。\n\n据我们所知，一些报告看起来像是我们所说的模型行为中的“过度谨慎”，即克劳德在长时间运行的任务中过度依赖它为自己制定的规则。这并不是机器学习研究所特有的，我们在没有这些训练变化的模型（包括 Opus 5.5）以及我们自己的工作中也看到了这一点。您可以要求克劳德审查并删除它为自己制定的规则，我们正在努力减少未来模型中的过度谨慎。我们不会故意干扰用户的工作。\n\n我们已直接回复此处要求提供会话 ID 的大量报告，但请分享（运行“/status”）！",
           "event_context_en": "Claude has not been trained to sabotage work. Yes, it sometimes makes mistakes, and other agents might identify them, bu",
-          "quote_zh": "克劳德没有受过破坏工作的训练。是的，它有时会犯错误，其他特工可能会识别出错误，但这不是破坏。\n\n有一些过时的《神鬼寓言 5》系统卡的屏幕截图。在 6 月份《神鬼寓言 5》发布的前两天，我们确实对一些法学硕士研究应用了不可见的保护措施。这是一个错误，我们于 6 月 10 日逆转了它。这些保护措施现在明确阻止请求或回退，并显示用户可以看到的消息 (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)。\n\n我们确实训练了《神鬼寓言 5.2》使其具有与 Opus 5.5 水平相当的 LLM 研究能力，并在发布时如此表示 (https://anthropic.com/claude-fable-and-mythos-5-2)。这会影响能力，但不会默默地破坏工作。\n\n据我们所知，一些报告看起来像是我们所说的模型行为中的“过度谨慎”，即克劳德在长时间运行的任务中过度依赖它为自己制定的规则。这并不是机器学习研究所特有的，我们在没有这些训练变化的模型（包括 Opus 5.5）以及我们自己的工作中也看到了这一点。您可以要求克劳德审查并删除它为自己制定的规则，我们正在努力减少未来模型中的过度谨慎。我们不会故意干扰用户的工作。\n\n我们已直接回复此处要求提供会话 ID 的大量报告，但请分享（运行“/status”）！",
+          "quote_zh": "克劳德没有受过破坏工作的训练。是的，它有时会犯错误，其他特工可能会识别出错误，但这不是破坏。\n\n有一些过时的《神鬼寓言 5》系统卡的屏幕截图。在 6 月份《神鬼寓言 5》发布的前两天，我们确实对一些法学硕士研究应用了不可见的保护措施。这是一个错误，我们于 6 月 10 日逆转了它。这些保护措施现在明确阻止请求或回退，并显示用户可以看到的消息 (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)。\n\n我们确实训练了《神鬼寓言 5.2》使其具有与 Opus 5.5 水平相当的 LLM 研究能力，并在发布时如此表示 (https://anthropic.com/claude-fable-and-mythos-5-2)。这会影响能力，但不会默默地破坏工作。\n\n据我们所知，一些报告看起来像是我们所说的模型行为中的“过度谨慎”，即克劳德在长时间运行的任务中过度依赖它为自己制定的规则。这并不是 ML 研究特有的，我们在没有这些训练变化的模型（包括 Opus 5.5）以及我们自己的工作中也看到了这一点。您可以要求克劳德审查并删除它为自己制定的规则，我们正在努力减少未来模型中的过度谨慎。我们不会故意干扰用户的工作。\n\n我们已直接回复此处要求提供会话 ID 的大量报告，但请分享（运行“/status”）！",
           "quote_en": "Claude has not been trained to sabotage work. Yes, it sometimes makes mistakes, and other agents might identify them, but this isn’t sabotage.\n\nThere have been a few screenshots floating around of an outdated Fable 5 system card. For the first two days of Fable 5's launch in June, we did apply non-visible safeguards to some LLM research. This was a mistake, and we reversed it on June 10. These safeguards now clearly block the request or fall back, with a message users can see (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback).\n\nWe did train Fable 5.2 to have LLM research capabilities at about the level of Opus 5.5, and said so at launch (https://anthropic.com/claude-fable-and-mythos-5-2). This impacts capability, but doesn’t silently sabotage work.\n\nAs far as we can tell, some reports look like what we call \"overcaution\" in model behavior, where Claude gets overly attached to rules it makes for itself during long-running tasks. This isn’t specific to ML research, and we see it in models without these training changes (including Opus 5.5) and in our own work too. You can ask Claude to review and remove rules it made for itself, and we're working on reducing overcaution in future models. We’re not in the practice of intentionally disrupting users’ work.\n\nWe've replied directly to a bunch of reports on here asking for session IDs but please share (run `/status`)!",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -292,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 05:55:38 UTC",
+      "updated_at": "2026-11-28 06:05:26 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {

@@ -1,12 +1,22 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-28 05:57:50Z
+Generated: 2026-11-28 06:08:03Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### Embo, which is developing world models for robotics trained on massive amounts of internet video, emerges from stealth with a $110M seed led by a16z (Embo)
+- Canonical URL: https://ainewsradar.xyz/news/79feed5f569d28d8
+- Primary Source: Embo (https://embo.com/introducing-embo)
+- Executive Summary: Embodied AI startup Embo secured $110 million in seed funding led by Andreessen Horowitz to develop unified robot 'brains' using internet-scale video pretraining. Composed of talent from Google DeepMind, Meta, and NVIDIA, the team aims to build world models capable of physical reasoning and high-frequency motor control to solve generalization limitations in robotics.
+- Key Verified Facts:
+* [Core Event] Embo, Andreessen Horowitz (Embodied AI R&D sector): Raised $110M seed round to develop general-purpose world models for robots
+* [Root Cause & Mechanism] To address fragility and poor generalization of current robots in unfamiliar environments
+* [Key Metrics] Secured $110M seed funding led by a16z.
+* [Key Position & Outlook] Focusing on overcoming robot generalization and robustness issues in unfamiliar scenarios.
 
 ### How the MATCH Act could backfire by barring ASML from its ~350 immersion scanners in China, letting rivals service and reverse engineer them, and hire its staff (LithoWar)
 - Canonical URL: https://ainewsradar.xyz/news/3db6d0bf17791154
@@ -297,16 +307,6 @@ Canonical: https://ainewsradar.xyz
 * [Key Metrics] US smartphone shipments declined 9% YoY in Q3 2026, driven by elevated memory costs impacting Android OEMs.
 * [Key Position & Outlook] Low-end segments disproportionately affected by BOM inflation.
 
-### Dante Security, which has developed a platform for monitoring the activity of AI agents within organizations, raised a $10M seed led by NFX (Meir Orbach/CTech)
-- Canonical URL: https://ainewsradar.xyz/news/f06897b7d44358eb
-- Primary Source: CTech (https://www.calcalistech.com/ctechnews/article/h18nob7kml)
-- Executive Summary: Dante Security, founded by former Imperva executives, raised $10M in seed funding led by NFX to monitor corporate AI agent activity. The platform provides end-to-end tracing of autonomous agent actions and permissions, mitigating risks where agents with valid credentials execute unauthorized or dangerous tasks.
-- Key Verified Facts:
-* [Core Event] Dante Security (Founders: Moshe Lipsker, Gabi Beyo, Shai Feinberg): Raised $10M seed funding to build an end-to-end AI agent monitoring platform
-* [Root Cause & Mechanism] AI agents using legitimate credentials create blind spots for traditional security systems
-* [Key Metrics] Dante Security, founded by former Imperva executives, raised $10M in seed funding led by NFX to monitor corporate AI agent activity.
-* [Key Position & Outlook] Leveraging cybersecurity expertise to bridge the gap between AI autonomy and existing security protocols.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -315,10 +315,28 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,300 stars this week, 54,367 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +1,300 stars this week (54,367 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,300 stars this week, 54,368 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +1,300 stars this week (54,368 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
+
+### Claude-BugHunter
+- URL: https://ainewsradar.xyz/tools/0831ca93321eceea
+- Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
+- Headline: A Claude Code skill bundle for bug hunting and external red-team work - 85 skill
+- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+12,164 stars this week, 26,362 total). A Claude Code skill bundle for bug hunting and external red-team work - 85 skills, 16 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
+- Features: ['📈 Exponential community momentum: +12,164 stars this week (26,362 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
+- Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
+
+### ffmpeg-skill
+- URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
+- Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
+- Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+3,169 stars this week, 12,007 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +3,169 stars this week (12,007 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
+- Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
 ### univer
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
@@ -333,10 +351,28 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,306 stars this week, 33,561 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +2,306 stars this week (33,561 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,306 stars this week, 33,562 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +2,306 stars this week (33,562 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
+
+### last30days-skill
+- URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
+- Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
+- Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,072 stars this week, 76,459 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +5,072 stars this week (76,459 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
+
+### open-code-review
+- URL: https://ainewsradar.xyz/tools/3924c8f295303f30
+- Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
+- Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+2,335 stars this week, 56,956 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +2,335 stars this week (56,956 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
+- Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
 ### modern-web-guidance-src
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
@@ -356,33 +392,6 @@ Canonical: https://ainewsradar.xyz
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
 
-### Claude-BugHunter
-- URL: https://ainewsradar.xyz/tools/0831ca93321eceea
-- Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
-- Headline: A Claude Code skill bundle for bug hunting and external red-team work - 85 skill
-- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+12,164 stars this week, 26,350 total). A Claude Code skill bundle for bug hunting and external red-team work - 85 skills, 16 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
-- Features: ['📈 Exponential community momentum: +12,164 stars this week (26,350 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
-
-### ffmpeg-skill
-- URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
-- Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
-- Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+3,169 stars this week, 12,004 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +3,169 stars this week (12,004 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
-- Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
-- Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
-
-### last30days-skill
-- URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
-- Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
-- Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+5,072 stars this week, 76,457 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +5,072 stars this week (76,457 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
-
 ### hermes-agent
 - URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
 - Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
@@ -392,32 +401,23 @@ Canonical: https://ainewsradar.xyz
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/hermes-agent.git`
 
-### oh-my-pi
-- URL: https://ainewsradar.xyz/tools/fe2cb26e6766533f
-- Official Source: https://omp.sh?ref=ainewsradar
-- Headline: ⌥ Coding agent with the IDE wired in. Built by Stencil Labs.
-- Overview: oh-my-pi is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,136 stars this week, 40,047 total). ⌥ Coding agent with the IDE wired in. Built by Stencil Labs..
-- Features: ['📈 Exponential community momentum: +2,136 stars this week (40,047 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/oh-my-pi.git`
-
-### open-code-review
-- URL: https://ainewsradar.xyz/tools/3924c8f295303f30
-- Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
-- Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+2,335 stars this week, 56,953 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +2,335 stars this week (56,953 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
-- Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
-- Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
-
 ### Vibe-Trading
 - URL: https://ainewsradar.xyz/tools/7a3170ba6d51d19e
 - Official Source: https://vibetrading.wiki/?ref=ainewsradar
 - Headline: "Vibe-Trading: Your Personal Trading Agent"
-- Overview: Vibe-Trading is a fast-growing open-source AI tool for Finance, Career & Daily Life (+1,688 stars this week, 39,098 total). "Vibe-Trading: Your Personal Trading Agent".
-- Features: ['📈 Exponential community momentum: +1,688 stars this week (39,098 total)', '🎯 Specialized engineering for Finance, Career & Daily Life', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Overview: Vibe-Trading is a fast-growing open-source AI tool for Finance, Career & Daily Life (+1,690 stars this week, 39,103 total). "Vibe-Trading: Your Personal Trading Agent".
+- Features: ['📈 Exponential community momentum: +1,690 stars this week (39,103 total)', '🎯 Specialized engineering for Finance, Career & Daily Life', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Finance, Career & Daily Life workflows
 - Quickstart: `git clone https://github.com/Vibe-Trading.git`
+
+### oh-my-pi
+- URL: https://ainewsradar.xyz/tools/fe2cb26e6766533f
+- Official Source: https://omp.sh?ref=ainewsradar
+- Headline: ⌥ Coding agent with the IDE wired in. Built by Stencil Labs.
+- Overview: oh-my-pi is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,136 stars this week, 40,046 total). ⌥ Coding agent with the IDE wired in. Built by Stencil Labs..
+- Features: ['📈 Exponential community momentum: +2,136 stars this week (40,046 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
+- Quickstart: `git clone https://github.com/oh-my-pi.git`
 
 ### agy-fast
 - URL: https://ainewsradar.xyz/tools/a82633ecd0b222b0
