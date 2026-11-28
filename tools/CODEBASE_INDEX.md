@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构、规则与符号极速索引 (Codebase Fast Index v2.0)
 
-> **生成时间**: `2026-11-27 01:25:49 UTC` | **代码文件**: `124` 个 | **索引符号**: `1448` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
+> **生成时间**: `2026-11-28 01:54:32 UTC` | **代码文件**: `124` 个 | **索引符号**: `1448` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，经 `tools/verify_code_integrity.py` 与 `.git/hooks/pre-commit` 自动增量同步刷新。
 
 ---
@@ -101,7 +101,7 @@
 ### 前端客户端与单页交互 (Frontend SPA, Theme & Monetization)
 *极速弹窗阅读、分卷按需加载、联盟好物光学混合展示、主题/多语言切换与移动端自适应。*
 
-- [`public/js/app.js`](../public/js/app.js) (760.3 KB): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
+- [`public/js/app.js`](../public/js/app.js) (761.1 KB): `flipPinnedSlide, scheduleNextPinnedFlip, initPinnedSlider, optimizeImageUrl, optimizeAvatarUrl...`
 - [`public/js/monetization.js`](../public/js/monetization.js) (365.4 KB): `amzDp, amzSearch, isZhPage, isDarkPage, esc...`
 - [`public/js/page_language.js`](../public/js/page_language.js) (23.8 KB): `showToast, updateButtonLabel, ensureChineseConverter, loadTranslateEngine, exec...`
 - [`public/js/page_theme.js`](../public/js/page_theme.js) (3.0 KB): `getStoredTheme, resolveIsDark, updateToggleButtons, applyPageTheme, setPageTheme...`
@@ -180,22 +180,22 @@
 **核心数据仓与公共分发：**
 - **`data/affiliate_products.json`** (`310.8 KB`)
 - **`data/apify_crawler_state.json`** (`385.3 KB`)
-- **`data/archive_celebrity.json`** (`26.66 MB`)
-- **`data/archive_news.json`** (`64.75 MB`)
-- **`data/curated_column_highlights.json`** (`43.7 KB`)
+- **`data/archive_celebrity.json`** (`27.62 MB`)
+- **`data/archive_news.json`** (`66.24 MB`)
+- **`data/curated_column_highlights.json`** (`36.9 KB`)
 - **`data/curated_prompts_library.json`** (`42.2 KB`)
 - **`data/curated_workflows_library.json`** (`13.6 KB`)
-- **`data/github_stars_history.json`** (`101.5 KB`)
-- **`data/indexnow_ledger.json`** (`297.2 KB`)
-- **`data/knowledge_graph.json`** (`66.9 KB`)
-- **`data/latest_news.json`** (`26.41 MB`)
+- **`data/github_stars_history.json`** (`102.4 KB`)
+- **`data/indexnow_ledger.json`** (`302.9 KB`)
+- **`data/knowledge_graph.json`** (`69.6 KB`)
+- **`data/latest_news.json`** (`24.64 MB`)
 - **`data/latest_wechat.json`** (`29.3 KB`)
-- **`data/master_archive.json`** (`88.47 MB`)
-- **`data/processed_news_ledger.json`** (`9.62 MB`)
+- **`data/master_archive.json`** (`90.44 MB`)
+- **`data/processed_news_ledger.json`** (`9.82 MB`)
 - **`data/sota_model_registry.json`** (`9.5 KB`)
-- **`data/topic_focus.json`** (`22.5 KB`)
-- **`public/data/latest_news.json`** (`661.4 KB`)
-- **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `16.15 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
+- **`data/topic_focus.json`** (`18.3 KB`)
+- **`public/data/latest_news.json`** (`612.9 KB`)
+- **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `16.52 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
 
 ---
 

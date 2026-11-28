@@ -15,6 +15,11 @@
           var userLang = localStorage.getItem('ai_radar_user_site_lang') || '';
           var isZh = userLang === 'chinese_simplified' || userLang === 'chinese_traditional' || (!userLang && ((navigator.language || navigator.userLanguage || '').toLowerCase().startsWith('zh')));
           window.location.replace(isZh ? '/zh/m' : '/m');
+        } else {
+          var savedDesktopLang = localStorage.getItem('ai_radar_user_site_lang') || '';
+          if (savedDesktopLang === 'chinese_simplified' || savedDesktopLang === 'chinese_traditional') {
+            window.location.replace('/zh' + (window.location.search || '') + (window.location.hash || ''));
+          }
         }
       } catch (e) {}
     })();
@@ -4225,7 +4230,7 @@ Harley Finkelstein (President): &quot;The reason I mention that is those are ver
     };
   </script>
 
-  <script defer src="/js/app-v746.min.js"></script>
+  <script defer src="/js/app-v746.min.js?v=2"></script>
   <script defer src="/js/monetization.js?v=46"></script>
 
   <!-- Partner Showcase Pre-Footer (Zero-CLS Deferred Visual Showcase) -->

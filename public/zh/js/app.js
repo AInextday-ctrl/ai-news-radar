@@ -1026,13 +1026,21 @@
       const savedSiteLang = localStorage.getItem('ai_radar_user_site_lang');
       if (savedSiteLang) {
         if (window.location.pathname.startsWith('/zh')) {
-          if (savedSiteLang === 'chinese_traditional') {
-            currentSiteLang = 'chinese_traditional';
-          } else if (savedSiteLang !== 'english') {
+          if (savedSiteLang !== 'english') {
             currentSiteLang = savedSiteLang;
           }
         } else {
-          if (savedSiteLang !== 'chinese_simplified' && savedSiteLang !== 'chinese_traditional') {
+          if (savedSiteLang === 'chinese_simplified' || savedSiteLang === 'chinese_traditional') {
+            const p = window.location.pathname || '/';
+            let targetPath = '/zh';
+            if (p !== '/' && p !== '' && p !== '/index.html') {
+              targetPath = '/zh' + (p.startsWith('/') ? p : '/' + p);
+              if (targetPath.endsWith('/index.html')) {
+                targetPath = targetPath.slice(0, -11) || '/zh';
+              }
+            }
+            window.location.replace(targetPath + (window.location.search || '') + (window.location.hash || ''));
+          } else {
             currentSiteLang = savedSiteLang;
           }
         }
@@ -1096,7 +1104,59 @@
     }
 
     function initTranslateEngine() {
-      if (typeof translate === 'undefined') return;
+      const selectEl = document.getElementById('site-lang-select');
+      if (selectEl && currentSiteLang) {
+        // 如果当前语言不在预设的常用选项里，动态添加一个选项显示
+        let opt = selectEl.querySelector(`option[value="${currentSiteLang}"]`);
+        if (!opt && currentSiteLang !== 'chinese_simplified') {
+          opt = document.createElement('option');
+          opt.value = currentSiteLang;
+          opt.textContent = `🌐 ${currentSiteLang}`;
+          selectEl.appendChild(opt);
+        }
+        selectEl.value = currentSiteLang;
+      }
+
+      if (currentSiteLang === 'chinese_traditional') {
+        updateNavTabsLanguage('chinese_traditional');
+        document.documentElement.lang = 'zh-TW';
+        ensureChineseConverter(() => {
+          if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+            window.ChineseConverter.convertDomToTraditional();
+          }
+        });
+        return;
+      }
+
+      if (currentSiteLang === 'chinese_simplified') {
+        updateNavTabsLanguage('chinese_simplified');
+        document.documentElement.lang = 'zh-CN';
+        if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
+          window.ChineseConverter.revertDomToSimplified();
+        }
+        return;
+      }
+
+      if (currentSiteLang === 'english') {
+        if (window.location.pathname.startsWith('/zh')) {
+          currentSiteLang = 'chinese_simplified';
+          if (selectEl) selectEl.value = 'chinese_simplified';
+          updateNavTabsLanguage('chinese_simplified');
+          return;
+        }
+        setLanguage('en', false);
+        try {
+          if (window._hasTranslateExecuted && typeof translate !== 'undefined' && translate.reset) translate.reset();
+        } catch (e) {}
+        return;
+      }
+
+      updateNavTabsLanguage(currentSiteLang);
+
+      if (typeof translate === 'undefined') {
+        loadAndExecuteTranslatePlugin(currentSiteLang);
+        return;
+      }
 
       translate.selectLanguageTag.show = false;
       translate.service.use('client.edge');
@@ -1230,56 +1290,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         `.trim());
       }
 
-      const selectEl = document.getElementById('site-lang-select');
-      if (selectEl && currentSiteLang) {
-        // 如果当前语言不在预设的常用选项里，动态添加一个选项显示
-        let opt = selectEl.querySelector(`option[value="${currentSiteLang}"]`);
-        if (!opt && currentSiteLang !== 'chinese_simplified') {
-          opt = document.createElement('option');
-          opt.value = currentSiteLang;
-          opt.textContent = `🌐 ${currentSiteLang}`;
-          selectEl.appendChild(opt);
-        }
-        selectEl.value = currentSiteLang;
-      }
-
-      if (currentSiteLang === 'chinese_traditional') {
-        updateNavTabsLanguage('chinese_traditional');
-        document.documentElement.lang = 'zh-TW';
-        ensureChineseConverter(() => {
-          if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
-            window.ChineseConverter.convertDomToTraditional();
-          }
-        });
-        return;
-      }
-
-      if (currentSiteLang === 'chinese_simplified') {
-        updateNavTabsLanguage('chinese_simplified');
-        document.documentElement.lang = 'zh-CN';
-        if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
-          window.ChineseConverter.revertDomToSimplified();
-        }
-        return;
-      }
-
-      if (currentSiteLang === 'english') {
-        if (window.location.pathname.startsWith('/zh')) {
-          currentSiteLang = 'chinese_simplified';
-          updateNavTabsLanguage('chinese_simplified');
-          return;
-        }
-        setLanguage('en', false);
-        try {
-          if (window._hasTranslateExecuted && typeof translate !== 'undefined' && translate.reset) translate.reset();
-        } catch (e) {}
-        return;
-      }
-
-      updateNavTabsLanguage(currentSiteLang);
       window._hasTranslateExecuted = true;
-      translate.execute();
       translate.changeLanguage(currentSiteLang);
+      translate.execute();
     }
 
     // 智能获取等价语言版本的 URL（严格保留当前页面路径、查询参数及专栏 Hash）
