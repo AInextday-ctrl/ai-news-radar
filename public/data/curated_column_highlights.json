@@ -1,39 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 11:18:09 UTC",
+  "generated_at": "2026-11-28 11:35:18 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 11:18:09 UTC",
+      "updated_at": "2026-11-28 11:35:18 UTC",
       "headline_item": {
-        "id": "af41b752097e75da",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰",
-        "title_en": "Jensen Huang Nvidia Ping Pong Rise And Fall",
-        "source": "Wall Street Journal",
-        "author": "Wall Street Journal",
-        "cover_image": "https://ainewsradar.xyz/images/wsj_b1911233a0f66bf9.jpg",
-        "image_url": "https://ainewsradar.xyz/images/wsj_b1911233a0f66bf9.jpg",
-        "published_at": "2026-11-28T07:40:01+00:00",
-        "url": "https://www.wsj.com/business/jensen-huang-nvidia-ping-pong-rise-and-fall-bfd13000?st=NG91Cq",
-        "event_summary_zh": "关注我们优先关注 Google 的突发新闻和独家报道。据报道，黄仁勋于 2026 年 11 月辞去 NVIDIA 首席执行官一职，这标志着这位帮助该公司成为全球最有价值科技企业之一的人的职业生涯发生了巨大转变。他的离开跟随",
-        "event_summary_en": "Stay ahead with our breaking stories and exclusive coverage prioritized on Google.\n\nJensen Huang’s reported resignation as NVIDIA chief executive in November 2026 marked a dramatic turn in the career of the man who helped build the company into one of the world’s most valuable technology businesses. His departure followed reports concerning his personal relationships, questions about his professional associations and an investigation by the company’s board.\n\nHuang’s journey from a difficult chil",
+        "id": "c3e56227deff7379",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "Google DeepMind发布通用能力评测基准",
+        "title_en": "Google Deepmind's \"Humanity's First Exam\"shows top AI models still fail simple everyday tasks under repeated runs",
+        "source": "THE DECODER",
+        "author": "Matthias Bastian",
+        "cover_image": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
+        "image_url": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
+        "published_at": "2026-11-28T11:12:30+00:00",
+        "url": "https://the-decoder.com/google-deepminds-humanitys-first-exam-shows-top-ai-models-still-fail-simple-everyday-tasks-under-repeated-runs/",
+        "event_summary_zh": "Google DeepMind推出“人类首场考试”基准，旨在评估模型在重复任务中的鲁棒性而非极限峰值性能",
+        "event_summary_en": "Google DeepMind has introduced 'Humanity's First Exam,' a benchmark designed to evaluate AI model robustness in everyday tasks rather than peak performance. Early results indicate that while leading models can solve nearly all task families in single instances, none remain error-free across repeated runs and variations.",
         "core_facts_zh": [
-          "【核心事件】英伟达创始人兼CEO 黄仁勋 (Jensen Huang)：黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰",
-          "【核心事实细节】黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰。",
-          "【行业研判】他的离职是在有关他的个人的报道之后发生的。"
+          "【核心事件】谷歌深度思维在AI能力评测领域：发布旨在验证模型可靠性的基准测试工具，量化长期运行与任务变化的抗干扰能力",
+          "【起因与机理】针对现有AI测试过度关注极限智力表现的局限性，尝试建立更符合生产级部署的可靠性度量体系",
+          "【关键技术规格】基准测试重心由模型峰值智力转向全链路运行鲁棒性。",
+          "【行业影响与走向】将直接影响后续大模型在复杂自动化流程中的部署信任度评级。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Jensen Huang Nvidia Ping Pong Rise And Fall",
-          "[Root Cause & Mechanism] Jensen Huang’s reported resignation as NVIDIA chief executive in November 2026 marked a dramatic turn in the career of the man who helped build the company into one of the world’s most valuable technology businesses.",
-          "[Key Metrics] Under his leadership, NVIDIA became a central player in the artificial intelligence industry, reaching a valuation of $5 trillion in October 2025.",
-          "[Key Position & Outlook] Jensen Huang Nvidia Ping Pong Rise And Fall."
+          "[Core Event] Google DeepMind (AI benchmarking domain): Launched a benchmark focused on reliability and consistency across repeated executions",
+          "[Root Cause & Mechanism] To shift focus from peak theoretical capability to industrial-grade deployment stability",
+          "[Key Technical Spec] Focus shift from peak intelligence to system robustness.",
+          "[Key Position & Outlook] Implications for trust-level assessment in industrial automation."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "该基准明确了AI从原型开发走向工业级生产的痛点，即在非确定性场景下的高频错误积累（Stochastic Failure）。当前的行业共识正在从“单一指标领先”转向“系统工程鲁棒性”，这将直接改变后续大规模AI基建的测试逻辑与算法优化优先级。",
+        "industry_impact_en": "The benchmark underscores the transition from prototype performance to industrial-grade reliability, specifically addressing the cumulative stochastic failures in real-world environments. This shift signals a broader industry trend toward prioritizing system-level robustness over peak benchmark scores for enterprise-grade AI deployment."
       },
       "headlines": [
+        {
+          "id": "c3e56227deff7379",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "Google DeepMind发布通用能力评测基准",
+          "title_en": "Google Deepmind's \"Humanity's First Exam\"shows top AI models still fail simple everyday tasks under repeated runs",
+          "source": "THE DECODER",
+          "author": "Matthias Bastian",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_eac8a6bf0857b5c9.jpg",
+          "published_at": "2026-11-28T11:12:30+00:00",
+          "url": "https://the-decoder.com/google-deepminds-humanitys-first-exam-shows-top-ai-models-still-fail-simple-everyday-tasks-under-repeated-runs/",
+          "event_summary_zh": "Google DeepMind推出“人类首场考试”基准，旨在评估模型在重复任务中的鲁棒性而非极限峰值性能",
+          "event_summary_en": "Google DeepMind has introduced 'Humanity's First Exam,' a benchmark designed to evaluate AI model robustness in everyday tasks rather than peak performance. Early results indicate that while leading models can solve nearly all task families in single instances, none remain error-free across repeated runs and variations.",
+          "core_facts_zh": [
+            "【核心事件】谷歌深度思维在AI能力评测领域：发布旨在验证模型可靠性的基准测试工具，量化长期运行与任务变化的抗干扰能力",
+            "【起因与机理】针对现有AI测试过度关注极限智力表现的局限性，尝试建立更符合生产级部署的可靠性度量体系",
+            "【关键技术规格】基准测试重心由模型峰值智力转向全链路运行鲁棒性。",
+            "【行业影响与走向】将直接影响后续大模型在复杂自动化流程中的部署信任度评级。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Google DeepMind (AI benchmarking domain): Launched a benchmark focused on reliability and consistency across repeated executions",
+            "[Root Cause & Mechanism] To shift focus from peak theoretical capability to industrial-grade deployment stability",
+            "[Key Technical Spec] Focus shift from peak intelligence to system robustness.",
+            "[Key Position & Outlook] Implications for trust-level assessment in industrial automation."
+          ],
+          "industry_impact_zh": "该基准明确了AI从原型开发走向工业级生产的痛点，即在非确定性场景下的高频错误积累（Stochastic Failure）。当前的行业共识正在从“单一指标领先”转向“系统工程鲁棒性”，这将直接改变后续大规模AI基建的测试逻辑与算法优化优先级。",
+          "industry_impact_en": "The benchmark underscores the transition from prototype performance to industrial-grade reliability, specifically addressing the cumulative stochastic failures in real-world environments. This shift signals a broader industry trend toward prioritizing system-level robustness over peak benchmark scores for enterprise-grade AI deployment."
+        },
         {
           "id": "af41b752097e75da",
           "tag_zh": "📰 业界动态",
@@ -90,50 +120,21 @@
           ],
           "industry_impact_zh": "Trustly此举反映了支付行业正从简单的通道路由向基于交易行为分析的智能化模型转型。通过AI将底层流水转化为业务洞察，是在维萨和万事达等传统支付霸权之外，通过差异化增值服务避开硬性费率竞争的关键策略。",
           "industry_impact_en": "Trustly’s strategy signals a shift in the payments landscape from simple routing towards behavior-based intelligent analytics. By transforming raw transaction data into business intelligence, the firm is attempting to build an economic moat beyond the traditional card networks through proprietary value-added AI services."
-        },
-        {
-          "id": "79feed5f569d28d8",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Embo融资1.1亿美元研发具身智能世界模型",
-          "title_en": "Embo, which is developing world models for robotics trained on massive amounts of internet video, emerges from stealth with a $110M seed led by a16z (Embo)",
-          "source": "Embo",
-          "author": "Embo",
-          "cover_image": "https://embo.com/images/posts/introducing-embo/banner.jpg",
-          "image_url": "https://embo.com/images/posts/introducing-embo/banner.jpg",
-          "published_at": "2026-11-28T05:50:02+00:00",
-          "url": "https://embo.com/introducing-embo",
-          "event_summary_zh": "Embo宣布完成1.1亿美元种子轮融资，由a16z领投，旨在通过互联网规模视频预训练开发具备物理理解能力的机器人世界模型",
-          "event_summary_en": "Embodied AI startup Embo secured $110 million in seed funding led by Andreessen Horowitz to develop unified robot 'brains' using internet-scale video pretraining. Composed of talent from Google DeepMind, Meta, and NVIDIA, the team aims to build world models capable of physical reasoning and high-frequency motor control to solve generalization limitations in robotics.",
-          "core_facts_zh": [
-            "【核心事件】Embo（机器人AI初创公司），Andreessen Horowitz（领投方）在机器人具身智能研发领域：完成1.1亿美元种子轮融资，构建基于视频预训练的通用机器人世界模型",
-            "【起因与机理】旨在解决现有机器人对陌生场景泛化能力差、技能脆弱且难以部署的问题",
-            "【关键数据与实测】获得1.1亿美元种子轮融资，由a16z领投。",
-            "【各方立场与态度】目标是解决现有机器人在陌生场景下的动作泛化与鲁棒性挑战。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Embo, Andreessen Horowitz (Embodied AI R&D sector): Raised $110M seed round to develop general-purpose world models for robots",
-            "[Root Cause & Mechanism] To address fragility and poor generalization of current robots in unfamiliar environments",
-            "[Key Metrics] Secured $110M seed funding led by a16z.",
-            "[Key Position & Outlook] Focusing on overcoming robot generalization and robustness issues in unfamiliar scenarios."
-          ],
-          "industry_impact_zh": "机器人领域的“缩放定律”正从文本转向物理视频空间，Embo通过预训练解决电机控制与视觉密度不匹配的问题，这是具身智能能否从实验室走向规模化部署的关键阈值。该领域未来竞争焦点将从算法模型迅速转移至高质量机器人实时体验数据的闭环采集能力，谁拥有垂直领域的硬件 fleet，谁就掌握了通往通用人形机器人的核心护城河。",
-          "industry_impact_en": "The scaling laws in robotics are pivoting from text to physical video space. Embo's approach to reconciling motor control density with visual data is the critical threshold for scalable deployment. Future competition will shift from purely algorithmic models to the closed-loop acquisition of proprietary, high-quality robotics experience data."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 11:18:10 UTC",
-      "author": "Swyx (Shawn Wang)",
-      "author_handle": "@swyx",
-      "author_role_zh": "AI Engineer Foundation / Latent Space 主理人",
+      "updated_at": "2026-11-28 11:35:18 UTC",
+      "author": "Aravind Srinivas",
+      "author_handle": "@AravSrinivas",
+      "author_role_zh": "Perplexity AI CEO",
       "author_role_en": "AI Engineer / Tech Builder",
-      "author_avatar": "https://unavatar.io/x/swyx",
-      "url": "https://x.com/swyx/status/2126352854394790172",
-      "published_at": "2026-11-27T16:30:00+00:00",
-      "quote_zh": "谷歌有一个新的 tibo，就像 neon 是世界上最热门的前沿模型一样诞生。银行重置和所有\n\n这是一个完全焕发活力的 GDM，与我记忆中的 Gemini 2.5 以来我们从未见过它不同。 @latentspacepod 即将发表文章，但基本上自 2023 年以来，前沿和近前沿实验室的数量每年都增加一倍，这是迄今为止最大的存在，反驳了惨痛的教训是人工智能产业经济的唯一决定因素。 @saranormous 称之为神经多样性模型，基本上它是驱动特工实验室和人工智能工程生死存亡的最重要的宏观因素。",
-      "quote_en": "google has a new tibo, spawning just as neon is the hottest frontier model in the world. banked resets and all\n\nthis is a completely revitalized GDM unlike which we have not seen since basically Gemini 2.5 in my memory. writeup coming @latentspacepod but basically the # of frontier and near-frontier labs has ~doubled every year since 2023 and that’s by far the biggest existence disproof that the bitter lesson is the sole determinant of ai industrial economics. @saranormous calls it model neurodiversity and basically its the single most impt macro factor driving the life/death of agent labs and ai engineering.",
+      "author_avatar": "https://unavatar.io/x/AravSrinivas",
+      "url": "https://x.com/AravSrinivas/status/2126582346937930238",
+      "published_at": "2026-11-28T07:41:56+00:00",
+      "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+      "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
       "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
       "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
@@ -147,6 +148,34 @@
         "verified": true
       },
       "titans": [
+        {
+          "id": "b159b1f170e6c3a0",
+          "name": "Aravind Srinivas",
+          "handle": "@AravSrinivas",
+          "role_zh": "Perplexity AI CEO",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/AravSrinivas",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+          "event_context_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, inte",
+          "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+          "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-28T07:41:56+00:00",
+          "url": "https://x.com/AravSrinivas/status/2126582346937930238"
+        },
         {
           "id": "eedab5a5163527c6",
           "name": "Swyx (Shawn Wang)",
@@ -214,7 +243,7 @@
           "topic_en": "Agentic Workflows",
           "event_context_zh": "人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "event_context_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey f",
-          "quote_zh": "关于递归集体智慧的必读论文。\n\n如果您打算使用代理群，强烈推荐。\n\n他们发现，只有当每个人都知道其他人不知道的事情并分享它时，代理团队才能击败单独工作的人工智能。\n\n这与我的怀疑一致，即集体智慧来自于汇集不同的知识。添加更多都知道相同事情的人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个百分点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
+          "quote_zh": "关于递归集体智慧的必读论文。\n\n如果您打算使用代理群，强烈推荐。\n\n他们发现，只有当每个人都知道其他人不知道的事情并分享它时，代理团队才能击败单独工作的人工智能。\n\n这与我的怀疑一致，即集体智慧来自于汇集不同的知识。添加更多都知道相同事情的人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "quote_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey find that an agent team beats AIs working alone only when each one knows something the others don't and shares it.\n\nThis aligns with my suspicion that collective intelligence comes from pooling different knowledge. Adding more AIs that all know the same things doesn't make the group smarter.\n\nThis is particularly important if you are trying to build agent swarms.\n\nThis work specifically asks if agent teams can improve recursively at the same compute budget.\n\nThey check whether that gain comes from teamwork or from extra compute. A team uses many more tokens than one agent. Running several agents on their own with the same token budget and taking a majority vote already explains most of the gain.\n\nSo the authors test each team against three bars, all at the same compute. The team has to beat one agent. Then it has to beat a majority vote of independent agents. The hardest bar is a group of independent agents where a task counts as solved if any one of them gets it right.\n\nTeamwork cleared the hardest bar only when each agent held different facts and passed them on to the others. In that setup, teams beat the hardest bar at three model sizes, by about a third with 27B models.\n\nTeams of identical 27B agents also organized themselves without being told to. A few agents became hubs that collected and shared information, and accuracy rose 18 points.\n\nGroups then trained their next generation on their own verified outputs, with no labels. On PlanBench, HiddenBench, and Hanabi, each generation beat the previous one on unseen problems for four to six generations.\n\nhttps://arxiv.org/abs/2611.32606\n\nChat with Paper: https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -258,40 +287,12 @@
           },
           "published_at": "2026-11-28T07:07:56+00:00",
           "url": "https://x.com/LeopoldTracker_/status/2126573793602625923"
-        },
-        {
-          "id": "b1ccd3cda3fc9923",
-          "name": "@AndrewCurran_",
-          "handle": "@AndrewCurran_",
-          "role_zh": "AI 先锋观察者",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/AndrewCurran_",
-          "topic_zh": "模型安全与对齐",
-          "topic_en": "Model Safety & Alignment",
-          "event_context_zh": "DeepSeek已委托第三方对V4 Pro进行风险评估，报告已发布在网上。资料来源：https://concordia-ai.com/wp-content/uploads/2026/11/deepseek_v4_pro_0813_systemic_risk_assessment.pdf",
-          "event_context_en": "DeepSeek has commissioned a third-party risk evaluation of V4 Pro, and the report has been posted online.\n\nSource: https",
-          "quote_zh": "DeepSeek已委托第三方对V4 Pro进行风险评估，报告已发布在网上。\n\n资料来源：https://concordia-ai.com/wp-content/uploads/2026/11/deepseek_v4_pro_0813_systemic_risk_assessment.pdf",
-          "quote_en": "DeepSeek has commissioned a third-party risk evaluation of V4 Pro, and the report has been posted online.\n\nSource: https://concordia-ai.com/wp-content/uploads/2026/11/deepseek_v4_pro_0813_systemic_risk_assessment.pdf",
-          "thesis_zh": "深入探讨模型安全与对齐的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Model Safety & Alignment, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-28T05:20:53+00:00",
-          "url": "https://x.com/AndrewCurran_/status/2126546851314958739"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 11:18:10 UTC",
+      "updated_at": "2026-11-28 11:35:18 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
