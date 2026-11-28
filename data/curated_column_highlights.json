@@ -1,40 +1,69 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 06:49:03 UTC",
+  "generated_at": "2026-11-28 07:04:39 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 06:49:03 UTC",
+      "updated_at": "2026-11-28 07:04:39 UTC",
       "headline_item": {
-        "id": "79feed5f569d28d8",
+        "id": "2bcc720b338fe271",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Embo融资1.1亿美元研发具身智能世界模型",
-        "title_en": "Embo, which is developing world models for robotics trained on massive amounts of internet video, emerges from stealth with a $110M seed led by a16z (Embo)",
-        "source": "Embo",
-        "author": "Embo",
-        "cover_image": "https://embo.com/images/posts/introducing-embo/banner.jpg",
-        "image_url": "https://embo.com/images/posts/introducing-embo/banner.jpg",
-        "published_at": "2026-11-28T05:50:02+00:00",
-        "url": "https://embo.com/introducing-embo",
-        "event_summary_zh": "Embo宣布完成1.1亿美元种子轮融资，由a16z领投，旨在通过互联网规模视频预训练开发具备物理理解能力的机器人世界模型",
-        "event_summary_en": "Embodied AI startup Embo secured $110 million in seed funding led by Andreessen Horowitz to develop unified robot 'brains' using internet-scale video pretraining. Composed of talent from Google DeepMind, Meta, and NVIDIA, the team aims to build world models capable of physical reasoning and high-frequency motor control to solve generalization limitations in robotics.",
+        "title_zh": "支付巨头Trustly获6000万美元融资",
+        "title_en": "Sweden-based Trustly, which lets merchants accept payments via bank transfers, raised $60M from Nordic Capital and others, taking its total funding to $450M+ (John Reynolds/Tech.eu)",
+        "source": "Tech.eu",
+        "author": "Tech.eu",
+        "cover_image": "https://ainewsradar.xyz/images/techeu_trustly-completes-60m-funding-raise.png",
+        "image_url": "https://ainewsradar.xyz/images/techeu_trustly-completes-60m-funding-raise.png",
+        "published_at": "2026-11-28T06:45:01+00:00",
+        "url": "https://tech.eu/2026/11/24/trustly-completes-60m-funding-raise/",
+        "event_summary_zh": "瑞典金融科技公司Trustly从Nordic Capital等现有股东处获6000万美元注资，累计融资超4.5亿美元，将投入AI驱动的产品研发",
+        "event_summary_en": "Swedish fintech firm Trustly has secured $60 million in funding from Nordic Capital and other existing shareholders to accelerate AI-driven product development. The capital injection aims to leverage open banking infrastructure to transform transactional data into intelligence, positioning the platform as a direct competitor to traditional card-based payment systems.",
         "core_facts_zh": [
-          "【核心事件】Embo（机器人AI初创公司），Andreessen Horowitz（领投方）在机器人具身智能研发领域：完成1.1亿美元种子轮融资，构建基于视频预训练的通用机器人世界模型",
-          "【起因与机理】旨在解决现有机器人对陌生场景泛化能力差、技能脆弱且难以部署的问题",
-          "【关键数据与实测】获得1.1亿美元种子轮融资，由a16z领投。",
-          "【各方立场与态度】目标是解决现有机器人在陌生场景下的动作泛化与鲁棒性挑战。"
+          "【核心事件】Trustly（首席执行官Johan Tjärnberg）、Nordic Capital、Alfvén & Didrikson在欧洲及北美支付市场：完成6000万美元融资，重点投入AI产品开发以优化支付流程",
+          "【起因与机理】应对上一年度营收下滑压力，寻求利用AI技术提升用户留存与风险管控能力",
+          "【关键数据与实测】财务细节：本次融资6000万美元，由Nordic Capital等现有股东参与，总融资额逾4.5亿美元。",
+          "【行业影响与走向】行业影响：该路径旨在通过开源银行架构实现差异化，对抗Visa与万事达的既有垄断格局。"
         ],
         "core_facts_en": [
-          "[Core Event] Embo, Andreessen Horowitz (Embodied AI R&D sector): Raised $110M seed round to develop general-purpose world models for robots",
-          "[Root Cause & Mechanism] To address fragility and poor generalization of current robots in unfamiliar environments",
-          "[Key Metrics] Secured $110M seed funding led by a16z.",
-          "[Key Position & Outlook] Focusing on overcoming robot generalization and robustness issues in unfamiliar scenarios."
+          "[Core Event] Trustly (CEO Johan Tjärnberg), Nordic Capital, Alfvén & Didrikson: Raised $60 million to accelerate AI-powered intelligence platform development",
+          "[Root Cause & Mechanism] To recover from recent revenue decline and improve customer retention and risk management via AI",
+          "[Key Metrics] Financial details: $60 million raised; total funding exceeds $450 million with participation from existing backers.",
+          "[Industry Impact & Outlook] Market impact: Utilizing open banking to compete against traditional card network dominance."
         ],
-        "industry_impact_zh": "机器人领域的“缩放定律”正从文本转向物理视频空间，Embo通过预训练解决电机控制与视觉密度不匹配的问题，这是具身智能能否从实验室走向规模化部署的关键阈值。该领域未来竞争焦点将从算法模型迅速转移至高质量机器人实时体验数据的闭环采集能力，谁拥有垂直领域的硬件 fleet，谁就掌握了通往通用人形机器人的核心护城河。",
-        "industry_impact_en": "The scaling laws in robotics are pivoting from text to physical video space. Embo's approach to reconciling motor control density with visual data is the critical threshold for scalable deployment. Future competition will shift from purely algorithmic models to the closed-loop acquisition of proprietary, high-quality robotics experience data."
+        "industry_impact_zh": "Trustly此举反映了支付行业正从简单的通道路由向基于交易行为分析的智能化模型转型。通过AI将底层流水转化为业务洞察，是在维萨和万事达等传统支付霸权之外，通过差异化增值服务避开硬性费率竞争的关键策略。",
+        "industry_impact_en": "Trustly’s strategy signals a shift in the payments landscape from simple routing towards behavior-based intelligent analytics. By transforming raw transaction data into business intelligence, the firm is attempting to build an economic moat beyond the traditional card networks through proprietary value-added AI services."
       },
       "headlines": [
+        {
+          "id": "2bcc720b338fe271",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "支付巨头Trustly获6000万美元融资",
+          "title_en": "Sweden-based Trustly, which lets merchants accept payments via bank transfers, raised $60M from Nordic Capital and others, taking its total funding to $450M+ (John Reynolds/Tech.eu)",
+          "source": "Tech.eu",
+          "author": "Tech.eu",
+          "cover_image": "https://ainewsradar.xyz/images/techeu_trustly-completes-60m-funding-raise.png",
+          "image_url": "https://ainewsradar.xyz/images/techeu_trustly-completes-60m-funding-raise.png",
+          "published_at": "2026-11-28T06:45:01+00:00",
+          "url": "https://tech.eu/2026/11/24/trustly-completes-60m-funding-raise/",
+          "event_summary_zh": "瑞典金融科技公司Trustly从Nordic Capital等现有股东处获6000万美元注资，累计融资超4.5亿美元，将投入AI驱动的产品研发",
+          "event_summary_en": "Swedish fintech firm Trustly has secured $60 million in funding from Nordic Capital and other existing shareholders to accelerate AI-driven product development. The capital injection aims to leverage open banking infrastructure to transform transactional data into intelligence, positioning the platform as a direct competitor to traditional card-based payment systems.",
+          "core_facts_zh": [
+            "【核心事件】Trustly（首席执行官Johan Tjärnberg）、Nordic Capital、Alfvén & Didrikson在欧洲及北美支付市场：完成6000万美元融资，重点投入AI产品开发以优化支付流程",
+            "【起因与机理】应对上一年度营收下滑压力，寻求利用AI技术提升用户留存与风险管控能力",
+            "【关键数据与实测】财务细节：本次融资6000万美元，由Nordic Capital等现有股东参与，总融资额逾4.5亿美元。",
+            "【行业影响与走向】行业影响：该路径旨在通过开源银行架构实现差异化，对抗Visa与万事达的既有垄断格局。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Trustly (CEO Johan Tjärnberg), Nordic Capital, Alfvén & Didrikson: Raised $60 million to accelerate AI-powered intelligence platform development",
+            "[Root Cause & Mechanism] To recover from recent revenue decline and improve customer retention and risk management via AI",
+            "[Key Metrics] Financial details: $60 million raised; total funding exceeds $450 million with participation from existing backers.",
+            "[Industry Impact & Outlook] Market impact: Utilizing open banking to compete against traditional card network dominance."
+          ],
+          "industry_impact_zh": "Trustly此举反映了支付行业正从简单的通道路由向基于交易行为分析的智能化模型转型。通过AI将底层流水转化为业务洞察，是在维萨和万事达等传统支付霸权之外，通过差异化增值服务避开硬性费率竞争的关键策略。",
+          "industry_impact_en": "Trustly’s strategy signals a shift in the payments landscape from simple routing towards behavior-based intelligent analytics. By transforming raw transaction data into business intelligence, the firm is attempting to build an economic moat beyond the traditional card networks through proprietary value-added AI services."
+        },
         {
           "id": "79feed5f569d28d8",
           "tag_zh": "📰 业界动态",
@@ -92,40 +121,12 @@
           ],
           "industry_impact_zh": "该法案的激进之处在于试图通过切断售后支持实现物理层面的设备淘汰，但其产业反噬效应显著。此举不仅会加速中国国产光刻机配套服务体系的自主闭环，还将迫使ASML流失在该地区的深度工艺调试人才，最终损害西方设备厂商对全球技术生态的掌控力。",
           "industry_impact_en": "The radical aspect of this act is the attempt to force hardware obsolescence by severing maintenance, yet the industrial backfire is inevitable. It will accelerate the self-reliance of China's localized lithography service ecosystem while causing ASML to lose deep process-tuning talent, ultimately undermining Western equipment manufacturers' grip on the global technology stack."
-        },
-        {
-          "id": "2102c4e2599c9116",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "好事达加入了越来越多受技术中断影响的公司名单",
-          "title_en": "Allstate Joins Growing List of Companies Hit by Tech Outages",
-          "source": "Wall Street Journal",
-          "author": "Jean Eaglesham",
-          "cover_image": "https://ainewsradar.xyz/images/wsj_67d4baefb53dbfcb.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wsj_67d4baefb53dbfcb.jpg",
-          "published_at": "2026-11-27T23:30:02+00:00",
-          "url": "https://www.wsj.com/finance/allstate-joins-growing-list-of-companies-hit-by-tech-outages-77dbb488?st=h32XJK&reflink=desktopwebshare_permalink",
-          "event_summary_zh": "它只是最近遇到技术问题的数十家公司之一。由于一系列影响全国公司的问题，一家大型保险公司遭受了技术中断的打击。越来越多的公司的服务因数字问题而受到阻碍，好事达是最新一家加入其中的公司",
-          "event_summary_en": "The multiday outage has left customers struggling to reach the insurer during one of the year's busiest travel weeks",
-          "core_facts_zh": [
-            "【核心事件】好事达加入了越来越多受技术中断影响的公司名单",
-            "【起因与机理】由于一系列影响全国公司的问题，一家大型保险公司遭受了技术中断的打击。",
-            "【关键数据与实测】Auto-renews at $5.99 monthly. Cancel anytime。",
-            "【行业研判】停电导致客户无法提出索赔或重新赔偿。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Allstate Joins Growing List of Companies Hit by Tech Outages",
-            "[Root Cause & Mechanism] The multiday outage has left customers struggling to reach the insurer during one of the year's busiest travel weeks.",
-            "[Key Fact Detail] Allstate Joins Growing List of Companies Hit by Tech Outages."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 06:49:03 UTC",
+      "updated_at": "2026-11-28 07:04:39 UTC",
       "author": "Swyx (Shawn Wang)",
       "author_handle": "@swyx",
       "author_role_zh": "AI Engineer Foundation / Latent Space 主理人",
@@ -215,7 +216,7 @@
           "topic_en": "Agentic Workflows",
           "event_context_zh": "人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "event_context_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey f",
-          "quote_zh": "关于递归集体智慧的必读论文。\n\n如果您打算使用代理群，强烈推荐。\n\n他们发现，只有当每个人都知道其他人不知道的事情并分享它时，代理团队才能击败单独工作的人工智能。\n\n这与我的怀疑一致，即集体智慧来自于汇集不同的知识。添加更多都知道相同事情的人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个百分点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
+          "quote_zh": "关于递归集体智慧的必读论文。\n\n如果您打算使用代理群，强烈推荐。\n\n他们发现，只有当每个人都知道其他人不知道的事情并分享它时，代理团队才能击败单独工作的人工智能。\n\n这与我的怀疑一致，即集体智慧来自于汇集不同的知识。添加更多都知道相同事情的人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "quote_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey find that an agent team beats AIs working alone only when each one knows something the others don't and shares it.\n\nThis aligns with my suspicion that collective intelligence comes from pooling different knowledge. Adding more AIs that all know the same things doesn't make the group smarter.\n\nThis is particularly important if you are trying to build agent swarms.\n\nThis work specifically asks if agent teams can improve recursively at the same compute budget.\n\nThey check whether that gain comes from teamwork or from extra compute. A team uses many more tokens than one agent. Running several agents on their own with the same token budget and taking a majority vote already explains most of the gain.\n\nSo the authors test each team against three bars, all at the same compute. The team has to beat one agent. Then it has to beat a majority vote of independent agents. The hardest bar is a group of independent agents where a task counts as solved if any one of them gets it right.\n\nTeamwork cleared the hardest bar only when each agent held different facts and passed them on to the others. In that setup, teams beat the hardest bar at three model sizes, by about a third with 27B models.\n\nTeams of identical 27B agents also organized themselves without being told to. A few agents became hubs that collected and shared information, and accuracy rose 18 points.\n\nGroups then trained their next generation on their own verified outputs, with no labels. On PlanBench, HiddenBench, and Hanabi, each generation beat the previous one on unseen problems for four to six generations.\n\nhttps://arxiv.org/abs/2611.32606\n\nChat with Paper: https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -292,7 +293,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 06:49:03 UTC",
+      "updated_at": "2026-11-28 07:04:39 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
