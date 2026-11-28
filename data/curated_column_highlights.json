@@ -1,49 +1,79 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 14:03:34 UTC",
+  "generated_at": "2026-11-28 14:26:02 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 14:03:34 UTC",
+      "updated_at": "2026-11-28 14:26:02 UTC",
       "headline_item": {
-        "id": "1458733036de81a0",
+        "id": "ac4ff8a3f4c0028d",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "电力运营商正在使用传感器和软件动态调整电网安全限制，在人工智能驱动的能源需求不断增长的情况下提高现有网络容量",
-        "title_en": "Power operators are using sensors and software to dynamically adjust grid safety limits, boosting existing network capacity amid rising AI-driven energy demand (Martha Muir/Financial Times)",
-        "source": "Financial Times",
-        "author": "Financial Times",
-        "cover_image": "",
-        "image_url": "",
-        "published_at": "2026-11-28T12:40:01+00:00",
-        "url": "https://www.ft.com/content/7db3c2c9-dfad-4b5d-a8dc-aabf6fa87440",
-        "event_summary_zh": "运营商正在努力解决电力供需之间的不匹配问题，并使用传感器和复杂的软件从已安装的输电线路中获取更多容量",
-        "event_summary_en": "Operators are using sensors and sophisticated software to eke out more capacity from installed transmission lines as they struggle …",
+        "title_zh": "英国议会要求Anthropic提交未删减AI安全报告",
+        "title_en": "UK Parliament demands unredacted METR safety report after Anthropic redacts most of the evidence",
+        "source": "THE DECODER",
+        "author": "Matthias Bastian",
+        "cover_image": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
+        "image_url": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
+        "published_at": "2026-11-28T13:42:00+00:00",
+        "url": "https://the-decoder.com/uk-parliament-demands-unredacted-metr-safety-report-after-anthropic-redacts-most-of-the-evidence/",
+        "event_summary_zh": "英国议会商业委员会致函Anthropic，要求披露METR安全报告的完整原始版本及删减原因",
+        "event_summary_en": "Liam Byrne, Chair of the UK House of Commons Business Committee, has formally requested Pip White, Anthropic's head of UK and Ireland, to provide the unredacted version of the November 5 METR safety report by December 4. The committee is probing the internal acceleration of AI development and the rationale behind Anthropic’s decision to redact critical evidence from the assessment.",
         "core_facts_zh": [
-          "【核心事件】电力运营商正在使用传感器和软件动态调整电网安全限制，在人工智能驱动的能源需求不断增长的情况下提高现有网络容量",
-          "【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
-          "【核心事实细节】电力运营商正在使用传感器和软件在全球产业与技术前沿一线。",
-          "【各方立场与态度】谁能锁定长期稳定的清洁能源供给，谁才能在接下来的算力耐力赛中站稳脚跟。"
+          "【核心事件】英国下议院商业委员会主席Liam Byrne、Anthropic负责人Pip White在英国议会调查听证程序：要求提交METR报告未删减原件并解释删减动机",
+          "【起因与机理】报告显示Anthropic研发速率提升系数高达1.3至3倍且缺乏明显瓶颈，议会认为公众知情权被人为屏蔽",
+          "【关键数据与实测】报告显示Anthropic研发进度提速达3倍，但因核心证据被隐藏引发监管质疑。",
+          "【各方立场与态度】设定12月4日为提交截止期限，重点审查AI安全评估中的信息透明度与合规性。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Power operators are using sensors and software to dynamically adjust grid safety limits, boosting existing network capacity amid rising AI-driven energy demand (Martha Muir/Financial Times)",
-          "[Root Cause & Mechanism] Operators are using sensors and sophisticated software to eke out more capacity from installed transmission lines as they struggle ….",
-          "[Key Fact] Martha Muir / Financial Times:."
+          "[Core Event] Liam Byrne (UK MP), Pip White (Anthropic UK/Ireland Head) (UK Parliamentary inquiry): Demand for the unredacted METR report and justification for redactions",
+          "[Root Cause & Mechanism] The report indicated 1.3x-3x acceleration in development with no bottlenecks, raising concerns over transparency",
+          "[Key Fact Detail] UK Parliament demands the original, unredacted METR AI safety report from Anthropic.",
+          "[Key Position & Outlook] December 4 deadline set to address transparency concerns in frontier AI safety assessments."
         ],
-        "industry_impact_zh": "大模型参数狂飙到数万亿之后，AI 的物理对手终于从算法工程师变成了国家电网。算力扩张的终点不是数学极限，而是变压器与输电线路的吞吐上限。谁能锁定长期稳定的清洁能源供给，谁才能在接下来的算力耐力赛中站稳脚跟。",
-        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        "industry_impact_zh": "此次博弈不仅是透明度之争，更是监管机构试图穿透“商业机密”围墙以评估前沿AI模型外溢风险的范式转移。Anthropic对关键证据的删减反映了顶尖AI实验室在履行安全评估承诺与保护极端技术壁垒之间的剧烈冲突，预示着各国政府将加速建立超越企业自愿披露的强制性评估框架。",
+        "industry_impact_en": "This confrontation signals a paradigm shift where regulators are piercing 'trade secret' defenses to quantify frontier AI risks. Anthropic's redactions highlight the inherent tension between safety pledges and intellectual property protection, signaling that governments are moving toward mandatory disclosure frameworks that supersede voluntary industry reporting."
       },
       "headlines": [
+        {
+          "id": "ac4ff8a3f4c0028d",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英国议会要求Anthropic提交未删减AI安全报告",
+          "title_en": "UK Parliament demands unredacted METR safety report after Anthropic redacts most of the evidence",
+          "source": "THE DECODER",
+          "author": "Matthias Bastian",
+          "cover_image": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
+          "image_url": "https://ainewsradar.xyz/images/decoder_c3eabf5a552c0369.jpg",
+          "published_at": "2026-11-28T13:42:00+00:00",
+          "url": "https://the-decoder.com/uk-parliament-demands-unredacted-metr-safety-report-after-anthropic-redacts-most-of-the-evidence/",
+          "event_summary_zh": "英国议会商业委员会致函Anthropic，要求披露METR安全报告的完整原始版本及删减原因",
+          "event_summary_en": "Liam Byrne, Chair of the UK House of Commons Business Committee, has formally requested Pip White, Anthropic's head of UK and Ireland, to provide the unredacted version of the November 5 METR safety report by December 4. The committee is probing the internal acceleration of AI development and the rationale behind Anthropic’s decision to redact critical evidence from the assessment.",
+          "core_facts_zh": [
+            "【核心事件】英国下议院商业委员会主席Liam Byrne、Anthropic负责人Pip White在英国议会调查听证程序：要求提交METR报告未删减原件并解释删减动机",
+            "【起因与机理】报告显示Anthropic研发速率提升系数高达1.3至3倍且缺乏明显瓶颈，议会认为公众知情权被人为屏蔽",
+            "【关键数据与实测】报告显示Anthropic研发进度提速达3倍，但因核心证据被隐藏引发监管质疑。",
+            "【各方立场与态度】设定12月4日为提交截止期限，重点审查AI安全评估中的信息透明度与合规性。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Liam Byrne (UK MP), Pip White (Anthropic UK/Ireland Head) (UK Parliamentary inquiry): Demand for the unredacted METR report and justification for redactions",
+            "[Root Cause & Mechanism] The report indicated 1.3x-3x acceleration in development with no bottlenecks, raising concerns over transparency",
+            "[Key Fact Detail] UK Parliament demands the original, unredacted METR AI safety report from Anthropic.",
+            "[Key Position & Outlook] December 4 deadline set to address transparency concerns in frontier AI safety assessments."
+          ],
+          "industry_impact_zh": "此次博弈不仅是透明度之争，更是监管机构试图穿透“商业机密”围墙以评估前沿AI模型外溢风险的范式转移。Anthropic对关键证据的删减反映了顶尖AI实验室在履行安全评估承诺与保护极端技术壁垒之间的剧烈冲突，预示着各国政府将加速建立超越企业自愿披露的强制性评估框架。",
+          "industry_impact_en": "This confrontation signals a paradigm shift where regulators are piercing 'trade secret' defenses to quantify frontier AI risks. Anthropic's redactions highlight the inherent tension between safety pledges and intellectual property protection, signaling that governments are moving toward mandatory disclosure frameworks that supersede voluntary industry reporting."
+        },
         {
           "id": "1458733036de81a0",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
           "title_zh": "电力运营商正在使用传感器和软件动态调整电网安全限制，在人工智能驱动的能源需求不断增长的情况下提高现有网络容量",
-          "title_en": "Power operators are using sensors and software to dynamically adjust grid safety limits, boosting existing network capacity amid rising AI-driven energy demand (Martha Muir/Financial Times)",
+          "title_en": "Engineers turn to tech to squeeze more out of constrained electricity grids",
           "source": "Financial Times",
-          "author": "Financial Times",
-          "cover_image": "",
-          "image_url": "",
+          "author": "Martha Muir",
+          "cover_image": "https://ainewsradar.xyz/images/ft_dcea038b15fae477.jpg",
+          "image_url": "https://ainewsradar.xyz/images/ft_dcea038b15fae477.jpg",
           "published_at": "2026-11-28T12:40:01+00:00",
           "url": "https://www.ft.com/content/7db3c2c9-dfad-4b5d-a8dc-aabf6fa87440",
           "event_summary_zh": "运营商正在努力解决电力供需之间的不匹配问题，并使用传感器和复杂的软件从已安装的输电线路中获取更多容量",
@@ -57,7 +87,7 @@
           "core_facts_en": [
             "[Core Event] Industry Leaders: Power operators are using sensors and software to dynamically adjust grid safety limits, boosting existing network capacity amid rising AI-driven energy demand (Martha Muir/Financial Times)",
             "[Root Cause & Mechanism] Operators are using sensors and sophisticated software to eke out more capacity from installed transmission lines as they struggle ….",
-            "[Key Fact] Martha Muir / Financial Times:."
+            "[Key Metrics] In contrast, accommodating an extra 330GW of generation, storage and demand by expanding the grid would cost around $100bn."
           ],
           "industry_impact_zh": "大模型参数狂飙到数万亿之后，AI 的物理对手终于从算法工程师变成了国家电网。算力扩张的终点不是数学极限，而是变压器与输电线路的吞吐上限。谁能锁定长期稳定的清洁能源供给，谁才能在接下来的算力耐力赛中站稳脚跟。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
@@ -90,40 +120,12 @@
           ],
           "industry_impact_zh": "该基准明确了AI从原型开发走向工业级生产的痛点，即在非确定性场景下的高频错误积累（Stochastic Failure）。当前的行业共识正在从“单一指标领先”转向“系统工程鲁棒性”，这将直接改变后续大规模AI基建的测试逻辑与算法优化优先级。",
           "industry_impact_en": "The benchmark underscores the transition from prototype performance to industrial-grade reliability, specifically addressing the cumulative stochastic failures in real-world environments. This shift signals a broader industry trend toward prioritizing system-level robustness over peak benchmark scores for enterprise-grade AI deployment."
-        },
-        {
-          "id": "af41b752097e75da",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰",
-          "title_en": "Jensen Huang Nvidia Ping Pong Rise And Fall",
-          "source": "Wall Street Journal",
-          "author": "Wall Street Journal",
-          "cover_image": "https://ainewsradar.xyz/images/wsj_b1911233a0f66bf9.jpg",
-          "image_url": "https://ainewsradar.xyz/images/wsj_b1911233a0f66bf9.jpg",
-          "published_at": "2026-11-28T07:40:01+00:00",
-          "url": "https://www.wsj.com/business/jensen-huang-nvidia-ping-pong-rise-and-fall-bfd13000?st=NG91Cq",
-          "event_summary_zh": "关注我们优先关注 Google 的突发新闻和独家报道。据报道，黄仁勋于 2026 年 11 月辞去 NVIDIA 首席执行官一职，这标志着这位帮助该公司成为全球最有价值科技企业之一的人的职业生涯发生了巨大转变。他的离开跟随",
-          "event_summary_en": "Stay ahead with our breaking stories and exclusive coverage prioritized on Google.\n\nJensen Huang’s reported resignation as NVIDIA chief executive in November 2026 marked a dramatic turn in the career of the man who helped build the company into one of the world’s most valuable technology businesses. His departure followed reports concerning his personal relationships, questions about his professional associations and an investigation by the company’s board.\n\nHuang’s journey from a difficult chil",
-          "core_facts_zh": [
-            "【核心事件】英伟达创始人兼CEO 黄仁勋 (Jensen Huang)：黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰",
-            "【核心事实细节】黄仁勋 (Jensen Huang) Nvidia 乒乓球的兴衰。",
-            "【行业研判】他的离职是在有关他的个人的报道之后发生的。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Jensen Huang Nvidia Ping Pong Rise And Fall",
-            "[Root Cause & Mechanism] Jensen Huang’s reported resignation as NVIDIA chief executive in November 2026 marked a dramatic turn in the career of the man who helped build the company into one of the world’s most valuable technology businesses.",
-            "[Key Metrics] Under his leadership, NVIDIA became a central player in the artificial intelligence industry, reaching a valuation of $5 trillion in October 2025.",
-            "[Key Position & Outlook] Jensen Huang Nvidia Ping Pong Rise And Fall."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 14:03:34 UTC",
+      "updated_at": "2026-11-28 14:26:02 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -131,7 +133,7 @@
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
       "url": "https://x.com/AravSrinivas/status/2126582346937930238",
       "published_at": "2026-11-28T07:41:56+00:00",
-      "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+      "quote_zh": "这并不疯狂。自从数字化同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
       "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
       "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
       "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -157,7 +159,7 @@
           "topic_en": "Agentic Workflows",
           "event_context_zh": "能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
           "event_context_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, inte",
-          "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+          "quote_zh": "这并不疯狂。自从数字化同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
           "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -290,7 +292,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 14:03:34 UTC",
+      "updated_at": "2026-11-28 14:26:02 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -443,7 +445,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "26.7k",
+          "stars": "26.8k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
