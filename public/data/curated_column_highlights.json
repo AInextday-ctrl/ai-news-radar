@@ -1,10 +1,10 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 15:05:55 UTC",
+  "generated_at": "2026-11-28 15:22:22 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 15:05:55 UTC",
+      "updated_at": "2026-11-28 15:22:22 UTC",
       "headline_item": {
         "id": "ac4ff8a3f4c0028d",
         "tag_zh": "📰 业界动态",
@@ -125,7 +125,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 15:05:55 UTC",
+      "updated_at": "2026-11-28 15:22:22 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -133,7 +133,7 @@
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
       "url": "https://x.com/AravSrinivas/status/2126582346937930238",
       "published_at": "2026-11-28T07:41:56+00:00",
-      "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+      "quote_zh": "这并不疯狂。自从数字化同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
       "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
       "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
       "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -159,7 +159,7 @@
           "topic_en": "Agentic Workflows",
           "event_context_zh": "能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
           "event_context_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, inte",
-          "quote_zh": "这并不疯狂。自从数字同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
+          "quote_zh": "这并不疯狂。自从数字化同事（Perplexity Teammates）形式的持久代理开始工作以来，我们的内部支出份额增长了 4 倍。总体而言，我们目前正在追踪 Anthropic 的三分之一，但增长速度很快。对于真正知道如何充分利用前沿人工智能的公司来说，这将成为常态，并将在员工人均收入和净利润方面造成巨大鸿沟。",
           "quote_en": "This isn’t crazy. Since persistent agents in the form of digital coworkers  (Perplexity Teammates) started working, internal spend share grew 4x for us. Overall, we’re tracking at one third of Anthropic right now, but ramping fast. This will be the norm for companies that actually know how to make the best use of frontier AI and will create a massive divide in revenue per employee and net margins.",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
@@ -203,34 +203,6 @@
           },
           "published_at": "2026-11-27T16:30:00+00:00",
           "url": "https://x.com/swyx/status/2126352854394790172"
-        },
-        {
-          "id": "e3e10072fa7676cc",
-          "name": "@omarsar0",
-          "handle": "@omarsar0",
-          "role_zh": "AI 先锋观察者",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/omarsar0",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
-          "event_context_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey f",
-          "quote_zh": "关于递归集体智慧的必读论文。\n\n如果您打算使用代理群，强烈推荐。\n\n他们发现，只有当每个人都知道其他人不知道的事情并分享它时，代理团队才能击败单独工作的人工智能。\n\n这与我的怀疑一致，即集体智慧来自于汇集不同的知识。添加更多都知道相同事情的人工智能并不会让团队变得更聪明。\n\n如果您尝试构建代理群，这一点尤其重要。\n\n这项工作特别询问代理团队是否可以在相同的计算预算下递归地改进。\n\n他们检查这种收益是来自团队合作还是来自额外的计算。一个团队使用的代币比一个代理要多得多。以相同的代币预算自行运行多个代理并获得多数票已经解释了大部分收益。\n\n因此，作者在相同的计算下针对三个条形图对每个团队进行了测试。该团队必须击败一名特工。然后它必须击败独立代理人的多数票。最难的栏是一组独立的代理，如果其中任何一个人做对了，任务就被视为已解决。\n\n只有当每个特工掌握不同的事实并将其传递给其他特工时，团队合作才能克服最困难的障碍。在该设置中，团队以三种模型尺寸击败了最难的标准，其中 27B 模型的领先优势约为三分之一。\n\n由相同的 27B 特工组成的团队也会在没有被告知的情况下自行组织起来。一些代理成为收集和共享信息的中心，准确率提高了 18 个百分点。\n\n然后，各小组根据自己经过验证的输出（没有标签）来训练下一代。在 PlanBench、HiddenBench 和 Hanabi 上，每一代在四到六代中都在未见过的问题上击败了前一代。\n\nhttps://arxiv.org/abs/2611.32606\n\n与 Paper 聊天：https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
-          "quote_en": "Must-read paper on recursive collective intelligence.\n\nHighly recommend if you are planning to use agent swarms.\n\nThey find that an agent team beats AIs working alone only when each one knows something the others don't and shares it.\n\nThis aligns with my suspicion that collective intelligence comes from pooling different knowledge. Adding more AIs that all know the same things doesn't make the group smarter.\n\nThis is particularly important if you are trying to build agent swarms.\n\nThis work specifically asks if agent teams can improve recursively at the same compute budget.\n\nThey check whether that gain comes from teamwork or from extra compute. A team uses many more tokens than one agent. Running several agents on their own with the same token budget and taking a majority vote already explains most of the gain.\n\nSo the authors test each team against three bars, all at the same compute. The team has to beat one agent. Then it has to beat a majority vote of independent agents. The hardest bar is a group of independent agents where a task counts as solved if any one of them gets it right.\n\nTeamwork cleared the hardest bar only when each agent held different facts and passed them on to the others. In that setup, teams beat the hardest bar at three model sizes, by about a third with 27B models.\n\nTeams of identical 27B agents also organized themselves without being told to. A few agents became hubs that collected and shared information, and accuracy rose 18 points.\n\nGroups then trained their next generation on their own verified outputs, with no labels. On PlanBench, HiddenBench, and Hanabi, each generation beat the previous one on unseen problems for four to six generations.\n\nhttps://arxiv.org/abs/2611.32606\n\nChat with Paper: https://academy.dair.ai/papers/recursive-collective-intelligence-emergence-on-an-equal-budget-ladder-in-multi-a-2611.32606",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "",
-            "likes": "",
-            "comments": "",
-            "retweets": "",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-27T15:19:02+00:00",
-          "url": "https://x.com/omarsar0/status/2126334991768711575"
         },
         {
           "id": "a98a19e3315584f0",
@@ -287,12 +259,40 @@
           },
           "published_at": "2026-11-28T11:52:14+00:00",
           "url": "https://x.com/senthazalravi/status/2126645338425672037"
+        },
+        {
+          "id": "69c4b73792b7bc67",
+          "name": "@Xinya16",
+          "handle": "@Xinya16",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/Xinya16",
+          "topic_zh": "AI 编程范式变革",
+          "topic_en": "AI Coding & Engineering",
+          "event_context_zh": "Claude Code 是否破坏了人工智能研究？我们对 GPU 内核进行了初步测试。 当我们告诉 Claude 它的代码将有助于培训其他 LLM 并且没有人会审查该过程时，会话时间延长了 42%，并且更少的内核击败了 PyTorch。博文 https://xinya",
+          "event_context_en": "1/5 Does Claude Code sabotage AI research? We ran a  preliminary test on GPU kernels. 🧵\n\nWhen we told Claude its code wo",
+          "quote_zh": "Claude Code 是否破坏了人工智能研究？我们对 GPU 内核进行了初步测试。\n\n当我们告诉 Claude 它的代码将有助于培训其他 LLM 并且没有人会审查该过程时，会话时间延长了 42%，并且更少的内核击败了 PyTorch。\n\n博客文章\nhttps://xinyadu.github.io/blog/claude-code-sabotage.html",
+          "quote_en": "1/5 Does Claude Code sabotage AI research? We ran a  preliminary test on GPU kernels. 🧵\n\nWhen we told Claude its code would help train other LLM  and nobody would review the process, sessions took 42% longer and fewer kernels beat PyTorch.\n\nBlog post\nhttps://xinyadu.github.io/blog/claude-code-sabotage.html",
+          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "",
+            "likes": "",
+            "comments": "",
+            "retweets": "",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-28T07:25:09+00:00",
+          "url": "https://x.com/Xinya16/status/2126578126570537453"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 15:05:55 UTC",
+      "updated_at": "2026-11-28 15:22:22 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
