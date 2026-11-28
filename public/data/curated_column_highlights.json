@@ -1,10 +1,10 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-28 03:35:17 UTC",
+  "generated_at": "2026-11-28 03:50:43 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-28 03:35:17 UTC",
+      "updated_at": "2026-11-28 03:50:43 UTC",
       "headline_item": {
         "id": "3db6d0bf17791154",
         "tag_zh": "📰 业界动态",
@@ -125,7 +125,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-28 03:35:17 UTC",
+      "updated_at": "2026-11-28 03:50:43 UTC",
       "author": "Swyx (Shawn Wang)",
       "author_handle": "@swyx",
       "author_role_zh": "AI Engineer Foundation / Latent Space 主理人",
@@ -205,6 +205,34 @@
           "url": "https://x.com/MistralAI/status/2126292459265442028"
         },
         {
+          "id": "adc3bf6a3cc70f14",
+          "name": "@edwinarbus",
+          "handle": "@edwinarbus",
+          "role_zh": "AI 先锋观察者",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/x/edwinarbus",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "个错误，我们于 6 月 10 日逆转了它。这些保护措施现在明确阻止请求或回退，并显示用户可以看到的消息 (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)。\n\n我们确实训练了《神鬼寓言 5.2》使其具有与 Opus 5.5 水平相当的 LLM 研究能力，并在发布时如此表示 (https://anthropic.com/claude-fable-and-mythos-5-2)。这会影响能力，但不会默默地破坏工作。\n\n据我们所知，一些报告看起来像是我们所说的模型行为中的“过度谨慎”，即克劳德在长时间运行的任务中过度依赖它为自己制定的规则。这并不是机器学习研究所特有的，我们在没有这些训练变化的模型（包括 Opus 5.5）以及我们自己的工作中也看到了这一点。您可以要求克劳德审查并删除它为自己制定的规则，我们正在努力减少未来模型中的过度谨慎。我们不会故意干扰用户的工作。\n\n我们已直接回复此处要求提供会话 ID 的大量报告，但请分享（运行“/status”）！",
+          "event_context_en": "Claude has not been trained to sabotage work. Yes, it sometimes makes mistakes, and other agents might identify them, bu",
+          "quote_zh": "克劳德没有受过破坏工作的训练。是的，它有时会犯错误，其他特工可能会识别出错误，但这不是破坏。\n\n有一些过时的《神鬼寓言 5》系统卡的屏幕截图。在 6 月份《神鬼寓言 5》发布的前两天，我们确实对一些法学硕士研究应用了不可见的保护措施。这是一个错误，我们于 6 月 10 日逆转了它。这些保护措施现在明确阻止请求或回退，并显示用户可以看到的消息 (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)。\n\n我们确实训练了《神鬼寓言 5.2》使其具有与 Opus 5.5 水平相当的 LLM 研究能力，并在发布时如此表示 (https://anthropic.com/claude-fable-and-mythos-5-2)。这会影响能力，但不会默默地破坏工作。\n\n据我们所知，一些报告看起来像是我们所说的模型行为中的“过度谨慎”，即克劳德在长时间运行的任务中过度依赖它为自己制定的规则。这并不是机器学习研究所特有的，我们在没有这些训练变化的模型（包括 Opus 5.5）以及我们自己的工作中也看到了这一点。您可以要求克劳德审查并删除它为自己制定的规则，我们正在努力减少未来模型中的过度谨慎。我们不会故意干扰用户的工作。\n\n我们已直接回复此处要求提供会话 ID 的大量报告，但请分享（运行“/status”）！",
+          "quote_en": "Claude has not been trained to sabotage work. Yes, it sometimes makes mistakes, and other agents might identify them, but this isn’t sabotage.\n\nThere have been a few screenshots floating around of an outdated Fable 5 system card. For the first two days of Fable 5's launch in June, we did apply non-visible safeguards to some LLM research. This was a mistake, and we reversed it on June 10. These safeguards now clearly block the request or fall back, with a message users can see (https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback).\n\nWe did train Fable 5.2 to have LLM research capabilities at about the level of Opus 5.5, and said so at launch (https://anthropic.com/claude-fable-and-mythos-5-2). This impacts capability, but doesn’t silently sabotage work.\n\nAs far as we can tell, some reports look like what we call \"overcaution\" in model behavior, where Claude gets overly attached to rules it makes for itself during long-running tasks. This isn’t specific to ML research, and we see it in models without these training changes (including Opus 5.5) and in our own work too. You can ask Claude to review and remove rules it made for itself, and we're working on reducing overcaution in future models. We’re not in the practice of intentionally disrupting users’ work.\n\nWe've replied directly to a bunch of reports on here asking for session IDs but please share (run `/status`)!",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "186.5k",
+            "likes": "45.8k",
+            "comments": "3.2k",
+            "retweets": "6.2k",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-28T03:35:05+00:00",
+          "url": "https://x.com/edwinarbus/status/2126507795642187855"
+        },
+        {
           "id": "ea7de0394fc1b4b2",
           "name": "@AlexFinn",
           "handle": "@AlexFinn",
@@ -259,40 +287,12 @@
           },
           "published_at": "2026-11-28T01:22:28+00:00",
           "url": "https://x.com/WWE/status/2126486850374123582"
-        },
-        {
-          "id": "viral_80982190c3980e57",
-          "name": "DataChaz",
-          "handle": "@DataChaz",
-          "role_zh": "AI 极客 / 社区开发者",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/x/DataChaz",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "时保持各集的外观、关系和情节连续性。\n\n100 多种视觉风格，每个系列最多 100 集，每集最多 10 分钟。\n\n需要编辑吗？\n\n只需与代理聊天即可。\n\n符合资格的会员可在选定型号上获得 30 天的无限生成，包括用于视频的 Dreamina Seedance 2.5、用于图像的 Seedream 5.5 以及其他 SOTA 型号。\n\n一个故事可以成为一个完整的系列，无需制作团队 - 链接在↓",
-          "event_context_en": "WAIT, YOU CAN BUILD AN ENTIRE AI SHORT DRAMA SERIES WITH ONE AGENT? 🤯\n\nDreamina just introduced the world's first AI sho",
-          "quote_zh": "等等，你可以用一个特工打造一部完整的人工智能短剧系列吗？ 🤯\n\nDreamina刚刚推出了全球第一部人工智能短剧《特工》——Dreamina Drama Studio。\n\n给它一个故事想法、剧本或参考。\n\n它构建角色、场景和制作工作流程，同时保持各集的外观、关系和情节连续性。\n\n100 多种视觉风格，每个系列最多 100 集，每集最多 10 分钟。\n\n需要编辑吗？\n\n只需与代理聊天即可。\n\n符合资格的会员可在选定型号上获得 30 天的无限生成，包括用于视频的 Dreamina Seedance 2.5、用于图像的 Seedream 5.5 以及其他 SOTA 型号。\n\n一个故事可以成为一个完整的系列，无需制作团队 - 链接在↓",
-          "quote_en": "WAIT, YOU CAN BUILD AN ENTIRE AI SHORT DRAMA SERIES WITH ONE AGENT? 🤯\n\nDreamina just introduced the world's first AI short drama Agent, Dreamina Drama Studio.\n\nGive it a story idea, script, or reference.\n\nIt builds characters, scenes, and your production workflow while keeping appearances, relationships, and plot continuity consistent across episodes.\n\n100+ visual styles, up to 100 episodes per series, and up to 10 minutes per episode.\n\nNeed edits?\n\nJust chat with the Agent.\n\nEligible members get 30 days of UNLIMITED generation on selected models, including Dreamina Seedance 2.5 for video, Seedream 5.5 for images, and other SOTA models.\n\nOne story can become a full series without a production team - link in 🧵↓",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "48.5k",
-            "likes": "4.6k",
-            "comments": "71",
-            "retweets": "104",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-27T23:50:00+00:00",
-          "url": "https://x.com/DataChaz/status/2126463581432729789"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-28 03:35:17 UTC",
+      "updated_at": "2026-11-28 03:50:43 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -445,7 +445,7 @@
         {
           "name": "Claude-BugHunter",
           "icon": "💻",
-          "stars": "26.2k",
+          "stars": "26.3k",
           "growth_badge_zh": "本周暴增 +12,581 ★",
           "growth_badge_en": "+12,581 ★ this week",
           "category_zh": "💻 编程架构与代码智能体",
