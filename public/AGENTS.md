@@ -24,6 +24,9 @@
 5. **置顶推文双轨同构与关键词防裁剪**：
    - `public/js/app.js` 检索推文与置顶条目必须优先读取全局 `cachedData`（`cachedData.grouped?.celebrity`、`cachedData.items`），严禁仅依赖不存在的 `window.newsData` 或局部越域变量；前后端 `isTiboResetTweet` / `is_tibo_reset_tweet` 时效窗口统一保持 `48h`。
    - `format_tibo_pinned_card` 与 `renderTiboPinnedCard` 严禁在提取 `reset` / `重置` 关键句前对多段正文做定长 `250` 字符硬截断；若核心重置声明位于后段，须自动组排“首句 + 重置核心句”并配合 `leading-snug line-clamp-4` 确保卡片首屏可见。
+6. **双语入口与 `localStorage` 状态同构**：
+   - `public/index.html` 与 `public/js/app.js` 须与移动端（`public/m/index.html`、`mobile.js`）及静态详情页（`page_language.js`）保持一致：当 `localStorage.ai_radar_user_site_lang` 为 `chinese_simplified` 或 `chinese_traditional` 且访问非 `/zh` 路径时，须立即跳转 `/zh`（保留 `search` 与 `hash`），严禁在英文 `/` 页面将 `#site-lang-select` 设为中文从而阻塞下拉框 `onchange` 并屏蔽语言建议气泡；`/zh` 路径下严禁让 `currentSiteLang` 回落为 `english`。
+   - `initTranslateEngine()` 必须在 `typeof translate === 'undefined'` 早退之前完成 `#site-lang-select` 同步、`/zh` 语言基线矫正及 `chinese_traditional` 的 `ensureChineseConverter` 繁中转换，防止 SSR 命中跳过 `renderUI()` 时语言状态失效。
 
 ---
 
@@ -38,5 +41,5 @@
 
 ## 4. 变更交付与双端复核
 
-1. 修改 `src/input.css` 或 HTML 中的 Tailwind 类（含 `dark:bg-[#...]` 主题色）后，必须执行 Tailwind 构建并同步覆盖 HTML 与断言 22 引用的版本化 CSS（如 `public/css/style-v736.min.css` / `style-v735.min.css`），核验新样式已编入压缩包；修改 `public/js/app.js` 后，必须使用 `npx --no-install terser public/js/app.js -c -m -o public/js/app-v746.min.js`（并同步 `app.min.js` 及按需对齐 `public/zh/js/app.js`），再重跑 `content_publisher.py` 与双门禁（`python tools/verify_code_integrity.py` + `python tests/test_data_quality_gate.py`）。
+1. 修改 `src/input.css` 或 HTML 中的 Tailwind 类（含 `dark:bg-[#...]` 主题色）后，必须执行 Tailwind 构建并同步覆盖 HTML 与断言 22 引用的版本化 CSS（如 `public/css/style-v736.min.css` / `style-v735.min.css`），核验新样式已编入压缩包；修改 `public/js/app.js` 后，必须使用 `npx --no-install terser public/js/app.js -c -m -o public/js/app-v746.min.js`（并同步 `app.min.js` 及按需对齐 `public/zh/js/app.js`），再重跑 `content_publisher.py` 与双门禁（`python tools/verify_code_integrity.py` + `python tests/test_data_quality_gate.py`）。因 `firebase.json` 对 `**/js/*-v*.min.js` 配置了 1 年 `immutable` 缓存，更新 `app-v746.min.js` 后须保留原文件名满足断言 22，并同步递增 `public/index.html` 与 `public/zh/index.html` 中 `/js/app-v746.min.js?v=<N>` 的查询版本号。
 2. 通过 `python tools/safe_sync.py` 推送上线后，必须对 `https://ainewsradar.xyz` 与 `https://ai-radar-news.web.app` 真实抓包确认 HTTP 200 及静态资源生效。

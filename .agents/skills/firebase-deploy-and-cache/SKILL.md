@@ -11,6 +11,7 @@ When `https://ainewsradar.xyz` or static assets appear unchanged after a push:
 
 1. **Bypass Cloudflare & check Firebase origin directly**:
    - Inspect live `updated_at` and headers directly against `https://ai-radar-news.web.app` so CDN edge cache and origin state are separated immediately.
+   - Because `/` and `/zh` carry `s-maxage=600` (10-min CDN edge cache), append a cache-busting query string (e.g. `https://ainewsradar.xyz/?cb=<ts>` and `https://ai-radar-news.web.app/?cb=<ts>`) when verifying HTML changes immediately after a CI deploy finishes.
 2. **Verify active Firebase Hosting releases**:
    - Run `npx firebase-tools hosting:channel:list --site ai-radar-news` and check GitHub Actions CI logs (`Step 12` in `.github/workflows/update_and_deploy.yml`).
 3. **Inspect GitHub Actions runs & logs on Windows (no `gh` CLI)**:
@@ -22,6 +23,7 @@ When `https://ainewsradar.xyz` or static assets appear unchanged after a push:
 5. **Triggering CI verification when pushing via `tools/safe_sync.py`**:
    - `tools/safe_sync.py` auto-commits dirty working trees with `[skip ci]`, which skips GitHub Actions.
    - When pushing workflow/deploy fixes that need an immediate CI verification run, run `git add` + `git commit -m "..."` (without `[skip ci]`) **first**, then run `python tools/safe_sync.py` to rebase and push cleanly.
+   - If `tools/safe_sync.py` fails to connect on `127.0.0.1:7890`, inspect the active system proxy via `python -c "import urllib.request; print(urllib.request.getproxies())"` (e.g. `127.0.0.1:7897`) and pass `-c http.proxy=<proxy> -c https.proxy=<proxy>` to `git pull --rebase` / `git push` (with `GIT_TERMINAL_PROMPT=0`); when rebasing frontend-only changes onto newer 24x7 bot data commits, keep upstream `data/` and re-apply only the frontend patch if `origin/main` advanced.
 
 ## 2. Resolving `HTTP 429: Hosting storage quota exceeded`
 
@@ -60,3 +62,4 @@ Even with `retainedReleaseCount` configured, frequent 24x7 deploys can leave orp
     - `**/*.@(js|css|mjs)` -> `Cache-Control: no-cache, must-revalidate`
 - **Instant invalidation when replacing assets or UI behavior**:
   - Bump query cache-busters (`PHOTO_VER` in `public/js/monetization.js` and `?v=<N>` query params on `monetization.js` / `page_theme.js` in static publishers and HTML).
+  - For `public/js/app-v746.min.js` (matched by `**/js/*-v*.min.js` `immutable` 1-year rule, and filename-locked by CI Assertion 22), keep the filename intact and bump `/js/app-v746.min.js?v=<N>` in `public/index.html` and `public/zh/index.html`.

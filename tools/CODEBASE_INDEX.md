@@ -1,6 +1,6 @@
 # AI News Radar - 代码库架构、规则与符号极速索引 (Codebase Fast Index v2.0)
 
-> **生成时间**: `2026-11-28 01:54:32 UTC` | **代码文件**: `124` 个 | **索引符号**: `1448` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
+> **生成时间**: `2026-11-28 02:14:54 UTC` | **代码文件**: `124` 个 | **索引符号**: `1448` 个 | **注册信源**: `34` 个 | **作用域规则**: `3` 个 | **本地技能**: `3` 个
 > **更新机制**: 由 `tools/fast_index.py` 驱动，经 `tools/verify_code_integrity.py` 与 `.git/hooks/pre-commit` 自动增量同步刷新。
 
 ---
@@ -11,13 +11,13 @@
 | :--- | :--- | :--- | :--- | :--- |
 | [`AGENTS.md`](../AGENTS.md) | `.` | `14,416 B` | `60.1%` | `OK` |
 | [`crawlers/AGENTS.md`](../crawlers/AGENTS.md) | `crawlers` | `6,509 B` | `27.1%` | `OK` |
-| [`public/AGENTS.md`](../public/AGENTS.md) | `public` | `4,664 B` | `19.4%` | `OK` |
+| [`public/AGENTS.md`](../public/AGENTS.md) | `public` | `5,796 B` | `24.1%` | `OK` |
 
 | 工作区技能 (Skill) | 路径 | 体积 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | **`affiliate-ui-and-theming`** | [`.agents/skills/affiliate-ui-and-theming/SKILL.md`](../.agents/skills/affiliate-ui-and-theming/SKILL.md) | `3,922 B` | Guides Amazon Associates showcase visual engineering, optical mix-blend product staging, strict contextual rel... |
 | **`codebase-fast-index`** | [`.agents/skills/codebase-fast-index/SKILL.md`](../.agents/skills/codebase-fast-index/SKILL.md) | `3,225 B` | Fast codebase, scoped-rules, and data store indexing for AI News Radar. Use when locating functions, classes, ... |
-| **`firebase-deploy-and-cache`** | [`.agents/skills/firebase-deploy-and-cache/SKILL.md`](../.agents/skills/firebase-deploy-and-cache/SKILL.md) | `5,507 B` | Diagnoses GitHub Actions deployment failures and stale Firebase Hosting rollouts, resolves HTTP 429 Hosting st... |
+| **`firebase-deploy-and-cache`** | [`.agents/skills/firebase-deploy-and-cache/SKILL.md`](../.agents/skills/firebase-deploy-and-cache/SKILL.md) | `6,500 B` | Diagnoses GitHub Actions deployment failures and stale Firebase Hosting rollouts, resolves HTTP 429 Hosting st... |
 
 ---
 
@@ -188,13 +188,13 @@
 - **`data/github_stars_history.json`** (`102.4 KB`)
 - **`data/indexnow_ledger.json`** (`302.9 KB`)
 - **`data/knowledge_graph.json`** (`69.6 KB`)
-- **`data/latest_news.json`** (`24.64 MB`)
+- **`data/latest_news.json`** (`24.66 MB`)
 - **`data/latest_wechat.json`** (`29.3 KB`)
-- **`data/master_archive.json`** (`90.44 MB`)
+- **`data/master_archive.json`** (`90.43 MB`)
 - **`data/processed_news_ledger.json`** (`9.82 MB`)
 - **`data/sota_model_registry.json`** (`9.5 KB`)
-- **`data/topic_focus.json`** (`18.3 KB`)
-- **`public/data/latest_news.json`** (`612.9 KB`)
+- **`data/topic_focus.json`** (`18.6 KB`)
+- **`public/data/latest_news.json`** (`613.7 KB`)
 - **信源独立缓存 (`data/*_cache.json`)**: 共 `27` 个文件，合计 `16.52 MB`（anthropic, arstechnica, bloomberg, cbsnews, chatbot_arena, cnbc, decoder, deepmind, forbes, fortune, ft, mittr, nineto5mac, nypost, nyt, openai, reuters, semafor, siliconangle, techcrunch, techeu, tweet_tags, verge, wapo, washsun, wired, wsj）
 
 ---
